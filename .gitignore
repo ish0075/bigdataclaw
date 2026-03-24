@@ -62,3 +62,4 @@ config.local.js
 test_output/
 coverage/
 .nyc_output/
+.vercel
