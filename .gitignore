@@ -1,0 +1,64 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Environment
+.env
+.env.local
+.env.*.local
+.venv/
+venv/
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+tmp/
+temp/
+
+# Large files (keep these local)
+*.pdf
+*.zip
+*.tar.gz
+desktop_resources/
+buyers_data/Buyers/
+buyers_data/Hot_Money/
+
+# Database
+*.db
+*.sqlite
+
+# API keys and secrets (NEVER commit these)
+*.pem
+*.key
+secrets.json
+config.local.js
+
+# Obsidian
+.obsidian/
+.trash/
+
+# Test outputs
+test_output/
+coverage/
+.nyc_output/
