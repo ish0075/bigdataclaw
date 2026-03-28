@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "buildCommand": "cd nerve && npm install && npm run build",
+  "outputDirectory": "nerve/dist",
   "framework": "vite",
   "installCommand": "npm install",
   "rewrites": [
