@@ -20,6 +20,7 @@ import PropertyUploadView from './views/PropertyUploadView';
 import SkillsView from './views/SkillsView';
 import MapView from './views/MapView';
 import SettingsView from './views/SettingsView';
+import LenderMatcherView from './views/LenderMatcherView';
 
 const NAV_ITEMS = [
   { id: 'chat', icon: MessageSquare, label: 'OpenClaw Chat' },
@@ -113,16 +114,7 @@ function AgentMatcherView() {
   );
 }
 
-// Lender Matcher View
-function LenderMatcherView() {
-  return (
-    <div className="flex-1 flex flex-col p-8 overflow-y-auto">
-      <h1 className="text-2xl font-bold text-white mb-4">Lender Matcher</h1>
-      <p className="text-gray-400 mb-4">Find lenders who finance your asset class.</p>
-      <p className="text-coral">Use the Buyer Matching tab to generate a comprehensive report including matched lenders.</p>
-    </div>
-  );
-}
+// Lender Matcher View now imported from views/LenderMatcherView.jsx
 
 // Main Content Area
 function ContentArea({ activeTab, onTabChange }) {

@@ -408,8 +408,7 @@ function TypewriterChatbox() {
 }
 
 // Chat Input Component
-function ChatInput({ onSend, onUpload, disabled, isRecording, onToggleRecording }) {
-  const [input, setInput] = useState('');
+function ChatInput({ input, setInput, onSend, onUpload, disabled, isRecording, onToggleRecording, placeholder, showUpload = true }) {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef(null);
   
@@ -451,27 +450,31 @@ function ChatInput({ onSend, onUpload, disabled, isRecording, onToggleRecording 
       >
         <div className="flex items-end gap-2">
           {/* Upload Button */}
-          <input 
-            type="file" 
-            ref={fileInputRef}
-            onChange={handleFileSelect}
-            className="hidden"
-            accept=".pdf,.doc,.docx,.txt,image/*"
-          />
-          <button 
-            onClick={() => fileInputRef.current?.click()}
-            className="p-2.5 rounded-xl bg-gray-700/50 hover:bg-gray-700 text-gray-400 hover:text-white transition-colors"
-            title="Upload listing"
-          >
-            <Upload size={18} />
-          </button>
+          {showUpload && (
+            <>
+              <input 
+                type="file" 
+                ref={fileInputRef}
+                onChange={handleFileSelect}
+                className="hidden"
+                accept=".pdf,.doc,.docx,.txt,image/*"
+              />
+              <button 
+                onClick={() => fileInputRef.current?.click()}
+                className="p-2.5 rounded-xl bg-gray-700/50 hover:bg-gray-700 text-gray-400 hover:text-white transition-colors"
+                title="Upload listing"
+              >
+                <Upload size={18} />
+              </button>
+            </>
+          )}
           
           {/* Text Input */}
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Describe your property or upload a listing..."
+            placeholder={placeholder}
             disabled={disabled}
             rows={1}
             className="flex-1 bg-transparent border-0 px-2 py-2.5 text-sm text-white placeholder-gray-500 resize-none focus:outline-none focus:ring-0"
@@ -501,7 +504,7 @@ function ChatInput({ onSend, onUpload, disabled, isRecording, onToggleRecording 
           </button>
         </div>
         
-        {isDragging && (
+        {isDragging && showUpload && (
           <div className="mt-2 text-xs text-coral text-center">
             Drop your listing file here
           </div>
@@ -573,6 +576,8 @@ export default function ChatView() {
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
+  const [mode, setMode] = useState('matching'); // 'matching' or 'chat'
+  const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
   
@@ -591,7 +596,7 @@ export default function ChatView() {
       
       recognitionRef.current.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
-        handleSend(transcript);
+        setInput(prev => prev ? prev + ' ' + transcript : transcript);
       };
       
       recognitionRef.current.onerror = () => {
@@ -650,35 +655,58 @@ export default function ChatView() {
     setIsTyping(true);
     
     try {
-      // Extract property details
-      const propertyDetails = extractPropertyDetails(content);
-      
-      // Call API
-      const response = await fetch(`${API_URL}/match-all`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(propertyDetails)
-      });
-      
-      if (!response.ok) throw new Error('API error');
-      
-      const data = await response.json();
-      
-      // Add results message
-      const resultsMessage = {
-        id: Date.now() + 1,
-        content: `Found ${data.buyers?.length || 0} buyers, ${data.agents?.length || 0} agents, and ${data.lenders?.length || 0} lenders matching your criteria.`,
-        isUser: false,
-        results: {
-          buyers: data.buyers || [],
-          agents: data.agents || [],
-          lenders: data.lenders || []
-        },
-        property: propertyDetails,
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
-      
-      setMessages(prev => [...prev, resultsMessage]);
+      if (mode === 'chat') {
+        // AI Chat mode
+        const response = await fetch(`${API_URL}/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: content })
+        });
+        
+        if (!response.ok) throw new Error('API error');
+        
+        const data = await response.json();
+        
+        // Add chat response
+        const chatMessage = {
+          id: Date.now() + 1,
+          content: data.response || data.error,
+          isUser: false,
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        
+        setMessages(prev => [...prev, chatMessage]);
+      } else {
+        // Property Matching mode
+        const propertyDetails = extractPropertyDetails(content);
+        
+        // Call API
+        const response = await fetch(`${API_URL}/match-all`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(propertyDetails)
+        });
+        
+        if (!response.ok) throw new Error('API error');
+        
+        const data = await response.json();
+        
+        // Add results message
+        const resultsMessage = {
+          id: Date.now() + 1,
+          content: `Found ${data.buyers?.length || 0} buyers, ${data.agents?.length || 0} agents, and ${data.lenders?.length || 0} lenders matching your criteria.`,
+          isUser: false,
+          results: {
+            buyers: data.buyers || [],
+            agents: data.agents || [],
+            lenders: data.lenders || []
+          },
+          property: propertyDetails,
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        
+        setMessages(prev => [...prev, resultsMessage]);
+      }
     } catch (err) {
       // Error message
       setMessages(prev => [...prev, {
@@ -716,9 +744,21 @@ export default function ChatView() {
           <Sparkles size={16} className="text-coral" />
           <span className="font-semibold text-white">OpenClaw Chat</span>
         </div>
-        <div className="flex items-center gap-2 text-xs text-gray-500">
-          <span className="w-2 h-2 rounded-full bg-status-active" />
-          Connected
+        <div className="flex items-center gap-2">
+          <button 
+            onClick={() => setMode(mode === 'matching' ? 'chat' : 'matching')}
+            className={`px-3 py-1 text-xs rounded-lg transition-colors ${
+              mode === 'matching' 
+                ? 'bg-coral/20 text-coral' 
+                : 'bg-blue-500/20 text-blue-400'
+            }`}
+          >
+            {mode === 'matching' ? 'Property Matching' : 'AI Chat'}
+          </button>
+          <div className="flex items-center gap-2 text-xs text-gray-500">
+            <span className="w-2 h-2 rounded-full bg-status-active" />
+            Connected
+          </div>
         </div>
       </div>
       
@@ -754,11 +794,15 @@ export default function ChatView() {
       <div className="p-4 border-t border-border bg-background-secondary">
         <div className="max-w-3xl mx-auto">
           <ChatInput 
+            input={input}
+            setInput={setInput}
             onSend={handleSend}
             onUpload={handleUpload}
             disabled={isTyping}
             isRecording={isRecording}
             onToggleRecording={handleToggleRecording}
+            placeholder={mode === 'chat' ? 'Ask me anything...' : 'Describe your property or upload a listing...'}
+            showUpload={mode === 'matching'}
           />
           <div className="flex justify-center gap-2 mt-3">
             <span className="text-[10px] text-gray-500">Text</span>
