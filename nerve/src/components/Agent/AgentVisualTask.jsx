@@ -20,6 +20,8 @@ const AGENT_VISUALS = {
   'task-web':       { theme: 'radar',    label: 'Scraping web' },
   'task-analysis':  { theme: 'nodes',    label: 'Analyzing' },
   'task-write':     { theme: 'typing',   label: 'Writing' },
+  'task-verify':    { theme: 'verify',   label: 'Fact checking' },
+  'task-ideate':    { theme: 'sparkles', label: 'Ideating' },
 
   // Mission Control agents
   'transaction-scout':   { theme: 'radar',    label: 'Scanning transactions' },
@@ -60,6 +62,12 @@ const AGENT_VISUALS = {
   'seller_outreach_bot':   { theme: 'waves',    label: 'Outreach campaign' },
   'property_valuation_bot':{ theme: 'dial',     label: 'Calculating value' },
   'marketing_campaign_bot':{ theme: 'bars',     label: 'Optimizing ads' },
+  
+  // New bots
+  'fact_checker_bot':      { theme: 'verify',   label: 'Verifying facts' },
+  'fact-checker':          { theme: 'verify',   label: 'Verifying facts' },
+  'ideas_bot':             { theme: 'sparkles', label: 'Generating ideas' },
+  'ideas-bot':             { theme: 'sparkles', label: 'Generating ideas' },
 }
 
 const THEMES = {
@@ -78,6 +86,8 @@ const THEMES = {
   typing: TypingVisual,
   grid: GridVisual,
   dial: DialVisual,
+  verify: VerifyVisual,
+  sparkles: SparklesVisual,
 }
 
 export default function AgentVisualTask({ agentId, status = 'idle', compact = false, taskType = null }) {
@@ -489,6 +499,114 @@ function DialVisual({ size = 48, active = true }) {
         @keyframes dial-spin {
           from { stroke-dashoffset: 264; }
           to { stroke-dashoffset: 0; }
+        }
+      `}</style>
+    </div>
+  )
+}
+
+function VerifyVisual({ size = 48, active = true }) {
+  return (
+    <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+      <svg width={size * 0.7} height={size * 0.7} viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-accent-lime">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <polyline points="14 2 14 8 20 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="9" y1="15" x2="15" y2="15" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+      {active && (
+        <>
+          <div 
+            className="absolute rounded-full border-2 border-accent-lime/40"
+            style={{ width: size, height: size, animation: 'verify-pulse 1.5s ease-in-out infinite' }}
+          />
+          <div 
+            className="absolute"
+            style={{ 
+              width: size * 0.4, 
+              height: size * 0.4,
+              animation: 'verify-scan 1.2s ease-in-out infinite alternate'
+            }}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-accent-lime w-full h-full">
+              <circle cx="11" cy="11" r="8" strokeWidth="2" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </div>
+        </>
+      )}
+      <style>{`
+        @keyframes verify-pulse {
+          0%, 100% { transform: scale(0.9); opacity: 0.3; }
+          50% { transform: scale(1.1); opacity: 0.7; }
+        }
+        @keyframes verify-scan {
+          from { transform: translateY(-10%) scale(0.8); opacity: 0.5; }
+          to { transform: translateY(10%) scale(1); opacity: 1; }
+        }
+      `}</style>
+    </div>
+  )
+}
+
+function SparklesVisual({ size = 48, active = true }) {
+  return (
+    <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+      <svg width={size * 0.6} height={size * 0.6} viewBox="0 0 24 24" fill="currentColor" className="text-accent-sky">
+        <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+      </svg>
+      {active && (
+        <>
+          <div 
+            className="absolute bg-accent-sky rounded-full"
+            style={{ 
+              width: 3, height: 3, 
+              top: '15%', left: '25%',
+              animation: 'sparkle-blink 0.8s ease-in-out infinite alternate'
+            }}
+          />
+          <div 
+            className="absolute bg-accent-sky rounded-full"
+            style={{ 
+              width: 4, height: 4, 
+              top: '20%', right: '20%',
+              animation: 'sparkle-blink 1s ease-in-out infinite alternate 0.2s'
+            }}
+          />
+          <div 
+            className="absolute bg-accent-sky rounded-full"
+            style={{ 
+              width: 3, height: 3, 
+              bottom: '20%', left: '20%',
+              animation: 'sparkle-blink 0.9s ease-in-out infinite alternate 0.4s'
+            }}
+          />
+          <div 
+            className="absolute bg-accent-sky rounded-full"
+            style={{ 
+              width: 2, height: 2, 
+              bottom: '15%', right: '25%',
+              animation: 'sparkle-blink 0.7s ease-in-out infinite alternate 0.1s'
+            }}
+          />
+          <div 
+            className="absolute bg-accent-sky/60"
+            style={{ 
+              width: 12, height: 2, 
+              top: '30%', left: '10%',
+              animation: 'sparkle-streak 1.2s linear infinite'
+            }}
+          />
+        </>
+      )}
+      <style>{`
+        @keyframes sparkle-blink {
+          from { transform: scale(0.3); opacity: 0.2; }
+          to { transform: scale(1.2); opacity: 1; }
+        }
+        @keyframes sparkle-streak {
+          0% { transform: translateX(-10px) rotate(45deg); opacity: 0; }
+          50% { opacity: 1; }
+          100% { transform: translateX(20px) rotate(45deg); opacity: 0; }
         }
       `}</style>
     </div>

@@ -22,6 +22,8 @@ const TASK_TYPES = {
   web: { icon: Globe, color: '#f59e0b', label: 'Web Scraping' },
   analysis: { icon: Activity, color: '#ec4899', label: 'Analysis' },
   write: { icon: FileText, color: '#06b6d4', label: 'Content Writing' },
+  verify: { icon: CheckCircle, color: '#65a30d', label: 'Fact Checking' },
+  ideate: { icon: Sparkles, color: '#0ea5e9', label: 'Ideation' },
 };
 
 // Mock agents
@@ -31,6 +33,8 @@ const AGENTS = [
   { id: 'agent-3', name: 'WebScout', type: 'Researcher', status: 'idle', skills: ['Scraping', 'Search', 'Validation'], avatar: '🔍' },
   { id: 'agent-4', name: 'ContentBot', type: 'Writer', status: 'idle', skills: ['Copy', 'Docs', 'Markdown'], avatar: '✍️' },
   { id: 'agent-5', name: 'TestRunner', type: 'QA', status: 'idle', skills: ['Testing', 'Debugging', 'Review'], avatar: '🧪' },
+  { id: 'agent-6', name: 'Skeptic', type: 'Fact Checker', status: 'idle', skills: ['Validation', 'Sources', 'Logic'], avatar: '🔍' },
+  { id: 'agent-7', name: 'Spark', type: 'Ideation', status: 'idle', skills: ['Brainstorming', 'Optimization', 'Strategy'], avatar: '💡' },
 ];
 
 // Mock tasks queue
@@ -47,6 +51,10 @@ const INITIAL_TASKS = [
   { id: 10, title: 'Draft email campaign', type: 'write', priority: 'high', status: 'pending', agent: null, progress: 0 },
   { id: 11, title: 'Score lead quality', type: 'analysis', priority: 'high', status: 'pending', agent: null, progress: 0 },
   { id: 12, title: 'Sync CRM records', type: 'data', priority: 'low', status: 'pending', agent: null, progress: 0 },
+  { id: 13, title: 'Verify market report claims', type: 'verify', priority: 'high', status: 'pending', agent: null, progress: 0 },
+  { id: 14, title: 'Fact-check listing descriptions', type: 'verify', priority: 'medium', status: 'pending', agent: null, progress: 0 },
+  { id: 15, title: 'Optimize outreach workflow', type: 'ideate', priority: 'high', status: 'pending', agent: null, progress: 0 },
+  { id: 16, title: 'Rethink buyer matching strategy', type: 'ideate', priority: 'medium', status: 'pending', agent: null, progress: 0 },
 ];
 
 // Agent thought process simulation
@@ -102,6 +110,22 @@ const AGENT_THOUGHTS = {
     'Adding technical details...',
     'Reviewing for clarity...',
     'Polishing final version...',
+  ],
+  verify: [
+    'Cross-referencing sources...',
+    'Checking data consistency...',
+    'Validating claims...',
+    'Looking for contradictions...',
+    'Confirming with external sources...',
+    'Flagging uncertain statements...',
+  ],
+  ideate: [
+    'Brainstorming angles...',
+    'Connecting disparate concepts...',
+    'Questioning assumptions...',
+    'Evaluating trade-offs...',
+    'Synthesizing best approach...',
+    'Prioritizing by impact...',
   ],
 };
 
@@ -239,6 +263,8 @@ const AgentMissionControl = () => {
       data: ['Clean dataset', 'Generate reports', 'Sync databases', 'Backup records'],
       analysis: ['Predict pricing', 'Score leads', 'Forecast trends', 'Analyze portfolios'],
       write: ['Draft email campaign', 'Write blog post', 'Create documentation', 'Summarize findings'],
+      verify: ['Validate source claims', 'Fact-check report data', 'Verify contact details', 'Audit listing accuracy'],
+      ideate: ['Brainstorm workflow improvements', 'Design faster pipeline', 'Rethink outreach strategy', 'Propose new feature'],
     };
     const randomTitle = titles[randomType][Math.floor(Math.random() * titles[randomType].length)];
     

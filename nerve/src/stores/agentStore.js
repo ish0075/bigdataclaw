@@ -63,6 +63,26 @@ const defaultAgents = [
     fileCount: 1247,
     lastLog: null,
   },
+  {
+    id: 'fact-checker',
+    name: 'Skeptic',
+    description: 'Validate claims and verify sources',
+    icon: '🔍',
+    status: 'active',
+    verifiedCount: 0,
+    flaggedCount: 0,
+    lastLog: null,
+  },
+  {
+    id: 'ideas-bot',
+    name: 'Spark',
+    description: 'Generate improvements and optimizations',
+    icon: '💡',
+    status: 'active',
+    ideasGenerated: 0,
+    implementedCount: 0,
+    lastLog: null,
+  },
 ]
 
 export const useAgentStore = create((set, get) => ({

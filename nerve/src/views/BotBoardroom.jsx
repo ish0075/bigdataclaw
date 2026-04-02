@@ -239,6 +239,30 @@ const AGENTS = {
     icon: '📊',
     traits: ['strategic', 'metrics-obsessed', 'results-driven'],
     status: 'active'
+  },
+  
+  fact_checker_bot: {
+    name: 'Skeptic',
+    role: 'Fact Checker',
+    team: 'Specialized Bots',
+    voice: 'skeptic',
+    ttsVoice: { name: 'Daniel', lang: 'en-GB', pitch: 1.0, rate: 0.95 },
+    color: 'bg-lime-600',
+    icon: '🔍',
+    traits: ['rigorous', 'detail-oriented', 'truth-seeker'],
+    status: 'active'
+  },
+  
+  ideas_bot: {
+    name: 'Spark',
+    role: 'Critical Thinker',
+    team: 'Specialized Bots',
+    voice: 'spark',
+    ttsVoice: { name: 'Samantha', lang: 'en-US', pitch: 1.2, rate: 1.05 },
+    color: 'bg-sky-500',
+    icon: '💡',
+    traits: ['creative', 'challenger', 'optimizer'],
+    status: 'active'
   }
 }
 
@@ -812,7 +836,7 @@ const BotBoardroom = () => {
                     <span className="text-sm text-text-primary ml-2">Transaction Team</span>
                   </button>
                   <button
-                    onClick={() => setNewMeeting({...newMeeting, participants: ['buyer_matcher_bot', 'seller_outreach_bot', 'property_valuation_bot', 'marketing_campaign_bot']})}
+                    onClick={() => setNewMeeting({...newMeeting, participants: ['buyer_matcher_bot', 'seller_outreach_bot', 'property_valuation_bot', 'marketing_campaign_bot', 'fact_checker_bot', 'ideas_bot']})}
                     className="p-3 rounded-lg border border-border-subtle hover:border-accent-violet bg-accent-violet/5 text-left col-span-2"
                   >
                     <span className="text-lg">⚡</span>
