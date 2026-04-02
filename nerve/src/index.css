@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border-subtle;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-bg-primary text-text-primary;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-bg-card rounded-xl border border-border-subtle;
+  }
+  
+  .card-hover {
+    @apply card transition-all duration-200 hover:scale-[1.02] hover:shadow-xl;
+  }
+  
+  .btn-primary {
+    @apply bg-accent-red text-white px-4 py-2.5 rounded-lg font-medium 
+           transition-all duration-200 hover:bg-opacity-90 hover:shadow-lg
+           active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-secondary {
+    @apply bg-bg-input text-text-primary px-4 py-2.5 rounded-lg font-medium
+           border border-border-subtle transition-all duration-200
+           hover:bg-opacity-80 hover:border-text-muted
+           active:scale-[0.98];
+  }
+  
+  .input-field {
+    @apply bg-bg-input border border-border-subtle rounded-lg px-4 py-3
+           text-text-primary placeholder-text-muted
+           focus:outline-none focus:border-accent-red focus:ring-1 focus:ring-accent-red
+           transition-all duration-200;
+  }
+  
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .status-active {
+    @apply status-badge bg-accent-green/20 text-accent-green;
+  }
+  
+  .status-queued {
+    @apply status-badge bg-accent-yellow/20 text-accent-yellow;
+  }
+  
+  .status-idle {
+    @apply status-badge bg-text-muted/20 text-text-secondary;
+  }
+  
+  .status-error {
+    @apply status-badge bg-accent-red/20 text-accent-red;
+  }
+  
+  .hot-money-badge {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-lg 
+           bg-accent-red/20 text-accent-red text-sm font-semibold
+           animate-pulse-red;
+  }
+  
+  .nav-item {
+    @apply flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary
+           transition-all duration-200 hover:text-text-primary hover:bg-bg-card
+           cursor-pointer;
+  }
+  
+  .nav-item.active {
+    @apply text-accent-red bg-bg-card border-l-2 border-accent-red;
+  }
+  
+  .score-ring {
+    @apply relative w-16 h-16 rounded-full flex items-center justify-center
+           bg-bg-input border-2 border-border-subtle;
+  }
+  
+  .score-ring-high {
+    @apply border-accent-green text-accent-green;
+  }
+  
+  .score-ring-medium {
+    @apply border-accent-yellow text-accent-yellow;
+  }
+  
+  .score-ring-low {
+    @apply border-accent-red text-accent-red;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #2D2D2D #0D0D0D;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #0D0D0D;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #2D2D2D;
+    border-radius: 3px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #3D3D3D;
+  }
+}
