@@ -1,0 +1,223 @@
+version: '3.8'
+
+# BigDataClaw NERVE - Production Deployment
+# Includes: Load Balancer (Traefik), NERVE (multiple instances), Redis integration
+
+services:
+  # Load Balancer - Traefik
+  traefik:
+    image: traefik:v3.0
+    container_name: bigdataclaw-traefik
+    command:
+      - "--api.insecure=true"
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL:-admin@bigdataclaw.com}"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+      - "--ping=true"
+      - "--log.level=INFO"
+      - "--accesslog=true"
+      - "--metrics.prometheus=true"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"  # Traefik Dashboard (http://localhost:8080)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./letsencrypt:/letsencrypt
+    networks:
+      - bigdataclaw-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.bigdataclaw.local`)"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.entrypoints=web"
+    restart: unless-stopped
+
+  # NERVE Instance 1
+  nerve-1:
+    build:
+      context: ./nerve
+      dockerfile: Dockerfile
+    container_name: bigdataclaw-nerve-1
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - REDIS_URL=redis://redis:6379
+      - REDIS_ENABLED=true
+      - INSTANCE_ID=nerve-1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nerve.rule=Host(`${DOMAIN:-localhost}`)"
+      - "traefik.http.routers.nerve.entrypoints=websecure"
+      - "traefik.http.routers.nerve.tls.certresolver=letsencrypt"
+      - "traefik.http.services.nerve.loadbalancer.server.port=3001"
+      - "traefik.http.services.nerve.loadbalancer.healthcheck.path=/health"
+      - "traefik.http.services.nerve.loadbalancer.healthcheck.interval=10s"
+    networks:
+      - bigdataclaw-network
+    depends_on:
+      - redis
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  # NERVE Instance 2
+  nerve-2:
+    build:
+      context: ./nerve
+      dockerfile: Dockerfile
+    container_name: bigdataclaw-nerve-2
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - REDIS_URL=redis://redis:6379
+      - REDIS_ENABLED=true
+      - INSTANCE_ID=nerve-2
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nerve.rule=Host(`${DOMAIN:-localhost}`)"
+      - "traefik.http.routers.nerve.entrypoints=websecure"
+      - "traefik.http.routers.nerve.tls.certresolver=letsencrypt"
+      - "traefik.http.services.nerve.loadbalancer.server.port=3001"
+    networks:
+      - bigdataclaw-network
+    depends_on:
+      - redis
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+
+  # NERVE Instance 3 (Backup)
+  nerve-3:
+    build:
+      context: ./nerve
+      dockerfile: Dockerfile
+    container_name: bigdataclaw-nerve-3
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - REDIS_URL=redis://redis:6379
+      - REDIS_ENABLED=true
+      - INSTANCE_ID=nerve-3
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nerve.rule=Host(`${DOMAIN:-localhost}`)"
+      - "traefik.http.routers.nerve.entrypoints=websecure"
+      - "traefik.http.routers.nerve.tls.certresolver=letsencrypt"
+      - "traefik.http.services.nerve.loadbalancer.server.port=3001"
+    networks:
+      - bigdataclaw-network
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  # Redis - Session Store & Cache
+  # If you have existing Redis, comment this out and update REDIS_URL
+  redis:
+    image: redis:7-alpine
+    container_name: bigdataclaw-redis
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis-data:/data
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "6379:6379"  # Expose for external connections (optional)
+    networks:
+      - bigdataclaw-network
+    restart: unless-stopped
+    sysctls:
+      - net.core.somaxconn=65535
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  # Redis Commander (Redis GUI)
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: bigdataclaw-redis-commander
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"  # http://localhost:8081
+    networks:
+      - bigdataclaw-network
+    depends_on:
+      - redis
+    restart: unless-stopped
+    profiles:
+      - debug  # Only start with: docker-compose --profile debug up
+
+  # Prometheus (Monitoring)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: bigdataclaw-prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    ports:
+      - "9090:9090"
+    networks:
+      - bigdataclaw-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+  # Grafana (Dashboards)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: bigdataclaw-grafana
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    ports:
+      - "3000:3000"
+    networks:
+      - bigdataclaw-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+networks:
+  bigdataclaw-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  redis-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local

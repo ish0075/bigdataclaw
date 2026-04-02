@@ -1,0 +1,101 @@
+{
+  "tasks": [
+    {
+      "id": "loopnet_scraper",
+      "agent_type": "scraper",
+      "command": "python scrapers/loopnet_scraper.py",
+      "schedule": "daily",
+      "status": "AgentStatus.IDLE",
+      "last_run": null,
+      "next_run": "2026-03-29 00:37:24.005298",
+      "retry_count": 0,
+      "max_retries": 3,
+      "output_file": null
+    },
+    {
+      "id": "news_monitor",
+      "agent_type": "monitor",
+      "command": "python monitors/news_monitor.py",
+      "schedule": "hourly",
+      "status": "AgentStatus.IDLE",
+      "last_run": null,
+      "next_run": "2026-03-28 01:37:24.005319",
+      "retry_count": 0,
+      "max_retries": 3,
+      "output_file": null
+    },
+    {
+      "id": "property_enricher",
+      "agent_type": "enrichment",
+      "command": "python property_enrichment_engine.py --batch",
+      "schedule": "daily",
+      "status": "AgentStatus.IDLE",
+      "last_run": null,
+      "next_run": "2026-03-29 00:37:24.005327",
+      "retry_count": 0,
+      "max_retries": 2,
+      "output_file": null
+    },
+    {
+      "id": "quicklink_generator",
+      "agent_type": "enrichment",
+      "command": "python generate_quick_links.py --all",
+      "schedule": "daily",
+      "status": "AgentStatus.IDLE",
+      "last_run": null,
+      "next_run": "2026-03-29 00:37:24.005331",
+      "retry_count": 0,
+      "max_retries": 2,
+      "output_file": null
+    },
+    {
+      "id": "dead_link_checker",
+      "agent_type": "quality",
+      "command": "python health_monitor.py --check-links",
+      "schedule": "weekly",
+      "status": "AgentStatus.IDLE",
+      "last_run": null,
+      "next_run": "2026-04-04 00:37:24.005334",
+      "retry_count": 0,
+      "max_retries": 1,
+      "output_file": null
+    },
+    {
+      "id": "health_monitor",
+      "agent_type": "quality",
+      "command": "python health_monitor.py",
+      "schedule": "daily",
+      "status": "AgentStatus.IDLE",
+      "last_run": null,
+      "next_run": "2026-03-29 00:37:24.005339",
+      "retry_count": 0,
+      "max_retries": 1,
+      "output_file": null
+    },
+    {
+      "id": "obsidian_sync",
+      "agent_type": "distribution",
+      "command": "python sync_to_obsidian.py",
+      "schedule": "daily",
+      "status": "AgentStatus.IDLE",
+      "last_run": null,
+      "next_run": "2026-03-29 00:37:24.005342",
+      "retry_count": 0,
+      "max_retries": 2,
+      "output_file": null
+    },
+    {
+      "id": "contextkeep_sync",
+      "agent_type": "distribution",
+      "command": "python save_quicklinks_to_contextkeep.py",
+      "schedule": "weekly",
+      "status": "AgentStatus.IDLE",
+      "last_run": null,
+      "next_run": "2026-04-04 00:37:24.005344",
+      "retry_count": 0,
+      "max_retries": 2,
+      "output_file": null
+    }
+  ],
+  "last_saved": "2026-03-28T00:37:24.005490"
+}

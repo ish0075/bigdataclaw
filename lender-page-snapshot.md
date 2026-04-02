@@ -1,0 +1,3120 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "BIGDATA CLAW" [level=1] [ref=e9]
+        - paragraph [ref=e10]: NERVE Mission Control
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Obsidian Vault" [ref=e46] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e47]
+        - generic [ref=e51]: Obsidian Vault
+      - generic [ref=e52]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e53] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e54]
+        - generic [ref=e57]: EXP Agent Recruiter
+        - generic [ref=e58]: 96K
+      - link "Commercial Agents 6.7K" [ref=e59] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e60]
+        - generic [ref=e63]: Commercial Agents
+        - generic [ref=e64]: 6.7K
+      - generic [ref=e65]: Tools
+      - link "My Listings" [ref=e66] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e67]
+        - generic [ref=e71]: My Listings
+      - link "Buyer Matcher" [ref=e72] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e73]
+        - generic [ref=e78]: Buyer Matcher
+      - link "Agent Matcher" [ref=e79] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e80]
+        - generic [ref=e84]: Agent Matcher
+      - link "Lender Matcher" [ref=e85] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e86]
+        - generic [ref=e88]: Lender Matcher
+      - link "Builder Directory" [ref=e89] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e90]
+        - generic [ref=e94]: Builder Directory
+      - link "Property Upload" [ref=e95] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e96]
+        - generic [ref=e99]: Property Upload
+      - link "Skills & Agents" [ref=e100] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e101]
+        - generic [ref=e104]: Skills & Agents
+      - link "Map View" [ref=e105] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e106]
+        - generic [ref=e108]: Map View
+      - link "Data Manager" [ref=e109] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e110]
+        - generic [ref=e114]: Data Manager
+    - generic [ref=e118]: System Online
+  - generic [ref=e119]:
+    - banner [ref=e120]:
+      - generic [ref=e126]:
+        - img [ref=e127]
+        - generic [ref=e134]: Reconnecting...
+      - generic [ref=e137]:
+        - img [ref=e138]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e141]
+        - combobox [ref=e142]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e143]:
+        - button "Voice" [ref=e144] [cursor=pointer]:
+          - img [ref=e145]
+          - generic [ref=e151]: Voice
+        - generic [ref=e152]:
+          - img [ref=e153]
+          - generic [ref=e158]: $12.40
+        - link "Data Manager" [ref=e159] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e160]
+        - button [ref=e164] [cursor=pointer]:
+          - img [ref=e165]
+        - link [ref=e168] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e169]
+        - link "🦞" [ref=e172] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e173]: 🦞
+    - main [ref=e174]:
+      - generic [ref=e176]:
+        - generic [ref=e177]:
+          - generic [ref=e178]:
+            - heading "Lender Matcher" [level=1] [ref=e179]:
+              - img [ref=e180]
+              - text: Lender Matcher
+            - paragraph [ref=e184]: 1,131 lenders available for financing
+          - button "Export CSV" [ref=e185] [cursor=pointer]:
+            - img [ref=e186]
+            - text: Export CSV
+        - generic [ref=e237]:
+          - generic [ref=e238]:
+            - paragraph [ref=e239]: Total Lenders
+            - paragraph [ref=e240]: 1,131
+          - generic [ref=e241]:
+            - paragraph [ref=e242]: Banks
+            - paragraph [ref=e243]: "107"
+          - generic [ref=e244]:
+            - paragraph [ref=e245]: Insurance
+            - paragraph [ref=e246]: "37"
+          - generic [ref=e247]:
+            - paragraph [ref=e248]: Private Lenders
+            - paragraph [ref=e249]: "610"
+        - generic [ref=e189]:
+          - paragraph [ref=e190]:
+            - img [ref=e191]
+            - text: Filter by Asset Class
+          - generic [ref=e194]:
+            - button "All Asset Classes" [ref=e195] [cursor=pointer]
+            - button "Commercial" [ref=e196] [cursor=pointer]
+            - button "Land" [ref=e197] [cursor=pointer]
+            - button "Construction" [ref=e198] [cursor=pointer]
+            - button "Residential" [ref=e199] [cursor=pointer]
+            - button "Industrial" [ref=e200] [cursor=pointer]
+            - button "Retail" [ref=e201] [cursor=pointer]
+        - generic [ref=e202]:
+          - heading "Search Lenders" [level=3] [ref=e203]
+          - generic [ref=e204]:
+            - generic [ref=e205]:
+              - generic [ref=e206]: Search by Name
+              - generic [ref=e207]:
+                - img [ref=e208]
+                - textbox "Search lenders... (Press Enter)" [ref=e211]
+                - button "Search" [ref=e212] [cursor=pointer]:
+                  - img [ref=e213]
+                  - text: Search
+            - generic [ref=e216]:
+              - generic [ref=e217]: Lender Type
+              - combobox [ref=e218]:
+                - option "All Types" [selected]
+                - option "Bank"
+                - option "Credit Union"
+                - option "Insurance"
+                - option "Mortgage Lender"
+                - option "Other"
+                - option "Private Lender"
+            - generic [ref=e219]:
+              - generic [ref=e220]: Loan Amount Needed
+              - generic [ref=e221]:
+                - img [ref=e222]
+                - textbox "e.g. 5000000" [ref=e224]
+        - generic [ref=e225]:
+          - paragraph [ref=e226]: Showing 100 of 1,131 lenders
+          - generic [ref=e250]:
+            - button "Previous" [disabled] [ref=e251]
+            - generic [ref=e252]: Page 1 of 12
+            - button "Next" [ref=e253] [cursor=pointer]
+        - generic [ref=e254]:
+          - generic [ref=e255]:
+            - heading "Commercial, Land, Construction (46)" [level=3] [ref=e256]:
+              - text: Commercial, Land, Construction
+              - generic [ref=e258]: (46)
+            - generic [ref=e259]:
+              - generic [ref=e260]:
+                - generic [ref=e261]:
+                  - generic [ref=e262]:
+                    - heading "109 Investments Ltd" [level=4] [ref=e263]
+                    - paragraph [ref=e264]: Private Lender
+                  - generic [ref=e265]:
+                    - img [ref=e266]
+                    - text: "4.5"
+                - generic [ref=e269]: Commercial, Land, Construction
+                - generic [ref=e270]:
+                  - link "Web" [ref=e271] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=109+Investments+Ltd
+                    - img [ref=e272]
+                    - generic [ref=e275]: Web
+                  - link "LI" [ref=e276] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=109+Investments+Ltd+linkedin
+                    - img [ref=e277]
+                    - generic [ref=e281]: LI
+                  - link "Google" [ref=e282] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=109+Investments+Ltd
+                    - img [ref=e283]
+                    - generic [ref=e286]: Google
+                  - link "Contact" [ref=e287] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=109+Investments+Ltd+contact
+                    - img [ref=e288]
+                    - generic [ref=e291]: Contact
+                - button "Quick Links" [ref=e292] [cursor=pointer]:
+                  - img [ref=e293]
+                  - text: Quick Links
+              - generic [ref=e297]:
+                - generic [ref=e298]:
+                  - generic [ref=e299]:
+                    - heading "1111 Investments Inc" [level=4] [ref=e300]
+                    - paragraph [ref=e301]: Private Lender
+                  - generic [ref=e302]:
+                    - img [ref=e303]
+                    - text: "4.5"
+                - generic [ref=e306]: Commercial, Land, Construction
+                - generic [ref=e307]:
+                  - link "Web" [ref=e308] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=1111+Investments+Inc
+                    - img [ref=e309]
+                    - generic [ref=e312]: Web
+                  - link "LI" [ref=e313] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=1111+Investments+Inc+linkedin
+                    - img [ref=e314]
+                    - generic [ref=e318]: LI
+                  - link "Google" [ref=e319] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=1111+Investments+Inc
+                    - img [ref=e320]
+                    - generic [ref=e323]: Google
+                  - link "Contact" [ref=e324] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=1111+Investments+Inc+contact
+                    - img [ref=e325]
+                    - generic [ref=e328]: Contact
+                - button "Quick Links" [ref=e329] [cursor=pointer]:
+                  - img [ref=e330]
+                  - text: Quick Links
+              - generic [ref=e334]:
+                - generic [ref=e335]:
+                  - generic [ref=e336]:
+                    - heading "3412-8 Line Investment Cor" [level=4] [ref=e337]
+                    - paragraph [ref=e338]: Private Lender
+                  - generic [ref=e339]:
+                    - img [ref=e340]
+                    - text: "4.5"
+                - generic [ref=e343]: Commercial, Land, Construction
+                - generic [ref=e344]:
+                  - link "Web" [ref=e345] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=3412-8+Line+Investment+Cor
+                    - img [ref=e346]
+                    - generic [ref=e349]: Web
+                  - link "LI" [ref=e350] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=3412-8+Line+Investment+Cor+linkedin
+                    - img [ref=e351]
+                    - generic [ref=e355]: LI
+                  - link "Google" [ref=e356] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=3412-8+Line+Investment+Cor
+                    - img [ref=e357]
+                    - generic [ref=e360]: Google
+                  - link "Contact" [ref=e361] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=3412-8+Line+Investment+Cor+contact
+                    - img [ref=e362]
+                    - generic [ref=e365]: Contact
+                - button "Quick Links" [ref=e366] [cursor=pointer]:
+                  - img [ref=e367]
+                  - text: Quick Links
+              - generic [ref=e371]:
+                - generic [ref=e372]:
+                  - generic [ref=e373]:
+                    - heading "365 Investment Partners Ltd" [level=4] [ref=e374]
+                    - paragraph [ref=e375]: Private Lender
+                  - generic [ref=e376]:
+                    - img [ref=e377]
+                    - text: "4.5"
+                - generic [ref=e380]: Commercial, Land, Construction
+                - generic [ref=e381]:
+                  - link "Web" [ref=e382] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=365+Investment+Partners+Ltd
+                    - img [ref=e383]
+                    - generic [ref=e386]: Web
+                  - link "LI" [ref=e387] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=365+Investment+Partners+Ltd+linkedin
+                    - img [ref=e388]
+                    - generic [ref=e392]: LI
+                  - link "Google" [ref=e393] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=365+Investment+Partners+Ltd
+                    - img [ref=e394]
+                    - generic [ref=e397]: Google
+                  - link "Contact" [ref=e398] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=365+Investment+Partners+Ltd+contact
+                    - img [ref=e399]
+                    - generic [ref=e402]: Contact
+                - button "Quick Links" [ref=e403] [cursor=pointer]:
+                  - img [ref=e404]
+                  - text: Quick Links
+              - generic [ref=e408]:
+                - generic [ref=e409]:
+                  - generic [ref=e410]:
+                    - heading "405 St David Street Investments Inc" [level=4] [ref=e411]
+                    - paragraph [ref=e412]: Private Lender
+                  - generic [ref=e413]:
+                    - img [ref=e414]
+                    - text: "4.5"
+                - generic [ref=e417]: Commercial, Land, Construction
+                - generic [ref=e418]:
+                  - link "Web" [ref=e419] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=405+St+David+Street+Investments+Inc
+                    - img [ref=e420]
+                    - generic [ref=e423]: Web
+                  - link "LI" [ref=e424] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=405+St+David+Street+Investments+Inc+linkedin
+                    - img [ref=e425]
+                    - generic [ref=e429]: LI
+                  - link "Google" [ref=e430] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=405+St+David+Street+Investments+Inc
+                    - img [ref=e431]
+                    - generic [ref=e434]: Google
+                  - link "Contact" [ref=e435] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=405+St+David+Street+Investments+Inc+contact
+                    - img [ref=e436]
+                    - generic [ref=e439]: Contact
+                - button "Quick Links" [ref=e440] [cursor=pointer]:
+                  - img [ref=e441]
+                  - text: Quick Links
+              - generic [ref=e445]:
+                - generic [ref=e446]:
+                  - generic [ref=e447]:
+                    - heading "601 Investments Inc" [level=4] [ref=e448]
+                    - paragraph [ref=e449]: Private Lender
+                  - generic [ref=e450]:
+                    - img [ref=e451]
+                    - text: "4.5"
+                - generic [ref=e454]: Commercial, Land, Construction
+                - generic [ref=e455]:
+                  - link "Web" [ref=e456] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=601+Investments+Inc
+                    - img [ref=e457]
+                    - generic [ref=e460]: Web
+                  - link "LI" [ref=e461] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=601+Investments+Inc+linkedin
+                    - img [ref=e462]
+                    - generic [ref=e466]: LI
+                  - link "Google" [ref=e467] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=601+Investments+Inc
+                    - img [ref=e468]
+                    - generic [ref=e471]: Google
+                  - link "Contact" [ref=e472] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=601+Investments+Inc+contact
+                    - img [ref=e473]
+                    - generic [ref=e476]: Contact
+                - button "Quick Links" [ref=e477] [cursor=pointer]:
+                  - img [ref=e478]
+                  - text: Quick Links
+              - generic [ref=e482]:
+                - generic [ref=e483]:
+                  - generic [ref=e484]:
+                    - heading "88 Financial Investments Inc" [level=4] [ref=e485]
+                    - paragraph [ref=e486]: Private Lender
+                  - generic [ref=e487]:
+                    - img [ref=e488]
+                    - text: "4.5"
+                - generic [ref=e491]: Commercial, Land, Construction
+                - generic [ref=e492]:
+                  - link "Web" [ref=e493] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=88+Financial+Investments+Inc
+                    - img [ref=e494]
+                    - generic [ref=e497]: Web
+                  - link "LI" [ref=e498] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=88+Financial+Investments+Inc+linkedin
+                    - img [ref=e499]
+                    - generic [ref=e503]: LI
+                  - link "Google" [ref=e504] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=88+Financial+Investments+Inc
+                    - img [ref=e505]
+                    - generic [ref=e508]: Google
+                  - link "Contact" [ref=e509] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=88+Financial+Investments+Inc+contact
+                    - img [ref=e510]
+                    - generic [ref=e513]: Contact
+                - button "Quick Links" [ref=e514] [cursor=pointer]:
+                  - img [ref=e515]
+                  - text: Quick Links
+              - generic [ref=e519]:
+                - generic [ref=e520]:
+                  - generic [ref=e521]:
+                    - heading "AFFG Properties &amp; Investments Inc" [level=4] [ref=e522]
+                    - paragraph [ref=e523]: Private Lender
+                  - generic [ref=e524]:
+                    - img [ref=e525]
+                    - text: "4.5"
+                - generic [ref=e528]: Commercial, Land, Construction
+                - generic [ref=e529]:
+                  - link "Web" [ref=e530] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AFFG+Properties+%26amp%3B+Investments+Inc
+                    - img [ref=e531]
+                    - generic [ref=e534]: Web
+                  - link "LI" [ref=e535] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AFFG+Properties+%26amp%3B+Investments+Inc+linkedin
+                    - img [ref=e536]
+                    - generic [ref=e540]: LI
+                  - link "Google" [ref=e541] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AFFG+Properties+%26amp%3B+Investments+Inc
+                    - img [ref=e542]
+                    - generic [ref=e545]: Google
+                  - link "Contact" [ref=e546] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AFFG+Properties+%26amp%3B+Investments+Inc+contact
+                    - img [ref=e547]
+                    - generic [ref=e550]: Contact
+                - button "Quick Links" [ref=e551] [cursor=pointer]:
+                  - img [ref=e552]
+                  - text: Quick Links
+              - generic [ref=e556]:
+                - generic [ref=e557]:
+                  - generic [ref=e558]:
+                    - heading "AGS Capital Cor" [level=4] [ref=e559]
+                    - paragraph [ref=e560]: Private Lender
+                  - generic [ref=e561]:
+                    - img [ref=e562]
+                    - text: "4.5"
+                - generic [ref=e565]: Commercial, Land, Construction
+                - generic [ref=e566]:
+                  - link "Web" [ref=e567] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AGS+Capital+Cor
+                    - img [ref=e568]
+                    - generic [ref=e571]: Web
+                  - link "LI" [ref=e572] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AGS+Capital+Cor+linkedin
+                    - img [ref=e573]
+                    - generic [ref=e577]: LI
+                  - link "Google" [ref=e578] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AGS+Capital+Cor
+                    - img [ref=e579]
+                    - generic [ref=e582]: Google
+                  - link "Contact" [ref=e583] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AGS+Capital+Cor+contact
+                    - img [ref=e584]
+                    - generic [ref=e587]: Contact
+                - button "Quick Links" [ref=e588] [cursor=pointer]:
+                  - img [ref=e589]
+                  - text: Quick Links
+              - generic [ref=e593]:
+                - generic [ref=e594]:
+                  - generic [ref=e595]:
+                    - heading "AML Investments Inc" [level=4] [ref=e596]
+                    - paragraph [ref=e597]: Private Lender
+                  - generic [ref=e598]:
+                    - img [ref=e599]
+                    - text: "4.5"
+                - generic [ref=e602]: Commercial, Land, Construction
+                - generic [ref=e603]:
+                  - link "Web" [ref=e604] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AML+Investments+Inc
+                    - img [ref=e605]
+                    - generic [ref=e608]: Web
+                  - link "LI" [ref=e609] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AML+Investments+Inc+linkedin
+                    - img [ref=e610]
+                    - generic [ref=e614]: LI
+                  - link "Google" [ref=e615] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AML+Investments+Inc
+                    - img [ref=e616]
+                    - generic [ref=e619]: Google
+                  - link "Contact" [ref=e620] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AML+Investments+Inc+contact
+                    - img [ref=e621]
+                    - generic [ref=e624]: Contact
+                - button "Quick Links" [ref=e625] [cursor=pointer]:
+                  - img [ref=e626]
+                  - text: Quick Links
+              - generic [ref=e630]:
+                - generic [ref=e631]:
+                  - generic [ref=e632]:
+                    - heading "AMLD Investments Inc and 6 other" [level=4] [ref=e633]
+                    - paragraph [ref=e634]: Private Lender
+                  - generic [ref=e635]:
+                    - img [ref=e636]
+                    - text: "4.5"
+                - generic [ref=e639]: Commercial, Land, Construction
+                - generic [ref=e640]:
+                  - link "Web" [ref=e641] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AMLD+Investments+Inc+and+6+other
+                    - img [ref=e642]
+                    - generic [ref=e645]: Web
+                  - link "LI" [ref=e646] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AMLD+Investments+Inc+and+6+other+linkedin
+                    - img [ref=e647]
+                    - generic [ref=e651]: LI
+                  - link "Google" [ref=e652] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AMLD+Investments+Inc+and+6+other
+                    - img [ref=e653]
+                    - generic [ref=e656]: Google
+                  - link "Contact" [ref=e657] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AMLD+Investments+Inc+and+6+other+contact
+                    - img [ref=e658]
+                    - generic [ref=e661]: Contact
+                - button "Quick Links" [ref=e662] [cursor=pointer]:
+                  - img [ref=e663]
+                  - text: Quick Links
+              - generic [ref=e667]:
+                - generic [ref=e668]:
+                  - generic [ref=e669]:
+                    - heading "AP Investments Inc" [level=4] [ref=e670]
+                    - paragraph [ref=e671]: Private Lender
+                  - generic [ref=e672]:
+                    - img [ref=e673]
+                    - text: "4.5"
+                - generic [ref=e676]: Commercial, Land, Construction
+                - generic [ref=e677]:
+                  - link "Web" [ref=e678] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AP+Investments+Inc
+                    - img [ref=e679]
+                    - generic [ref=e682]: Web
+                  - link "LI" [ref=e683] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AP+Investments+Inc+linkedin
+                    - img [ref=e684]
+                    - generic [ref=e688]: LI
+                  - link "Google" [ref=e689] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AP+Investments+Inc
+                    - img [ref=e690]
+                    - generic [ref=e693]: Google
+                  - link "Contact" [ref=e694] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AP+Investments+Inc+contact
+                    - img [ref=e695]
+                    - generic [ref=e698]: Contact
+                - button "Quick Links" [ref=e699] [cursor=pointer]:
+                  - img [ref=e700]
+                  - text: Quick Links
+              - generic [ref=e704]:
+                - generic [ref=e705]:
+                  - generic [ref=e706]:
+                    - heading "Abell Investments Ltd" [level=4] [ref=e707]
+                    - paragraph [ref=e708]: Private Lender
+                  - generic [ref=e709]:
+                    - img [ref=e710]
+                    - text: "4.5"
+                - generic [ref=e713]: Commercial, Land, Construction
+                - generic [ref=e714]:
+                  - link "Web" [ref=e715] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Abell+Investments+Ltd
+                    - img [ref=e716]
+                    - generic [ref=e719]: Web
+                  - link "LI" [ref=e720] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Abell+Investments+Ltd+linkedin
+                    - img [ref=e721]
+                    - generic [ref=e725]: LI
+                  - link "Google" [ref=e726] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Abell+Investments+Ltd
+                    - img [ref=e727]
+                    - generic [ref=e730]: Google
+                  - link "Contact" [ref=e731] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Abell+Investments+Ltd+contact
+                    - img [ref=e732]
+                    - generic [ref=e735]: Contact
+                - button "Quick Links" [ref=e736] [cursor=pointer]:
+                  - img [ref=e737]
+                  - text: Quick Links
+              - generic [ref=e741]:
+                - generic [ref=e742]:
+                  - generic [ref=e743]:
+                    - heading "Acapulco Investments Ltd" [level=4] [ref=e744]
+                    - paragraph [ref=e745]: Private Lender
+                  - generic [ref=e746]:
+                    - img [ref=e747]
+                    - text: "4.5"
+                - generic [ref=e750]: Commercial, Land, Construction
+                - generic [ref=e751]:
+                  - link "Web" [ref=e752] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Acapulco+Investments+Ltd
+                    - img [ref=e753]
+                    - generic [ref=e756]: Web
+                  - link "LI" [ref=e757] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Acapulco+Investments+Ltd+linkedin
+                    - img [ref=e758]
+                    - generic [ref=e762]: LI
+                  - link "Google" [ref=e763] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Acapulco+Investments+Ltd
+                    - img [ref=e764]
+                    - generic [ref=e767]: Google
+                  - link "Contact" [ref=e768] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Acapulco+Investments+Ltd+contact
+                    - img [ref=e769]
+                    - generic [ref=e772]: Contact
+                - button "Quick Links" [ref=e773] [cursor=pointer]:
+                  - img [ref=e774]
+                  - text: Quick Links
+              - generic [ref=e778]:
+                - generic [ref=e779]:
+                  - generic [ref=e780]:
+                    - heading "Addenda Capital Inc" [level=4] [ref=e781]
+                    - paragraph [ref=e782]: Private Lender
+                  - generic [ref=e783]:
+                    - img [ref=e784]
+                    - text: "4.5"
+                - generic [ref=e787]: Commercial, Land, Construction
+                - generic [ref=e788]:
+                  - link "Web" [ref=e789] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Addenda+Capital+Inc
+                    - img [ref=e790]
+                    - generic [ref=e793]: Web
+                  - link "LI" [ref=e794] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Addenda+Capital+Inc+linkedin
+                    - img [ref=e795]
+                    - generic [ref=e799]: LI
+                  - link "Google" [ref=e800] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Addenda+Capital+Inc
+                    - img [ref=e801]
+                    - generic [ref=e804]: Google
+                  - link "Contact" [ref=e805] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Addenda+Capital+Inc+contact
+                    - img [ref=e806]
+                    - generic [ref=e809]: Contact
+                - button "Quick Links" [ref=e810] [cursor=pointer]:
+                  - img [ref=e811]
+                  - text: Quick Links
+              - generic [ref=e815]:
+                - generic [ref=e816]:
+                  - generic [ref=e817]:
+                    - heading "Aggregated Investments Inc" [level=4] [ref=e818]
+                    - paragraph [ref=e819]: Private Lender
+                  - generic [ref=e820]:
+                    - img [ref=e821]
+                    - text: "4.5"
+                - generic [ref=e824]: Commercial, Land, Construction
+                - generic [ref=e825]:
+                  - link "Web" [ref=e826] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aggregated+Investments+Inc
+                    - img [ref=e827]
+                    - generic [ref=e830]: Web
+                  - link "LI" [ref=e831] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aggregated+Investments+Inc+linkedin
+                    - img [ref=e832]
+                    - generic [ref=e836]: LI
+                  - link "Google" [ref=e837] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aggregated+Investments+Inc
+                    - img [ref=e838]
+                    - generic [ref=e841]: Google
+                  - link "Contact" [ref=e842] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aggregated+Investments+Inc+contact
+                    - img [ref=e843]
+                    - generic [ref=e846]: Contact
+                - button "Quick Links" [ref=e847] [cursor=pointer]:
+                  - img [ref=e848]
+                  - text: Quick Links
+              - generic [ref=e852]:
+                - generic [ref=e853]:
+                  - generic [ref=e854]:
+                    - heading "Ahluwalia Investments Inc" [level=4] [ref=e855]
+                    - paragraph [ref=e856]: Private Lender
+                  - generic [ref=e857]:
+                    - img [ref=e858]
+                    - text: "4.5"
+                - generic [ref=e861]: Commercial, Land, Construction
+                - generic [ref=e862]:
+                  - link "Web" [ref=e863] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ahluwalia+Investments+Inc
+                    - img [ref=e864]
+                    - generic [ref=e867]: Web
+                  - link "LI" [ref=e868] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ahluwalia+Investments+Inc+linkedin
+                    - img [ref=e869]
+                    - generic [ref=e873]: LI
+                  - link "Google" [ref=e874] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ahluwalia+Investments+Inc
+                    - img [ref=e875]
+                    - generic [ref=e878]: Google
+                  - link "Contact" [ref=e879] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ahluwalia+Investments+Inc+contact
+                    - img [ref=e880]
+                    - generic [ref=e883]: Contact
+                - button "Quick Links" [ref=e884] [cursor=pointer]:
+                  - img [ref=e885]
+                  - text: Quick Links
+              - generic [ref=e889]:
+                - generic [ref=e890]:
+                  - generic [ref=e891]:
+                    - heading "Akleh Investments Ltd" [level=4] [ref=e892]
+                    - paragraph [ref=e893]: Private Lender
+                  - generic [ref=e894]:
+                    - img [ref=e895]
+                    - text: "4.5"
+                - generic [ref=e898]: Commercial, Land, Construction
+                - generic [ref=e899]:
+                  - link "Web" [ref=e900] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Akleh+Investments+Ltd
+                    - img [ref=e901]
+                    - generic [ref=e904]: Web
+                  - link "LI" [ref=e905] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Akleh+Investments+Ltd+linkedin
+                    - img [ref=e906]
+                    - generic [ref=e910]: LI
+                  - link "Google" [ref=e911] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Akleh+Investments+Ltd
+                    - img [ref=e912]
+                    - generic [ref=e915]: Google
+                  - link "Contact" [ref=e916] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Akleh+Investments+Ltd+contact
+                    - img [ref=e917]
+                    - generic [ref=e920]: Contact
+                - button "Quick Links" [ref=e921] [cursor=pointer]:
+                  - img [ref=e922]
+                  - text: Quick Links
+              - generic [ref=e926]:
+                - generic [ref=e927]:
+                  - generic [ref=e928]:
+                    - heading "Alexa Investments Ltd" [level=4] [ref=e929]
+                    - paragraph [ref=e930]: Private Lender
+                  - generic [ref=e931]:
+                    - img [ref=e932]
+                    - text: "4.5"
+                - generic [ref=e935]: Commercial, Land, Construction
+                - generic [ref=e936]:
+                  - link "Web" [ref=e937] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alexa+Investments+Ltd
+                    - img [ref=e938]
+                    - generic [ref=e941]: Web
+                  - link "LI" [ref=e942] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alexa+Investments+Ltd+linkedin
+                    - img [ref=e943]
+                    - generic [ref=e947]: LI
+                  - link "Google" [ref=e948] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alexa+Investments+Ltd
+                    - img [ref=e949]
+                    - generic [ref=e952]: Google
+                  - link "Contact" [ref=e953] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alexa+Investments+Ltd+contact
+                    - img [ref=e954]
+                    - generic [ref=e957]: Contact
+                - button "Quick Links" [ref=e958] [cursor=pointer]:
+                  - img [ref=e959]
+                  - text: Quick Links
+              - generic [ref=e963]:
+                - generic [ref=e964]:
+                  - generic [ref=e965]:
+                    - heading "Algo Capital Holdings Inc" [level=4] [ref=e966]
+                    - paragraph [ref=e967]: Private Lender
+                  - generic [ref=e968]:
+                    - img [ref=e969]
+                    - text: "4.5"
+                - generic [ref=e972]: Commercial, Land, Construction
+                - generic [ref=e973]:
+                  - link "Web" [ref=e974] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Algo+Capital+Holdings+Inc
+                    - img [ref=e975]
+                    - generic [ref=e978]: Web
+                  - link "LI" [ref=e979] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Algo+Capital+Holdings+Inc+linkedin
+                    - img [ref=e980]
+                    - generic [ref=e984]: LI
+                  - link "Google" [ref=e985] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Algo+Capital+Holdings+Inc
+                    - img [ref=e986]
+                    - generic [ref=e989]: Google
+                  - link "Contact" [ref=e990] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Algo+Capital+Holdings+Inc+contact
+                    - img [ref=e991]
+                    - generic [ref=e994]: Contact
+                - button "Quick Links" [ref=e995] [cursor=pointer]:
+                  - img [ref=e996]
+                  - text: Quick Links
+              - generic [ref=e1000]:
+                - generic [ref=e1001]:
+                  - generic [ref=e1002]:
+                    - heading "Almore Capital Ltd" [level=4] [ref=e1003]
+                    - paragraph [ref=e1004]: Private Lender
+                  - generic [ref=e1005]:
+                    - img [ref=e1006]
+                    - text: "4.5"
+                - generic [ref=e1009]: Commercial, Land, Construction
+                - generic [ref=e1010]:
+                  - link "Web" [ref=e1011] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Almore+Capital+Ltd
+                    - img [ref=e1012]
+                    - generic [ref=e1015]: Web
+                  - link "LI" [ref=e1016] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Almore+Capital+Ltd+linkedin
+                    - img [ref=e1017]
+                    - generic [ref=e1021]: LI
+                  - link "Google" [ref=e1022] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Almore+Capital+Ltd
+                    - img [ref=e1023]
+                    - generic [ref=e1026]: Google
+                  - link "Contact" [ref=e1027] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Almore+Capital+Ltd+contact
+                    - img [ref=e1028]
+                    - generic [ref=e1031]: Contact
+                - button "Quick Links" [ref=e1032] [cursor=pointer]:
+                  - img [ref=e1033]
+                  - text: Quick Links
+              - generic [ref=e1037]:
+                - generic [ref=e1038]:
+                  - generic [ref=e1039]:
+                    - heading "Amtoca Investment Ltd" [level=4] [ref=e1040]
+                    - paragraph [ref=e1041]: Private Lender
+                  - generic [ref=e1042]:
+                    - img [ref=e1043]
+                    - text: "4.5"
+                - generic [ref=e1046]: Commercial, Land, Construction
+                - generic [ref=e1047]:
+                  - link "Web" [ref=e1048] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Amtoca+Investment+Ltd
+                    - img [ref=e1049]
+                    - generic [ref=e1052]: Web
+                  - link "LI" [ref=e1053] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Amtoca+Investment+Ltd+linkedin
+                    - img [ref=e1054]
+                    - generic [ref=e1058]: LI
+                  - link "Google" [ref=e1059] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Amtoca+Investment+Ltd
+                    - img [ref=e1060]
+                    - generic [ref=e1063]: Google
+                  - link "Contact" [ref=e1064] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Amtoca+Investment+Ltd+contact
+                    - img [ref=e1065]
+                    - generic [ref=e1068]: Contact
+                - button "Quick Links" [ref=e1069] [cursor=pointer]:
+                  - img [ref=e1070]
+                  - text: Quick Links
+              - generic [ref=e1074]:
+                - generic [ref=e1075]:
+                  - generic [ref=e1076]:
+                    - heading "Amur Capital Income Fund Inc" [level=4] [ref=e1077]
+                    - paragraph [ref=e1078]: Private Lender
+                  - generic [ref=e1079]:
+                    - img [ref=e1080]
+                    - text: "4.5"
+                - generic [ref=e1083]: Commercial, Land, Construction
+                - generic [ref=e1084]:
+                  - link "Web" [ref=e1085] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Amur+Capital+Income+Fund+Inc
+                    - img [ref=e1086]
+                    - generic [ref=e1089]: Web
+                  - link "LI" [ref=e1090] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Amur+Capital+Income+Fund+Inc+linkedin
+                    - img [ref=e1091]
+                    - generic [ref=e1095]: LI
+                  - link "Google" [ref=e1096] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Amur+Capital+Income+Fund+Inc
+                    - img [ref=e1097]
+                    - generic [ref=e1100]: Google
+                  - link "Contact" [ref=e1101] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Amur+Capital+Income+Fund+Inc+contact
+                    - img [ref=e1102]
+                    - generic [ref=e1105]: Contact
+                - button "Quick Links" [ref=e1106] [cursor=pointer]:
+                  - img [ref=e1107]
+                  - text: Quick Links
+              - generic [ref=e1111]:
+                - generic [ref=e1112]:
+                  - generic [ref=e1113]:
+                    - heading "Ancon Investments Inc" [level=4] [ref=e1114]
+                    - paragraph [ref=e1115]: Private Lender
+                  - generic [ref=e1116]:
+                    - img [ref=e1117]
+                    - text: "4.5"
+                - generic [ref=e1120]: Commercial, Land, Construction
+                - generic [ref=e1121]:
+                  - link "Web" [ref=e1122] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ancon+Investments+Inc
+                    - img [ref=e1123]
+                    - generic [ref=e1126]: Web
+                  - link "LI" [ref=e1127] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ancon+Investments+Inc+linkedin
+                    - img [ref=e1128]
+                    - generic [ref=e1132]: LI
+                  - link "Google" [ref=e1133] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ancon+Investments+Inc
+                    - img [ref=e1134]
+                    - generic [ref=e1137]: Google
+                  - link "Contact" [ref=e1138] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ancon+Investments+Inc+contact
+                    - img [ref=e1139]
+                    - generic [ref=e1142]: Contact
+                - button "Quick Links" [ref=e1143] [cursor=pointer]:
+                  - img [ref=e1144]
+                  - text: Quick Links
+              - generic [ref=e1148]:
+                - generic [ref=e1149]:
+                  - generic [ref=e1150]:
+                    - heading "Andash Investments Ltd" [level=4] [ref=e1151]
+                    - paragraph [ref=e1152]: Private Lender
+                  - generic [ref=e1153]:
+                    - img [ref=e1154]
+                    - text: "4.5"
+                - generic [ref=e1157]: Commercial, Land, Construction
+                - generic [ref=e1158]:
+                  - link "Web" [ref=e1159] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Andash+Investments+Ltd
+                    - img [ref=e1160]
+                    - generic [ref=e1163]: Web
+                  - link "LI" [ref=e1164] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Andash+Investments+Ltd+linkedin
+                    - img [ref=e1165]
+                    - generic [ref=e1169]: LI
+                  - link "Google" [ref=e1170] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Andash+Investments+Ltd
+                    - img [ref=e1171]
+                    - generic [ref=e1174]: Google
+                  - link "Contact" [ref=e1175] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Andash+Investments+Ltd+contact
+                    - img [ref=e1176]
+                    - generic [ref=e1179]: Contact
+                - button "Quick Links" [ref=e1180] [cursor=pointer]:
+                  - img [ref=e1181]
+                  - text: Quick Links
+              - generic [ref=e1185]:
+                - generic [ref=e1186]:
+                  - generic [ref=e1187]:
+                    - heading "Angra Investments Ltd" [level=4] [ref=e1188]
+                    - paragraph [ref=e1189]: Private Lender
+                  - generic [ref=e1190]:
+                    - img [ref=e1191]
+                    - text: "4.5"
+                - generic [ref=e1194]: Commercial, Land, Construction
+                - generic [ref=e1195]:
+                  - link "Web" [ref=e1196] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Angra+Investments+Ltd
+                    - img [ref=e1197]
+                    - generic [ref=e1200]: Web
+                  - link "LI" [ref=e1201] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Angra+Investments+Ltd+linkedin
+                    - img [ref=e1202]
+                    - generic [ref=e1206]: LI
+                  - link "Google" [ref=e1207] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Angra+Investments+Ltd
+                    - img [ref=e1208]
+                    - generic [ref=e1211]: Google
+                  - link "Contact" [ref=e1212] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Angra+Investments+Ltd+contact
+                    - img [ref=e1213]
+                    - generic [ref=e1216]: Contact
+                - button "Quick Links" [ref=e1217] [cursor=pointer]:
+                  - img [ref=e1218]
+                  - text: Quick Links
+              - generic [ref=e1222]:
+                - generic [ref=e1223]:
+                  - generic [ref=e1224]:
+                    - heading "Applecore Investments Inc" [level=4] [ref=e1225]
+                    - paragraph [ref=e1226]: Private Lender
+                  - generic [ref=e1227]:
+                    - img [ref=e1228]
+                    - text: "4.5"
+                - generic [ref=e1231]: Commercial, Land, Construction
+                - generic [ref=e1232]:
+                  - link "Web" [ref=e1233] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Applecore+Investments+Inc
+                    - img [ref=e1234]
+                    - generic [ref=e1237]: Web
+                  - link "LI" [ref=e1238] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Applecore+Investments+Inc+linkedin
+                    - img [ref=e1239]
+                    - generic [ref=e1243]: LI
+                  - link "Google" [ref=e1244] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Applecore+Investments+Inc
+                    - img [ref=e1245]
+                    - generic [ref=e1248]: Google
+                  - link "Contact" [ref=e1249] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Applecore+Investments+Inc+contact
+                    - img [ref=e1250]
+                    - generic [ref=e1253]: Contact
+                - button "Quick Links" [ref=e1254] [cursor=pointer]:
+                  - img [ref=e1255]
+                  - text: Quick Links
+              - generic [ref=e1259]:
+                - generic [ref=e1260]:
+                  - generic [ref=e1261]:
+                    - heading "Arca Investments Inc" [level=4] [ref=e1262]
+                    - paragraph [ref=e1263]: Private Lender
+                  - generic [ref=e1264]:
+                    - img [ref=e1265]
+                    - text: "4.5"
+                - generic [ref=e1268]: Commercial, Land, Construction
+                - generic [ref=e1269]:
+                  - link "Web" [ref=e1270] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Arca+Investments+Inc
+                    - img [ref=e1271]
+                    - generic [ref=e1274]: Web
+                  - link "LI" [ref=e1275] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Arca+Investments+Inc+linkedin
+                    - img [ref=e1276]
+                    - generic [ref=e1280]: LI
+                  - link "Google" [ref=e1281] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Arca+Investments+Inc
+                    - img [ref=e1282]
+                    - generic [ref=e1285]: Google
+                  - link "Contact" [ref=e1286] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Arca+Investments+Inc+contact
+                    - img [ref=e1287]
+                    - generic [ref=e1290]: Contact
+                - button "Quick Links" [ref=e1291] [cursor=pointer]:
+                  - img [ref=e1292]
+                  - text: Quick Links
+              - generic [ref=e1296]:
+                - generic [ref=e1297]:
+                  - generic [ref=e1298]:
+                    - heading "Arca Real Estate Investments Inc" [level=4] [ref=e1299]
+                    - paragraph [ref=e1300]: Private Lender
+                  - generic [ref=e1301]:
+                    - img [ref=e1302]
+                    - text: "4.5"
+                - generic [ref=e1305]: Commercial, Land, Construction
+                - generic [ref=e1306]:
+                  - link "Web" [ref=e1307] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Arca+Real+Estate+Investments+Inc
+                    - img [ref=e1308]
+                    - generic [ref=e1311]: Web
+                  - link "LI" [ref=e1312] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Arca+Real+Estate+Investments+Inc+linkedin
+                    - img [ref=e1313]
+                    - generic [ref=e1317]: LI
+                  - link "Google" [ref=e1318] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Arca+Real+Estate+Investments+Inc
+                    - img [ref=e1319]
+                    - generic [ref=e1322]: Google
+                  - link "Contact" [ref=e1323] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Arca+Real+Estate+Investments+Inc+contact
+                    - img [ref=e1324]
+                    - generic [ref=e1327]: Contact
+                - button "Quick Links" [ref=e1328] [cursor=pointer]:
+                  - img [ref=e1329]
+                  - text: Quick Links
+              - generic [ref=e1333]:
+                - generic [ref=e1334]:
+                  - generic [ref=e1335]:
+                    - heading "Ardex Capital Management Inc" [level=4] [ref=e1336]
+                    - paragraph [ref=e1337]: Private Lender
+                  - generic [ref=e1338]:
+                    - img [ref=e1339]
+                    - text: "4.5"
+                - generic [ref=e1342]: Commercial, Land, Construction
+                - generic [ref=e1343]:
+                  - link "Web" [ref=e1344] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ardex+Capital+Management+Inc
+                    - img [ref=e1345]
+                    - generic [ref=e1348]: Web
+                  - link "LI" [ref=e1349] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ardex+Capital+Management+Inc+linkedin
+                    - img [ref=e1350]
+                    - generic [ref=e1354]: LI
+                  - link "Google" [ref=e1355] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ardex+Capital+Management+Inc
+                    - img [ref=e1356]
+                    - generic [ref=e1359]: Google
+                  - link "Contact" [ref=e1360] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ardex+Capital+Management+Inc+contact
+                    - img [ref=e1361]
+                    - generic [ref=e1364]: Contact
+                - button "Quick Links" [ref=e1365] [cursor=pointer]:
+                  - img [ref=e1366]
+                  - text: Quick Links
+              - generic [ref=e1370]:
+                - generic [ref=e1371]:
+                  - generic [ref=e1372]:
+                    - heading "Ardex Capital Mangement Inc" [level=4] [ref=e1373]
+                    - paragraph [ref=e1374]: Private Lender
+                  - generic [ref=e1375]:
+                    - img [ref=e1376]
+                    - text: "4.5"
+                - generic [ref=e1379]: Commercial, Land, Construction
+                - generic [ref=e1380]:
+                  - link "Web" [ref=e1381] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ardex+Capital+Mangement+Inc
+                    - img [ref=e1382]
+                    - generic [ref=e1385]: Web
+                  - link "LI" [ref=e1386] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ardex+Capital+Mangement+Inc+linkedin
+                    - img [ref=e1387]
+                    - generic [ref=e1391]: LI
+                  - link "Google" [ref=e1392] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ardex+Capital+Mangement+Inc
+                    - img [ref=e1393]
+                    - generic [ref=e1396]: Google
+                  - link "Contact" [ref=e1397] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ardex+Capital+Mangement+Inc+contact
+                    - img [ref=e1398]
+                    - generic [ref=e1401]: Contact
+                - button "Quick Links" [ref=e1402] [cursor=pointer]:
+                  - img [ref=e1403]
+                  - text: Quick Links
+              - generic [ref=e1407]:
+                - generic [ref=e1408]:
+                  - generic [ref=e1409]:
+                    - heading "Ark Capital Ltd" [level=4] [ref=e1410]
+                    - paragraph [ref=e1411]: Private Lender
+                  - generic [ref=e1412]:
+                    - img [ref=e1413]
+                    - text: "4.5"
+                - generic [ref=e1416]: Commercial, Land, Construction
+                - generic [ref=e1417]:
+                  - link "Web" [ref=e1418] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ark+Capital+Ltd
+                    - img [ref=e1419]
+                    - generic [ref=e1422]: Web
+                  - link "LI" [ref=e1423] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ark+Capital+Ltd+linkedin
+                    - img [ref=e1424]
+                    - generic [ref=e1428]: LI
+                  - link "Google" [ref=e1429] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ark+Capital+Ltd
+                    - img [ref=e1430]
+                    - generic [ref=e1433]: Google
+                  - link "Contact" [ref=e1434] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Ark+Capital+Ltd+contact
+                    - img [ref=e1435]
+                    - generic [ref=e1438]: Contact
+                - button "Quick Links" [ref=e1439] [cursor=pointer]:
+                  - img [ref=e1440]
+                  - text: Quick Links
+              - generic [ref=e1444]:
+                - generic [ref=e1445]:
+                  - generic [ref=e1446]:
+                    - heading "Atrium Mortgge Investment Cor" [level=4] [ref=e1447]
+                    - paragraph [ref=e1448]: Private Lender
+                  - generic [ref=e1449]:
+                    - img [ref=e1450]
+                    - text: "4.5"
+                - generic [ref=e1453]: Commercial, Land, Construction
+                - generic [ref=e1454]:
+                  - link "Web" [ref=e1455] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Mortgge+Investment+Cor
+                    - img [ref=e1456]
+                    - generic [ref=e1459]: Web
+                  - link "LI" [ref=e1460] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Mortgge+Investment+Cor+linkedin
+                    - img [ref=e1461]
+                    - generic [ref=e1465]: LI
+                  - link "Google" [ref=e1466] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Mortgge+Investment+Cor
+                    - img [ref=e1467]
+                    - generic [ref=e1470]: Google
+                  - link "Contact" [ref=e1471] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Mortgge+Investment+Cor+contact
+                    - img [ref=e1472]
+                    - generic [ref=e1475]: Contact
+                - button "Quick Links" [ref=e1476] [cursor=pointer]:
+                  - img [ref=e1477]
+                  - text: Quick Links
+              - generic [ref=e1481]:
+                - generic [ref=e1482]:
+                  - generic [ref=e1483]:
+                    - heading "Augend 100 Steeles Investments Ltd" [level=4] [ref=e1484]
+                    - paragraph [ref=e1485]: Private Lender
+                  - generic [ref=e1486]:
+                    - img [ref=e1487]
+                    - text: "4.5"
+                - generic [ref=e1490]: Commercial, Land, Construction
+                - generic [ref=e1491]:
+                  - link "Web" [ref=e1492] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Augend+100+Steeles+Investments+Ltd
+                    - img [ref=e1493]
+                    - generic [ref=e1496]: Web
+                  - link "LI" [ref=e1497] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Augend+100+Steeles+Investments+Ltd+linkedin
+                    - img [ref=e1498]
+                    - generic [ref=e1502]: LI
+                  - link "Google" [ref=e1503] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Augend+100+Steeles+Investments+Ltd
+                    - img [ref=e1504]
+                    - generic [ref=e1507]: Google
+                  - link "Contact" [ref=e1508] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Augend+100+Steeles+Investments+Ltd+contact
+                    - img [ref=e1509]
+                    - generic [ref=e1512]: Contact
+                - button "Quick Links" [ref=e1513] [cursor=pointer]:
+                  - img [ref=e1514]
+                  - text: Quick Links
+              - generic [ref=e1518]:
+                - generic [ref=e1519]:
+                  - generic [ref=e1520]:
+                    - heading "Avila Investments Ltd" [level=4] [ref=e1521]
+                    - paragraph [ref=e1522]: Private Lender
+                  - generic [ref=e1523]:
+                    - img [ref=e1524]
+                    - text: "4.5"
+                - generic [ref=e1527]: Commercial, Land, Construction
+                - generic [ref=e1528]:
+                  - link "Web" [ref=e1529] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Avila+Investments+Ltd
+                    - img [ref=e1530]
+                    - generic [ref=e1533]: Web
+                  - link "LI" [ref=e1534] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Avila+Investments+Ltd+linkedin
+                    - img [ref=e1535]
+                    - generic [ref=e1539]: LI
+                  - link "Google" [ref=e1540] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Avila+Investments+Ltd
+                    - img [ref=e1541]
+                    - generic [ref=e1544]: Google
+                  - link "Contact" [ref=e1545] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Avila+Investments+Ltd+contact
+                    - img [ref=e1546]
+                    - generic [ref=e1549]: Contact
+                - button "Quick Links" [ref=e1550] [cursor=pointer]:
+                  - img [ref=e1551]
+                  - text: Quick Links
+              - generic [ref=e1555]:
+                - generic [ref=e1556]:
+                  - generic [ref=e1557]:
+                    - heading "Avondale Capital Inc" [level=4] [ref=e1558]
+                    - paragraph [ref=e1559]: Private Lender
+                  - generic [ref=e1560]:
+                    - img [ref=e1561]
+                    - text: "4.5"
+                - generic [ref=e1564]: Commercial, Land, Construction
+                - generic [ref=e1565]:
+                  - link "Web" [ref=e1566] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Avondale+Capital+Inc
+                    - img [ref=e1567]
+                    - generic [ref=e1570]: Web
+                  - link "LI" [ref=e1571] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Avondale+Capital+Inc+linkedin
+                    - img [ref=e1572]
+                    - generic [ref=e1576]: LI
+                  - link "Google" [ref=e1577] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Avondale+Capital+Inc
+                    - img [ref=e1578]
+                    - generic [ref=e1581]: Google
+                  - link "Contact" [ref=e1582] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Avondale+Capital+Inc+contact
+                    - img [ref=e1583]
+                    - generic [ref=e1586]: Contact
+                - button "Quick Links" [ref=e1587] [cursor=pointer]:
+                  - img [ref=e1588]
+                  - text: Quick Links
+              - generic [ref=e1592]:
+                - generic [ref=e1593]:
+                  - generic [ref=e1594]:
+                    - heading "B &amp; M Handelman Investments &amp; other" [level=4] [ref=e1595]
+                    - paragraph [ref=e1596]: Private Lender
+                  - generic [ref=e1597]:
+                    - img [ref=e1598]
+                    - text: "4.5"
+                - generic [ref=e1601]: Commercial, Land, Construction
+                - generic [ref=e1602]:
+                  - link "Web" [ref=e1603] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+%26amp%3B+other
+                    - img [ref=e1604]
+                    - generic [ref=e1607]: Web
+                  - link "LI" [ref=e1608] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+%26amp%3B+other+linkedin
+                    - img [ref=e1609]
+                    - generic [ref=e1613]: LI
+                  - link "Google" [ref=e1614] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+%26amp%3B+other
+                    - img [ref=e1615]
+                    - generic [ref=e1618]: Google
+                  - link "Contact" [ref=e1619] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+%26amp%3B+other+contact
+                    - img [ref=e1620]
+                    - generic [ref=e1623]: Contact
+                - button "Quick Links" [ref=e1624] [cursor=pointer]:
+                  - img [ref=e1625]
+                  - text: Quick Links
+              - generic [ref=e1629]:
+                - generic [ref=e1630]:
+                  - generic [ref=e1631]:
+                    - heading "B &amp; M Handelman Investments Ltd &amp; other" [level=4] [ref=e1632]
+                    - paragraph [ref=e1633]: Private Lender
+                  - generic [ref=e1634]:
+                    - img [ref=e1635]
+                    - text: "4.5"
+                - generic [ref=e1638]: Commercial, Land, Construction
+                - generic [ref=e1639]:
+                  - link "Web" [ref=e1640] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+Ltd+%26amp%3B+other
+                    - img [ref=e1641]
+                    - generic [ref=e1644]: Web
+                  - link "LI" [ref=e1645] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+Ltd+%26amp%3B+other+linkedin
+                    - img [ref=e1646]
+                    - generic [ref=e1650]: LI
+                  - link "Google" [ref=e1651] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+Ltd+%26amp%3B+other
+                    - img [ref=e1652]
+                    - generic [ref=e1655]: Google
+                  - link "Contact" [ref=e1656] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+Ltd+%26amp%3B+other+contact
+                    - img [ref=e1657]
+                    - generic [ref=e1660]: Contact
+                - button "Quick Links" [ref=e1661] [cursor=pointer]:
+                  - img [ref=e1662]
+                  - text: Quick Links
+              - generic [ref=e1666]:
+                - generic [ref=e1667]:
+                  - generic [ref=e1668]:
+                    - heading "B &amp; M Handelman Investments Ltd and 20 other" [level=4] [ref=e1669]
+                    - paragraph [ref=e1670]: Private Lender
+                  - generic [ref=e1671]:
+                    - img [ref=e1672]
+                    - text: "4.5"
+                - generic [ref=e1675]: Commercial, Land, Construction
+                - generic [ref=e1676]:
+                  - link "Web" [ref=e1677] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+Ltd+and+20+other
+                    - img [ref=e1678]
+                    - generic [ref=e1681]: Web
+                  - link "LI" [ref=e1682] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+Ltd+and+20+other+linkedin
+                    - img [ref=e1683]
+                    - generic [ref=e1687]: LI
+                  - link "Google" [ref=e1688] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+Ltd+and+20+other
+                    - img [ref=e1689]
+                    - generic [ref=e1692]: Google
+                  - link "Contact" [ref=e1693] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+Ltd+and+20+other+contact
+                    - img [ref=e1694]
+                    - generic [ref=e1697]: Contact
+                - button "Quick Links" [ref=e1698] [cursor=pointer]:
+                  - img [ref=e1699]
+                  - text: Quick Links
+              - generic [ref=e1703]:
+                - generic [ref=e1704]:
+                  - generic [ref=e1705]:
+                    - heading "B &amp; M Handelman Investments Ltd and 6 other" [level=4] [ref=e1706]
+                    - paragraph [ref=e1707]: Private Lender
+                  - generic [ref=e1708]:
+                    - img [ref=e1709]
+                    - text: "4.5"
+                - generic [ref=e1712]: Commercial, Land, Construction
+                - generic [ref=e1713]:
+                  - link "Web" [ref=e1714] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+Ltd+and+6+other
+                    - img [ref=e1715]
+                    - generic [ref=e1718]: Web
+                  - link "LI" [ref=e1719] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+Ltd+and+6+other+linkedin
+                    - img [ref=e1720]
+                    - generic [ref=e1724]: LI
+                  - link "Google" [ref=e1725] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+Ltd+and+6+other
+                    - img [ref=e1726]
+                    - generic [ref=e1729]: Google
+                  - link "Contact" [ref=e1730] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B+%26amp%3B+M+Handelman+Investments+Ltd+and+6+other+contact
+                    - img [ref=e1731]
+                    - generic [ref=e1734]: Contact
+                - button "Quick Links" [ref=e1735] [cursor=pointer]:
+                  - img [ref=e1736]
+                  - text: Quick Links
+              - generic [ref=e1740]:
+                - generic [ref=e1741]:
+                  - generic [ref=e1742]:
+                    - heading "B&amp;M Handelman Investments Ltd and 6 other" [level=4] [ref=e1743]
+                    - paragraph [ref=e1744]: Private Lender
+                  - generic [ref=e1745]:
+                    - img [ref=e1746]
+                    - text: "4.5"
+                - generic [ref=e1749]: Commercial, Land, Construction
+                - generic [ref=e1750]:
+                  - link "Web" [ref=e1751] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B%26amp%3BM+Handelman+Investments+Ltd+and+6+other
+                    - img [ref=e1752]
+                    - generic [ref=e1755]: Web
+                  - link "LI" [ref=e1756] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B%26amp%3BM+Handelman+Investments+Ltd+and+6+other+linkedin
+                    - img [ref=e1757]
+                    - generic [ref=e1761]: LI
+                  - link "Google" [ref=e1762] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B%26amp%3BM+Handelman+Investments+Ltd+and+6+other
+                    - img [ref=e1763]
+                    - generic [ref=e1766]: Google
+                  - link "Contact" [ref=e1767] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B%26amp%3BM+Handelman+Investments+Ltd+and+6+other+contact
+                    - img [ref=e1768]
+                    - generic [ref=e1771]: Contact
+                - button "Quick Links" [ref=e1772] [cursor=pointer]:
+                  - img [ref=e1773]
+                  - text: Quick Links
+              - generic [ref=e1777]:
+                - generic [ref=e1778]:
+                  - generic [ref=e1779]:
+                    - heading "BCIMC Construction Fund Cor" [level=4] [ref=e1780]
+                    - paragraph [ref=e1781]: Private Lender
+                  - generic [ref=e1782]:
+                    - img [ref=e1783]
+                    - text: "4.5"
+                - generic [ref=e1786]: Commercial, Land, Construction
+                - generic [ref=e1787]:
+                  - link "Web" [ref=e1788] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCIMC+Construction+Fund+Cor
+                    - img [ref=e1789]
+                    - generic [ref=e1792]: Web
+                  - link "LI" [ref=e1793] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCIMC+Construction+Fund+Cor+linkedin
+                    - img [ref=e1794]
+                    - generic [ref=e1798]: LI
+                  - link "Google" [ref=e1799] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCIMC+Construction+Fund+Cor
+                    - img [ref=e1800]
+                    - generic [ref=e1803]: Google
+                  - link "Contact" [ref=e1804] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCIMC+Construction+Fund+Cor+contact
+                    - img [ref=e1805]
+                    - generic [ref=e1808]: Contact
+                - button "Quick Links" [ref=e1809] [cursor=pointer]:
+                  - img [ref=e1810]
+                  - text: Quick Links
+              - generic [ref=e1814]:
+                - generic [ref=e1815]:
+                  - generic [ref=e1816]:
+                    - heading "BCMP Motrgage Investment Cor" [level=4] [ref=e1817]
+                    - paragraph [ref=e1818]: Private Lender
+                  - generic [ref=e1819]:
+                    - img [ref=e1820]
+                    - text: "4.5"
+                - generic [ref=e1823]: Commercial, Land, Construction
+                - generic [ref=e1824]:
+                  - link "Web" [ref=e1825] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCMP+Motrgage+Investment+Cor
+                    - img [ref=e1826]
+                    - generic [ref=e1829]: Web
+                  - link "LI" [ref=e1830] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCMP+Motrgage+Investment+Cor+linkedin
+                    - img [ref=e1831]
+                    - generic [ref=e1835]: LI
+                  - link "Google" [ref=e1836] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCMP+Motrgage+Investment+Cor
+                    - img [ref=e1837]
+                    - generic [ref=e1840]: Google
+                  - link "Contact" [ref=e1841] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCMP+Motrgage+Investment+Cor+contact
+                    - img [ref=e1842]
+                    - generic [ref=e1845]: Contact
+                - button "Quick Links" [ref=e1846] [cursor=pointer]:
+                  - img [ref=e1847]
+                  - text: Quick Links
+              - generic [ref=e1851]:
+                - generic [ref=e1852]:
+                  - generic [ref=e1853]:
+                    - heading "BDC Capital Inc" [level=4] [ref=e1854]
+                    - paragraph [ref=e1855]: Private Lender
+                  - generic [ref=e1856]:
+                    - img [ref=e1857]
+                    - text: "4.5"
+                - paragraph [ref=e1859]: bdcnewengland.com
+                - generic [ref=e1861]: Commercial, Land, Construction
+                - generic [ref=e1862]:
+                  - link "Web" [ref=e1863] [cursor=pointer]:
+                    - /url: https://bdcnewengland.com
+                    - img [ref=e1864]
+                    - generic [ref=e1867]: Web
+                  - link "LI" [ref=e1868] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BDC+Capital+Inc+linkedin
+                    - img [ref=e1869]
+                    - generic [ref=e1873]: LI
+                  - link "Google" [ref=e1874] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BDC+Capital+Inc
+                    - img [ref=e1875]
+                    - generic [ref=e1878]: Google
+                  - link "Contact" [ref=e1879] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BDC+Capital+Inc+contact
+                    - img [ref=e1880]
+                    - generic [ref=e1883]: Contact
+                - button "Quick Links" [ref=e1884] [cursor=pointer]:
+                  - img [ref=e1885]
+                  - text: Quick Links
+              - generic [ref=e1889]:
+                - generic [ref=e1890]:
+                  - generic [ref=e1891]:
+                    - heading "BFT Capital Inc" [level=4] [ref=e1892]
+                    - paragraph [ref=e1893]: Private Lender
+                  - generic [ref=e1894]:
+                    - img [ref=e1895]
+                    - text: "4.5"
+                - generic [ref=e1898]: Commercial, Land, Construction
+                - generic [ref=e1899]:
+                  - link "Web" [ref=e1900] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BFT+Capital+Inc
+                    - img [ref=e1901]
+                    - generic [ref=e1904]: Web
+                  - link "LI" [ref=e1905] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BFT+Capital+Inc+linkedin
+                    - img [ref=e1906]
+                    - generic [ref=e1910]: LI
+                  - link "Google" [ref=e1911] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BFT+Capital+Inc
+                    - img [ref=e1912]
+                    - generic [ref=e1915]: Google
+                  - link "Contact" [ref=e1916] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BFT+Capital+Inc+contact
+                    - img [ref=e1917]
+                    - generic [ref=e1920]: Contact
+                - button "Quick Links" [ref=e1921] [cursor=pointer]:
+                  - img [ref=e1922]
+                  - text: Quick Links
+              - generic [ref=e1926]:
+                - generic [ref=e1927]:
+                  - generic [ref=e1928]:
+                    - heading "Balmuzz Investments Inc" [level=4] [ref=e1929]
+                    - paragraph [ref=e1930]: Private Lender
+                  - generic [ref=e1931]:
+                    - img [ref=e1932]
+                    - text: "4.5"
+                - generic [ref=e1935]: Commercial, Land, Construction
+                - generic [ref=e1936]:
+                  - link "Web" [ref=e1937] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Balmuzz+Investments+Inc
+                    - img [ref=e1938]
+                    - generic [ref=e1941]: Web
+                  - link "LI" [ref=e1942] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Balmuzz+Investments+Inc+linkedin
+                    - img [ref=e1943]
+                    - generic [ref=e1947]: LI
+                  - link "Google" [ref=e1948] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Balmuzz+Investments+Inc
+                    - img [ref=e1949]
+                    - generic [ref=e1952]: Google
+                  - link "Contact" [ref=e1953] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Balmuzz+Investments+Inc+contact
+                    - img [ref=e1954]
+                    - generic [ref=e1957]: Contact
+                - button "Quick Links" [ref=e1958] [cursor=pointer]:
+                  - img [ref=e1959]
+                  - text: Quick Links
+          - generic [ref=e1963]:
+            - heading "Commercial (50)" [level=3] [ref=e1964]:
+              - text: Commercial
+              - generic [ref=e1966]: (50)
+            - generic [ref=e1967]:
+              - generic [ref=e1968]:
+                - generic [ref=e1969]:
+                  - generic [ref=e1970]:
+                    - heading "19 Duncan Mortgage Inc" [level=4] [ref=e1971]
+                    - paragraph [ref=e1972]: Mortgage Lender
+                  - generic [ref=e1973]:
+                    - img [ref=e1974]
+                    - text: "4.5"
+                - generic [ref=e1977]: Commercial
+                - generic [ref=e1978]:
+                  - link "Web" [ref=e1979] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=19+Duncan+Mortgage+Inc
+                    - img [ref=e1980]
+                    - generic [ref=e1983]: Web
+                  - link "LI" [ref=e1984] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=19+Duncan+Mortgage+Inc+linkedin
+                    - img [ref=e1985]
+                    - generic [ref=e1989]: LI
+                  - link "Google" [ref=e1990] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=19+Duncan+Mortgage+Inc
+                    - img [ref=e1991]
+                    - generic [ref=e1994]: Google
+                  - link "Contact" [ref=e1995] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=19+Duncan+Mortgage+Inc+contact
+                    - img [ref=e1996]
+                    - generic [ref=e1999]: Contact
+                - button "Quick Links" [ref=e2000] [cursor=pointer]:
+                  - img [ref=e2001]
+                  - text: Quick Links
+              - generic [ref=e2005]:
+                - generic [ref=e2006]:
+                  - generic [ref=e2007]:
+                    - heading "2 Fraser Avenue Finance Inc" [level=4] [ref=e2008]
+                    - paragraph [ref=e2009]: Private Lender
+                  - generic [ref=e2010]:
+                    - img [ref=e2011]
+                    - text: "4.5"
+                - generic [ref=e2014]: Commercial
+                - generic [ref=e2015]:
+                  - link "Web" [ref=e2016] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=2+Fraser+Avenue+Finance+Inc
+                    - img [ref=e2017]
+                    - generic [ref=e2020]: Web
+                  - link "LI" [ref=e2021] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=2+Fraser+Avenue+Finance+Inc+linkedin
+                    - img [ref=e2022]
+                    - generic [ref=e2026]: LI
+                  - link "Google" [ref=e2027] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=2+Fraser+Avenue+Finance+Inc
+                    - img [ref=e2028]
+                    - generic [ref=e2031]: Google
+                  - link "Contact" [ref=e2032] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=2+Fraser+Avenue+Finance+Inc+contact
+                    - img [ref=e2033]
+                    - generic [ref=e2036]: Contact
+                - button "Quick Links" [ref=e2037] [cursor=pointer]:
+                  - img [ref=e2038]
+                  - text: Quick Links
+              - generic [ref=e2042]:
+                - generic [ref=e2043]:
+                  - generic [ref=e2044]:
+                    - heading "245 Creditstone Rd Ltd" [level=4] [ref=e2045]
+                    - paragraph [ref=e2046]: Other
+                  - generic [ref=e2047]:
+                    - img [ref=e2048]
+                    - text: "4.5"
+                - generic [ref=e2051]: Commercial
+                - generic [ref=e2052]:
+                  - link "Web" [ref=e2053] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=245+Creditstone+Rd+Ltd
+                    - img [ref=e2054]
+                    - generic [ref=e2057]: Web
+                  - link "LI" [ref=e2058] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=245+Creditstone+Rd+Ltd+linkedin
+                    - img [ref=e2059]
+                    - generic [ref=e2063]: LI
+                  - link "Google" [ref=e2064] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=245+Creditstone+Rd+Ltd
+                    - img [ref=e2065]
+                    - generic [ref=e2068]: Google
+                  - link "Contact" [ref=e2069] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=245+Creditstone+Rd+Ltd+contact
+                    - img [ref=e2070]
+                    - generic [ref=e2073]: Contact
+                - button "Quick Links" [ref=e2074] [cursor=pointer]:
+                  - img [ref=e2075]
+                  - text: Quick Links
+              - generic [ref=e2079]:
+                - generic [ref=e2080]:
+                  - generic [ref=e2081]:
+                    - heading "401 Real Estate Trust Inc" [level=4] [ref=e2082]
+                    - paragraph [ref=e2083]: Mortgage Lender
+                  - generic [ref=e2084]:
+                    - img [ref=e2085]
+                    - text: "4.5"
+                - generic [ref=e2088]: Commercial
+                - generic [ref=e2089]:
+                  - link "Web" [ref=e2090] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=401+Real+Estate+Trust+Inc
+                    - img [ref=e2091]
+                    - generic [ref=e2094]: Web
+                  - link "LI" [ref=e2095] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=401+Real+Estate+Trust+Inc+linkedin
+                    - img [ref=e2096]
+                    - generic [ref=e2100]: LI
+                  - link "Google" [ref=e2101] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=401+Real+Estate+Trust+Inc
+                    - img [ref=e2102]
+                    - generic [ref=e2105]: Google
+                  - link "Contact" [ref=e2106] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=401+Real+Estate+Trust+Inc+contact
+                    - img [ref=e2107]
+                    - generic [ref=e2110]: Contact
+                - button "Quick Links" [ref=e2111] [cursor=pointer]:
+                  - img [ref=e2112]
+                  - text: Quick Links
+              - generic [ref=e2116]:
+                - generic [ref=e2117]:
+                  - generic [ref=e2118]:
+                    - heading "4230 Meadowvale Realty Ltd" [level=4] [ref=e2119]
+                    - paragraph [ref=e2120]: Other
+                  - generic [ref=e2121]:
+                    - img [ref=e2122]
+                    - text: "4.5"
+                - generic [ref=e2125]: Commercial
+                - generic [ref=e2126]:
+                  - link "Web" [ref=e2127] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=4230+Meadowvale+Realty+Ltd
+                    - img [ref=e2128]
+                    - generic [ref=e2131]: Web
+                  - link "LI" [ref=e2132] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=4230+Meadowvale+Realty+Ltd+linkedin
+                    - img [ref=e2133]
+                    - generic [ref=e2137]: LI
+                  - link "Google" [ref=e2138] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=4230+Meadowvale+Realty+Ltd
+                    - img [ref=e2139]
+                    - generic [ref=e2142]: Google
+                  - link "Contact" [ref=e2143] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=4230+Meadowvale+Realty+Ltd+contact
+                    - img [ref=e2144]
+                    - generic [ref=e2147]: Contact
+                - button "Quick Links" [ref=e2148] [cursor=pointer]:
+                  - img [ref=e2149]
+                  - text: Quick Links
+              - generic [ref=e2153]:
+                - generic [ref=e2154]:
+                  - generic [ref=e2155]:
+                    - heading "4Q Bank Note Holdings Inc" [level=4] [ref=e2156]
+                    - paragraph [ref=e2157]: Bank
+                  - generic [ref=e2158]:
+                    - img [ref=e2159]
+                    - text: "4.5"
+                - generic [ref=e2162]: Commercial
+                - generic [ref=e2163]:
+                  - link "Web" [ref=e2164] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=4Q+Bank+Note+Holdings+Inc
+                    - img [ref=e2165]
+                    - generic [ref=e2168]: Web
+                  - link "LI" [ref=e2169] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=4Q+Bank+Note+Holdings+Inc+linkedin
+                    - img [ref=e2170]
+                    - generic [ref=e2174]: LI
+                  - link "Google" [ref=e2175] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=4Q+Bank+Note+Holdings+Inc
+                    - img [ref=e2176]
+                    - generic [ref=e2179]: Google
+                  - link "Contact" [ref=e2180] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=4Q+Bank+Note+Holdings+Inc+contact
+                    - img [ref=e2181]
+                    - generic [ref=e2184]: Contact
+                - button "Quick Links" [ref=e2185] [cursor=pointer]:
+                  - img [ref=e2186]
+                  - text: Quick Links
+              - generic [ref=e2190]:
+                - generic [ref=e2191]:
+                  - generic [ref=e2192]:
+                    - heading "54 Esplanade Realty" [level=4] [ref=e2193]
+                    - paragraph [ref=e2194]: Other
+                  - generic [ref=e2195]:
+                    - img [ref=e2196]
+                    - text: "4.5"
+                - generic [ref=e2199]: Commercial
+                - generic [ref=e2200]:
+                  - link "Web" [ref=e2201] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=54+Esplanade+Realty
+                    - img [ref=e2202]
+                    - generic [ref=e2205]: Web
+                  - link "LI" [ref=e2206] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=54+Esplanade+Realty+linkedin
+                    - img [ref=e2207]
+                    - generic [ref=e2211]: LI
+                  - link "Google" [ref=e2212] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=54+Esplanade+Realty
+                    - img [ref=e2213]
+                    - generic [ref=e2216]: Google
+                  - link "Contact" [ref=e2217] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=54+Esplanade+Realty+contact
+                    - img [ref=e2218]
+                    - generic [ref=e2221]: Contact
+                - button "Quick Links" [ref=e2222] [cursor=pointer]:
+                  - img [ref=e2223]
+                  - text: Quick Links
+              - generic [ref=e2227]:
+                - generic [ref=e2228]:
+                  - generic [ref=e2229]:
+                    - heading "AFC Mortgage Administration Inc" [level=4] [ref=e2230]
+                    - paragraph [ref=e2231]: Mortgage Lender
+                  - generic [ref=e2232]:
+                    - img [ref=e2233]
+                    - text: "4.5"
+                - generic [ref=e2236]: Commercial
+                - generic [ref=e2237]:
+                  - link "Web" [ref=e2238] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AFC+Mortgage+Administration+Inc
+                    - img [ref=e2239]
+                    - generic [ref=e2242]: Web
+                  - link "LI" [ref=e2243] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AFC+Mortgage+Administration+Inc+linkedin
+                    - img [ref=e2244]
+                    - generic [ref=e2248]: LI
+                  - link "Google" [ref=e2249] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AFC+Mortgage+Administration+Inc
+                    - img [ref=e2250]
+                    - generic [ref=e2253]: Google
+                  - link "Contact" [ref=e2254] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AFC+Mortgage+Administration+Inc+contact
+                    - img [ref=e2255]
+                    - generic [ref=e2258]: Contact
+                - button "Quick Links" [ref=e2259] [cursor=pointer]:
+                  - img [ref=e2260]
+                  - text: Quick Links
+              - generic [ref=e2264]:
+                - generic [ref=e2265]:
+                  - generic [ref=e2266]:
+                    - heading "AJF Financial Cor" [level=4] [ref=e2267]
+                    - paragraph [ref=e2268]: Private Lender
+                  - generic [ref=e2269]:
+                    - img [ref=e2270]
+                    - text: "4.5"
+                - paragraph [ref=e2272]: ajffinancial.com
+                - generic [ref=e2274]: Commercial
+                - generic [ref=e2275]:
+                  - link "Web" [ref=e2276] [cursor=pointer]:
+                    - /url: https://ajffinancial.com
+                    - img [ref=e2277]
+                    - generic [ref=e2280]: Web
+                  - link "LI" [ref=e2281] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AJF+Financial+Cor+linkedin
+                    - img [ref=e2282]
+                    - generic [ref=e2286]: LI
+                  - link "Google" [ref=e2287] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AJF+Financial+Cor
+                    - img [ref=e2288]
+                    - generic [ref=e2291]: Google
+                  - link "Contact" [ref=e2292] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AJF+Financial+Cor+contact
+                    - img [ref=e2293]
+                    - generic [ref=e2296]: Contact
+                - button "Quick Links" [ref=e2297] [cursor=pointer]:
+                  - img [ref=e2298]
+                  - text: Quick Links
+              - generic [ref=e2302]:
+                - generic [ref=e2303]:
+                  - generic [ref=e2304]:
+                    - heading "AST Trust Company (Canada)" [level=4] [ref=e2305]
+                    - paragraph [ref=e2306]: Mortgage Lender
+                  - generic [ref=e2307]:
+                    - img [ref=e2308]
+                    - text: "4.5"
+                - generic [ref=e2311]: Commercial
+                - generic [ref=e2312]:
+                  - link "Web" [ref=e2313] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AST+Trust+Company+%28Canada%29
+                    - img [ref=e2314]
+                    - generic [ref=e2317]: Web
+                  - link "LI" [ref=e2318] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AST+Trust+Company+%28Canada%29+linkedin
+                    - img [ref=e2319]
+                    - generic [ref=e2323]: LI
+                  - link "Google" [ref=e2324] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AST+Trust+Company+%28Canada%29
+                    - img [ref=e2325]
+                    - generic [ref=e2328]: Google
+                  - link "Contact" [ref=e2329] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=AST+Trust+Company+%28Canada%29+contact
+                    - img [ref=e2330]
+                    - generic [ref=e2333]: Contact
+                - button "Quick Links" [ref=e2334] [cursor=pointer]:
+                  - img [ref=e2335]
+                  - text: Quick Links
+              - generic [ref=e2339]:
+                - generic [ref=e2340]:
+                  - generic [ref=e2341]:
+                    - heading "Aareal Bank AG" [level=4] [ref=e2342]
+                    - paragraph [ref=e2343]: Bank
+                  - generic [ref=e2344]:
+                    - img [ref=e2345]
+                    - text: "4.5"
+                - paragraph [ref=e2347]: aareal-bank.com
+                - generic [ref=e2349]: Commercial
+                - generic [ref=e2350]:
+                  - link "Web" [ref=e2351] [cursor=pointer]:
+                    - /url: https://aareal-bank.com
+                    - img [ref=e2352]
+                    - generic [ref=e2355]: Web
+                  - link "LI" [ref=e2356] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aareal+Bank+AG+linkedin
+                    - img [ref=e2357]
+                    - generic [ref=e2361]: LI
+                  - link "Google" [ref=e2362] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aareal+Bank+AG
+                    - img [ref=e2363]
+                    - generic [ref=e2366]: Google
+                  - link "Contact" [ref=e2367] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aareal+Bank+AG+contact
+                    - img [ref=e2368]
+                    - generic [ref=e2371]: Contact
+                - button "Quick Links" [ref=e2372] [cursor=pointer]:
+                  - img [ref=e2373]
+                  - text: Quick Links
+              - generic [ref=e2377]:
+                - generic [ref=e2378]:
+                  - generic [ref=e2379]:
+                    - heading "Accord Financial Canada Cor" [level=4] [ref=e2380]
+                    - paragraph [ref=e2381]: Private Lender
+                  - generic [ref=e2382]:
+                    - img [ref=e2383]
+                    - text: "4.5"
+                - generic [ref=e2386]: Commercial
+                - generic [ref=e2387]:
+                  - link "Web" [ref=e2388] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Accord+Financial+Canada+Cor
+                    - img [ref=e2389]
+                    - generic [ref=e2392]: Web
+                  - link "LI" [ref=e2393] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Accord+Financial+Canada+Cor+linkedin
+                    - img [ref=e2394]
+                    - generic [ref=e2398]: LI
+                  - link "Google" [ref=e2399] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Accord+Financial+Canada+Cor
+                    - img [ref=e2400]
+                    - generic [ref=e2403]: Google
+                  - link "Contact" [ref=e2404] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Accord+Financial+Canada+Cor+contact
+                    - img [ref=e2405]
+                    - generic [ref=e2408]: Contact
+                - button "Quick Links" [ref=e2409] [cursor=pointer]:
+                  - img [ref=e2410]
+                  - text: Quick Links
+              - generic [ref=e2414]:
+                - generic [ref=e2415]:
+                  - generic [ref=e2416]:
+                    - heading "Adam J Gill Trust Inc" [level=4] [ref=e2417]
+                    - paragraph [ref=e2418]: Mortgage Lender
+                  - generic [ref=e2419]:
+                    - img [ref=e2420]
+                    - text: "4.5"
+                - generic [ref=e2423]: Commercial
+                - generic [ref=e2424]:
+                  - link "Web" [ref=e2425] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Adam+J+Gill+Trust+Inc
+                    - img [ref=e2426]
+                    - generic [ref=e2429]: Web
+                  - link "LI" [ref=e2430] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Adam+J+Gill+Trust+Inc+linkedin
+                    - img [ref=e2431]
+                    - generic [ref=e2435]: LI
+                  - link "Google" [ref=e2436] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Adam+J+Gill+Trust+Inc
+                    - img [ref=e2437]
+                    - generic [ref=e2440]: Google
+                  - link "Contact" [ref=e2441] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Adam+J+Gill+Trust+Inc+contact
+                    - img [ref=e2442]
+                    - generic [ref=e2445]: Contact
+                - button "Quick Links" [ref=e2446] [cursor=pointer]:
+                  - img [ref=e2447]
+                  - text: Quick Links
+              - generic [ref=e2451]:
+                - generic [ref=e2452]:
+                  - generic [ref=e2453]:
+                    - heading "Advanced Mortgage Investment Cor" [level=4] [ref=e2454]
+                    - paragraph [ref=e2455]: Mortgage Lender
+                  - generic [ref=e2456]:
+                    - img [ref=e2457]
+                    - text: "4.5"
+                - generic [ref=e2460]: Commercial
+                - generic [ref=e2461]:
+                  - link "Web" [ref=e2462] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Advanced+Mortgage+Investment+Cor
+                    - img [ref=e2463]
+                    - generic [ref=e2466]: Web
+                  - link "LI" [ref=e2467] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Advanced+Mortgage+Investment+Cor+linkedin
+                    - img [ref=e2468]
+                    - generic [ref=e2472]: LI
+                  - link "Google" [ref=e2473] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Advanced+Mortgage+Investment+Cor
+                    - img [ref=e2474]
+                    - generic [ref=e2477]: Google
+                  - link "Contact" [ref=e2478] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Advanced+Mortgage+Investment+Cor+contact
+                    - img [ref=e2479]
+                    - generic [ref=e2482]: Contact
+                - button "Quick Links" [ref=e2483] [cursor=pointer]:
+                  - img [ref=e2484]
+                  - text: Quick Links
+              - generic [ref=e2488]:
+                - generic [ref=e2489]:
+                  - generic [ref=e2490]:
+                    - heading "Agriroots Realty Inc" [level=4] [ref=e2491]
+                    - paragraph [ref=e2492]: Other
+                  - generic [ref=e2493]:
+                    - img [ref=e2494]
+                    - text: "4.5"
+                - generic [ref=e2497]: Commercial
+                - generic [ref=e2498]:
+                  - link "Web" [ref=e2499] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Agriroots+Realty+Inc
+                    - img [ref=e2500]
+                    - generic [ref=e2503]: Web
+                  - link "LI" [ref=e2504] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Agriroots+Realty+Inc+linkedin
+                    - img [ref=e2505]
+                    - generic [ref=e2509]: LI
+                  - link "Google" [ref=e2510] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Agriroots+Realty+Inc
+                    - img [ref=e2511]
+                    - generic [ref=e2514]: Google
+                  - link "Contact" [ref=e2515] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Agriroots+Realty+Inc+contact
+                    - img [ref=e2516]
+                    - generic [ref=e2519]: Contact
+                - button "Quick Links" [ref=e2520] [cursor=pointer]:
+                  - img [ref=e2521]
+                  - text: Quick Links
+              - generic [ref=e2525]:
+                - generic [ref=e2526]:
+                  - generic [ref=e2527]:
+                    - heading "Alfin Financial Cor" [level=4] [ref=e2528]
+                    - paragraph [ref=e2529]: Private Lender
+                  - generic [ref=e2530]:
+                    - img [ref=e2531]
+                    - text: "4.5"
+                - generic [ref=e2534]: Commercial
+                - generic [ref=e2535]:
+                  - link "Web" [ref=e2536] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alfin+Financial+Cor
+                    - img [ref=e2537]
+                    - generic [ref=e2540]: Web
+                  - link "LI" [ref=e2541] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alfin+Financial+Cor+linkedin
+                    - img [ref=e2542]
+                    - generic [ref=e2546]: LI
+                  - link "Google" [ref=e2547] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alfin+Financial+Cor
+                    - img [ref=e2548]
+                    - generic [ref=e2551]: Google
+                  - link "Contact" [ref=e2552] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alfin+Financial+Cor+contact
+                    - img [ref=e2553]
+                    - generic [ref=e2556]: Contact
+                - button "Quick Links" [ref=e2557] [cursor=pointer]:
+                  - img [ref=e2558]
+                  - text: Quick Links
+              - generic [ref=e2562]:
+                - generic [ref=e2563]:
+                  - generic [ref=e2564]:
+                    - heading "All Approved Financial Cor" [level=4] [ref=e2565]
+                    - paragraph [ref=e2566]: Private Lender
+                  - generic [ref=e2567]:
+                    - img [ref=e2568]
+                    - text: "4.5"
+                - generic [ref=e2571]: Commercial
+                - generic [ref=e2572]:
+                  - link "Web" [ref=e2573] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=All+Approved+Financial+Cor
+                    - img [ref=e2574]
+                    - generic [ref=e2577]: Web
+                  - link "LI" [ref=e2578] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=All+Approved+Financial+Cor+linkedin
+                    - img [ref=e2579]
+                    - generic [ref=e2583]: LI
+                  - link "Google" [ref=e2584] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=All+Approved+Financial+Cor
+                    - img [ref=e2585]
+                    - generic [ref=e2588]: Google
+                  - link "Contact" [ref=e2589] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=All+Approved+Financial+Cor+contact
+                    - img [ref=e2590]
+                    - generic [ref=e2593]: Contact
+                - button "Quick Links" [ref=e2594] [cursor=pointer]:
+                  - img [ref=e2595]
+                  - text: Quick Links
+              - generic [ref=e2599]:
+                - generic [ref=e2600]:
+                  - generic [ref=e2601]:
+                    - heading "Alleghe Mortgage Fund Ltd" [level=4] [ref=e2602]
+                    - paragraph [ref=e2603]: Mortgage Lender
+                  - generic [ref=e2604]:
+                    - img [ref=e2605]
+                    - text: "4.5"
+                - generic [ref=e2608]: Commercial
+                - generic [ref=e2609]:
+                  - link "Web" [ref=e2610] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alleghe+Mortgage+Fund+Ltd
+                    - img [ref=e2611]
+                    - generic [ref=e2614]: Web
+                  - link "LI" [ref=e2615] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alleghe+Mortgage+Fund+Ltd+linkedin
+                    - img [ref=e2616]
+                    - generic [ref=e2620]: LI
+                  - link "Google" [ref=e2621] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alleghe+Mortgage+Fund+Ltd
+                    - img [ref=e2622]
+                    - generic [ref=e2625]: Google
+                  - link "Contact" [ref=e2626] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alleghe+Mortgage+Fund+Ltd+contact
+                    - img [ref=e2627]
+                    - generic [ref=e2630]: Contact
+                - button "Quick Links" [ref=e2631] [cursor=pointer]:
+                  - img [ref=e2632]
+                  - text: Quick Links
+              - generic [ref=e2636]:
+                - generic [ref=e2637]:
+                  - generic [ref=e2638]:
+                    - heading "Alterna Savings and Credit Unio" [level=4] [ref=e2639]
+                    - paragraph [ref=e2640]: Other
+                  - generic [ref=e2641]:
+                    - img [ref=e2642]
+                    - text: "4.5"
+                - generic [ref=e2645]: Commercial
+                - generic [ref=e2646]:
+                  - link "Web" [ref=e2647] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alterna+Savings+and+Credit+Unio
+                    - img [ref=e2648]
+                    - generic [ref=e2651]: Web
+                  - link "LI" [ref=e2652] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alterna+Savings+and+Credit+Unio+linkedin
+                    - img [ref=e2653]
+                    - generic [ref=e2657]: LI
+                  - link "Google" [ref=e2658] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alterna+Savings+and+Credit+Unio
+                    - img [ref=e2659]
+                    - generic [ref=e2662]: Google
+                  - link "Contact" [ref=e2663] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alterna+Savings+and+Credit+Unio+contact
+                    - img [ref=e2664]
+                    - generic [ref=e2667]: Contact
+                - button "Quick Links" [ref=e2668] [cursor=pointer]:
+                  - img [ref=e2669]
+                  - text: Quick Links
+              - generic [ref=e2673]:
+                - generic [ref=e2674]:
+                  - generic [ref=e2675]:
+                    - heading "American General Life Insurance Co" [level=4] [ref=e2676]
+                    - paragraph [ref=e2677]: Insurance
+                  - generic [ref=e2678]:
+                    - img [ref=e2679]
+                    - text: "4.5"
+                - generic [ref=e2682]: Commercial
+                - generic [ref=e2683]:
+                  - link "Web" [ref=e2684] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=American+General+Life+Insurance+Co
+                    - img [ref=e2685]
+                    - generic [ref=e2688]: Web
+                  - link "LI" [ref=e2689] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=American+General+Life+Insurance+Co+linkedin
+                    - img [ref=e2690]
+                    - generic [ref=e2694]: LI
+                  - link "Google" [ref=e2695] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=American+General+Life+Insurance+Co
+                    - img [ref=e2696]
+                    - generic [ref=e2699]: Google
+                  - link "Contact" [ref=e2700] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=American+General+Life+Insurance+Co+contact
+                    - img [ref=e2701]
+                    - generic [ref=e2704]: Contact
+                - button "Quick Links" [ref=e2705] [cursor=pointer]:
+                  - img [ref=e2706]
+                  - text: Quick Links
+              - generic [ref=e2710]:
+                - generic [ref=e2711]:
+                  - generic [ref=e2712]:
+                    - heading "American Life Insurance Co" [level=4] [ref=e2713]
+                    - paragraph [ref=e2714]: Insurance
+                  - generic [ref=e2715]:
+                    - img [ref=e2716]
+                    - text: "4.5"
+                - generic [ref=e2719]: Commercial
+                - generic [ref=e2720]:
+                  - link "Web" [ref=e2721] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=American+Life+Insurance+Co
+                    - img [ref=e2722]
+                    - generic [ref=e2725]: Web
+                  - link "LI" [ref=e2726] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=American+Life+Insurance+Co+linkedin
+                    - img [ref=e2727]
+                    - generic [ref=e2731]: LI
+                  - link "Google" [ref=e2732] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=American+Life+Insurance+Co
+                    - img [ref=e2733]
+                    - generic [ref=e2736]: Google
+                  - link "Contact" [ref=e2737] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=American+Life+Insurance+Co+contact
+                    - img [ref=e2738]
+                    - generic [ref=e2741]: Contact
+                - button "Quick Links" [ref=e2742] [cursor=pointer]:
+                  - img [ref=e2743]
+                  - text: Quick Links
+              - generic [ref=e2747]:
+                - generic [ref=e2748]:
+                  - generic [ref=e2749]:
+                    - heading "Antrim Balanced Mortgage Fund Ltd" [level=4] [ref=e2750]
+                    - paragraph [ref=e2751]: Mortgage Lender
+                  - generic [ref=e2752]:
+                    - img [ref=e2753]
+                    - text: "4.5"
+                - generic [ref=e2756]: Commercial
+                - generic [ref=e2757]:
+                  - link "Web" [ref=e2758] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Antrim+Balanced+Mortgage+Fund+Ltd
+                    - img [ref=e2759]
+                    - generic [ref=e2762]: Web
+                  - link "LI" [ref=e2763] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Antrim+Balanced+Mortgage+Fund+Ltd+linkedin
+                    - img [ref=e2764]
+                    - generic [ref=e2768]: LI
+                  - link "Google" [ref=e2769] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Antrim+Balanced+Mortgage+Fund+Ltd
+                    - img [ref=e2770]
+                    - generic [ref=e2773]: Google
+                  - link "Contact" [ref=e2774] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Antrim+Balanced+Mortgage+Fund+Ltd+contact
+                    - img [ref=e2775]
+                    - generic [ref=e2778]: Contact
+                - button "Quick Links" [ref=e2779] [cursor=pointer]:
+                  - img [ref=e2780]
+                  - text: Quick Links
+              - generic [ref=e2784]:
+                - generic [ref=e2785]:
+                  - generic [ref=e2786]:
+                    - heading "Aramco Financial Solutions Inc" [level=4] [ref=e2787]
+                    - paragraph [ref=e2788]: Private Lender
+                  - generic [ref=e2789]:
+                    - img [ref=e2790]
+                    - text: "4.5"
+                - generic [ref=e2793]: Commercial
+                - generic [ref=e2794]:
+                  - link "Web" [ref=e2795] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aramco+Financial+Solutions+Inc
+                    - img [ref=e2796]
+                    - generic [ref=e2799]: Web
+                  - link "LI" [ref=e2800] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aramco+Financial+Solutions+Inc+linkedin
+                    - img [ref=e2801]
+                    - generic [ref=e2805]: LI
+                  - link "Google" [ref=e2806] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aramco+Financial+Solutions+Inc
+                    - img [ref=e2807]
+                    - generic [ref=e2810]: Google
+                  - link "Contact" [ref=e2811] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aramco+Financial+Solutions+Inc+contact
+                    - img [ref=e2812]
+                    - generic [ref=e2815]: Contact
+                - button "Quick Links" [ref=e2816] [cursor=pointer]:
+                  - img [ref=e2817]
+                  - text: Quick Links
+              - generic [ref=e2821]:
+                - generic [ref=e2822]:
+                  - generic [ref=e2823]:
+                    - heading "Arch Insurance Canada Ltd" [level=4] [ref=e2824]
+                    - paragraph [ref=e2825]: Insurance
+                  - generic [ref=e2826]:
+                    - img [ref=e2827]
+                    - text: "4.5"
+                - paragraph [ref=e2829]: archinsurance.com
+                - generic [ref=e2831]: Commercial
+                - generic [ref=e2832]:
+                  - link "Web" [ref=e2833] [cursor=pointer]:
+                    - /url: https://archinsurance.com
+                    - img [ref=e2834]
+                    - generic [ref=e2837]: Web
+                  - link "LI" [ref=e2838] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Arch+Insurance+Canada+Ltd+linkedin
+                    - img [ref=e2839]
+                    - generic [ref=e2843]: LI
+                  - link "Google" [ref=e2844] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Arch+Insurance+Canada+Ltd
+                    - img [ref=e2845]
+                    - generic [ref=e2848]: Google
+                  - link "Contact" [ref=e2849] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Arch+Insurance+Canada+Ltd+contact
+                    - img [ref=e2850]
+                    - generic [ref=e2853]: Contact
+                - button "Quick Links" [ref=e2854] [cursor=pointer]:
+                  - img [ref=e2855]
+                  - text: Quick Links
+              - generic [ref=e2859]:
+                - generic [ref=e2860]:
+                  - generic [ref=e2861]:
+                    - heading "Atrium Equity Holdings Inc" [level=4] [ref=e2862]
+                    - paragraph [ref=e2863]: Private Lender
+                  - generic [ref=e2864]:
+                    - img [ref=e2865]
+                    - text: "4.5"
+                - generic [ref=e2868]: Commercial
+                - generic [ref=e2869]:
+                  - link "Web" [ref=e2870] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Equity+Holdings+Inc
+                    - img [ref=e2871]
+                    - generic [ref=e2874]: Web
+                  - link "LI" [ref=e2875] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Equity+Holdings+Inc+linkedin
+                    - img [ref=e2876]
+                    - generic [ref=e2880]: LI
+                  - link "Google" [ref=e2881] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Equity+Holdings+Inc
+                    - img [ref=e2882]
+                    - generic [ref=e2885]: Google
+                  - link "Contact" [ref=e2886] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Equity+Holdings+Inc+contact
+                    - img [ref=e2887]
+                    - generic [ref=e2890]: Contact
+                - button "Quick Links" [ref=e2891] [cursor=pointer]:
+                  - img [ref=e2892]
+                  - text: Quick Links
+              - generic [ref=e2896]:
+                - generic [ref=e2897]:
+                  - generic [ref=e2898]:
+                    - heading "Atrium Mortgage Investment Cor" [level=4] [ref=e2899]
+                    - paragraph [ref=e2900]: Mortgage Lender
+                  - generic [ref=e2901]:
+                    - img [ref=e2902]
+                    - text: "4.5"
+                - generic [ref=e2905]: Commercial
+                - generic [ref=e2906]:
+                  - link "Web" [ref=e2907] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Mortgage+Investment+Cor
+                    - img [ref=e2908]
+                    - generic [ref=e2911]: Web
+                  - link "LI" [ref=e2912] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Mortgage+Investment+Cor+linkedin
+                    - img [ref=e2913]
+                    - generic [ref=e2917]: LI
+                  - link "Google" [ref=e2918] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Mortgage+Investment+Cor
+                    - img [ref=e2919]
+                    - generic [ref=e2922]: Google
+                  - link "Contact" [ref=e2923] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Mortgage+Investment+Cor+contact
+                    - img [ref=e2924]
+                    - generic [ref=e2927]: Contact
+                - button "Quick Links" [ref=e2928] [cursor=pointer]:
+                  - img [ref=e2929]
+                  - text: Quick Links
+              - generic [ref=e2933]:
+                - generic [ref=e2934]:
+                  - generic [ref=e2935]:
+                    - heading "Atrium Mortgage Investments Cor" [level=4] [ref=e2936]
+                    - paragraph [ref=e2937]: Mortgage Lender
+                  - generic [ref=e2938]:
+                    - img [ref=e2939]
+                    - text: "4.5"
+                - generic [ref=e2942]: Commercial
+                - generic [ref=e2943]:
+                  - link "Web" [ref=e2944] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Mortgage+Investments+Cor
+                    - img [ref=e2945]
+                    - generic [ref=e2948]: Web
+                  - link "LI" [ref=e2949] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Mortgage+Investments+Cor+linkedin
+                    - img [ref=e2950]
+                    - generic [ref=e2954]: LI
+                  - link "Google" [ref=e2955] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Mortgage+Investments+Cor
+                    - img [ref=e2956]
+                    - generic [ref=e2959]: Google
+                  - link "Contact" [ref=e2960] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Atrium+Mortgage+Investments+Cor+contact
+                    - img [ref=e2961]
+                    - generic [ref=e2964]: Contact
+                - button "Quick Links" [ref=e2965] [cursor=pointer]:
+                  - img [ref=e2966]
+                  - text: Quick Links
+              - generic [ref=e2970]:
+                - generic [ref=e2971]:
+                  - generic [ref=e2972]:
+                    - heading "Aviva Insurance Co of Canada" [level=4] [ref=e2973]
+                    - paragraph [ref=e2974]: Insurance
+                  - generic [ref=e2975]:
+                    - img [ref=e2976]
+                    - text: "4.5"
+                - paragraph [ref=e2978]: avivacanada.com
+                - generic [ref=e2980]: Commercial
+                - generic [ref=e2981]:
+                  - link "Web" [ref=e2982] [cursor=pointer]:
+                    - /url: https://avivacanada.com
+                    - img [ref=e2983]
+                    - generic [ref=e2986]: Web
+                  - link "LI" [ref=e2987] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aviva+Insurance+Co+of+Canada+linkedin
+                    - img [ref=e2988]
+                    - generic [ref=e2992]: LI
+                  - link "Google" [ref=e2993] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aviva+Insurance+Co+of+Canada
+                    - img [ref=e2994]
+                    - generic [ref=e2997]: Google
+                  - link "Contact" [ref=e2998] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aviva+Insurance+Co+of+Canada+contact
+                    - img [ref=e2999]
+                    - generic [ref=e3002]: Contact
+                - button "Quick Links" [ref=e3003] [cursor=pointer]:
+                  - img [ref=e3004]
+                  - text: Quick Links
+              - generic [ref=e3008]:
+                - generic [ref=e3009]:
+                  - generic [ref=e3010]:
+                    - heading "Aviva Insurance Company of Canada" [level=4] [ref=e3011]
+                    - paragraph [ref=e3012]: Insurance
+                  - generic [ref=e3013]:
+                    - img [ref=e3014]
+                    - text: "4.5"
+                - generic [ref=e3017]: Commercial
+                - generic [ref=e3018]:
+                  - link "Web" [ref=e3019] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aviva+Insurance+Company+of+Canada
+                    - img [ref=e3020]
+                    - generic [ref=e3023]: Web
+                  - link "LI" [ref=e3024] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aviva+Insurance+Company+of+Canada+linkedin
+                    - img [ref=e3025]
+                    - generic [ref=e3029]: LI
+                  - link "Google" [ref=e3030] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aviva+Insurance+Company+of+Canada
+                    - img [ref=e3031]
+                    - generic [ref=e3034]: Google
+                  - link "Contact" [ref=e3035] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Aviva+Insurance+Company+of+Canada+contact
+                    - img [ref=e3036]
+                    - generic [ref=e3039]: Contact
+                - button "Quick Links" [ref=e3040] [cursor=pointer]:
+                  - img [ref=e3041]
+                  - text: Quick Links
+              - generic [ref=e3045]:
+                - generic [ref=e3046]:
+                  - generic [ref=e3047]:
+                    - heading "B2B Trust" [level=4] [ref=e3048]
+                    - paragraph [ref=e3049]: Mortgage Lender
+                  - generic [ref=e3050]:
+                    - img [ref=e3051]
+                    - text: "4.5"
+                - generic [ref=e3054]: Commercial
+                - generic [ref=e3055]:
+                  - link "Web" [ref=e3056] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B2B+Trust
+                    - img [ref=e3057]
+                    - generic [ref=e3060]: Web
+                  - link "LI" [ref=e3061] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B2B+Trust+linkedin
+                    - img [ref=e3062]
+                    - generic [ref=e3066]: LI
+                  - link "Google" [ref=e3067] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B2B+Trust
+                    - img [ref=e3068]
+                    - generic [ref=e3071]: Google
+                  - link "Contact" [ref=e3072] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B2B+Trust+contact
+                    - img [ref=e3073]
+                    - generic [ref=e3076]: Contact
+                - button "Quick Links" [ref=e3077] [cursor=pointer]:
+                  - img [ref=e3078]
+                  - text: Quick Links
+              - generic [ref=e3082]:
+                - generic [ref=e3083]:
+                  - generic [ref=e3084]:
+                    - heading "B4M Financial Services Inc" [level=4] [ref=e3085]
+                    - paragraph [ref=e3086]: Private Lender
+                  - generic [ref=e3087]:
+                    - img [ref=e3088]
+                    - text: "4.5"
+                - generic [ref=e3091]: Commercial
+                - generic [ref=e3092]:
+                  - link "Web" [ref=e3093] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B4M+Financial+Services+Inc
+                    - img [ref=e3094]
+                    - generic [ref=e3097]: Web
+                  - link "LI" [ref=e3098] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B4M+Financial+Services+Inc+linkedin
+                    - img [ref=e3099]
+                    - generic [ref=e3103]: LI
+                  - link "Google" [ref=e3104] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B4M+Financial+Services+Inc
+                    - img [ref=e3105]
+                    - generic [ref=e3108]: Google
+                  - link "Contact" [ref=e3109] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=B4M+Financial+Services+Inc+contact
+                    - img [ref=e3110]
+                    - generic [ref=e3113]: Contact
+                - button "Quick Links" [ref=e3114] [cursor=pointer]:
+                  - img [ref=e3115]
+                  - text: Quick Links
+              - generic [ref=e3119]:
+                - generic [ref=e3120]:
+                  - generic [ref=e3121]:
+                    - heading "BCA Financial Cor" [level=4] [ref=e3122]
+                    - paragraph [ref=e3123]: Private Lender
+                  - generic [ref=e3124]:
+                    - img [ref=e3125]
+                    - text: "4.5"
+                - generic [ref=e3128]: Commercial
+                - generic [ref=e3129]:
+                  - link "Web" [ref=e3130] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCA+Financial+Cor
+                    - img [ref=e3131]
+                    - generic [ref=e3134]: Web
+                  - link "LI" [ref=e3135] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCA+Financial+Cor+linkedin
+                    - img [ref=e3136]
+                    - generic [ref=e3140]: LI
+                  - link "Google" [ref=e3141] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCA+Financial+Cor
+                    - img [ref=e3142]
+                    - generic [ref=e3145]: Google
+                  - link "Contact" [ref=e3146] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCA+Financial+Cor+contact
+                    - img [ref=e3147]
+                    - generic [ref=e3150]: Contact
+                - button "Quick Links" [ref=e3151] [cursor=pointer]:
+                  - img [ref=e3152]
+                  - text: Quick Links
+              - generic [ref=e3156]:
+                - generic [ref=e3157]:
+                  - generic [ref=e3158]:
+                    - heading "BCA Financial Corp." [level=4] [ref=e3159]
+                    - paragraph [ref=e3160]: Private Lender
+                  - generic [ref=e3161]:
+                    - img [ref=e3162]
+                    - text: "4.5"
+                - generic [ref=e3165]: Commercial
+                - generic [ref=e3166]:
+                  - link "Web" [ref=e3167] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCA+Financial+Corp.
+                    - img [ref=e3168]
+                    - generic [ref=e3171]: Web
+                  - link "LI" [ref=e3172] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCA+Financial+Corp.+linkedin
+                    - img [ref=e3173]
+                    - generic [ref=e3177]: LI
+                  - link "Google" [ref=e3178] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCA+Financial+Corp.
+                    - img [ref=e3179]
+                    - generic [ref=e3182]: Google
+                  - link "Contact" [ref=e3183] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCA+Financial+Corp.+contact
+                    - img [ref=e3184]
+                    - generic [ref=e3187]: Contact
+                - button "Quick Links" [ref=e3188] [cursor=pointer]:
+                  - img [ref=e3189]
+                  - text: Quick Links
+              - generic [ref=e3193]:
+                - generic [ref=e3194]:
+                  - generic [ref=e3195]:
+                    - heading "BCMP Mortgage Investment Cor" [level=4] [ref=e3196]
+                    - paragraph [ref=e3197]: Mortgage Lender
+                  - generic [ref=e3198]:
+                    - img [ref=e3199]
+                    - text: "4.5"
+                - generic [ref=e3202]: Commercial
+                - generic [ref=e3203]:
+                  - link "Web" [ref=e3204] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCMP+Mortgage+Investment+Cor
+                    - img [ref=e3205]
+                    - generic [ref=e3208]: Web
+                  - link "LI" [ref=e3209] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCMP+Mortgage+Investment+Cor+linkedin
+                    - img [ref=e3210]
+                    - generic [ref=e3214]: LI
+                  - link "Google" [ref=e3215] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCMP+Mortgage+Investment+Cor
+                    - img [ref=e3216]
+                    - generic [ref=e3219]: Google
+                  - link "Contact" [ref=e3220] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BCMP+Mortgage+Investment+Cor+contact
+                    - img [ref=e3221]
+                    - generic [ref=e3224]: Contact
+                - button "Quick Links" [ref=e3225] [cursor=pointer]:
+                  - img [ref=e3226]
+                  - text: Quick Links
+              - generic [ref=e3230]:
+                - generic [ref=e3231]:
+                  - generic [ref=e3232]:
+                    - heading "BFT Mortgage Investment Cor" [level=4] [ref=e3233]
+                    - paragraph [ref=e3234]: Mortgage Lender
+                  - generic [ref=e3235]:
+                    - img [ref=e3236]
+                    - text: "4.5"
+                - generic [ref=e3239]: Commercial
+                - generic [ref=e3240]:
+                  - link "Web" [ref=e3241] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BFT+Mortgage+Investment+Cor
+                    - img [ref=e3242]
+                    - generic [ref=e3245]: Web
+                  - link "LI" [ref=e3246] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BFT+Mortgage+Investment+Cor+linkedin
+                    - img [ref=e3247]
+                    - generic [ref=e3251]: LI
+                  - link "Google" [ref=e3252] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BFT+Mortgage+Investment+Cor
+                    - img [ref=e3253]
+                    - generic [ref=e3256]: Google
+                  - link "Contact" [ref=e3257] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BFT+Mortgage+Investment+Cor+contact
+                    - img [ref=e3258]
+                    - generic [ref=e3261]: Contact
+                - button "Quick Links" [ref=e3262] [cursor=pointer]:
+                  - img [ref=e3263]
+                  - text: Quick Links
+              - generic [ref=e3267]:
+                - generic [ref=e3268]:
+                  - generic [ref=e3269]:
+                    - heading "BFT Mortgage Investments Cor" [level=4] [ref=e3270]
+                    - paragraph [ref=e3271]: Mortgage Lender
+                  - generic [ref=e3272]:
+                    - img [ref=e3273]
+                    - text: "4.5"
+                - generic [ref=e3276]: Commercial
+                - generic [ref=e3277]:
+                  - link "Web" [ref=e3278] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BFT+Mortgage+Investments+Cor
+                    - img [ref=e3279]
+                    - generic [ref=e3282]: Web
+                  - link "LI" [ref=e3283] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BFT+Mortgage+Investments+Cor+linkedin
+                    - img [ref=e3284]
+                    - generic [ref=e3288]: LI
+                  - link "Google" [ref=e3289] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BFT+Mortgage+Investments+Cor
+                    - img [ref=e3290]
+                    - generic [ref=e3293]: Google
+                  - link "Contact" [ref=e3294] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BFT+Mortgage+Investments+Cor+contact
+                    - img [ref=e3295]
+                    - generic [ref=e3298]: Contact
+                - button "Quick Links" [ref=e3299] [cursor=pointer]:
+                  - img [ref=e3300]
+                  - text: Quick Links
+              - generic [ref=e3304]:
+                - generic [ref=e3305]:
+                  - generic [ref=e3306]:
+                    - heading "BMCC Phase III Realty Cor" [level=4] [ref=e3307]
+                    - paragraph [ref=e3308]: Other
+                  - generic [ref=e3309]:
+                    - img [ref=e3310]
+                    - text: "4.5"
+                - generic [ref=e3313]: Commercial
+                - generic [ref=e3314]:
+                  - link "Web" [ref=e3315] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BMCC+Phase+III+Realty+Cor
+                    - img [ref=e3316]
+                    - generic [ref=e3319]: Web
+                  - link "LI" [ref=e3320] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BMCC+Phase+III+Realty+Cor+linkedin
+                    - img [ref=e3321]
+                    - generic [ref=e3325]: LI
+                  - link "Google" [ref=e3326] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BMCC+Phase+III+Realty+Cor
+                    - img [ref=e3327]
+                    - generic [ref=e3330]: Google
+                  - link "Contact" [ref=e3331] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BMCC+Phase+III+Realty+Cor+contact
+                    - img [ref=e3332]
+                    - generic [ref=e3335]: Contact
+                - button "Quick Links" [ref=e3336] [cursor=pointer]:
+                  - img [ref=e3337]
+                  - text: Quick Links
+              - generic [ref=e3341]:
+                - generic [ref=e3342]:
+                  - generic [ref=e3343]:
+                    - heading "BMO Bank of Montreal" [level=4] [ref=e3344]
+                    - paragraph [ref=e3345]: Bank
+                  - generic [ref=e3346]:
+                    - img [ref=e3347]
+                    - text: "4.5"
+                - paragraph [ref=e3349]: bmo.com
+                - generic [ref=e3351]: Commercial
+                - generic [ref=e3352]:
+                  - link "Web" [ref=e3353] [cursor=pointer]:
+                    - /url: https://bmo.com
+                    - img [ref=e3354]
+                    - generic [ref=e3357]: Web
+                  - link "LI" [ref=e3358] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BMO+Bank+of+Montreal+linkedin
+                    - img [ref=e3359]
+                    - generic [ref=e3363]: LI
+                  - link "Google" [ref=e3364] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BMO+Bank+of+Montreal
+                    - img [ref=e3365]
+                    - generic [ref=e3368]: Google
+                  - link "Contact" [ref=e3369] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BMO+Bank+of+Montreal+contact
+                    - img [ref=e3370]
+                    - generic [ref=e3373]: Contact
+                - button "Quick Links" [ref=e3374] [cursor=pointer]:
+                  - img [ref=e3375]
+                  - text: Quick Links
+              - generic [ref=e3379]:
+                - generic [ref=e3380]:
+                  - generic [ref=e3381]:
+                    - heading "BMW Group Financial Services Canada" [level=4] [ref=e3382]
+                    - paragraph [ref=e3383]: Private Lender
+                  - generic [ref=e3384]:
+                    - img [ref=e3385]
+                    - text: "4.5"
+                - generic [ref=e3388]: Commercial
+                - generic [ref=e3389]:
+                  - link "Web" [ref=e3390] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BMW+Group+Financial+Services+Canada
+                    - img [ref=e3391]
+                    - generic [ref=e3394]: Web
+                  - link "LI" [ref=e3395] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BMW+Group+Financial+Services+Canada+linkedin
+                    - img [ref=e3396]
+                    - generic [ref=e3400]: LI
+                  - link "Google" [ref=e3401] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BMW+Group+Financial+Services+Canada
+                    - img [ref=e3402]
+                    - generic [ref=e3405]: Google
+                  - link "Contact" [ref=e3406] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BMW+Group+Financial+Services+Canada+contact
+                    - img [ref=e3407]
+                    - generic [ref=e3410]: Contact
+                - button "Quick Links" [ref=e3411] [cursor=pointer]:
+                  - img [ref=e3412]
+                  - text: Quick Links
+              - generic [ref=e3416]:
+                - generic [ref=e3417]:
+                  - generic [ref=e3418]:
+                    - heading "BNV Trust Company of Canada" [level=4] [ref=e3419]
+                    - paragraph [ref=e3420]: Mortgage Lender
+                  - generic [ref=e3421]:
+                    - img [ref=e3422]
+                    - text: "4.5"
+                - generic [ref=e3425]: Commercial
+                - generic [ref=e3426]:
+                  - link "Web" [ref=e3427] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BNV+Trust+Company+of+Canada
+                    - img [ref=e3428]
+                    - generic [ref=e3431]: Web
+                  - link "LI" [ref=e3432] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BNV+Trust+Company+of+Canada+linkedin
+                    - img [ref=e3433]
+                    - generic [ref=e3437]: LI
+                  - link "Google" [ref=e3438] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BNV+Trust+Company+of+Canada
+                    - img [ref=e3439]
+                    - generic [ref=e3442]: Google
+                  - link "Contact" [ref=e3443] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BNV+Trust+Company+of+Canada+contact
+                    - img [ref=e3444]
+                    - generic [ref=e3447]: Contact
+                - button "Quick Links" [ref=e3448] [cursor=pointer]:
+                  - img [ref=e3449]
+                  - text: Quick Links
+              - generic [ref=e3453]:
+                - generic [ref=e3454]:
+                  - generic [ref=e3455]:
+                    - heading "BNY Trust Company of Canada" [level=4] [ref=e3456]
+                    - paragraph [ref=e3457]: Mortgage Lender
+                  - generic [ref=e3458]:
+                    - img [ref=e3459]
+                    - text: "4.5"
+                - generic [ref=e3462]: Commercial
+                - generic [ref=e3463]:
+                  - link "Web" [ref=e3464] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BNY+Trust+Company+of+Canada
+                    - img [ref=e3465]
+                    - generic [ref=e3468]: Web
+                  - link "LI" [ref=e3469] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BNY+Trust+Company+of+Canada+linkedin
+                    - img [ref=e3470]
+                    - generic [ref=e3474]: LI
+                  - link "Google" [ref=e3475] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BNY+Trust+Company+of+Canada
+                    - img [ref=e3476]
+                    - generic [ref=e3479]: Google
+                  - link "Contact" [ref=e3480] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BNY+Trust+Company+of+Canada+contact
+                    - img [ref=e3481]
+                    - generic [ref=e3484]: Contact
+                - button "Quick Links" [ref=e3485] [cursor=pointer]:
+                  - img [ref=e3486]
+                  - text: Quick Links
+              - generic [ref=e3490]:
+                - generic [ref=e3491]:
+                  - generic [ref=e3492]:
+                    - heading "BRL Realty Ltd" [level=4] [ref=e3493]
+                    - paragraph [ref=e3494]: Other
+                  - generic [ref=e3495]:
+                    - img [ref=e3496]
+                    - text: "4.5"
+                - generic [ref=e3499]: Commercial
+                - generic [ref=e3500]:
+                  - link "Web" [ref=e3501] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BRL+Realty+Ltd
+                    - img [ref=e3502]
+                    - generic [ref=e3505]: Web
+                  - link "LI" [ref=e3506] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BRL+Realty+Ltd+linkedin
+                    - img [ref=e3507]
+                    - generic [ref=e3511]: LI
+                  - link "Google" [ref=e3512] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BRL+Realty+Ltd
+                    - img [ref=e3513]
+                    - generic [ref=e3516]: Google
+                  - link "Contact" [ref=e3517] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=BRL+Realty+Ltd+contact
+                    - img [ref=e3518]
+                    - generic [ref=e3521]: Contact
+                - button "Quick Links" [ref=e3522] [cursor=pointer]:
+                  - img [ref=e3523]
+                  - text: Quick Links
+              - generic [ref=e3527]:
+                - generic [ref=e3528]:
+                  - generic [ref=e3529]:
+                    - heading "Bank of America, N. A." [level=4] [ref=e3530]
+                    - paragraph [ref=e3531]: Bank
+                  - generic [ref=e3532]:
+                    - img [ref=e3533]
+                    - text: "4.5"
+                - generic [ref=e3536]: Commercial
+                - generic [ref=e3537]:
+                  - link "Web" [ref=e3538] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+America%2C+N.+A.
+                    - img [ref=e3539]
+                    - generic [ref=e3542]: Web
+                  - link "LI" [ref=e3543] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+America%2C+N.+A.+linkedin
+                    - img [ref=e3544]
+                    - generic [ref=e3548]: LI
+                  - link "Google" [ref=e3549] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+America%2C+N.+A.
+                    - img [ref=e3550]
+                    - generic [ref=e3553]: Google
+                  - link "Contact" [ref=e3554] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+America%2C+N.+A.+contact
+                    - img [ref=e3555]
+                    - generic [ref=e3558]: Contact
+                - button "Quick Links" [ref=e3559] [cursor=pointer]:
+                  - img [ref=e3560]
+                  - text: Quick Links
+              - generic [ref=e3564]:
+                - generic [ref=e3565]:
+                  - generic [ref=e3566]:
+                    - heading "Bank of America, NA" [level=4] [ref=e3567]
+                    - paragraph [ref=e3568]: Bank
+                  - generic [ref=e3569]:
+                    - img [ref=e3570]
+                    - text: "4.5"
+                - generic [ref=e3573]: Commercial
+                - generic [ref=e3574]:
+                  - link "Web" [ref=e3575] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+America%2C+NA
+                    - img [ref=e3576]
+                    - generic [ref=e3579]: Web
+                  - link "LI" [ref=e3580] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+America%2C+NA+linkedin
+                    - img [ref=e3581]
+                    - generic [ref=e3585]: LI
+                  - link "Google" [ref=e3586] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+America%2C+NA
+                    - img [ref=e3587]
+                    - generic [ref=e3590]: Google
+                  - link "Contact" [ref=e3591] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+America%2C+NA+contact
+                    - img [ref=e3592]
+                    - generic [ref=e3595]: Contact
+                - button "Quick Links" [ref=e3596] [cursor=pointer]:
+                  - img [ref=e3597]
+                  - text: Quick Links
+              - generic [ref=e3601]:
+                - generic [ref=e3602]:
+                  - generic [ref=e3603]:
+                    - heading "Bank of America, National Associatio" [level=4] [ref=e3604]
+                    - paragraph [ref=e3605]: Bank
+                  - generic [ref=e3606]:
+                    - img [ref=e3607]
+                    - text: "4.5"
+                - paragraph [ref=e3609]: bankofamerica.com
+                - generic [ref=e3611]: Commercial
+                - generic [ref=e3612]:
+                  - link "Web" [ref=e3613] [cursor=pointer]:
+                    - /url: https://bankofamerica.com
+                    - img [ref=e3614]
+                    - generic [ref=e3617]: Web
+                  - link "LI" [ref=e3618] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+America%2C+National+Associatio+linkedin
+                    - img [ref=e3619]
+                    - generic [ref=e3623]: LI
+                  - link "Google" [ref=e3624] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+America%2C+National+Associatio
+                    - img [ref=e3625]
+                    - generic [ref=e3628]: Google
+                  - link "Contact" [ref=e3629] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+America%2C+National+Associatio+contact
+                    - img [ref=e3630]
+                    - generic [ref=e3633]: Contact
+                - button "Quick Links" [ref=e3634] [cursor=pointer]:
+                  - img [ref=e3635]
+                  - text: Quick Links
+              - generic [ref=e3639]:
+                - generic [ref=e3640]:
+                  - generic [ref=e3641]:
+                    - heading "Bank of China (Canada)" [level=4] [ref=e3642]
+                    - paragraph [ref=e3643]: Bank
+                  - generic [ref=e3644]:
+                    - img [ref=e3645]
+                    - text: "4.5"
+                - paragraph [ref=e3647]: boc.cn
+                - generic [ref=e3649]: Commercial
+                - generic [ref=e3650]:
+                  - link "Web" [ref=e3651] [cursor=pointer]:
+                    - /url: https://boc.cn
+                    - img [ref=e3652]
+                    - generic [ref=e3655]: Web
+                  - link "LI" [ref=e3656] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+China+%28Canada%29+linkedin
+                    - img [ref=e3657]
+                    - generic [ref=e3661]: LI
+                  - link "Google" [ref=e3662] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+China+%28Canada%29
+                    - img [ref=e3663]
+                    - generic [ref=e3666]: Google
+                  - link "Contact" [ref=e3667] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+China+%28Canada%29+contact
+                    - img [ref=e3668]
+                    - generic [ref=e3671]: Contact
+                - button "Quick Links" [ref=e3672] [cursor=pointer]:
+                  - img [ref=e3673]
+                  - text: Quick Links
+              - generic [ref=e3677]:
+                - generic [ref=e3678]:
+                  - generic [ref=e3679]:
+                    - heading "Bank of Montreal" [level=4] [ref=e3680]
+                    - paragraph [ref=e3681]: Bank
+                  - generic [ref=e3682]:
+                    - img [ref=e3683]
+                    - text: "4.5"
+                - paragraph [ref=e3685]: bmo.com
+                - generic [ref=e3687]: Commercial
+                - generic [ref=e3688]:
+                  - link "Web" [ref=e3689] [cursor=pointer]:
+                    - /url: https://bmo.com
+                    - img [ref=e3690]
+                    - generic [ref=e3693]: Web
+                  - link "LI" [ref=e3694] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+linkedin
+                    - img [ref=e3695]
+                    - generic [ref=e3699]: LI
+                  - link "Google" [ref=e3700] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal
+                    - img [ref=e3701]
+                    - generic [ref=e3704]: Google
+                  - link "Contact" [ref=e3705] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+contact
+                    - img [ref=e3706]
+                    - generic [ref=e3709]: Contact
+                - button "Quick Links" [ref=e3710] [cursor=pointer]:
+                  - img [ref=e3711]
+                  - text: Quick Links
+              - generic [ref=e3715]:
+                - generic [ref=e3716]:
+                  - generic [ref=e3717]:
+                    - heading "Bank of Montreal DBA BMO Capital Partner" [level=4] [ref=e3718]
+                    - paragraph [ref=e3719]: Bank
+                  - generic [ref=e3720]:
+                    - img [ref=e3721]
+                    - text: "4.5"
+                - generic [ref=e3724]: Commercial
+                - generic [ref=e3725]:
+                  - link "Web" [ref=e3726] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+DBA+BMO+Capital+Partner
+                    - img [ref=e3727]
+                    - generic [ref=e3730]: Web
+                  - link "LI" [ref=e3731] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+DBA+BMO+Capital+Partner+linkedin
+                    - img [ref=e3732]
+                    - generic [ref=e3736]: LI
+                  - link "Google" [ref=e3737] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+DBA+BMO+Capital+Partner
+                    - img [ref=e3738]
+                    - generic [ref=e3741]: Google
+                  - link "Contact" [ref=e3742] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+DBA+BMO+Capital+Partner+contact
+                    - img [ref=e3743]
+                    - generic [ref=e3746]: Contact
+                - button "Quick Links" [ref=e3747] [cursor=pointer]:
+                  - img [ref=e3748]
+                  - text: Quick Links
+              - generic [ref=e3752]:
+                - generic [ref=e3753]:
+                  - generic [ref=e3754]:
+                    - heading "Bank of Montreal DBA BMO Capitals Partner" [level=4] [ref=e3755]
+                    - paragraph [ref=e3756]: Bank
+                  - generic [ref=e3757]:
+                    - img [ref=e3758]
+                    - text: "4.5"
+                - generic [ref=e3761]: Commercial
+                - generic [ref=e3762]:
+                  - link "Web" [ref=e3763] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+DBA+BMO+Capitals+Partner
+                    - img [ref=e3764]
+                    - generic [ref=e3767]: Web
+                  - link "LI" [ref=e3768] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+DBA+BMO+Capitals+Partner+linkedin
+                    - img [ref=e3769]
+                    - generic [ref=e3773]: LI
+                  - link "Google" [ref=e3774] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+DBA+BMO+Capitals+Partner
+                    - img [ref=e3775]
+                    - generic [ref=e3778]: Google
+                  - link "Contact" [ref=e3779] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+DBA+BMO+Capitals+Partner+contact
+                    - img [ref=e3780]
+                    - generic [ref=e3783]: Contact
+                - button "Quick Links" [ref=e3784] [cursor=pointer]:
+                  - img [ref=e3785]
+                  - text: Quick Links
+              - generic [ref=e3789]:
+                - generic [ref=e3790]:
+                  - generic [ref=e3791]:
+                    - heading "Bank of Montreal Holding Inc" [level=4] [ref=e3792]
+                    - paragraph [ref=e3793]: Bank
+                  - generic [ref=e3794]:
+                    - img [ref=e3795]
+                    - text: "4.5"
+                - generic [ref=e3798]: Commercial
+                - generic [ref=e3799]:
+                  - link "Web" [ref=e3800] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+Holding+Inc
+                    - img [ref=e3801]
+                    - generic [ref=e3804]: Web
+                  - link "LI" [ref=e3805] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+Holding+Inc+linkedin
+                    - img [ref=e3806]
+                    - generic [ref=e3810]: LI
+                  - link "Google" [ref=e3811] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+Holding+Inc
+                    - img [ref=e3812]
+                    - generic [ref=e3815]: Google
+                  - link "Contact" [ref=e3816] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Bank+of+Montreal+Holding+Inc+contact
+                    - img [ref=e3817]
+                    - generic [ref=e3820]: Contact
+                - button "Quick Links" [ref=e3821] [cursor=pointer]:
+                  - img [ref=e3822]
+                  - text: Quick Links
+          - generic [ref=e3826]:
+            - heading "Commercial, Land (3)" [level=3] [ref=e3827]:
+              - text: Commercial, Land
+              - generic [ref=e3829]: (3)
+            - generic [ref=e3830]:
+              - generic [ref=e3831]:
+                - generic [ref=e3832]:
+                  - generic [ref=e3833]:
+                    - heading "Alterna Saving and Credit Union Ltd" [level=4] [ref=e3834]
+                    - paragraph [ref=e3835]: Credit Union
+                  - generic [ref=e3836]:
+                    - img [ref=e3837]
+                    - text: "4.5"
+                - generic [ref=e3840]: Commercial, Land
+                - generic [ref=e3841]:
+                  - link "Web" [ref=e3842] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alterna+Saving+and+Credit+Union+Ltd
+                    - img [ref=e3843]
+                    - generic [ref=e3846]: Web
+                  - link "LI" [ref=e3847] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alterna+Saving+and+Credit+Union+Ltd+linkedin
+                    - img [ref=e3848]
+                    - generic [ref=e3852]: LI
+                  - link "Google" [ref=e3853] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alterna+Saving+and+Credit+Union+Ltd
+                    - img [ref=e3854]
+                    - generic [ref=e3857]: Google
+                  - link "Contact" [ref=e3858] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alterna+Saving+and+Credit+Union+Ltd+contact
+                    - img [ref=e3859]
+                    - generic [ref=e3862]: Contact
+                - button "Quick Links" [ref=e3863] [cursor=pointer]:
+                  - img [ref=e3864]
+                  - text: Quick Links
+              - generic [ref=e3868]:
+                - generic [ref=e3869]:
+                  - generic [ref=e3870]:
+                    - heading "Alterna Savings and Credit Union Ltd" [level=4] [ref=e3871]
+                    - paragraph [ref=e3872]: Credit Union
+                  - generic [ref=e3873]:
+                    - img [ref=e3874]
+                    - text: "4.5"
+                - paragraph [ref=e3876]: alterna.ca
+                - generic [ref=e3878]: Commercial, Land
+                - generic [ref=e3879]:
+                  - link "Web" [ref=e3880] [cursor=pointer]:
+                    - /url: https://alterna.ca
+                    - img [ref=e3881]
+                    - generic [ref=e3884]: Web
+                  - link "LI" [ref=e3885] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alterna+Savings+and+Credit+Union+Ltd+linkedin
+                    - img [ref=e3886]
+                    - generic [ref=e3890]: LI
+                  - link "Google" [ref=e3891] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alterna+Savings+and+Credit+Union+Ltd
+                    - img [ref=e3892]
+                    - generic [ref=e3895]: Google
+                  - link "Contact" [ref=e3896] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Alterna+Savings+and+Credit+Union+Ltd+contact
+                    - img [ref=e3897]
+                    - generic [ref=e3900]: Contact
+                - button "Quick Links" [ref=e3901] [cursor=pointer]:
+                  - img [ref=e3902]
+                  - text: Quick Links
+              - generic [ref=e3906]:
+                - generic [ref=e3907]:
+                  - generic [ref=e3908]:
+                    - heading "Auto Workers Community Credit Union Ltd" [level=4] [ref=e3909]
+                    - paragraph [ref=e3910]: Credit Union
+                  - generic [ref=e3911]:
+                    - img [ref=e3912]
+                    - text: "4.5"
+                - generic [ref=e3915]: Commercial, Land
+                - generic [ref=e3916]:
+                  - link "Web" [ref=e3917] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Auto+Workers+Community+Credit+Union+Ltd
+                    - img [ref=e3918]
+                    - generic [ref=e3921]: Web
+                  - link "LI" [ref=e3922] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Auto+Workers+Community+Credit+Union+Ltd+linkedin
+                    - img [ref=e3923]
+                    - generic [ref=e3927]: LI
+                  - link "Google" [ref=e3928] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Auto+Workers+Community+Credit+Union+Ltd
+                    - img [ref=e3929]
+                    - generic [ref=e3932]: Google
+                  - link "Contact" [ref=e3933] [cursor=pointer]:
+                    - /url: https://www.google.com/search?q=Auto+Workers+Community+Credit+Union+Ltd+contact
+                    - img [ref=e3934]
+                    - generic [ref=e3937]: Contact
+                - button "Quick Links" [ref=e3938] [cursor=pointer]:
+                  - img [ref=e3939]
+                  - text: Quick Links
+          - generic [ref=e3943]:
+            - heading "Commercial, Construction (1)" [level=3] [ref=e3944]:
+              - text: Commercial, Construction
+              - generic [ref=e3946]: (1)
+            - generic [ref=e3948]:
+              - generic [ref=e3949]:
+                - generic [ref=e3950]:
+                  - heading "Atlas Springbank Developments Ltd" [level=4] [ref=e3951]
+                  - paragraph [ref=e3952]: Bank
+                - generic [ref=e3953]:
+                  - img [ref=e3954]
+                  - text: "4.5"
+              - generic [ref=e3957]: Commercial, Construction
+              - generic [ref=e3958]:
+                - link "Web" [ref=e3959] [cursor=pointer]:
+                  - /url: https://www.google.com/search?q=Atlas+Springbank+Developments+Ltd
+                  - img [ref=e3960]
+                  - generic [ref=e3963]: Web
+                - link "LI" [ref=e3964] [cursor=pointer]:
+                  - /url: https://www.google.com/search?q=Atlas+Springbank+Developments+Ltd+linkedin
+                  - img [ref=e3965]
+                  - generic [ref=e3969]: LI
+                - link "Google" [ref=e3970] [cursor=pointer]:
+                  - /url: https://www.google.com/search?q=Atlas+Springbank+Developments+Ltd
+                  - img [ref=e3971]
+                  - generic [ref=e3974]: Google
+                - link "Contact" [ref=e3975] [cursor=pointer]:
+                  - /url: https://www.google.com/search?q=Atlas+Springbank+Developments+Ltd+contact
+                  - img [ref=e3976]
+                  - generic [ref=e3979]: Contact
+              - button "Quick Links" [ref=e3980] [cursor=pointer]:
+                - img [ref=e3981]
+                - text: Quick Links
+  - button "Ctrl+Shift+V" [ref=e232] [cursor=pointer]:
+    - img [ref=e233]
+    - generic [ref=e236]: Ctrl+Shift+V

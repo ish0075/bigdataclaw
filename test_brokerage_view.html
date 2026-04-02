@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Brokerage View</title>
+    <script>
+        fetch('http://localhost:8000/api/dbeaver/stats')
+            .then(r => r.json())
+            .then(data => {
+                document.body.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            })
+            .catch(e => {
+                document.body.innerHTML = '<p>Error: ' + e.message + '</p>';
+            });
+    </script>
+</head>
+<body>
+    <p>Loading...</p>
+</body>
+</html>

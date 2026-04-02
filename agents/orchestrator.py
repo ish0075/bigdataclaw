@@ -2,6 +2,7 @@
 """
 BigDataClaw Agent Orchestrator
 Coordinates all research agents for property matching
+Includes Obsidian Real Estate Expert for property intelligence
 """
 
 import pandas as pd
@@ -9,6 +10,12 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 import json
 from dataclasses import dataclass
+
+# Import Obsidian Real Estate Expert
+try:
+    from agents.obsidian_agent import get_obsidian_agent, ObsidianRealEstateExpert
+except ImportError:
+    ObsidianRealEstateExpert = None
 
 @dataclass
 class PropertySubmission:
@@ -36,6 +43,8 @@ class MatchResult:
 class AgentOrchestrator:
     """
     Main orchestrator that coordinates research agents
+    Phase 0: Obsidian Expert (property intelligence & calculations)
+    Phases 1-6: Specialized research agents
     """
     
     def __init__(self, data_path: str = "~/CortexOS/workspace"):
@@ -45,6 +54,14 @@ class AgentOrchestrator:
             'buyers': None,
             'fresh_leads': None
         }
+        # Initialize Obsidian Real Estate Expert
+        self.obsidian_expert = None
+        if ObsidianRealEstateExpert:
+            try:
+                self.obsidian_expert = get_obsidian_agent()
+                print("✓ Obsidian Real Estate Expert initialized")
+            except Exception as e:
+                print(f"⚠ Obsidian Expert not available: {e}")
         self._load_data()
     
     def _load_data(self):
@@ -77,12 +94,17 @@ class AgentOrchestrator:
     def research_property(self, property_data: Dict[str, Any]) -> Dict[str, Any]:
         """
         Main entry point - orchestrates all agents
+        Phase 0: Obsidian Expert Analysis
+        Phases 1-6: Specialized research agents
         """
         prop = PropertySubmission(**property_data)
-        print(f"\nResearching: {prop.address}")
-        print(f"  Asset Class: {prop.asset_class}")
-        print(f"  Price: ${prop.price:,.0f}")
-        print(f"  Region: {prop.region}")
+        print(f"\n{'='*60}")
+        print(f"BigDataClaw Property Research")
+        print(f"{'='*60}")
+        print(f"Property: {prop.address}")
+        print(f"Asset Class: {prop.asset_class}")
+        print(f"Price: ${prop.price:,.0f}")
+        print(f"Region: {prop.region}")
         
         results = {
             'property': property_data,
@@ -95,6 +117,48 @@ class AgentOrchestrator:
                 'matched_lenders': []
             }
         }
+        
+        # Phase 0: Obsidian Real Estate Expert
+        if self.obsidian_expert:
+            print("\n🏛️ Phase 0: Obsidian Expert Analysis")
+            try:
+                obsidian_results = self.obsidian_expert.coordinate_data_gathering(
+                    property_data,
+                    agents_to_call=['transaction_scout']  # Lightweight for now
+                )
+                results['obsidian_analysis'] = obsidian_results
+                results['agents_executed'].append('obsidian_expert')
+                
+                # Add calculated metrics if available
+                if 'calculated_metrics' in obsidian_results.get('results', {}):
+                    metrics = obsidian_results['results']['calculated_metrics']
+                    results['calculated_metrics'] = metrics
+                    
+                    # Print key metrics
+                    if metrics.get('cap_rate'):
+                        print(f"  📊 Cap Rate: {metrics['cap_rate']:.2f}%")
+                    if metrics.get('price_per_sf'):
+                        print(f"  📊 Price/SF: ${metrics['price_per_sf']:.2f}")
+                    if metrics.get('price_per_acre'):
+                        print(f"  📊 Price/Acre: ${metrics['price_per_acre']:,.2f}")
+                    if metrics.get('price_per_lot'):
+                        print(f"  📊 Price/Lot: ${metrics['price_per_lot']:,.2f}")
+                
+                # Add comparables
+                if 'comparable_properties' in obsidian_results.get('results', {}):
+                    comparables = obsidian_results['results']['comparable_properties']
+                    results['comparable_properties'] = comparables
+                    print(f"  📋 Found {len(comparables)} comparable properties")
+                
+                # Add market stats
+                if 'market_statistics' in obsidian_results.get('results', {}):
+                    stats = obsidian_results['results']['market_statistics']
+                    results['market_statistics'] = stats
+                    if 'avg_cap_rate' in stats:
+                        print(f"  📈 Market Avg Cap Rate: {stats['avg_cap_rate']:.2f}%")
+                
+            except Exception as e:
+                print(f"  ⚠ Obsidian analysis error: {e}")
         
         # Phase 1: Transaction Scout
         print("\nPhase 1: Transaction Scout Agent")

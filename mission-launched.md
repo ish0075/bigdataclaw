@@ -1,0 +1,208 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "BIGDATA CLAW" [level=1] [ref=e9]
+        - paragraph [ref=e10]: NERVE Mission Control
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Agent Workspace" [ref=e37] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e38]
+        - generic [ref=e41]: Agent Workspace
+      - link "Obsidian Vault" [ref=e42] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e43]
+        - generic [ref=e47]: Obsidian Vault
+      - generic [ref=e48]: Tools
+      - link "My Listings" [ref=e49] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e50]
+        - generic [ref=e54]: My Listings
+      - link "Buyer Matcher" [ref=e55] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e56]
+        - generic [ref=e61]: Buyer Matcher
+      - link "Agent Matcher" [ref=e62] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e63]
+        - generic [ref=e67]: Agent Matcher
+      - link "Lender Matcher" [ref=e68] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e69]
+        - generic [ref=e71]: Lender Matcher
+      - link "Property Upload" [ref=e72] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e73]
+        - generic [ref=e76]: Property Upload
+      - link "Skills & Agents" [ref=e77] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e78]
+        - generic [ref=e81]: Skills & Agents
+      - link "Map View" [ref=e82] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e83]
+        - generic [ref=e85]: Map View
+    - generic [ref=e89]: System Online
+  - generic [ref=e90]:
+    - banner [ref=e91]:
+      - generic [ref=e96]:
+        - img [ref=e238]
+        - generic [ref=e104]: Connected
+      - generic [ref=e105]:
+        - button "Voice" [ref=e106] [cursor=pointer]:
+          - img [ref=e107]
+          - generic [ref=e113]: Voice
+        - generic [ref=e114]:
+          - img [ref=e115]
+          - generic [ref=e120]: $12.40
+        - button [ref=e121] [cursor=pointer]:
+          - img [ref=e122]
+        - link [ref=e125] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e126]
+        - link "🦞" [ref=e129] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e130]: 🦞
+    - main [ref=e131]:
+      - generic [ref=e133]:
+        - generic [ref=e134]:
+          - button [ref=e135] [cursor=pointer]:
+            - img [ref=e136]
+          - generic [ref=e138]:
+            - heading "New Research Mission" [level=1] [ref=e139]
+            - paragraph [ref=e140]: Chat, upload documents, or fill the form manually
+        - generic [ref=e141]:
+          - button "AI Chat & Upload" [ref=e142] [cursor=pointer]:
+            - img [ref=e143]
+            - text: AI Chat & Upload
+          - button "Manual Form" [ref=e145] [cursor=pointer]:
+            - img [ref=e146]
+            - text: Manual Form
+        - generic [ref=e149]:
+          - generic [ref=e255]:
+            - heading "Property Input" [level=3] [ref=e256]:
+              - img [ref=e257]
+              - text: Property Input
+            - generic [ref=e260]:
+              - generic [ref=e261]:
+                - generic [ref=e262]:
+                  - generic [ref=e263]: Street Address *
+                  - generic [ref=e264]:
+                    - textbox "1500 Michael Drive, Welland" [ref=e265]: 281 Chippawa Creek Road
+                    - img [ref=e266]
+                - generic [ref=e269]:
+                  - generic [ref=e270]: City *
+                  - textbox "Welland" [ref=e271]
+                - generic [ref=e272]:
+                  - generic [ref=e273]: Postal Code
+                  - textbox "L3C 5W3" [ref=e274]
+                - generic [ref=e275]:
+                  - generic [ref=e276]: Asset Class *
+                  - generic [ref=e277]:
+                    - combobox [ref=e278]:
+                      - option "Industrial" [selected]
+                      - option "Retail"
+                      - option "Office"
+                      - option "Multi-Family"
+                      - option "Agricultural"
+                      - option "Land"
+                    - img
+                - generic [ref=e279]:
+                  - generic [ref=e280]: Region *
+                  - generic [ref=e281]:
+                    - combobox [ref=e282]:
+                      - option "Niagara" [selected]
+                      - option "Toronto"
+                      - option "Hamilton"
+                      - option "GTA"
+                      - option "Southwestern Ontario"
+                    - img
+                - generic [ref=e283]:
+                  - generic [ref=e284]: Price ($) *
+                  - generic [ref=e285]:
+                    - spinbutton [active] [ref=e286]
+                    - img [ref=e287]
+                - generic [ref=e289]:
+                  - generic [ref=e290]: Size (SF)
+                  - generic [ref=e291]:
+                    - spinbutton [ref=e292]
+                    - img [ref=e293]
+              - generic [ref=e298]:
+                - generic [ref=e299]:
+                  - img [ref=e300]
+                  - text: Attach Documents (Optional)
+                - generic [ref=e302]:
+                  - button "Choose File" [ref=e303] [cursor=pointer]
+                  - paragraph [ref=e304]: "Supported: PDF, Word, Images (PNG, JPG), TXT • Max 10MB per file"
+              - button "Launch Mission" [ref=e305] [cursor=pointer]:
+                - img [ref=e306]
+                - generic [ref=e311]: Launch Mission
+          - generic [ref=e186]:
+            - generic [ref=e187]:
+              - heading "Form Preview" [level=3] [ref=e188]:
+                - img [ref=e189]
+                - text: Form Preview
+              - generic [ref=e192]:
+                - generic [ref=e193]:
+                  - paragraph [ref=e194]: Address
+                  - paragraph [ref=e195]: 281 Chippawa Creek Road
+                - generic [ref=e196]:
+                  - generic [ref=e197]:
+                    - paragraph [ref=e198]: City
+                    - paragraph [ref=e199]: Welland
+                  - generic [ref=e200]:
+                    - paragraph [ref=e201]: Region
+                    - paragraph [ref=e202]: Niagara
+                - generic [ref=e203]:
+                  - generic [ref=e204]:
+                    - paragraph [ref=e205]: Asset Class
+                    - paragraph [ref=e206]: Industrial
+                  - generic [ref=e207]:
+                    - paragraph [ref=e208]: Price
+                    - paragraph [ref=e209]: "-"
+                - generic [ref=e210]:
+                  - paragraph [ref=e211]: Size
+                  - paragraph [ref=e212]: "-"
+            - generic [ref=e213]:
+              - heading "Research Configuration" [level=3] [ref=e214]
+              - generic [ref=e215]:
+                - generic [ref=e216] [cursor=pointer]:
+                  - radio "Quick Top 5 matches • 1-2 min" [ref=e217]
+                  - generic [ref=e218]:
+                    - paragraph [ref=e219]: Quick
+                    - paragraph [ref=e220]: Top 5 matches • 1-2 min
+                - generic [ref=e221] [cursor=pointer]:
+                  - radio "Standard Top 10 matches • 3-5 min" [checked] [ref=e222]
+                  - generic [ref=e223]:
+                    - paragraph [ref=e224]: Standard
+                    - paragraph [ref=e225]: Top 10 matches • 3-5 min
+                - generic [ref=e226] [cursor=pointer]:
+                  - radio "Deep Top 25 matches • 8-10 min" [ref=e227]
+                  - generic [ref=e228]:
+                    - paragraph [ref=e229]: Deep
+                    - paragraph [ref=e230]: Top 25 matches • 8-10 min
+            - generic [ref=e231]:
+              - heading "💡 Tips" [level=3] [ref=e232]
+              - list [ref=e233]:
+                - listitem [ref=e234]: • Upload an Offering Memorandum to auto-fill
+                - listitem [ref=e235]: • Use voice control for hands-free input
+                - listitem [ref=e236]: • Chat with me naturally about the property
+                - listitem [ref=e237]: • Include photos for better analysis

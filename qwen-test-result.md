@@ -1,0 +1,182 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "BIGDATA CLAW" [level=1] [ref=e9]
+        - paragraph [ref=e10]: NERVE Mission Control
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Agent Workspace" [ref=e37] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e38]
+        - generic [ref=e41]: Agent Workspace
+      - link "Obsidian Vault" [ref=e42] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e43]
+        - generic [ref=e47]: Obsidian Vault
+      - generic [ref=e48]: Tools
+      - link "My Listings" [ref=e49] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e50]
+        - generic [ref=e54]: My Listings
+      - link "Buyer Matcher" [ref=e55] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e56]
+        - generic [ref=e61]: Buyer Matcher
+      - link "Agent Matcher" [ref=e62] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e63]
+        - generic [ref=e67]: Agent Matcher
+      - link "Lender Matcher" [ref=e68] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e69]
+        - generic [ref=e71]: Lender Matcher
+      - link "Property Upload" [ref=e72] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e73]
+        - generic [ref=e76]: Property Upload
+      - link "Skills & Agents" [ref=e77] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e78]
+        - generic [ref=e81]: Skills & Agents
+      - link "Map View" [ref=e82] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e83]
+        - generic [ref=e85]: Map View
+    - generic [ref=e89]: System Online
+  - generic [ref=e90]:
+    - banner [ref=e91]:
+      - generic [ref=e96]:
+        - img [ref=e238]
+        - generic [ref=e104]: Connected
+      - generic [ref=e105]:
+        - button "Voice" [ref=e106] [cursor=pointer]:
+          - img [ref=e107]
+          - generic [ref=e113]: Voice
+        - generic [ref=e114]:
+          - img [ref=e115]
+          - generic [ref=e120]: $12.40
+        - button [ref=e121] [cursor=pointer]:
+          - img [ref=e122]
+        - link [ref=e125] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e126]
+        - link "🦞" [ref=e129] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e130]: 🦞
+    - main [ref=e131]:
+      - generic [ref=e133]:
+        - generic [ref=e134]:
+          - button [ref=e135] [cursor=pointer]:
+            - img [ref=e136]
+          - generic [ref=e138]:
+            - heading "New Research Mission" [level=1] [ref=e139]
+            - paragraph [ref=e140]: Chat, upload documents, or fill the form manually
+        - generic [ref=e141]:
+          - button "AI Chat & Upload" [ref=e142] [cursor=pointer]:
+            - img [ref=e143]
+            - text: AI Chat & Upload
+          - button "Manual Form" [ref=e145] [cursor=pointer]:
+            - img [ref=e146]
+            - text: Manual Form
+        - generic [ref=e149]:
+          - generic [ref=e151]:
+            - generic [ref=e153]:
+              - img [ref=e155]
+              - generic [ref=e157]:
+                - heading "Kimi AI Assistant" [level=3] [ref=e158]
+                - paragraph [ref=e159]: Powered by Moonshot AI
+            - generic [ref=e160]:
+              - generic [ref=e161]:
+                - img [ref=e163]
+                - generic [ref=e165]:
+                  - generic [ref=e166]: Hi! I'm your property research assistant powered by Kimi AI. I can help you fill out this form by chatting, uploading documents, or using voice. What property would you like to research today?
+                  - text: 11:24 AM
+              - generic [ref=e242]:
+                - img [ref=e244]
+                - generic [ref=e247]:
+                  - generic [ref=e248]: Analyze 281 Chippawa Creek Road, Welland. Industrial building for sale at $5.2 million, 80,000 SF
+                  - text: 11:24 AM
+              - generic [ref=e249]:
+                - img [ref=e251]
+                - generic [ref=e253]:
+                  - img [ref=e254]
+                  - generic [ref=e256]: Kimi is thinking...
+            - generic [ref=e167]:
+              - button "Upload PDF, Images, Docs" [ref=e169] [cursor=pointer]:
+                - img [ref=e170]
+                - text: Upload PDF, Images, Docs
+              - generic [ref=e172]:
+                - button "Start voice input" [ref=e173] [cursor=pointer]:
+                  - img [ref=e174]
+                - textbox "Ask Kimi about your property..." [disabled] [ref=e181]
+                - button [disabled] [ref=e182]:
+                  - img [ref=e183]
+          - generic [ref=e186]:
+            - generic [ref=e187]:
+              - heading "Form Preview" [level=3] [ref=e188]:
+                - img [ref=e189]
+                - text: Form Preview
+              - generic [ref=e192]:
+                - generic [ref=e193]:
+                  - paragraph [ref=e194]: Address
+                  - paragraph [ref=e195]: Not provided
+                - generic [ref=e196]:
+                  - generic [ref=e197]:
+                    - paragraph [ref=e198]: City
+                    - paragraph [ref=e199]: "-"
+                  - generic [ref=e200]:
+                    - paragraph [ref=e201]: Region
+                    - paragraph [ref=e202]: Niagara
+                - generic [ref=e203]:
+                  - generic [ref=e204]:
+                    - paragraph [ref=e205]: Asset Class
+                    - paragraph [ref=e206]: Industrial
+                  - generic [ref=e207]:
+                    - paragraph [ref=e208]: Price
+                    - paragraph [ref=e209]: "-"
+                - generic [ref=e210]:
+                  - paragraph [ref=e211]: Size
+                  - paragraph [ref=e212]: "-"
+            - generic [ref=e213]:
+              - heading "Research Configuration" [level=3] [ref=e214]
+              - generic [ref=e215]:
+                - generic [ref=e216] [cursor=pointer]:
+                  - radio "Quick Top 5 matches • 1-2 min" [ref=e217]
+                  - generic [ref=e218]:
+                    - paragraph [ref=e219]: Quick
+                    - paragraph [ref=e220]: Top 5 matches • 1-2 min
+                - generic [ref=e221] [cursor=pointer]:
+                  - radio "Standard Top 10 matches • 3-5 min" [checked] [ref=e222]
+                  - generic [ref=e223]:
+                    - paragraph [ref=e224]: Standard
+                    - paragraph [ref=e225]: Top 10 matches • 3-5 min
+                - generic [ref=e226] [cursor=pointer]:
+                  - radio "Deep Top 25 matches • 8-10 min" [ref=e227]
+                  - generic [ref=e228]:
+                    - paragraph [ref=e229]: Deep
+                    - paragraph [ref=e230]: Top 25 matches • 8-10 min
+            - generic [ref=e231]:
+              - heading "💡 Tips" [level=3] [ref=e232]
+              - list [ref=e233]:
+                - listitem [ref=e234]: • Upload an Offering Memorandum to auto-fill
+                - listitem [ref=e235]: • Use voice control for hands-free input
+                - listitem [ref=e236]: • Chat with me naturally about the property
+                - listitem [ref=e237]: • Include photos for better analysis

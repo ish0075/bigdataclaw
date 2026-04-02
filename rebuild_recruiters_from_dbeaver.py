@@ -24,7 +24,7 @@ def generate_quick_links(name, brokerage, email, job_title):
     links['facebook'] = f"{base}?q={quote_plus(name + ' facebook')}"
     links['instagram'] = f"{base}?q={quote_plus(name + ' instagram')}"
     links['twitter'] = f"{base}?q={quote_plus(name + ' twitter OR x.com')}"
-    links['realtorCa'] = f"{base}?q={quote_plus(name + ' site:realtor.ca')}"
+    links['realtorCa'] = f"{base}?q={quote_plus(name + ' realtor.ca')}"
     
     brokerage_links = {}
     if brokerage:

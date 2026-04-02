@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NERVE Monitoring Dashboard</title>
+    <meta http-equiv="refresh" content="30">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f0f0f; color: #fff; margin: 0; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { margin: 0; color: #3b82f6; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: #1a1a1a; border-radius: 12px; padding: 20px; border: 1px solid #333; }
+        .card h2 { margin-top: 0; color: #60a5fa; font-size: 18px; }
+        .status { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
+        .status-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .status-healthy { background: #22c55e; }
+        .status-error { background: #ef4444; }
+        .status-warning { background: #f59e0b; }
+        .metric { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333; }
+        .metric:last-child { border-bottom: none; }
+        .timestamp { text-align: center; color: #666; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🦞 NERVE Monitoring Dashboard</h1>
+        <p>Real-time system health monitoring</p>
+    </div>
+    <div class="grid">
+        <div class="card">
+            <h2>📡 Services</h2>
+<div class="status"><div class="status-dot status-healthy"></div>nerve_frontend</div><div class="status"><div class="status-dot status-healthy"></div>nerve_backend</div><div class="status"><div class="status-dot status-healthy"></div>qdrant</div><div class="status"><div class="status-dot status-healthy"></div>open_webui</div>
+        </div>
+        <div class="card">
+            <h2>💻 System Resources</h2>
+<div class="metric"><span>CPU</span><span>68.0%</span></div><div class="metric"><span>Memory</span><span>91.7%</span></div><div class="metric"><span>Disk</span><span>80.3%</span></div>
+        </div>
+        <div class="card">
+            <h2>🧠 Qdrant</h2>
+            <div class="metric"><span>Status</span><span>connected</span></div>
+            <div class="metric"><span>Collections</span><span>23</span></div>
+        </div>
+        <div class="card">
+            <h2>🤖 Agents</h2>
+            <div class="metric"><span>Running</span><span>0</span></div>
+            <div class="metric"><span>Expected</span><span>6</span></div>
+        </div>
+    </div>
+    <div class="timestamp">Last updated: 2026-03-28 12:28:10</div>
+</body>
+</html>

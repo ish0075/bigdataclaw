@@ -1,0 +1,70 @@
+{
+  "last_updated": "2026-03-24T23:30:48.712716",
+  "skills": {
+    "fund_life_tracker": {
+      "name": "fund_life_tracker",
+      "description": "Tracks fund life cycles and predicts exit windows for motivated seller identification",
+      "agent": "hot_money_identifier",
+      "version": "1.0.0",
+      "author": "BigDataClaw",
+      "priority": "P0",
+      "status": "active",
+      "dependencies": [],
+      "input_schema": {
+        "required": [
+          "buyer_name",
+          "acquisition_date"
+        ],
+        "optional": [
+          "fund_name",
+          "fund_size",
+          "asset_class",
+          "typical_hold_years"
+        ]
+      },
+      "output_schema": {
+        "fund_life_analysis": "dict",
+        "exit_window": "dict",
+        "motivation_score": "float",
+        "recommended_action": "str"
+      },
+      "enabled": true,
+      "execution_count": 1,
+      "last_executed": "2026-03-24T23:30:48.712713",
+      "avg_execution_time_ms": 0.057
+    },
+    "distress_scanner": {
+      "name": "distress_scanner",
+      "description": "Identifies distress signals like dark anchors, bankruptcies, CMBS maturities",
+      "agent": "hot_money_identifier",
+      "version": "1.0.0",
+      "author": "BigDataClaw",
+      "priority": "P0",
+      "status": "active",
+      "dependencies": [],
+      "input_schema": {
+        "required": [
+          "property_address",
+          "city"
+        ],
+        "optional": [
+          "tenant_list",
+          "occupancy_rate",
+          "cmbs_loan",
+          "ownership_structure"
+        ]
+      },
+      "output_schema": {
+        "distress_signals": "list",
+        "distress_level": "str",
+        "distress_score": "int",
+        "motivation_factors": "list",
+        "recommended_discount": "float"
+      },
+      "enabled": true,
+      "execution_count": 0,
+      "last_executed": null,
+      "avg_execution_time_ms": null
+    }
+  }
+}

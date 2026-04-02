@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Qdrant Experience Agent Dashboard</title>
+    <meta http-equiv="refresh" content="30">
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: #0f0f0f; 
+            color: #fff; 
+            margin: 0; 
+            padding: 20px;
+        }
+        .header { 
+            text-align: center; 
+            margin-bottom: 30px; 
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+        }
+        .header h1 { margin: 0; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; 
+        }
+        .card { 
+            background: #1a1a1a; 
+            border-radius: 12px; 
+            padding: 20px; 
+            border: 1px solid #333; 
+        }
+        .card h2 { 
+            margin-top: 0; 
+            color: #60a5fa; 
+            font-size: 18px; 
+        }
+        .status { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            margin: 10px 0; 
+            padding: 10px;
+            background: #222;
+            border-radius: 8px;
+        }
+        .status-dot { 
+            width: 10px; 
+            height: 10px; 
+            border-radius: 50%; 
+        }
+        .status-healthy { background: #22c55e; }
+        .status-error { background: #ef4444; }
+        .metric { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 8px 0; 
+            border-bottom: 1px solid #333; 
+        }
+        .metric:last-child { border-bottom: none; }
+        .timestamp { 
+            text-align: center; 
+            color: #666; 
+            margin-top: 20px; 
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧠 Qdrant Experience Agent</h1>
+        <p>24/7 Vector Database Management</p>
+    </div>
+    <div class="grid">
+        <div class="card">
+            <h2>📊 System Health</h2>
+            <div id="health-status">Loading...</div>
+        </div>
+        <div class="card">
+            <h2>📁 Collections</h2>
+            <div id="collections">Loading...</div>
+        </div>
+        <div class="card">
+            <h2>📈 Indexing Progress</h2>
+            <div id="indexing">Loading...</div>
+        </div>
+        <div class="card">
+            <h2>⚡ Agent Stats</h2>
+            <div id="stats">Loading...</div>
+        </div>
+    </div>
+    <div class="timestamp">Last updated: <span id="timestamp">-</span></div>
+    
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                updateDashboard(data);
+            } catch (e) {
+                console.error('Failed to fetch data:', e);
+            }
+        }
+        
+        function updateDashboard(data) {
+            document.getElementById('timestamp').textContent = new Date().toLocaleString();
+            
+            // Health status
+            const healthHtml = data.healthy 
+                ? '<div class="status"><div class="status-dot status-healthy"></div>Qdrant is Healthy</div>'
+                : '<div class="status"><div class="status-dot status-error"></div>Qdrant is Unhealthy</div>';
+            document.getElementById('health-status').innerHTML = healthHtml;
+            
+            // Collections
+            let collectionsHtml = '';
+            if (data.collections) {
+                data.collections.forEach(col => {
+                    collectionsHtml += `<div class="metric"><span>${col.name}</span><span>${col.points?.toLocaleString() || 'Error'} points</span></div>`;
+                });
+            }
+            document.getElementById('collections').innerHTML = collectionsHtml || 'No collections';
+            
+            // Indexing progress
+            if (data.collections && data.collections.find(c => c.name === 'recruiters')) {
+                const recruiters = data.collections.find(c => c.name === 'recruiters');
+                const percentage = ((recruiters.points / 28505) * 100).toFixed(1);
+                document.getElementById('indexing').innerHTML = `
+                    <p>Recruiters: ${recruiters.points.toLocaleString()} / 28,505</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${percentage}%"></div></div>
+                    <p>${percentage}% complete</p>
+                `;
+            }
+            
+            // Stats
+            document.getElementById('stats').innerHTML = `
+                <div class="metric"><span>Checks Performed</span><span>${data.stats?.checks_performed || 0}</span></div>
+                <div class="metric"><span>Optimizations</span><span>${data.stats?.optimizations || 0}</span></div>
+                <div class="metric"><span>Items Indexed</span><span>${data.stats?.indexed_items?.toLocaleString() || 0}</span></div>
+            `;
+        }
+        
+        fetchData();
+        setInterval(fetchData, 30000);
+    </script>
+</body>
+</html>

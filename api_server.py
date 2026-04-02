@@ -18,6 +18,13 @@ from pydantic import BaseModel
 from qdrant_client import QdrantClient
 import uvicorn
 
+# Import Agent Workspace API
+from agent_workspace_api import router as agent_workspace_router
+from notification_service import notification_router
+from bot_builder_api import router as bot_builder_router
+from realtor_bot_api import router as realtor_bot_router
+from ai_builder_api import router as ai_builder_router
+
 # Initialize FastAPI
 app = FastAPI(
     title="BigDataClaw NERVE API",
@@ -33,6 +40,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include Agent Workspace Router
+app.include_router(agent_workspace_router)
+app.include_router(notification_router)
+app.include_router(bot_builder_router)
+app.include_router(realtor_bot_router)
+app.include_router(ai_builder_router)
 
 # Database paths
 DB_PATH = Path('bigdataclaw.db')
@@ -1340,6 +1354,10 @@ class LLMChatRequest(BaseModel):
     conversation_history: Optional[List[Dict[str, Any]]] = None
     model: Optional[str] = None
 
+class DocumentRequest(BaseModel):
+    file_content: str
+    file_type: Optional[str] = "txt"
+
 @app.get("/api/llm/status")
 async def get_llm_status():
     """Check local LLM (Ollama) status"""
@@ -1398,6 +1416,213 @@ async def llm_generate(request: LLMRequest):
         raise HTTPException(status_code=503, detail="Ollama not running")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/chat")
+async def chat(request: LLMChatRequest):
+    """Main chat endpoint for property research"""
+    try:
+        messages = []
+        system_prompt = """You are Kimi, a commercial real estate research assistant for BigDataClaw NERVE. 
+Help users research properties by extracting key details and providing helpful responses.
+
+When a user mentions a property, try to extract:
+- Address
+- City  
+- Price
+- Property type (Industrial, Retail, Office, etc.)
+- Size (square footage)
+- Number of beds/baths (for residential)
+
+Be conversational and helpful."""
+        
+        messages.append({"role": "system", "content": system_prompt})
+        if request.conversation_history:
+            messages.extend(request.conversation_history[-6:])
+        messages.append({"role": "user", "content": request.message})
+        
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                f"{OLLAMA_HOST}/api/chat",
+                json={
+                    "model": OLLAMA_MODEL,
+                    "messages": messages,
+                    "stream": False,
+                    "options": {
+                        "temperature": 0.7,
+                        "num_predict": 1024
+                    }
+                },
+                timeout=60.0
+            )
+            
+            if response.status_code != 200:
+                raise HTTPException(status_code=500, detail=f"Ollama error: {response.text}")
+            
+            data = response.json()
+            ai_message = data.get("message", {}).get("content", "")
+            
+            # Try to extract property data from the user's message
+            extracted_data = await extract_property_data(request.message)
+            
+            return {
+                "response": ai_message,
+                "extractedData": extracted_data,
+                "model": OLLAMA_MODEL,
+                "source": "local"
+            }
+    except httpx.ConnectError:
+        # Fallback response if Ollama is not running
+        extracted_data = await extract_property_data_fallback(request.message)
+        return {
+            "response": "I've received your message. Let me help you research this property. I've extracted the details I could find and updated the form for you.",
+            "extractedData": extracted_data,
+            "model": "fallback",
+            "source": "rule-based"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+async def extract_property_data(message: str) -> dict:
+    """Extract property data using LLM"""
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                f"{OLLAMA_HOST}/api/generate",
+                json={
+                    "model": OLLAMA_MODEL,
+                    "prompt": f"""Extract property information from this text and return ONLY valid JSON:
+{{
+  "address": "street address or null",
+  "city": "city name or null", 
+  "price": number or null,
+  "assetClass": "property type like Industrial, Retail, Office, etc or null",
+  "size": number (square feet) or null,
+  "bedrooms": number or null,
+  "bathrooms": number or null,
+  "parking": number or null,
+  "region": "region/area or null"
+}}
+
+Text: {message}
+
+JSON:""",
+                    "stream": False,
+                    "options": {"temperature": 0.1, "num_predict": 256}
+                },
+                timeout=30.0
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                json_str = data.get("response", "{}")
+                # Clean up the response to get valid JSON
+                json_str = json_str.strip()
+                if json_str.startswith("```json"):
+                    json_str = json_str[7:]
+                if json_str.startswith("```"):
+                    json_str = json_str[3:]
+                if json_str.endswith("```"):
+                    json_str = json_str[:-3]
+                json_str = json_str.strip()
+                
+                extracted = json.loads(json_str)
+                # Filter out null values
+                return {k: v for k, v in extracted.items() if v is not None}
+    except Exception as e:
+        print(f"Extraction error: {e}")
+    
+    return await extract_property_data_fallback(message)
+
+async def extract_property_data_fallback(message: str) -> dict:
+    """Simple rule-based property extraction when LLM is unavailable"""
+    import re
+    
+    extracted = {}
+    message_lower = message.lower()
+    
+    # Extract price (look for $X or X million/thousand)
+    price_patterns = [
+        r'\$([0-9,]+(?:\.[0-9]+)?)\s*(million|m)?',
+        r'\$([0-9,]+(?:\.[0-9]+)?)\s*(thousand|k)?',
+        r'([0-9]+)\s*million',
+        r'([0-9]+)\s*thousand'
+    ]
+    for pattern in price_patterns:
+        match = re.search(pattern, message_lower)
+        if match:
+            num = match.group(1).replace(',', '')
+            multiplier = 1
+            if 'million' in message_lower or 'm' in (match.group(2) or ''):
+                multiplier = 1000000
+            elif 'thousand' in message_lower or 'k' in (match.group(2) or ''):
+                multiplier = 1000
+            extracted['price'] = int(float(num) * multiplier)
+            break
+    
+    # Extract address patterns
+    address_patterns = [
+        r'(\d+\s+[A-Za-z]+(?:\s+[A-Za-z]+)*(?:\s+(?:Drive|Dr|Street|St|Avenue|Ave|Road|Rd|Boulevard|Blvd|Lane|Ln|Way|Court|Ct|Place|Pl|Circle|Cir))?)',
+    ]
+    for pattern in address_patterns:
+        match = re.search(pattern, message, re.IGNORECASE)
+        if match:
+            extracted['address'] = match.group(1).strip()
+            break
+    
+    # Extract city (common Ontario cities)
+    cities = ['toronto', 'welland', 'niagara', 'hamilton', 'ottawa', 'mississauga', 'brampton', 'london', 'kitchener', 'waterloo', 'barrie', 'oshawa', 'windsor', 'st catharines', 'burlington', 'oakville']
+    for city in cities:
+        if city in message_lower:
+            extracted['city'] = city.title()
+            break
+    
+    # Extract property type
+    property_types = {
+        'industrial': 'Industrial',
+        'warehouse': 'Industrial', 
+        'retail': 'Retail',
+        'office': 'Office',
+        'commercial': 'Commercial',
+        'residential': 'Residential',
+        'multifamily': 'Multi-Family',
+        'apartment': 'Multi-Family',
+        'land': 'Land',
+        'agricultural': 'Agricultural'
+    }
+    for key, val in property_types.items():
+        if key in message_lower:
+            extracted['assetClass'] = val
+            break
+    
+    # Extract size (sqft, sf, square feet)
+    size_match = re.search(r'(\d+(?:,\d+)*)\s*(?:sq\s*ft|sqft|sf|square\s*feet)', message_lower)
+    if size_match:
+        extracted['size'] = int(size_match.group(1).replace(',', ''))
+    
+    # Extract beds/baths
+    bed_match = re.search(r'(\d+)\s*bed', message_lower)
+    if bed_match:
+        extracted['bedrooms'] = int(bed_match.group(1))
+    
+    bath_match = re.search(r'(\d+)\s*bath', message_lower)
+    if bath_match:
+        extracted['bathrooms'] = int(bath_match.group(1))
+    
+    return extracted
+
+@app.post("/api/chat/document")
+async def chat_document(request: DocumentRequest):
+    """Process document and extract property information"""
+    try:
+        # Simple extraction from document text
+        extracted = await extract_property_data_fallback(request.file_content)
+        
+        return {
+            **extracted,
+            "raw": request.file_content[:1000]  # First 1000 chars for preview
+        }
+    except Exception as e:
+        return {"error": str(e)}
 
 @app.post("/api/llm/chat")
 async def llm_chat(request: LLMChatRequest):
@@ -1645,6 +1870,15 @@ if __name__ == "__main__":
     print("   GET  /api/dbeaver/stats         - DBeaver statistics")
     print("   GET  /api/lenders               - List lenders (paginated)")
     print("   GET  /api/lenders/stats         - Lender statistics")
+    print("\n🤖 Agent Workspace Endpoints:")
+    print("   GET  /api/agents/workspaces          - List agent workspaces")
+    print("   GET  /api/agents/workspaces/{id}     - Get agent workspace")
+    print("   GET  /api/agents/workspaces/{id}/tasks      - Get agent tasks")
+    print("   POST /api/agents/workspaces/{id}/tasks      - Create task")
+    print("   GET  /api/agents/workspaces/{id}/memory     - Get agent memory")
+    print("   GET  /api/agents/workspaces/{id}/conversations  - Get conversations")
+    print("   GET  /api/agents/commanders          - List commanders")
+    print("   GET  /api/agents/commanders/{id}/dashboard  - Commander dashboard")
     print("\n🌐 Starting server on http://0.0.0.0:8000")
     print("=" * 60)
     
