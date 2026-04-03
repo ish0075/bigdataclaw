@@ -1,0 +1,911 @@
+INFO:     Will watch for changes in these directories: ["/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/nerve/server"]
+INFO:     Uvicorn running on http://127.0.0.1:3090 (Press CTRL+C to quit)
+INFO:     Started reloader process [3871313] using WatchFiles
+INFO:     Started server process [3871319]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✓ BigDataClaw components imported successfully
+✓ Loaded 520 transactions
+✓ Loaded 5666 buyer records
+✓ Loaded 2109 fresh leads
+✓ MatchingEngine initialized
+🏛️ Obsidian Agent: Loading knowledge base...
+  ✓ Loaded 520 transactions
+  ✓ Loaded 1 buyer profiles
+🏛️ Knowledge base ready: 1 properties indexed
+✓ Obsidian Real Estate Expert initialized
+Loaded 520 transactions
+Loaded 5666 buyer records
+Loaded 2109 fresh leads
+✓ AgentOrchestrator initialized
+✓ BigDataClaw connector ready: {'total_transactions': 520, 'total_buyers': 5666, 'total_fresh_leads': 2109, 'hot_money_count': 3, 'tracked_capital': 31840000}
+✓ Obsidian vault connector ready: {'buyer_profiles': 0, 'property_research': 0, 'hot_money_notes': 0, 'vault_path': '/home/jamie/Documents/BDAIV2', 'total_files': 0}
+INFO:     127.0.0.1:46092 - "GET /health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50910 - "GET /health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56392 - "GET /health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58276 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:58288 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:44096 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:41504 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:41512 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:41524 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:51706 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:38976 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:38988 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:39004 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:35346 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:35350 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:35352 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:59754 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:59768 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:48564 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:50424 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:45182 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:45188 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:52860 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:33402 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:33408 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:33424 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:33946 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:33960 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:33966 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:45128 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:45138 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:45152 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:58226 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:58230 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:58246 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:50740 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52964 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52970 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:56090 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:43420 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:43426 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:43430 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:46760 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:46764 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:46776 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:46782 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:46794 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:57078 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:34186 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:34190 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34204 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49568 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49578 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:49592 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49606 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:49618 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:52110 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52120 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:52136 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:40254 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:40256 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:40272 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:50974 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:50978 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:50980 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:45764 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:45772 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:45788 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:37412 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:37418 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:37430 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:48958 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:48966 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:48980 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:48996 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:34402 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34414 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:34416 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34426 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34432 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34434 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:34446 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34454 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34458 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34460 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34464 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34272 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:34286 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34292 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:52184 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:52190 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:52200 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:52214 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52228 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:52234 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52250 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52252 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52266 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52280 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52288 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52294 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:42492 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:48478 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:48490 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:48502 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:48510 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:48512 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:48514 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:48530 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:48534 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:40398 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:45102 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:45110 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:45122 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:43264 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:43272 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:43278 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52120 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:38968 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:38970 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:38984 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:38992 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:38994 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:39002 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:39016 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:39032 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:39036 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:39050 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49794 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49810 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49812 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49814 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49816 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:38428 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:38442 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:38450 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:38460 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:38468 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:38480 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:38488 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:38496 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:38506 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:38520 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:49064 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:49078 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:49094 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:49100 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49110 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49122 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49130 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49144 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49158 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49170 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:55744 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:36860 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:58154 - "WebSocket /ws" [accepted]
+INFO:     connection closed
+INFO:     127.0.0.1:58164 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:58170 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:59480 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:59484 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:59492 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:58206 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:43444 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:38332 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:38334 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:38344 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:59552 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:59558 - "WebSocket /ws" [accepted]
+INFO:     connection closed
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:40032 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:40044 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:47310 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:47326 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:57646 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:55044 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:55050 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:55060 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:55074 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:55078 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:55080 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:55094 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:55104 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:55106 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34046 - "GET /health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42688 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:42690 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:42698 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:38782 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:38794 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:32894 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:32910 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:32914 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:43922 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:46388 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:35718 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49664 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49364 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:35362 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52776 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59924 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:45274 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37106 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56856 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57346 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:45790 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:33374 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37878 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57882 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42600 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60972 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:36008 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:39886 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:39230 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42264 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37862 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42834 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:46856 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55844 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:47242 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:33598 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55216 - "GET / HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     127.0.0.1:59628 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:41564 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:40582 - "GET / HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     127.0.0.1:34460 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:34472 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:34474 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34480 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:34490 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34506 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34522 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34524 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34540 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34546 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34550 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:34560 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:54426 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:54432 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:54440 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:54450 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:54458 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:54470 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:54482 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:54490 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:54494 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:54502 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:54514 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:54526 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:49936 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49944 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:35582 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:35588 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:35660 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34048 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58748 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:45636 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42686 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54032 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:46322 - "GET /api/recruiters?page=1&limit=1000 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:46332 - "GET / HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:44214 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:44218 - "GET /api/recruiters?page=1&limit=1000 HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     127.0.0.1:44226 - "GET /api/recruiters?page=1&limit=1000 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:44236 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:44242 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:43882 - "GET / HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:33862 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:33874 - "GET /api/recruiters?page=1&limit=1000 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:33884 - "GET /api/recruiters?page=1&limit=1000 HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     127.0.0.1:33886 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:53994 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:43788 - "GET / HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:43794 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:43800 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:43812 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:35222 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57760 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53188 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:44986 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52464 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:44168 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54478 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:47888 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42794 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:39112 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49728 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:43510 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:38538 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58904 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52762 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59774 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59002 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:47882 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:47056 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42312 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:33316 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:40476 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50066 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49034 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:40482 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:41118 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59812 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50728 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:46502 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:38636 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:44888 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53270 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58074 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50028 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:48982 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:39198 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58662 - "GET / HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:58612 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:58628 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:58644 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:58646 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:58648 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:58658 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:58664 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:58678 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:58686 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:58698 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:58706 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:58718 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:58720 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56386 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:56388 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:56396 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:56402 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:56418 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:56420 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:35146 - "GET / HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:59384 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59396 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:59410 - "WebSocket /ws" [accepted]
+INFO:     connection closed
+INFO:     connection open
+INFO:     127.0.0.1:59412 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:44724 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54102 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:44486 - "GET / HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     127.0.0.1:44658 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:57000 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:53438 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:53400 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37124 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:43796 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49178 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:44466 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52456 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59572 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58534 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60550 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42572 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:39188 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42858 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51606 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54406 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:39578 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:45668 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37214 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:38814 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52776 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:48614 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37402 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:43988 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57160 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59580 - "GET / HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:44534 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:44544 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:44558 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:60064 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:38436 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:41362 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:41298 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:39138 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57242 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:43126 - "GET / HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     127.0.0.1:50478 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:38072 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49240 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60582 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:45874 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:36340 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49676 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53012 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50816 - "GET / HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     127.0.0.1:53758 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:53546 - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:36500 - "GET / HTTP/1.1" 404 Not Found
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3871319]
+INFO:     Stopping reloader process [3871313]

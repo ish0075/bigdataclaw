@@ -1,0 +1,493 @@
+2026-03-28 12:38:43,192 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,207 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,213 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/builders "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,301 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,305 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/contacts "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,306 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,310 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/land_lenders "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,310 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,323 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-13cf15d5502dc4d3 "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,323 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,330 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-d32eb4b33904f1d3 "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,331 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,334 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/bdaiv2_properties "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,335 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,341 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-448aec9a42673049 "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,342 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,347 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/jamies_listings_to_match "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,347 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,353 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/bdaiv2_sample_200 "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,354 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,356 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/company_contacts "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,357 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,363 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-09a1c76568e2f341 "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,364 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,370 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-5bb47a180225e304 "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,370 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,375 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-174ae0d64d34ba03 "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,375 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,384 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-1f9d3bbddc48ddf7 "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,385 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,388 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/BDAIV2_System "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,389 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,392 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/bdaiv2_review_queue "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,393 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,399 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-dd186b70b9cba1a0 "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,400 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,406 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-782d85838ddb1fea "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,406 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,414 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-87dd4f87d96e2ee9 "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,416 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,422 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-89f9e8230d441cdc "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,422 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,425 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/intelligence_base_files "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,426 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,430 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-305974dbb78c68c7 "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,431 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:38:43,436 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/buyer_profiles "HTTP/1.1 200 OK"
+2026-03-28 12:38:43,436 - qdrant_indexer - ERROR - Failed to get collection info: 'CollectionInfo' object has no attribute 'vectors_count'
+2026-03-28 12:39:01,039 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:39:09,754 - qdrant_indexer - INFO - Loading embedding model: all-MiniLM-L6-v2
+2026-03-28 12:39:09,774 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda:0
+2026-03-28 12:39:09,774 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-28 12:39:11,233 - qdrant_indexer - INFO - ✓ Embedding model loaded
+2026-03-28 12:39:11,234 - qdrant_indexer - INFO - 
+============================================================
+2026-03-28 12:39:11,234 - qdrant_indexer - INFO - INDEXING RECRUITERS TO QDRANT
+2026-03-28 12:39:11,234 - qdrant_indexer - INFO - ============================================================
+2026-03-28 12:39:11,238 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections "HTTP/1.1 200 OK"
+2026-03-28 12:39:11,239 - qdrant_indexer - INFO - Creating collection: recruiters
+2026-03-28 12:39:11,336 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters "HTTP/1.1 200 OK"
+2026-03-28 12:39:11,338 - qdrant_indexer - INFO - ✓ Collection 'recruiters' created
+2026-03-28 12:39:11,338 - qdrant_indexer - INFO - Loading data from recruiter_db_with_quicklinks.json...
+2026-03-28 12:39:12,450 - qdrant_indexer - INFO - ✓ Loaded 28505 recruiters
+2026-03-28 12:39:12,451 - qdrant_indexer - INFO - Starting indexing of 28505 items...
+2026-03-28 12:39:12,451 - qdrant_indexer - INFO - Batch size: 100
+2026-03-28 12:39:14,072 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:15,237 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:16,177 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:17,153 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:18,162 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:19,385 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:20,860 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:21,994 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:23,083 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:24,102 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:24,104 - qdrant_indexer - INFO - Progress: 1000/28505 (3.5%)
+2026-03-28 12:39:25,146 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:26,142 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:27,173 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:28,154 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:29,132 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:30,121 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:31,138 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:32,202 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:33,252 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:34,294 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:34,295 - qdrant_indexer - INFO - Progress: 2000/28505 (7.0%)
+2026-03-28 12:39:35,355 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:36,454 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:37,566 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:38,627 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:39,602 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:40,548 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:41,456 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:42,387 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:43,353 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:44,351 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:44,353 - qdrant_indexer - INFO - Progress: 3000/28505 (10.5%)
+2026-03-28 12:39:45,318 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:46,240 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:47,184 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:48,143 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:49,128 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:50,113 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:51,135 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:52,195 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:53,225 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:54,273 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:54,275 - qdrant_indexer - INFO - Progress: 4000/28505 (14.0%)
+2026-03-28 12:39:55,257 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:56,283 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:57,265 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:58,255 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:39:59,317 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:00,309 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:01,337 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:02,393 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:03,441 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:04,514 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:04,516 - qdrant_indexer - INFO - Progress: 5000/28505 (17.5%)
+2026-03-28 12:40:05,618 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:06,716 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:07,747 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:08,765 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:09,780 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:10,815 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:11,810 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:12,795 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:13,812 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:14,816 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:14,818 - qdrant_indexer - INFO - Progress: 6000/28505 (21.0%)
+2026-03-28 12:40:15,820 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:16,857 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:17,896 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:18,939 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:19,974 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:21,027 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:22,054 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:23,033 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:23,998 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:25,003 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:25,004 - qdrant_indexer - INFO - Progress: 7000/28505 (24.6%)
+2026-03-28 12:40:25,959 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:26,978 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:27,987 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:28,916 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:29,879 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:30,836 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:31,729 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:32,640 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:33,560 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:34,482 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:34,484 - qdrant_indexer - INFO - Progress: 8000/28505 (28.1%)
+2026-03-28 12:40:35,419 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:36,333 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:37,267 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:38,196 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:39,136 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:40,045 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:40,999 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:41,942 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:42,906 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:43,855 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:43,857 - qdrant_indexer - INFO - Progress: 9000/28505 (31.6%)
+2026-03-28 12:40:44,851 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:45,840 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:46,822 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:47,826 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:48,812 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:49,799 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:50,796 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:51,810 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:52,817 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:53,792 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:53,794 - qdrant_indexer - INFO - Progress: 10000/28505 (35.1%)
+2026-03-28 12:40:54,768 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:55,815 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:56,857 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:57,867 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:58,885 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:40:59,873 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:00,929 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:02,011 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:03,016 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:04,062 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:04,064 - qdrant_indexer - INFO - Progress: 11000/28505 (38.6%)
+2026-03-28 12:41:05,089 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:06,127 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:07,172 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:08,226 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:09,306 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:10,396 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:11,447 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:12,480 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:13,481 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:14,505 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:14,507 - qdrant_indexer - INFO - Progress: 12000/28505 (42.1%)
+2026-03-28 12:41:15,533 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:16,550 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:17,581 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:18,607 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:19,621 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:20,630 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:21,620 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:22,645 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:23,665 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:24,787 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:24,789 - qdrant_indexer - INFO - Progress: 13000/28505 (45.6%)
+2026-03-28 12:41:25,803 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:26,777 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:27,926 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:28,978 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:29,967 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:31,030 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:32,094 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:33,123 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:34,034 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:34,966 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:34,968 - qdrant_indexer - INFO - Progress: 14000/28505 (49.1%)
+2026-03-28 12:41:35,857 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:36,733 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:37,744 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:38,796 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:39,808 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:40,880 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:41,827 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:42,856 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:43,823 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:45,030 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:45,032 - qdrant_indexer - INFO - Progress: 15000/28505 (52.6%)
+2026-03-28 12:41:46,159 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:47,133 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:48,041 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:48,950 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:49,877 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:50,759 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:51,633 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:52,759 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:53,713 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:54,726 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:54,727 - qdrant_indexer - INFO - Progress: 16000/28505 (56.1%)
+2026-03-28 12:41:55,641 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:56,575 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:57,583 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:58,669 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:41:59,810 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:00,958 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:02,050 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:03,105 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:04,114 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:05,167 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:05,168 - qdrant_indexer - INFO - Progress: 17000/28505 (59.6%)
+2026-03-28 12:42:05,988 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:06,858 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:07,746 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:08,644 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:09,600 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:10,573 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:11,668 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:12,992 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:13,984 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:14,942 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:14,944 - qdrant_indexer - INFO - Progress: 18000/28505 (63.1%)
+2026-03-28 12:42:15,863 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:16,831 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:17,801 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:18,722 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:19,663 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:20,756 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:21,933 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:23,028 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:24,038 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:25,104 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:25,105 - qdrant_indexer - INFO - Progress: 19000/28505 (66.7%)
+2026-03-28 12:42:26,197 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:27,204 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:28,350 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:29,495 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:30,587 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:31,707 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:32,851 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:34,033 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:35,153 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:36,392 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:36,394 - qdrant_indexer - INFO - Progress: 20000/28505 (70.2%)
+2026-03-28 12:42:37,688 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:38,963 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:40,091 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:41,226 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:42,231 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:43,298 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:44,454 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:45,603 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:46,695 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:48,008 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:48,010 - qdrant_indexer - INFO - Progress: 21000/28505 (73.7%)
+2026-03-28 12:42:49,345 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:50,671 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:51,929 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:53,146 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:54,524 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:56,127 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:57,801 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:42:59,009 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:00,156 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:01,430 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:01,432 - qdrant_indexer - INFO - Progress: 22000/28505 (77.2%)
+2026-03-28 12:43:02,655 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:03,809 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:04,734 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:05,722 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:06,863 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:07,938 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:09,189 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:10,211 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:11,189 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:12,162 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:12,165 - qdrant_indexer - INFO - Progress: 23000/28505 (80.7%)
+2026-03-28 12:43:13,171 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:14,154 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:15,530 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:17,203 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:18,121 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:19,254 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:20,269 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:21,237 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:22,156 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:23,109 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:23,111 - qdrant_indexer - INFO - Progress: 24000/28505 (84.2%)
+2026-03-28 12:43:24,063 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:25,080 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:26,027 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:26,939 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:27,910 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:28,794 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:29,623 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:30,433 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:31,298 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:32,215 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:32,216 - qdrant_indexer - INFO - Progress: 25000/28505 (87.7%)
+2026-03-28 12:43:33,129 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:33,972 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:34,822 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:35,730 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:36,643 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:37,582 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:38,527 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:39,560 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:40,662 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:41,661 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:41,662 - qdrant_indexer - INFO - Progress: 26000/28505 (91.2%)
+2026-03-28 12:43:42,697 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:43,698 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:44,710 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:45,820 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:47,075 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:48,178 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:49,264 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:50,393 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:51,499 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:52,488 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:52,489 - qdrant_indexer - INFO - Progress: 27000/28505 (94.7%)
+2026-03-28 12:43:53,589 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:54,777 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:56,111 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:57,281 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:58,481 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:43:59,712 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:44:01,362 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:44:03,624 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:44:05,061 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:44:05,877 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:44:05,878 - qdrant_indexer - INFO - Progress: 28000/28505 (98.2%)
+2026-03-28 12:44:06,714 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:44:07,750 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:44:08,653 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:44:09,860 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:44:10,945 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:44:10,996 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/recruiters/points?wait=true "HTTP/1.1 200 OK"
+2026-03-28 12:44:10,997 - qdrant_indexer - INFO - 
+============================================================
+2026-03-28 12:44:10,997 - qdrant_indexer - INFO - INDEXING COMPLETE
+2026-03-28 12:44:10,997 - qdrant_indexer - INFO - ============================================================
+2026-03-28 12:44:10,997 - qdrant_indexer - INFO - Processed: 28505
+2026-03-28 12:44:10,997 - qdrant_indexer - INFO - Indexed: 28505
+2026-03-28 12:44:10,997 - qdrant_indexer - INFO - Errors: 0
+2026-03-28 12:44:10,997 - qdrant_indexer - INFO - Duration: 298.5s
+2026-03-28 12:44:10,997 - qdrant_indexer - INFO - Rate: 95.5 items/sec
+2026-03-28 12:44:10,998 - qdrant_indexer - INFO - ============================================================
+
+2026-03-28 12:44:29,466 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,481 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,489 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/builders "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,580 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/contacts "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,585 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/land_lenders "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,589 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-13cf15d5502dc4d3 "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,594 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-d32eb4b33904f1d3 "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,598 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/bdaiv2_properties "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,602 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/recruiters "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,606 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-448aec9a42673049 "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,611 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/jamies_listings_to_match "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,615 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/bdaiv2_sample_200 "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,619 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/company_contacts "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,624 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-09a1c76568e2f341 "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,629 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-5bb47a180225e304 "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,632 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-174ae0d64d34ba03 "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,637 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-1f9d3bbddc48ddf7 "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,640 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/BDAIV2_System "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,644 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/bdaiv2_review_queue "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,648 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-dd186b70b9cba1a0 "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,652 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-782d85838ddb1fea "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,658 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-87dd4f87d96e2ee9 "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,663 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-89f9e8230d441cdc "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,666 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/intelligence_base_files "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,670 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/ws-305974dbb78c68c7 "HTTP/1.1 200 OK"
+2026-03-28 12:44:29,674 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/buyer_profiles "HTTP/1.1 200 OK"
+2026-03-28 12:44:36,613 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:44:45,191 - qdrant_indexer - INFO - Loading embedding model: all-MiniLM-L6-v2
+2026-03-28 12:44:45,218 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda:0
+2026-03-28 12:44:45,218 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-28 12:44:46,647 - qdrant_indexer - INFO - ✓ Embedding model loaded
+2026-03-28 12:44:47,512 - qdrant_indexer - ERROR - Search failed: 'QdrantClient' object has no attribute 'search'
+2026-03-28 12:45:09,231 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:45:18,074 - qdrant_indexer - INFO - Loading embedding model: all-MiniLM-L6-v2
+2026-03-28 12:45:18,099 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda:0
+2026-03-28 12:45:18,099 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-28 12:45:19,629 - qdrant_indexer - INFO - ✓ Embedding model loaded
+2026-03-28 12:45:20,369 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:45:31,039 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:45:39,406 - qdrant_indexer - INFO - Loading embedding model: all-MiniLM-L6-v2
+2026-03-28 12:45:39,430 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda:0
+2026-03-28 12:45:39,431 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-28 12:45:40,892 - qdrant_indexer - INFO - ✓ Embedding model loaded
+2026-03-28 12:45:41,689 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:45:52,528 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:46:01,415 - qdrant_indexer - INFO - Loading embedding model: all-MiniLM-L6-v2
+2026-03-28 12:46:01,443 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda:0
+2026-03-28 12:46:01,443 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-28 12:46:02,901 - qdrant_indexer - INFO - ✓ Embedding model loaded
+2026-03-28 12:46:03,687 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:47:08,093 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:47:16,787 - qdrant_indexer - INFO - Loading embedding model: all-MiniLM-L6-v2
+2026-03-28 12:47:16,812 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda:0
+2026-03-28 12:47:16,812 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-28 12:47:18,261 - qdrant_indexer - INFO - ✓ Embedding model loaded
+2026-03-28 12:47:19,030 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:47:29,632 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:47:30,422 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:47:31,277 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:47:37,979 - qdrant_indexer - INFO - Loading embedding model: all-MiniLM-L6-v2
+2026-03-28 12:47:38,008 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda:0
+2026-03-28 12:47:38,008 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-28 12:47:38,054 - qdrant_indexer - INFO - Loading embedding model: all-MiniLM-L6-v2
+2026-03-28 12:47:38,076 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda:0
+2026-03-28 12:47:38,076 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-28 12:47:39,108 - qdrant_indexer - INFO - Loading embedding model: all-MiniLM-L6-v2
+2026-03-28 12:47:39,236 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda:0
+2026-03-28 12:47:39,236 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-28 12:47:39,681 - qdrant_indexer - INFO - ✓ Embedding model loaded
+2026-03-28 12:47:39,681 - qdrant_indexer - INFO - ✓ Embedding model loaded
+2026-03-28 12:47:57,988 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:47:57,988 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:47:58,056 - qdrant_indexer - INFO - ✓ Embedding model loaded
+2026-03-28 12:48:05,734 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:48:16,614 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:48:17,839 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:48:19,104 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:48:24,820 - qdrant_indexer - INFO - Loading embedding model: all-MiniLM-L6-v2
+2026-03-28 12:48:24,821 - qdrant_indexer - INFO - Loading embedding model: all-MiniLM-L6-v2
+2026-03-28 12:48:24,856 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda:0
+2026-03-28 12:48:24,857 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-28 12:48:24,859 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda:0
+2026-03-28 12:48:24,859 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-28 12:48:26,193 - qdrant_indexer - INFO - Loading embedding model: all-MiniLM-L6-v2
+2026-03-28 12:48:26,218 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda:0
+2026-03-28 12:48:26,218 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-28 12:48:27,383 - qdrant_indexer - INFO - ✓ Embedding model loaded
+2026-03-28 12:48:27,383 - qdrant_indexer - INFO - ✓ Embedding model loaded
+2026-03-28 12:48:27,722 - qdrant_indexer - INFO - ✓ Embedding model loaded
+2026-03-28 12:48:28,255 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:48:28,256 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:48:28,452 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:48:40,332 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-28 12:48:48,332 - qdrant_indexer - INFO - Loading embedding model: all-MiniLM-L6-v2
+2026-03-28 12:48:48,361 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda:0
+2026-03-28 12:48:48,361 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-28 12:48:50,838 - qdrant_indexer - INFO - ✓ Embedding model loaded
+2026-03-28 12:48:51,617 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:48:51,639 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:48:51,658 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:48:51,678 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:48:51,699 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"
+2026-03-28 12:48:51,718 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/recruiters/points/query "HTTP/1.1 200 OK"

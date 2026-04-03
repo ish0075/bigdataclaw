@@ -1,0 +1,12 @@
+[     107ms] [LOG] [BrowserMock] Loading assets... @ http://localhost:8081/assets/browserMock-BGxVit6P.js:0
+[     108ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8081/vite.svg:0
+[     114ms] [LOG] [BrowserMock] Decoding PNG assets in browser... @ http://localhost:8081/assets/browserMock-BGxVit6P.js:0
+[     345ms] [LOG] [BrowserMock] Ready (browser-png-decode) — 6 chars, 9 floors, 1 wall sets, 38 furniture items @ http://localhost:8081/assets/browserMock-BGxVit6P.js:0
+[     361ms] [LOG] [vscode.postMessage] {type: webviewReady} @ http://localhost:8081/assets/index-CyLLRjGS.js:8
+[     363ms] [LOG] [Webview] Received 6 pre-colored character sprites @ http://localhost:8081/assets/index-CyLLRjGS.js:8
+[     363ms] [LOG] [Webview] Received 9 floor tile patterns @ http://localhost:8081/assets/index-CyLLRjGS.js:8
+[     363ms] [LOG] [Webview] Received 1 wall tile set(s) @ http://localhost:8081/assets/index-CyLLRjGS.js:8
+[     363ms] [LOG] 📦 Webview: Loaded 38 furniture assets @ http://localhost:8081/assets/index-CyLLRjGS.js:8
+[     365ms] [LOG] ✓ Built dynamic catalog with 42 assets (25 visible, 7 rotation groups, 1 state pairs, 1 animation groups) @ http://localhost:8081/assets/index-CyLLRjGS.js:8
+[     368ms] [LOG] [BrowserMock] Messages dispatched @ http://localhost:8081/assets/browserMock-BGxVit6P.js:0
+[   21396ms] [LOG] [vscode.postMessage] {type: setLastSeenVersion, version: 1.2} @ http://localhost:8081/assets/index-CyLLRjGS.js:8

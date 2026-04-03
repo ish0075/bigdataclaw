@@ -1,0 +1,173 @@
+INFO:     Started server process [2262056]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+============================================================
+🚀 BigDataClaw NERVE API Server
+============================================================
+
+📡 Endpoints:
+   GET  /api/health                - Health check
+   GET  /api/info                  - System info
+   GET  /api/recruiters            - List recruiters (paginated)
+   GET  /api/recruiters/stats      - Recruiter statistics
+   GET  /api/brokerages            - List brokerages
+   GET  /api/brokerages/stats      - Brokerage statistics
+   GET  /api/dbeaver/brokerages    - DBeaver brokerages (3,884)
+   GET  /api/dbeaver/stats         - DBeaver statistics
+   GET  /api/lenders               - List lenders (paginated)
+   GET  /api/lenders/stats         - Lender statistics
+
+🤖 Agent Workspace Endpoints:
+   GET  /api/agents/workspaces          - List agent workspaces
+   GET  /api/agents/workspaces/{id}     - Get agent workspace
+   GET  /api/agents/workspaces/{id}/tasks      - Get agent tasks
+   POST /api/agents/workspaces/{id}/tasks      - Create task
+   GET  /api/agents/workspaces/{id}/memory     - Get agent memory
+   GET  /api/agents/workspaces/{id}/conversations  - Get conversations
+   GET  /api/agents/commanders          - List commanders
+   GET  /api/agents/commanders/{id}/dashboard  - Commander dashboard
+
+📝 Obsidian Integration (READ ONLY):
+   GET  /api/obsidian/status        - Vault connection status
+   GET  /api/obsidian/files         - List files with filters
+   GET  /api/obsidian/files/{path}  - Get file content (read)
+   POST /api/obsidian/search        - Search vault (read)
+   GET  /api/obsidian/folders       - List folders (read)
+
+   ⚠️  WRITE OPERATIONS DISABLED
+   Use separate BDAIV2 Writer project for vault modifications
+
+🌐 Starting server on http://0.0.0.0:8000
+============================================================
+INFO:     127.0.0.1:35290 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41164 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46492 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40654 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40666 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40674 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40682 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40688 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40700 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40710 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40716 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58482 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58490 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45356 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45372 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45358 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45378 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57746 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57756 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47506 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47520 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59588 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36794 - "GET /api/paperclip/agents HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:36798 - "GET /api/paperclip/issues HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42322 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42344 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42330 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42360 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42372 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42370 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42376 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/issues HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42392 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42394 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42410 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42420 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/issues HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42422 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54384 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54392 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53398 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53424 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53414 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53434 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53452 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53440 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53466 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/issues HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53476 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53484 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53496 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53512 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/issues HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53514 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43054 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43082 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43070 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43096 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43116 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43100 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43124 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/issues HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43140 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43142 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43148 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43150 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/issues HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57762 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40006 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40024 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40018 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40034 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40064 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40048 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40070 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/issues HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40074 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40086 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40108 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/issues HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40092 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40110 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:32802 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:32804 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51504 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51520 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41620 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41632 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50344 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50350 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55266 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55280 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42074 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42088 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42078 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42098 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/issues HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42106 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37130 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37142 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41634 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41666 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41642 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41654 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41670 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/issues HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41676 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41692 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41682 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41718 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/issues HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41702 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53958 - "GET /api/paperclip/companies/4ad8ddb7-ff2c-4362-b8a8-cbed6a14ea89/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53962 - "GET /api/paperclip/companies/4ad8ddb7-ff2c-4362-b8a8-cbed6a14ea89/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53976 - "GET /api/paperclip/companies/4ad8ddb7-ff2c-4362-b8a8-cbed6a14ea89/issues HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53992 - "GET /api/paperclip/companies/4ad8ddb7-ff2c-4362-b8a8-cbed6a14ea89/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55618 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58780 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59588 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37760 - "GET /api/paperclip/companies/48826eea-3284-4ea6-82bf-9b568daba2ce/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48050 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40208 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42984 - "GET /api/paperclip/companies/48826eea-3284-4ea6-82bf-9b568daba2ce/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56082 - "GET /api/paperclip/companies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56086 - "GET /api/paperclip/companies/5bae9f16-3f16-4774-9aea-b484d9de4b85/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56090 - "GET /api/paperclip/companies/4ad8ddb7-ff2c-4362-b8a8-cbed6a14ea89/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56104 - "GET /api/paperclip/companies/1166be19-f83b-4258-81dc-ed37824f264b/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56112 - "GET /api/paperclip/companies/2d414da9-3f1e-41a1-8c4c-f75c0085b5c1/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56120 - "GET /api/paperclip/companies/a6d8a7a0-cdcf-4875-b36d-775ad03834b9/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56128 - "GET /api/paperclip/companies/9b40c9b7-8b5a-4a07-b3b7-7010de936117/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56138 - "GET /api/paperclip/companies/09398e31-c570-41bb-97fa-c62379203861/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56148 - "GET /api/paperclip/companies/df5a726d-71ae-4e5b-adbf-b29d12fb223e/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56160 - "GET /api/paperclip/companies/e5e40b9b-3b5c-4625-bed4-67b7380b625f/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56172 - "GET /api/paperclip/companies/48826eea-3284-4ea6-82bf-9b568daba2ce/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57542 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57558 - "GET /api/data-manager/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41996 - "GET /api/paperclip/companies/a6d8a7a0-cdcf-4875-b36d-775ad03834b9/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42010 - "GET /api/paperclip/companies/a6d8a7a0-cdcf-4875-b36d-775ad03834b9/dashboard HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2262056]

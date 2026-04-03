@@ -1,0 +1,16 @@
+[     271ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:20102
+[     531ms] [WARNING] WebSocket connection to 'ws://localhost:3090/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:5173/src/hooks/useWebSocket.js:97
+[     556ms] [ERROR] WebSocket error: Event @ http://localhost:5173/src/hooks/useWebSocket.js:41
+[     557ms] [LOG] WebSocket disconnected @ http://localhost:5173/src/hooks/useWebSocket.js:34
+[     642ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[     730ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[    3562ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[    3564ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[  115943ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:20102
+[  116301ms] [WARNING] WebSocket connection to 'ws://localhost:3090/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:5173/src/hooks/useWebSocket.js:97
+[  116319ms] [ERROR] WebSocket error: Event @ http://localhost:5173/src/hooks/useWebSocket.js:41
+[  116319ms] [LOG] WebSocket disconnected @ http://localhost:5173/src/hooks/useWebSocket.js:34
+[  116371ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[  116456ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[  119327ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[  119328ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80

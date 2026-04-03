@@ -1,0 +1,2 @@
+[     196ms] [WARNING] Manifest: Enctype should be set to either application/x-www-form-urlencoded or multipart/form-data. It currently defaults to application/x-www-form-urlencoded @ http://localhost:8080/manifest.json:0
+[    1071ms] [WARNING] No token found in localStorage, user-join event not emitted @ http://localhost:8080/_app/immutable/nodes/0.BNLwiQIH.js:0

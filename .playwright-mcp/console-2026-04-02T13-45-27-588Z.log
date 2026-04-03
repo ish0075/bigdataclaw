@@ -1,0 +1,26 @@
+[    1190ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/health:0
+[    1190ms] [ERROR] Health check failed: TypeError: Failed to fetch
+    at U (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:1240:43067)
+    at https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:1240:43012
+    at Sl (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:93572)
+    at Gg (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:108876)
+    at Ei (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:108760)
+    at Gg (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:109642)
+    at Ei (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:108760)
+    at Gg (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:108856)
+    at Ei (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:108760)
+    at Gg (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:108856) @ https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:1239
+[    1190ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/agents/meetings?limit=10:0
+[    1190ms] [ERROR] Failed to load meetings: TypeError: Failed to fetch
+    at A (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:1240:43225)
+    at https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:1240:43016
+    at Sl (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:93572)
+    at Gg (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:108876)
+    at Ei (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:108760)
+    at Gg (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:109642)
+    at Ei (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:108760)
+    at Gg (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:108856)
+    at Ei (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:108760)
+    at Gg (https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:48:108856) @ https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:1239
+[    1287ms] [LOG] WebSocket connected @ https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:1443
+[    1308ms] [LOG] Unknown message type: subscribed @ https://mission-control-brown-omega.vercel.app/assets/index-BjRj8O73.js:1443

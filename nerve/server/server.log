@@ -1,0 +1,77 @@
+INFO:     Will watch for changes in these directories: ["/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/nerve/server"]
+INFO:     Uvicorn running on http://127.0.0.1:3090 (Press CTRL+C to quit)
+INFO:     Started reloader process [49621] using WatchFiles
+INFO:     Started server process [49793]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✓ BigDataClaw components imported successfully
+✓ Loaded 520 transactions
+✓ Loaded 5666 buyer records
+✓ Loaded 2109 fresh leads
+✓ MatchingEngine initialized
+🏛️ Obsidian Agent: Loading knowledge base...
+  ✓ Loaded 520 transactions
+  ✓ Loaded 1 buyer profiles
+🏛️ Knowledge base ready: 1 properties indexed
+✓ Obsidian Real Estate Expert initialized
+Loaded 520 transactions
+Loaded 5666 buyer records
+Loaded 2109 fresh leads
+✓ AgentOrchestrator initialized
+✓ Loaded 28 hot money leads from database
+✓ BigDataClaw connector ready: {'total_transactions': 520, 'total_buyers': 5666, 'total_fresh_leads': 2109, 'hot_money_count': 28, 'tracked_capital': 1017437000}
+✓ Obsidian vault connector ready: {'buyer_profiles': 0, 'property_research': 0, 'hot_money_notes': 0, 'vault_path': '/home/jamie/Documents/BDAIV2', 'total_files': 0}
+INFO:     127.0.0.1:33974 - "GET /health HTTP/1.1" 404 Not Found
+INFO:     ('127.0.0.1', 40688) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 40698) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 40712) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:47076 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:47076 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     ('127.0.0.1', 47086) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 47090) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 47102) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 33960) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 33976) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 33980) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     ('127.0.0.1', 35978) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 35982) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 35986) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     ('127.0.0.1', 44906) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 44912) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 39898) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [49793]
+Shutting down Nerve server...
+INFO:     Stopping reloader process [49621]

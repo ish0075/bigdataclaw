@@ -1,0 +1,17 @@
+INFO:     Started server process [684867]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8081 (Press CTRL+C to quit)
+✅ Database initialized
+🚀 Agent Meeting Orchestrator started
+INFO:     127.0.0.1:36994 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50640 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38296 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38306 - "GET /agents/meetings?limit=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38296 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38306 - "GET /agents/meetings?limit=10 HTTP/1.1" 200 OK
+/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/agent_meetings/main.py:404: PydanticDeprecatedSince20: The `parse_raw` method is deprecated; if your data is JSON use `model_validate_json`, otherwise load the data then use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.5/migration/
+  summary = MeetingSummary.parse_raw(row[5]) if row[5] else None
+INFO:     127.0.0.1:35132 - "GET /agents/meeting/3f58537d-1841-4a65-8678-074e4beed73e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33336 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38380 - "GET /health HTTP/1.1" 200 OK

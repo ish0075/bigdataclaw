@@ -1,0 +1,136 @@
+{
+  "timestamp": "2026-03-28T13:21:12.638140",
+  "services": {
+    "nerve_frontend": {
+      "name": "nerve_frontend",
+      "status": "healthy",
+      "status_code": 200,
+      "response_time_ms": 8.97,
+      "last_check": "2026-03-28T13:21:11.410774"
+    },
+    "nerve_backend": {
+      "name": "nerve_backend",
+      "status": "healthy",
+      "status_code": 404,
+      "response_time_ms": 6.29,
+      "last_check": "2026-03-28T13:21:11.408398"
+    },
+    "qdrant": {
+      "name": "qdrant",
+      "status": "healthy",
+      "status_code": 200,
+      "response_time_ms": 5.28,
+      "last_check": "2026-03-28T13:21:11.407518"
+    },
+    "open_webui": {
+      "name": "open_webui",
+      "status": "healthy",
+      "status_code": 200,
+      "response_time_ms": 12.58,
+      "last_check": "2026-03-28T13:21:11.414937"
+    }
+  },
+  "agents": {
+    "running_agents": 0,
+    "agents": [],
+    "expected_agents": 6
+  },
+  "system": {
+    "cpu_percent": 68.8,
+    "memory": {
+      "total_gb": 31.28,
+      "used_gb": 24.01,
+      "percent": 91.3
+    },
+    "disk": {
+      "total_gb": 915.32,
+      "used_gb": 697.7,
+      "percent": 80.3
+    },
+    "timestamp": "2026-03-28T13:21:12.630334"
+  },
+  "qdrant": {
+    "status": "connected",
+    "collections": [
+      {
+        "name": "builders"
+      },
+      {
+        "name": "contacts"
+      },
+      {
+        "name": "land_lenders"
+      },
+      {
+        "name": "ws-13cf15d5502dc4d3"
+      },
+      {
+        "name": "ws-d32eb4b33904f1d3"
+      },
+      {
+        "name": "bdaiv2_properties"
+      },
+      {
+        "name": "recruiters"
+      },
+      {
+        "name": "ws-448aec9a42673049"
+      },
+      {
+        "name": "jamies_listings_to_match"
+      },
+      {
+        "name": "bdaiv2_sample_200"
+      },
+      {
+        "name": "company_contacts"
+      },
+      {
+        "name": "ws-09a1c76568e2f341"
+      },
+      {
+        "name": "ws-5bb47a180225e304"
+      },
+      {
+        "name": "ws-174ae0d64d34ba03"
+      },
+      {
+        "name": "ws-1f9d3bbddc48ddf7"
+      },
+      {
+        "name": "BDAIV2_System"
+      },
+      {
+        "name": "bdaiv2_review_queue"
+      },
+      {
+        "name": "ws-dd186b70b9cba1a0"
+      },
+      {
+        "name": "ws-782d85838ddb1fea"
+      },
+      {
+        "name": "ws-87dd4f87d96e2ee9"
+      },
+      {
+        "name": "ws-89f9e8230d441cdc"
+      },
+      {
+        "name": "intelligence_base_files"
+      },
+      {
+        "name": "ws-305974dbb78c68c7"
+      },
+      {
+        "name": "buyer_profiles"
+      }
+    ],
+    "collection_count": 24
+  },
+  "summary": {
+    "healthy_services": 4,
+    "total_services": 4,
+    "running_agents": 0,
+    "system_health": "warning"
+  }
+}

@@ -1,0 +1,11 @@
+
+> bigdataclaw-nerve@1.0.0 dev
+> vite --port 3001
+
+
+  VITE v6.4.1  ready in 320 ms
+
+  ➜  Local:   http://localhost:3001/
+  ➜  Network: use --host to expose
+1:18:38 a.m. [vite] (client) hmr update /src/views/AgentMatcher.jsx, /src/index.css
+1:18:38 a.m. [vite] (client) hmr update /src/views/AgentMatcher.jsx, /src/index.css

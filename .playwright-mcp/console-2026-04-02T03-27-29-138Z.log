@@ -1,0 +1,339 @@
+[     203ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=9b343416:20102
+[     389ms] [WARNING] WebSocket connection to 'ws://localhost:3090/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:5173/src/hooks/useWebSocket.js:97
+[     397ms] [ERROR] WebSocket error: Event @ http://localhost:5173/src/hooks/useWebSocket.js:41
+[     397ms] [LOG] WebSocket disconnected @ http://localhost:5173/src/hooks/useWebSocket.js:34
+[     443ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[     533ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[    3406ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[    3408ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[  223937ms] [ERROR] The final argument passed to %s changed size between renders. The order and size of this array must remain constant.
+
+Previous: %s
+Incoming: %s useEffect [async () => {
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    if (useApi) {
+      const params = new URLSearchParams({
+        page: page.toString(),
+        limit: pageSize.toString()
+      });
+      if (effectiveSearch) params.append("search", effectiveSearch);
+      if (selectedBrokerage !== "All Brokerages") params.append("brokerage", selectedBrokerage);
+      if (selectedStatus !== "All Status") params.append("status", selectedStatus);
+      if (selectedCity !== "All Cities") params.append("city", selectedCity);
+      try {
+        const r = await fetch(`${API_ENDPOINTS.recruiters}?${params}`);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const data = await r.json();
+        if (!cancelled) {
+          let recruiters = data.recruiters || [];
+          recruiters = recruiters.filter((agent) => {
+            const name = cleanAgentName(agent.name).trim();
+            const nameParts = name.split(/\s+/);
+            return !(nameParts.length === 1 && nameParts[0].toLowerCase() === "sunny");
+          });
+          recruiters.sort((a, b) => {
+            const aIsExp = isExpAgent(a);
+            const bIsExp = isExpAgent(b);
+            if (aIsExp && !bIsExp) return 1;
+            if (!aIsExp && bIsExp) return -1;
+            return 0;
+          });
+          setAgents(recruiters);
+          setTotalAgents(data.total || 0);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Error loading agents from API:", err);
+        if (!cancelled) {
+          setUseApi(false);
+          setLoading(false);
+        }
+      }
+    } else {
+      const jsonUrl = jsonMode === "sample" ? "/data/recruiters_sample.json" : "/data/recruiters_full.json";
+      try {
+        let data;
+        if (jsonMode === "full" && fullJsonRef.current) {
+          data = fullJsonRef.current;
+        } else {
+          const r = await fetch(jsonUrl);
+          if (!r.ok) throw new Error("Failed to load recruiter data");
+          data = await r.json();
+          if (jsonMode === "full") {
+            fullJsonRef.current = data;
+          }
+        }
+        const filtered = filterJsonData(data);
+        const total = filtered.length;
+        const startIdx = (page - 1) * pageSize;
+        const paginated = filtered.slice(startIdx, startIdx + pageSize);
+        if (!cancelled) {
+          setAgents(paginated);
+          setTotalAgents(total);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Error loading agents:", err);
+        if (!cancelled) {
+          setError(err.message);
+          setLoading(false);
+        }
+      }
+    }
+    return () => {
+      cancelled = true;
+    };
+  }] [async () => {
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    if (useApi) {
+      const params = new URLSearchParams({
+        page: page.toString(),
+        limit: pageSize.toString()
+      });
+      if (effectiveSearch) params.append("search", effectiveSearch);
+      if (selectedBrokerage !== "All Brokerages") params.append("brokerage", selectedBrokerage);
+      if (selectedStatus !== "All Status") params.append("status", selectedStatus);
+      if (selectedCity !== "All Cities") params.append("city", selectedCity);
+      try {
+        const r = await fetch(`${API_ENDPOINTS.recruiters}?${params}`);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const data = await r.json();
+        if (!cancelled) {
+          let recruiters = data.recruiters || [];
+          recruiters = recruiters.filter((agent) => {
+            const name = cleanAgentName(agent.name).trim();
+            const nameParts = name.split(/\s+/);
+            return !(nameParts.length === 1 && nameParts[0].toLowerCase() === "sunny");
+          });
+          recruiters.sort((a, b) => {
+            const aIsExp = isExpAgent(a);
+            const bIsExp = isExpAgent(b);
+            if (aIsExp && !bIsExp) return 1;
+            if (!aIsExp && bIsExp) return -1;
+            return 0;
+          });
+          setAgents(recruiters);
+          setTotalAgents(data.total || 0);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Error loading agents from API:", err);
+        if (!cancelled) {
+          setUseApi(false);
+          setLoading(false);
+        }
+      }
+    } else {
+      const jsonUrl = jsonMode === "sample" ? "/data/recruiters_sample.json" : "/data/recruiters_full.json";
+      try {
+        let data;
+        if (jsonMode === "full" && fullJsonRef.current) {
+          data = fullJsonRef.current;
+        } else {
+          const r = await fetch(jsonUrl);
+          if (!r.ok) throw new Error("Failed to load recruiter data");
+          data = await r.json();
+          if (jsonMode === "full") {
+            fullJsonRef.current = data;
+          }
+        }
+        const filtered = filterJsonData(data);
+        const total = filtered.length;
+        const startIdx = (page - 1) * pageSize;
+        const paginated = filtered.slice(startIdx, startIdx + pageSize);
+        if (!cancelled) {
+          setAgents(paginated);
+          setTotalAgents(total);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Error loading agents:", err);
+        if (!cancelled) {
+          setError(err.message);
+          setLoading(false);
+        }
+      }
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, ] @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=9b343416:5627
+[  273617ms] [ERROR] The final argument passed to %s changed size between renders. The order and size of this array must remain constant.
+
+Previous: %s
+Incoming: %s useEffect [async () => {
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    if (useApi) {
+      const params = new URLSearchParams({
+        page: page.toString(),
+        limit: pageSize.toString()
+      });
+      if (effectiveSearch) params.append("search", effectiveSearch);
+      if (selectedBrokerage !== "All Brokerages") params.append("brokerage", selectedBrokerage);
+      if (selectedStatus !== "All Status") params.append("status", selectedStatus);
+      if (selectedCity !== "All Cities") params.append("city", selectedCity);
+      try {
+        const r = await fetch(`${API_ENDPOINTS.recruiters}?${params}`);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const data = await r.json();
+        if (!cancelled) {
+          let recruiters = data.recruiters || [];
+          recruiters = recruiters.filter((agent) => {
+            const name = cleanAgentName(agent.name).trim();
+            const nameParts = name.split(/\s+/);
+            return !(nameParts.length === 1 && nameParts[0].toLowerCase() === "sunny");
+          });
+          recruiters.sort((a, b) => {
+            const aIsExp = isExpAgent(a);
+            const bIsExp = isExpAgent(b);
+            if (aIsExp && !bIsExp) return 1;
+            if (!aIsExp && bIsExp) return -1;
+            return 0;
+          });
+          setAgents(recruiters);
+          setTotalAgents(data.total || 0);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Error loading agents from API:", err);
+        if (!cancelled) {
+          setUseApi(false);
+          setLoading(false);
+        }
+      }
+    } else {
+      const jsonUrl = jsonMode === "sample" ? "/data/recruiters_sample.json" : "/data/recruiters_full.json";
+      try {
+        let data;
+        if (jsonMode === "full" && fullJsonRef.current) {
+          data = fullJsonRef.current;
+        } else {
+          const r = await fetch(jsonUrl);
+          if (!r.ok) throw new Error("Failed to load recruiter data");
+          data = await r.json();
+          if (jsonMode === "full") {
+            fullJsonRef.current = data;
+          }
+        }
+        const filtered = filterJsonData(data);
+        const total = filtered.length;
+        const startIdx = (page - 1) * pageSize;
+        const paginated = filtered.slice(startIdx, startIdx + pageSize);
+        if (!cancelled) {
+          setAgents(paginated);
+          setTotalAgents(total);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Error loading agents:", err);
+        if (!cancelled) {
+          setError(err.message);
+          setLoading(false);
+        }
+      }
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, ] [async () => {
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    if (useApi) {
+      const params = new URLSearchParams({
+        page: page.toString(),
+        limit: pageSize.toString()
+      });
+      if (effectiveSearch) params.append("search", effectiveSearch);
+      if (selectedBrokerage !== "All Brokerages") params.append("brokerage", selectedBrokerage);
+      if (selectedStatus !== "All Status") params.append("status", selectedStatus);
+      if (selectedCity !== "All Cities") params.append("city", selectedCity);
+      try {
+        const r = await fetch(`${API_ENDPOINTS.recruiters}?${params}`);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const data = await r.json();
+        if (!cancelled) {
+          let recruiters = data.recruiters || [];
+          recruiters = recruiters.filter((agent) => {
+            const name = cleanAgentName(agent.name).trim();
+            const nameParts = name.split(/\s+/);
+            return !(nameParts.length === 1 && nameParts[0].toLowerCase() === "sunny");
+          });
+          recruiters.sort((a, b) => {
+            const aIsExp = isExpAgent(a);
+            const bIsExp = isExpAgent(b);
+            if (aIsExp && !bIsExp) return 1;
+            if (!aIsExp && bIsExp) return -1;
+            return 0;
+          });
+          setAgents(recruiters);
+          setTotalAgents(data.total || 0);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Error loading agents from API:", err);
+        if (!cancelled) {
+          setUseApi(false);
+          setLoading(false);
+        }
+      }
+    } else {
+      const jsonUrl = jsonMode === "sample" ? "/data/recruiters_sample.json" : "/data/recruiters_full.json";
+      try {
+        let data;
+        if (jsonMode === "full" && fullJsonRef.current) {
+          data = fullJsonRef.current;
+        } else {
+          const r = await fetch(jsonUrl);
+          if (!r.ok) throw new Error("Failed to load recruiter data");
+          data = await r.json();
+          if (jsonMode === "full") {
+            fullJsonRef.current = data;
+          }
+        }
+        const filtered = filterJsonData(data);
+        const total = filtered.length;
+        const startIdx = (page - 1) * pageSize;
+        const paginated = filtered.slice(startIdx, startIdx + pageSize);
+        if (!cancelled) {
+          setAgents(paginated);
+          setTotalAgents(total);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Error loading agents:", err);
+        if (!cancelled) {
+          setError(err.message);
+          setLoading(false);
+        }
+      }
+    }
+    return () => {
+      cancelled = true;
+    };
+  }] @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=9b343416:5627
+[  309325ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:5173/@vite/client:963
+[  309327ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  310329ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  311332ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  312335ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  313338ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  314343ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  315349ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  316360ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  317371ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  318450ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  319534ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  320649ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  322174ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  324348ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  326571ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  330005ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  335359ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  338596ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034

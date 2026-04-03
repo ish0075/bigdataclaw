@@ -1,0 +1,164 @@
+INFO:     Started server process [630226]
+INFO:     Waiting for application startup.
+INFO:nerve-server:Mission controller started
+INFO:nerve-server:Hot money tracker started
+INFO:nerve-server:NERVE server started
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:3090 (Press CTRL+C to quit)
+INFO:     127.0.0.1:51534 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 1
+INFO:     connection open
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:     127.0.0.1:51546 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 2
+INFO:     connection open
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:     127.0.0.1:51550 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 3
+INFO:     connection open
+INFO:     127.0.0.1:51552 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 4
+INFO:     connection open
+INFO:     127.0.0.1:51560 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 5
+INFO:     connection open
+INFO:     127.0.0.1:51576 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 6
+INFO:     connection open
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+Loaded .env file
+INFO:     127.0.0.1:60314 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37282 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 7
+INFO:     connection open
+INFO:     127.0.0.1:37290 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 8
+INFO:     connection open
+INFO:nerve-server:Client disconnected. Total: 7
+INFO:     connection closed
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:     127.0.0.1:45684 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 8
+INFO:     connection open
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:     127.0.0.1:48736 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48746 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:nerve-server:Client disconnected. Total: 7
+INFO:nerve-server:Client disconnected. Total: 6
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:38760 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 7
+INFO:     connection open
+INFO:     127.0.0.1:38774 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 8
+INFO:     connection open
+INFO:nerve-server:Client disconnected. Total: 7
+INFO:     connection closed
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:     127.0.0.1:38778 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 8
+INFO:     connection open
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:     127.0.0.1:44672 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 9
+INFO:     connection open
+INFO:     127.0.0.1:44678 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 10
+INFO:     connection open
+INFO:nerve-server:Client disconnected. Total: 9
+INFO:     connection closed
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:     127.0.0.1:44690 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 10
+INFO:     connection open
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:     127.0.0.1:34614 - "OPTIONS /api/chat/document HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34614 - "POST /api/chat/document HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:34614 - "POST /api/chat/document HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:41092 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 11
+INFO:     connection open
+INFO:nerve-server:Client disconnected. Total: 10
+INFO:     connection closed
+INFO:     127.0.0.1:41098 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 11
+INFO:     connection open
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:     127.0.0.1:41100 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 12
+INFO:     connection open
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:nerve-server:Client disconnected. Total: 11
+INFO:nerve-server:Client disconnected. Total: 10
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:41104 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 11
+INFO:     connection open
+INFO:     127.0.0.1:41110 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 12
+INFO:     connection open
+INFO:nerve-server:Client disconnected. Total: 11
+INFO:     connection closed
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:     127.0.0.1:33416 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 12
+INFO:     connection open
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:     127.0.0.1:60612 - "OPTIONS /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60624 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48402 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 13
+INFO:     connection open
+INFO:     127.0.0.1:48416 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 14
+INFO:nerve-server:Client disconnected. Total: 13
+INFO:     connection open
+INFO:     connection closed
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:     127.0.0.1:33756 - "WebSocket /ws" [accepted]
+INFO:nerve-server:Client connected. Total: 14
+INFO:     connection open
+INFO:nerve-server:Subscribed to missions
+INFO:nerve-server:Subscribed to agents
+INFO:nerve-server:Subscribed to hotmoney
+INFO:nerve-server:Client disconnected. Total: 13
+INFO:nerve-server:Client disconnected. Total: 12
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:42118 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46596 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38640 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44612 - "GET /health HTTP/1.1" 200 OK

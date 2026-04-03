@@ -1,0 +1,20 @@
+[    1803ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3100/node_modules/.vite/deps/react-dom_client.js?v=feef9054:20102
+[    4112ms] [ERROR] Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `KitchenSinkSidebarLink`.  @ http://localhost:3100/node_modules/.vite/deps/react-dom_client.js?v=feef9054:18617
+[    4113ms] [ERROR] Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `KitchenSinkSidebarLink`.  @ http://localhost:3100/node_modules/.vite/deps/react-dom_client.js?v=feef9054:18617
+[    4118ms] [ERROR] Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `KitchenSinkSidebarPanel`.  @ http://localhost:3100/node_modules/.vite/deps/react-dom_client.js?v=feef9054:18617
+[ 1190619ms] [ERROR] `DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.
+
+If you want to hide the `DialogTitle`, you can wrap it with our VisuallyHidden component.
+
+For more information, see https://radix-ui.com/primitives/docs/components/dialog @ http://localhost:3100/node_modules/.vite/deps/chunk-ZD3KU2S7.js?v=847c8d7d:2178
+[ 1190626ms] [ERROR] `DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.
+
+If you want to hide the `DialogTitle`, you can wrap it with our VisuallyHidden component.
+
+For more information, see https://radix-ui.com/primitives/docs/components/dialog @ http://localhost:3100/node_modules/.vite/deps/chunk-ZD3KU2S7.js?v=847c8d7d:2178

@@ -1,0 +1,14 @@
+[     383ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=4e6313c0:20102
+[     844ms] [WARNING] WebSocket connection to 'ws://localhost:3090/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:5173/src/hooks/useWebSocket.js:97
+[     889ms] [ERROR] WebSocket error: Event @ http://localhost:5173/src/hooks/useWebSocket.js:41
+[     890ms] [LOG] WebSocket disconnected @ http://localhost:5173/src/hooks/useWebSocket.js:34
+[     900ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[    1053ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[    3899ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[    3902ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[   16191ms] [LOG] Fetching hot money leads... @ http://localhost:5173/src/views/HotMoneyRadar.jsx?t=1774923396868:112
+[   16193ms] [LOG] Fetching hot money leads... @ http://localhost:5173/src/views/HotMoneyRadar.jsx?t=1774923396868:112
+[   16218ms] [LOG] Received data: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ http://localhost:5173/src/views/HotMoneyRadar.jsx?t=1774923396868:116
+[   16219ms] [LOG] Mapped leads: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ http://localhost:5173/src/views/HotMoneyRadar.jsx?t=1774923396868:119
+[   16386ms] [LOG] Received data: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ http://localhost:5173/src/views/HotMoneyRadar.jsx?t=1774923396868:116
+[   16387ms] [LOG] Mapped leads: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ http://localhost:5173/src/views/HotMoneyRadar.jsx?t=1774923396868:119

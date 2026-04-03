@@ -1,0 +1,7 @@
+
+> bigdataclaw@0.0.0 preview
+> vite preview
+
+NODE_ENV=production is not supported in the .env file. Only NODE_ENV=development is supported to create a development build of your project. If you need to set process.env.NODE_ENV, you can set it in the Vite config instead.
+  ➜  Local:   http://localhost:4173/
+  ➜  Network: use --host to expose

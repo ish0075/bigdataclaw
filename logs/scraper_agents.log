@@ -1,0 +1,38 @@
+2026-03-28 12:29:32,867 - scraper_agents - INFO - 🚀 Starting Agent Orchestrator...
+2026-03-28 12:29:32,868 - scraper_agents - INFO -   Started 7 agents
+2026-03-28 12:29:32,869 - scraper_agents - INFO - Starting agent: Transaction Scout
+2026-03-28 12:29:32,869 - scraper_agents - INFO - 🔍 Transaction Scout scanning for new deals...
+2026-03-28 12:29:32,869 - scraper_agents - INFO -   Found 1 new transactions
+2026-03-28 12:29:32,869 - scraper_agents - INFO - Starting agent: Hot Money Tracker
+2026-03-28 12:29:32,870 - scraper_agents - INFO - 💰 Hot Money Tracker checking for capital movements...
+2026-03-28 12:29:32,870 - scraper_agents - INFO -   1 new hot money alerts
+2026-03-28 12:29:32,870 - scraper_agents - INFO - Starting agent: Portfolio Analyzer
+2026-03-28 12:29:32,870 - scraper_agents - INFO - 📊 Portfolio Analyzer matching asset classes...
+2026-03-28 12:29:32,870 - scraper_agents - INFO -   Completed 0 portfolio matches
+2026-03-28 12:29:32,870 - scraper_agents - INFO - Starting agent: Agent Finder
+2026-03-28 12:29:32,870 - scraper_agents - INFO - 👤 Agent Finder searching for brokers...
+2026-03-28 12:29:32,870 - scraper_agents - INFO -   Found 0 new agents
+2026-03-28 12:29:32,871 - scraper_agents - INFO - Starting agent: Lender Matcher
+2026-03-28 12:29:32,871 - scraper_agents - INFO - 🏦 Lender Matcher finding financing sources...
+2026-03-28 12:29:32,871 - scraper_agents - INFO -   Matched 0 lenders
+2026-03-28 12:29:32,871 - scraper_agents - INFO - Starting agent: Obsidian Sync
+2026-03-28 12:29:32,872 - scraper_agents - INFO - 📝 Obsidian Sync running...
+2026-03-28 12:29:32,872 - scraper_agents - INFO -   Syncing to /home/jamie/Documents/BDAIV2
+2026-03-28 12:29:32,872 - scraper_agents - INFO -   Synced 5 files
+2026-03-28 12:29:32,872 - scraper_agents - INFO - Starting agent: Qdrant Indexer
+2026-03-28 12:29:32,872 - scraper_agents - INFO - 🧠 Qdrant Indexer starting...
+2026-03-28 12:29:33,256 - scraper_agents - INFO -   Qdrant is healthy
+2026-03-28 12:29:33,258 - scraper_agents - INFO -   Loading contacts from recruiter_db_with_quicklinks.json
+2026-03-28 12:29:33,258 - scraper_agents - INFO -   Indexing contacts (simulated)
+2026-03-28 12:29:33,258 - scraper_agents - INFO -   Indexed 0 contacts (need vector embeddings)
+2026-03-28 12:29:47,667 - scraper_agents - INFO - Received signal 15
+2026-03-28 12:29:47,667 - scraper_agents - INFO - 🛑 Stopping all agents...
+2026-03-28 12:29:47,668 - scraper_agents - INFO - Stopping agent: Transaction Scout
+2026-03-28 12:29:47,668 - scraper_agents - INFO - Stopping agent: Hot Money Tracker
+2026-03-28 12:29:47,668 - scraper_agents - INFO - Stopping agent: Portfolio Analyzer
+2026-03-28 12:29:47,668 - scraper_agents - INFO - Stopping agent: Agent Finder
+2026-03-28 12:29:47,668 - scraper_agents - INFO - Stopping agent: Lender Matcher
+2026-03-28 12:29:47,668 - scraper_agents - INFO - Stopping agent: Obsidian Sync
+2026-03-28 12:29:47,668 - scraper_agents - INFO - Stopping agent: Qdrant Indexer
+2026-03-28 12:29:47,669 - scraper_agents - INFO -   All agents stopped
+2026-03-28 12:29:47,669 - scraper_agents - INFO - Orchestrator cancelled

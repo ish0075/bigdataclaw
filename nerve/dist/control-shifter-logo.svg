@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.4" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer glow ring -->
+  <circle cx="50" cy="50" r="46" fill="none" stroke="url(#glowGradient)" stroke-width="2" opacity="0.6">
+    <animate attributeName="r" values="46;48;46" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0.3;0.6" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Main circle background -->
+  <circle cx="50" cy="50" r="42" fill="url(#blueGradient)"/>
+  
+  <!-- Inner decorative ring -->
+  <circle cx="50" cy="50" r="38" fill="none" stroke="#60a5fa" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Mission Control Center Icon - Control Panel -->
+  <!-- Top bar -->
+  <rect x="25" y="28" width="50" height="8" rx="2" fill="#1e3a8a" opacity="0.8"/>
+  
+  <!-- Main control panel body -->
+  <rect x="20" y="38" width="60" height="36" rx="4" fill="#1e40af" stroke="#60a5fa" stroke-width="2"/>
+  
+  <!-- Screen/display area -->
+  <rect x="26" y="44" width="48" height="20" rx="2" fill="#0f172a"/>
+  
+  <!-- Screen glow -->
+  <rect x="28" y="46" width="44" height="16" rx="1" fill="url(#glowGradient)" opacity="0.3"/>
+  
+  <!-- Data lines on screen -->
+  <rect x="32" y="50" width="20" height="2" rx="1" fill="#60a5fa"/>
+  <rect x="32" y="55" width="30" height="2" rx="1" fill="#3b82f6"/>
+  <rect x="32" y="60" width="15" height="2" rx="1" fill="#2563eb"/>
+  
+  <!-- Control buttons -->
+  <circle cx="32" cy="70" r="3" fill="#10b981"/>
+  <circle cx="42" cy="70" r="3" fill="#f59e0b"/>
+  <circle cx="52" cy="70" r="3" fill="#ef4444"/>
+  <circle cx="68" cy="70" r="3" fill="#8b5cf6"/>
+  
+  <!-- Shift/Control arrows -->
+  <path d="M70 48 L75 52 L70 56" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M30 52 L25 48 L30 44" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Center indicator -->
+  <circle cx="50" cy="54" r="4" fill="#ffffff" opacity="0.9">
+    <animate attributeName="opacity" values="0.9;0.5;0.9" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Top accent lines -->
+  <rect x="35" y="32" width="8" height="2" rx="1" fill="#60a5fa"/>
+  <rect x="47" y="32" width="6" height="2" rx="1" fill="#3b82f6"/>
+  <rect x="57" y="32" width="8" height="2" rx="1" fill="#2563eb"/>
+</svg>

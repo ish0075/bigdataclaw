@@ -1,0 +1,15 @@
+[    1387ms] [ERROR] Access to fetch at 'http://localhost:8000/api/ai-builder/files?path=' from origin 'https://mission-control-brown-omega.vercel.app' has been blocked by CORS policy: Permission was denied for this request to access the `loopback` address space. @ https://mission-control-brown-omega.vercel.app/ai-builder:0
+[    1389ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/ai-builder/files?path=:0
+[    1389ms] [ERROR] Failed to load files: TypeError: Failed to fetch
+    at Y (https://mission-control-brown-omega.vercel.app/assets/index--3olCZ4j.js:1352:525)
+    at https://mission-control-brown-omega.vercel.app/assets/index--3olCZ4j.js:1352:379
+    at Nl (https://mission-control-brown-omega.vercel.app/assets/index--3olCZ4j.js:48:93572)
+    at Gg (https://mission-control-brown-omega.vercel.app/assets/index--3olCZ4j.js:48:108876)
+    at Ei (https://mission-control-brown-omega.vercel.app/assets/index--3olCZ4j.js:48:108760)
+    at Gg (https://mission-control-brown-omega.vercel.app/assets/index--3olCZ4j.js:48:109642)
+    at Ei (https://mission-control-brown-omega.vercel.app/assets/index--3olCZ4j.js:48:108760)
+    at Gg (https://mission-control-brown-omega.vercel.app/assets/index--3olCZ4j.js:48:108856)
+    at Ei (https://mission-control-brown-omega.vercel.app/assets/index--3olCZ4j.js:48:108760)
+    at Gg (https://mission-control-brown-omega.vercel.app/assets/index--3olCZ4j.js:48:108856) @ https://mission-control-brown-omega.vercel.app/assets/index--3olCZ4j.js:1351
+[    1491ms] [LOG] WebSocket connected @ https://mission-control-brown-omega.vercel.app/assets/index--3olCZ4j.js:1453
+[    1504ms] [LOG] Unknown message type: subscribed @ https://mission-control-brown-omega.vercel.app/assets/index--3olCZ4j.js:1453

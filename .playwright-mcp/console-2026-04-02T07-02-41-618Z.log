@@ -1,0 +1,14 @@
+[     226ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:20102
+[     460ms] [WARNING] WebSocket connection to 'ws://localhost:3090/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:5173/src/hooks/useWebSocket.js:97
+[     471ms] [ERROR] WebSocket error: Event @ http://localhost:5173/src/hooks/useWebSocket.js:41
+[     471ms] [LOG] WebSocket disconnected @ http://localhost:5173/src/hooks/useWebSocket.js:34
+[     533ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[     644ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[    3478ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[    3481ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[   20475ms] [LOG] Fetching hot money leads... @ http://localhost:5173/src/views/HotMoneyRadar.jsx:132
+[   20477ms] [LOG] Fetching hot money leads... @ http://localhost:5173/src/views/HotMoneyRadar.jsx:132
+[   20508ms] [LOG] Received data: {leads: Array(2)} @ http://localhost:5173/src/views/HotMoneyRadar.jsx:136
+[   20509ms] [LOG] Mapped leads: [Object, Object] @ http://localhost:5173/src/views/HotMoneyRadar.jsx:139
+[   20568ms] [LOG] Received data: {leads: Array(2)} @ http://localhost:5173/src/views/HotMoneyRadar.jsx:136
+[   20568ms] [LOG] Mapped leads: [Object, Object] @ http://localhost:5173/src/views/HotMoneyRadar.jsx:139

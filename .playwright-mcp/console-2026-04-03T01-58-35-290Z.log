@@ -1,0 +1,29 @@
+[    4455ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:20102
+[    4761ms] [LOG] Fetching hot money leads... @ http://localhost:8081/src/views/HotMoneyRadar.jsx:132
+[    4764ms] [WARNING] WebSocket connection to 'ws://localhost:3090/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:8081/src/hooks/useWebSocket.js:97
+[    4769ms] [LOG] Fetching hot money leads... @ http://localhost:8081/src/views/HotMoneyRadar.jsx:132
+[    4785ms] [ERROR] WebSocket error: Event @ http://localhost:8081/src/hooks/useWebSocket.js:41
+[    4785ms] [LOG] WebSocket disconnected @ http://localhost:8081/src/hooks/useWebSocket.js:34
+[    4888ms] [LOG] WebSocket connected @ http://localhost:8081/src/hooks/useWebSocket.js:18
+[    4889ms] [LOG] Received data: {leads: Array(2)} @ http://localhost:8081/src/views/HotMoneyRadar.jsx:136
+[    4890ms] [LOG] Mapped leads: [Object, Object] @ http://localhost:8081/src/views/HotMoneyRadar.jsx:139
+[    4890ms] [LOG] Received data: {leads: Array(2)} @ http://localhost:8081/src/views/HotMoneyRadar.jsx:136
+[    4890ms] [LOG] Mapped leads: [Object, Object] @ http://localhost:8081/src/views/HotMoneyRadar.jsx:139
+[    5039ms] [LOG] Unknown message type: subscribed @ http://localhost:8081/src/hooks/useWebSocket.js:80
+[    7794ms] [LOG] WebSocket connected @ http://localhost:8081/src/hooks/useWebSocket.js:18
+[    7796ms] [LOG] Unknown message type: subscribed @ http://localhost:8081/src/hooks/useWebSocket.js:80
+[  118449ms] [LOG] View Profile clicked for: 2650687 Ontario Ltd @ http://localhost:8081/src/views/HotMoneyRadar.jsx:2880
+[  118450ms] [LOG] Opening profile for: {id: HM-001, entity: 2650687 Ontario Ltd, cashAmount: 15000000, saleDate: May 2025, location: West Lincoln} @ http://localhost:8081/src/views/HotMoneyRadar.jsx:165
+[  118563ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:8081/api/hotmoney/HM-001/matches:0
+[  118563ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:8081/api/hotmoney/HM-001/matches:0
+[  118588ms] [LOG] Modal should be open. showDetailModal: true selectedLead: {id: HM-001, entity: 2650687 Ontario Ltd, cashAmount: 15000000, saleDate: May 2025, location: West Lincoln} @ http://localhost:8081/src/views/HotMoneyRadar.jsx:170
+[ 2629060ms] [LOG] WebSocket connected @ http://localhost:8081/src/hooks/useWebSocket.js:18
+[ 2629062ms] [LOG] Unknown message type: subscribed @ http://localhost:8081/src/hooks/useWebSocket.js:80
+[ 2629253ms] [LOG] WebSocket disconnected @ http://localhost:8081/src/hooks/useWebSocket.js:34
+[ 2632259ms] [LOG] WebSocket connected @ http://localhost:8081/src/hooks/useWebSocket.js:18
+[ 2632421ms] [LOG] Unknown message type: subscribed @ http://localhost:8081/src/hooks/useWebSocket.js:80
+[ 2638089ms] [LOG] WebSocket disconnected @ http://localhost:8081/src/hooks/useWebSocket.js:34
+[ 2638216ms] [LOG] WebSocket connected @ http://localhost:8081/src/hooks/useWebSocket.js:18
+[ 2638333ms] [LOG] Unknown message type: subscribed @ http://localhost:8081/src/hooks/useWebSocket.js:80
+[ 2641097ms] [LOG] WebSocket connected @ http://localhost:8081/src/hooks/useWebSocket.js:18
+[ 2641109ms] [LOG] Unknown message type: subscribed @ http://localhost:8081/src/hooks/useWebSocket.js:80

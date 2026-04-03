@@ -1,0 +1,4 @@
+[    1558ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=74c91099:20102
+[    3120ms] [ERROR] Failed to load UI module for plugin "paperclip-file-browser-example" SyntaxError: Unexpected token '<' @ http://localhost:5175/src/plugins/slots.tsx:233
+[    3121ms] [ERROR] Failed to load UI module for plugin "paperclip-kitchen-sink-example" SyntaxError: Unexpected token '<' @ http://localhost:5175/src/plugins/slots.tsx:233
+[    3121ms] [ERROR] Failed to load UI module for plugin "paperclip.hello-world-example" SyntaxError: Unexpected token '<' @ http://localhost:5175/src/plugins/slots.tsx:233

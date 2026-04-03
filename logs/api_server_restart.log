@@ -1,0 +1,76 @@
+INFO:     Started server process [88188]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+============================================================
+🚀 BigDataClaw NERVE API Server
+============================================================
+
+📡 Endpoints:
+   GET  /api/health           - Health check
+   GET  /api/info             - System info
+   GET  /api/recruiters       - List recruiters (paginated)
+   GET  /api/recruiters/stats - Recruiter statistics
+   GET  /api/recruiters/filter-options
+   POST /api/recruiters/{id}/contact
+   GET  /api/recruiters/search?q=...
+   GET  /api/opportunities
+   GET  /api/lenders          - List lenders (paginated)
+   GET  /api/lenders/stats    - Lender statistics
+   GET  /api/lenders/filter-options
+
+🌐 Starting server on http://0.0.0.0:8000
+============================================================
+INFO:     127.0.0.1:54436 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46452 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:46452 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:46452 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60654 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60396 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60402 - "GET /api/recruiters?page=1&limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60396 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60418 - "GET /api/recruiters/filter-options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60430 - "GET /api/recruiters/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60396 - "GET /api/recruiters/filter-options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60436 - "GET /api/recruiters?page=1&limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60430 - "GET /api/recruiters/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59106 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59120 - "GET /api/recruiters?page=1&limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59106 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59128 - "GET /api/recruiters/filter-options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /api/recruiters/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59106 - "GET /api/recruiters/filter-options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59146 - "GET /api/recruiters?page=1&limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /api/recruiters/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38332 - "GET /api/recruiters?page=1&limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38348 - "GET /api/recruiters?page=1&limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47790 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47796 - "GET /api/recruiters?page=1&limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47790 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47800 - "GET /api/recruiters/filter-options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47812 - "GET /api/recruiters/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47790 - "GET /api/recruiters/filter-options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47824 - "GET /api/recruiters?page=1&limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47812 - "GET /api/recruiters/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58484 - "GET /api/recruiters?page=1&limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58496 - "GET /api/recruiters?page=1&limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44970 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44982 - "GET /api/recruiters?page=1&limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44970 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44998 - "GET /api/recruiters/filter-options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45006 - "GET /api/recruiters/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44970 - "GET /api/recruiters/filter-options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45010 - "GET /api/recruiters?page=1&limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45006 - "GET /api/recruiters/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34280 - "GET /api/lenders?page=1&limit=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34296 - "GET /api/lenders/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34306 - "GET /api/lenders?page=1&limit=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34296 - "GET /api/lenders/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34296 - "GET /api/lenders/filter-options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34296 - "GET /api/lenders/filter-options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34296 - "GET /api/recruiters HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34306 - "GET /api/recruiters HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [88188]

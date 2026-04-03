@@ -1,0 +1,47 @@
+{
+  "orchestrator_running": false,
+  "agents": [
+    {
+      "name": "Transaction Scout",
+      "running": false,
+      "last_run": "2026-03-28T12:29:32.869732",
+      "pid_file_exists": true
+    },
+    {
+      "name": "Hot Money Tracker",
+      "running": false,
+      "last_run": "2026-03-28T12:29:32.870278",
+      "pid_file_exists": true
+    },
+    {
+      "name": "Portfolio Analyzer",
+      "running": false,
+      "last_run": "2026-03-28T12:29:32.870657",
+      "pid_file_exists": true
+    },
+    {
+      "name": "Agent Finder",
+      "running": false,
+      "last_run": "2026-03-28T12:29:32.870980",
+      "pid_file_exists": true
+    },
+    {
+      "name": "Lender Matcher",
+      "running": false,
+      "last_run": "2026-03-28T12:29:32.871782",
+      "pid_file_exists": true
+    },
+    {
+      "name": "Obsidian Sync",
+      "running": false,
+      "last_run": "2026-03-28T12:29:32.872325",
+      "pid_file_exists": true
+    },
+    {
+      "name": "Qdrant Indexer",
+      "running": false,
+      "last_run": "2026-03-28T12:29:33.259178",
+      "pid_file_exists": true
+    }
+  ]
+}

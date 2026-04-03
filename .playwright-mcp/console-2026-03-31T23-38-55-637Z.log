@@ -1,0 +1,11 @@
+[     223ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=9b343416:20102
+[     429ms] [WARNING] WebSocket connection to 'ws://localhost:3090/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:5173/src/hooks/useWebSocket.js:97
+[     438ms] [ERROR] WebSocket error: Event @ http://localhost:5173/src/hooks/useWebSocket.js:41
+[     438ms] [LOG] WebSocket disconnected @ http://localhost:5173/src/hooks/useWebSocket.js:34
+[     491ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[     556ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[     694ms] [ERROR] Microphone permission error: NotReadableError: Could not start audio source @ http://localhost:5173/src/components/Property/PropertyChat.jsx?t=1775000137085:129
+[     936ms] [ERROR] Microphone permission error: NotReadableError: Could not start audio source @ http://localhost:5173/src/components/Property/PropertyChat.jsx?t=1775000137085:129
+[    3446ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[    3448ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[   45333ms] [ERROR] Speech recognition error: audio-capture @ http://localhost:5173/src/components/System/VoiceControl.jsx:48

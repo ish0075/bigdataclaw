@@ -1,0 +1,153 @@
+[     906ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[     925ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[     926ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[    3928ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[    3928ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[    3929ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[    6945ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[    6954ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[    6955ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[    9959ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[    9960ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[    9960ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   12970ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   12970ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   12971ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   15978ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   15978ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   15978ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   18992ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   18992ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   18992ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   22010ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   22010ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   22011ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   25043ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   25043ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   25044ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   28117ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   28117ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   28117ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   31159ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   31159ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   31160ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   34401ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   34402ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   34402ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   37692ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   37692ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   37692ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   41451ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   41452ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   41452ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   45002ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   45002ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   45003ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   51735ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   51735ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   51736ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   58436ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   58436ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   58436ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   63491ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   63491ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   63491ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   68834ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   68834ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   68834ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   73783ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   73784ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   73784ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   80087ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   80087ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   80087ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   85665ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   85665ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   85666ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   91169ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   91169ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   91169ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   99174ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   99174ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[   99175ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  105080ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  105080ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  105080ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  110791ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  110791ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  110791ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  118465ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  118465ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  118466ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  121468ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  121468ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  121468ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  124471ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  124471ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  124472ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  127479ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  127479ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  127481ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  130485ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  130485ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  130486ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  133502ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  133502ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  133503ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  136516ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  136516ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  136517ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  139529ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  139529ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  139530ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  141623ms] [LOG] Fetching hot money leads... @ http://localhost:8081/assets/index-DOuvr2-2.js:1012
+[  141657ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8081/api/hotmoney:0
+[  141657ms] [ERROR] Error fetching leads: Error: HTTP 404: File not found
+    at E (http://localhost:8081/assets/index-DOuvr2-2.js:1013:2826) @ http://localhost:8081/assets/index-DOuvr2-2.js:1012
+[  142543ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  142543ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  142543ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  145560ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  145561ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  145562ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  148609ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  148609ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  148610ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  151689ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  151689ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  151690ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  154827ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  154828ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  154828ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  158350ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  158351ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  158351ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  161634ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  161634ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  161635ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  165948ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  165948ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  165949ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  170952ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  170952ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  170952ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  176827ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  176828ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  176828ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  181152ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  181153ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  181153ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  186044ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  186044ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  186044ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  193680ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  193681ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  193681ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  199944ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  199944ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  199945ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  206702ms] [ERROR] WebSocket connection to 'ws://localhost:3090/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  206703ms] [ERROR] WebSocket error: Event @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  206703ms] [LOG] WebSocket disconnected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  213546ms] [LOG] WebSocket connected @ http://localhost:8081/assets/index-DOuvr2-2.js:1453
+[  213573ms] [LOG] Unknown message type: subscribed @ http://localhost:8081/assets/index-DOuvr2-2.js:1453

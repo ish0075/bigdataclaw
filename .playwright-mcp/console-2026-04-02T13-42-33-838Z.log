@@ -1,0 +1,56 @@
+[     241ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:20102
+[     565ms] [WARNING] WebSocket connection to 'ws://localhost:3090/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:97
+[     582ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/health:0
+[     582ms] [ERROR] Health check failed: TypeError: Failed to fetch
+    at checkHealth (http://localhost:5173/src/views/BotBoardroom.jsx?t=1775137283383:325:25)
+    at http://localhost:5173/src/views/BotBoardroom.jsx?t=1775137283383:320:5
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:18567:20)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:997:72)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:9411:163)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:9465:60)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11040:29)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11010:13)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11201:13)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11010:13) @ http://localhost:5173/src/views/BotBoardroom.jsx?t=1775137283383:328
+[     582ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/agents/meetings?limit=10:0
+[     582ms] [ERROR] Failed to load meetings: TypeError: Failed to fetch
+    at loadMeetings (http://localhost:5173/src/views/BotBoardroom.jsx?t=1775137283383:335:25)
+    at http://localhost:5173/src/views/BotBoardroom.jsx?t=1775137283383:321:5
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:18567:20)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:997:72)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:9411:163)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:9465:60)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11040:29)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11010:13)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11201:13)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11010:13) @ http://localhost:5173/src/views/BotBoardroom.jsx?t=1775137283383:338
+[     583ms] [ERROR] WebSocket error: Event @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:41
+[     583ms] [LOG] WebSocket disconnected @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:34
+[     584ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/health:0
+[     584ms] [ERROR] Health check failed: TypeError: Failed to fetch
+    at checkHealth (http://localhost:5173/src/views/BotBoardroom.jsx?t=1775137283383:325:25)
+    at http://localhost:5173/src/views/BotBoardroom.jsx?t=1775137283383:320:5
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:18567:20)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:997:72)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:9411:163)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:9465:60)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11273:13)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11240:11)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11317:13)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11240:11) @ http://localhost:5173/src/views/BotBoardroom.jsx?t=1775137283383:328
+[     584ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8081/agents/meetings?limit=10:0
+[     584ms] [ERROR] Failed to load meetings: TypeError: Failed to fetch
+    at loadMeetings (http://localhost:5173/src/views/BotBoardroom.jsx?t=1775137283383:335:25)
+    at http://localhost:5173/src/views/BotBoardroom.jsx?t=1775137283383:321:5
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:18567:20)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:997:72)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:9411:163)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:9465:60)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11273:13)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11240:11)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11317:13)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:11240:11) @ http://localhost:5173/src/views/BotBoardroom.jsx?t=1775137283383:338
+[     745ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:18
+[     892ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:80
+[    3591ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:18
+[    3600ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:80

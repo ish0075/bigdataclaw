@@ -1,0 +1,235 @@
+{
+  "metadata": {
+    "name": "Ontario Regions",
+    "description": "Official Ontario regions and counties for real estate agent recruiting",
+    "source": "fwdontarioregions.zip",
+    "last_updated": "2026-03-28",
+    "total_count": 37,
+    "province": "Ontario",
+    "country": "Canada"
+  },
+  "regions": [
+    {
+      "id": "algoma",
+      "name": "Algoma",
+      "type": "District",
+      "major_cities": ["Sault Ste. Marie", "Elliot Lake", "Blind River"]
+    },
+    {
+      "id": "brant",
+      "name": "Brant",
+      "type": "County/City",
+      "major_cities": ["Brantford"]
+    },
+    {
+      "id": "bruce",
+      "name": "Bruce",
+      "type": "County",
+      "major_cities": ["Kincardine", "Port Elgin", "Wiarton"]
+    },
+    {
+      "id": "cochrane",
+      "name": "Cochrane",
+      "type": "District",
+      "major_cities": ["Timmins", "Cochrane", "Hearst"]
+    },
+    {
+      "id": "dufferin",
+      "name": "Dufferin County",
+      "type": "County",
+      "major_cities": ["Orangeville", "Shelburne"]
+    },
+    {
+      "id": "durham",
+      "name": "Durham Region",
+      "type": "Region",
+      "major_cities": ["Ajax", "Pickering", "Whitby", "Oshawa", "Clarington"]
+    },
+    {
+      "id": "elgin",
+      "name": "Elgin County",
+      "type": "County",
+      "major_cities": ["St. Thomas", "Aylmer", "Port Stanley"]
+    },
+    {
+      "id": "essex",
+      "name": "Essex County",
+      "type": "County",
+      "major_cities": ["Windsor", "Tecumseh", "Amherstburg", "LaSalle"]
+    },
+    {
+      "id": "frontenac",
+      "name": "Frontenac County",
+      "type": "County",
+      "major_cities": ["Kingston"]
+    },
+    {
+      "id": "grey",
+      "name": "Grey County",
+      "type": "County",
+      "major_cities": ["Owen Sound", "Meaford", "The Blue Mountains"]
+    },
+    {
+      "id": "haldimand",
+      "name": "Haldimand County",
+      "type": "County",
+      "major_cities": ["Caledonia", "Hagersville", "Dunnville"]
+    },
+    {
+      "id": "halton",
+      "name": "Halton Region",
+      "type": "Region",
+      "major_cities": ["Oakville", "Burlington", "Milton", "Halton Hills"]
+    },
+    {
+      "id": "hamilton-wentworth",
+      "name": "Hamilton-Wentworth",
+      "type": "Municipality",
+      "major_cities": ["Hamilton", "Stoney Creek", "Ancaster", "Dundas"]
+    },
+    {
+      "id": "hastings",
+      "name": "Hastings County",
+      "type": "County",
+      "major_cities": ["Belleville", "Trenton", "Bancroft"]
+    },
+    {
+      "id": "kenora",
+      "name": "Kenora",
+      "type": "District",
+      "major_cities": ["Kenora", "Dryden", "Sioux Lookout"]
+    },
+    {
+      "id": "kitchener-waterloo",
+      "name": "Kitchener-Waterloo",
+      "type": "Region",
+      "major_cities": ["Kitchener", "Waterloo", "Cambridge"]
+    },
+    {
+      "id": "lambton",
+      "name": "Lambton",
+      "type": "County",
+      "major_cities": ["Sarnia", "Petrolia", "Forest"]
+    },
+    {
+      "id": "lanark",
+      "name": "Lanark County",
+      "type": "County",
+      "major_cities": ["Perth", "Smiths Falls", "Carleton Place"]
+    },
+    {
+      "id": "leeds",
+      "name": "Leeds",
+      "type": "County",
+      "major_cities": ["Brockville", "Gananoque", "Prescott"]
+    },
+    {
+      "id": "metro-toronto",
+      "name": "Metro Toronto",
+      "type": "City",
+      "major_cities": ["Toronto", "North York", "Scarborough", "Etobicoke"]
+    },
+    {
+      "id": "middlesex",
+      "name": "Middlesex County",
+      "type": "County",
+      "major_cities": ["London", "Strathroy-Caradoc", "North Middlesex"]
+    },
+    {
+      "id": "muskoka",
+      "name": "Muskoka",
+      "type": "District",
+      "major_cities": ["Bracebridge", "Huntsville", "Gravenhurst"]
+    },
+    {
+      "id": "niagara-n",
+      "name": "Niagara N",
+      "type": "Region",
+      "major_cities": ["St. Catharines", "Thorold", "Niagara-on-the-Lake"]
+    },
+    {
+      "id": "niagara-s",
+      "name": "Niagara S",
+      "type": "Region",
+      "major_cities": ["Welland", "Port Colborne", "Fort Erie"]
+    },
+    {
+      "id": "northumberland",
+      "name": "Northumberland",
+      "type": "County",
+      "major_cities": ["Cobourg", "Port Hope", "Brighton"]
+    },
+    {
+      "id": "ottawa-carleton",
+      "name": "Ottawa-Carleton",
+      "type": "Region",
+      "major_cities": ["Ottawa", "Kanata", "Barrhaven", "Orleans"]
+    },
+    {
+      "id": "oxford",
+      "name": "Oxford County",
+      "type": "County",
+      "major_cities": ["Woodstock", "Tillsonburg", "Ingersoll"]
+    },
+    {
+      "id": "peel",
+      "name": "Peel Region",
+      "type": "Region",
+      "major_cities": ["Mississauga", "Brampton", "Caledon"]
+    },
+    {
+      "id": "perth",
+      "name": "Perth County",
+      "type": "County",
+      "major_cities": ["Stratford", "St. Marys", "North Perth"]
+    },
+    {
+      "id": "peterborough",
+      "name": "Peterborough County",
+      "type": "County",
+      "major_cities": ["Peterborough", "Lakefield", "Norwood"]
+    },
+    {
+      "id": "prescott",
+      "name": "Prescott",
+      "type": "County",
+      "major_cities": ["Hawkesbury", "Alfred", "Plantagenet"]
+    },
+    {
+      "id": "renfrew",
+      "name": "Renfrew",
+      "type": "County",
+      "major_cities": ["Pembroke", "Renfrew", "Arnprior"]
+    },
+    {
+      "id": "simcoe",
+      "name": "Simcoe County",
+      "type": "County",
+      "major_cities": ["Barrie", "Orillia", "Collingwood", "Wasaga Beach"]
+    },
+    {
+      "id": "stormont",
+      "name": "Stormont",
+      "type": "County",
+      "major_cities": ["Cornwall", "Alexandria", "Winchester"]
+    },
+    {
+      "id": "thunder-bay",
+      "name": "Thunder Bay",
+      "type": "District",
+      "major_cities": ["Thunder Bay", "Marathon", "Greenstone"]
+    },
+    {
+      "id": "wellington",
+      "name": "Wellington",
+      "type": "County",
+      "major_cities": ["Guelph", "Erin", "Centre Wellington"]
+    },
+    {
+      "id": "york",
+      "name": "York Region",
+      "type": "Region",
+      "major_cities": ["Vaughan", "Markham", "Richmond Hill", "Newmarket", "Aurora"]
+    }
+  ]
+}

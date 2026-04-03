@@ -1,0 +1,84 @@
+🎨 Starting design server on port 4000
+Static file  not found
+/paperclip/node_modules/.pnpm/@embedded-postgres+linux-x64@18.1.0-beta.16/node_modules/@embedded-postgres/linux-x64_tmp_357857/native/lib/pkgconfig/libecpg_compat.pc:1:7 - error: Unexpected token
+
+1: prefix=/usr/local/pg-build
+         ^
+
+
+/paperclip/node_modules/.pnpm/@embedded-postgres+linux-x64@18.1.0-beta.16/node_modules/@embedded-postgres/linux-x64_tmp_357857/native/lib/pkgconfig/libecpg_compat.pc:1:7 - error: Unexpected token
+
+1: prefix=/usr/local/pg-build
+         ^
+
+
+/paperclip/node_modules/.pnpm/@embedded-postgres+linux-x64@18.1.0-beta.16/node_modules/@embedded-postgres/linux-x64_tmp_357857/native/lib/pkgconfig/libecpg_compat.pc:1:7 - error: Unexpected token
+
+1: prefix=/usr/local/pg-build
+         ^
+
+
+/paperclip/node_modules/.pnpm/@embedded-postgres+linux-x64@18.1.0-beta.16/node_modules/@embedded-postgres/linux-x64_tmp_357857/native/lib/pkgconfig/libecpg.pc:1:7 - error: Unexpected token
+
+1: prefix=/usr/local/pg-build
+         ^
+
+
+/paperclip/node_modules/.pnpm/@embedded-postgres+linux-x64@18.1.0-beta.16/node_modules/@embedded-postgres/linux-x64_tmp_357857/native/lib/pkgconfig/libecpg.pc:1:7 - error: Unexpected token
+
+1: prefix=/usr/local/pg-build
+         ^
+
+
+/paperclip/node_modules/.pnpm/@embedded-postgres+linux-x64@18.1.0-beta.16/node_modules/@embedded-postgres/linux-x64_tmp_357857/native/lib/pkgconfig/libpgtypes.pc:1:7 - error: Unexpected token
+
+1: prefix=/usr/local/pg-build
+         ^
+
+
+/paperclip/node_modules/.pnpm/@embedded-postgres+linux-x64@18.1.0-beta.16/node_modules/@embedded-postgres/linux-x64_tmp_357857/native/lib/pkgconfig/libecpg.pc:1:7 - error: Unexpected token
+
+1: prefix=/usr/local/pg-build
+         ^
+
+
+/paperclip/node_modules/.pnpm/@embedded-postgres+linux-x64@18.1.0-beta.16/node_modules/@embedded-postgres/linux-x64_tmp_357857/native/lib/pkgconfig/libpgtypes.pc:1:7 - error: Unexpected token
+
+1: prefix=/usr/local/pg-build
+         ^
+
+
+/paperclip/node_modules/.pnpm/@embedded-postgres+linux-x64@18.1.0-beta.16/node_modules/@embedded-postgres/linux-x64_tmp_357857/native/lib/pkgconfig/libpgtypes.pc:1:7 - error: Unexpected token
+
+1: prefix=/usr/local/pg-build
+         ^
+
+
+/paperclip/node_modules/.pnpm/@embedded-postgres+linux-x64@18.1.0-beta.16/node_modules/@embedded-postgres/linux-x64_tmp_357857/native/lib/pkgconfig/libpq.pc:1:7 - error: Unexpected token
+
+1: prefix=/usr/local/pg-build
+         ^
+
+
+/paperclip/node_modules/.pnpm/@embedded-postgres+linux-x64@18.1.0-beta.16/node_modules/@embedded-postgres/linux-x64_tmp_357857/native/lib/pkgconfig/libpq.pc:1:7 - error: Unexpected token
+
+1: prefix=/usr/local/pg-build
+         ^
+
+
+/paperclip/node_modules/.pnpm/@embedded-postgres+linux-x64@18.1.0-beta.16/node_modules/@embedded-postgres/linux-x64_tmp_357857/native/lib/pkgconfig/libpq.pc:1:7 - error: Unexpected token
+
+1: prefix=/usr/local/pg-build
+         ^
+
+
+Static file  not found
+Static file  not found
+Static file  not found
+Static file designer not found
+Static file  not found
+Static file  not found
+Static file index.html not found
+Static file designer.html not found
+Static file  not found
+Terminated

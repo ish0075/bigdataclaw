@@ -1,0 +1,2 @@
+[    1024ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=74c91099:20102
+[   35710ms] [WARNING] WebSocket connection to 'ws://localhost:5175/api/companies/48826eea-3284-4ea6-82bf-9b568daba2ce/events/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:5175/src/pages/AgentDetail.tsx:5229

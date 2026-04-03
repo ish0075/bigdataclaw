@@ -1,0 +1,16 @@
+[   36369ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=9b343416:20102
+[   36591ms] [LOG] useMemo: searchQuery changed to:  effectiveSearch:  @ http://localhost:5173/src/views/EXAgentRecruiterEnhanced.jsx:1904
+[   36592ms] [LOG] useMemo: searchQuery changed to:  effectiveSearch:  @ http://localhost:5173/src/views/EXAgentRecruiterEnhanced.jsx:1904
+[   36647ms] [LOG] Load recruiters effect triggered. Search:  @ http://localhost:5173/src/views/EXAgentRecruiterEnhanced.jsx:1941
+[   36649ms] [LOG] Building params. effectiveSearch:  @ http://localhost:5173/src/views/EXAgentRecruiterEnhanced.jsx:1951
+[   36649ms] [LOG] Final URL params: page=1&limit=50 @ http://localhost:5173/src/views/EXAgentRecruiterEnhanced.jsx:1953
+[   36653ms] [WARNING] WebSocket connection to 'ws://localhost:3090/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:5173/src/hooks/useWebSocket.js:97
+[   36657ms] [LOG] Load recruiters effect triggered. Search:  @ http://localhost:5173/src/views/EXAgentRecruiterEnhanced.jsx:1941
+[   36657ms] [LOG] Building params. effectiveSearch:  @ http://localhost:5173/src/views/EXAgentRecruiterEnhanced.jsx:1951
+[   36658ms] [LOG] Final URL params: page=1&limit=50 @ http://localhost:5173/src/views/EXAgentRecruiterEnhanced.jsx:1953
+[   36675ms] [ERROR] WebSocket error: Event @ http://localhost:5173/src/hooks/useWebSocket.js:41
+[   36675ms] [LOG] WebSocket disconnected @ http://localhost:5173/src/hooks/useWebSocket.js:34
+[   36685ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[   36750ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[   39683ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[   39686ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80

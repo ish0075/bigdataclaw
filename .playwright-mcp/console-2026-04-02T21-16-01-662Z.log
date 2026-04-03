@@ -1,0 +1,14 @@
+[     230ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:20102
+[     460ms] [LOG] Fetching hot money leads... @ http://localhost:5173/src/views/HotMoneyRadar.jsx?t=1775154646830:132
+[     462ms] [WARNING] WebSocket connection to 'ws://localhost:3090/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:5173/src/hooks/useWebSocket.js:97
+[     465ms] [LOG] Fetching hot money leads... @ http://localhost:5173/src/views/HotMoneyRadar.jsx?t=1775154646830:132
+[     473ms] [ERROR] WebSocket error: Event @ http://localhost:5173/src/hooks/useWebSocket.js:41
+[     473ms] [LOG] WebSocket disconnected @ http://localhost:5173/src/hooks/useWebSocket.js:34
+[     557ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[     646ms] [LOG] Received data: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ http://localhost:5173/src/views/HotMoneyRadar.jsx?t=1775154646830:136
+[     646ms] [LOG] Mapped leads: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ http://localhost:5173/src/views/HotMoneyRadar.jsx?t=1775154646830:139
+[     647ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[     647ms] [LOG] Received data: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ http://localhost:5173/src/views/HotMoneyRadar.jsx?t=1775154646830:136
+[     647ms] [LOG] Mapped leads: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ http://localhost:5173/src/views/HotMoneyRadar.jsx?t=1775154646830:139
+[    3482ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[    3483ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80

@@ -1,0 +1,9 @@
+[     281ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5173/src/components/Agent/AgentVisualTask.jsx?t=1775137198372:0
+[   72052ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=2373fa66:20102
+[   72489ms] [WARNING] WebSocket connection to 'ws://localhost:3090/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:97
+[   72512ms] [ERROR] WebSocket error: Event @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:41
+[   72513ms] [LOG] WebSocket disconnected @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:34
+[   72526ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:18
+[   72704ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:80
+[   75525ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:18
+[   75527ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js?t=1775136983426:80

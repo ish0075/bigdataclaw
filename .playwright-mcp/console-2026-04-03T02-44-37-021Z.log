@@ -1,0 +1,13 @@
+[    1152ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3100/node_modules/.vite/deps/react-dom_client.js?v=feef9054:20102
+[    2499ms] [ERROR] Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `HelloWorldDashboardWidget`.  @ http://localhost:3100/node_modules/.vite/deps/react-dom_client.js?v=feef9054:18617
+[    2515ms] [ERROR] Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `KitchenSinkSidebarLink`.  @ http://localhost:3100/node_modules/.vite/deps/react-dom_client.js?v=feef9054:18617
+[    2515ms] [ERROR] Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `KitchenSinkSidebarLink`.  @ http://localhost:3100/node_modules/.vite/deps/react-dom_client.js?v=feef9054:18617
+[    2518ms] [ERROR] Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `KitchenSinkSidebarPanel`.  @ http://localhost:3100/node_modules/.vite/deps/react-dom_client.js?v=feef9054:18617

@@ -1,0 +1,20 @@
+[     229ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=9b343416:20102
+[     423ms] [WARNING] WebSocket connection to 'ws://localhost:3090/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:5173/src/hooks/useWebSocket.js:97
+[     436ms] [ERROR] WebSocket error: Event @ http://localhost:5173/src/hooks/useWebSocket.js:41
+[     436ms] [LOG] WebSocket disconnected @ http://localhost:5173/src/hooks/useWebSocket.js:34
+[     438ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/api/health:0
+[     439ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/api/dbeaver/stats:0
+[     440ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/api/dbeaver/cities:0
+[     441ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/api/recruiters?page=1&limit=50:0
+[     441ms] [ERROR] Error loading agents from API: Error: HTTP 404
+    at loadData (http://localhost:5173/src/views/EXAgentRecruiterEnhanced.jsx?t=1775088024392:1954:28) @ http://localhost:5173/src/views/EXAgentRecruiterEnhanced.jsx?t=1775088024392:1974
+[     472ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/api/health:0
+[     474ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/api/dbeaver/stats:0
+[     474ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/api/dbeaver/cities:0
+[     474ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/api/recruiters?page=1&limit=50:0
+[     474ms] [ERROR] Error loading agents from API: Error: HTTP 404
+    at loadData (http://localhost:5173/src/views/EXAgentRecruiterEnhanced.jsx?t=1775088024392:1954:28) @ http://localhost:5173/src/views/EXAgentRecruiterEnhanced.jsx?t=1775088024392:1974
+[     477ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[     535ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80
+[    3443ms] [LOG] WebSocket connected @ http://localhost:5173/src/hooks/useWebSocket.js:18
+[    3444ms] [LOG] Unknown message type: subscribed @ http://localhost:5173/src/hooks/useWebSocket.js:80

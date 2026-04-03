@@ -1,0 +1,10 @@
+
+> bigdataclaw@0.0.0 dev
+> vite --port 3000
+
+
+  VITE v8.0.0  ready in 398 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: use --host to expose
+1:18:38 a.m. [vite] (client) hmr update /src/index.css
