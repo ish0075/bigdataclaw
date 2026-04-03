@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigDataClaw - Pablo's Pixel Agents</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #1a1a2e;
+            font-family: 'Press Start 2P', monospace;
+            overflow: hidden;
+            color: #fff;
+        }
+        
+        #container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #header {
+            background: #0f0f1a;
+            padding: 15px 25px;
+            border-bottom: 3px solid #00d4ff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        #logo { 
+            font-size: 14px; 
+            color: #00d4ff; 
+            text-shadow: 0 0 20px #00d4ff;
+        }
+        
+        #stage {
+            flex: 1;
+            position: relative;
+            background: #0a0a0f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        #game-canvas {
+            image-rendering: pixelated;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+        }
+        
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .btn {
+            background: #0f3460;
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+            padding: 12px 20px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 9px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background: #00d4ff;
+            color: #0a0a0f;
+        }
+        
+        .btn-hot {
+            border-color: #ff4444;
+            color: #ff4444;
+        }
+        
+        .btn-hot:hover {
+            background: #ff4444;
+            color: #fff;
+        }
+        
+        #stats {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #00d4ff;
+            padding: 15px;
+            font-size: 10px;
+            z-index: 10;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00d4ff;
+            font-size: 20px;
+            animation: pulse 1s infinite;
+            z-index: 100;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Speech bubble */
+        .bubble {
+            position: absolute;
+            background: #fff;
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 8px;
+            pointer-events: none;
+            z-index: 50;
+            border: 2px solid #333;
+        }
+        
+        .bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <div id="logo">🏢 BIGDATACLAW - Pablo's Pixel Agents</div>
+            <div style="font-size: 9px; color: #888;">Using Original Assets</div>
+        </div>
+        
+        <div id="stage">
+            <div id="loading" class="loading">Loading Assets...</div>
+            <canvas id="game-canvas" width="960" height="640"></canvas>
+            
+            <div id="controls">
+                <button class="btn" onclick="spawnAgent()">➕ ADD AGENT</button>
+                <button class="btn btn-hot" onclick="hotMoneyAlert()">🔥 HOT MONEY</button>
+                <button class="btn btn-hot" onclick="staynerDeal()">🏗️ STAYNER</button>
+            </div>
+            
+            <div id="stats">
+                <div style="color: #00d4ff; margin-bottom: 10px;">SYSTEM</div>
+                <div>Agents: <span id="agent-count">0</span></div>
+                <div>Active: <span id="active-count">0</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ============================================
+        // BIGDATACLAW - Pablo's Pixel Agents (Working)
+        // Uses Pablo's actual assets
+        // ============================================
+        
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+        
+        const ASSET_BASE = './pablo-assets/';
+        const TILE_SIZE = 16;
+        const SCALE = 2; // Scale up for visibility
+        
+        const state = {
+            agents: [],
+            assets: {},
+            loaded: false,
+            frame: 0,
+            activeTasks: 0
+        };
+        
+        // Office layout (30x20 tiles)
+        const OFFICE_COLS = 30;
+        const OFFICE_ROWS = 20;
+        
+        // ============================================
+        // ASSET LOADING
+        // ============================================
+        
+        async function loadAssets() {
+            const assetsToLoad = [
+                // Characters
+                { name: 'char_0', path: 'characters/char_0.png' },
+                { name: 'char_1', path: 'characters/char_1.png' },
+                { name: 'char_2', path: 'characters/char_2.png' },
+                { name: 'char_3', path: 'characters/char_3.png' },
+                { name: 'char_4', path: 'characters/char_4.png' },
+                { name: 'char_5', path: 'characters/char_5.png' },
+                
+                // Floors (9 variants)
+                { name: 'floor_0', path: 'floors/floor_0.png' },
+                { name: 'floor_1', path: 'floors/floor_1.png' },
+                { name: 'floor_2', path: 'floors/floor_2.png' },
+                { name: 'floor_3', path: 'floors/floor_3.png' },
+                { name: 'floor_4', path: 'floors/floor_4.png' },
+                
+                // Walls
+                { name: 'wall_0', path: 'walls/wall_0.png' },
+                
+                // Furniture
+                { name: 'desk', path: 'furniture/DESK/DESK.png' },
+                { name: 'chair_front', path: 'furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_FRONT.png' },
+                { name: 'chair_back', path: 'furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_BACK.png' },
+                { name: 'chair_side', path: 'furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_SIDE.png' },
+                { name: 'plant', path: 'furniture/PLANT/PLANT.png' },
+                { name: 'cactus', path: 'furniture/CACTUS/CACTUS.png' },
+                { name: 'bookshelf', path: 'furniture/BOOKSHELF/BOOKSHELF.png' },
+                { name: 'double_bookshelf', path: 'furniture/DOUBLE_BOOKSHELF/DOUBLE_BOOKSHELF.png' },
+                { name: 'whiteboard', path: 'furniture/WHITEBOARD/WHITEBOARD.png' },
+                { name: 'coffee', path: 'furniture/COFFEE/COFFEE.png' },
+                { name: 'clock', path: 'furniture/CLOCK/CLOCK.png' },
+                { name: 'bin', path: 'furniture/BIN/BIN.png' }
+            ];
+            
+            for (const asset of assetsToLoad) {
+                try {
+                    const img = await loadImage(ASSET_BASE + asset.path);
+                    state.assets[asset.name] = img;
+                } catch (e) {
+                    console.warn(`Failed: ${asset.path}`);
+                }
+            }
+            
+            document.getElementById('loading').style.display = 'none';
+            state.loaded = true;
+            
+            // Spawn BigDataClaw agents
+            spawnBigDataClawAgents();
+        }
+        
+        function loadImage(src) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = reject;
+                img.src = src;
+            });
+        }
+        
+        // ============================================
+        // AGENT CLASS
+        // ============================================
+        
+        class Agent {
+            constructor(id, config) {
+                this.id = id;
+                this.name = config.name;
+                this.role = config.role;
+                this.emoji = config.emoji;
+                
+                // Pablo's char sprites (0-5)
+                this.charIndex = config.charIndex || 0;
+                this.spriteKey = `char_${this.charIndex}`;
+                
+                // Position (in tiles)
+                this.col = config.col;
+                this.row = config.row;
+                this.x = this.col * TILE_SIZE;
+                this.y = this.row * TILE_SIZE;
+                
+                this.targetCol = this.col;
+                this.targetRow = this.row;
+                
+                // Direction: 0=down, 1=left, 2=right, 3=up
+                this.direction = 0;
+                
+                // Animation
+                this.animFrame = 0;
+                this.frameTimer = 0;
+                this.walking = false;
+                
+                // Task
+                this.task = null;
+                this.bubble = null;
+            }
+            
+            update(dt) {
+                // Animation timing
+                this.frameTimer += dt;
+                if (this.frameTimer > 0.15) {
+                    this.animFrame = (this.animFrame + 1) % 2;
+                    this.frameTimer = 0;
+                }
+                
+                // Movement
+                const targetX = this.targetCol * TILE_SIZE;
+                const targetY = this.targetRow * TILE_SIZE;
+                const dx = targetX - this.x;
+                const dy = targetY - this.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                
+                if (dist > 1) {
+                    this.walking = true;
+                    const speed = 40 * dt;
+                    this.x += (dx/dist) * speed;
+                    this.y += (dy/dist) * speed;
+                    
+                    // Direction
+                    if (Math.abs(dx) > Math.abs(dy)) {
+                        this.direction = dx > 0 ? 2 : 1;
+                    } else {
+                        this.direction = dy > 0 ? 0 : 3;
+                    }
+                } else {
+                    this.walking = false;
+                    this.x = targetX;
+                    this.y = targetY;
+                    this.col = this.targetCol;
+                    this.row = this.targetRow;
+                }
+            }
+            
+            draw(ctx) {
+                const sprite = state.assets[this.spriteKey];
+                if (!sprite) return;
+                
+                // Pablo's sprite format:
+                // 112x96 total, 4 rows of 24px each
+                // Each frame is 16x24
+                const FRAME_W = 16;
+                const FRAME_H = 24;
+                const ROW_HEIGHT = 24;
+                
+                // Select frame
+                const frameX = this.walking ? this.animFrame * FRAME_W : 0;
+                const frameY = this.direction * ROW_HEIGHT;
+                
+                // Draw scaled up
+                ctx.drawImage(
+                    sprite,
+                    frameX, frameY, FRAME_W, FRAME_H,
+                    this.x * SCALE, (this.y - 8) * SCALE, 
+                    FRAME_W * SCALE, FRAME_H * SCALE
+                );
+            }
+            
+            goTo(col, row) {
+                this.targetCol = col;
+                this.targetRow = row;
+            }
+            
+            showTask(text) {
+                this.task = text;
+                state.activeTasks++;
+                updateStats();
+                
+                // Return to seat after 4 seconds
+                setTimeout(() => {
+                    this.task = null;
+                    state.activeTasks--;
+                    updateStats();
+                    this.goTo(this.col, this.row);
+                }, 4000);
+            }
+        }
+        
+        // ============================================
+        // BIGDATACLAW AGENTS SETUP
+        // ============================================
+        
+        function spawnBigDataClawAgents() {
+            const configs = [
+                { name: 'Transaction Scout', role: 'Deal Hunter', emoji: '🔍', charIndex: 0, col: 5, row: 5 },
+                { name: 'Hot Money Tracker', role: 'Capital Intel', emoji: '💰', charIndex: 1, col: 10, row: 5 },
+                { name: 'Portfolio Analyzer', role: 'Buyer Match', emoji: '📊', charIndex: 2, col: 15, row: 5 },
+                { name: 'LoopNet Intel', role: 'Market Scout', emoji: '🌐', charIndex: 3, col: 5, row: 10 },
+                { name: 'Property Submit', role: 'Deal Pipeline', emoji: '📨', charIndex: 4, col: 10, row: 10 },
+                { name: 'Buyer Database', role: 'Data Master', emoji: '👥', charIndex: 5, col: 15, row: 10 },
+                { name: 'Obsidian Sync', role: 'Knowledge Base', emoji: '📝', charIndex: 0, col: 5, row: 15 },
+                { name: 'Builders Agent', role: 'Dev Tracker', emoji: '🏗️', charIndex: 1, col: 10, row: 15 },
+                { name: 'Collab Agent', role: 'Team Link', emoji: '🤝', charIndex: 2, col: 15, row: 15 },
+                { name: 'Orchestrator', role: 'Command', emoji: '🎮', charIndex: 3, col: 25, row: 8 }
+            ];
+            
+            configs.forEach((config, i) => {
+                setTimeout(() => {
+                    const agent = new Agent(state.agents.length, config);
+                    state.agents.push(agent);
+                    updateStats();
+                }, i * 200);
+            });
+        }
+        
+        function spawnAgent() {
+            const charIndex = Math.floor(Math.random() * 6);
+            const col = 3 + Math.floor(Math.random() * 20);
+            const row = 3 + Math.floor(Math.random() * 14);
+            
+            const agent = new Agent(state.agents.length, {
+                name: `Agent ${state.agents.length + 1}`,
+                role: 'Assistant',
+                emoji: '👤',
+                charIndex,
+                col,
+                row
+            });
+            
+            state.agents.push(agent);
+            updateStats();
+            
+            // Wander
+            setTimeout(() => {
+                agent.goTo(3 + Math.floor(Math.random() * 24), 3 + Math.floor(Math.random() * 14));
+            }, 1000);
+            
+            // Return home
+            setTimeout(() => {
+                agent.goTo(col, row);
+            }, 5000);
+        }
+        
+        function hotMoneyAlert() {
+            const hm = state.agents.find(a => a.name === 'Hot Money Tracker');
+            if (hm) {
+                hm.showTask('🔥 HOT MONEY ALERT!');
+                hm.goTo(20, 5);
+            }
+        }
+        
+        function staynerDeal() {
+            state.agents.forEach((agent, i) => {
+                setTimeout(() => {
+                    agent.showTask('Stayner: $18M');
+                    agent.goTo(20 + (i % 3), 8 + Math.floor(i / 3));
+                }, i * 300);
+            });
+        }
+        
+        function updateStats() {
+            document.getElementById('agent-count').textContent = state.agents.length;
+            document.getElementById('active-count').textContent = state.activeTasks;
+        }
+        
+        // ============================================
+        // RENDERING
+        // ============================================
+        
+        function drawOffice() {
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw floor tiles
+            for (let row = 0; row < OFFICE_ROWS; row++) {
+                for (let col = 0; col < OFFICE_COLS; col++) {
+                    const floorVariant = (col + row) % 5;
+                    const floorSprite = state.assets[`floor_${floorVariant}`] || state.assets.floor_0;
+                    
+                    if (floorSprite) {
+                        ctx.drawImage(floorSprite, col * TILE_SIZE * SCALE, row * TILE_SIZE * SCALE, 
+                                     TILE_SIZE * SCALE, TILE_SIZE * SCALE);
+                    }
+                }
+            }
+            
+            // Draw walls on borders
+            const wallSprite = state.assets.wall_0;
+            if (wallSprite) {
+                for (let col = 0; col < OFFICE_COLS; col++) {
+                    ctx.drawImage(wallSprite, col * TILE_SIZE * SCALE, 0, TILE_SIZE * SCALE, TILE_SIZE * SCALE);
+                    ctx.drawImage(wallSprite, col * TILE_SIZE * SCALE, (OFFICE_ROWS - 1) * TILE_SIZE * SCALE, 
+                                 TILE_SIZE * SCALE, TILE_SIZE * SCALE);
+                }
+                for (let row = 1; row < OFFICE_ROWS - 1; row++) {
+                    ctx.drawImage(wallSprite, 0, row * TILE_SIZE * SCALE, TILE_SIZE * SCALE, TILE_SIZE * SCALE);
+                    ctx.drawImage(wallSprite, (OFFICE_COLS - 1) * TILE_SIZE * SCALE, row * TILE_SIZE * SCALE, 
+                                 TILE_SIZE * SCALE, TILE_SIZE * SCALE);
+                }
+            }
+            
+            // Draw furniture at agent seats
+            state.agents.forEach(agent => {
+                const desk = state.assets.desk;
+                const chair = state.assets.chair_front;
+                
+                if (desk) {
+                    ctx.drawImage(desk, (agent.col - 1) * TILE_SIZE * SCALE, (agent.row - 1) * TILE_SIZE * SCALE, 
+                                 48, 48);
+                }
+                if (chair) {
+                    ctx.drawImage(chair, agent.col * TILE_SIZE * SCALE, agent.row * TILE_SIZE * SCALE, 
+                                 32, 32);
+                }
+            });
+            
+            // Decor
+            const plant = state.assets.plant;
+            const cactus = state.assets.cactus;
+            const bookshelf = state.assets.bookshelf;
+            const coffee = state.assets.coffee;
+            
+            if (plant) {
+                ctx.drawImage(plant, 2 * TILE_SIZE * SCALE, 2 * TILE_SIZE * SCALE, 32, 32);
+                ctx.drawImage(plant, 27 * TILE_SIZE * SCALE, 2 * TILE_SIZE * SCALE, 32, 32);
+                ctx.drawImage(plant, 2 * TILE_SIZE * SCALE, 17 * TILE_SIZE * SCALE, 32, 32);
+            }
+            
+            if (cactus) {
+                ctx.drawImage(cactus, 28 * TILE_SIZE * SCALE, 16 * TILE_SIZE * SCALE, 32, 32);
+            }
+            
+            if (bookshelf) {
+                ctx.drawImage(bookshelf, 28 * TILE_SIZE * SCALE, 8 * TILE_SIZE * SCALE, 32, 48);
+            }
+            
+            if (coffee) {
+                ctx.drawImage(coffee, 26 * TILE_SIZE * SCALE, 4 * TILE_SIZE * SCALE, 32, 32);
+            }
+        }
+        
+        // ============================================
+        // GAME LOOP
+        // ============================================
+        
+        let lastTime = 0;
+        function gameLoop(timestamp) {
+            const dt = (timestamp - lastTime) / 1000;
+            lastTime = timestamp;
+            
+            if (state.loaded) {
+                // Draw office
+                drawOffice();
+                
+                // Update agents
+                state.agents.forEach(agent => agent.update(dt));
+                
+                // Sort by Y and draw
+                state.agents.sort((a, b) => a.y - b.y);
+                state.agents.forEach(agent => agent.draw(ctx));
+            }
+            
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // Start
+        loadAssets().then(() => {
+            requestAnimationFrame(gameLoop);
+        });
+    </script>
+</body>
+</html>
