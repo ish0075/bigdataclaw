@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigDataClaw AI Office - Agents at Work</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #0a0a0f;
+            font-family: 'Press Start 2P', monospace;
+            overflow: hidden;
+            color: #fff;
+        }
+        
+        #container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #header {
+            background: linear-gradient(180deg, #1a1a2e 0%, transparent 100%);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        #logo {
+            font-size: 16px;
+            color: #00d4ff;
+            text-shadow: 0 0 20px #00d4ff;
+        }
+        
+        #stats {
+            display: flex;
+            gap: 30px;
+            font-size: 10px;
+        }
+        
+        .stat { display: flex; gap: 8px; }
+        .stat-label { color: #666; }
+        .stat-value { color: #ffd700; }
+        
+        #stage {
+            flex: 1;
+            position: relative;
+            background: #0f0f1a;
+        }
+        
+        #canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            image-rendering: pixelated;
+            box-shadow: 0 0 60px rgba(0, 212, 255, 0.3);
+        }
+        
+        /* Speech Bubble Styles */
+        .speech-bubble {
+            position: absolute;
+            background: #fff;
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 8px;
+            max-width: 180px;
+            word-wrap: break-word;
+            z-index: 50;
+            pointer-events: none;
+            animation: bubblePop 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #fff;
+        }
+        
+        .speech-bubble.working {
+            background: #00d4ff;
+            color: #000;
+        }
+        
+        .speech-bubble.working::after {
+            border-top-color: #00d4ff;
+        }
+        
+        .speech-bubble.complete {
+            background: #00ff88;
+            color: #000;
+        }
+        
+        .speech-bubble.complete::after {
+            border-top-color: #00ff88;
+        }
+        
+        .speech-bubble.hot-money {
+            background: #ff3333;
+            color: #fff;
+            animation: hotPulse 0.5s infinite;
+        }
+        
+        .speech-bubble.hot-money::after {
+            border-top-color: #ff3333;
+        }
+        
+        @keyframes bubblePop {
+            0% { transform: scale(0) translateX(-50%); opacity: 0; }
+            50% { transform: scale(1.1) translateX(-50%); }
+            100% { transform: scale(1) translateX(-50%); opacity: 1; }
+        }
+        
+        @keyframes hotPulse {
+            0%, 100% { box-shadow: 0 0 10px #ff3333; }
+            50% { box-shadow: 0 0 25px #ff3333, 0 0 40px #ff6600; }
+        }
+        
+        /* Task Log Panel */
+        #task-log {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 320px;
+            background: rgba(15, 15, 26, 0.95);
+            border: 2px solid #00d4ff;
+            padding: 15px;
+            z-index: 100;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        #task-log h3 {
+            font-size: 10px;
+            color: #00d4ff;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #00d4ff;
+            padding-bottom: 5px;
+        }
+        
+        .log-entry {
+            font-size: 7px;
+            padding: 6px 0;
+            border-bottom: 1px solid #333;
+            animation: logSlide 0.3s ease;
+        }
+        
+        @keyframes logSlide {
+            from { transform: translateX(20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .log-time { color: #666; }
+        .log-agent { color: #ffd700; }
+        .log-task { color: #fff; }
+        .log-done { color: #00ff88; }
+        
+        /* Controls */
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(15, 15, 26, 0.95);
+            border: 2px solid #00d4ff;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .btn {
+            background: #0f3460;
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+            padding: 10px 15px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background: #00d4ff;
+            color: #0a0a0f;
+            box-shadow: 0 0 15px #00d4ff;
+        }
+        
+        .btn-hot {
+            border-color: #ff3333;
+            color: #ff3333;
+        }
+        
+        .btn-hot:hover {
+            background: #ff3333;
+            color: #fff;
+        }
+        
+        /* Agent Detail Panel */
+        #agent-panel {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 280px;
+            background: rgba(15, 15, 26, 0.95);
+            border: 2px solid #00d4ff;
+            padding: 15px;
+            z-index: 100;
+            display: none;
+        }
+        
+        #agent-panel.active { display: block; }
+        
+        #agent-panel h3 {
+            font-size: 12px;
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+        
+        .panel-row {
+            font-size: 8px;
+            padding: 5px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .panel-label { color: #666; }
+        .panel-value { color: #fff; }
+        
+        /* Scanlines */
+        #scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <div id="logo">🏢 BIGDATACLAW AI OFFICE</div>
+            <div id="stats">
+                <div class="stat">
+                    <span class="stat-label">AGENTS:</span>
+                    <span class="stat-value">10</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">ACTIVE:</span>
+                    <span class="stat-value" id="active-count">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">TASKS:</span>
+                    <span class="stat-value" id="task-count">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="stage">
+            <canvas id="canvas" width="1200" height="800"></canvas>
+            <div id="bubble-container"></div>
+            
+            <div id="task-log">
+                <h3>📋 LIVE TASK STREAM</h3>
+                <div id="log-entries"></div>
+            </div>
+            
+            <div id="controls">
+                <button class="btn" onclick="office.addTask()">🎯 ASSIGN TASK</button>
+                <button class="btn" onclick="office.allAgentsWork()">⚡ ALL WORK</button>
+                <button class="btn btn-hot" onclick="office.triggerHotMoney()">🔥 HOT MONEY</button>
+                <button class="btn btn-hot" onclick="office.staynerDeal()">🏗️ STAYNER DEAL</button>
+                <button class="btn" onclick="office.toggleSpeed()">⏩ SPEED UP</button>
+            </div>
+            
+            <div id="agent-panel">
+                <h3 id="panel-name">AGENT</h3>
+                <div class="panel-row">
+                    <span class="panel-label">ROLE:</span>
+                    <span class="panel-value" id="panel-role">-</span>
+                </div>
+                <div class="panel-row">
+                    <span class="panel-label">STATUS:</span>
+                    <span class="panel-value" id="panel-status">-</span>
+                </div>
+                <div class="panel-row">
+                    <span class="panel-label">CURRENT TASK:</span>
+                    <span class="panel-value" id="panel-task">-</span>
+                </div>
+                <div class="panel-row">
+                    <span class="panel-label">COMPLETED:</span>
+                    <span class="panel-value" id="panel-completed">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="scanlines"></div>
+    </div>
+    
+    <script>
+        // ============================================
+        // BIGDATACLAW PIXEL OFFICE v2
+        // With Pablo De Lucca-style speech bubbles
+        // ============================================
+        
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+        
+        const TILE = 32;
+        let speedMult = 1;
+        let totalTasks = 0;
+        let activeTasks = 0;
+        
+        // Agent definitions with tasks
+        const AGENT_DATA = [
+            { name: 'Transaction Scout', emoji: '🔍', color: '#00d4ff', role: 'Deal Hunter',
+              tasks: ['Scanning LoopNet...', 'New listing found!', 'Price drop detected', 'Analyzing comps', 'Deal scored: 85/100'] },
+            { name: 'Hot Money Tracker', emoji: '💰', color: '#ff3333', role: 'Capital Intel',
+              tasks: ['Tracking fresh capital', 'Seller motivation: 60%', 'Hot money alert!', 'Analyzing liquidity', 'Urgent opportunity!'] },
+            { name: 'Portfolio Analyzer', emoji: '📊', color: '#00ff88', role: 'Buyer Match',
+              tasks: ['Querying 96K agents', 'Matching buyers', 'Portfolio scored', 'Top 5 identified', 'Buyer ranked #1'] },
+            { name: 'LoopNet Intel', emoji: '🌐', color: '#ffaa00', role: 'Market Scout',
+              tasks: ['Scraping listings', 'Price history check', 'Market trend up', 'New development', 'Data synced'] },
+            { name: 'Property Submit', emoji: '📨', color: '#ff66cc', role: 'Deal Pipeline',
+              tasks: ['Processing submission', 'PDF generated', 'Email sent', 'Deal packaged', 'Alert triggered'] },
+            { name: 'Buyer Database', emoji: '👥', color: '#9966ff', role: 'Data Master',
+              tasks: ['Importing agents', 'Updating records', 'Sync complete', 'Query optimized', 'Database refreshed'] },
+            { name: 'Obsidian Sync', emoji: '📝', color: '#66ccff', role: 'Knowledge Base',
+              tasks: ['Syncing vault', 'Creating note', 'Links updated', 'Deal documented', 'Knowledge synced'] },
+            { name: 'Builders Agent', emoji: '🏗️', color: '#ffcc00', role: 'Dev Tracker',
+              tasks: ['Tracking permits', 'Builder outreach', 'Project update', 'Development intel', 'Construction alert'] },
+            { name: 'Collab Agent', emoji: '🤝', color: '#66ff66', role: 'Team Link',
+              tasks: ['Coordinating team', 'Task delegated', 'Meeting scheduled', 'Notes shared', 'Team synced'] },
+            { name: 'Orchestrator', emoji: '🎮', color: '#ffd700', role: 'Command',
+              tasks: ['System check', 'Optimizing flow', 'Resource alloc', 'Monitoring all', 'System optimal'], isBoss: true }
+        ];
+        
+        // Speech bubble manager
+        class SpeechBubble {
+            constructor(text, x, y, type = 'normal') {
+                this.text = text;
+                this.x = x;
+                this.y = y;
+                this.type = type;
+                this.element = this.create();
+                this.life = 3000; // 3 seconds
+            }
+            
+            create() {
+                const el = document.createElement('div');
+                el.className = `speech-bubble ${this.type}`;
+                el.textContent = this.text;
+                document.getElementById('bubble-container').appendChild(el);
+                this.updatePosition();
+                return el;
+            }
+            
+            updatePosition() {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = rect.width / canvas.width;
+                const scaleY = rect.height / canvas.height;
+                
+                const screenX = rect.left + (this.x * scaleX);
+                const screenY = rect.top + (this.y * scaleY);
+                
+                this.element.style.left = screenX + 'px';
+                this.element.style.top = (screenY - 60) + 'px';
+            }
+            
+            update(dt) {
+                this.life -= dt * 1000;
+                this.updatePosition();
+                return this.life > 0;
+            }
+            
+            destroy() {
+                this.element.remove();
+            }
+        }
+        
+        // Agent class
+        class Agent {
+            constructor(data, index) {
+                this.data = data;
+                this.index = index;
+                this.x = data.isBoss ? 30 * TILE : (3 + (index % 5) * 4) * TILE;
+                this.y = data.isBoss ? 6 * TILE : (3 + Math.floor(index / 5) * 5) * TILE;
+                this.homeX = this.x;
+                this.homeY = this.y;
+                this.tx = this.x;
+                this.ty = this.y;
+                this.state = 'idle';
+                this.task = null;
+                this.taskProgress = 0;
+                this.completed = 0;
+                this.anim = 0;
+                this.walkCycle = 0;
+                this.dir = 0;
+                this.bubble = null;
+            }
+            
+            update(dt) {
+                this.anim += dt * speedMult;
+                
+                // Movement
+                const dx = this.tx - this.x;
+                const dy = this.ty - this.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                
+                if (dist > 2) {
+                    this.state = 'walk';
+                    const speed = 2.5 * dt * speedMult;
+                    this.x += (dx/dist) * speed;
+                    this.y += (dy/dist) * speed;
+                    this.walkCycle += dt * 12 * speedMult;
+                    this.dir = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 3 : 2) : (dy > 0 ? 0 : 1);
+                } else {
+                    if (this.state === 'walk') {
+                        this.state = this.task ? 'work' : 'idle';
+                        if (this.task) {
+                            this.showBubble(this.task, 'working');
+                        }
+                    }
+                }
+                
+                // Task progress
+                if (this.task && this.state === 'work') {
+                    this.taskProgress += dt * 8 * speedMult;
+                    if (this.taskProgress >= 100) {
+                        this.completeTask();
+                    }
+                }
+                
+                // Update bubble position
+                if (this.bubble) {
+                    if (!this.bubble.update(dt)) {
+                        this.bubble.destroy();
+                        this.bubble = null;
+                    }
+                }
+            }
+            
+            draw(ctx) {
+                const bounce = this.state === 'walk' ? Math.sin(this.walkCycle) * 3 :
+                              this.state === 'work' ? Math.sin(this.anim * 10) * 1.5 : 0;
+                
+                const x = Math.floor(this.x);
+                const y = Math.floor(this.y);
+                
+                // Shadow
+                ctx.fillStyle = 'rgba(0,0,0,0.3)';
+                ctx.beginPath();
+                ctx.ellipse(x, y + 12, 12, 5, 0, 0, Math.PI*2);
+                ctx.fill();
+                
+                const py = y - 18 + bounce;
+                const scale = this.data.isBoss ? 1.2 : 1;
+                
+                // Body
+                ctx.fillStyle = this.data.color;
+                ctx.fillRect(x - 11*scale, py + 10, 22*scale, 16*scale);
+                
+                // Head
+                ctx.fillStyle = '#ffccaa';
+                ctx.fillRect(x - 9*scale, py, 18*scale, 12*scale);
+                
+                // Hair
+                ctx.fillStyle = this.data.isBoss ? '#e8d4a0' : '#4a3728';
+                ctx.fillRect(x - 9*scale, py, 18*scale, 4*scale);
+                
+                // Eyes
+                if (Math.sin(this.anim * 2.5) > -0.95) {
+                    ctx.fillStyle = '#000';
+                    const eyeY = py + 6*scale;
+                    if (this.dir === 2) ctx.fillRect(x - 5*scale, eyeY, 2*scale, 2*scale);
+                    else if (this.dir === 3) ctx.fillRect(x + 3*scale, eyeY, 2*scale, 2*scale);
+                    else {
+                        ctx.fillRect(x - 4*scale, eyeY, 2*scale, 2*scale);
+                        ctx.fillRect(x + 2*scale, eyeY, 2*scale, 2*scale);
+                    }
+                }
+                
+                // Working animation
+                if (this.state === 'work') {
+                    const arm = Math.sin(this.anim * 12) * 2;
+                    ctx.fillStyle = '#ffccaa';
+                    ctx.fillRect(x - 14, py + 12 + arm, 4, 6);
+                    ctx.fillRect(x + 10, py + 12 - arm, 4, 6);
+                    
+                    // Screen glow
+                    ctx.fillStyle = this.data.color + '50';
+                    ctx.fillRect(x - 22, py - 3, 44, 36);
+                }
+                
+                // Emoji
+                ctx.font = `${14*scale}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.fillText(this.data.emoji, x, py - 6);
+                
+                // Progress bar
+                if (this.task) {
+                    const bw = 32;
+                    ctx.fillStyle = '#222';
+                    ctx.fillRect(x - bw/2, py - 15, bw, 3);
+                    ctx.fillStyle = this.data.color;
+                    ctx.fillRect(x - bw/2, py - 15, bw * (this.taskProgress/100), 3);
+                }
+                
+                // Status indicator
+                ctx.font = '7px "Press Start 2P"';
+                ctx.fillStyle = this.state === 'work' ? '#0f0' : this.state === 'walk' ? '#ff0' : '#888';
+                ctx.fillText(this.data.name.split(' ')[0], x, y + 22);
+            }
+            
+            showBubble(text, type = 'normal') {
+                if (this.bubble) {
+                    this.bubble.destroy();
+                }
+                this.bubble = new SpeechBubble(text, this.x, this.y - 45, type);
+            }
+            
+            giveTask(taskName) {
+                this.task = taskName;
+                this.taskProgress = 0;
+                this.tx = this.homeX;
+                this.ty = this.homeY;
+                activeTasks++;
+                updateStats();
+                this.showBubble(taskName, 'working');
+                logTask(this.data.name, taskName);
+            }
+            
+            completeTask() {
+                this.completed++;
+                totalTasks++;
+                activeTasks--;
+                updateStats();
+                this.showBubble('Done! ✅', 'complete');
+                logDone(this.data.name, this.task);
+                this.task = null;
+                this.taskProgress = 0;
+                
+                setTimeout(() => this.wander(), 1500);
+            }
+            
+            wander() {
+                const spots = [
+                    {x: 26*TILE, y: 14*TILE},
+                    {x: 20*TILE, y: 9*TILE},
+                    {x: 2*TILE, y: 7*TILE},
+                ];
+                const spot = spots[Math.floor(Math.random() * spots.length)];
+                this.tx = spot.x;
+                this.ty = spot.y;
+                setTimeout(() => {
+                    this.tx = this.homeX;
+                    this.ty = this.homeY;
+                }, 4000);
+            }
+        }
+        
+        // Office
+        const office = {
+            agents: AGENT_DATA.map((d, i) => new Agent(d, i)),
+            bubbles: [],
+            
+            init() {
+                this.loop(0);
+                setInterval(() => this.randomTask(), 4000);
+            },
+            
+            loop(timestamp) {
+                const dt = 1/60;
+                this.agents.forEach(a => a.update(dt));
+                this.draw();
+                requestAnimationFrame((t) => this.loop(t));
+            },
+            
+            draw() {
+                // Floor
+                ctx.fillStyle = '#1a1a2e';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Grid
+                ctx.strokeStyle = '#252538';
+                for (let x = 0; x < canvas.width; x += TILE) {
+                    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+                }
+                for (let y = 0; y < canvas.height; y += TILE) {
+                    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+                }
+                
+                // Carpet
+                ctx.fillStyle = '#222236';
+                ctx.fillRect(TILE, TILE, 24*TILE, 12*TILE);
+                ctx.fillRect(27*TILE, 11*TILE, 8*TILE, 8*TILE);
+                
+                // Desks
+                this.agents.forEach(a => {
+                    ctx.fillStyle = a.data.isBoss ? '#5c3d2e' : '#3a3a4a';
+                    ctx.fillRect(a.homeX - 20, a.homeY - 25, 40, 20);
+                    // Monitor
+                    ctx.fillStyle = '#111';
+                    ctx.fillRect(a.homeX - 12, a.homeY - 35, 24, 18);
+                    ctx.fillStyle = a.state === 'work' ? a.data.color : '#0f0';
+                    ctx.fillRect(a.homeX - 10, a.homeY - 33, 20, 12);
+                });
+                
+                // Meeting table
+                ctx.fillStyle = '#5c3d2e';
+                ctx.fillRect(28*TILE, 13*TILE, 6*TILE, 4*TILE);
+                
+                // Agents sorted by Y
+                this.agents.sort((a, b) => a.y - b.y);
+                this.agents.forEach(a => a.draw(ctx));
+            },
+            
+            addTask() {
+                const available = this.agents.filter(a => !a.task);
+                if (available.length === 0) return;
+                const a = available[Math.floor(Math.random() * available.length)];
+                const task = a.data.tasks[Math.floor(Math.random() * a.data.tasks.length)];
+                a.giveTask(task);
+            },
+            
+            allAgentsWork() {
+                this.agents.forEach((a, i) => {
+                    setTimeout(() => {
+                        if (!a.task) {
+                            const task = a.data.tasks[Math.floor(Math.random() * a.data.tasks.length)];
+                            a.giveTask(task);
+                        }
+                    }, i * 200);
+                });
+            },
+            
+            triggerHotMoney() {
+                const hm = this.agents.find(a => a.data.name === 'Hot Money Tracker');
+                if (hm) {
+                    hm.giveTask('🔥 HOT MONEY ALERT!');
+                    hm.showBubble('🔥 HOT MONEY DETECTED!', 'hot-money');
+                    
+                    // Flash effect
+                    canvas.style.boxShadow = '0 0 80px #ff0000';
+                    setTimeout(() => canvas.style.boxShadow = '0 0 60px rgba(0, 212, 255, 0.3)', 1000);
+                }
+            },
+            
+            staynerDeal() {
+                this.agents.forEach((a, i) => {
+                    const staynerTasks = [
+                        'Stayner: 112 acres', '$18M analysis', 'Matching buyers',
+                        '708 units calc', 'Commission: $360K', 'Tier 1 outreach',
+                        'LOI processing', 'Valuation: $15.7M'
+                    ];
+                    setTimeout(() => {
+                        a.giveTask(staynerTasks[i % staynerTasks.length]);
+                    }, i * 300);
+                });
+            },
+            
+            toggleSpeed() {
+                speedMult = speedMult === 1 ? 3 : 1;
+            },
+            
+            randomTask() {
+                this.addTask();
+            }
+        };
+        
+        // UI Functions
+        function updateStats() {
+            document.getElementById('active-count').textContent = activeTasks;
+            document.getElementById('task-count').textContent = totalTasks;
+        }
+        
+        function logTask(agent, task) {
+            const time = new Date().toLocaleTimeString('en-US', {hour12:false, hour:'2-digit', minute:'2-digit'});
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.innerHTML = `<span class="log-time">${time}</span> <span class="log-agent">${agent}:</span> <span class="log-task">${task}</span>`;
+            const list = document.getElementById('log-entries');
+            list.insertBefore(entry, list.firstChild);
+            while (list.children.length > 8) list.removeChild(list.lastChild);
+        }
+        
+        function logDone(agent, task) {
+            const time = new Date().toLocaleTimeString('en-US', {hour12:false, hour:'2-digit', minute:'2-digit'});
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.innerHTML = `<span class="log-time">${time}</span> <span class="log-agent">${agent}:</span> <span class="log-done">✓ ${task}</span>`;
+            const list = document.getElementById('log-entries');
+            list.insertBefore(entry, list.firstChild);
+            while (list.children.length > 8) list.removeChild(list.lastChild);
+        }
+        
+        // Canvas click handler
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            const x = (e.clientX - rect.left) * scaleX;
+            const y = (e.clientY - rect.top) * scaleY;
+            
+            for (const a of office.agents) {
+                const dx = x - a.x;
+                const dy = y - a.y;
+                if (Math.sqrt(dx*dx + dy*dy) < 30) {
+                    showAgentPanel(a);
+                    return;
+                }
+            }
+            hideAgentPanel();
+        });
+        
+        function showAgentPanel(agent) {
+            document.getElementById('agent-panel').classList.add('active');
+            document.getElementById('panel-name').textContent = agent.data.emoji + ' ' + agent.data.name;
+            document.getElementById('panel-role').textContent = agent.data.role;
+            document.getElementById('panel-status').textContent = agent.state;
+            document.getElementById('panel-task').textContent = agent.task || 'None';
+            document.getElementById('panel-completed').textContent = agent.completed;
+        }
+        
+        function hideAgentPanel() {
+            document.getElementById('agent-panel').classList.remove('active');
+        }
+        
+        // Start
+        office.init();
+    </script>
+</body>
+</html>
