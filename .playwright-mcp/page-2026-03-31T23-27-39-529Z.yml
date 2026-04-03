@@ -1,0 +1,342 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "BIGDATA CLAW" [level=1] [ref=e9]
+        - paragraph [ref=e10]: NERVE Mission Control
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Obsidian Vault" [ref=e46] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e47]
+        - generic [ref=e51]: Obsidian Vault
+      - generic [ref=e52]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e53] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e54]
+        - generic [ref=e57]: EXP Agent Recruiter
+        - generic [ref=e58]: 96K
+      - link "Commercial Agents 6.7K" [ref=e59] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e60]
+        - generic [ref=e63]: Commercial Agents
+        - generic [ref=e64]: 6.7K
+      - link "Brokerages" [ref=e65] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e66]
+        - generic [ref=e69]: Brokerages
+      - generic [ref=e70]: Tools
+      - link "My Listings" [ref=e71] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e72]
+        - generic [ref=e76]: My Listings
+      - link "Buyer Matcher" [ref=e77] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e78]
+        - generic [ref=e83]: Buyer Matcher
+      - link "Agent Matcher" [ref=e84] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e85]
+        - generic [ref=e89]: Agent Matcher
+      - link "Lender Matcher" [ref=e90] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e91]
+        - generic [ref=e93]: Lender Matcher
+      - link "Builder Directory" [ref=e94] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e95]
+        - generic [ref=e99]: Builder Directory
+      - link "Property Upload" [ref=e100] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e101]
+        - generic [ref=e104]: Property Upload
+      - link "Olena Marketing" [ref=e105] [cursor=pointer]:
+        - /url: /olena-feature-sheet
+        - img [ref=e106]
+        - generic [ref=e109]: Olena Marketing
+      - link "Skills & Agents" [ref=e110] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e111]
+        - generic [ref=e114]: Skills & Agents
+      - link "Map View" [ref=e115] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e116]
+        - generic [ref=e118]: Map View
+      - link "Data Manager" [ref=e119] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e120]
+        - generic [ref=e124]: Data Manager
+    - generic [ref=e128]: System Online
+  - generic [ref=e129]:
+    - banner [ref=e130]:
+      - generic [ref=e136]:
+        - img [ref=e434]
+        - generic [ref=e144]: Connected
+      - generic [ref=e147]:
+        - img [ref=e148]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e151]
+        - combobox [ref=e152]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e153]:
+        - button "Voice" [ref=e154] [cursor=pointer]:
+          - img [ref=e155]
+          - generic [ref=e161]: Voice
+        - generic [ref=e162]:
+          - img [ref=e163]
+          - generic [ref=e168]: $12.40
+        - link "Data Manager" [ref=e169] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e170]
+        - button [ref=e174] [cursor=pointer]:
+          - img [ref=e175]
+        - link [ref=e178] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e179]
+        - link "🦞" [ref=e182] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e183]: 🦞
+    - main [ref=e184]:
+      - generic [ref=e186]:
+        - generic [ref=e187]:
+          - generic [ref=e188]:
+            - img [ref=e190]
+            - generic [ref=e192]:
+              - heading "Olena Feature Sheets" [level=1] [ref=e193]
+              - paragraph [ref=e194]: Professional Marketing Suite
+          - generic [ref=e195]:
+            - generic [ref=e196]:
+              - button [ref=e197] [cursor=pointer]:
+                - img [ref=e198]
+              - button [ref=e200] [cursor=pointer]:
+                - img [ref=e201]
+              - button [ref=e203] [cursor=pointer]:
+                - img [ref=e204]
+            - button "AI Generate All" [ref=e206] [cursor=pointer]:
+              - img [ref=e207]
+              - text: AI Generate All
+            - button "Export" [ref=e210] [cursor=pointer]:
+              - img [ref=e211]
+              - text: Export
+        - generic [ref=e214]:
+          - generic [ref=e215]:
+            - generic [ref=e216]:
+              - button "editor" [ref=e217] [cursor=pointer]
+              - button "templates" [ref=e218] [cursor=pointer]
+              - button "social" [ref=e219] [cursor=pointer]
+              - button "Data Room" [ref=e220] [cursor=pointer]
+            - generic [ref=e221]:
+              - generic [ref=e222]:
+                - heading "Property Details" [level=3] [ref=e223]:
+                  - img [ref=e224]
+                  - text: Property Details
+                - generic [ref=e228]:
+                  - generic [ref=e229]:
+                    - generic [ref=e230]: Address
+                    - textbox "123 Main Street" [ref=e231]
+                  - generic [ref=e232]:
+                    - generic [ref=e233]:
+                      - generic [ref=e234]: City
+                      - textbox "Toronto" [ref=e235]
+                    - generic [ref=e236]:
+                      - generic [ref=e237]: Province
+                      - combobox [ref=e238]:
+                        - option "Ontario" [selected]
+                        - option "British Columbia"
+                        - option "Alberta"
+                        - option "Quebec"
+                  - generic [ref=e239]:
+                    - generic [ref=e240]: Price
+                    - generic [ref=e241]:
+                      - img [ref=e242]
+                      - spinbutton [ref=e244]
+                  - generic [ref=e245]:
+                    - generic [ref=e246]:
+                      - generic [ref=e247]: Beds
+                      - generic [ref=e248]:
+                        - img [ref=e249]
+                        - spinbutton [ref=e252]
+                    - generic [ref=e253]:
+                      - generic [ref=e254]: Baths
+                      - generic [ref=e255]:
+                        - img [ref=e256]
+                        - spinbutton [ref=e259]
+                    - generic [ref=e260]:
+                      - generic [ref=e261]: Parking
+                      - generic [ref=e262]:
+                        - img [ref=e263]
+                        - spinbutton [ref=e267]
+                  - generic [ref=e268]:
+                    - generic [ref=e269]:
+                      - generic [ref=e270]: Square Feet
+                      - generic [ref=e271]:
+                        - img [ref=e272]
+                        - spinbutton [ref=e277]
+                    - generic [ref=e278]:
+                      - generic [ref=e279]: Year Built
+                      - generic [ref=e280]:
+                        - img [ref=e281]
+                        - spinbutton [ref=e283]
+                  - generic [ref=e284]:
+                    - generic [ref=e285]: Property Type
+                    - combobox [ref=e286]:
+                      - option "Single Family" [selected]
+                      - option "Condominium"
+                      - option "Townhouse"
+                      - option "Commercial"
+                      - option "Industrial"
+                      - option "Land"
+                  - generic [ref=e287]:
+                    - generic [ref=e288]: Description
+                    - textbox "Enter a compelling property description..." [ref=e289]
+              - generic [ref=e290]:
+                - heading "Key Features" [level=3] [ref=e291]:
+                  - img [ref=e292]
+                  - text: Key Features
+                - generic [ref=e294]:
+                  - generic [ref=e295] [cursor=pointer]:
+                    - checkbox "Grand entrance with 20ft ceilings" [ref=e296]
+                    - generic [ref=e297]: Grand entrance with 20ft ceilings
+                  - generic [ref=e298] [cursor=pointer]:
+                    - checkbox "Chef-inspired gourmet kitchen" [ref=e299]
+                    - generic [ref=e300]: Chef-inspired gourmet kitchen
+                  - generic [ref=e301] [cursor=pointer]:
+                    - checkbox "Primary suite with spa bathroom" [ref=e302]
+                    - generic [ref=e303]: Primary suite with spa bathroom
+                  - generic [ref=e304] [cursor=pointer]:
+                    - checkbox "Smart home automation throughout" [ref=e305]
+                    - generic [ref=e306]: Smart home automation throughout
+                  - generic [ref=e307] [cursor=pointer]:
+                    - checkbox "Infinity edge pool with cabana" [ref=e308]
+                    - generic [ref=e309]: Infinity edge pool with cabana
+                  - generic [ref=e310] [cursor=pointer]:
+                    - checkbox "Wine cellar with tasting room" [ref=e311]
+                    - generic [ref=e312]: Wine cellar with tasting room
+                  - generic [ref=e313] [cursor=pointer]:
+                    - checkbox "Home theater with 4K projection" [ref=e314]
+                    - generic [ref=e315]: Home theater with 4K projection
+                  - generic [ref=e316] [cursor=pointer]:
+                    - checkbox "Rooftop terrace with city views" [ref=e317]
+                    - generic [ref=e318]: Rooftop terrace with city views
+                  - generic [ref=e319] [cursor=pointer]:
+                    - checkbox "Private elevator access" [ref=e320]
+                    - generic [ref=e321]: Private elevator access
+                  - generic [ref=e322] [cursor=pointer]:
+                    - checkbox "Climate-controlled 4-car garage" [ref=e323]
+                    - generic [ref=e324]: Climate-controlled 4-car garage
+              - generic [ref=e325]:
+                - heading "Photos (0/25)" [level=3] [ref=e326]:
+                  - img [ref=e327]
+                  - text: Photos (0/25)
+                - button "Click to upload photos JPG, PNG up to 25MB each" [ref=e330] [cursor=pointer]:
+                  - img [ref=e331]
+                  - generic [ref=e335]: Click to upload photos
+                  - generic [ref=e336]: JPG, PNG up to 25MB each
+              - generic [ref=e337]:
+                - heading "Agent Information" [level=3] [ref=e338]:
+                  - img [ref=e339]
+                  - text: Agent Information
+                - generic [ref=e342]:
+                  - generic [ref=e343]:
+                    - generic [ref=e344]: Agent Name
+                    - textbox "Jane Smith" [ref=e345]
+                  - generic [ref=e346]:
+                    - generic [ref=e347]: Title
+                    - textbox "Senior Real Estate Advisor" [ref=e348]
+                  - generic [ref=e349]:
+                    - generic [ref=e350]:
+                      - generic [ref=e351]: Phone
+                      - generic [ref=e352]:
+                        - img [ref=e353]
+                        - textbox "(416) 555-0123" [ref=e355]
+                    - generic [ref=e356]:
+                      - generic [ref=e357]: Email
+                      - generic [ref=e358]:
+                        - img [ref=e359]
+                        - textbox "jane@brokerage.com" [ref=e362]
+                  - generic [ref=e363]:
+                    - generic [ref=e364]: Brokerage
+                    - textbox "Royal LePage" [ref=e365]
+          - generic [ref=e367]:
+            - generic [ref=e368]:
+              - generic [ref=e438]:
+                - generic [ref=e370]:
+                  - paragraph [ref=e371]: Exclusive Listing
+                  - heading "123 Sample Street" [level=2] [ref=e372]
+                  - paragraph [ref=e373]: Toronto, Ontario
+                - generic [ref=e374]:
+                  - paragraph [ref=e375]: $2,500,000
+                  - paragraph [ref=e376]: Single Family
+              - img [ref=e379]
+              - generic [ref=e383]:
+                - generic [ref=e439]:
+                  - img [ref=e384]
+                  - paragraph [ref=e440]: "4"
+                  - paragraph [ref=e441]: Bedrooms
+                - generic [ref=e442]:
+                  - img [ref=e387]
+                  - paragraph [ref=e443]: "3"
+                  - paragraph [ref=e444]: Bathrooms
+                - generic [ref=e445]:
+                  - img [ref=e390]
+                  - paragraph [ref=e446]: "2"
+                  - paragraph [ref=e447]: Parking
+                - generic [ref=e448]:
+                  - img [ref=e394]
+                  - paragraph [ref=e449]: 3,500
+                  - paragraph [ref=e450]: Sq Ft
+              - generic [ref=e399]:
+                - heading "About This Property" [level=3] [ref=e451]
+                - paragraph [ref=e452]: This stunning property features exceptional craftsmanship and modern amenities throughout. The open-concept design seamlessly connects indoor and outdoor living spaces, creating the perfect environment for both entertaining and everyday living.
+              - generic [ref=e453]:
+                - generic [ref=e401]:
+                  - img [ref=e403]
+                  - generic [ref=e406]:
+                    - paragraph [ref=e407]: Jane Smith
+                    - paragraph [ref=e408]: Senior Real Estate Advisor
+                    - paragraph [ref=e409]: Royal LePage
+                - generic [ref=e410]:
+                  - paragraph [ref=e411]: (416) 555-0123
+                  - paragraph [ref=e412]: jane@brokerage.com
+            - generic [ref=e413]:
+              - button "Full Preview" [ref=e414] [cursor=pointer]:
+                - img [ref=e415]
+                - text: Full Preview
+              - button "Download PDF" [ref=e418] [cursor=pointer]:
+                - img [ref=e419]
+                - text: Download PDF
+              - button "Share" [ref=e422] [cursor=pointer]:
+                - img [ref=e423]
+                - text: Share
+  - button "Ctrl+Shift+V" [ref=e429] [cursor=pointer]:
+    - img [ref=e430]
+    - generic [ref=e433]: Ctrl+Shift+V

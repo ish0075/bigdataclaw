@@ -178,6 +178,26 @@ const HotMoneyRadar = () => {
       alert('Failed to save changes. Please try again.')
     }
   }
+
+  const spawnPaperclipMission = async (lead, e) => {
+    e?.stopPropagation()
+    e?.preventDefault()
+    try {
+      const response = await fetch(`${API_BASE}/paperclip/hot-money-missions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lead: frontendToApi(lead) })
+      })
+      if (!response.ok) throw new Error('Failed to create Paperclip mission')
+      const data = await response.json()
+      alert(`Paperclip company created: ${data.name}`)
+      // Open the company in a new tab
+      window.open(`/paperclip-companies/${data.company_id}`, '_blank')
+    } catch (err) {
+      console.error('Error creating Paperclip mission:', err)
+      alert('Failed to create Paperclip mission. Please try again.')
+    }
+  }
   
   const totalCapital = displayLeads.reduce((sum, l) => sum + (l.cashAmount || 0), 0)
   
@@ -402,6 +422,7 @@ const HotMoneyRadar = () => {
                 lead={lead} 
                 formatCash={formatCash}
                 onViewProfile={() => handleViewProfile(lead)}
+                onSpawnPaperclip={(e) => spawnPaperclipMission(lead, e)}
               />
             ))
           )}
@@ -1323,7 +1344,7 @@ const FilterModal = ({ show, onClose, filters, setFilters }) => {
   )
 }
 
-const HotMoneyListItem = ({ lead, formatCash, onViewProfile }) => {
+const HotMoneyListItem = ({ lead, formatCash, onViewProfile, onSpawnPaperclip }) => {
   const getScoreColor = (score) => {
     if (score >= 90) return 'text-emerald-400'
     if (score >= 70) return 'text-yellow-400'
@@ -1399,6 +1420,14 @@ const HotMoneyListItem = ({ lead, formatCash, onViewProfile }) => {
                   className="px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-medium hover:bg-red-500 transition-colors cursor-pointer"
                 >
                   View Profile
+                </button>
+                <button
+                  type="button"
+                  onClick={onSpawnPaperclip}
+                  className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-500 transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+                >
+                  <span>🚀</span>
+                  <span>Analyze</span>
                 </button>
               </div>
             </div>

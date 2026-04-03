@@ -1,0 +1,1530 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - img "Control Shifter" [ref=e8]
+      - generic [ref=e9]:
+        - heading "Mission Control" [level=1] [ref=e10]
+        - paragraph [ref=e11]: Real Estate Command Center
+    - navigation [ref=e12]:
+      - generic [ref=e13]: Main
+      - link "Mission Control" [ref=e14] [cursor=pointer]:
+        - /url: /
+        - img [ref=e15]
+        - generic [ref=e20]: Mission Control
+      - link "Property Research" [ref=e21] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e22]
+        - generic [ref=e26]: Property Research
+      - link "Hot Money Radar" [ref=e27] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e28]
+        - generic [ref=e30]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e31] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e32]
+        - generic [ref=e37]: Deal Pipeline
+      - link "Opportunities" [ref=e38] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e39]
+        - generic [ref=e41]: Opportunities
+      - link "Agent Workspace" [ref=e42] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e43]
+        - generic [ref=e46]: Agent Workspace
+      - link "Bot Boardroom" [ref=e47] [cursor=pointer]:
+        - /url: /bot-boardroom
+        - img [ref=e48]
+        - generic [ref=e54]: Bot Boardroom
+      - link "Obsidian Vault" [ref=e55] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e56]
+        - generic [ref=e60]: Obsidian Vault
+      - generic [ref=e61]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e62] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e63]
+        - generic [ref=e66]: EXP Agent Recruiter
+        - generic [ref=e67]: 96K
+      - link "Commercial Agents 6.7K" [ref=e68] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e69]
+        - generic [ref=e72]: Commercial Agents
+        - generic [ref=e73]: 6.7K
+      - link "Brokerages" [ref=e74] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e75]
+        - generic [ref=e78]: Brokerages
+      - generic [ref=e79]: AI Bots
+      - link "Buyer Intelligence AI" [ref=e80] [cursor=pointer]:
+        - /url: /buyer-bot
+        - img [ref=e81]
+        - generic [ref=e85]: Buyer Intelligence
+        - generic [ref=e86]: AI
+      - link "Seller Outreach AI" [ref=e87] [cursor=pointer]:
+        - /url: /seller-outreach-bot
+        - img [ref=e88]
+        - generic [ref=e93]: Seller Outreach
+        - generic [ref=e94]: AI
+      - link "Property Valuation AI" [ref=e95] [cursor=pointer]:
+        - /url: /property-valuation-bot
+        - img [ref=e96]
+        - generic [ref=e98]: Property Valuation
+        - generic [ref=e99]: AI
+      - link "Vigil Monitor 24/7" [ref=e100] [cursor=pointer]:
+        - /url: /vigil
+        - img [ref=e101]
+        - generic [ref=e103]: Vigil Monitor
+        - generic [ref=e104]: 24/7
+      - link "Agent Workspaces NEW" [ref=e105] [cursor=pointer]:
+        - /url: /agent-workspaces
+        - img [ref=e106]
+        - generic [ref=e108]: Agent Workspaces
+        - generic [ref=e109]: NEW
+      - link "Bot Builder BUILD" [ref=e110] [cursor=pointer]:
+        - /url: /bot-builder
+        - img [ref=e111]
+        - generic [ref=e115]: Bot Builder
+        - generic [ref=e116]: BUILD
+      - generic [ref=e117]: Tools
+      - link "My Listings" [ref=e118] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e119]
+        - generic [ref=e123]: My Listings
+      - link "Buyer Matcher" [ref=e124] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e125]
+        - generic [ref=e130]: Buyer Matcher
+      - link "Agent Matcher" [ref=e131] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e132]
+        - generic [ref=e136]: Agent Matcher
+      - link "Lender Matcher" [ref=e137] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e138]
+        - generic [ref=e140]: Lender Matcher
+      - link "Builder Directory" [ref=e141] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e142]
+        - generic [ref=e146]: Builder Directory
+      - link "Property Upload" [ref=e147] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e148]
+        - generic [ref=e151]: Property Upload
+      - link "Olena Marketing" [ref=e152] [cursor=pointer]:
+        - /url: /olena-feature-sheet
+        - img [ref=e153]
+        - generic [ref=e156]: Olena Marketing
+      - link "Canva Editor" [ref=e157] [cursor=pointer]:
+        - /url: /canva-editor
+        - img [ref=e158]
+        - generic [ref=e164]: Canva Editor
+      - link "Skills & Agents" [ref=e165] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e166]
+        - generic [ref=e169]: Skills & Agents
+      - link "Map View" [ref=e170] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e171]
+        - generic [ref=e173]: Map View
+      - link "Data Manager" [ref=e174] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e175]
+        - generic [ref=e179]: Data Manager
+      - link "AI Builder" [ref=e180] [cursor=pointer]:
+        - /url: /ai-builder
+        - img [ref=e181]
+        - generic [ref=e184]: AI Builder
+    - generic [ref=e188]: System Online
+  - generic [ref=e189]:
+    - banner [ref=e190]:
+      - generic [ref=e196]:
+        - img [ref=e333]
+        - generic [ref=e204]: Connected
+      - generic [ref=e207]:
+        - img [ref=e208]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e211]
+        - combobox [ref=e212]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e213]:
+        - button "Voice" [ref=e214] [cursor=pointer]:
+          - img [ref=e215]
+          - generic [ref=e221]: Voice
+        - generic [ref=e222]:
+          - img [ref=e223]
+          - generic [ref=e228]: $12.40
+        - link "Data Manager" [ref=e229] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e230]
+        - button [ref=e234] [cursor=pointer]:
+          - img [ref=e235]
+        - link [ref=e238] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e239]
+        - link "🦞" [ref=e242] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e243]: 🦞
+    - main [ref=e244]:
+      - generic [ref=e246]:
+        - generic [ref=e247]:
+          - generic [ref=e248]:
+            - img [ref=e250]
+            - generic [ref=e253]:
+              - heading "AI Builder" [level=1] [ref=e254]
+              - paragraph [ref=e255]: VS Code Style Editor
+          - generic [ref=e256]:
+            - button [ref=e257] [cursor=pointer]:
+              - img [ref=e258]
+            - button [ref=e261] [cursor=pointer]:
+              - img [ref=e262]
+            - button "Save" [disabled] [ref=e264]:
+              - img [ref=e265]
+              - text: Save
+        - generic [ref=e269]:
+          - generic [ref=e270]:
+            - generic [ref=e271]:
+              - generic [ref=e272]: Explorer
+              - generic [ref=e273]:
+                - button "New File" [ref=e274] [cursor=pointer]:
+                  - img [ref=e275]
+                - button "Refresh" [ref=e276] [cursor=pointer]:
+                  - img [ref=e277]
+            - generic [ref=e282]:
+              - generic [ref=e337] [cursor=pointer]:
+                - img [ref=e338]
+                - generic [ref=e341]: 281_CHIPPAWA_FULL_REPORT.txt
+              - generic [ref=e342] [cursor=pointer]:
+                - img [ref=e343]
+                - generic [ref=e346]: AGENT_RECRUITER_ENHANCEMENT_PLAN.md
+              - generic [ref=e347] [cursor=pointer]:
+                - img [ref=e348]
+                - generic [ref=e351]: AGENT_WORKSPACE_ARCHITECTURE.md
+              - generic [ref=e352] [cursor=pointer]:
+                - img [ref=e353]
+                - generic [ref=e356]: AGENT_WORKSPACE_SYSTEM_COMPLETE.md
+              - generic [ref=e357] [cursor=pointer]:
+                - img [ref=e358]
+                - generic [ref=e361]: BACKEND_ECOSYSTEM_ARCHITECTURE.md
+              - generic [ref=e362] [cursor=pointer]:
+                - img [ref=e363]
+                - generic [ref=e366]: BACKEND_ECOSYSTEM_IMPLEMENTATION_COMPLETE.md
+              - generic [ref=e367] [cursor=pointer]:
+                - img [ref=e368]
+                - generic [ref=e371]: BACKEND_ECOSYSTEM_SUMMARY.md
+              - generic [ref=e372] [cursor=pointer]:
+                - img [ref=e373]
+                - generic [ref=e376]: BIGDATACLAW_SAAS_PLAN.md
+              - generic [ref=e377] [cursor=pointer]:
+                - img [ref=e378]
+                - generic [ref=e381]: BOT_BUILDER_COMPLETE.md
+              - generic [ref=e382] [cursor=pointer]:
+                - img [ref=e383]
+                - generic [ref=e386]: BOT_SWARM_MARKETING.md
+              - generic [ref=e387] [cursor=pointer]:
+                - img [ref=e388]
+                - generic [ref=e391]: BOT_SWARM_MARKETING_SPEC.md
+              - generic [ref=e392] [cursor=pointer]:
+                - img [ref=e393]
+                - generic [ref=e396]: BUILD_COMPLETE_SUMMARY.md
+              - generic [ref=e397] [cursor=pointer]:
+                - img [ref=e398]
+                - generic [ref=e401]: COMMERCIAL_AGENT_RECRUITER.md
+              - generic [ref=e402] [cursor=pointer]:
+                - img [ref=e403]
+                - generic [ref=e406]: COMMERCIAL_AGENT_RECRUITER_PLAN.md
+              - generic [ref=e408] [cursor=pointer]:
+                - img [ref=e409]
+                - img [ref=e411]
+                - generic [ref=e413]: COMPANIES_BY_CATEGORY
+              - generic [ref=e414] [cursor=pointer]:
+                - img [ref=e415]
+                - generic [ref=e418]: COMPANY_CATEGORIES_SUMMARY.txt
+              - generic [ref=e419] [cursor=pointer]:
+                - img [ref=e420]
+                - generic [ref=e423]: CONTACT_INTELLIGENCE_INTEGRATION.md
+              - generic [ref=e424] [cursor=pointer]:
+                - img [ref=e425]
+                - generic [ref=e428]: CONTEXTKEEP_CONVERSATIONS.json
+              - generic [ref=e429] [cursor=pointer]:
+                - img [ref=e430]
+                - generic [ref=e433]: CONTEXTKEEP_EXPORT_SUMMARY.md
+              - generic [ref=e434] [cursor=pointer]:
+                - img [ref=e435]
+                - generic [ref=e438]: CONTEXTKEEP_QUICKLINKS_EXPORT.json
+              - generic [ref=e439] [cursor=pointer]:
+                - img [ref=e440]
+                - generic [ref=e443]: CONTEXTKEEP_SETUP.md
+              - generic [ref=e444] [cursor=pointer]:
+                - img [ref=e445]
+                - generic [ref=e448]: CONTEXTKEEP_TROUBLESHOOTING.md
+              - generic [ref=e449] [cursor=pointer]:
+                - img [ref=e450]
+                - generic [ref=e453]: DASHBOARD_LOCATIONS.md
+              - generic [ref=e454] [cursor=pointer]:
+                - img [ref=e455]
+                - generic [ref=e458]: DATA_EMPIRE_FULLY_OPERATIONAL.md
+              - generic [ref=e459] [cursor=pointer]:
+                - img [ref=e460]
+                - generic [ref=e463]: DATA_EMPIRE_LAUNCH_READY.md
+              - generic [ref=e464] [cursor=pointer]:
+                - img [ref=e465]
+                - generic [ref=e468]: DATA_EMPIRE_MASTER_PLAN.md
+              - generic [ref=e469] [cursor=pointer]:
+                - img [ref=e470]
+                - generic [ref=e473]: DEPLOY_GUIDE_ish0075.md
+              - generic [ref=e474] [cursor=pointer]:
+                - img [ref=e475]
+                - generic [ref=e478]: ENRICHMENT_QUICKSTART.md
+              - generic [ref=e479] [cursor=pointer]:
+                - img [ref=e480]
+                - generic [ref=e483]: EXP_AGENT_RECRUITER_CONTEXTKEEP.md
+              - generic [ref=e484] [cursor=pointer]:
+                - img [ref=e485]
+                - generic [ref=e488]: EXP_AGENT_RECRUITER_ENHANCED.md
+              - generic [ref=e489] [cursor=pointer]:
+                - img [ref=e490]
+                - generic [ref=e493]: FRONTEND_STATUS.md
+              - generic [ref=e494] [cursor=pointer]:
+                - img [ref=e495]
+                - generic [ref=e498]: FULL_BUILD_ALL.sh
+              - generic [ref=e499] [cursor=pointer]:
+                - img [ref=e500]
+                - generic [ref=e503]: GAMEPLAN.md
+              - generic [ref=e504] [cursor=pointer]:
+                - img [ref=e505]
+                - generic [ref=e508]: GAME_PLAN_START_NOW.md
+              - generic [ref=e509] [cursor=pointer]:
+                - img [ref=e510]
+                - generic [ref=e513]: INTEGRATION_SUMMARY.md
+              - generic [ref=e515] [cursor=pointer]:
+                - img [ref=e516]
+                - img [ref=e518]
+                - generic [ref=e520]: LENDERS_BY_SPECIALIZATION
+              - generic [ref=e521] [cursor=pointer]:
+                - img [ref=e522]
+                - generic [ref=e525]: LOAD_BALANCER_SETUP.md
+              - generic [ref=e526] [cursor=pointer]:
+                - img [ref=e527]
+                - generic [ref=e530]: MONETIZATION_ARCHITECTURE.md
+              - generic [ref=e531] [cursor=pointer]:
+                - img [ref=e532]
+                - generic [ref=e535]: NERVE_MISSION_BOARD_SPEC.md
+              - generic [ref=e536] [cursor=pointer]:
+                - img [ref=e537]
+                - generic [ref=e540]: NERVE_UI_DESIGN.md
+              - generic [ref=e541] [cursor=pointer]:
+                - img [ref=e542]
+                - generic [ref=e545]: PROPERTY_ENRICHMENT_SUMMARY.md
+              - generic [ref=e546] [cursor=pointer]:
+                - img [ref=e547]
+                - generic [ref=e550]: PROPERTY_ENRICHMENT_SYSTEM.md
+              - generic [ref=e551] [cursor=pointer]:
+                - img [ref=e552]
+                - generic [ref=e555]: PROPERTY_MATCHING_SYSTEM.md
+              - generic [ref=e556] [cursor=pointer]:
+                - img [ref=e557]
+                - generic [ref=e560]: PUSH_TO_GITHUB.sh
+              - generic [ref=e561] [cursor=pointer]:
+                - img [ref=e562]
+                - generic [ref=e565]: Procfile
+              - generic [ref=e566] [cursor=pointer]:
+                - img [ref=e567]
+                - generic [ref=e570]: QUICKSTART.md
+              - generic [ref=e571] [cursor=pointer]:
+                - img [ref=e572]
+                - generic [ref=e575]: QUICK_LINKS_ALL_REALTORS.csv
+              - generic [ref=e576] [cursor=pointer]:
+                - img [ref=e577]
+                - generic [ref=e580]: QUICK_LINKS_ALL_REALTORS_V2.csv
+              - generic [ref=e581] [cursor=pointer]:
+                - img [ref=e582]
+                - generic [ref=e585]: QUICK_LINKS_BROKERAGES.csv
+              - generic [ref=e586] [cursor=pointer]:
+                - img [ref=e587]
+                - generic [ref=e590]: QUICK_LINKS_BUILDERS.csv
+              - generic [ref=e591] [cursor=pointer]:
+                - img [ref=e592]
+                - generic [ref=e595]: QUICK_LINKS_COMPANIES.csv
+              - generic [ref=e596] [cursor=pointer]:
+                - img [ref=e597]
+                - generic [ref=e600]: QUICK_LINKS_COMPANIES_CATEGORIZED.csv
+              - generic [ref=e601] [cursor=pointer]:
+                - img [ref=e602]
+                - generic [ref=e605]: QUICK_LINKS_COMPANIES_V2.csv
+              - generic [ref=e606] [cursor=pointer]:
+                - img [ref=e607]
+                - generic [ref=e610]: QUICK_LINKS_GUIDE.md
+              - generic [ref=e611] [cursor=pointer]:
+                - img [ref=e612]
+                - generic [ref=e615]: QUICK_LINKS_LENDERS.csv
+              - generic [ref=e616] [cursor=pointer]:
+                - img [ref=e617]
+                - generic [ref=e620]: QUICK_LINKS_LENDERS_V2.csv
+              - generic [ref=e621] [cursor=pointer]:
+                - img [ref=e622]
+                - generic [ref=e625]: QUICK_LINKS_MASTER_GUIDE.md
+              - generic [ref=e626] [cursor=pointer]:
+                - img [ref=e627]
+                - generic [ref=e630]: QUICK_LINKS_RECRUITER_DATABASE.csv
+              - generic [ref=e631] [cursor=pointer]:
+                - img [ref=e632]
+                - generic [ref=e635]: QUICK_LINKS_RECRUITER_SUMMARY.txt
+              - generic [ref=e636] [cursor=pointer]:
+                - img [ref=e637]
+                - generic [ref=e640]: QUICK_LINKS_SUMMARY.txt
+              - generic [ref=e641] [cursor=pointer]:
+                - img [ref=e642]
+                - generic [ref=e645]: QUICK_LINKS_SUMMARY_V2.txt
+              - generic [ref=e646] [cursor=pointer]:
+                - img [ref=e647]
+                - generic [ref=e650]: QUICK_LINKS_V21_UPDATE.md
+              - generic [ref=e651] [cursor=pointer]:
+                - img [ref=e652]
+                - generic [ref=e655]: QUICK_LINKS_V2_GUIDE.md
+              - generic [ref=e656] [cursor=pointer]:
+                - img [ref=e657]
+                - generic [ref=e660]: README-GITHUB.md
+              - generic [ref=e661] [cursor=pointer]:
+                - img [ref=e662]
+                - generic [ref=e665]: README.md
+              - generic [ref=e666] [cursor=pointer]:
+                - img [ref=e667]
+                - generic [ref=e670]: REALTOR_BOT.md
+              - generic [ref=e671] [cursor=pointer]:
+                - img [ref=e672]
+                - generic [ref=e675]: SEAWAY_MALL_BLOCK_BUYERS.csv
+              - generic [ref=e676] [cursor=pointer]:
+                - img [ref=e677]
+                - generic [ref=e680]: SEAWAY_MALL_BLOCK_SALE_STRATEGY.md
+              - generic [ref=e681] [cursor=pointer]:
+                - img [ref=e682]
+                - generic [ref=e685]: SEAWAY_MALL_CREAM_OF_THE_CROP.md
+              - generic [ref=e686] [cursor=pointer]:
+                - img [ref=e687]
+                - generic [ref=e690]: SEAWAY_MALL_MAIN_DEVELOPMENT_BUYERS.csv
+              - generic [ref=e691] [cursor=pointer]:
+                - img [ref=e692]
+                - generic [ref=e695]: SEAWAY_MALL_PRIORITY_CALL_LIST.csv
+              - generic [ref=e696] [cursor=pointer]:
+                - img [ref=e697]
+                - generic [ref=e700]: SEAWAY_MALL_REAR_PARCEL_BUYERS.csv
+              - generic [ref=e701] [cursor=pointer]:
+                - img [ref=e702]
+                - generic [ref=e705]: SEAWAY_MALL_REVISED_DEAL_TERMS.md
+              - generic [ref=e706] [cursor=pointer]:
+                - img [ref=e707]
+                - generic [ref=e710]: SEAWAY_MALL_TIER_1_CASH_BUYERS.csv
+              - generic [ref=e711] [cursor=pointer]:
+                - img [ref=e712]
+                - generic [ref=e715]: SEAWAY_MALL_TWO_COMPONENT_BREAKDOWN.md
+              - generic [ref=e717] [cursor=pointer]:
+                - img [ref=e718]
+                - img [ref=e720]
+                - generic [ref=e722]: SOVEREIGN_AI_CORRIDOR
+              - generic [ref=e723] [cursor=pointer]:
+                - img [ref=e724]
+                - generic [ref=e727]: START_BUILDING_NOW.sh
+              - generic [ref=e729] [cursor=pointer]:
+                - img [ref=e730]
+                - img [ref=e732]
+                - generic [ref=e734]: THOROLD_CROWN_LAND_SUBMISSION_PACKAGE
+              - generic [ref=e735] [cursor=pointer]:
+                - img [ref=e736]
+                - generic [ref=e739]: TOMORROW_TESTING_GUIDE.md
+              - generic [ref=e741] [cursor=pointer]:
+                - img [ref=e742]
+                - img [ref=e744]
+                - generic [ref=e746]: __pycache__
+              - generic [ref=e747] [cursor=pointer]:
+                - img [ref=e748]
+                - generic [ref=e751]: agent-matcher-obsidian-export-updated.png
+              - generic [ref=e752] [cursor=pointer]:
+                - img [ref=e753]
+                - generic [ref=e756]: agent-matcher-obsidian-export.png
+              - generic [ref=e757] [cursor=pointer]:
+                - img [ref=e758]
+                - generic [ref=e761]: agent-matcher.png
+              - generic [ref=e762] [cursor=pointer]:
+                - img [ref=e763]
+                - generic [ref=e766]: agent-workspace-config.png
+              - generic [ref=e767] [cursor=pointer]:
+                - img [ref=e768]
+                - generic [ref=e771]: agent-workspace-detail.png
+              - generic [ref=e772] [cursor=pointer]:
+                - img [ref=e773]
+                - generic [ref=e776]: agent-workspace-working.png
+              - generic [ref=e777] [cursor=pointer]:
+                - img [ref=e778]
+                - generic [ref=e781]: agent-workspaces-overview.png
+              - generic [ref=e782] [cursor=pointer]:
+                - img [ref=e783]
+                - generic [ref=e786]: agent_config.json
+              - generic [ref=e788] [cursor=pointer]:
+                - img [ref=e789]
+                - img [ref=e791]
+                - generic [ref=e793]: agent_meetings
+              - generic [ref=e794] [cursor=pointer]:
+                - img [ref=e795]
+                - generic [ref=e800]: agent_orchestrator.py
+              - generic [ref=e801] [cursor=pointer]:
+                - img [ref=e802]
+                - generic [ref=e805]: agent_server.log
+              - generic [ref=e806] [cursor=pointer]:
+                - img [ref=e807]
+                - generic [ref=e812]: agent_workspace_api.py
+              - generic [ref=e814] [cursor=pointer]:
+                - img [ref=e815]
+                - img [ref=e817]
+                - generic [ref=e819]: agents
+              - generic [ref=e820] [cursor=pointer]:
+                - img [ref=e821]
+                - generic [ref=e826]: ai_builder_api.py
+              - generic [ref=e827] [cursor=pointer]:
+                - img [ref=e828]
+                - generic [ref=e831]: all_contacts_quick_links.csv
+              - generic [ref=e832] [cursor=pointer]:
+                - img [ref=e833]
+                - generic [ref=e836]: all_contacts_with_quick_links.csv
+              - generic [ref=e837] [cursor=pointer]:
+                - img [ref=e838]
+                - generic [ref=e841]: allanburg-key-parcels.png
+              - generic [ref=e842] [cursor=pointer]:
+                - img [ref=e843]
+                - generic [ref=e846]: allanburg-parcel-cards-final.png
+              - generic [ref=e847] [cursor=pointer]:
+                - img [ref=e848]
+                - generic [ref=e851]: allanburg-parcels-features.png
+              - generic [ref=e852] [cursor=pointer]:
+                - img [ref=e853]
+                - generic [ref=e856]: allanburg-rings-cards.png
+              - generic [ref=e857] [cursor=pointer]:
+                - img [ref=e858]
+                - generic [ref=e861]: allanburg-rings-parcels.png
+              - generic [ref=e862] [cursor=pointer]:
+                - img [ref=e863]
+                - generic [ref=e866]: allanburg-updated-pins.png
+              - generic [ref=e867] [cursor=pointer]:
+                - img [ref=e868]
+                - generic [ref=e873]: api_recruiters.py
+              - generic [ref=e874] [cursor=pointer]:
+                - img [ref=e875]
+                - generic [ref=e878]: api_server.log
+              - generic [ref=e879] [cursor=pointer]:
+                - img [ref=e880]
+                - generic [ref=e883]: api_server.pid
+              - generic [ref=e884] [cursor=pointer]:
+                - img [ref=e885]
+                - generic [ref=e890]: api_server.py
+              - generic [ref=e891] [cursor=pointer]:
+                - img [ref=e892]
+                - generic [ref=e897]: apply_quick_links_all_contacts.py
+              - generic [ref=e898] [cursor=pointer]:
+                - img [ref=e899]
+                - generic [ref=e904]: apply_quick_links_enhanced.py
+              - generic [ref=e905] [cursor=pointer]:
+                - img [ref=e906]
+                - generic [ref=e911]: apply_quick_links_recruiter.py
+              - generic [ref=e912] [cursor=pointer]:
+                - img [ref=e913]
+                - generic [ref=e918]: automation_runner.py
+              - generic [ref=e919] [cursor=pointer]:
+                - img [ref=e920]
+                - generic [ref=e925]: batch_enrich_properties.py
+              - generic [ref=e927] [cursor=pointer]:
+                - img [ref=e928]
+                - img [ref=e930]
+                - generic [ref=e932]: bdaiv2_exports
+              - generic [ref=e933] [cursor=pointer]:
+                - img [ref=e934]
+                - generic [ref=e937]: bigdataclaw-buyer-matching.png
+              - generic [ref=e938] [cursor=pointer]:
+                - img [ref=e939]
+                - generic [ref=e942]: bigdataclaw-error.png
+              - generic [ref=e943] [cursor=pointer]:
+                - img [ref=e944]
+                - generic [ref=e947]: bigdataclaw-home.png
+              - generic [ref=e948] [cursor=pointer]:
+                - img [ref=e949]
+                - generic [ref=e952]: bigdataclaw-listings.png
+              - generic [ref=e953] [cursor=pointer]:
+                - img [ref=e954]
+                - generic [ref=e957]: bigdataclaw-map-view.png
+              - generic [ref=e958] [cursor=pointer]:
+                - img [ref=e959]
+                - generic [ref=e962]: bigdataclaw-matching-results-full.png
+              - generic [ref=e963] [cursor=pointer]:
+                - img [ref=e964]
+                - generic [ref=e967]: bigdataclaw-matching-results.png
+              - generic [ref=e968] [cursor=pointer]:
+                - img [ref=e969]
+                - generic [ref=e972]: bigdataclaw-property-upload.png
+              - generic [ref=e973] [cursor=pointer]:
+                - img [ref=e974]
+                - generic [ref=e977]: bigdataclaw-research-results-bottom.png
+              - generic [ref=e978] [cursor=pointer]:
+                - img [ref=e979]
+                - generic [ref=e982]: bigdataclaw-research-results.png
+              - generic [ref=e983] [cursor=pointer]:
+                - img [ref=e984]
+                - generic [ref=e987]: bigdataclaw-skills-agents.png
+              - generic [ref=e988] [cursor=pointer]:
+                - img [ref=e989]
+                - generic [ref=e992]: bigdataclaw.db
+              - generic [ref=e993] [cursor=pointer]:
+                - img [ref=e994]
+                - generic [ref=e997]: bot-boardroom-13-agents.png
+              - generic [ref=e998] [cursor=pointer]:
+                - img [ref=e999]
+                - generic [ref=e1002]: bot-boardroom-16-agents.png
+              - generic [ref=e1003] [cursor=pointer]:
+                - img [ref=e1004]
+                - generic [ref=e1007]: bot-boardroom-all-teams.png
+              - generic [ref=e1008] [cursor=pointer]:
+                - img [ref=e1009]
+                - generic [ref=e1012]: bot-boardroom-full-view.png
+              - generic [ref=e1013] [cursor=pointer]:
+                - img [ref=e1014]
+                - generic [ref=e1017]: bot-builder-configure.png
+              - generic [ref=e1018] [cursor=pointer]:
+                - img [ref=e1019]
+                - generic [ref=e1022]: bot-builder-review.png
+              - generic [ref=e1023] [cursor=pointer]:
+                - img [ref=e1024]
+                - generic [ref=e1027]: bot-builder-skills.png
+              - generic [ref=e1028] [cursor=pointer]:
+                - img [ref=e1029]
+                - generic [ref=e1032]: bot-builder-templates.png
+              - generic [ref=e1033] [cursor=pointer]:
+                - img [ref=e1034]
+                - generic [ref=e1037]: bot-builder-tools.png
+              - generic [ref=e1038] [cursor=pointer]:
+                - img [ref=e1039]
+                - generic [ref=e1042]: bot-swarm-active-1.png
+              - generic [ref=e1043] [cursor=pointer]:
+                - img [ref=e1044]
+                - generic [ref=e1047]: bot-swarm-demo.png
+              - generic [ref=e1048] [cursor=pointer]:
+                - img [ref=e1049]
+                - generic [ref=e1052]: bot_boardroom_audio.png
+              - generic [ref=e1053] [cursor=pointer]:
+                - img [ref=e1054]
+                - generic [ref=e1057]: bot_boardroom_audio_controls.png
+              - generic [ref=e1058] [cursor=pointer]:
+                - img [ref=e1059]
+                - generic [ref=e1062]: bot_boardroom_check.png
+              - generic [ref=e1063] [cursor=pointer]:
+                - img [ref=e1064]
+                - generic [ref=e1067]: bot_boardroom_complete.png
+              - generic [ref=e1068] [cursor=pointer]:
+                - img [ref=e1069]
+                - generic [ref=e1072]: bot_boardroom_create_modal.png
+              - generic [ref=e1073] [cursor=pointer]:
+                - img [ref=e1074]
+                - generic [ref=e1077]: bot_boardroom_deal_review.png
+              - generic [ref=e1078] [cursor=pointer]:
+                - img [ref=e1079]
+                - generic [ref=e1082]: bot_boardroom_final.png
+              - generic [ref=e1083] [cursor=pointer]:
+                - img [ref=e1084]
+                - generic [ref=e1087]: bot_boardroom_meeting_detail.png
+              - generic [ref=e1088] [cursor=pointer]:
+                - img [ref=e1089]
+                - generic [ref=e1092]: bot_boardroom_meeting_started.png
+              - generic [ref=e1093] [cursor=pointer]:
+                - img [ref=e1094]
+                - generic [ref=e1097]: bot_boardroom_meeting_summary.png
+              - generic [ref=e1098] [cursor=pointer]:
+                - img [ref=e1099]
+                - generic [ref=e1102]: bot_boardroom_meeting_view.png
+              - generic [ref=e1103] [cursor=pointer]:
+                - img [ref=e1104]
+                - generic [ref=e1107]: bot_boardroom_meetings.png
+              - generic [ref=e1108] [cursor=pointer]:
+                - img [ref=e1109]
+                - generic [ref=e1112]: bot_boardroom_modal_agents.png
+              - generic [ref=e1113] [cursor=pointer]:
+                - img [ref=e1114]
+                - generic [ref=e1117]: bot_boardroom_modal_participants.png
+              - generic [ref=e1118] [cursor=pointer]:
+                - img [ref=e1119]
+                - generic [ref=e1122]: bot_boardroom_modal_participants2.png
+              - generic [ref=e1123] [cursor=pointer]:
+                - img [ref=e1124]
+                - generic [ref=e1127]: bot_boardroom_modal_scroll.png
+              - generic [ref=e1128] [cursor=pointer]:
+                - img [ref=e1129]
+                - generic [ref=e1132]: bot_boardroom_page.png
+              - generic [ref=e1133] [cursor=pointer]:
+                - img [ref=e1134]
+                - generic [ref=e1137]: bot_boardroom_participants_section.png
+              - generic [ref=e1138] [cursor=pointer]:
+                - img [ref=e1139]
+                - generic [ref=e1142]: bot_boardroom_scrolled.png
+              - generic [ref=e1143] [cursor=pointer]:
+                - img [ref=e1144]
+                - generic [ref=e1147]: bot_boardroom_summary_section.png
+              - generic [ref=e1148] [cursor=pointer]:
+                - img [ref=e1149]
+                - generic [ref=e1152]: bot_boardroom_working.png
+              - generic [ref=e1153] [cursor=pointer]:
+                - img [ref=e1154]
+                - generic [ref=e1159]: bot_builder_api.py
+              - generic [ref=e1160] [cursor=pointer]:
+                - img [ref=e1161]
+                - generic [ref=e1164]: botboardroom.png
+              - generic [ref=e1165] [cursor=pointer]:
+                - img [ref=e1166]
+                - generic [ref=e1169]: briefing-deck-section.png
+              - generic [ref=e1170] [cursor=pointer]:
+                - img [ref=e1171]
+                - generic [ref=e1174]: briefing-deck-view.png
+              - generic [ref=e1175] [cursor=pointer]:
+                - img [ref=e1176]
+                - generic [ref=e1179]: builder-directory-current.png
+              - generic [ref=e1180] [cursor=pointer]:
+                - img [ref=e1181]
+                - generic [ref=e1184]: builder-directory.png
+              - generic [ref=e1185] [cursor=pointer]:
+                - img [ref=e1186]
+                - generic [ref=e1189]: builder-quick-links-fixed.png
+              - generic [ref=e1190] [cursor=pointer]:
+                - img [ref=e1191]
+                - generic [ref=e1194]: builder-quick-links-google-search.png
+              - generic [ref=e1195] [cursor=pointer]:
+                - img [ref=e1196]
+                - generic [ref=e1199]: buyer-bot-page.png
+              - generic [ref=e1200] [cursor=pointer]:
+                - img [ref=e1201]
+                - generic [ref=e1204]: buyer-bot-profile.png
+              - generic [ref=e1205] [cursor=pointer]:
+                - img [ref=e1206]
+                - generic [ref=e1209]: buyer-matcher-fixed.png
+              - generic [ref=e1210] [cursor=pointer]:
+                - img [ref=e1211]
+                - generic [ref=e1214]: buyer_matcher_buyers.png
+              - generic [ref=e1215] [cursor=pointer]:
+                - img [ref=e1216]
+                - generic [ref=e1219]: buyer_matcher_overview.png
+              - generic [ref=e1220] [cursor=pointer]:
+                - img [ref=e1221]
+                - generic [ref=e1224]: buyer_matcher_top.png
+              - generic [ref=e1226] [cursor=pointer]:
+                - img [ref=e1227]
+                - img [ref=e1229]
+                - generic [ref=e1231]: buyers_data
+              - generic [ref=e1232] [cursor=pointer]:
+                - img [ref=e1233]
+                - generic [ref=e1236]: canva-editor-modern.png
+              - generic [ref=e1237] [cursor=pointer]:
+                - img [ref=e1238]
+                - generic [ref=e1241]: canva-editor-selected.png
+              - generic [ref=e1242] [cursor=pointer]:
+                - img [ref=e1243]
+                - generic [ref=e1246]: canva-editor-view.png
+              - generic [ref=e1247] [cursor=pointer]:
+                - img [ref=e1248]
+                - generic [ref=e1253]: categorize_lenders.py
+              - generic [ref=e1254] [cursor=pointer]:
+                - img [ref=e1255]
+                - generic [ref=e1258]: commander-dashboard.png
+              - generic [ref=e1259] [cursor=pointer]:
+                - img [ref=e1260]
+                - generic [ref=e1263]: connect-frontend-backend.sh
+              - generic [ref=e1264] [cursor=pointer]:
+                - img [ref=e1265]
+                - generic [ref=e1268]: contact-form-submitted.png
+              - generic [ref=e1269] [cursor=pointer]:
+                - img [ref=e1270]
+                - generic [ref=e1273]: contact-form-success.png
+              - generic [ref=e1274] [cursor=pointer]:
+                - img [ref=e1275]
+                - generic [ref=e1280]: contact_intelligence_client.py
+              - generic [ref=e1281] [cursor=pointer]:
+                - img [ref=e1282]
+                - generic [ref=e1287]: contact_intelligence_demo.py
+              - generic [ref=e1288] [cursor=pointer]:
+                - img [ref=e1289]
+                - generic [ref=e1294]: contextkeep_examples.py
+              - generic [ref=e1295] [cursor=pointer]:
+                - img [ref=e1296]
+                - generic [ref=e1301]: contextkeep_integration.py
+              - generic [ref=e1302] [cursor=pointer]:
+                - img [ref=e1303]
+                - generic [ref=e1308]: conversation_logger.py
+              - generic [ref=e1310] [cursor=pointer]:
+                - img [ref=e1311]
+                - img [ref=e1313]
+                - generic [ref=e1315]: conversation_logs
+              - generic [ref=e1316] [cursor=pointer]:
+                - img [ref=e1317]
+                - generic [ref=e1320]: corridor-4-node-cards.png
+              - generic [ref=e1321] [cursor=pointer]:
+                - img [ref=e1322]
+                - generic [ref=e1325]: corridor-4-nodes.png
+              - generic [ref=e1326] [cursor=pointer]:
+                - img [ref=e1327]
+                - generic [ref=e1330]: corridor-all-4-nodes.png
+              - generic [ref=e1331] [cursor=pointer]:
+                - img [ref=e1332]
+                - generic [ref=e1335]: corridor-final-two-nodes.png
+              - generic [ref=e1336] [cursor=pointer]:
+                - img [ref=e1337]
+                - generic [ref=e1340]: corridor-node-cards-final.png
+              - generic [ref=e1341] [cursor=pointer]:
+                - img [ref=e1342]
+                - generic [ref=e1345]: corridor-node-cards.png
+              - generic [ref=e1346] [cursor=pointer]:
+                - img [ref=e1347]
+                - generic [ref=e1350]: corridor-nodes-cards.png
+              - generic [ref=e1351] [cursor=pointer]:
+                - img [ref=e1352]
+                - generic [ref=e1355]: corridor-nodes-view.png
+              - generic [ref=e1356] [cursor=pointer]:
+                - img [ref=e1357]
+                - generic [ref=e1360]: corridor-section-4-nodes.png
+              - generic [ref=e1361] [cursor=pointer]:
+                - img [ref=e1362]
+                - generic [ref=e1365]: corridor-section-two-nodes.png
+              - generic [ref=e1366] [cursor=pointer]:
+                - img [ref=e1367]
+                - generic [ref=e1370]: corridor-two-node-cards.png
+              - generic [ref=e1371] [cursor=pointer]:
+                - img [ref=e1372]
+                - generic [ref=e1375]: corridor-two-nodes.png
+              - generic [ref=e1376] [cursor=pointer]:
+                - img [ref=e1377]
+                - generic [ref=e1382]: create_category_obsidian_notes.py
+              - generic [ref=e1383] [cursor=pointer]:
+                - img [ref=e1384]
+                - generic [ref=e1387]: current-view.png
+              - generic [ref=e1389] [cursor=pointer]:
+                - img [ref=e1390]
+                - img [ref=e1392]
+                - generic [ref=e1394]: dbeaver_complete_exports
+              - generic [ref=e1396] [cursor=pointer]:
+                - img [ref=e1397]
+                - img [ref=e1399]
+                - generic [ref=e1401]: dbeaver_exports
+              - generic [ref=e1403] [cursor=pointer]:
+                - img [ref=e1404]
+                - img [ref=e1406]
+                - generic [ref=e1408]: dbeaver_final_exports
+              - generic [ref=e1409] [cursor=pointer]:
+                - img [ref=e1410]
+                - generic [ref=e1413]: deal-details-modal.png
+              - generic [ref=e1414] [cursor=pointer]:
+                - img [ref=e1415]
+                - generic [ref=e1418]: deal-pipeline-fixed.png
+              - generic [ref=e1419] [cursor=pointer]:
+                - img [ref=e1420]
+                - generic [ref=e1423]: deal_package_output.md
+              - generic [ref=e1424] [cursor=pointer]:
+                - img [ref=e1425]
+                - generic [ref=e1428]: deploy-production.sh
+              - generic [ref=e1429] [cursor=pointer]:
+                - img [ref=e1430]
+                - generic [ref=e1433]: deploy-to-vercel.sh
+              - generic [ref=e1434] [cursor=pointer]:
+                - img [ref=e1435]
+                - generic [ref=e1440]: deploy_scraper_agents.py
+              - generic [ref=e1442] [cursor=pointer]:
+                - img [ref=e1443]
+                - img [ref=e1445]
+                - generic [ref=e1447]: desktop_resources
+              - generic [ref=e1449] [cursor=pointer]:
+                - img [ref=e1450]
+                - img [ref=e1452]
+                - generic [ref=e1454]: dist
+              - generic [ref=e1455] [cursor=pointer]:
+                - img [ref=e1456]
+                - generic [ref=e1459]: docker-compose.agents.yml
+              - generic [ref=e1460] [cursor=pointer]:
+                - img [ref=e1461]
+                - generic [ref=e1464]: docker-compose.yml
+              - generic [ref=e1465] [cursor=pointer]:
+                - img [ref=e1466]
+                - generic [ref=e1469]: domain-check.png
+              - generic [ref=e1470] [cursor=pointer]:
+                - img [ref=e1471]
+                - generic [ref=e1476]: enhance_final_builders_list.py
+              - generic [ref=e1477] [cursor=pointer]:
+                - img [ref=e1478]
+                - generic [ref=e1483]: enhanced_api.py
+              - generic [ref=e1484] [cursor=pointer]:
+                - img [ref=e1485]
+                - generic [ref=e1490]: enhanced_company_categorizer.py
+              - generic [ref=e1491] [cursor=pointer]:
+                - img [ref=e1492]
+                - generic [ref=e1497]: eslint.config.js
+              - generic [ref=e1498] [cursor=pointer]:
+                - img [ref=e1499]
+                - generic [ref=e1502]: exp-agent-quick-links-google-search.png
+              - generic [ref=e1503] [cursor=pointer]:
+                - img [ref=e1504]
+                - generic [ref=e1507]: exp-agent-recruiter-agents-view.png
+              - generic [ref=e1508] [cursor=pointer]:
+                - img [ref=e1509]
+                - generic [ref=e1512]: exp-agent-recruiter-initial.png
+              - generic [ref=e1513] [cursor=pointer]:
+                - img [ref=e1514]
+                - generic [ref=e1517]: exp-agent-recruiter-list-view.png
+              - generic [ref=e1518] [cursor=pointer]:
+                - img [ref=e1519]
+                - generic [ref=e1522]: exp-agent-recruiter-list-view2.png
+              - generic [ref=e1523] [cursor=pointer]:
+                - img [ref=e1524]
+                - generic [ref=e1527]: exp-agent-recruiter-search-exp-realty.png
+              - generic [ref=e1528] [cursor=pointer]:
+                - img [ref=e1529]
+                - generic [ref=e1532]: exp-agent-recruiter-search-john-fixed.png
+              - generic [ref=e1533] [cursor=pointer]:
+                - img [ref=e1534]
+                - generic [ref=e1537]: exp-agent-recruiter-search-john-smith.png
+              - generic [ref=e1538] [cursor=pointer]:
+                - img [ref=e1539]
+                - generic [ref=e1542]: exp-agent-recruiter-search-john.png
+              - generic [ref=e1543] [cursor=pointer]:
+                - img [ref=e1544]
+                - generic [ref=e1547]: exp-agent-recruiter-search-results-john-smith.png
+              - generic [ref=e1548] [cursor=pointer]:
+                - img [ref=e1549]
+                - generic [ref=e1552]: exp-agent-recruiter-search-results.png
+              - generic [ref=e1553] [cursor=pointer]:
+                - img [ref=e1554]
+                - generic [ref=e1557]: exp-agent-recruiter-search-toronto.png
+              - generic [ref=e1558] [cursor=pointer]:
+                - img [ref=e1559]
+                - generic [ref=e1562]: exp-agent-search-current.png
+              - generic [ref=e1563] [cursor=pointer]:
+                - img [ref=e1564]
+                - generic [ref=e1567]: exp-agent-search-john-test.png
+              - generic [ref=e1568] [cursor=pointer]:
+                - img [ref=e1569]
+                - generic [ref=e1572]: exp-agent-search-list-view.png
+              - generic [ref=e1573] [cursor=pointer]:
+                - img [ref=e1574]
+                - generic [ref=e1577]: exp-agent-search-results.png
+              - generic [ref=e1578] [cursor=pointer]:
+                - img [ref=e1579]
+                - generic [ref=e1582]: exp-agent-search-test.png
+              - generic [ref=e1583] [cursor=pointer]:
+                - img [ref=e1584]
+                - generic [ref=e1587]: exp_agent_recruiter_complete.png
+              - generic [ref=e1588] [cursor=pointer]:
+                - img [ref=e1589]
+                - generic [ref=e1592]: exp_agent_recruiter_current.png
+              - generic [ref=e1593] [cursor=pointer]:
+                - img [ref=e1594]
+                - generic [ref=e1597]: exp_agent_recruiter_final.png
+              - generic [ref=e1598] [cursor=pointer]:
+                - img [ref=e1599]
+                - generic [ref=e1602]: exp_agent_recruiter_full_search.png
+              - generic [ref=e1603] [cursor=pointer]:
+                - img [ref=e1604]
+                - generic [ref=e1607]: exp_agent_recruiter_middle.png
+              - generic [ref=e1608] [cursor=pointer]:
+                - img [ref=e1609]
+                - generic [ref=e1612]: exp_agent_recruiter_search_bar.png
+              - generic [ref=e1613] [cursor=pointer]:
+                - img [ref=e1614]
+                - generic [ref=e1617]: exp_agent_recruiter_search_fixed.png
+              - generic [ref=e1618] [cursor=pointer]:
+                - img [ref=e1619]
+                - generic [ref=e1622]: exp_agent_recruiter_search_input.png
+              - generic [ref=e1623] [cursor=pointer]:
+                - img [ref=e1624]
+                - generic [ref=e1627]: exp_agent_recruiter_search_result.png
+              - generic [ref=e1628] [cursor=pointer]:
+                - img [ref=e1629]
+                - generic [ref=e1632]: exp_agent_recruiter_search_scrolled.png
+              - generic [ref=e1633] [cursor=pointer]:
+                - img [ref=e1634]
+                - generic [ref=e1637]: exp_agent_recruiter_search_section.png
+              - generic [ref=e1638] [cursor=pointer]:
+                - img [ref=e1639]
+                - generic [ref=e1642]: exp_agent_recruiter_search_test.png
+              - generic [ref=e1643] [cursor=pointer]:
+                - img [ref=e1644]
+                - generic [ref=e1647]: exp_agent_recruiter_searchbar_final.png
+              - generic [ref=e1648] [cursor=pointer]:
+                - img [ref=e1649]
+                - generic [ref=e1652]: exp_agent_recruiter_top.png
+              - generic [ref=e1653] [cursor=pointer]:
+                - img [ref=e1654]
+                - generic [ref=e1657]: expagentrecruiter-top.png
+              - generic [ref=e1658] [cursor=pointer]:
+                - img [ref=e1659]
+                - generic [ref=e1662]: expagentrecruiter.png
+              - generic [ref=e1663] [cursor=pointer]:
+                - img [ref=e1664]
+                - generic [ref=e1667]: final-check.png
+              - generic [ref=e1668] [cursor=pointer]:
+                - img [ref=e1669]
+                - generic [ref=e1674]: generate_all_quick_links.py
+              - generic [ref=e1675] [cursor=pointer]:
+                - img [ref=e1676]
+                - generic [ref=e1679]: generated-mind-map.png
+              - generic [ref=e1680] [cursor=pointer]:
+                - img [ref=e1681]
+                - generic [ref=e1686]: health_check.py
+              - generic [ref=e1687] [cursor=pointer]:
+                - img [ref=e1688]
+                - generic [ref=e1693]: health_monitor.py
+              - generic [ref=e1694] [cursor=pointer]:
+                - img [ref=e1695]
+                - generic [ref=e1700]: health_monitor_frontend_backend.py
+              - generic [ref=e1701] [cursor=pointer]:
+                - img [ref=e1702]
+                - generic [ref=e1705]: health_report_20260328_003718.md
+              - generic [ref=e1706] [cursor=pointer]:
+                - img [ref=e1707]
+                - generic [ref=e1710]: health_report_20260328_004716.md
+              - generic [ref=e1711] [cursor=pointer]:
+                - img [ref=e1712]
+                - generic [ref=e1715]: hero-25-opacity.png
+              - generic [ref=e1716] [cursor=pointer]:
+                - img [ref=e1717]
+                - generic [ref=e1720]: hero-45-opacity.png
+              - generic [ref=e1721] [cursor=pointer]:
+                - img [ref=e1722]
+                - generic [ref=e1725]: hero-subtle-check.png
+              - generic [ref=e1726] [cursor=pointer]:
+                - img [ref=e1727]
+                - generic [ref=e1730]: hero-very-subtle.png
+              - generic [ref=e1731] [cursor=pointer]:
+                - img [ref=e1732]
+                - generic [ref=e1735]: hero-video-check.png
+              - generic [ref=e1736] [cursor=pointer]:
+                - img [ref=e1737]
+                - generic [ref=e1740]: hero-video-loop-check.png
+              - generic [ref=e1741] [cursor=pointer]:
+                - img [ref=e1742]
+                - generic [ref=e1745]: hero-video-reverted.png
+              - generic [ref=e1746] [cursor=pointer]:
+                - img [ref=e1747]
+                - generic [ref=e1750]: hero-visible-25.png
+              - generic [ref=e1751] [cursor=pointer]:
+                - img [ref=e1752]
+                - generic [ref=e1755]: hot-money-radar-fixed.png
+              - generic [ref=e1756] [cursor=pointer]:
+                - img [ref=e1757]
+                - generic [ref=e1760]: hot_money_radar_fixed.png
+              - generic [ref=e1761] [cursor=pointer]:
+                - img [ref=e1762]
+                - generic [ref=e1765]: hot_money_radar_full.png
+              - generic [ref=e1766] [cursor=pointer]:
+                - img [ref=e1767]
+                - generic [ref=e1770]: hot_money_radar_working.png
+              - generic [ref=e1771] [cursor=pointer]:
+                - img [ref=e1772]
+                - generic [ref=e1777]: import_all_lenders.py
+              - generic [ref=e1778] [cursor=pointer]:
+                - img [ref=e1779]
+                - generic [ref=e1784]: import_all_lenders_fixed.py
+              - generic [ref=e1785] [cursor=pointer]:
+                - img [ref=e1786]
+                - generic [ref=e1791]: import_builders_to_obsidian.py
+              - generic [ref=e1792] [cursor=pointer]:
+                - img [ref=e1793]
+                - generic [ref=e1798]: import_dbeaver_final.py
+              - generic [ref=e1799] [cursor=pointer]:
+                - img [ref=e1800]
+                - generic [ref=e1805]: import_real_lenders_only.py
+              - generic [ref=e1806] [cursor=pointer]:
+                - img [ref=e1807]
+                - generic [ref=e1812]: index.html
+              - generic [ref=e1813] [cursor=pointer]:
+                - img [ref=e1814]
+                - generic [ref=e1819]: index_contacts_to_qdrant.py
+              - generic [ref=e1820] [cursor=pointer]:
+                - img [ref=e1821]
+                - generic [ref=e1824]: lender-matcher-api-working.png
+              - generic [ref=e1825] [cursor=pointer]:
+                - img [ref=e1826]
+                - generic [ref=e1829]: lender-matcher-asset-class.png
+              - generic [ref=e1830] [cursor=pointer]:
+                - img [ref=e1831]
+                - generic [ref=e1834]: lender-matcher-clean-data.png
+              - generic [ref=e1835] [cursor=pointer]:
+                - img [ref=e1836]
+                - generic [ref=e1839]: lender-matcher-full-view.png
+              - generic [ref=e1840] [cursor=pointer]:
+                - img [ref=e1841]
+                - generic [ref=e1844]: lender-matcher-land-filter-active.png
+              - generic [ref=e1845] [cursor=pointer]:
+                - img [ref=e1846]
+                - generic [ref=e1849]: lender-matcher-land-lenders-bottom.png
+              - generic [ref=e1850] [cursor=pointer]:
+                - img [ref=e1851]
+                - generic [ref=e1854]: lender-matcher-land-lenders-populated.png
+              - generic [ref=e1855] [cursor=pointer]:
+                - img [ref=e1856]
+                - generic [ref=e1859]: lender-page-snapshot.md
+              - generic [ref=e1860] [cursor=pointer]:
+                - img [ref=e1861]
+                - generic [ref=e1864]: lenders_page_fixed.png
+              - generic [ref=e1865] [cursor=pointer]:
+                - img [ref=e1866]
+                - generic [ref=e1869]: lenders_page_list.png
+              - generic [ref=e1871] [cursor=pointer]:
+                - img [ref=e1872]
+                - img [ref=e1874]
+                - generic [ref=e1876]: logs
+              - generic [ref=e1877] [cursor=pointer]:
+                - img [ref=e1878]
+                - generic [ref=e1883]: matching_engine.py
+              - generic [ref=e1884] [cursor=pointer]:
+                - img [ref=e1885]
+                - generic [ref=e1888]: mind-map-section.png
+              - generic [ref=e1889] [cursor=pointer]:
+                - img [ref=e1890]
+                - generic [ref=e1893]: mind-map-v2.png
+              - generic [ref=e1894] [cursor=pointer]:
+                - img [ref=e1895]
+                - generic [ref=e1898]: mission-control-logo-updated.png
+              - generic [ref=e1899] [cursor=pointer]:
+                - img [ref=e1900]
+                - generic [ref=e1903]: mission-launched.md
+              - generic [ref=e1904] [cursor=pointer]:
+                - img [ref=e1905]
+                - generic [ref=e1910]: monitoring_dashboard.html
+              - generic [ref=e1911] [cursor=pointer]:
+                - img [ref=e1912]
+                - generic [ref=e1917]: monitoring_dashboard.py
+              - generic [ref=e1918] [cursor=pointer]:
+                - img [ref=e1919]
+                - generic [ref=e1922]: my-listings-grid-view.png
+              - generic [ref=e1923] [cursor=pointer]:
+                - img [ref=e1924]
+                - generic [ref=e1927]: my-listings-list-view.png
+              - generic [ref=e1928] [cursor=pointer]:
+                - img [ref=e1929]
+                - generic [ref=e1932]: nanticoke-crown-assembly-live.png
+              - generic [ref=e1933] [cursor=pointer]:
+                - img [ref=e1934]
+                - generic [ref=e1937]: nanticoke-map-full.png
+              - generic [ref=e1938] [cursor=pointer]:
+                - img [ref=e1939]
+                - generic [ref=e1942]: nanticoke-map-parcels.png
+              - generic [ref=e1943] [cursor=pointer]:
+                - img [ref=e1944]
+                - generic [ref=e1947]: nanticoke-map-section.png
+              - generic [ref=e1948] [cursor=pointer]:
+                - img [ref=e1949]
+                - generic [ref=e1952]: nanticoke-parcel-cards-stats.png
+              - generic [ref=e1953] [cursor=pointer]:
+                - img [ref=e1954]
+                - generic [ref=e1957]: nanticoke-parcels-stats.png
+              - generic [ref=e1958] [cursor=pointer]:
+                - img [ref=e1959]
+                - generic [ref=e1962]: nanticoke-section.png
+              - generic [ref=e1963] [cursor=pointer]:
+                - img [ref=e1964]
+                - generic [ref=e1967]: nanticoke-stats-final.png
+              - generic [ref=e1968] [cursor=pointer]:
+                - img [ref=e1969]
+                - generic [ref=e1972]: nanticoke-stats-row.png
+              - generic [ref=e1974] [cursor=pointer]:
+                - img [ref=e1975]
+                - img [ref=e1977]
+                - generic [ref=e1979]: nerve
+              - generic [ref=e1980] [cursor=pointer]:
+                - img [ref=e1981]
+                - generic [ref=e1984]: nerve-current-state.png
+              - generic [ref=e1985] [cursor=pointer]:
+                - img [ref=e1986]
+                - generic [ref=e1989]: nerve-scraper-agents.service
+              - generic [ref=e1990] [cursor=pointer]:
+                - img [ref=e1991]
+                - generic [ref=e1994]: nerve_server.pid
+              - generic [ref=e1995] [cursor=pointer]:
+                - img [ref=e1996]
+                - generic [ref=e1999]: new-site-live.png
+              - generic [ref=e2000] [cursor=pointer]:
+                - img [ref=e2001]
+                - generic [ref=e2006]: notification_service.py
+              - generic [ref=e2007] [cursor=pointer]:
+                - img [ref=e2008]
+                - generic [ref=e2011]: numbered_brokerages_search.csv
+              - generic [ref=e2012] [cursor=pointer]:
+                - img [ref=e2013]
+                - generic [ref=e2018]: numbered_brokerages_search.html
+              - generic [ref=e2019] [cursor=pointer]:
+                - img [ref=e2020]
+                - generic [ref=e2023]: numbered_entity_mappings.json
+              - generic [ref=e2024] [cursor=pointer]:
+                - img [ref=e2025]
+                - generic [ref=e2028]: obsidian-vault-full.png
+              - generic [ref=e2029] [cursor=pointer]:
+                - img [ref=e2030]
+                - generic [ref=e2033]: obsidian-vault-working.png
+              - generic [ref=e2034] [cursor=pointer]:
+                - img [ref=e2035]
+                - generic [ref=e2040]: obsidian_integration.py
+              - generic [ref=e2041] [cursor=pointer]:
+                - img [ref=e2042]
+                - generic [ref=e2045]: opportunity-automation.service
+              - generic [ref=e2046] [cursor=pointer]:
+                - img [ref=e2047]
+                - generic [ref=e2052]: opportunity_automation_system.py
+              - generic [ref=e2053] [cursor=pointer]:
+                - img [ref=e2054]
+                - generic [ref=e2057]: package-lock.json
+              - generic [ref=e2058] [cursor=pointer]:
+                - img [ref=e2059]
+                - generic [ref=e2062]: package.json
+              - generic [ref=e2063] [cursor=pointer]:
+                - img [ref=e2064]
+                - generic [ref=e2067]: pdf-briefing-section.png
+              - generic [ref=e2068] [cursor=pointer]:
+                - img [ref=e2069]
+                - generic [ref=e2074]: populate_land_lenders.py
+              - generic [ref=e2075] [cursor=pointer]:
+                - img [ref=e2076]
+                - generic [ref=e2081]: postcss.config.js
+              - generic [ref=e2082] [cursor=pointer]:
+                - img [ref=e2083]
+                - generic [ref=e2086]: pptx-card-full.png
+              - generic [ref=e2087] [cursor=pointer]:
+                - img [ref=e2088]
+                - generic [ref=e2091]: pptx-download-button.png
+              - generic [ref=e2092] [cursor=pointer]:
+                - img [ref=e2093]
+                - generic [ref=e2096]: pptx-section-view.png
+              - generic [ref=e2097] [cursor=pointer]:
+                - img [ref=e2098]
+                - generic [ref=e2101]: preview.log
+              - generic [ref=e2102] [cursor=pointer]:
+                - img [ref=e2103]
+                - generic [ref=e2106]: preview_server.pid
+              - generic [ref=e2107] [cursor=pointer]:
+                - img [ref=e2108]
+                - generic [ref=e2111]: property-intelligence-bot.png
+              - generic [ref=e2112] [cursor=pointer]:
+                - img [ref=e2113]
+                - generic [ref=e2116]: property-valuation-bot.png
+              - generic [ref=e2117] [cursor=pointer]:
+                - img [ref=e2118]
+                - generic [ref=e2123]: property_enrichment_engine.py
+              - generic [ref=e2124] [cursor=pointer]:
+                - img [ref=e2125]
+                - generic [ref=e2128]: property_research_form.png
+              - generic [ref=e2129] [cursor=pointer]:
+                - img [ref=e2130]
+                - generic [ref=e2133]: property_research_form_bottom.png
+              - generic [ref=e2134] [cursor=pointer]:
+                - img [ref=e2135]
+                - generic [ref=e2138]: property_research_full.png
+              - generic [ref=e2139] [cursor=pointer]:
+                - img [ref=e2140]
+                - generic [ref=e2143]: property_research_page.png
+              - generic [ref=e2144] [cursor=pointer]:
+                - img [ref=e2145]
+                - generic [ref=e2148]: property_upload_page.png
+              - generic [ref=e2150] [cursor=pointer]:
+                - img [ref=e2151]
+                - img [ref=e2153]
+                - generic [ref=e2155]: public
+              - generic [ref=e2156] [cursor=pointer]:
+                - img [ref=e2157]
+                - generic [ref=e2162]: qdrant_dashboard.html
+              - generic [ref=e2163] [cursor=pointer]:
+                - img [ref=e2164]
+                - generic [ref=e2169]: qdrant_experience_agent.py
+              - generic [ref=e2170] [cursor=pointer]:
+                - img [ref=e2171]
+                - generic [ref=e2174]: quick_links_contacts.csv
+              - generic [ref=e2175] [cursor=pointer]:
+                - img [ref=e2176]
+                - generic [ref=e2181]: quick_links_example.html
+              - generic [ref=e2182] [cursor=pointer]:
+                - img [ref=e2183]
+                - generic [ref=e2186]: quick_links_example.md
+              - generic [ref=e2187] [cursor=pointer]:
+                - img [ref=e2188]
+                - generic [ref=e2193]: quick_links_generator.py
+              - generic [ref=e2195] [cursor=pointer]:
+                - img [ref=e2196]
+                - img [ref=e2198]
+                - generic [ref=e2200]: quick_links_notes
+              - generic [ref=e2201] [cursor=pointer]:
+                - img [ref=e2202]
+                - generic [ref=e2207]: quick_links_universal.py
+              - generic [ref=e2208] [cursor=pointer]:
+                - img [ref=e2209]
+                - generic [ref=e2212]: qwen-local-llm-working.png
+              - generic [ref=e2213] [cursor=pointer]:
+                - img [ref=e2214]
+                - generic [ref=e2217]: qwen-test-result.md
+              - generic [ref=e2218] [cursor=pointer]:
+                - img [ref=e2219]
+                - generic [ref=e2222]: realtor-bot-open.png
+              - generic [ref=e2223] [cursor=pointer]:
+                - img [ref=e2224]
+                - generic [ref=e2227]: realtor-bot-widget.png
+              - generic [ref=e2228] [cursor=pointer]:
+                - img [ref=e2229]
+                - generic [ref=e2234]: realtor_bot_api.py
+              - generic [ref=e2236] [cursor=pointer]:
+                - img [ref=e2237]
+                - img [ref=e2239]
+                - generic [ref=e2241]: realtor_exports
+              - generic [ref=e2242] [cursor=pointer]:
+                - img [ref=e2243]
+                - generic [ref=e2248]: rebuild_recruiters_from_dbeaver.py
+              - generic [ref=e2249] [cursor=pointer]:
+                - img [ref=e2250]
+                - generic [ref=e2253]: rebuilt-corridor-section.png
+              - generic [ref=e2254] [cursor=pointer]:
+                - img [ref=e2255]
+                - generic [ref=e2258]: rebuilt-hero.png
+              - generic [ref=e2259] [cursor=pointer]:
+                - img [ref=e2260]
+                - generic [ref=e2263]: rebuilt-mandate-urgency.png
+              - generic [ref=e2264] [cursor=pointer]:
+                - img [ref=e2265]
+                - generic [ref=e2268]: rebuilt-urgency-contact.png
+              - generic [ref=e2269] [cursor=pointer]:
+                - img [ref=e2270]
+                - generic [ref=e2273]: rebuilt-urgency.png
+              - generic [ref=e2274] [cursor=pointer]:
+                - img [ref=e2275]
+                - generic [ref=e2278]: recruiter_db_with_quicklinks.json
+              - generic [ref=e2279] [cursor=pointer]:
+                - img [ref=e2280]
+                - generic [ref=e2283]: requirements.txt
+              - generic [ref=e2284] [cursor=pointer]:
+                - img [ref=e2285]
+                - generic [ref=e2290]: research_api.py
+              - generic [ref=e2291] [cursor=pointer]:
+                - img [ref=e2292]
+                - generic [ref=e2295]: residential-recruiter-agent-cards.png
+              - generic [ref=e2296] [cursor=pointer]:
+                - img [ref=e2297]
+                - generic [ref=e2300]: residential-recruiter-agent-grid.png
+              - generic [ref=e2301] [cursor=pointer]:
+                - img [ref=e2302]
+                - generic [ref=e2305]: residential-recruiter-agents.png
+              - generic [ref=e2306] [cursor=pointer]:
+                - img [ref=e2307]
+                - generic [ref=e2310]: residential-recruiter-app.png
+              - generic [ref=e2311] [cursor=pointer]:
+                - img [ref=e2312]
+                - generic [ref=e2315]: residential-recruiter-cards-grid.png
+              - generic [ref=e2316] [cursor=pointer]:
+                - img [ref=e2317]
+                - generic [ref=e2320]: residential-recruiter-dashboard.png
+              - generic [ref=e2321] [cursor=pointer]:
+                - img [ref=e2322]
+                - generic [ref=e2325]: residential-recruiter-detail-modal.png
+              - generic [ref=e2326] [cursor=pointer]:
+                - img [ref=e2327]
+                - generic [ref=e2330]: residential-recruiter-final.png
+              - generic [ref=e2331] [cursor=pointer]:
+                - img [ref=e2332]
+                - generic [ref=e2335]: residential-recruiter-full-grid.png
+              - generic [ref=e2336] [cursor=pointer]:
+                - img [ref=e2337]
+                - generic [ref=e2340]: residential-recruiter-grouped.png
+              - generic [ref=e2341] [cursor=pointer]:
+                - img [ref=e2342]
+                - generic [ref=e2345]: residential-recruiter-main.png
+              - generic [ref=e2346] [cursor=pointer]:
+                - img [ref=e2347]
+                - generic [ref=e2350]: residential-recruiter-modal.png
+              - generic [ref=e2351] [cursor=pointer]:
+                - img [ref=e2352]
+                - generic [ref=e2355]: residential-recruiter-obsidian-export.png
+              - generic [ref=e2356] [cursor=pointer]:
+                - img [ref=e2357]
+                - generic [ref=e2360]: residential-recruiter-v2.png
+              - generic [ref=e2361] [cursor=pointer]:
+                - img [ref=e2362]
+                - generic [ref=e2365]: root-domain-live.png
+              - generic [ref=e2366] [cursor=pointer]:
+                - img [ref=e2367]
+                - generic [ref=e2372]: save_quicklinks_to_contextkeep.py
+              - generic [ref=e2373] [cursor=pointer]:
+                - img [ref=e2374]
+                - generic [ref=e2379]: save_session_to_contextkeep_obsidian.py
+              - generic [ref=e2381] [cursor=pointer]:
+                - img [ref=e2382]
+                - img [ref=e2384]
+                - generic [ref=e2386]: scraped_data
+              - generic [ref=e2388] [cursor=pointer]:
+                - img [ref=e2389]
+                - img [ref=e2391]
+                - generic [ref=e2393]: scrapers
+              - generic [ref=e2395] [cursor=pointer]:
+                - img [ref=e2396]
+                - img [ref=e2398]
+                - generic [ref=e2400]: scripts
+              - generic [ref=e2401] [cursor=pointer]:
+                - img [ref=e2402]
+                - generic [ref=e2405]: seller-bot-page.png
+              - generic [ref=e2406] [cursor=pointer]:
+                - img [ref=e2407]
+                - generic [ref=e2410]: seller-intelligence-bot.png
+              - generic [ref=e2411] [cursor=pointer]:
+                - img [ref=e2412]
+                - generic [ref=e2415]: seller-outreach-bot.png
+              - generic [ref=e2416] [cursor=pointer]:
+                - img [ref=e2417]
+                - generic [ref=e2422]: setup_agent_workspace_db.py
+              - generic [ref=e2423] [cursor=pointer]:
+                - img [ref=e2424]
+                - generic [ref=e2427]: setup_backend_ecosystem.sh
+              - generic [ref=e2428] [cursor=pointer]:
+                - img [ref=e2429]
+                - generic [ref=e2432]: setup_contextkeep_complete.sh
+              - generic [ref=e2433] [cursor=pointer]:
+                - img [ref=e2434]
+                - generic [ref=e2439]: setup_hotmoney_table.py
+              - generic [ref=e2440] [cursor=pointer]:
+                - img [ref=e2441]
+                - generic [ref=e2446]: setup_lenders_backend.py
+              - generic [ref=e2447] [cursor=pointer]:
+                - img [ref=e2448]
+                - generic [ref=e2453]: setup_property_enrichment.py
+              - generic [ref=e2454] [cursor=pointer]:
+                - img [ref=e2455]
+                - generic [ref=e2460]: setup_sqlite_backend.py
+              - generic [ref=e2461] [cursor=pointer]:
+                - img [ref=e2462]
+                - generic [ref=e2465]: site-check.png
+              - generic [ref=e2466] [cursor=pointer]:
+                - img [ref=e2467]
+                - generic [ref=e2470]: skills-agents-working.png
+              - generic [ref=e2471] [cursor=pointer]:
+                - img [ref=e2472]
+                - generic [ref=e2475]: skills_agent_created.png
+              - generic [ref=e2476] [cursor=pointer]:
+                - img [ref=e2477]
+                - generic [ref=e2480]: skills_agent_created_final.png
+              - generic [ref=e2481] [cursor=pointer]:
+                - img [ref=e2482]
+                - generic [ref=e2485]: skills_create_agent_clicked.png
+              - generic [ref=e2486] [cursor=pointer]:
+                - img [ref=e2487]
+                - generic [ref=e2490]: skills_create_agent_modal.png
+              - generic [ref=e2491] [cursor=pointer]:
+                - img [ref=e2492]
+                - generic [ref=e2495]: skills_custom_agents.png
+              - generic [ref=e2496] [cursor=pointer]:
+                - img [ref=e2497]
+                - generic [ref=e2500]: skills_page_full.png
+              - generic [ref=e2501] [cursor=pointer]:
+                - img [ref=e2502]
+                - generic [ref=e2505]: skills_page_overview.png
+              - generic [ref=e2506] [cursor=pointer]:
+                - img [ref=e2507]
+                - generic [ref=e2510]: skills_system_logs.png
+              - generic [ref=e2511] [cursor=pointer]:
+                - img [ref=e2512]
+                - generic [ref=e2515]: skills_tab.png
+              - generic [ref=e2516] [cursor=pointer]:
+                - img [ref=e2517]
+                - generic [ref=e2520]: skills_tab_scrolled.png
+              - generic [ref=e2521] [cursor=pointer]:
+                - img [ref=e2522]
+                - generic [ref=e2525]: sovereign-ai-hero-video.png
+              - generic [ref=e2526] [cursor=pointer]:
+                - img [ref=e2527]
+                - generic [ref=e2530]: sovereign-corridor-current.png
+              - generic [ref=e2532] [cursor=pointer]:
+                - img [ref=e2533]
+                - img [ref=e2535]
+                - generic [ref=e2537]: src
+              - generic [ref=e2538] [cursor=pointer]:
+                - img [ref=e2539]
+                - generic [ref=e2542]: stop-mission-working.png
+              - generic [ref=e2543] [cursor=pointer]:
+                - img [ref=e2544]
+                - generic [ref=e2549]: sync_seaway_to_contextkeep.py
+              - generic [ref=e2550] [cursor=pointer]:
+                - img [ref=e2551]
+                - generic [ref=e2556]: tailwind.config.js
+              - generic [ref=e2557] [cursor=pointer]:
+                - img [ref=e2558]
+                - generic [ref=e2563]: test_brokerage_view.html
+              - generic [ref=e2564] [cursor=pointer]:
+                - img [ref=e2565]
+                - generic [ref=e2570]: test_contextkeep.py
+              - generic [ref=e2571] [cursor=pointer]:
+                - img [ref=e2572]
+                - generic [ref=e2577]: test_email_alerts.py
+              - generic [ref=e2578] [cursor=pointer]:
+                - img [ref=e2579]
+                - generic [ref=e2584]: test_research.py
+              - generic [ref=e2585] [cursor=pointer]:
+                - img [ref=e2586]
+                - generic [ref=e2589]: tools-section-working.png
+              - generic [ref=e2590] [cursor=pointer]:
+                - img [ref=e2591]
+                - generic [ref=e2594]: uptop-logo-updated.png
+              - generic [ref=e2595] [cursor=pointer]:
+                - img [ref=e2596]
+                - generic [ref=e2599]: vercel.json
+              - generic [ref=e2600] [cursor=pointer]:
+                - img [ref=e2601]
+                - generic [ref=e2604]: vigil-bot-fixed.png
+              - generic [ref=e2605] [cursor=pointer]:
+                - img [ref=e2606]
+                - generic [ref=e2609]: vigil-bot-full.png
+              - generic [ref=e2610] [cursor=pointer]:
+                - img [ref=e2611]
+                - generic [ref=e2614]: vigil-bot-top.png
+              - generic [ref=e2615] [cursor=pointer]:
+                - img [ref=e2616]
+                - generic [ref=e2619]: vigil-bot-working.png
+              - generic [ref=e2620] [cursor=pointer]:
+                - img [ref=e2621]
+                - generic [ref=e2624]: vigil-bot.png
+              - generic [ref=e2625] [cursor=pointer]:
+                - img [ref=e2626]
+                - generic [ref=e2631]: vite.config.js
+              - generic [ref=e2632] [cursor=pointer]:
+                - img [ref=e2633]
+                - generic [ref=e2636]: www-domain-live.png
+              - generic [ref=e2637] [cursor=pointer]:
+                - img [ref=e2638]
+                - generic [ref=e2641]: xdotool.tar.gz
+              - generic [ref=e2642] [cursor=pointer]:
+                - img [ref=e2643]
+                - generic [ref=e2646]: your-domain-live.png
+          - generic [ref=e286]:
+            - img [ref=e287]
+            - paragraph [ref=e290]: Select a file to start editing
+            - paragraph [ref=e291]: or ask the AI to create one for you
+          - generic [ref=e292]:
+            - generic [ref=e293]:
+              - generic [ref=e294]:
+                - img [ref=e296]
+                - generic [ref=e299]:
+                  - text: AI Assistant
+                  - generic [ref=e300]: Online
+              - button [ref=e302] [cursor=pointer]:
+                - img [ref=e303]
+            - generic [ref=e308]:
+              - generic [ref=e309]:
+                - img [ref=e310]
+                - generic [ref=e312]: AI Assistant
+              - paragraph [ref=e313]: "👋 Hi! I'm your AI Builder assistant. I can help you: • Create new components • Fix bugs and errors • Add styling with Tailwind • Explain existing code • Refactor and optimize What would you like to build today?"
+              - generic [ref=e314]:
+                - button "Create a new component" [ref=e315] [cursor=pointer]
+                - button "Fix an error" [ref=e316] [cursor=pointer]
+                - button "Add styling" [ref=e317] [cursor=pointer]
+                - button "Explain this code" [ref=e318] [cursor=pointer]
+            - generic [ref=e319]:
+              - generic [ref=e320]:
+                - textbox "Ask AI to build something..." [ref=e321]
+                - button [disabled] [ref=e322]:
+                  - img [ref=e323]
+              - paragraph [ref=e327]: AI can create, edit, and explain code
+  - button "Ctrl+Shift+V" [ref=e328] [cursor=pointer]:
+    - img [ref=e329]
+    - generic [ref=e332]: Ctrl+Shift+V

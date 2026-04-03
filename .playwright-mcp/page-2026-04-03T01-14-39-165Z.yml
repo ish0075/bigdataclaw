@@ -1,0 +1,251 @@
+- generic [ref=e4]:
+  - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e11]
+          - generic [ref=e13]:
+            - button "N" [ref=e14]:
+              - link "N" [ref=e15] [cursor=pointer]:
+                - /url: /NIAAAA/dashboard
+                - generic [ref=e17]:
+                  - img [ref=e18]
+                  - generic [ref=e19]: "N"
+            - button "T" [ref=e20]:
+              - link "T" [ref=e21] [cursor=pointer]:
+                - /url: /TES/dashboard
+                - generic [ref=e23]:
+                  - img [ref=e24]
+                  - generic [ref=e25]: T
+            - button "N" [ref=e26]:
+              - link "N" [ref=e27] [cursor=pointer]:
+                - /url: /NIAA/dashboard
+                - generic [ref=e30]:
+                  - img [ref=e31]
+                  - generic [ref=e32]: "N"
+            - button "N" [ref=e33]:
+              - link "N" [ref=e34] [cursor=pointer]:
+                - /url: /NIA/dashboard
+                - generic [ref=e36]:
+                  - img [ref=e37]
+                  - generic [ref=e38]: "N"
+            - button "T" [ref=e39]:
+              - link "T" [ref=e40] [cursor=pointer]:
+                - /url: /TESA/dashboard
+                - generic [ref=e43]:
+                  - img [ref=e44]
+                  - generic [ref=e45]: T
+            - button "N" [ref=e46]:
+              - link "N" [ref=e47] [cursor=pointer]:
+                - /url: /NIAAA/dashboard
+                - generic [ref=e49]:
+                  - img [ref=e50]
+                  - generic [ref=e51]: "N"
+            - button "T" [ref=e52]:
+              - link "T" [ref=e53] [cursor=pointer]:
+                - /url: /TESAAA/dashboard
+                - generic [ref=e55]:
+                  - img [ref=e56]
+                  - generic [ref=e57]: T
+            - button "A" [ref=e58]:
+              - link "A" [ref=e59] [cursor=pointer]:
+                - /url: /ABC/dashboard
+                - generic [ref=e61]:
+                  - img [ref=e62]
+                  - generic [ref=e63]: A
+            - button "F" [ref=e64]:
+              - link "F" [ref=e65] [cursor=pointer]:
+                - /url: /FAC/dashboard
+                - generic [ref=e67]:
+                  - img [ref=e68]
+                  - generic [ref=e69]: F
+            - button "M" [ref=e70]:
+              - link "M" [ref=e71] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - generic [ref=e73]:
+                  - img [ref=e74]
+                  - generic [ref=e75]: M
+            - status [ref=e76]
+          - button "Add company" [ref=e79]:
+            - img [ref=e80]
+        - complementary [ref=e82]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: Test Hybrid Integration Mission Company
+            - button [ref=e85]:
+              - img
+          - navigation [ref=e86]:
+            - generic [ref=e87]:
+              - button "New Issue" [ref=e88]:
+                - img [ref=e89]
+                - generic [ref=e92]: New Issue
+              - link "Dashboard" [ref=e93] [cursor=pointer]:
+                - /url: /TESA/dashboard
+                - img [ref=e95]
+                - generic [ref=e100]: Dashboard
+              - link "Inbox 6" [ref=e101] [cursor=pointer]:
+                - /url: /TESA/inbox
+                - img [ref=e103]
+                - generic [ref=e106]: Inbox
+                - generic [ref=e107]: "6"
+              - generic [ref=e109]: "Kitchen Sink (Example): Kitchen Sink"
+            - generic [ref=e110]:
+              - generic [ref=e111]: Work
+              - generic [ref=e112]:
+                - link "Issues" [ref=e113] [cursor=pointer]:
+                  - /url: /TESA/issues
+                  - img [ref=e115]
+                  - generic [ref=e118]: Issues
+                - link "Routines Beta" [ref=e119] [cursor=pointer]:
+                  - /url: /TESA/routines
+                  - img [ref=e121]
+                  - generic [ref=e126]: Routines
+                  - generic [ref=e127]: Beta
+                - link "Goals" [ref=e128] [cursor=pointer]:
+                  - /url: /TESA/goals
+                  - img [ref=e130]
+                  - generic [ref=e134]: Goals
+            - generic [ref=e135]:
+              - generic [ref=e137]:
+                - button "Projects" [expanded] [ref=e138]:
+                  - img [ref=e139]
+                  - generic [ref=e141]: Projects
+                - button "New project" [ref=e142]:
+                  - img [ref=e143]
+              - status [ref=e144]
+            - generic [ref=e145]:
+              - generic [ref=e147]:
+                - button "Agents" [expanded] [ref=e148]:
+                  - img [ref=e149]
+                  - generic [ref=e151]: Agents
+                - button "New agent" [ref=e152]:
+                  - img [ref=e153]
+              - link "CEO Strategy" [ref=e156] [cursor=pointer]:
+                - /url: /TESA/agents/ceo-strategy/dashboard
+                - img [ref=e157]
+                - generic [ref=e160]: CEO Strategy
+            - generic [ref=e161]:
+              - generic [ref=e162]: Company
+              - generic [ref=e163]:
+                - link "Org" [ref=e164] [cursor=pointer]:
+                  - /url: /TESA/org
+                  - img [ref=e166]
+                  - generic [ref=e171]: Org
+                - link "Skills" [ref=e172] [cursor=pointer]:
+                  - /url: /TESA/skills
+                  - img [ref=e174]
+                  - generic [ref=e184]: Skills
+                - link "Costs" [ref=e185] [cursor=pointer]:
+                  - /url: /TESA/costs
+                  - img [ref=e187]
+                  - generic [ref=e189]: Costs
+                - link "Activity" [ref=e190] [cursor=pointer]:
+                  - /url: /TESA/activity
+                  - img [ref=e192]
+                  - generic [ref=e196]: Activity
+                - link "Settings" [ref=e197] [cursor=pointer]:
+                  - /url: /TESA/company/settings
+                  - img [ref=e199]
+                  - generic [ref=e202]: Settings
+            - generic [ref=e204]: "Kitchen Sink (Example): Kitchen Sink Panel"
+      - generic [ref=e206]:
+        - link "Documentation" [ref=e207] [cursor=pointer]:
+          - /url: https://docs.paperclip.ing/
+          - img [ref=e208]
+          - generic [ref=e210]: Documentation
+        - generic [ref=e211]: v
+        - link "Instance settings" [ref=e212] [cursor=pointer]:
+          - /url: /instance/settings/plugins
+          - img
+        - button "Switch to light mode" [ref=e213]:
+          - img
+    - generic [ref=e214]:
+      - navigation "breadcrumb" [ref=e218]:
+        - list [ref=e219]:
+          - listitem [ref=e220]:
+            - link "Agents" [ref=e221] [cursor=pointer]:
+              - /url: /TESA/agents
+          - listitem [ref=e222]:
+            - img [ref=e223]
+          - listitem [ref=e225]:
+            - link "CEO Strategy" [disabled] [ref=e226]
+      - main [ref=e228]:
+        - generic [ref=e229]:
+          - generic [ref=e230]:
+            - generic:
+              - button [ref=e231]:
+                - img [ref=e232]
+              - generic:
+                - heading "CEO Strategy" [level=2]
+                - paragraph: CEO
+            - generic [ref=e235]:
+              - button "Assign Task" [ref=e236]:
+                - img
+                - generic [ref=e237]: Assign Task
+              - button "Run Heartbeat" [ref=e238]:
+                - img
+                - generic [ref=e239]: Run Heartbeat
+              - button "Pause" [ref=e240]:
+                - img
+                - generic [ref=e241]: Pause
+              - generic [ref=e243]: idle
+              - button [ref=e244]:
+                - img
+          - tablist [ref=e246]:
+            - tab "Dashboard" [selected] [ref=e247]
+            - tab "Instructions" [ref=e248]
+            - tab "Skills" [ref=e249]
+            - tab "Configuration" [ref=e250]
+            - tab "Runs" [ref=e251]
+            - tab "Budget" [ref=e252]
+          - generic:
+            - generic:
+              - button "Cancel"
+              - button "Save"
+          - generic [ref=e253]:
+            - generic [ref=e254]:
+              - generic [ref=e255]:
+                - generic [ref=e256]:
+                  - heading "Run Activity" [level=3] [ref=e257]
+                  - text: Last 14 days
+                - paragraph [ref=e258]: No runs yet
+              - generic [ref=e259]:
+                - generic [ref=e260]:
+                  - heading "Issues by Priority" [level=3] [ref=e261]
+                  - text: Last 14 days
+                - paragraph [ref=e262]: No issues
+              - generic [ref=e263]:
+                - generic [ref=e264]:
+                  - heading "Issues by Status" [level=3] [ref=e265]
+                  - text: Last 14 days
+                - paragraph [ref=e266]: No issues
+              - generic [ref=e267]:
+                - generic [ref=e268]:
+                  - heading "Success Rate" [level=3] [ref=e269]
+                  - text: Last 14 days
+                - paragraph [ref=e270]: No runs yet
+            - generic [ref=e271]:
+              - generic [ref=e272]:
+                - heading "Recent Issues" [level=3] [ref=e273]
+                - link "See All →" [ref=e274] [cursor=pointer]:
+                  - /url: /TESA/issues?participantAgentId=04b7a9e3-0291-4d5b-a143-ca59d6de2727
+              - paragraph [ref=e275]: No recent issues.
+            - generic [ref=e276]:
+              - heading "Costs" [level=3] [ref=e277]
+              - generic [ref=e280]:
+                - generic [ref=e281]:
+                  - generic [ref=e282]: Input tokens
+                  - text: "0"
+                - generic [ref=e283]:
+                  - generic [ref=e284]: Output tokens
+                  - text: "0"
+                - generic [ref=e285]:
+                  - generic [ref=e286]: Cached tokens
+                  - text: "0"
+                - generic [ref=e287]:
+                  - generic [ref=e288]: Total cost
+                  - text: $0.00
+  - generic [ref=e289]:
+    - heading "Command Palette" [level=2] [ref=e290]
+    - paragraph [ref=e291]: Search for a command to run...

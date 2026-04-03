@@ -1,0 +1,362 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img "Control Shifter" [ref=e8]
+        - generic [ref=e9]:
+          - heading "Mission Control" [level=1] [ref=e10]
+          - paragraph [ref=e11]: Real Estate Command Center
+      - button "Collapse sidebar" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - generic [ref=e17]:
+        - button "Collapse all" [ref=e18] [cursor=pointer]
+        - button "Expand all" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - button "Main" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]: Main
+          - img [ref=e23]
+        - generic [ref=e25]:
+          - link "Mission Control" [ref=e26] [cursor=pointer]:
+            - /url: /
+            - img [ref=e27]
+            - generic [ref=e32]: Mission Control
+          - link "Property Research" [ref=e33] [cursor=pointer]:
+            - /url: /research
+            - img [ref=e34]
+            - generic [ref=e38]: Property Research
+          - link "Hot Money Radar" [ref=e39] [cursor=pointer]:
+            - /url: /hotmoney
+            - img [ref=e40]
+            - generic [ref=e42]: Hot Money Radar
+          - link "Deal Pipeline" [ref=e43] [cursor=pointer]:
+            - /url: /pipeline
+            - img [ref=e44]
+            - generic [ref=e49]: Deal Pipeline
+          - link "Opportunities" [ref=e50] [cursor=pointer]:
+            - /url: /opportunities
+            - img [ref=e51]
+            - generic [ref=e53]: Opportunities
+          - link "Agent Workspace" [ref=e54] [cursor=pointer]:
+            - /url: /agents
+            - img [ref=e55]
+            - generic [ref=e58]: Agent Workspace
+          - link "Agent Companies NEW" [ref=e59] [cursor=pointer]:
+            - /url: /paperclip-companies
+            - img [ref=e60]
+            - generic [ref=e64]: Agent Companies
+            - generic [ref=e65]: NEW
+          - link "Paperclip Dashboard NEW" [ref=e66] [cursor=pointer]:
+            - /url: /paperclip-dashboard
+            - img [ref=e67]
+            - generic [ref=e69]: Paperclip Dashboard
+            - generic [ref=e70]: NEW
+          - link "Pixel Agents LIVE" [ref=e71] [cursor=pointer]:
+            - /url: /mission-control
+            - img [ref=e72]
+            - generic [ref=e77]: Pixel Agents
+            - generic [ref=e78]: LIVE
+          - link "Bot Boardroom AI" [ref=e79] [cursor=pointer]:
+            - /url: /bot-boardroom
+            - img [ref=e80]
+            - generic [ref=e86]: Bot Boardroom
+            - generic [ref=e87]: AI
+          - link "Obsidian Vault" [ref=e88] [cursor=pointer]:
+            - /url: /vault
+            - img [ref=e89]
+            - generic [ref=e93]: Obsidian Vault
+      - generic [ref=e94]:
+        - button "Recruitment" [ref=e95] [cursor=pointer]:
+          - generic [ref=e96]: Recruitment
+          - img [ref=e97]
+        - generic [ref=e99]:
+          - link "EXP Agent Recruiter 96K" [ref=e100] [cursor=pointer]:
+            - /url: /exp-agent-recruiter
+            - img [ref=e101]
+            - generic [ref=e104]: EXP Agent Recruiter
+            - generic [ref=e105]: 96K
+          - link "Commercial Agents 6.7K" [ref=e106] [cursor=pointer]:
+            - /url: /commercial-agent-recruiter
+            - img [ref=e107]
+            - generic [ref=e110]: Commercial Agents
+            - generic [ref=e111]: 6.7K
+          - link "Brokerages" [ref=e112] [cursor=pointer]:
+            - /url: /brokerages
+            - img [ref=e113]
+            - generic [ref=e116]: Brokerages
+      - generic [ref=e117]:
+        - button "AI Bots" [ref=e118] [cursor=pointer]:
+          - generic [ref=e119]: AI Bots
+          - img [ref=e120]
+        - generic [ref=e122]:
+          - link "Buyer Intelligence AI" [ref=e123] [cursor=pointer]:
+            - /url: /buyer-bot
+            - img [ref=e124]
+            - generic [ref=e128]: Buyer Intelligence
+            - generic [ref=e129]: AI
+          - link "Seller Outreach AI" [ref=e130] [cursor=pointer]:
+            - /url: /seller-outreach-bot
+            - img [ref=e131]
+            - generic [ref=e136]: Seller Outreach
+            - generic [ref=e137]: AI
+          - link "Property Valuation AI" [ref=e138] [cursor=pointer]:
+            - /url: /property-valuation-bot
+            - img [ref=e139]
+            - generic [ref=e141]: Property Valuation
+            - generic [ref=e142]: AI
+          - link "Vigil Monitor 24/7" [ref=e143] [cursor=pointer]:
+            - /url: /vigil
+            - img [ref=e144]
+            - generic [ref=e146]: Vigil Monitor
+            - generic [ref=e147]: 24/7
+          - link "Agent Workspaces NEW" [ref=e148] [cursor=pointer]:
+            - /url: /agent-workspaces
+            - img [ref=e149]
+            - generic [ref=e151]: Agent Workspaces
+            - generic [ref=e152]: NEW
+          - link "Bot Builder BUILD" [ref=e153] [cursor=pointer]:
+            - /url: /bot-builder
+            - img [ref=e154]
+            - generic [ref=e158]: Bot Builder
+            - generic [ref=e159]: BUILD
+      - generic [ref=e160]:
+        - button "Tools" [ref=e161] [cursor=pointer]:
+          - generic [ref=e162]: Tools
+          - img [ref=e163]
+        - generic [ref=e165]:
+          - link "My Listings" [ref=e166] [cursor=pointer]:
+            - /url: /listings
+            - img [ref=e167]
+            - generic [ref=e171]: My Listings
+          - link "Buyer Matcher" [ref=e172] [cursor=pointer]:
+            - /url: /buyers
+            - img [ref=e173]
+            - generic [ref=e178]: Buyer Matcher
+          - link "Agent Matcher" [ref=e179] [cursor=pointer]:
+            - /url: /agents-matcher
+            - img [ref=e180]
+            - generic [ref=e184]: Agent Matcher
+          - link "Lender Matcher" [ref=e185] [cursor=pointer]:
+            - /url: /lenders
+            - img [ref=e186]
+            - generic [ref=e188]: Lender Matcher
+          - link "Builder Directory" [ref=e189] [cursor=pointer]:
+            - /url: /builders
+            - img [ref=e190]
+            - generic [ref=e194]: Builder Directory
+          - link "Property Upload" [ref=e195] [cursor=pointer]:
+            - /url: /upload
+            - img [ref=e196]
+            - generic [ref=e199]: Property Upload
+          - link "Olena Marketing NEW" [ref=e200] [cursor=pointer]:
+            - /url: /olena-feature-sheet
+            - img [ref=e201]
+            - generic [ref=e204]: Olena Marketing
+            - generic [ref=e205]: NEW
+          - link "Canva Editor NEW" [ref=e206] [cursor=pointer]:
+            - /url: /canva-editor
+            - img [ref=e207]
+            - generic [ref=e213]: Canva Editor
+            - generic [ref=e214]: NEW
+          - link "Skills & Agents" [ref=e215] [cursor=pointer]:
+            - /url: /skills
+            - img [ref=e216]
+            - generic [ref=e219]: Skills & Agents
+          - link "Map View" [ref=e220] [cursor=pointer]:
+            - /url: /map
+            - img [ref=e221]
+            - generic [ref=e223]: Map View
+          - link "Data Manager" [ref=e224] [cursor=pointer]:
+            - /url: /data-manager
+            - img [ref=e225]
+            - generic [ref=e229]: Data Manager
+          - link "AI Builder CODE" [ref=e230] [cursor=pointer]:
+            - /url: /ai-builder
+            - img [ref=e231]
+            - generic [ref=e234]: AI Builder
+            - generic [ref=e235]: CODE
+    - generic [ref=e239]: System Online
+  - generic [ref=e240]:
+    - banner [ref=e241]:
+      - generic [ref=e247]:
+        - img [ref=e392]
+        - generic [ref=e255]: Connected
+      - generic [ref=e258]:
+        - img [ref=e259]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e262]
+        - combobox [ref=e263]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e264]:
+        - button "Help" [ref=e266] [cursor=pointer]:
+          - img [ref=e267]
+          - generic [ref=e270]: Help
+        - button "Voice" [ref=e271] [cursor=pointer]:
+          - img [ref=e272]
+          - generic [ref=e278]: Voice
+        - generic [ref=e279]:
+          - img [ref=e280]
+          - generic [ref=e285]: $12.40
+        - link "Data Manager" [ref=e286] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e287]
+        - button [ref=e291] [cursor=pointer]:
+          - img [ref=e292]
+        - link [ref=e295] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e296]
+        - link "🦞" [ref=e299] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e300]: 🦞
+    - main [ref=e301]:
+      - generic [ref=e303]:
+        - generic [ref=e304]:
+          - generic [ref=e305]:
+            - heading "Hot Money Radar" [level=1] [ref=e306]:
+              - img [ref=e307]
+              - text: Hot Money Radar
+            - paragraph [ref=e309]: 2 leads with $24.8M in fresh capital • Recently sold
+          - generic [ref=e310]:
+            - button "Paste Deal" [ref=e311] [cursor=pointer]:
+              - img [ref=e312]
+              - text: Paste Deal
+            - button "Refresh" [ref=e316] [cursor=pointer]:
+              - img [ref=e317]
+              - text: Refresh
+            - button "Filter" [ref=e319] [cursor=pointer]:
+              - img [ref=e320]
+              - text: Filter
+            - button "Export" [ref=e322] [cursor=pointer]:
+              - img [ref=e323]
+              - text: Export
+        - generic [ref=e326]:
+          - generic [ref=e328]:
+            - img
+            - generic [ref=e331]:
+              - paragraph [ref=e332]: $24.8M
+              - paragraph [ref=e333]: Total Hot Money
+          - generic [ref=e335]:
+            - img [ref=e336]
+            - generic [ref=e338]:
+              - paragraph [ref=e339]: "2"
+              - paragraph [ref=e340]: Active Alerts
+          - generic [ref=e342]:
+            - img
+            - generic [ref=e347]:
+              - paragraph [ref=e348]: $12.4M
+              - paragraph [ref=e349]: Avg Cash Position
+          - generic [ref=e351]:
+            - img [ref=e352]
+            - generic [ref=e354]:
+              - paragraph [ref=e355]: "90"
+              - paragraph [ref=e356]: Avg Match Score
+        - generic [ref=e358]:
+          - generic [ref=e359]:
+            - img [ref=e360]
+            - textbox "Search by entity name, location, or asset class... (or use voice 🎤)" [ref=e363]
+            - generic [ref=e364]:
+              - button "Search" [ref=e365] [cursor=pointer]:
+                - img [ref=e366]
+                - text: Search
+              - button "Start voice input" [ref=e370] [cursor=pointer]:
+                - img [ref=e371]
+          - combobox [ref=e375]:
+            - option "All Asset Classes" [selected]
+            - option "Industrial"
+            - option "Retail"
+            - option "Office"
+            - option "Multi-Family"
+            - option "Agricultural"
+            - option "Land"
+            - option "Mixed-Use"
+        - generic [ref=e376]:
+          - generic [ref=e378]:
+            - heading "Hot Money Leads" [level=3] [ref=e379]
+            - generic [ref=e380]:
+              - generic [ref=e381]: "Sorted by:"
+              - combobox [ref=e382]:
+                - option "Cash Amount (High → Low)" [selected]
+                - option "Date (Newest)"
+                - option "Match Score"
+          - generic [ref=e383]:
+            - generic [ref=e397] [cursor=pointer]:
+              - img [ref=e400]
+              - generic [ref=e402]:
+                - generic [ref=e403]:
+                  - generic [ref=e404]:
+                    - generic [ref=e405]:
+                      - heading "2650687 Ontario Ltd" [level=4] [ref=e406]
+                      - generic [ref=e407]: "Sale: May 2025"
+                    - generic [ref=e408]:
+                      - generic [ref=e409]:
+                        - img [ref=e410]
+                        - generic [ref=e412]: $15.0M cash
+                      - generic [ref=e413]: "|"
+                      - generic [ref=e414]:
+                        - img [ref=e415]
+                        - generic [ref=e417]: May 2025
+                      - generic [ref=e418]: "|"
+                      - generic [ref=e419]:
+                        - img [ref=e420]
+                        - generic [ref=e423]: West Lincoln
+                    - paragraph [ref=e424]: Development•Thirty Rd
+                  - generic [ref=e425]:
+                    - generic [ref=e426]:
+                      - generic [ref=e427]: "92"
+                      - generic [ref=e428]: Match Score
+                    - generic [ref=e429]:
+                      - button "View Profile" [ref=e430]
+                      - button "🚀 Analyze" [ref=e431]:
+                        - generic [ref=e432]: 🚀
+                        - generic [ref=e433]: Analyze
+                - generic [ref=e434]:
+                  - generic [ref=e435]: "💰 Seller:"
+                  - link "Google" [ref=e436]:
+                    - /url: https://www.google.com/search?q=2650687%20Ontario%20Ltd
+                  - generic [ref=e437]: •
+                  - link "LI" [ref=e438]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=2650687%20Ontario%20Ltd
+            - generic [ref=e440] [cursor=pointer]:
+              - img [ref=e443]
+              - generic [ref=e445]:
+                - generic [ref=e446]:
+                  - generic [ref=e447]:
+                    - generic [ref=e448]:
+                      - heading "Turnberry Holdings Inc" [level=4] [ref=e449]
+                      - generic [ref=e450]: "Sale: Jan 2025"
+                    - generic [ref=e451]:
+                      - generic [ref=e452]:
+                        - img [ref=e453]
+                        - generic [ref=e455]: $9.8M cash
+                      - generic [ref=e456]: "|"
+                      - generic [ref=e457]:
+                        - img [ref=e458]
+                        - generic [ref=e460]: Jan 2025
+                      - generic [ref=e461]: "|"
+                      - generic [ref=e462]:
+                        - img [ref=e463]
+                        - generic [ref=e466]: Lincoln
+                    - paragraph [ref=e467]: Retail•4556-4568 Lincoln Ave
+                  - generic [ref=e468]:
+                    - generic [ref=e469]:
+                      - generic [ref=e470]: "88"
+                      - generic [ref=e471]: Match Score
+                    - generic [ref=e472]:
+                      - button "View Profile" [ref=e473]
+                      - button "🚀 Analyze" [ref=e474]:
+                        - generic [ref=e475]: 🚀
+                        - generic [ref=e476]: Analyze
+                - generic [ref=e477]:
+                  - generic [ref=e478]: "💰 Seller:"
+                  - link "Google" [ref=e479]:
+                    - /url: https://www.google.com/search?q=Turnberry%20Holdings%20Inc
+                  - generic [ref=e480]: •
+                  - link "LI" [ref=e481]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Turnberry%20Holdings%20Inc
+  - button "Ctrl+Shift+V" [ref=e387] [cursor=pointer]:
+    - img [ref=e388]
+    - generic [ref=e391]: Ctrl+Shift+V

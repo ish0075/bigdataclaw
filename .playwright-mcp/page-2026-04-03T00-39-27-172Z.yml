@@ -1,0 +1,294 @@
+- generic:
+  - generic:
+    - generic:
+      - link:
+        - /url: "#main-content"
+        - text: Skip to Main Content
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - img
+              - generic:
+                - button:
+                  - link:
+                    - /url: /NIAAAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: "N"
+                - button:
+                  - link:
+                    - /url: /TES/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: T
+                - button:
+                  - link:
+                    - /url: /NIAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: "N"
+                - button:
+                  - link:
+                    - /url: /NIA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: "N"
+                - button:
+                  - link:
+                    - /url: /TESA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: T
+                - button:
+                  - link:
+                    - /url: /NIAAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: "N"
+                - button:
+                  - link:
+                    - /url: /TESAAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: T
+                - button:
+                  - link:
+                    - /url: /ABC/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: A
+                - button:
+                  - link:
+                    - /url: /FAC/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: F
+                - button:
+                  - link:
+                    - /url: /TESAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: M
+                - status
+              - generic:
+                - button:
+                  - img
+            - generic:
+              - complementary:
+                - generic:
+                  - generic: Mission Control - Real Estate Command Center
+                  - button:
+                    - img
+                - navigation:
+                  - generic:
+                    - button:
+                      - img
+                      - generic: New Issue
+                    - link:
+                      - /url: /TESAA/dashboard
+                      - generic:
+                        - img
+                      - generic: Dashboard
+                    - link:
+                      - /url: /TESAA/inbox
+                      - generic:
+                        - img
+                      - generic: Inbox
+                      - generic: "2"
+                  - generic:
+                    - generic: Work
+                    - generic:
+                      - link:
+                        - /url: /TESAA/issues
+                        - generic:
+                          - img
+                        - generic: Issues
+                      - link:
+                        - /url: /TESAA/routines
+                        - generic:
+                          - img
+                        - generic: Routines
+                        - generic: Beta
+                      - link:
+                        - /url: /TESAA/goals
+                        - generic:
+                          - img
+                        - generic: Goals
+                  - generic:
+                    - generic:
+                      - generic:
+                        - button [expanded]:
+                          - img
+                          - generic: Projects
+                        - button:
+                          - img
+                    - generic:
+                      - status
+                  - generic:
+                    - generic:
+                      - generic:
+                        - button [expanded]:
+                          - img
+                          - generic: Agents
+                        - button:
+                          - img
+                    - generic:
+                      - generic:
+                        - link:
+                          - /url: /TESAA/agents/capital-analyst
+                          - img
+                          - generic: Capital Analyst
+                        - link:
+                          - /url: /TESAA/agents/outreach-strategist
+                          - img
+                          - generic: Outreach Strategist
+                  - generic:
+                    - generic: Company
+                    - generic:
+                      - link:
+                        - /url: /TESAA/org
+                        - generic:
+                          - img
+                        - generic: Org
+                      - link:
+                        - /url: /TESAA/skills
+                        - generic:
+                          - img
+                        - generic: Skills
+                      - link:
+                        - /url: /TESAA/costs
+                        - generic:
+                          - img
+                        - generic: Costs
+                      - link:
+                        - /url: /TESAA/activity
+                        - generic:
+                          - img
+                        - generic: Activity
+                      - link:
+                        - /url: /TESAA/company/settings
+                        - generic:
+                          - img
+                        - generic: Settings
+          - generic:
+            - generic:
+              - link:
+                - /url: https://docs.paperclip.ing/
+                - img
+                - generic: Documentation
+              - generic: v
+              - link:
+                - /url: /instance/settings/general
+                - img
+              - button:
+                - img
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - heading [level=1]: Agents
+          - generic:
+            - main:
+              - generic:
+                - generic:
+                  - generic:
+                    - tablist:
+                      - tab [selected]: All
+                      - tab: Active
+                      - tab: Paused
+                      - tab: Error
+                  - generic:
+                    - generic:
+                      - button:
+                        - img
+                        - text: Filters
+                    - generic:
+                      - button:
+                        - img
+                      - button:
+                        - img
+                    - button:
+                      - img
+                      - text: New Agent
+                - paragraph: 2 agents
+                - generic:
+                  - generic:
+                    - link:
+                      - /url: /TESAA/agents/capital-analyst
+                      - generic: Capital AnalystResearcher
+                      - generic:
+                        - generic:
+                          - generic: nerve_gateway
+                          - generic: —
+                          - generic:
+                            - generic: idle
+                  - generic:
+                    - link:
+                      - /url: /TESAA/agents/outreach-strategist
+                      - generic: Outreach StrategistCMO
+                      - generic:
+                        - generic:
+                          - generic: Process
+                          - generic: —
+                          - generic:
+                            - generic: idle
+      - generic:
+        - heading [level=2]: Command Palette
+        - paragraph: Search for a command to run...
+  - dialog [ref=e279]:
+    - generic [ref=e280]:
+      - generic [ref=e281]:
+        - button "MIS" [ref=e282] [cursor=pointer]
+        - generic [ref=e283]: ›
+        - generic [ref=e284]: New issue
+      - generic [ref=e285]:
+        - button [ref=e286]:
+          - img
+        - button "×" [ref=e287]:
+          - generic [ref=e288]: ×
+    - textbox "Issue title" [active] [ref=e290]
+    - generic [ref=e293]:
+      - generic [ref=e294]: For
+      - button "Assignee" [ref=e295]:
+        - generic [ref=e296]: Assignee
+      - generic [ref=e297]: in
+      - button "Project" [ref=e298]:
+        - generic [ref=e299]: Project
+    - generic [ref=e304]:
+      - textbox "editable markdown" [ref=e306]:
+        - paragraph [ref=e307]
+      - generic:
+        - paragraph: Add description...
+    - generic [ref=e308]:
+      - button "Todo" [ref=e309]:
+        - img [ref=e310]
+        - text: Todo
+      - button "Priority" [ref=e313]:
+        - img [ref=e314]
+        - text: Priority
+      - button "Labels" [ref=e315]:
+        - img [ref=e316]
+        - text: Labels
+      - button "Upload" [ref=e319]:
+        - img [ref=e320]
+        - text: Upload
+      - button [ref=e322]:
+        - img [ref=e323]
+    - generic [ref=e327]:
+      - button "Discard Draft" [disabled]
+      - generic [ref=e328]:
+        - button "Create Issue" [disabled]:
+          - generic:
+            - generic: Create Issue

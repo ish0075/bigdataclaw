@@ -1,0 +1,936 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img "Control Shifter" [ref=e8]
+        - generic [ref=e9]:
+          - heading "Mission Control" [level=1] [ref=e10]
+          - paragraph [ref=e11]: Real Estate Command Center
+      - button "Collapse sidebar" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - generic [ref=e17]:
+        - button "Collapse all" [ref=e18] [cursor=pointer]
+        - button "Expand all" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - button "Main" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]: Main
+          - img [ref=e23]
+        - generic [ref=e25]:
+          - link "Mission Control" [ref=e26] [cursor=pointer]:
+            - /url: /
+            - img [ref=e27]
+            - generic [ref=e32]: Mission Control
+          - link "Property Research" [ref=e33] [cursor=pointer]:
+            - /url: /research
+            - img [ref=e34]
+            - generic [ref=e38]: Property Research
+          - link "Hot Money Radar" [ref=e39] [cursor=pointer]:
+            - /url: /hotmoney
+            - img [ref=e40]
+            - generic [ref=e42]: Hot Money Radar
+          - link "Deal Pipeline" [ref=e43] [cursor=pointer]:
+            - /url: /pipeline
+            - img [ref=e44]
+            - generic [ref=e49]: Deal Pipeline
+          - link "Opportunities" [ref=e50] [cursor=pointer]:
+            - /url: /opportunities
+            - img [ref=e51]
+            - generic [ref=e53]: Opportunities
+          - link "Agent Workspace" [ref=e54] [cursor=pointer]:
+            - /url: /agents
+            - img [ref=e55]
+            - generic [ref=e58]: Agent Workspace
+          - link "Agent Companies NEW" [ref=e59] [cursor=pointer]:
+            - /url: /paperclip-companies
+            - img [ref=e60]
+            - generic [ref=e64]: Agent Companies
+            - generic [ref=e65]: NEW
+          - link "Bot Boardroom AI" [ref=e66] [cursor=pointer]:
+            - /url: /bot-boardroom
+            - img [ref=e67]
+            - generic [ref=e73]: Bot Boardroom
+            - generic [ref=e74]: AI
+          - link "Obsidian Vault" [ref=e75] [cursor=pointer]:
+            - /url: /vault
+            - img [ref=e76]
+            - generic [ref=e80]: Obsidian Vault
+      - generic [ref=e81]:
+        - button "Recruitment" [ref=e82] [cursor=pointer]:
+          - generic [ref=e83]: Recruitment
+          - img [ref=e84]
+        - generic [ref=e86]:
+          - link "EXP Agent Recruiter 96K" [ref=e87] [cursor=pointer]:
+            - /url: /exp-agent-recruiter
+            - img [ref=e88]
+            - generic [ref=e91]: EXP Agent Recruiter
+            - generic [ref=e92]: 96K
+          - link "Commercial Agents 6.7K" [ref=e93] [cursor=pointer]:
+            - /url: /commercial-agent-recruiter
+            - img [ref=e94]
+            - generic [ref=e97]: Commercial Agents
+            - generic [ref=e98]: 6.7K
+          - link "Brokerages" [ref=e99] [cursor=pointer]:
+            - /url: /brokerages
+            - img [ref=e100]
+            - generic [ref=e103]: Brokerages
+      - generic [ref=e104]:
+        - button "AI Bots" [ref=e105] [cursor=pointer]:
+          - generic [ref=e106]: AI Bots
+          - img [ref=e107]
+        - generic [ref=e109]:
+          - link "Buyer Intelligence AI" [ref=e110] [cursor=pointer]:
+            - /url: /buyer-bot
+            - img [ref=e111]
+            - generic [ref=e115]: Buyer Intelligence
+            - generic [ref=e116]: AI
+          - link "Seller Outreach AI" [ref=e117] [cursor=pointer]:
+            - /url: /seller-outreach-bot
+            - img [ref=e118]
+            - generic [ref=e123]: Seller Outreach
+            - generic [ref=e124]: AI
+          - link "Property Valuation AI" [ref=e125] [cursor=pointer]:
+            - /url: /property-valuation-bot
+            - img [ref=e126]
+            - generic [ref=e128]: Property Valuation
+            - generic [ref=e129]: AI
+          - link "Vigil Monitor 24/7" [ref=e130] [cursor=pointer]:
+            - /url: /vigil
+            - img [ref=e131]
+            - generic [ref=e133]: Vigil Monitor
+            - generic [ref=e134]: 24/7
+          - link "Agent Workspaces NEW" [ref=e135] [cursor=pointer]:
+            - /url: /agent-workspaces
+            - img [ref=e136]
+            - generic [ref=e138]: Agent Workspaces
+            - generic [ref=e139]: NEW
+          - link "Bot Builder BUILD" [ref=e140] [cursor=pointer]:
+            - /url: /bot-builder
+            - img [ref=e141]
+            - generic [ref=e145]: Bot Builder
+            - generic [ref=e146]: BUILD
+          - link "Agent Visualizer LIVE" [ref=e147] [cursor=pointer]:
+            - /url: /mission-control
+            - img [ref=e148]
+            - generic [ref=e150]: Agent Visualizer
+            - generic [ref=e151]: LIVE
+      - button "Tools" [ref=e153] [cursor=pointer]:
+        - generic [ref=e154]: Tools
+        - img [ref=e155]
+    - generic [ref=e160]: System Online
+  - generic [ref=e161]:
+    - banner [ref=e162]:
+      - generic [ref=e168]:
+        - img [ref=e313]
+        - generic [ref=e176]: Connected
+      - generic [ref=e179]:
+        - img [ref=e180]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e183]
+        - combobox [ref=e184]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e185]:
+        - button "Help" [ref=e187] [cursor=pointer]:
+          - img [ref=e188]
+          - generic [ref=e191]: Help
+        - button "Voice" [ref=e192] [cursor=pointer]:
+          - img [ref=e193]
+          - generic [ref=e199]: Voice
+        - generic [ref=e200]:
+          - img [ref=e201]
+          - generic [ref=e206]: $12.40
+        - link "Data Manager" [ref=e207] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e208]
+        - button [ref=e212] [cursor=pointer]:
+          - img [ref=e213]
+        - link [ref=e216] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e217]
+        - link "🦞" [ref=e220] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e221]: 🦞
+    - main [ref=e222]:
+      - generic [ref=e224]:
+        - generic [ref=e225]:
+          - generic [ref=e226]:
+            - heading "Hot Money Radar" [level=1] [ref=e227]:
+              - img [ref=e228]
+              - text: Hot Money Radar
+            - paragraph [ref=e230]: 20 leads with $980.6M in fresh capital • Recently sold
+          - generic [ref=e231]:
+            - button "Paste Deal" [ref=e232] [cursor=pointer]:
+              - img [ref=e233]
+              - text: Paste Deal
+            - button "Refresh" [ref=e237] [cursor=pointer]:
+              - img [ref=e238]
+              - text: Refresh
+            - button "Filter" [ref=e240] [cursor=pointer]:
+              - img [ref=e241]
+              - text: Filter
+            - button "Export" [ref=e243] [cursor=pointer]:
+              - img [ref=e244]
+              - text: Export
+        - generic [ref=e247]:
+          - generic [ref=e249]:
+            - img
+            - generic [ref=e252]:
+              - paragraph [ref=e253]: $980.6M
+              - paragraph [ref=e254]: Total Hot Money
+          - generic [ref=e256]:
+            - img [ref=e257]
+            - generic [ref=e259]:
+              - paragraph [ref=e260]: "20"
+              - paragraph [ref=e261]: Active Alerts
+          - generic [ref=e263]:
+            - img
+            - generic [ref=e268]:
+              - paragraph [ref=e269]: $49.0M
+              - paragraph [ref=e270]: Avg Cash Position
+          - generic [ref=e272]:
+            - img [ref=e273]
+            - generic [ref=e275]:
+              - paragraph [ref=e276]: "82"
+              - paragraph [ref=e277]: Avg Match Score
+        - generic [ref=e279]:
+          - generic [ref=e280]:
+            - img [ref=e281]
+            - textbox "Search by entity name, location, or asset class... (or use voice 🎤)" [ref=e284]
+            - generic [ref=e285]:
+              - button "Search" [ref=e286] [cursor=pointer]:
+                - img [ref=e287]
+                - text: Search
+              - button "Start voice input" [ref=e291] [cursor=pointer]:
+                - img [ref=e292]
+          - combobox [ref=e296]:
+            - option "All Asset Classes" [selected]
+            - option "Industrial"
+            - option "Retail"
+            - option "Office"
+            - option "Multi-Family"
+            - option "Agricultural"
+            - option "Land"
+            - option "Mixed-Use"
+        - generic [ref=e297]:
+          - generic [ref=e299]:
+            - heading "Hot Money Leads" [level=3] [ref=e300]
+            - generic [ref=e301]:
+              - generic [ref=e302]: "Sorted by:"
+              - combobox [ref=e303]:
+                - option "Cash Amount (High → Low)" [selected]
+                - option "Date (Newest)"
+                - option "Match Score"
+          - generic [ref=e304]:
+            - generic [ref=e318] [cursor=pointer]:
+              - img [ref=e321]
+              - generic [ref=e323]:
+                - generic [ref=e324]:
+                  - generic [ref=e325]:
+                    - generic [ref=e326]:
+                      - heading "Facility Inc" [level=4] [ref=e327]
+                      - generic [ref=e328]: "Sale: Mar 2026"
+                    - generic [ref=e329]:
+                      - generic [ref=e330]:
+                        - img [ref=e331]
+                        - generic [ref=e333]: $467.0M cash
+                      - generic [ref=e334]: "|"
+                      - generic [ref=e335]:
+                        - img [ref=e336]
+                        - generic [ref=e338]: Mar 2026
+                      - generic [ref=e339]: "|"
+                      - img [ref=e341]
+                    - paragraph [ref=e344]: Ontario land•467 MAIN ST E 46 GRANT AVE
+                  - generic [ref=e345]:
+                    - generic [ref=e346]:
+                      - generic [ref=e347]: "80"
+                      - generic [ref=e348]: Match Score
+                    - generic [ref=e349]:
+                      - button "View Profile" [ref=e350]
+                      - button "🚀 Analyze" [ref=e351]:
+                        - generic [ref=e352]: 🚀
+                        - generic [ref=e353]: Analyze
+                - generic [ref=e354]:
+                  - generic [ref=e355]: "💰 Seller:"
+                  - link "Google" [ref=e356]:
+                    - /url: https://www.google.com/search?q=Facility%20Inc
+                  - generic [ref=e357]: •
+                  - link "LI" [ref=e358]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Facility%20Inc
+            - generic [ref=e360] [cursor=pointer]:
+              - img [ref=e363]
+              - generic [ref=e365]:
+                - generic [ref=e366]:
+                  - generic [ref=e367]:
+                    - generic [ref=e368]:
+                      - heading "Holdings Ltd" [level=4] [ref=e369]
+                      - generic [ref=e370]: "Sale: Mar 2026"
+                    - generic [ref=e371]:
+                      - generic [ref=e372]:
+                        - img [ref=e373]
+                        - generic [ref=e375]: $106.0M cash
+                      - generic [ref=e376]: "|"
+                      - generic [ref=e377]:
+                        - img [ref=e378]
+                        - generic [ref=e380]: Mar 2026
+                      - generic [ref=e381]: "|"
+                      - img [ref=e383]
+                    - paragraph [ref=e386]: West Mall•180 ALLST
+                  - generic [ref=e387]:
+                    - generic [ref=e388]:
+                      - generic [ref=e389]: "80"
+                      - generic [ref=e390]: Match Score
+                    - generic [ref=e391]:
+                      - button "View Profile" [ref=e392]
+                      - button "🚀 Analyze" [ref=e393]:
+                        - generic [ref=e394]: 🚀
+                        - generic [ref=e395]: Analyze
+                - generic [ref=e396]:
+                  - generic [ref=e397]: "💰 Seller:"
+                  - link "Google" [ref=e398]:
+                    - /url: https://www.google.com/search?q=Holdings%20Ltd
+                  - generic [ref=e399]: •
+                  - link "LI" [ref=e400]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Holdings%20Ltd
+            - generic [ref=e402] [cursor=pointer]:
+              - img [ref=e405]
+              - generic [ref=e407]:
+                - generic [ref=e408]:
+                  - generic [ref=e409]:
+                    - generic [ref=e410]:
+                      - heading "Peel Mutual Insurance Company" [level=4] [ref=e411]
+                      - generic [ref=e412]: "Sale: Mar 2026"
+                    - generic [ref=e413]:
+                      - generic [ref=e414]:
+                        - img [ref=e415]
+                        - generic [ref=e417]: $27.0M cash
+                      - generic [ref=e418]: "|"
+                      - generic [ref=e419]:
+                        - img [ref=e420]
+                        - generic [ref=e422]: Mar 2026
+                      - generic [ref=e423]: "|"
+                      - img [ref=e425]
+                    - paragraph [ref=e428]: use building•103 QUEEN ST W 105 QUEEN ST W 7 ELIZABETH ST
+                  - generic [ref=e429]:
+                    - generic [ref=e430]:
+                      - generic [ref=e431]: "80"
+                      - generic [ref=e432]: Match Score
+                    - generic [ref=e433]:
+                      - button "View Profile" [ref=e434]
+                      - button "🚀 Analyze" [ref=e435]:
+                        - generic [ref=e436]: 🚀
+                        - generic [ref=e437]: Analyze
+                - generic [ref=e438]:
+                  - generic [ref=e439]: "💰 Seller:"
+                  - link "Google" [ref=e440]:
+                    - /url: https://www.google.com/search?q=Peel%20Mutual%20Insurance%20Company
+                  - generic [ref=e441]: •
+                  - link "LI" [ref=e442]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Peel%20Mutual%20Insurance%20Company
+            - generic [ref=e444] [cursor=pointer]:
+              - img [ref=e447]
+              - generic [ref=e449]:
+                - generic [ref=e450]:
+                  - generic [ref=e451]:
+                    - generic [ref=e452]:
+                      - heading "Almak Holdings Inc" [level=4] [ref=e453]
+                      - generic [ref=e454]: "Sale: Mar 2026"
+                    - generic [ref=e455]:
+                      - generic [ref=e456]:
+                        - img [ref=e457]
+                        - generic [ref=e459]: $27.0M cash
+                      - generic [ref=e460]: "|"
+                      - generic [ref=e461]:
+                        - img [ref=e462]
+                        - generic [ref=e464]: Mar 2026
+                      - generic [ref=e465]: "|"
+                      - img [ref=e467]
+                    - paragraph [ref=e470]: scenic farm•846 Lexicon Dr
+                  - generic [ref=e471]:
+                    - generic [ref=e472]:
+                      - generic [ref=e473]: "80"
+                      - generic [ref=e474]: Match Score
+                    - generic [ref=e475]:
+                      - button "View Profile" [ref=e476]
+                      - button "🚀 Analyze" [ref=e477]:
+                        - generic [ref=e478]: 🚀
+                        - generic [ref=e479]: Analyze
+                - generic [ref=e480]:
+                  - generic [ref=e481]: "💰 Seller:"
+                  - link "Google" [ref=e482]:
+                    - /url: https://www.google.com/search?q=Almak%20Holdings%20Inc
+                  - generic [ref=e483]: •
+                  - link "LI" [ref=e484]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Almak%20Holdings%20Inc
+            - generic [ref=e486] [cursor=pointer]:
+              - img [ref=e489]
+              - generic [ref=e491]:
+                - generic [ref=e492]:
+                  - generic [ref=e493]:
+                    - generic [ref=e494]:
+                      - heading "Industrial Equities Guelph Corp" [level=4] [ref=e495]
+                      - generic [ref=e496]: "Sale: Mar 2026"
+                    - generic [ref=e497]:
+                      - generic [ref=e498]:
+                        - img [ref=e499]
+                        - generic [ref=e501]: $27.0M cash
+                      - generic [ref=e502]: "|"
+                      - generic [ref=e503]:
+                        - img [ref=e504]
+                        - generic [ref=e506]: Mar 2026
+                      - generic [ref=e507]: "|"
+                      - img [ref=e509]
+                    - paragraph [ref=e512]: storage facility•426 CRAWLEY RD
+                  - generic [ref=e513]:
+                    - generic [ref=e514]:
+                      - generic [ref=e515]: "80"
+                      - generic [ref=e516]: Match Score
+                    - generic [ref=e517]:
+                      - button "View Profile" [ref=e518]
+                      - button "🚀 Analyze" [ref=e519]:
+                        - generic [ref=e520]: 🚀
+                        - generic [ref=e521]: Analyze
+                - generic [ref=e522]:
+                  - generic [ref=e523]: "💰 Seller:"
+                  - link "Google" [ref=e524]:
+                    - /url: https://www.google.com/search?q=Industrial%20Equities%20Guelph%20Corp
+                  - generic [ref=e525]: •
+                  - link "LI" [ref=e526]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Industrial%20Equities%20Guelph%20Corp
+            - generic [ref=e528] [cursor=pointer]:
+              - img [ref=e531]
+              - generic [ref=e533]:
+                - generic [ref=e534]:
+                  - generic [ref=e535]:
+                    - generic [ref=e536]:
+                      - heading "Development Status Listed for sale as future residential development" [level=4] [ref=e537]
+                      - generic [ref=e538]: "Sale: Mar 2026"
+                    - generic [ref=e539]:
+                      - generic [ref=e540]:
+                        - img [ref=e541]
+                        - generic [ref=e543]: $27.0M cash
+                      - generic [ref=e544]: "|"
+                      - generic [ref=e545]:
+                        - img [ref=e546]
+                        - generic [ref=e548]: Mar 2026
+                      - generic [ref=e549]: "|"
+                      - img [ref=e551]
+                    - paragraph [ref=e554]: of land•000 801 Cochrane St
+                  - generic [ref=e555]:
+                    - generic [ref=e556]:
+                      - generic [ref=e557]: "80"
+                      - generic [ref=e558]: Match Score
+                    - generic [ref=e559]:
+                      - button "View Profile" [ref=e560]
+                      - button "🚀 Analyze" [ref=e561]:
+                        - generic [ref=e562]: 🚀
+                        - generic [ref=e563]: Analyze
+                - generic [ref=e564]:
+                  - generic [ref=e565]: "💰 Seller:"
+                  - link "Google" [ref=e566]:
+                    - /url: https://www.google.com/search?q=Development%20Status%0AListed%20for%20sale%20as%20future%20residential%20development
+                  - generic [ref=e567]: •
+                  - link "LI" [ref=e568]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Development%20Status%0AListed%20for%20sale%20as%20future%20residential%20development
+            - generic [ref=e570] [cursor=pointer]:
+              - img [ref=e573]
+              - generic [ref=e575]:
+                - generic [ref=e576]:
+                  - generic [ref=e577]:
+                    - generic [ref=e578]:
+                      - heading "Industrial Equities Guelph Corp" [level=4] [ref=e579]
+                      - generic [ref=e580]: "Sale: Mar 2026"
+                    - generic [ref=e581]:
+                      - generic [ref=e582]:
+                        - img [ref=e583]
+                        - generic [ref=e585]: $27.0M cash
+                      - generic [ref=e586]: "|"
+                      - generic [ref=e587]:
+                        - img [ref=e588]
+                        - generic [ref=e590]: Mar 2026
+                      - generic [ref=e591]: "|"
+                      - img [ref=e593]
+                    - paragraph [ref=e596]: Industrial•426 CRAWLEY RD
+                  - generic [ref=e597]:
+                    - generic [ref=e598]:
+                      - generic [ref=e599]: "80"
+                      - generic [ref=e600]: Match Score
+                    - generic [ref=e601]:
+                      - button "View Profile" [ref=e602]
+                      - button "🚀 Analyze" [ref=e603]:
+                        - generic [ref=e604]: 🚀
+                        - generic [ref=e605]: Analyze
+                - generic [ref=e606]:
+                  - generic [ref=e607]: "💰 Seller:"
+                  - link "Google" [ref=e608]:
+                    - /url: https://www.google.com/search?q=Industrial%20Equities%20Guelph%20Corp
+                  - generic [ref=e609]: •
+                  - link "LI" [ref=e610]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Industrial%20Equities%20Guelph%20Corp
+            - generic [ref=e612] [cursor=pointer]:
+              - img [ref=e615]
+              - generic [ref=e617]:
+                - generic [ref=e618]:
+                  - generic [ref=e619]:
+                    - generic [ref=e620]:
+                      - heading "typical for private rural holdings" [level=4] [ref=e621]
+                      - generic [ref=e622]: "Sale: Mar 2026"
+                    - generic [ref=e623]:
+                      - generic [ref=e624]:
+                        - img [ref=e625]
+                        - generic [ref=e627]: $26.0M cash
+                      - generic [ref=e628]: "|"
+                      - generic [ref=e629]:
+                        - img [ref=e630]
+                        - generic [ref=e632]: Mar 2026
+                      - generic [ref=e633]: "|"
+                      - img [ref=e635]
+                    - paragraph [ref=e638]: Rossland•7711 605 Rossland Rd
+                  - generic [ref=e639]:
+                    - generic [ref=e640]:
+                      - generic [ref=e641]: "80"
+                      - generic [ref=e642]: Match Score
+                    - generic [ref=e643]:
+                      - button "View Profile" [ref=e644]
+                      - button "🚀 Analyze" [ref=e645]:
+                        - generic [ref=e646]: 🚀
+                        - generic [ref=e647]: Analyze
+                - generic [ref=e648]:
+                  - generic [ref=e649]: "💰 Seller:"
+                  - link "Google" [ref=e650]:
+                    - /url: https://www.google.com/search?q=typical%20for%20private%20rural%20holdings
+                  - generic [ref=e651]: •
+                  - link "LI" [ref=e652]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=typical%20for%20private%20rural%20holdings
+            - generic [ref=e654] [cursor=pointer]:
+              - img [ref=e657]
+              - generic [ref=e659]:
+                - generic [ref=e660]:
+                  - generic [ref=e661]:
+                    - generic [ref=e662]:
+                      - heading "Richard Harding" [level=4] [ref=e663]
+                      - generic [ref=e664]: "Sale: Mar 2026"
+                    - generic [ref=e665]:
+                      - generic [ref=e666]:
+                        - img [ref=e667]
+                        - generic [ref=e669]: $26.0M cash
+                      - generic [ref=e670]: "|"
+                      - generic [ref=e671]:
+                        - img [ref=e672]
+                        - generic [ref=e674]: Mar 2026
+                      - generic [ref=e675]: "|"
+                      - img [ref=e677]
+                    - paragraph [ref=e680]: institutional land•61 Claireville Dr
+                  - generic [ref=e681]:
+                    - generic [ref=e682]:
+                      - generic [ref=e683]: "80"
+                      - generic [ref=e684]: Match Score
+                    - generic [ref=e685]:
+                      - button "View Profile" [ref=e686]
+                      - button "🚀 Analyze" [ref=e687]:
+                        - generic [ref=e688]: 🚀
+                        - generic [ref=e689]: Analyze
+                - generic [ref=e690]:
+                  - generic [ref=e691]: "💰 Seller:"
+                  - link "Google" [ref=e692]:
+                    - /url: https://www.google.com/search?q=Richard%20Harding
+                  - generic [ref=e693]: •
+                  - link "LI" [ref=e694]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Richard%20Harding
+            - generic [ref=e696] [cursor=pointer]:
+              - img [ref=e699]
+              - generic [ref=e701]:
+                - generic [ref=e702]:
+                  - generic [ref=e703]:
+                    - generic [ref=e704]:
+                      - heading "Fourteen Mile Farms Ltd" [level=4] [ref=e705]
+                      - generic [ref=e706]: "Sale: Mar 2026"
+                    - generic [ref=e707]:
+                      - generic [ref=e708]:
+                        - img [ref=e709]
+                        - generic [ref=e711]: $26.0M cash
+                      - generic [ref=e712]: "|"
+                      - generic [ref=e713]:
+                        - img [ref=e714]
+                        - generic [ref=e716]: Mar 2026
+                      - generic [ref=e717]: "|"
+                      - img [ref=e719]
+                    - paragraph [ref=e722]: Mile Farm•22474 PROSPECT HILL RD
+                  - generic [ref=e723]:
+                    - generic [ref=e724]:
+                      - generic [ref=e725]: "80"
+                      - generic [ref=e726]: Match Score
+                    - generic [ref=e727]:
+                      - button "View Profile" [ref=e728]
+                      - button "🚀 Analyze" [ref=e729]:
+                        - generic [ref=e730]: 🚀
+                        - generic [ref=e731]: Analyze
+                - generic [ref=e732]:
+                  - generic [ref=e733]: "💰 Seller:"
+                  - link "Google" [ref=e734]:
+                    - /url: https://www.google.com/search?q=Fourteen%20Mile%20Farms%20Ltd
+                  - generic [ref=e735]: •
+                  - link "LI" [ref=e736]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Fourteen%20Mile%20Farms%20Ltd
+            - generic [ref=e738] [cursor=pointer]:
+              - img [ref=e741]
+              - generic [ref=e743]:
+                - generic [ref=e744]:
+                  - generic [ref=e745]:
+                    - generic [ref=e746]:
+                      - heading "Mayfield Industrial GP Inc" [level=4] [ref=e747]
+                      - generic [ref=e748]: "Sale: Mar 2026"
+                    - generic [ref=e749]:
+                      - generic [ref=e750]:
+                        - img [ref=e751]
+                        - generic [ref=e753]: $26.0M cash
+                      - generic [ref=e754]: "|"
+                      - generic [ref=e755]:
+                        - img [ref=e756]
+                        - generic [ref=e758]: Mar 2026
+                      - generic [ref=e759]: "|"
+                      - img [ref=e761]
+                    - paragraph [ref=e764]: condo complex•95 INSPIRE BLVD
+                  - generic [ref=e765]:
+                    - generic [ref=e766]:
+                      - generic [ref=e767]: "80"
+                      - generic [ref=e768]: Match Score
+                    - generic [ref=e769]:
+                      - button "View Profile" [ref=e770]
+                      - button "🚀 Analyze" [ref=e771]:
+                        - generic [ref=e772]: 🚀
+                        - generic [ref=e773]: Analyze
+                - generic [ref=e774]:
+                  - generic [ref=e775]: "💰 Seller:"
+                  - link "Google" [ref=e776]:
+                    - /url: https://www.google.com/search?q=Mayfield%20Industrial%20GP%20Inc
+                  - generic [ref=e777]: •
+                  - link "LI" [ref=e778]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Mayfield%20Industrial%20GP%20Inc
+            - generic [ref=e780] [cursor=pointer]:
+              - img [ref=e783]
+              - generic [ref=e785]:
+                - generic [ref=e786]:
+                  - generic [ref=e787]:
+                    - generic [ref=e788]:
+                      - heading "Perimeter Forest GP Inc 624 Huron Terrace Kinc" [level=4] [ref=e789]
+                      - generic [ref=e790]: "Sale: Mar 2026"
+                    - generic [ref=e791]:
+                      - generic [ref=e792]:
+                        - img [ref=e793]
+                        - generic [ref=e795]: $26.0M cash
+                      - generic [ref=e796]: "|"
+                      - generic [ref=e797]:
+                        - img [ref=e798]
+                        - generic [ref=e800]: Mar 2026
+                      - generic [ref=e801]: "|"
+                      - img [ref=e803]
+                    - paragraph [ref=e806]: forestland•624 Huron Terrace Kincard
+                  - generic [ref=e807]:
+                    - generic [ref=e808]:
+                      - generic [ref=e809]: "80"
+                      - generic [ref=e810]: Match Score
+                    - generic [ref=e811]:
+                      - button "View Profile" [ref=e812]
+                      - button "🚀 Analyze" [ref=e813]:
+                        - generic [ref=e814]: 🚀
+                        - generic [ref=e815]: Analyze
+                - generic [ref=e816]:
+                  - generic [ref=e817]: "💰 Seller:"
+                  - link "Google" [ref=e818]:
+                    - /url: https://www.google.com/search?q=Perimeter%20Forest%20GP%20Inc%20%20%20%20%20%0A%0A624%20Huron%20Terrace%0AKinc
+                  - generic [ref=e819]: •
+                  - link "LI" [ref=e820]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Perimeter%20Forest%20GP%20Inc%20%20%20%20%20%0A%0A624%20Huron%20Terrace%0AKinc
+            - generic [ref=e822] [cursor=pointer]:
+              - img [ref=e825]
+              - generic [ref=e827]:
+                - generic [ref=e828]:
+                  - generic [ref=e829]:
+                    - generic [ref=e830]:
+                      - heading "Perimeter Forest GP Inc 624 Huron Terrace Kinc" [level=4] [ref=e831]
+                      - generic [ref=e832]: "Sale: Mar 2026"
+                    - generic [ref=e833]:
+                      - generic [ref=e834]:
+                        - img [ref=e835]
+                        - generic [ref=e837]: $26.0M cash
+                      - generic [ref=e838]: "|"
+                      - generic [ref=e839]:
+                        - img [ref=e840]
+                        - generic [ref=e842]: Mar 2026
+                      - generic [ref=e843]: "|"
+                      - img [ref=e845]
+                    - paragraph [ref=e848]: forestland•10021 Dist
+                  - generic [ref=e849]:
+                    - generic [ref=e850]:
+                      - generic [ref=e851]: "80"
+                      - generic [ref=e852]: Match Score
+                    - generic [ref=e853]:
+                      - button "View Profile" [ref=e854]
+                      - button "🚀 Analyze" [ref=e855]:
+                        - generic [ref=e856]: 🚀
+                        - generic [ref=e857]: Analyze
+                - generic [ref=e858]:
+                  - generic [ref=e859]: "💰 Seller:"
+                  - link "Google" [ref=e860]:
+                    - /url: https://www.google.com/search?q=Perimeter%20Forest%20GP%20Inc%20%20%20%20%20%0A%0A624%20Huron%20Terrace%0AKinc
+                  - generic [ref=e861]: •
+                  - link "LI" [ref=e862]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Perimeter%20Forest%20GP%20Inc%20%20%20%20%20%0A%0A624%20Huron%20Terrace%0AKinc
+            - generic [ref=e864] [cursor=pointer]:
+              - img [ref=e867]
+              - generic [ref=e869]:
+                - generic [ref=e870]:
+                  - generic [ref=e871]:
+                    - generic [ref=e872]:
+                      - heading "William Strachan" [level=4] [ref=e873]
+                      - generic [ref=e874]: "Sale: Mar 2026"
+                    - generic [ref=e875]:
+                      - generic [ref=e876]:
+                        - img [ref=e877]
+                        - generic [ref=e879]: $25.0M cash
+                      - generic [ref=e880]: "|"
+                      - generic [ref=e881]:
+                        - img [ref=e882]
+                        - generic [ref=e884]: Mar 2026
+                      - generic [ref=e885]: "|"
+                      - img [ref=e887]
+                    - paragraph [ref=e890]: Industrial•322 RUTHERFORD RD
+                  - generic [ref=e891]:
+                    - generic [ref=e892]:
+                      - generic [ref=e893]: "80"
+                      - generic [ref=e894]: Match Score
+                    - generic [ref=e895]:
+                      - button "View Profile" [ref=e896]
+                      - button "🚀 Analyze" [ref=e897]:
+                        - generic [ref=e898]: 🚀
+                        - generic [ref=e899]: Analyze
+                - generic [ref=e900]:
+                  - generic [ref=e901]: "💰 Seller:"
+                  - link "Google" [ref=e902]:
+                    - /url: https://www.google.com/search?q=William%20Strachan
+                  - generic [ref=e903]: •
+                  - link "LI" [ref=e904]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=William%20Strachan
+            - generic [ref=e906] [cursor=pointer]:
+              - img [ref=e909]
+              - generic [ref=e911]:
+                - generic [ref=e912]:
+                  - generic [ref=e913]:
+                    - generic [ref=e914]:
+                      - heading "Royal Bank of Canada princ" [level=4] [ref=e915]
+                      - generic [ref=e916]: "Sale: Mar 2026"
+                    - generic [ref=e917]:
+                      - generic [ref=e918]:
+                        - img [ref=e919]
+                        - generic [ref=e921]: $25.0M cash
+                      - generic [ref=e922]: "|"
+                      - generic [ref=e923]:
+                        - img [ref=e924]
+                        - generic [ref=e926]: Mar 2026
+                      - generic [ref=e927]: "|"
+                      - img [ref=e929]
+                    - paragraph [ref=e932]: surplus land•4561 LANGSTAFF RD
+                  - generic [ref=e933]:
+                    - generic [ref=e934]:
+                      - generic [ref=e935]: "80"
+                      - generic [ref=e936]: Match Score
+                    - generic [ref=e937]:
+                      - button "View Profile" [ref=e938]
+                      - button "🚀 Analyze" [ref=e939]:
+                        - generic [ref=e940]: 🚀
+                        - generic [ref=e941]: Analyze
+                - generic [ref=e942]:
+                  - generic [ref=e943]: "💰 Seller:"
+                  - link "Google" [ref=e944]:
+                    - /url: https://www.google.com/search?q=Royal%20Bank%20of%20Canada%0Aprinc
+                  - generic [ref=e945]: •
+                  - link "LI" [ref=e946]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Royal%20Bank%20of%20Canada%0Aprinc
+            - generic [ref=e948] [cursor=pointer]:
+              - img [ref=e951]
+              - generic [ref=e953]:
+                - generic [ref=e954]:
+                  - generic [ref=e955]:
+                    - generic [ref=e956]:
+                      - heading "Aziz Amiri" [level=4] [ref=e957]
+                      - generic [ref=e958]: "Sale: Mar 2026"
+                    - generic [ref=e959]:
+                      - generic [ref=e960]:
+                        - img [ref=e961]
+                        - generic [ref=e963]: $25.0M cash
+                      - generic [ref=e964]: "|"
+                      - generic [ref=e965]:
+                        - img [ref=e966]
+                        - generic [ref=e968]: Mar 2026
+                      - generic [ref=e969]: "|"
+                      - img [ref=e971]
+                    - paragraph [ref=e974]: Industrial•90 PRODUCTION DR
+                  - generic [ref=e975]:
+                    - generic [ref=e976]:
+                      - generic [ref=e977]: "80"
+                      - generic [ref=e978]: Match Score
+                    - generic [ref=e979]:
+                      - button "View Profile" [ref=e980]
+                      - button "🚀 Analyze" [ref=e981]:
+                        - generic [ref=e982]: 🚀
+                        - generic [ref=e983]: Analyze
+                - generic [ref=e984]:
+                  - generic [ref=e985]: "💰 Seller:"
+                  - link "Google" [ref=e986]:
+                    - /url: https://www.google.com/search?q=Aziz%20Amiri
+                  - generic [ref=e987]: •
+                  - link "LI" [ref=e988]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Aziz%20Amiri
+            - generic [ref=e990] [cursor=pointer]:
+              - img [ref=e993]
+              - generic [ref=e995]:
+                - generic [ref=e996]:
+                  - generic [ref=e997]:
+                    - generic [ref=e998]:
+                      - heading "1520724 Ontario Inc" [level=4] [ref=e999]
+                      - generic [ref=e1000]: "Sale: Mar 2026"
+                    - generic [ref=e1001]:
+                      - generic [ref=e1002]:
+                        - img [ref=e1003]
+                        - generic [ref=e1005]: $15.8M cash
+                      - generic [ref=e1006]: "|"
+                      - generic [ref=e1007]:
+                        - img [ref=e1008]
+                        - generic [ref=e1010]: Mar 2026
+                      - generic [ref=e1011]: "|"
+                      - img [ref=e1013]
+                    - paragraph [ref=e1016]: ft warehouse•44 WEST DR
+                  - generic [ref=e1017]:
+                    - generic [ref=e1018]:
+                      - generic [ref=e1019]: "80"
+                      - generic [ref=e1020]: Match Score
+                    - generic [ref=e1021]:
+                      - button "View Profile" [ref=e1022]
+                      - button "🚀 Analyze" [ref=e1023]:
+                        - generic [ref=e1024]: 🚀
+                        - generic [ref=e1025]: Analyze
+                - generic [ref=e1026]:
+                  - generic [ref=e1027]: "💰 Seller:"
+                  - link "Google" [ref=e1028]:
+                    - /url: https://www.google.com/search?q=1520724%20Ontario%20Inc
+                  - generic [ref=e1029]: •
+                  - link "LI" [ref=e1030]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=1520724%20Ontario%20Inc
+            - generic [ref=e1032] [cursor=pointer]:
+              - img [ref=e1035]
+              - generic [ref=e1037]:
+                - generic [ref=e1038]:
+                  - generic [ref=e1039]:
+                    - generic [ref=e1040]:
+                      - heading "Turnberry Holdings Inc" [level=4] [ref=e1041]
+                      - generic [ref=e1042]: "Sale: Jan 2025"
+                    - generic [ref=e1043]:
+                      - generic [ref=e1044]:
+                        - img [ref=e1045]
+                        - generic [ref=e1047]: $9.8M cash
+                      - generic [ref=e1048]: "|"
+                      - generic [ref=e1049]:
+                        - img [ref=e1050]
+                        - generic [ref=e1052]: Jan 2025
+                      - generic [ref=e1053]: "|"
+                      - generic [ref=e1054]:
+                        - img [ref=e1055]
+                        - generic [ref=e1058]: Lincoln
+                    - paragraph [ref=e1059]: Retail/Office Mixed-Use•4556-4568 Lincoln Ave, Beamsville, ON L0R 1B0
+                  - generic [ref=e1060]:
+                    - generic [ref=e1061]:
+                      - generic [ref=e1062]: "88"
+                      - generic [ref=e1063]: Match Score
+                    - generic [ref=e1064]:
+                      - button "View Profile" [ref=e1065]
+                      - button "🚀 Analyze" [ref=e1066]:
+                        - generic [ref=e1067]: 🚀
+                        - generic [ref=e1068]: Analyze
+                - generic [ref=e1069]:
+                  - generic [ref=e1070]: "💰 Seller:"
+                  - link "Google" [ref=e1071]:
+                    - /url: https://www.google.com/search?q=Turnberry%20Holdings%20Inc
+                  - generic [ref=e1072]: •
+                  - link "LI" [ref=e1073]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Turnberry%20Holdings%20Inc
+            - generic [ref=e1075] [cursor=pointer]:
+              - img [ref=e1078]
+              - generic [ref=e1080]:
+                - generic [ref=e1081]:
+                  - generic [ref=e1082]:
+                    - generic [ref=e1083]:
+                      - heading "Test Development Corp" [level=4] [ref=e1084]
+                      - generic [ref=e1085]: "Sale: Mar 2025"
+                    - generic [ref=e1086]:
+                      - generic [ref=e1087]:
+                        - img [ref=e1088]
+                        - generic [ref=e1090]: $8.5M cash
+                      - generic [ref=e1091]: "|"
+                      - generic [ref=e1092]:
+                        - img [ref=e1093]
+                        - generic [ref=e1095]: Mar 2025
+                      - generic [ref=e1096]: "|"
+                      - generic [ref=e1097]:
+                        - img [ref=e1098]
+                        - generic [ref=e1101]: St. Catharines
+                    - paragraph [ref=e1102]: Retail/Office Development•45 James St, St. Catharines, ON
+                  - generic [ref=e1103]:
+                    - generic [ref=e1104]:
+                      - generic [ref=e1105]: "90"
+                      - generic [ref=e1106]: Match Score
+                    - generic [ref=e1107]:
+                      - button "View Profile" [ref=e1108]
+                      - button "🚀 Analyze" [ref=e1109]:
+                        - generic [ref=e1110]: 🚀
+                        - generic [ref=e1111]: Analyze
+                - generic [ref=e1112]:
+                  - generic [ref=e1113]: "💰 Seller:"
+                  - link "Google" [ref=e1114]:
+                    - /url: https://www.google.com/search?q=Test%20Development%20Corp
+                  - generic [ref=e1115]: •
+                  - link "LI" [ref=e1116]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Test%20Development%20Corp
+            - generic [ref=e1118] [cursor=pointer]:
+              - img [ref=e1121]
+              - generic [ref=e1123]:
+                - generic [ref=e1124]:
+                  - generic [ref=e1125]:
+                    - generic [ref=e1126]:
+                      - heading "Updated Test Entity" [level=4] [ref=e1127]
+                      - generic [ref=e1128]: "Sale: May 2025"
+                    - generic [ref=e1129]:
+                      - generic [ref=e1130]:
+                        - img [ref=e1131]
+                        - generic [ref=e1133]: $7.5M cash
+                      - generic [ref=e1134]: "|"
+                      - generic [ref=e1135]:
+                        - img [ref=e1136]
+                        - generic [ref=e1138]: May 2025
+                      - generic [ref=e1139]: "|"
+                      - generic [ref=e1140]:
+                        - img [ref=e1141]
+                        - generic [ref=e1144]: West Lincoln
+                    - paragraph [ref=e1145]: Industrial Warehouse•1230 Thirty Rd, West Lincoln, ON L0R 2A0
+                  - generic [ref=e1146]:
+                    - generic [ref=e1147]:
+                      - generic [ref=e1148]: "92"
+                      - generic [ref=e1149]: Match Score
+                    - generic [ref=e1150]:
+                      - button "View Profile" [ref=e1151]
+                      - button "🚀 Analyze" [ref=e1152]:
+                        - generic [ref=e1153]: 🚀
+                        - generic [ref=e1154]: Analyze
+                - generic [ref=e1155]:
+                  - generic [ref=e1156]: "💰 Seller:"
+                  - link "Google" [ref=e1157]:
+                    - /url: https://www.google.com/search?q=Updated%20Test%20Entity
+                  - generic [ref=e1158]: •
+                  - link "LI" [ref=e1159]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Updated%20Test%20Entity
+  - button "Ctrl+Shift+V" [ref=e308] [cursor=pointer]:
+    - img [ref=e309]
+    - generic [ref=e312]: Ctrl+Shift+V

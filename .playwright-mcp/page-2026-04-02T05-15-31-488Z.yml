@@ -1,0 +1,282 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "Uptop Mission Control" [level=1] [ref=e9]
+        - paragraph [ref=e10]: real estate command center
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Bot Boardroom" [ref=e46] [cursor=pointer]:
+        - /url: /bot-boardroom
+        - img [ref=e47]
+        - generic [ref=e53]: Bot Boardroom
+      - link "Obsidian Vault" [ref=e54] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e55]
+        - generic [ref=e59]: Obsidian Vault
+      - generic [ref=e60]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e61] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e62]
+        - generic [ref=e65]: EXP Agent Recruiter
+        - generic [ref=e66]: 96K
+      - link "Commercial Agents 6.7K" [ref=e67] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e68]
+        - generic [ref=e71]: Commercial Agents
+        - generic [ref=e72]: 6.7K
+      - link "Brokerages" [ref=e73] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e74]
+        - generic [ref=e77]: Brokerages
+      - generic [ref=e78]: AI Bots
+      - link "Buyer Intelligence AI" [ref=e79] [cursor=pointer]:
+        - /url: /buyer-bot
+        - img [ref=e80]
+        - generic [ref=e84]: Buyer Intelligence
+        - generic [ref=e85]: AI
+      - link "Seller Outreach AI" [ref=e86] [cursor=pointer]:
+        - /url: /seller-outreach-bot
+        - img [ref=e87]
+        - generic [ref=e92]: Seller Outreach
+        - generic [ref=e93]: AI
+      - link "Property Valuation AI" [ref=e94] [cursor=pointer]:
+        - /url: /property-valuation-bot
+        - img [ref=e95]
+        - generic [ref=e97]: Property Valuation
+        - generic [ref=e98]: AI
+      - link "Vigil Monitor 24/7" [ref=e99] [cursor=pointer]:
+        - /url: /vigil
+        - img [ref=e100]
+        - generic [ref=e102]: Vigil Monitor
+        - generic [ref=e103]: 24/7
+      - link "Agent Workspaces NEW" [ref=e104] [cursor=pointer]:
+        - /url: /agent-workspaces
+        - img [ref=e105]
+        - generic [ref=e107]: Agent Workspaces
+        - generic [ref=e108]: NEW
+      - link "Bot Builder BUILD" [ref=e109] [cursor=pointer]:
+        - /url: /bot-builder
+        - img [ref=e110]
+        - generic [ref=e114]: Bot Builder
+        - generic [ref=e115]: BUILD
+      - generic [ref=e116]: Tools
+      - link "My Listings" [ref=e117] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e118]
+        - generic [ref=e122]: My Listings
+      - link "Buyer Matcher" [ref=e123] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e124]
+        - generic [ref=e129]: Buyer Matcher
+      - link "Agent Matcher" [ref=e130] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e131]
+        - generic [ref=e135]: Agent Matcher
+      - link "Lender Matcher" [ref=e136] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e137]
+        - generic [ref=e139]: Lender Matcher
+      - link "Builder Directory" [ref=e140] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e141]
+        - generic [ref=e145]: Builder Directory
+      - link "Property Upload" [ref=e146] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e147]
+        - generic [ref=e150]: Property Upload
+      - link "Olena Marketing" [ref=e151] [cursor=pointer]:
+        - /url: /olena-feature-sheet
+        - img [ref=e152]
+        - generic [ref=e155]: Olena Marketing
+      - link "Canva Editor" [ref=e156] [cursor=pointer]:
+        - /url: /canva-editor
+        - img [ref=e157]
+        - generic [ref=e163]: Canva Editor
+      - link "Skills & Agents" [ref=e164] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e165]
+        - generic [ref=e168]: Skills & Agents
+      - link "Map View" [ref=e169] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e170]
+        - generic [ref=e172]: Map View
+      - link "Data Manager" [ref=e173] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e174]
+        - generic [ref=e178]: Data Manager
+    - generic [ref=e182]: System Online
+  - generic [ref=e183]:
+    - banner [ref=e184]:
+      - generic [ref=e190]:
+        - img [ref=e191]
+        - generic [ref=e198]: Reconnecting...
+      - generic [ref=e201]:
+        - img [ref=e202]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e205]
+        - combobox [ref=e206]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e207]:
+        - button "Voice" [ref=e208] [cursor=pointer]:
+          - img [ref=e209]
+          - generic [ref=e215]: Voice
+        - generic [ref=e216]:
+          - img [ref=e217]
+          - generic [ref=e222]: $12.40
+        - link "Data Manager" [ref=e223] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e224]
+        - button [ref=e228] [cursor=pointer]:
+          - img [ref=e229]
+        - link [ref=e232] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e233]
+        - link "🦞" [ref=e236] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e237]: 🦞
+    - main [ref=e238]:
+      - generic [ref=e240]:
+        - generic [ref=e241]:
+          - generic [ref=e242]:
+            - img [ref=e244]
+            - generic [ref=e248]:
+              - heading "Bot Builder" [level=1] [ref=e249]
+              - paragraph [ref=e250]: Create, configure, and deploy AI agents
+          - generic [ref=e251]:
+            - button "Templates" [ref=e252] [cursor=pointer]
+            - img [ref=e253]
+            - button "Configure" [ref=e255] [cursor=pointer]
+            - img [ref=e256]
+            - button "Skills" [ref=e258] [cursor=pointer]
+            - img [ref=e259]
+            - button "Tools" [ref=e261] [cursor=pointer]
+            - img [ref=e262]
+            - button "Review" [ref=e264] [cursor=pointer]
+        - generic [ref=e265]:
+          - generic [ref=e266]:
+            - heading "Choose a Template" [level=2] [ref=e267]
+            - paragraph [ref=e268]: Start with a pre-configured bot or build from scratch
+          - generic [ref=e269]:
+            - button "Intelligence Buyer Intelligence Bot Analyzes buyer portfolios, identifies asset preferences, researches purchase history 4 skills included" [ref=e270] [cursor=pointer]:
+              - generic [ref=e271]:
+                - img [ref=e273]
+                - generic [ref=e277]: Intelligence
+              - heading "Buyer Intelligence Bot" [level=3] [ref=e278]
+              - paragraph [ref=e279]: Analyzes buyer portfolios, identifies asset preferences, researches purchase history
+              - generic [ref=e280]:
+                - generic [ref=e281]: 4 skills included
+                - img [ref=e282]
+            - button "Intelligence Seller Intelligence Bot Researches property ownership, identifies motivation signals, analyzes entity structures 3 skills included" [ref=e284] [cursor=pointer]:
+              - generic [ref=e285]:
+                - img [ref=e287]
+                - generic [ref=e292]: Intelligence
+              - heading "Seller Intelligence Bot" [level=3] [ref=e293]
+              - paragraph [ref=e294]: Researches property ownership, identifies motivation signals, analyzes entity structures
+              - generic [ref=e295]:
+                - generic [ref=e296]: 3 skills included
+                - img [ref=e297]
+            - button "Intelligence Property Valuation Bot Analyzes comparable sales, assesses building condition, estimates development potential 3 skills included" [ref=e299] [cursor=pointer]:
+              - generic [ref=e300]:
+                - img [ref=e302]
+                - generic [ref=e304]: Intelligence
+              - heading "Property Valuation Bot" [level=3] [ref=e305]
+              - paragraph [ref=e306]: Analyzes comparable sales, assesses building condition, estimates development potential
+              - generic [ref=e307]:
+                - generic [ref=e308]: 3 skills included
+                - img [ref=e309]
+            - button "Recruitment Agent Recruiter Bot Identifies, researches, and engages top real estate agents for recruitment 3 skills included" [ref=e311] [cursor=pointer]:
+              - generic [ref=e312]:
+                - img [ref=e314]
+                - generic [ref=e319]: Recruitment
+              - heading "Agent Recruiter Bot" [level=3] [ref=e320]
+              - paragraph [ref=e321]: Identifies, researches, and engages top real estate agents for recruitment
+              - generic [ref=e322]:
+                - generic [ref=e323]: 3 skills included
+                - img [ref=e324]
+            - button "Capital Hot Money Tracker Monitors market for fresh capital, tracks cash buyers, identifies new lenders 3 skills included" [ref=e326] [cursor=pointer]:
+              - generic [ref=e327]:
+                - img [ref=e329]
+                - generic [ref=e331]: Capital
+              - heading "Hot Money Tracker" [level=3] [ref=e332]
+              - paragraph [ref=e333]: Monitors market for fresh capital, tracks cash buyers, identifies new lenders
+              - generic [ref=e334]:
+                - generic [ref=e335]: 3 skills included
+                - img [ref=e336]
+            - button "Capital Lender Matcher Bot Matches properties and deals with appropriate lenders based on criteria 3 skills included" [ref=e338] [cursor=pointer]:
+              - generic [ref=e339]:
+                - img [ref=e341]
+                - generic [ref=e345]: Capital
+              - heading "Lender Matcher Bot" [level=3] [ref=e346]
+              - paragraph [ref=e347]: Matches properties and deals with appropriate lenders based on criteria
+              - generic [ref=e348]:
+                - generic [ref=e349]: 3 skills included
+                - img [ref=e350]
+            - button "Operations Deal Pipeline Manager Tracks deals through pipeline stages, ensures follow-ups, manages documentation 3 skills included" [ref=e352] [cursor=pointer]:
+              - generic [ref=e353]:
+                - img [ref=e355]
+                - generic [ref=e357]: Operations
+              - heading "Deal Pipeline Manager" [level=3] [ref=e358]
+              - paragraph [ref=e359]: Tracks deals through pipeline stages, ensures follow-ups, manages documentation
+              - generic [ref=e360]:
+                - generic [ref=e361]: 3 skills included
+                - img [ref=e362]
+            - button "Operations Property Enrichment Bot Enriches property data with additional details, photos, zoning info 3 skills included" [ref=e364] [cursor=pointer]:
+              - generic [ref=e365]:
+                - img [ref=e367]
+                - generic [ref=e371]: Operations
+              - heading "Property Enrichment Bot" [level=3] [ref=e372]
+              - paragraph [ref=e373]: Enriches property data with additional details, photos, zoning info
+              - generic [ref=e374]:
+                - generic [ref=e375]: 3 skills included
+                - img [ref=e376]
+            - button "Monitoring Vigil Sentinel 24/7 system monitoring, alerts on failures, tracks service health 3 skills included" [ref=e378] [cursor=pointer]:
+              - generic [ref=e379]:
+                - img [ref=e381]
+                - generic [ref=e384]: Monitoring
+              - heading "Vigil Sentinel" [level=3] [ref=e385]
+              - paragraph [ref=e386]: 24/7 system monitoring, alerts on failures, tracks service health
+              - generic [ref=e387]:
+                - generic [ref=e388]: 3 skills included
+                - img [ref=e389]
+            - button "Custom Custom Bot Build a completely custom bot from scratch 0 skills included" [ref=e391] [cursor=pointer]:
+              - generic [ref=e392]:
+                - img [ref=e394]
+                - generic [ref=e396]: Custom
+              - heading "Custom Bot" [level=3] [ref=e397]
+              - paragraph [ref=e398]: Build a completely custom bot from scratch
+              - generic [ref=e399]:
+                - generic [ref=e400]: 0 skills included
+                - img [ref=e401]
+  - button "Ctrl+Shift+V" [ref=e403] [cursor=pointer]:
+    - img [ref=e404]
+    - generic [ref=e407]: Ctrl+Shift+V

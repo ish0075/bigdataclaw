@@ -1,0 +1,153 @@
+- generic [ref=e4]:
+  - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e11]
+          - generic [ref=e13]:
+            - button "N" [ref=e14]:
+              - link "N" [ref=e15] [cursor=pointer]:
+                - /url: /NIAAAA/dashboard
+                - generic [ref=e18]:
+                  - img [ref=e19]
+                  - generic [ref=e20]: "N"
+            - button "T" [ref=e21]:
+              - link "T" [ref=e22] [cursor=pointer]:
+                - /url: /TES/dashboard
+                - generic [ref=e24]:
+                  - img [ref=e25]
+                  - generic [ref=e26]: T
+            - button "N" [ref=e27]:
+              - link "N" [ref=e28] [cursor=pointer]:
+                - /url: /NIAA/dashboard
+                - generic [ref=e30]:
+                  - img [ref=e31]
+                  - generic [ref=e32]: "N"
+            - button "N" [ref=e33]:
+              - link "N" [ref=e34] [cursor=pointer]:
+                - /url: /NIA/dashboard
+                - generic [ref=e36]:
+                  - img [ref=e37]
+                  - generic [ref=e38]: "N"
+            - button "T" [ref=e39]:
+              - link "T" [ref=e40] [cursor=pointer]:
+                - /url: /TESA/dashboard
+                - generic [ref=e42]:
+                  - img [ref=e43]
+                  - generic [ref=e44]: T
+            - button "N" [ref=e45]:
+              - link "N" [ref=e46] [cursor=pointer]:
+                - /url: /NIAAA/dashboard
+                - generic [ref=e48]:
+                  - img [ref=e49]
+                  - generic [ref=e50]: "N"
+            - button "T" [ref=e51]:
+              - link "T" [ref=e52] [cursor=pointer]:
+                - /url: /TESAAA/dashboard
+                - generic [ref=e54]:
+                  - img [ref=e55]
+                  - generic [ref=e56]: T
+            - button "A" [ref=e57]:
+              - link "A" [ref=e58] [cursor=pointer]:
+                - /url: /ABC/dashboard
+                - generic [ref=e60]:
+                  - img [ref=e61]
+                  - generic [ref=e62]: A
+            - button "F" [ref=e63]:
+              - link "F" [ref=e64] [cursor=pointer]:
+                - /url: /FAC/dashboard
+                - generic [ref=e66]:
+                  - img [ref=e67]
+                  - generic [ref=e68]: F
+            - button "M" [ref=e69]:
+              - link "M" [ref=e70] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - generic [ref=e72]:
+                  - img [ref=e73]
+                  - generic [ref=e74]: M
+            - status [ref=e75]
+          - button "Add company" [ref=e78]:
+            - img [ref=e79]
+        - complementary [ref=e553]:
+          - generic [ref=e554]:
+            - img [ref=e555]
+            - generic [ref=e558]: Instance Settings
+          - navigation [ref=e559]:
+            - generic [ref=e560]:
+              - link "General" [ref=e561] [cursor=pointer]:
+                - /url: /instance/settings/general
+                - img [ref=e563]
+                - generic [ref=e564]: General
+              - link "Heartbeats" [ref=e565] [cursor=pointer]:
+                - /url: /instance/settings/heartbeats
+                - img [ref=e567]
+                - generic [ref=e570]: Heartbeats
+              - link "Experimental" [ref=e571] [cursor=pointer]:
+                - /url: /instance/settings/experimental
+                - img [ref=e573]
+                - generic [ref=e575]: Experimental
+              - link "Plugins" [ref=e576] [cursor=pointer]:
+                - /url: /instance/settings/plugins
+                - img [ref=e578]
+                - generic [ref=e580]: Plugins
+      - generic [ref=e211]:
+        - link "Documentation" [ref=e212] [cursor=pointer]:
+          - /url: https://docs.paperclip.ing/
+          - img [ref=e213]
+          - generic [ref=e215]: Documentation
+        - generic [ref=e216]: v
+        - link "Instance settings" [active] [ref=e217] [cursor=pointer]:
+          - /url: /instance/settings/general
+          - img
+        - button "Switch to light mode" [ref=e218]:
+          - img
+    - generic [ref=e219]:
+      - navigation "breadcrumb" [ref=e581]:
+        - list [ref=e582]:
+          - listitem [ref=e583]:
+            - link "Instance Settings" [disabled] [ref=e584]
+          - listitem [ref=e585]:
+            - img [ref=e586]
+          - listitem [ref=e588]:
+            - link "General" [disabled] [ref=e589]
+      - main [ref=e225]:
+        - generic [ref=e590]:
+          - generic [ref=e591]:
+            - generic [ref=e592]:
+              - img [ref=e593]
+              - heading "General" [level=1] [ref=e594]
+            - paragraph [ref=e595]: Configure instance-wide defaults that affect how operator-visible logs are displayed.
+          - generic [ref=e597]:
+            - generic [ref=e598]:
+              - heading "Censor username in logs" [level=2] [ref=e599]
+              - paragraph [ref=e600]: Hide the username segment in home-directory paths and similar operator-visible log output. Standalone username mentions outside of paths are not yet masked in the live transcript view. This is off by default.
+            - button "Toggle username log censoring" [ref=e601]
+          - generic [ref=e604]:
+            - generic [ref=e605]:
+              - heading "AI feedback sharing" [level=2] [ref=e606]
+              - paragraph [ref=e607]: Control whether thumbs up and thumbs down votes can send the voted AI output to Paperclip Labs. Votes are always saved locally.
+              - link "Read our terms of service" [ref=e608] [cursor=pointer]:
+                - /url: https://paperclip.ing/tos
+            - generic [ref=e609]: No default is saved yet. The next thumbs up or thumbs down choice will ask once and then save the answer here.
+            - generic [ref=e610]:
+              - button "Always allow Share voted AI outputs automatically." [ref=e611]:
+                - generic [ref=e612]: Always allow
+                - generic [ref=e613]: Share voted AI outputs automatically.
+              - button "Don't allow Keep voted AI outputs local only." [ref=e614]:
+                - generic [ref=e615]: Don't allow
+                - generic [ref=e616]: Keep voted AI outputs local only.
+            - paragraph [ref=e617]:
+              - text: To retest the first-use prompt in local dev, remove the
+              - code [ref=e618]: feedbackDataSharingPreference
+              - text: key from the
+              - code [ref=e619]: instance_settings.general
+              - text: JSON row for this instance, or set it back to
+              - code [ref=e620]: "\"prompt\""
+              - text: . Unset and
+              - code [ref=e621]: "\"prompt\""
+              - text: both mean no default has been chosen yet.
+  - generic [ref=e550]:
+    - heading "Command Palette" [level=2] [ref=e551]
+    - paragraph [ref=e552]: Search for a command to run...

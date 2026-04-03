@@ -9,7 +9,8 @@ import {
   MessageSquare, X, Send, Plus, Trash2, RefreshCw, Search,
   Code, Terminal, Layout, Settings, Bot, Sparkles, Copy,
   Check, MoreVertical, FolderOpen, FileCode, FileText,
-  Wand2, Lightbulb, Zap, AlertCircle
+  Wand2, Lightbulb, Zap, AlertCircle, Cpu, BrainCircuit,
+  ShieldCheck, Flame
 } from 'lucide-react';
 import Editor from '@monaco-editor/react';
 
@@ -51,6 +52,8 @@ const AIBuilder = () => {
   ]);
   const [chatInput, setChatInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedModel, setSelectedModel] = useState('auto');
+  const [availableModels, setAvailableModels] = useState({});
   const [expandedDirs, setExpandedDirs] = useState(new Set(['nerve', 'nerve/src']));
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -60,9 +63,10 @@ const AIBuilder = () => {
   
   const chatEndRef = useRef(null);
   
-  // Load files on mount
+  // Load files and models on mount
   useEffect(() => {
     loadFiles('');
+    loadModels();
   }, []);
   
   // Auto-scroll chat
@@ -78,6 +82,16 @@ const AIBuilder = () => {
       setCurrentPath(data.current_path);
     } catch (error) {
       console.error('Failed to load files:', error);
+    }
+  };
+  
+  const loadModels = async () => {
+    try {
+      const res = await fetch('http://localhost:8000/api/ai-builder/models');
+      const data = await res.json();
+      setAvailableModels(data.models || {});
+    } catch (error) {
+      console.error('Failed to load models:', error);
     }
   };
   
@@ -144,7 +158,8 @@ const AIBuilder = () => {
         body: JSON.stringify({
           message: chatInput,
           context: fileContent,
-          file_path: activeFile?.path
+          file_path: activeFile?.path,
+          model: selectedModel
         })
       });
       
@@ -157,6 +172,8 @@ const AIBuilder = () => {
         code_blocks: data.code_blocks,
         suggestions: data.suggestions,
         actions: data.actions,
+        model_used: data.model_used,
+        task_type: data.task_type,
         timestamp: new Date()
       }]);
       
@@ -422,12 +439,28 @@ const AIBuilder = () => {
                   </span>
                 </div>
               </div>
-              <button 
-                onClick={() => setIsChatOpen(false)}
-                className="p-1 hover:bg-bg-input rounded"
-              >
-                <X className="w-4 h-4 text-text-secondary" />
-              </button>
+              <div className="flex items-center gap-2">
+                {/* Model Selector */}
+                <select
+                  value={selectedModel}
+                  onChange={(e) => setSelectedModel(e.target.value)}
+                  className="px-2 py-1 bg-bg-input border border-border-subtle rounded-lg text-xs text-text-primary focus:border-purple-500 outline-none"
+                  title="Select AI model"
+                >
+                  <option value="auto">🎯 Auto</option>
+                  {Object.entries(availableModels).map(([id, m]) => (
+                    <option key={id} value={id}>
+                      {m.name}
+                    </option>
+                  ))}
+                </select>
+                <button 
+                  onClick={() => setIsChatOpen(false)}
+                  className="p-1 hover:bg-bg-input rounded"
+                >
+                  <X className="w-4 h-4 text-text-secondary" />
+                </button>
+              </div>
             </div>
             
             {/* Chat Messages */}
@@ -440,6 +473,18 @@ const AIBuilder = () => {
                       <div className="flex items-center gap-2 mb-2">
                         <Sparkles className="w-4 h-4 text-purple-400" />
                         <span className="text-xs text-text-muted">AI Assistant</span>
+                        {msg.model_used && (
+                          <span 
+                            className="px-1.5 py-0.5 rounded text-[10px] font-medium uppercase tracking-wide"
+                            style={{ 
+                              backgroundColor: `${availableModels[msg.model_used]?.color || '#6366f1'}20`,
+                              color: availableModels[msg.model_used]?.color || '#6366f1'
+                            }}
+                            title={msg.task_type ? `Task: ${msg.task_type}` : ''}
+                          >
+                            {availableModels[msg.model_used]?.name || msg.model_used}
+                          </span>
+                        )}
                       </div>
                     )}
                     

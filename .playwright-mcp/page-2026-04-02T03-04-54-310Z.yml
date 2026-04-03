@@ -1,0 +1,197 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "BIGDATA CLAW" [level=1] [ref=e9]
+        - paragraph [ref=e10]: NERVE Mission Control
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Bot Boardroom" [ref=e46] [cursor=pointer]:
+        - /url: /bot-boardroom
+        - img [ref=e47]
+        - generic [ref=e53]: Bot Boardroom
+      - link "Obsidian Vault" [ref=e54] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e55]
+        - generic [ref=e59]: Obsidian Vault
+      - generic [ref=e60]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e61] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e62]
+        - generic [ref=e65]: EXP Agent Recruiter
+        - generic [ref=e66]: 96K
+      - link "Commercial Agents 6.7K" [ref=e67] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e68]
+        - generic [ref=e71]: Commercial Agents
+        - generic [ref=e72]: 6.7K
+      - link "Brokerages" [ref=e73] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e74]
+        - generic [ref=e77]: Brokerages
+      - generic [ref=e78]: AI Bots
+      - link "Buyer Intelligence AI" [ref=e79] [cursor=pointer]:
+        - /url: /buyer-bot
+        - img [ref=e80]
+        - generic [ref=e84]: Buyer Intelligence
+        - generic [ref=e85]: AI
+      - link "Seller Outreach AI" [ref=e86] [cursor=pointer]:
+        - /url: /seller-outreach-bot
+        - img [ref=e87]
+        - generic [ref=e92]: Seller Outreach
+        - generic [ref=e93]: AI
+      - link "Property Valuation AI" [ref=e94] [cursor=pointer]:
+        - /url: /property-valuation-bot
+        - img [ref=e95]
+        - generic [ref=e97]: Property Valuation
+        - generic [ref=e98]: AI
+      - generic [ref=e99]: Tools
+      - link "My Listings" [ref=e100] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e101]
+        - generic [ref=e105]: My Listings
+      - link "Buyer Matcher" [ref=e106] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e107]
+        - generic [ref=e112]: Buyer Matcher
+      - link "Agent Matcher" [ref=e113] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e114]
+        - generic [ref=e118]: Agent Matcher
+      - link "Lender Matcher" [ref=e119] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e120]
+        - generic [ref=e122]: Lender Matcher
+      - link "Builder Directory" [ref=e123] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e124]
+        - generic [ref=e128]: Builder Directory
+      - link "Property Upload" [ref=e129] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e130]
+        - generic [ref=e133]: Property Upload
+      - link "Olena Marketing" [ref=e134] [cursor=pointer]:
+        - /url: /olena-feature-sheet
+        - img [ref=e135]
+        - generic [ref=e138]: Olena Marketing
+      - link "Canva Editor" [ref=e139] [cursor=pointer]:
+        - /url: /canva-editor
+        - img [ref=e140]
+        - generic [ref=e146]: Canva Editor
+      - link "Skills & Agents" [ref=e147] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e148]
+        - generic [ref=e151]: Skills & Agents
+      - link "Map View" [ref=e152] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e153]
+        - generic [ref=e155]: Map View
+      - link "Data Manager" [ref=e156] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e157]
+        - generic [ref=e161]: Data Manager
+    - generic [ref=e165]: System Online
+  - generic [ref=e166]:
+    - banner [ref=e167]:
+      - generic [ref=e173]:
+        - img [ref=e287]
+        - generic [ref=e181]: Connected
+      - generic [ref=e184]:
+        - img [ref=e185]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e188]
+        - combobox [ref=e189]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e190]:
+        - button "Voice" [ref=e191] [cursor=pointer]:
+          - img [ref=e192]
+          - generic [ref=e198]: Voice
+        - generic [ref=e199]:
+          - img [ref=e200]
+          - generic [ref=e205]: $12.40
+        - link "Data Manager" [ref=e206] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e207]
+        - button [ref=e211] [cursor=pointer]:
+          - img [ref=e212]
+        - link [ref=e215] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e216]
+        - link "🦞" [ref=e219] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e220]: 🦞
+    - main [ref=e221]:
+      - generic [ref=e223]:
+        - generic [ref=e224]:
+          - generic [ref=e225]:
+            - generic [ref=e226]: 🏷️
+            - generic [ref=e227]:
+              - heading "Seller Intelligence Bot" [level=1] [ref=e228]
+              - paragraph [ref=e229]: Expert Seller Representative • Holdings Analysis & Motivation Intelligence
+          - generic [ref=e230]:
+            - button "Export Intelligence" [ref=e231] [cursor=pointer]:
+              - img [ref=e232]
+              - text: Export Intelligence
+            - button "Research New Seller" [ref=e235] [cursor=pointer]:
+              - img [ref=e236]
+              - text: Research New Seller
+        - generic [ref=e239]:
+          - generic [ref=e240]:
+            - generic [ref=e242]:
+              - img [ref=e243]
+              - textbox "Search sellers, entities, asset classes..." [ref=e246]
+            - generic [ref=e247]:
+              - heading "Qualified Sellers (2)" [level=3] [ref=e249]
+              - generic [ref=e250]:
+                - 'button "Robert Chen Chen Holdings Ltd. High Motivation Holdings: $29M • 8 properties" [ref=e251] [cursor=pointer]':
+                  - generic [ref=e252]:
+                    - generic [ref=e253]:
+                      - paragraph [ref=e254]: Robert Chen
+                      - paragraph [ref=e255]: Chen Holdings Ltd.
+                    - img [ref=e256]
+                  - generic [ref=e260]: High Motivation
+                  - paragraph [ref=e261]: "Holdings: $29M • 8 properties"
+                - 'button "Maria Santos Santos Family Trust Very High Motivation Holdings: $4M • 2 properties" [ref=e262] [cursor=pointer]':
+                  - generic [ref=e263]:
+                    - generic [ref=e264]:
+                      - paragraph [ref=e265]: Maria Santos
+                      - paragraph [ref=e266]: Santos Family Trust
+                    - img [ref=e267]
+                  - generic [ref=e271]: Very High Motivation
+                  - paragraph [ref=e272]: "Holdings: $4M • 2 properties"
+          - generic [ref=e274]:
+            - img [ref=e275]
+            - heading "No Seller Selected" [level=3] [ref=e280]
+            - paragraph [ref=e281]: Select a seller from the list to view their complete holdings analysis, motivation intelligence, and recommended contact strategy
+  - button "Ctrl+Shift+V" [ref=e282] [cursor=pointer]:
+    - img [ref=e283]
+    - generic [ref=e286]: Ctrl+Shift+V

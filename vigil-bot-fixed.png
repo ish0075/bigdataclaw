@@ -1,0 +1,757 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "BIGDATA CLAW" [level=1] [ref=e9]
+        - paragraph [ref=e10]: NERVE Mission Control
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Bot Boardroom" [ref=e46] [cursor=pointer]:
+        - /url: /bot-boardroom
+        - img [ref=e47]
+        - generic [ref=e53]: Bot Boardroom
+      - link "Obsidian Vault" [ref=e54] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e55]
+        - generic [ref=e59]: Obsidian Vault
+      - generic [ref=e60]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e61] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e62]
+        - generic [ref=e65]: EXP Agent Recruiter
+        - generic [ref=e66]: 96K
+      - link "Commercial Agents 6.7K" [ref=e67] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e68]
+        - generic [ref=e71]: Commercial Agents
+        - generic [ref=e72]: 6.7K
+      - link "Brokerages" [ref=e73] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e74]
+        - generic [ref=e77]: Brokerages
+      - generic [ref=e78]: AI Bots
+      - link "Buyer Intelligence AI" [ref=e79] [cursor=pointer]:
+        - /url: /buyer-bot
+        - img [ref=e80]
+        - generic [ref=e84]: Buyer Intelligence
+        - generic [ref=e85]: AI
+      - link "Seller Outreach AI" [ref=e86] [cursor=pointer]:
+        - /url: /seller-outreach-bot
+        - img [ref=e87]
+        - generic [ref=e92]: Seller Outreach
+        - generic [ref=e93]: AI
+      - link "Property Valuation AI" [ref=e94] [cursor=pointer]:
+        - /url: /property-valuation-bot
+        - img [ref=e95]
+        - generic [ref=e97]: Property Valuation
+        - generic [ref=e98]: AI
+      - link "Vigil Monitor 24/7" [ref=e99] [cursor=pointer]:
+        - /url: /vigil
+        - img [ref=e100]
+        - generic [ref=e102]: Vigil Monitor
+        - generic [ref=e103]: 24/7
+      - generic [ref=e104]: Tools
+      - link "My Listings" [ref=e105] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e106]
+        - generic [ref=e110]: My Listings
+      - link "Buyer Matcher" [ref=e111] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e112]
+        - generic [ref=e117]: Buyer Matcher
+      - link "Agent Matcher" [ref=e118] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e119]
+        - generic [ref=e123]: Agent Matcher
+      - link "Lender Matcher" [ref=e124] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e125]
+        - generic [ref=e127]: Lender Matcher
+      - link "Builder Directory" [ref=e128] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e129]
+        - generic [ref=e133]: Builder Directory
+      - link "Property Upload" [ref=e134] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e135]
+        - generic [ref=e138]: Property Upload
+      - link "Olena Marketing" [ref=e139] [cursor=pointer]:
+        - /url: /olena-feature-sheet
+        - img [ref=e140]
+        - generic [ref=e143]: Olena Marketing
+      - link "Canva Editor" [ref=e144] [cursor=pointer]:
+        - /url: /canva-editor
+        - img [ref=e145]
+        - generic [ref=e151]: Canva Editor
+      - link "Skills & Agents" [ref=e152] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e153]
+        - generic [ref=e156]: Skills & Agents
+      - link "Map View" [ref=e157] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e158]
+        - generic [ref=e160]: Map View
+      - link "Data Manager" [ref=e161] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e162]
+        - generic [ref=e166]: Data Manager
+    - generic [ref=e170]: System Online
+  - generic [ref=e171]:
+    - banner [ref=e172]:
+      - generic [ref=e178]:
+        - img [ref=e634]
+        - generic [ref=e186]: Connected
+      - generic [ref=e189]:
+        - img [ref=e190]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e193]
+        - combobox [ref=e194]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e195]:
+        - button "Voice" [ref=e196] [cursor=pointer]:
+          - img [ref=e197]
+          - generic [ref=e203]: Voice
+        - generic [ref=e204]:
+          - img [ref=e205]
+          - generic [ref=e210]: $12.40
+        - link "Data Manager" [ref=e211] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e212]
+        - button [ref=e216] [cursor=pointer]:
+          - img [ref=e217]
+        - link [ref=e220] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e221]
+        - link "🦞" [ref=e224] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e225]: 🦞
+    - main [ref=e226]:
+      - generic [ref=e228]:
+        - generic [ref=e229]:
+          - generic [ref=e230]:
+            - generic [ref=e231]: 👁️
+            - generic [ref=e232]:
+              - heading "Vigil" [level=1] [ref=e233]
+              - paragraph [ref=e234]: The Sentinel • 24/7 System Monitoring
+          - generic [ref=e235]:
+            - generic [ref=e236]:
+              - img [ref=e237]
+              - generic [ref=e240]: healthy
+            - button "Pause" [ref=e241] [cursor=pointer]:
+              - img [ref=e242]
+              - text: Pause
+            - button "Check Now" [ref=e245] [cursor=pointer]:
+              - img [ref=e246]
+              - text: Check Now
+        - generic [ref=e249]:
+          - generic [ref=e250]:
+            - generic [ref=e251]:
+              - img [ref=e252]
+              - paragraph [ref=e254]: Status
+            - paragraph [ref=e255]: healthy
+          - generic [ref=e256]:
+            - generic [ref=e257]:
+              - img [ref=e258]
+              - paragraph [ref=e261]: Uptime
+            - paragraph [ref=e262]: 99.9%
+          - generic [ref=e263]:
+            - generic [ref=e264]:
+              - img
+              - paragraph [ref=e267]: Avg Response
+            - paragraph [ref=e268]: 91ms
+          - generic [ref=e269]:
+            - generic [ref=e270]:
+              - img [ref=e271]
+              - paragraph [ref=e273]: Checks
+            - paragraph [ref=e274]: "19"
+          - generic [ref=e275]:
+            - generic [ref=e276]:
+              - img [ref=e277]
+              - paragraph [ref=e279]: Issues
+            - paragraph [ref=e280]: "0"
+          - generic [ref=e281] [cursor=pointer]:
+            - generic [ref=e282]:
+              - img [ref=e283]
+              - paragraph [ref=e286]: Alerts
+            - paragraph [ref=e287]: "0"
+        - generic [ref=e288]:
+          - generic [ref=e289]:
+            - generic [ref=e290]:
+              - generic [ref=e291]:
+                - generic [ref=e292]: 💻
+                - generic [ref=e293]:
+                  - heading "NERVE Frontend" [level=3] [ref=e294]
+                  - paragraph [ref=e295]: http://localhost:5173
+              - generic [ref=e296]:
+                - img [ref=e297]
+                - generic [ref=e300]: healthy
+            - generic [ref=e301]:
+              - generic [ref=e302]:
+                - img [ref=e303]
+                - generic [ref=e305]: 17ms
+              - generic [ref=e306]:
+                - img [ref=e307]
+                - generic [ref=e310]: "Last: 12:05:07 AM"
+              - generic [ref=e311]:
+                - img [ref=e312]
+                - generic [ref=e315]: "10"
+            - generic [ref=e316]:
+              - generic [ref=e317]:
+                - generic [ref=e318]:
+                  - generic [ref=e320]: Homepage
+                  - generic [ref=e321]: /
+                - generic [ref=e322]: 19ms
+              - generic [ref=e323]:
+                - generic [ref=e324]:
+                  - generic [ref=e326]: Agent Recruiter
+                  - generic [ref=e327]: /exp-agent-recruiter
+                - generic [ref=e328]: 18ms
+              - generic [ref=e329]:
+                - generic [ref=e330]:
+                  - generic [ref=e332]: Bot Boardroom
+                  - generic [ref=e333]: /bot-boardroom
+                - generic [ref=e334]: 18ms
+              - generic [ref=e335]:
+                - generic [ref=e336]:
+                  - generic [ref=e338]: Buyer Bot
+                  - generic [ref=e339]: /buyer-bot
+                - generic [ref=e340]: 17ms
+              - generic [ref=e341]:
+                - generic [ref=e342]:
+                  - generic [ref=e344]: Seller Bot
+                  - generic [ref=e345]: /seller-outreach-bot
+                - generic [ref=e346]: 16ms
+              - generic [ref=e347]:
+                - generic [ref=e348]:
+                  - generic [ref=e350]: Property Bot
+                  - generic [ref=e351]: /property-valuation-bot
+                - generic [ref=e352]: 16ms
+          - generic [ref=e353]:
+            - generic [ref=e354]:
+              - generic [ref=e355]:
+                - generic [ref=e356]: 🔌
+                - generic [ref=e357]:
+                  - heading "BigDataClaw API" [level=3] [ref=e358]
+                  - paragraph [ref=e359]: http://localhost:8000
+              - generic [ref=e360]:
+                - img [ref=e361]
+                - generic [ref=e364]: healthy
+            - generic [ref=e365]:
+              - generic [ref=e366]:
+                - img [ref=e367]
+                - generic [ref=e369]: 203ms
+              - generic [ref=e370]:
+                - img [ref=e371]
+                - generic [ref=e374]: "Last: 12:05:07 AM"
+              - generic [ref=e375]:
+                - img [ref=e376]
+                - generic [ref=e379]: "10"
+            - generic [ref=e380]:
+              - generic [ref=e381]:
+                - generic [ref=e382]:
+                  - generic [ref=e384]: Health Check
+                  - generic [ref=e385]: /api/health
+                - generic [ref=e386]: 204ms
+              - generic [ref=e387]:
+                - generic [ref=e388]:
+                  - generic [ref=e390]: Recruiters API
+                  - generic [ref=e391]: /api/recruiters?limit=5
+                - generic [ref=e392]: 204ms
+              - generic [ref=e393]:
+                - generic [ref=e394]:
+                  - generic [ref=e396]: DBeaver Stats
+                  - generic [ref=e397]: /api/dbeaver/stats
+                - generic [ref=e398]: 203ms
+              - generic [ref=e399]:
+                - generic [ref=e400]:
+                  - generic [ref=e402]: Lenders API
+                  - generic [ref=e403]: /api/lenders
+                - generic [ref=e404]: 202ms
+          - generic [ref=e405]:
+            - generic [ref=e406]:
+              - generic [ref=e407]:
+                - generic [ref=e408]: 🧠
+                - generic [ref=e409]:
+                  - heading "NERVE Server" [level=3] [ref=e410]
+                  - paragraph [ref=e411]: http://localhost:3090
+              - generic [ref=e412]:
+                - img [ref=e413]
+                - generic [ref=e416]: healthy
+            - generic [ref=e417]:
+              - generic [ref=e418]:
+                - img [ref=e419]
+                - generic [ref=e421]: 108ms
+              - generic [ref=e422]:
+                - img [ref=e423]
+                - generic [ref=e426]: "Last: 12:05:07 AM"
+              - generic [ref=e427]:
+                - img [ref=e428]
+                - generic [ref=e431]: "10"
+            - generic [ref=e432]:
+              - generic [ref=e433]:
+                - generic [ref=e434]:
+                  - generic [ref=e436]: Health Check
+                  - generic [ref=e437]: /api/health
+                - generic [ref=e438]: 108ms
+              - generic [ref=e439]:
+                - generic [ref=e440]:
+                  - generic [ref=e442]: WebSocket
+                  - generic [ref=e443]: /ws
+                - generic [ref=e444]: 107ms
+          - generic [ref=e445]:
+            - generic [ref=e446]:
+              - generic [ref=e447]:
+                - generic [ref=e448]: 🤖
+                - generic [ref=e449]:
+                  - heading "Agent Orchestrator" [level=3] [ref=e450]
+                  - paragraph [ref=e451]: http://localhost:8081
+              - generic [ref=e452]:
+                - img [ref=e453]
+                - generic [ref=e456]: healthy
+            - generic [ref=e457]:
+              - generic [ref=e458]:
+                - img [ref=e459]
+                - generic [ref=e461]: 106ms
+              - generic [ref=e462]:
+                - img [ref=e463]
+                - generic [ref=e466]: "Last: 12:05:07 AM"
+              - generic [ref=e467]:
+                - img [ref=e468]
+                - generic [ref=e471]: "10"
+            - generic [ref=e472]:
+              - generic [ref=e473]:
+                - generic [ref=e474]:
+                  - generic [ref=e476]: Health Check
+                  - generic [ref=e477]: /health
+                - generic [ref=e478]: 106ms
+              - generic [ref=e479]:
+                - generic [ref=e480]:
+                  - generic [ref=e482]: Meetings API
+                  - generic [ref=e483]: /meetings
+                - generic [ref=e484]: 106ms
+          - generic [ref=e485]:
+            - generic [ref=e486]:
+              - generic [ref=e487]:
+                - generic [ref=e488]: 🗄️
+                - generic [ref=e489]:
+                  - heading "SQLite Database" [level=3] [ref=e490]
+                  - paragraph [ref=e491]: bigdataclaw.db
+              - generic [ref=e492]:
+                - img [ref=e493]
+                - generic [ref=e496]: healthy
+            - generic [ref=e497]:
+              - generic [ref=e498]:
+                - img [ref=e499]
+                - generic [ref=e501]: 8ms
+              - generic [ref=e502]:
+                - img [ref=e503]
+                - generic [ref=e506]: "Last: 12:05:07 AM"
+              - generic [ref=e507]:
+                - img [ref=e508]
+                - generic [ref=e511]: "10"
+            - generic [ref=e513]:
+              - generic [ref=e514]:
+                - text: size
+                - paragraph [ref=e515]: 108 MB
+              - generic [ref=e516]:
+                - text: tables
+                - paragraph [ref=e517]: "12"
+              - generic [ref=e518]:
+                - text: connections
+                - paragraph [ref=e519]: "5"
+              - generic [ref=e520]:
+                - text: queries Per Second
+                - paragraph [ref=e521]: "45"
+          - generic [ref=e522]:
+            - generic [ref=e523]:
+              - generic [ref=e524]:
+                - generic [ref=e525]: 🔍
+                - generic [ref=e526]:
+                  - heading "Qdrant Vector DB" [level=3] [ref=e527]
+                  - paragraph [ref=e528]: http://localhost:6333
+              - generic [ref=e529]:
+                - img [ref=e530]
+                - generic [ref=e533]: healthy
+            - generic [ref=e534]:
+              - generic [ref=e535]:
+                - img [ref=e536]
+                - generic [ref=e538]: 105ms
+              - generic [ref=e539]:
+                - img [ref=e540]
+                - generic [ref=e543]: "Last: 12:05:07 AM"
+              - generic [ref=e544]:
+                - img [ref=e545]
+                - generic [ref=e548]: "10"
+            - generic [ref=e550]:
+              - generic [ref=e551]:
+                - generic [ref=e553]: Dashboard
+                - generic [ref=e554]: /
+              - generic [ref=e555]: 105ms
+        - generic [ref=e556]:
+          - generic [ref=e557]:
+            - generic [ref=e558]:
+              - heading "Live Monitor Logs" [level=3] [ref=e559]:
+                - img [ref=e560]
+                - text: Live Monitor Logs
+              - button "Clear" [ref=e562] [cursor=pointer]
+            - generic [ref=e563]:
+              - generic [ref=e564]:
+                - generic [ref=e565]: "[12:05:05 AM]"
+                - generic [ref=e566]: Checking NERVE Server...
+              - generic [ref=e567]:
+                - generic [ref=e568]: "[12:05:05 AM]"
+                - generic [ref=e569]: Checking Agent Orchestrator...
+              - generic [ref=e570]:
+                - generic [ref=e571]: "[12:05:05 AM]"
+                - generic [ref=e572]: Checking SQLite Database...
+              - generic [ref=e573]:
+                - generic [ref=e574]: "[12:05:05 AM]"
+                - generic [ref=e575]: Checking Qdrant Vector DB...
+              - generic [ref=e576]:
+                - generic [ref=e577]: "[12:05:05 AM]"
+                - generic [ref=e578]: "✅ System check complete. Status: HEALTHY"
+              - generic [ref=e579]:
+                - generic [ref=e580]: "[12:05:05 AM]"
+                - generic [ref=e581]: 🔍 Running system health check...
+              - generic [ref=e582]:
+                - generic [ref=e583]: "[12:05:05 AM]"
+                - generic [ref=e584]: Checking NERVE Frontend...
+              - generic [ref=e585]:
+                - generic [ref=e586]: "[12:05:05 AM]"
+                - generic [ref=e587]: Checking BigDataClaw API...
+              - generic [ref=e588]:
+                - generic [ref=e589]: "[12:05:05 AM]"
+                - generic [ref=e590]: Checking NERVE Server...
+              - generic [ref=e591]:
+                - generic [ref=e592]: "[12:05:05 AM]"
+                - generic [ref=e593]: Checking Agent Orchestrator...
+              - generic [ref=e594]:
+                - generic [ref=e595]: "[12:05:05 AM]"
+                - generic [ref=e596]: Checking SQLite Database...
+              - generic [ref=e597]:
+                - generic [ref=e598]: "[12:05:05 AM]"
+                - generic [ref=e599]: Checking Qdrant Vector DB...
+              - generic [ref=e600]:
+                - generic [ref=e601]: "[12:05:05 AM]"
+                - generic [ref=e602]: "✅ System check complete. Status: HEALTHY"
+              - generic [ref=e603]:
+                - generic [ref=e604]: "[12:05:05 AM]"
+                - generic [ref=e605]: 🔍 Running system health check...
+              - generic [ref=e638]:
+                - generic [ref=e639]: "[12:05:05 AM]"
+                - generic [ref=e640]: Checking NERVE Frontend...
+              - generic [ref=e641]:
+                - generic [ref=e642]: "[12:05:05 AM]"
+                - generic [ref=e643]: Checking BigDataClaw API...
+              - generic [ref=e644]:
+                - generic [ref=e645]: "[12:05:05 AM]"
+                - generic [ref=e646]: Checking NERVE Server...
+              - generic [ref=e647]:
+                - generic [ref=e648]: "[12:05:05 AM]"
+                - generic [ref=e649]: Checking Agent Orchestrator...
+              - generic [ref=e650]:
+                - generic [ref=e651]: "[12:05:05 AM]"
+                - generic [ref=e652]: Checking SQLite Database...
+              - generic [ref=e653]:
+                - generic [ref=e654]: "[12:05:05 AM]"
+                - generic [ref=e655]: Checking Qdrant Vector DB...
+              - generic [ref=e656]:
+                - generic [ref=e657]: "[12:05:06 AM]"
+                - generic [ref=e658]: "✅ System check complete. Status: HEALTHY"
+              - generic [ref=e659]:
+                - generic [ref=e660]: "[12:05:06 AM]"
+                - generic [ref=e661]: 🔍 Running system health check...
+              - generic [ref=e662]:
+                - generic [ref=e663]: "[12:05:06 AM]"
+                - generic [ref=e664]: Checking NERVE Frontend...
+              - generic [ref=e665]:
+                - generic [ref=e666]: "[12:05:06 AM]"
+                - generic [ref=e667]: Checking BigDataClaw API...
+              - generic [ref=e668]:
+                - generic [ref=e669]: "[12:05:06 AM]"
+                - generic [ref=e670]: Checking NERVE Server...
+              - generic [ref=e671]:
+                - generic [ref=e672]: "[12:05:06 AM]"
+                - generic [ref=e673]: Checking Agent Orchestrator...
+              - generic [ref=e674]:
+                - generic [ref=e675]: "[12:05:06 AM]"
+                - generic [ref=e676]: Checking SQLite Database...
+              - generic [ref=e677]:
+                - generic [ref=e678]: "[12:05:06 AM]"
+                - generic [ref=e679]: Checking Qdrant Vector DB...
+              - generic [ref=e680]:
+                - generic [ref=e681]: "[12:05:06 AM]"
+                - generic [ref=e682]: "✅ System check complete. Status: HEALTHY"
+              - generic [ref=e683]:
+                - generic [ref=e684]: "[12:05:06 AM]"
+                - generic [ref=e685]: 🔍 Running system health check...
+              - generic [ref=e686]:
+                - generic [ref=e687]: "[12:05:06 AM]"
+                - generic [ref=e688]: Checking NERVE Frontend...
+              - generic [ref=e689]:
+                - generic [ref=e690]: "[12:05:06 AM]"
+                - generic [ref=e691]: Checking BigDataClaw API...
+              - generic [ref=e692]:
+                - generic [ref=e693]: "[12:05:06 AM]"
+                - generic [ref=e694]: Checking NERVE Server...
+              - generic [ref=e695]:
+                - generic [ref=e696]: "[12:05:06 AM]"
+                - generic [ref=e697]: Checking Agent Orchestrator...
+              - generic [ref=e698]:
+                - generic [ref=e699]: "[12:05:06 AM]"
+                - generic [ref=e700]: Checking SQLite Database...
+              - generic [ref=e701]:
+                - generic [ref=e702]: "[12:05:06 AM]"
+                - generic [ref=e703]: Checking Qdrant Vector DB...
+              - generic [ref=e704]:
+                - generic [ref=e705]: "[12:05:06 AM]"
+                - generic [ref=e706]: "✅ System check complete. Status: HEALTHY"
+              - generic [ref=e707]:
+                - generic [ref=e708]: "[12:05:06 AM]"
+                - generic [ref=e709]: 🔍 Running system health check...
+              - generic [ref=e710]:
+                - generic [ref=e711]: "[12:05:06 AM]"
+                - generic [ref=e712]: Checking NERVE Frontend...
+              - generic [ref=e713]:
+                - generic [ref=e714]: "[12:05:06 AM]"
+                - generic [ref=e715]: Checking BigDataClaw API...
+              - generic [ref=e716]:
+                - generic [ref=e717]: "[12:05:06 AM]"
+                - generic [ref=e718]: Checking NERVE Server...
+              - generic [ref=e719]:
+                - generic [ref=e720]: "[12:05:06 AM]"
+                - generic [ref=e721]: Checking Agent Orchestrator...
+              - generic [ref=e722]:
+                - generic [ref=e723]: "[12:05:06 AM]"
+                - generic [ref=e724]: Checking SQLite Database...
+              - generic [ref=e725]:
+                - generic [ref=e726]: "[12:05:06 AM]"
+                - generic [ref=e727]: Checking Qdrant Vector DB...
+              - generic [ref=e728]:
+                - generic [ref=e729]: "[12:05:06 AM]"
+                - generic [ref=e730]: "✅ System check complete. Status: HEALTHY"
+              - generic [ref=e731]:
+                - generic [ref=e732]: "[12:05:06 AM]"
+                - generic [ref=e733]: 🔍 Running system health check...
+              - generic [ref=e734]:
+                - generic [ref=e735]: "[12:05:06 AM]"
+                - generic [ref=e736]: Checking NERVE Frontend...
+              - generic [ref=e737]:
+                - generic [ref=e738]: "[12:05:06 AM]"
+                - generic [ref=e739]: Checking BigDataClaw API...
+              - generic [ref=e740]:
+                - generic [ref=e741]: "[12:05:06 AM]"
+                - generic [ref=e742]: Checking NERVE Server...
+              - generic [ref=e743]:
+                - generic [ref=e744]: "[12:05:06 AM]"
+                - generic [ref=e745]: Checking Agent Orchestrator...
+              - generic [ref=e746]:
+                - generic [ref=e747]: "[12:05:06 AM]"
+                - generic [ref=e748]: Checking SQLite Database...
+              - generic [ref=e749]:
+                - generic [ref=e750]: "[12:05:06 AM]"
+                - generic [ref=e751]: Checking Qdrant Vector DB...
+              - generic [ref=e752]:
+                - generic [ref=e753]: "[12:05:06 AM]"
+                - generic [ref=e754]: "✅ System check complete. Status: HEALTHY"
+              - generic [ref=e755]:
+                - generic [ref=e756]: "[12:05:06 AM]"
+                - generic [ref=e757]: 🔍 Running system health check...
+              - generic [ref=e758]:
+                - generic [ref=e759]: "[12:05:06 AM]"
+                - generic [ref=e760]: Checking NERVE Frontend...
+              - generic [ref=e761]:
+                - generic [ref=e762]: "[12:05:06 AM]"
+                - generic [ref=e763]: Checking BigDataClaw API...
+              - generic [ref=e764]:
+                - generic [ref=e765]: "[12:05:06 AM]"
+                - generic [ref=e766]: Checking NERVE Server...
+              - generic [ref=e767]:
+                - generic [ref=e768]: "[12:05:06 AM]"
+                - generic [ref=e769]: Checking Agent Orchestrator...
+              - generic [ref=e770]:
+                - generic [ref=e771]: "[12:05:06 AM]"
+                - generic [ref=e772]: Checking SQLite Database...
+              - generic [ref=e773]:
+                - generic [ref=e774]: "[12:05:06 AM]"
+                - generic [ref=e775]: Checking Qdrant Vector DB...
+              - generic [ref=e776]:
+                - generic [ref=e777]: "[12:05:06 AM]"
+                - generic [ref=e778]: "✅ System check complete. Status: HEALTHY"
+              - generic [ref=e779]:
+                - generic [ref=e780]: "[12:05:06 AM]"
+                - generic [ref=e781]: 🔍 Running system health check...
+              - generic [ref=e782]:
+                - generic [ref=e783]: "[12:05:06 AM]"
+                - generic [ref=e784]: Checking NERVE Frontend...
+              - generic [ref=e785]:
+                - generic [ref=e786]: "[12:05:06 AM]"
+                - generic [ref=e787]: Checking BigDataClaw API...
+              - generic [ref=e788]:
+                - generic [ref=e789]: "[12:05:06 AM]"
+                - generic [ref=e790]: Checking NERVE Server...
+              - generic [ref=e791]:
+                - generic [ref=e792]: "[12:05:06 AM]"
+                - generic [ref=e793]: Checking Agent Orchestrator...
+              - generic [ref=e794]:
+                - generic [ref=e795]: "[12:05:06 AM]"
+                - generic [ref=e796]: Checking SQLite Database...
+              - generic [ref=e797]:
+                - generic [ref=e798]: "[12:05:06 AM]"
+                - generic [ref=e799]: Checking Qdrant Vector DB...
+              - generic [ref=e800]:
+                - generic [ref=e801]: "[12:05:06 AM]"
+                - generic [ref=e802]: "✅ System check complete. Status: HEALTHY"
+              - generic [ref=e803]:
+                - generic [ref=e804]: "[12:05:07 AM]"
+                - generic [ref=e805]: "✅ System check complete. Status: HEALTHY"
+              - generic [ref=e806]:
+                - generic [ref=e807]: "[12:05:07 AM]"
+                - generic [ref=e808]: 🔍 Running system health check...
+              - generic [ref=e809]:
+                - generic [ref=e810]: "[12:05:07 AM]"
+                - generic [ref=e811]: Checking NERVE Frontend...
+              - generic [ref=e812]:
+                - generic [ref=e813]: "[12:05:07 AM]"
+                - generic [ref=e814]: Checking BigDataClaw API...
+              - generic [ref=e815]:
+                - generic [ref=e816]: "[12:05:07 AM]"
+                - generic [ref=e817]: Checking NERVE Server...
+              - generic [ref=e818]:
+                - generic [ref=e819]: "[12:05:07 AM]"
+                - generic [ref=e820]: Checking Agent Orchestrator...
+              - generic [ref=e821]:
+                - generic [ref=e822]: "[12:05:07 AM]"
+                - generic [ref=e823]: Checking SQLite Database...
+              - generic [ref=e824]:
+                - generic [ref=e825]: "[12:05:07 AM]"
+                - generic [ref=e826]: Checking Qdrant Vector DB...
+              - generic [ref=e827]:
+                - generic [ref=e828]: "[12:05:07 AM]"
+                - generic [ref=e829]: 🔍 Running system health check...
+              - generic [ref=e830]:
+                - generic [ref=e831]: "[12:05:07 AM]"
+                - generic [ref=e832]: Checking NERVE Frontend...
+              - generic [ref=e833]:
+                - generic [ref=e834]: "[12:05:07 AM]"
+                - generic [ref=e835]: Checking BigDataClaw API...
+              - generic [ref=e836]:
+                - generic [ref=e837]: "[12:05:07 AM]"
+                - generic [ref=e838]: Checking NERVE Server...
+              - generic [ref=e839]:
+                - generic [ref=e840]: "[12:05:07 AM]"
+                - generic [ref=e841]: Checking Agent Orchestrator...
+              - generic [ref=e842]:
+                - generic [ref=e843]: "[12:05:07 AM]"
+                - generic [ref=e844]: Checking SQLite Database...
+              - generic [ref=e845]:
+                - generic [ref=e846]: "[12:05:07 AM]"
+                - generic [ref=e847]: Checking Qdrant Vector DB...
+              - generic [ref=e848]:
+                - generic [ref=e849]: "[12:05:07 AM]"
+                - generic [ref=e850]: "✅ System check complete. Status: HEALTHY"
+              - generic [ref=e851]:
+                - generic [ref=e852]: "[12:05:07 AM]"
+                - generic [ref=e853]: "✅ System check complete. Status: HEALTHY"
+              - generic [ref=e854]:
+                - generic [ref=e855]: "[12:05:07 AM]"
+                - generic [ref=e856]: 🔍 Running system health check...
+              - generic [ref=e857]:
+                - generic [ref=e858]: "[12:05:07 AM]"
+                - generic [ref=e859]: Checking NERVE Frontend...
+              - generic [ref=e860]:
+                - generic [ref=e861]: "[12:05:07 AM]"
+                - generic [ref=e862]: Checking BigDataClaw API...
+              - generic [ref=e863]:
+                - generic [ref=e864]: "[12:05:07 AM]"
+                - generic [ref=e865]: Checking NERVE Server...
+              - generic [ref=e866]:
+                - generic [ref=e867]: "[12:05:07 AM]"
+                - generic [ref=e868]: Checking Agent Orchestrator...
+              - generic [ref=e869]:
+                - generic [ref=e870]: "[12:05:07 AM]"
+                - generic [ref=e871]: Checking SQLite Database...
+              - generic [ref=e872]:
+                - generic [ref=e873]: "[12:05:07 AM]"
+                - generic [ref=e874]: Checking Qdrant Vector DB...
+              - generic [ref=e875]:
+                - generic [ref=e876]: "[12:05:07 AM]"
+                - generic [ref=e877]: 🔍 Running system health check...
+              - generic [ref=e878]:
+                - generic [ref=e879]: "[12:05:07 AM]"
+                - generic [ref=e880]: Checking NERVE Frontend...
+              - generic [ref=e881]:
+                - generic [ref=e882]: "[12:05:07 AM]"
+                - generic [ref=e883]: Checking BigDataClaw API...
+              - generic [ref=e884]:
+                - generic [ref=e885]: "[12:05:07 AM]"
+                - generic [ref=e886]: Checking NERVE Server...
+              - generic [ref=e887]:
+                - generic [ref=e888]: "[12:05:07 AM]"
+                - generic [ref=e889]: Checking Agent Orchestrator...
+              - generic [ref=e890]:
+                - generic [ref=e891]: "[12:05:07 AM]"
+                - generic [ref=e892]: Checking SQLite Database...
+              - generic [ref=e893]:
+                - generic [ref=e894]: "[12:05:07 AM]"
+                - generic [ref=e895]: Checking Qdrant Vector DB...
+          - generic [ref=e606]:
+            - heading "Vigil Settings" [level=3] [ref=e607]:
+              - img [ref=e608]
+              - text: Vigil Settings
+            - generic [ref=e611]:
+              - generic [ref=e612]:
+                - text: Check Interval
+                - combobox [ref=e613]:
+                  - option "10 seconds"
+                  - option "30 seconds" [selected]
+                  - option "1 minute"
+                  - option "5 minutes"
+              - generic [ref=e614]:
+                - text: Alert Threshold
+                - combobox [ref=e615]:
+                  - option "1 failure"
+                  - option "3 failures" [selected]
+                  - option "5 failures"
+              - generic [ref=e616]:
+                - generic [ref=e617]: Notifications
+                - generic [ref=e618] [cursor=pointer]:
+                  - checkbox "Email" [checked] [ref=e619]
+                  - img [ref=e620]
+                  - generic [ref=e623]: Email
+                - generic [ref=e624] [cursor=pointer]:
+                  - checkbox "Telegram" [checked] [ref=e625]
+                  - img [ref=e626]
+                  - generic [ref=e628]: Telegram
+  - button "Ctrl+Shift+V" [ref=e629] [cursor=pointer]:
+    - img [ref=e630]
+    - generic [ref=e633]: Ctrl+Shift+V

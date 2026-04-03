@@ -1,0 +1,186 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "BIGDATA CLAW" [level=1] [ref=e9]
+        - paragraph [ref=e10]: NERVE Mission Control
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Obsidian Vault" [ref=e46] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e47]
+        - generic [ref=e51]: Obsidian Vault
+      - generic [ref=e52]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e53] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e54]
+        - generic [ref=e57]: EXP Agent Recruiter
+        - generic [ref=e58]: 96K
+      - link "Commercial Agents 6.7K" [ref=e59] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e60]
+        - generic [ref=e63]: Commercial Agents
+        - generic [ref=e64]: 6.7K
+      - link "Brokerages" [ref=e65] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e66]
+        - generic [ref=e69]: Brokerages
+      - generic [ref=e70]: Tools
+      - link "My Listings" [ref=e71] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e72]
+        - generic [ref=e76]: My Listings
+      - link "Buyer Matcher" [ref=e77] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e78]
+        - generic [ref=e83]: Buyer Matcher
+      - link "Agent Matcher" [ref=e84] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e85]
+        - generic [ref=e89]: Agent Matcher
+      - link "Lender Matcher" [ref=e90] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e91]
+        - generic [ref=e93]: Lender Matcher
+      - link "Builder Directory" [ref=e94] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e95]
+        - generic [ref=e99]: Builder Directory
+      - link "Property Upload" [ref=e100] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e101]
+        - generic [ref=e104]: Property Upload
+      - link "Olena Marketing" [ref=e105] [cursor=pointer]:
+        - /url: /olena-feature-sheet
+        - img [ref=e106]
+        - generic [ref=e109]: Olena Marketing
+      - link "Canva Editor" [ref=e110] [cursor=pointer]:
+        - /url: /canva-editor
+        - img [ref=e111]
+        - generic [ref=e117]: Canva Editor
+      - link "Skills & Agents" [ref=e118] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e119]
+        - generic [ref=e122]: Skills & Agents
+      - link "Map View" [ref=e123] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e124]
+        - generic [ref=e126]: Map View
+      - link "Data Manager" [ref=e127] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e128]
+        - generic [ref=e132]: Data Manager
+    - generic [ref=e136]: System Online
+  - generic [ref=e137]:
+    - banner [ref=e138]:
+      - generic [ref=e144]:
+        - img [ref=e261]
+        - generic [ref=e152]: Connected
+      - generic [ref=e155]:
+        - img [ref=e156]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e159]
+        - combobox [ref=e160]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e161]:
+        - button "Help" [ref=e163] [cursor=pointer]:
+          - img [ref=e164]
+          - generic [ref=e167]: Help
+        - button "Voice" [ref=e168] [cursor=pointer]:
+          - img [ref=e169]
+          - generic [ref=e175]: Voice
+        - generic [ref=e176]:
+          - img [ref=e177]
+          - generic [ref=e182]: $12.40
+        - link "Data Manager" [ref=e183] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e184]
+        - button [ref=e188] [cursor=pointer]:
+          - img [ref=e189]
+        - link [ref=e192] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e193]
+        - link "🦞" [ref=e196] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e197]: 🦞
+    - main [ref=e198]:
+      - generic [ref=e200]:
+        - generic [ref=e201]:
+          - generic [ref=e202]:
+            - heading "Lender Matcher" [level=1] [ref=e203]:
+              - img [ref=e204]
+              - text: Lender Matcher
+            - paragraph [ref=e208]: Loading... available for financing
+          - button "Export CSV" [ref=e209] [cursor=pointer]:
+            - img [ref=e210]
+            - text: Export CSV
+        - generic [ref=e213]:
+          - paragraph [ref=e214]:
+            - img [ref=e215]
+            - text: Filter by Asset Class
+          - generic [ref=e218]:
+            - button "All Asset Classes" [ref=e219] [cursor=pointer]
+            - button "Commercial" [ref=e220] [cursor=pointer]
+            - button "Land" [ref=e221] [cursor=pointer]
+            - button "Construction" [ref=e222] [cursor=pointer]
+            - button "Residential" [ref=e223] [cursor=pointer]
+            - button "Industrial" [ref=e224] [cursor=pointer]
+            - button "Retail" [ref=e225] [cursor=pointer]
+        - generic [ref=e226]:
+          - heading "Search Lenders" [level=3] [ref=e227]
+          - generic [ref=e228]:
+            - generic [ref=e229]:
+              - generic [ref=e230]: Search by Name
+              - generic [ref=e231]:
+                - img [ref=e232]
+                - textbox "Search lenders... (Press Enter)" [ref=e235]
+                - button "Search" [ref=e236] [cursor=pointer]:
+                  - img [ref=e237]
+                  - text: Search
+            - generic [ref=e240]:
+              - generic [ref=e241]: Lender Type
+              - combobox [ref=e242]:
+                - option "All Types" [selected]
+            - generic [ref=e243]:
+              - generic [ref=e244]: Loan Amount Needed
+              - generic [ref=e245]:
+                - img [ref=e246]
+                - textbox "e.g. 5000000" [ref=e248]
+        - paragraph [ref=e250]: Showing 0 of 0 lenders
+        - generic [ref=e265]:
+          - img [ref=e266]
+          - heading "Failed to load lenders" [level=3] [ref=e269]
+          - paragraph [ref=e270]: Failed to load lenders
+          - button "Retry" [ref=e271] [cursor=pointer]
+  - button "Ctrl+Shift+V" [ref=e256] [cursor=pointer]:
+    - img [ref=e257]
+    - generic [ref=e260]: Ctrl+Shift+V

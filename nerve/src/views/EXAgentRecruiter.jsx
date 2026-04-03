@@ -237,7 +237,7 @@ const EXAgentRecruiter = () => {
     city: 'all',
     brokerage: 'all'
   })
-  const [searchField, setSearchField] = useState('all')
+  const [searchField, setSearchField] = useState('all')  // 'all', 'name', 'city', 'brokerage', 'email'
   
   // UI State
   const [selectedAgent, setSelectedAgent] = useState(null)
@@ -323,9 +323,13 @@ const EXAgentRecruiter = () => {
     await loadInteractions()
   }
 
-  // Filter agents
+  // Filter agents - search through ALL agents, not just loaded ones
   const filteredAgents = useMemo(() => {
-    return agents.filter(agent => {
+    // When searching, filter from allAgents to find matches across entire database
+    // Otherwise, just filter the loaded agents for performance
+    const sourceData = searchQuery ? allAgents : agents
+    
+    return sourceData.filter(agent => {
       // Search query
       if (searchQuery) {
         const searchLower = searchQuery.toLowerCase()
@@ -360,7 +364,7 @@ const EXAgentRecruiter = () => {
       
       return true
     })
-  }, [agents, searchQuery, searchField, filters, interactions, viewFilter])
+  }, [agents, allAgents, searchQuery, searchField, filters, interactions, viewFilter])
 
   // Group agents
   const groupedAgents = useMemo(() => {
@@ -495,66 +499,110 @@ const EXAgentRecruiter = () => {
 
       {/* Search & Filters */}
       <div className="card p-4 space-y-4">
-        {/* Search Row */}
-        <div className="flex flex-wrap items-center gap-4">
-          <div className="flex-1 min-w-[300px] flex gap-2">
+        {/* Search Row - Prominent Search Bar */}
+        <div className="flex gap-3">
+          <div className="relative flex-1">
+            <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+            <input
+              type="text"
+              placeholder="Search by agent name, brokerage, city..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 bg-bg-input border border-border-subtle rounded-xl text-base focus:border-accent-blue focus:ring-1 focus:ring-accent-blue/50 transition-all"
+            />
+            {searchQuery && (
+              <button 
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-bg-card text-text-muted"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+          <button className="px-6 py-3 bg-accent-blue text-white rounded-xl font-medium hover:bg-accent-blue/90 transition-colors flex items-center gap-2">
+            <Search className="w-4 h-4" />
+            Search
+          </button>
+        </div>
+
+        {/* Filters & View Options Row */}
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          {/* Left: Filter Dropdowns */}
+          <div className="flex flex-wrap items-center gap-3">
             <select 
-              value={searchField}
-              onChange={(e) => setSearchField(e.target.value)}
-              className="bg-bg-input border border-border-subtle rounded-lg px-3 py-2 text-sm w-40"
+              value={filters.brokerage} 
+              onChange={(e) => setFilters({...filters, brokerage: e.target.value})} 
+              className="bg-bg-input border border-border-subtle rounded-lg px-4 py-2 text-sm min-w-[160px]"
             >
-              <option value="all">All Fields</option>
-              <option value="name">Agent Name</option>
-              <option value="city">City</option>
-              <option value="brokerage">Brokerage</option>
-              <option value="email">Email</option>
+              <option value="all">All Brokerages</option>
+              {brokerages.map(b => (<option key={b} value={b}>{b}</option>))}
             </select>
-            <div className="relative flex-1">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" />
-              <input
-                type="text"
-                placeholder={`Search ${searchField === 'all' ? 'agents...' : searchField + '...'}`}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-bg-input border border-border-subtle rounded-lg text-sm"
-              />
+            
+            <OntarioCityDropdown 
+              value={filters.city}
+              onChange={(city) => setFilters({...filters, city})}
+            />
+            
+            <select 
+              value={filters.status} 
+              onChange={(e) => setFilters({...filters, status: e.target.value})} 
+              className="bg-bg-input border border-border-subtle rounded-lg px-4 py-2 text-sm"
+            >
+              {STATUS_OPTIONS.map(opt => (<option key={opt.value} value={opt.value}>{opt.label}</option>))}
+            </select>
+          </div>
+
+          {/* Right: View Toggle Pills */}
+          <div className="flex items-center gap-2 bg-bg-input p-1 rounded-lg">
+            <button 
+              onClick={() => setGroupBy('brokerage')} 
+              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${groupBy === 'brokerage' ? 'bg-accent-blue text-white shadow-sm' : 'text-text-secondary hover:text-text-primary'}`}
+            >
+              By Brokerage
+            </button>
+            <button 
+              onClick={() => setGroupBy('city')} 
+              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${groupBy === 'city' ? 'bg-accent-blue text-white shadow-sm' : 'text-text-secondary hover:text-text-primary'}`}
+            >
+              By City
+            </button>
+            <button 
+              onClick={() => setGroupBy('status')} 
+              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${groupBy === 'status' ? 'bg-accent-blue text-white shadow-sm' : 'text-text-secondary hover:text-text-primary'}`}
+            >
+              By Status
+            </button>
+          </div>
+        </div>
+
+        {/* Voice Search Hint & Results Count */}
+        <div className="flex items-center justify-between pt-3 border-t border-border-subtle">
+          <div className="flex items-center gap-2 text-sm text-text-muted">
+            <span>🎤</span>
+            <span>Try: "Find agents in Toronto" • "Show RE/MAX" • "Filter contacted"</span>
+          </div>
+          <div className="flex items-center gap-3">
+            {/* Contact Status Pills */}
+            <div className="flex items-center gap-1">
+              <button 
+                onClick={() => setViewFilter('all')} 
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${viewFilter === 'all' ? 'bg-accent-blue text-white' : 'bg-bg-input text-text-secondary hover:text-text-primary'}`}
+              >
+                All
+              </button>
+              <button 
+                onClick={() => setViewFilter('contacted')} 
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${viewFilter === 'contacted' ? 'bg-accent-green text-white' : 'bg-bg-input text-text-secondary hover:text-text-primary'}`}
+              >
+                Contacted
+              </button>
+              <button 
+                onClick={() => setViewFilter('not-contacted')} 
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${viewFilter === 'not-contacted' ? 'bg-accent-purple text-white' : 'bg-bg-input text-text-secondary hover:text-text-primary'}`}
+              >
+                Not Contacted
+              </button>
             </div>
-          </div>
-        </div>
-
-        {/* Filters Row */}
-        <div className="flex flex-wrap items-center gap-4">
-          <select value={filters.status} onChange={(e) => setFilters({...filters, status: e.target.value})} className="bg-bg-input border border-border-subtle rounded-lg px-3 py-2 text-sm">
-            {STATUS_OPTIONS.map(opt => (<option key={opt.value} value={opt.value}>{opt.label}</option>))}
-          </select>
-          
-          <OntarioCityDropdown 
-            value={filters.city}
-            onChange={(city) => setFilters({...filters, city})}
-          />
-          
-          <select value={filters.brokerage} onChange={(e) => setFilters({...filters, brokerage: e.target.value})} className="bg-bg-input border border-border-subtle rounded-lg px-3 py-2 text-sm max-w-[200px]">
-            <option value="all">All Brokerages</option>
-            {brokerages.map(b => (<option key={b} value={b}>{b}</option>))}
-          </select>
-        </div>
-
-        {/* Group By & Contact Filter */}
-        <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-border-subtle">
-          <span className="text-sm font-medium text-text-secondary">Group By:</span>
-          <div className="flex gap-2">
-            <button onClick={() => setGroupBy('brokerage')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${groupBy === 'brokerage' ? 'bg-accent-blue text-white' : 'bg-bg-input text-text-secondary'}`}>Brokerage</button>
-            <button onClick={() => setGroupBy('city')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${groupBy === 'city' ? 'bg-accent-blue text-white' : 'bg-bg-input text-text-secondary'}`}>City</button>
-            <button onClick={() => setGroupBy('status')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${groupBy === 'status' ? 'bg-accent-blue text-white' : 'bg-bg-input text-text-secondary'}`}>Status</button>
-          </div>
-
-          <div className="h-6 w-px bg-border-subtle mx-2" />
-
-          <span className="text-sm font-medium text-text-secondary">Contact Status:</span>
-          <div className="flex gap-2">
-            <button onClick={() => setViewFilter('all')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${viewFilter === 'all' ? 'bg-accent-blue text-white' : 'bg-bg-input text-text-secondary'}`}>All</button>
-            <button onClick={() => setViewFilter('contacted')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${viewFilter === 'contacted' ? 'bg-accent-green text-white' : 'bg-bg-input text-text-secondary'}`}>Contacted</button>
-            <button onClick={() => setViewFilter('not-contacted')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${viewFilter === 'not-contacted' ? 'bg-accent-purple text-white' : 'bg-bg-input text-text-secondary'}`}>Not Contacted</button>
           </div>
         </div>
       </div>

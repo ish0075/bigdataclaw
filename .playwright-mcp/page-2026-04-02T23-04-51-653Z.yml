@@ -1,0 +1,8 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - heading "🚀 Mission Control Settings" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Configure data source access for Jamie's Personal Vault, BDAIV2, and DBeaver databases
+    - button "🔄 Refresh Connections" [ref=e6] [cursor=pointer]:
+      - generic [ref=e7]: 🔄
+      - text: Refresh Connections
+  - generic [ref=e9]: Loading configuration...

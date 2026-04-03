@@ -1,0 +1,191 @@
+- generic [ref=e4]:
+  - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e11]
+          - generic [ref=e13]:
+            - button "N" [ref=e14]:
+              - link "N" [ref=e15] [cursor=pointer]:
+                - /url: /NIAAAA/dashboard
+                - generic [ref=e18]:
+                  - img [ref=e19]
+                  - generic [ref=e20]: "N"
+            - button "T" [ref=e21]:
+              - link "T" [ref=e22] [cursor=pointer]:
+                - /url: /TES/dashboard
+                - generic [ref=e24]:
+                  - img [ref=e25]
+                  - generic [ref=e26]: T
+            - button "N" [ref=e27]:
+              - link "N" [ref=e28] [cursor=pointer]:
+                - /url: /NIAA/dashboard
+                - generic [ref=e30]:
+                  - img [ref=e31]
+                  - generic [ref=e32]: "N"
+            - button "N" [ref=e33]:
+              - link "N" [ref=e34] [cursor=pointer]:
+                - /url: /NIA/dashboard
+                - generic [ref=e36]:
+                  - img [ref=e37]
+                  - generic [ref=e38]: "N"
+            - button "T" [ref=e39]:
+              - link "T" [ref=e40] [cursor=pointer]:
+                - /url: /TESA/dashboard
+                - generic [ref=e42]:
+                  - img [ref=e43]
+                  - generic [ref=e44]: T
+            - button "N" [ref=e45]:
+              - link "N" [ref=e46] [cursor=pointer]:
+                - /url: /NIAAA/dashboard
+                - generic [ref=e48]:
+                  - img [ref=e49]
+                  - generic [ref=e50]: "N"
+            - button "T" [ref=e51]:
+              - link "T" [ref=e52] [cursor=pointer]:
+                - /url: /TESAAA/dashboard
+                - generic [ref=e54]:
+                  - img [ref=e55]
+                  - generic [ref=e56]: T
+            - button "A" [ref=e57]:
+              - link "A" [ref=e58] [cursor=pointer]:
+                - /url: /ABC/dashboard
+                - generic [ref=e60]:
+                  - img [ref=e61]
+                  - generic [ref=e62]: A
+            - button "F" [ref=e63]:
+              - link "F" [ref=e64] [cursor=pointer]:
+                - /url: /FAC/dashboard
+                - generic [ref=e66]:
+                  - img [ref=e67]
+                  - generic [ref=e68]: F
+            - button "T" [ref=e69]:
+              - link "T" [ref=e70] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - generic [ref=e72]:
+                  - img [ref=e73]
+                  - generic [ref=e74]: T
+            - status [ref=e75]
+          - button "Add company" [ref=e78]:
+            - img [ref=e79]
+        - complementary [ref=e81]:
+          - generic [ref=e82]:
+            - generic [ref=e83]: Niagara High-Rise Verified Mission Company
+            - button [ref=e84]:
+              - img
+          - navigation [ref=e85]:
+            - generic [ref=e86]:
+              - button "New Issue" [ref=e87]:
+                - img [ref=e88]
+                - generic [ref=e91]: New Issue
+              - link "Dashboard" [ref=e92] [cursor=pointer]:
+                - /url: /TEST/dashboard
+                - img [ref=e94]
+                - generic [ref=e99]: Dashboard
+              - link "Inbox 6" [ref=e100] [cursor=pointer]:
+                - /url: /TEST/inbox
+                - img [ref=e102]
+                - generic [ref=e105]: Inbox
+                - generic [ref=e106]: "6"
+            - generic [ref=e107]:
+              - generic [ref=e108]: Work
+              - generic [ref=e109]:
+                - link "Issues" [ref=e110] [cursor=pointer]:
+                  - /url: /TEST/issues
+                  - img [ref=e112]
+                  - generic [ref=e115]: Issues
+                - link "Routines Beta" [ref=e116] [cursor=pointer]:
+                  - /url: /TEST/routines
+                  - img [ref=e118]
+                  - generic [ref=e123]: Routines
+                  - generic [ref=e124]: Beta
+                - link "Goals" [ref=e125] [cursor=pointer]:
+                  - /url: /TEST/goals
+                  - img [ref=e127]
+                  - generic [ref=e131]: Goals
+            - generic [ref=e132]:
+              - generic [ref=e134]:
+                - button "Projects" [expanded] [ref=e135]:
+                  - img [ref=e136]
+                  - generic [ref=e138]: Projects
+                - button "New project" [ref=e139]:
+                  - img [ref=e140]
+              - status [ref=e141]
+            - generic [ref=e142]:
+              - generic [ref=e144]:
+                - button "Agents" [expanded] [ref=e145]:
+                  - img [ref=e146]
+                  - generic [ref=e148]: Agents
+                - button "New agent" [ref=e149]:
+                  - img [ref=e150]
+              - generic [ref=e152]:
+                - link "Builder Scout" [ref=e153] [cursor=pointer]:
+                  - /url: /TEST/agents/builder-scout
+                  - img [ref=e154]
+                  - generic [ref=e157]: Builder Scout
+                - link "Buyer Scout" [ref=e158] [cursor=pointer]:
+                  - /url: /TEST/agents/buyer-scout
+                  - img [ref=e159]
+                  - generic [ref=e162]: Buyer Scout
+                - link "CEO Strategy" [ref=e163] [cursor=pointer]:
+                  - /url: /TEST/agents/ceo-strategy
+                  - img [ref=e164]
+                  - generic [ref=e167]: CEO Strategy
+            - generic [ref=e168]:
+              - generic [ref=e169]: Company
+              - generic [ref=e170]:
+                - link "Org" [ref=e171] [cursor=pointer]:
+                  - /url: /TEST/org
+                  - img [ref=e173]
+                  - generic [ref=e178]: Org
+                - link "Skills" [ref=e179] [cursor=pointer]:
+                  - /url: /TEST/skills
+                  - img [ref=e181]
+                  - generic [ref=e191]: Skills
+                - link "Costs" [ref=e192] [cursor=pointer]:
+                  - /url: /TEST/costs
+                  - img [ref=e194]
+                  - generic [ref=e196]: Costs
+                - link "Activity" [ref=e197] [cursor=pointer]:
+                  - /url: /TEST/activity
+                  - img [ref=e199]
+                  - generic [ref=e203]: Activity
+                - link "Settings" [ref=e204] [cursor=pointer]:
+                  - /url: /TEST/company/settings
+                  - img [ref=e206]
+                  - generic [ref=e209]: Settings
+      - generic [ref=e211]:
+        - link "Documentation" [ref=e212] [cursor=pointer]:
+          - /url: https://docs.paperclip.ing/
+          - img [ref=e213]
+          - generic [ref=e215]: Documentation
+        - generic [ref=e216]: v
+        - link "Instance settings" [ref=e217] [cursor=pointer]:
+          - /url: /instance/settings/general
+          - img
+        - button "Switch to light mode" [ref=e218]:
+          - img
+    - generic [ref=e219]:
+      - heading "Not Found" [level=1] [ref=e223]
+      - main [ref=e225]:
+        - generic [ref=e227]:
+          - generic [ref=e228]:
+            - img [ref=e230]
+            - generic [ref=e232]:
+              - heading "Company not found" [level=1] [ref=e233]
+              - paragraph [ref=e234]: No company matches prefix "TEST".
+          - generic [ref=e235]:
+            - text: "Requested path:"
+            - code [ref=e236]: /TEST/dashboard
+          - generic [ref=e237]:
+            - link "Open dashboard" [ref=e238] [cursor=pointer]:
+              - /url: /NIAAAA/dashboard
+              - img
+              - text: Open dashboard
+            - link "Go home" [ref=e239] [cursor=pointer]:
+              - /url: /
+  - generic [ref=e240]:
+    - heading "Command Palette" [level=2] [ref=e241]
+    - paragraph [ref=e242]: Search for a command to run...

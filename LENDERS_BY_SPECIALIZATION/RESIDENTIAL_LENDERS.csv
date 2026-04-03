@@ -1,0 +1,140 @@
+1,Royal Bank of Canada,,,2023-10-13 11:00:06,'2023-10-30 12:43:01'),lender_type,asset_specializations,is_land_lender,is_construction_lender,is_commercial_lender
+14,Cameron Stephens Mortgage Capital Ltd,,,2023-10-13 11:00:07,'2023-10-30 12:43:01'),Major Bank,residential,0,0,0
+23,Canadian Mortgage Servicing Cor,,,2023-10-13 11:00:07,'2023-10-30 12:43:01'),Other,residential,0,0,0
+27,Latitude Mortgage Services Inc,,,2023-10-13 11:00:07,'2023-10-30 12:43:01'),Other,residential,0,0,0
+42,Canada Mortgage and Housing Cor,,,2023-10-13 11:00:08,'2023-10-30 12:43:01'),Other,residential,0,0,0
+43,KingSett Mortgage Cor,,,2023-10-13 11:00:08,'2023-10-30 12:43:01'),Other,residential,0,0,0
+86,Timberdreek Canadian Multi-Residential V GP Inc,,,2023-10-13 11:00:10,'2023-10-30 12:43:01'),Other,residential,0,0,0
+87,Timbercreek Canadian Multi-Residential V GP Inc,,,2023-10-13 11:00:10,'2023-10-30 12:43:01'),Other,commercial|residential,0,0,1
+110,Scotia Mortgage Cor,,,2023-10-13 11:00:11,'2023-10-30 12:43:01'),Other,residential,0,0,0
+124,Hazelview Canadian Multi-Residential V GP Inc,,,2023-10-13 11:00:12,'2023-10-30 12:43:01'),Other,residential,0,0,0
+133,BCMP Mortgage Investment Cor,,,2023-10-13 11:00:12,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+140,Institutional Mortgage Capital Canada Inc,,,2023-10-13 11:00:12,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+192,Foremost Mortgage Holding Cor,,,2023-10-13 11:00:15,'2023-10-30 12:43:01'),Other,residential,0,0,0
+199,C &amp; K Mortgage Services Inc,,,2023-10-13 11:00:16,'2023-10-30 12:43:01'),Other,residential,0,0,0
+277,Corwin Mortgage Holding Cor,,,2023-10-13 11:00:25,'2023-10-30 12:43:01'),Other,residential,0,0,0
+278,Morrison Financial Mortgage Cor,morrisonfinancial.com,,2023-12-02 13:34:34,'2023-10-30 12:43:01'),Credit Union,residential,0,0,0
+286,Firm Capital Mortgage Fund Inc,firmcapital.com,,2023-12-02 13:34:34,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+350,RCMF Mortgage Investments Inc,,,2023-10-13 11:00:35,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+366,Fiirm Capital Mortgage Fund Inc,,,2023-10-13 11:00:35,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+395,RioCan Mortgage Cor,,,2023-10-13 11:00:40,'2023-10-30 12:43:01'),Other,residential,0,0,0
+413,Prudent Excellence Mortgage Investment Cor,,,2023-10-13 11:00:44,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+435,Centurion Mortgage Capital Cor,,,2023-10-13 11:00:48,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+450,CDPQ Mortgage Cor,,,2023-10-13 11:00:53,'2023-10-30 12:43:01'),Other,residential,0,0,0
+458,Owemanco Mortgage Holding Cor,,,2023-10-13 11:00:54,'2023-10-30 12:43:01'),Other,residential,0,0,0
+482,TCC Mortgage Holdings Inc,,,2023-10-13 11:00:56,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+495,"GMAC Commercial Mortgage of Canada, Ltd",,,2023-10-13 11:00:58,'2023-10-30 12:43:01'),Major Bank,commercial|residential,0,0,1
+499,CIBC Mortgages Inc,,,2023-10-13 11:00:58,'2023-10-30 12:43:01'),Major Bank,residential,0,0,0
+507,FCC Mortgage Associates Inc,,,2023-10-13 11:00:58,'2023-10-30 12:43:01'),Other,residential,0,0,0
+529,Firm Capital Mortgage Cor,,,2023-10-13 11:02:45,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+566,CDPQ Mortgage Investment Cor,,,2023-10-13 11:02:49,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+600,Alleghe Mortgage Fund Ltd,,,2023-10-13 11:02:54,'2023-10-30 12:43:01'),Major Bank,residential,0,0,0
+607,ING Mortgage Broker Services Inc,,,2023-10-13 11:02:55,'2023-10-30 12:43:01'),Other,residential,0,0,0
+625,Genesis Mortgage Investment Cor,,,2023-10-13 11:02:58,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+655,SLC Management Canadian Commercial Mortgage Fund,,,2023-10-13 11:12:00,'2023-10-30 12:43:01'),Other,commercial|residential,0,0,1
+697,Timbercreek Canadian Multi-Residential V GP,,,2023-10-13 11:12:10,'2023-10-30 12:43:01'),Other,commercial|residential,0,0,1
+703,Telb Mortgage Holding Cor,,,2023-10-13 11:12:11,'2023-10-30 12:43:01'),Other,residential,0,0,0
+707,Atrium Mortgage Investment Cor,,,2023-10-13 11:12:12,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+712,Corwin Mortgage Holdings Cor,,,2023-10-13 11:12:12,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+726,Cosman Mortgage Holdings Cor,,,2023-10-13 11:12:14,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+739,Wadsworth Mortgage Capital Cor,,,2023-10-13 11:12:17,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+753,AFC Mortgage Administration Inc,,,2023-10-13 11:12:18,'2023-10-30 12:43:01'),Other,residential,0,0,0
+786,DX Financial Mortgage Investment Cor,,,2023-10-13 11:13:54,'2023-10-30 12:43:01'),Credit Union,residential,0,0,0
+811,Terrapin Mortgage Investment Cor,,,2023-10-13 11:13:59,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+834,Forgestone Mortgage Fund GP Inc,,,2023-10-13 11:14:08,'2023-10-30 12:43:01'),Other,residential,0,0,0
+847,Ivest Equity Mortgage Investment Cor,,,2023-10-13 11:14:12,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+853,Elle Mortgage Cor,,,2023-10-13 11:14:12,'2023-10-30 12:43:01'),Other,residential,0,0,0
+854,Sub-Prime Mortgage Cor,,,2023-10-13 11:14:12,'2023-10-30 12:43:01'),Other,residential,0,0,0
+863,Ottawa-Carleton Mortgage Inc,,,2023-10-13 11:14:14,'2023-10-30 12:43:01'),Other,residential,0,0,0
+935,Cameron Stephens Mortgage Capital,,,2023-10-13 11:14:39,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+943,Cosman Mortgage Holding Cor,,,2023-10-13 11:14:58,'2023-10-30 12:43:01'),Other,residential,0,0,0
+944,Ginkgo Mortgage Investment Cor,,,2023-10-13 11:14:58,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+1026,Sky Mortgage Cor,,,2023-10-13 11:15:32,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1083,Hillmount Capital Mortgage Holdings Inc,,,2023-10-13 11:15:47,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+1175,Wingfield Mortgage Cor,,,2023-10-13 11:16:47,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1414,Canstone Mortgage Fund LP,,,2023-10-23 20:27:00,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1477,Forgetstone Mortgage Fund GP Inc,,,2023-10-23 20:29:53,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1495,CIBC Mortgage Inc,,,2023-10-24 14:27:34,'2023-10-30 12:43:01'),Major Bank,residential,0,0,0
+1542,Ontario Mortgages LLC,,,2023-10-24 14:28:21,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1556,19 Duncan Mortgage Inc,,,2023-10-24 14:28:22,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1603,Tuckernuck Mortgage Administration Inc,,,2023-10-24 14:30:26,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1614,DB Mortgage Investment Corp #1,,,2023-10-24 14:30:28,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+1621,Valour Mortgage Services Inc,,,2023-10-26 13:31:06,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1630,"CIBC Mortgages Inc, trading as FirstLine Mortgage",,,2023-10-26 13:31:06,'2023-10-30 12:43:01'),Major Bank,residential,0,0,0
+1676,180 University Residential Inc,,,2023-10-26 13:31:38,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1722,Mingsett Mortgage Cor,,,2023-10-26 19:27:50,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1728,C &amp; K Mortgage Service,,,2023-10-26 19:27:50,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1736,C &amp; K Mortgages Services Inc,,,2023-10-26 19:27:51,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1767,Rentx Mortgage Cor,,,2023-10-26 19:28:13,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1778,Foremost Second Mortgage Holding Cor,,,2023-10-26 19:28:42,'2023-10-30 12:43:01'),Other,residential,0,0,0
+1801,BFT Mortgage Investment Cor,,,2023-10-27 15:32:04,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+1827,Institutional Mortgage Capital Canada,,,2023-10-29 16:29:25,'2023-10-30 12:43:01'),Private Lender,residential,0,0,0
+1853,Canadian Mortgage Loan Services Ltd,,,2023-10-29 16:56:12,'2023-10-30 12:43:01'),Major Bank,residential,0,0,0
+1858,KingSett Real Estate Mortgage GP No 3 Inc,,,2023-10-29 16:56:45,'2023-10-30 12:43:01'),Other,residential,0,0,0
+2045,Valour Mortgages Services Inc,,,2023-11-04 16:35:46,'2023-11-04 16:35:46'),Other,residential,0,0,0
+2068,Scotia Mortgage Corporatio,,,2023-11-04 16:35:56,'2023-11-04 16:35:56'),Other,residential,0,0,0
+2083,Moskowitz Capital Mortgage Fund II Inc,,,2023-11-04 16:35:59,'2023-11-04 16:35:59'),Private Lender,residential,0,0,0
+2112,Firm Capital Mortgage Fund,,,2023-11-04 16:36:08,'2023-11-04 16:36:08'),Private Lender,residential,0,0,0
+2148,Cypress Point Mortgage Investment Cor,,,2023-11-04 16:36:17,'2023-11-04 16:36:17'),Private Lender,residential,0,0,0
+2153,Private Mortgage Capital Holdings Ltd,,,2023-11-04 16:36:19,'2023-11-04 16:36:19'),Major Bank,residential,0,0,0
+2217,MCF Mortgage Investment Cor,,,2023-11-06 12:07:13,'2023-11-06 12:07:13'),Private Lender,residential,0,0,0
+2429,Westboro Mortgage Investment Cor,,,2023-11-07 11:36:05,'2023-11-07 11:36:05'),Private Lender,residential,0,0,0
+2461,MCC Mortgage Holdings Inc,,,2023-11-10 12:57:21,'2023-11-10 12:57:21'),Private Lender,residential,0,0,0
+2462,Republic Mortgage Investment Cor,,,2023-11-10 12:57:23,'2023-11-10 12:57:23'),Private Lender,residential,0,0,0
+2464,Invest Equity Mortgage Investment Cor,,,2023-11-10 12:57:23,'2023-11-10 12:57:23'),Private Lender,residential,0,0,0
+2494,Silver Fund Mortgage Investment Corp and 7 other,,,2023-11-10 12:57:34,'2023-11-10 12:57:34'),Private Lender,residential,0,0,0
+2534,Brookfield Residential (Ontario) Milton Ltd,,,2023-11-12 19:41:17,'2023-11-12 19:41:17'),Major Bank,residential,0,0,0
+2616,Atrium Mortgage Investments Cor,,,2023-11-12 19:41:42,'2023-11-12 19:41:42'),Private Lender,residential,0,0,0
+2704,Ready Capital Mortgage Holdings Ltd,,,2023-11-14 19:35:17,'2023-11-14 19:35:17'),Major Bank,residential,0,0,0
+2706,Corwin Mortgage Capital Inc,,,2023-11-14 19:35:17,'2023-11-14 19:35:17'),Private Lender,residential,0,0,0
+2765,Bluebridge Mortgage Investment Cor,,,2023-11-14 19:35:38,'2023-11-14 19:35:38'),Private Lender,residential,0,0,0
+2782,JYR Real Capital Mortgage Investment Cor,,,2023-11-14 19:35:44,'2023-11-14 19:35:44'),Private Lender,residential,0,0,0
+2783,Cannect International Mortgage Cor,,,2023-11-14 19:35:44,'2023-11-14 19:35:44'),Other,residential,0,0,0
+2803,Advanced Mortgage Investment Cor,,,2023-11-17 16:40:29,'2023-11-17 16:40:29'),Private Lender,residential,0,0,0
+2856,Puccini Mortgage Cor,,,2023-11-17 16:40:51,'2023-11-17 16:40:51'),Other,residential,0,0,0
+2859,BFT Mortgage Investments Cor,,,2023-11-17 16:40:52,'2023-11-17 16:40:52'),Private Lender,residential,0,0,0
+2882,Owemanco Mortgage Holdings Cor,,,2023-11-17 16:41:00,'2023-11-17 16:41:00'),Private Lender,residential,0,0,0
+2913,Titan Mortgage Capital Partners Inc,,,2023-11-17 16:41:13,'2023-11-17 16:41:13'),Private Lender,residential,0,0,0
+2917,RR Mortgage &amp; Financial Grou,,,2023-11-17 16:41:16,'2023-11-17 16:41:16'),Credit Union,residential,0,0,0
+2926,Kuber Mortgage Investment Cor,,,2023-11-17 16:41:20,'2023-11-17 16:41:20'),Private Lender,residential,0,0,0
+2931,Meteor Mortgage Cor,,,2023-11-17 16:41:23,'2023-11-17 16:41:23'),Other,residential,0,0,0
+2944,Cameron Stephen Mortgage Capital Ltd,,,2023-11-17 16:41:28,'2023-11-17 16:41:28'),Major Bank,residential,0,0,0
+2958,Sub-Prime Mortgage Corporatio,,,2023-11-17 16:41:32,'2023-11-17 16:41:32'),Other,residential,0,0,0
+3094,Kingsett Mortgage Corporatio,,,2023-11-24 21:40:49,'2023-11-24 21:40:49'),Other,residential,0,0,0
+3095,Foragestone Mortgage Fund GP Inc,,,2023-11-24 21:40:49,'2023-11-24 21:40:49'),Other,residential,0,0,0
+3271,HarbourEdge Mortgage Investment Trustee Inc,,,2023-11-27 10:49:03,'2023-11-27 10:49:03'),Private Lender,residential,0,0,0
+3330,Hillmount Capital Mortgage Holding,,,2023-11-27 10:49:25,'2023-11-27 10:49:25'),Private Lender,residential,0,0,0
+3391,HarbourEdge Mortgage Investment Cor,,,2023-11-28 14:57:43,'2023-11-28 14:57:43'),Private Lender,residential,0,0,0
+3412,Bayview Mortgage Servicer Inc,,,2023-11-28 14:57:46,'2023-11-28 14:57:46'),Other,residential,0,0,0
+3473,First Mortgage Administration Cor,,,2023-11-28 14:57:56,'2023-11-28 14:57:56'),Other,residential,0,0,0
+3476,Foremost Mortgage Holdings Cor,,,2023-11-28 14:57:57,'2023-11-28 14:57:57'),Private Lender,residential,0,0,0
+3477,First Mortgage Adminstration Cor,,,2023-11-28 14:57:57,'2023-11-28 14:57:57'),Other,residential,0,0,0
+3532,Core Mortgage Cor,,,2023-11-28 14:58:11,'2023-11-28 14:58:11'),Other,residential,0,0,0
+3606,LPF Realty Residential Inc,,,2023-11-30 12:57:15,'2023-11-30 12:57:15'),Other,residential,0,0,0
+3627,Foremost Mortgage Holding Corp and other,,,2023-11-30 12:57:17,'2023-11-30 12:57:17'),Other,residential,0,0,0
+3631,Marmora Mortgage Corp Ltd,,,2023-11-30 12:57:17,'2023-11-30 12:57:17'),Major Bank,residential,0,0,0
+3764,Foremost Mortgage Holding Corp &amp; other,,,2023-11-30 12:57:46,'2023-11-30 12:57:46'),Other,residential,0,0,0
+3808,First Source Mortgage Cor,,,2023-11-30 12:57:58,'2023-11-30 12:57:58'),Other,residential,0,0,0
+3857,Corwin Mortgage Holding,,,2023-12-03 16:44:23,'2023-12-03 16:44:23'),Other,residential,0,0,0
+3874,Antrim Balanced Mortgage Fund Ltd,,,2023-12-03 16:44:30,'2023-12-03 16:44:30'),Major Bank,residential,0,0,0
+3902,Hullmark Mortgage Capital Inc,,,2023-12-03 16:44:38,'2023-12-03 16:44:38'),Private Lender,residential,0,0,0
+3918,Forestone Mortgage Fund GP Inc,,,2023-12-03 16:44:45,'2023-12-03 16:44:45'),Other,residential,0,0,0
+3987,Morrison Financial Mortgage Corporatio,,,2023-12-03 16:45:17,'2023-12-03 16:45:17'),Credit Union,residential,0,0,0
+4200,Canstone Mortgage Fund GP Inc,,,2023-12-08 11:36:41,'2023-12-08 11:36:41'),Other,residential,0,0,0
+4251,Tuckernuck Mortgage Adminstration Inc,,,2023-12-08 20:20:06,'2023-12-08 20:20:06'),Other,residential,0,0,0
+4262,Sun Life Canadian Commercial Mortgage GP Inc,,,2023-12-08 20:20:10,'2023-12-08 20:20:10'),Insurance Company,commercial|residential,0,0,1
+4341,Canada Mortgage and Housing Corporatio,,,2023-12-11 14:00:17,'2023-12-11 14:00:17'),Other,residential,0,0,0
+4375,Building &amp; Development Mortgages Canada Inc,,,2023-12-11 14:00:33,'2023-12-11 14:00:33'),Development Company,residential,0,0,0
+4446,Grand Mortgage Cor,,,2024-01-23 16:25:58,'2024-01-23 16:25:58'),Other,residential,0,0,0
+4478,Faan Mortgage Administrators Inc,,,2024-01-23 16:26:11,'2024-01-23 16:26:11'),Other,residential,0,0,0
+4666,The Solidity Group Mortgage Investment Cor,,,2024-06-01 17:35:47,'2024-06-01 17:35:47'),Private Lender,residential,0,0,0
+4679,Phoenix Mortgage Inc,,,2024-06-01 20:18:08,'2024-06-01 20:18:08'),Other,residential,0,0,0
+4715,Ginko Mortgage Investment Cor,,,2024-06-03 21:37:10,'2024-06-03 21:37:10'),Private Lender,residential,0,0,0
+4725,Riverrock Mortgage Investment Cor,,,2024-06-04 11:21:14,'2024-06-04 11:21:14'),Private Lender,residential,0,0,0
+4739,Trident Mortgage Investment Cor,,,2024-06-04 11:21:20,'2024-06-04 11:21:20'),Private Lender,residential,0,0,0
+4796,Canadian Mortgage Servicing Corporatio,,,2024-06-27 12:44:12,'2024-06-27 12:44:12'),Other,residential,0,0,0
+4860,Bridg Mortgage Investment Cor,,,2024-10-03 12:21:20,'2024-10-03 12:21:20'),Private Lender,residential,0,0,0
+4897,Mercury Mortgage Investment Cor,,,2024-10-28 15:12:08,'2024-10-28 15:12:08'),Private Lender,residential,0,0,0
+4903,Celernus Mortgages GP Inc,,,2024-10-28 16:12:21,'2024-10-28 16:12:21'),Other,residential,0,0,0
+5004,Northside Mortgage Investment Cor,,,2025-01-11 19:02:09,'2025-01-11 19:02:09'),Private Lender,residential,0,0,0
+5110,Diamond Residential Developments Cor,,,2025-09-09 03:57:37,'2025-09-09 03:57:37'),Development Company,residential,0,0,0

@@ -1,0 +1,316 @@
+- generic [ref=e4]:
+  - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e11]
+          - generic [ref=e13]:
+            - button "N" [ref=e14]:
+              - link "N" [ref=e15] [cursor=pointer]:
+                - /url: /NIAAAA/dashboard
+                - generic [ref=e17]:
+                  - img [ref=e18]
+                  - generic [ref=e19]: "N"
+            - button "T" [ref=e20]:
+              - link "T" [ref=e21] [cursor=pointer]:
+                - /url: /TES/dashboard
+                - generic [ref=e23]:
+                  - img [ref=e24]
+                  - generic [ref=e25]: T
+            - button "N" [ref=e26]:
+              - link "N" [ref=e27] [cursor=pointer]:
+                - /url: /NIAA/dashboard
+                - generic [ref=e29]:
+                  - img [ref=e30]
+                  - generic [ref=e31]: "N"
+            - button "N" [ref=e32]:
+              - link "N" [ref=e33] [cursor=pointer]:
+                - /url: /NIA/dashboard
+                - generic [ref=e35]:
+                  - img [ref=e36]
+                  - generic [ref=e37]: "N"
+            - button "T" [ref=e38]:
+              - link "T" [ref=e39] [cursor=pointer]:
+                - /url: /TESA/dashboard
+                - generic [ref=e41]:
+                  - img [ref=e42]
+                  - generic [ref=e43]: T
+            - button "N" [ref=e44]:
+              - link "N" [ref=e45] [cursor=pointer]:
+                - /url: /NIAAA/dashboard
+                - generic [ref=e47]:
+                  - img [ref=e48]
+                  - generic [ref=e49]: "N"
+            - button "T" [ref=e50]:
+              - link "T" [ref=e51] [cursor=pointer]:
+                - /url: /TESAAA/dashboard
+                - generic [ref=e53]:
+                  - img [ref=e54]
+                  - generic [ref=e55]: T
+            - button "A" [ref=e56]:
+              - link "A" [ref=e57] [cursor=pointer]:
+                - /url: /ABC/dashboard
+                - generic [ref=e59]:
+                  - img [ref=e60]
+                  - generic [ref=e61]: A
+            - button "F" [ref=e62]:
+              - link "F" [ref=e63] [cursor=pointer]:
+                - /url: /FAC/dashboard
+                - generic [ref=e65]:
+                  - img [ref=e66]
+                  - generic [ref=e67]: F
+            - button "M" [ref=e68]:
+              - link "M" [ref=e69] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - generic [ref=e72]:
+                  - img [ref=e73]
+                  - generic [ref=e74]: M
+            - status [ref=e75]
+          - button "Add company" [ref=e78]:
+            - img [ref=e79]
+        - complementary [ref=e81]:
+          - generic [ref=e82]:
+            - generic [ref=e84]: Mission Control - Real Estate Command Center
+            - button [ref=e85]:
+              - img
+          - navigation [ref=e86]:
+            - generic [ref=e87]:
+              - button "New Issue" [ref=e88]:
+                - img [ref=e89]
+                - generic [ref=e92]: New Issue
+              - link "Dashboard" [ref=e93] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - img [ref=e95]
+                - generic [ref=e100]: Dashboard
+              - link "Inbox 2" [ref=e101] [cursor=pointer]:
+                - /url: /TESAA/inbox
+                - img [ref=e103]
+                - generic [ref=e106]: Inbox
+                - generic [ref=e107]: "2"
+            - generic [ref=e108]:
+              - generic [ref=e109]: Work
+              - generic [ref=e110]:
+                - link "Issues" [ref=e111] [cursor=pointer]:
+                  - /url: /TESAA/issues
+                  - img [ref=e113]
+                  - generic [ref=e116]: Issues
+                - link "Routines Beta" [ref=e117] [cursor=pointer]:
+                  - /url: /TESAA/routines
+                  - img [ref=e119]
+                  - generic [ref=e124]: Routines
+                  - generic [ref=e125]: Beta
+                - link "Goals" [ref=e126] [cursor=pointer]:
+                  - /url: /TESAA/goals
+                  - img [ref=e128]
+                  - generic [ref=e132]: Goals
+            - generic [ref=e133]:
+              - generic [ref=e135]:
+                - button "Projects" [expanded] [ref=e136]:
+                  - img [ref=e137]
+                  - generic [ref=e139]: Projects
+                - button "New project" [ref=e140]:
+                  - img [ref=e141]
+              - status [ref=e142]
+            - generic [ref=e143]:
+              - generic [ref=e145]:
+                - button "Agents" [expanded] [ref=e146]:
+                  - img [ref=e147]
+                  - generic [ref=e149]: Agents
+                - button "New agent" [ref=e150]:
+                  - img [ref=e151]
+              - generic [ref=e153]:
+                - link "Capital Analyst" [ref=e154] [cursor=pointer]:
+                  - /url: /TESAA/agents/capital-analyst
+                  - img [ref=e155]
+                  - generic [ref=e158]: Capital Analyst
+                - link "CEO" [ref=e159] [cursor=pointer]:
+                  - /url: /TESAA/agents/ceo
+                  - img [ref=e160]
+                  - generic [ref=e163]: CEO
+                - link "Outreach Strategist" [ref=e164] [cursor=pointer]:
+                  - /url: /TESAA/agents/outreach-strategist
+                  - img [ref=e165]
+                  - generic [ref=e168]: Outreach Strategist
+            - generic [ref=e169]:
+              - generic [ref=e170]: Company
+              - generic [ref=e171]:
+                - link "Org" [ref=e172] [cursor=pointer]:
+                  - /url: /TESAA/org
+                  - img [ref=e174]
+                  - generic [ref=e179]: Org
+                - link "Skills" [ref=e180] [cursor=pointer]:
+                  - /url: /TESAA/skills
+                  - img [ref=e182]
+                  - generic [ref=e192]: Skills
+                - link "Costs" [ref=e193] [cursor=pointer]:
+                  - /url: /TESAA/costs
+                  - img [ref=e195]
+                  - generic [ref=e197]: Costs
+                - link "Activity" [ref=e198] [cursor=pointer]:
+                  - /url: /TESAA/activity
+                  - img [ref=e200]
+                  - generic [ref=e204]: Activity
+                - link "Settings" [ref=e205] [cursor=pointer]:
+                  - /url: /TESAA/company/settings
+                  - img [ref=e207]
+                  - generic [ref=e210]: Settings
+      - generic [ref=e212]:
+        - link "Documentation" [ref=e213] [cursor=pointer]:
+          - /url: https://docs.paperclip.ing/
+          - img [ref=e214]
+          - generic [ref=e216]: Documentation
+        - generic [ref=e217]: v
+        - link "Instance settings" [ref=e218] [cursor=pointer]:
+          - /url: /instance/settings/general
+          - img
+        - button "Switch to light mode" [ref=e219]:
+          - img
+    - generic [ref=e220]:
+      - navigation "breadcrumb" [ref=e224]:
+        - list [ref=e225]:
+          - listitem [ref=e226]:
+            - link "Agents" [ref=e227] [cursor=pointer]:
+              - /url: /TESAA/agents
+          - listitem [ref=e228]:
+            - img [ref=e229]
+          - listitem [ref=e231]:
+            - link "New Agent" [disabled] [ref=e232]
+      - main [ref=e234]:
+        - generic [ref=e235]:
+          - generic [ref=e236]:
+            - heading "New Agent" [level=1] [ref=e237]
+            - paragraph [ref=e238]: Advanced agent configuration
+          - generic [ref=e239]:
+            - textbox "Agent name" [active] [ref=e241]: CEO
+            - textbox "Title (e.g. VP of Engineering)" [ref=e243]: CEO
+            - generic [ref=e244]:
+              - button "General" [ref=e245]:
+                - img [ref=e246]
+                - text: General
+              - button "Reports to..." [ref=e248]:
+                - img [ref=e249]
+                - generic [ref=e252]: Reports to...
+            - generic [ref=e253]:
+              - generic [ref=e254]:
+                - generic [ref=e255]:
+                  - generic [ref=e256]: Adapter
+                  - button "Test environment" [ref=e257]
+                - generic [ref=e258]:
+                  - generic [ref=e259]:
+                    - generic [ref=e260]:
+                      - generic [ref=e261]: Adapter type
+                      - button [ref=e262]:
+                        - img [ref=e263]
+                    - button "Claude (local)" [ref=e266]:
+                      - generic [ref=e268]: Claude (local)
+                      - img [ref=e269]
+                  - generic [ref=e271]:
+                    - generic [ref=e272]:
+                      - generic [ref=e273]: Prompt Template
+                      - button [ref=e274]:
+                        - img [ref=e275]
+                    - generic [ref=e280]:
+                      - textbox "editable markdown" [ref=e282]:
+                        - paragraph [ref=e283]
+                      - generic:
+                        - paragraph: "You are agent {{ agent.name }}. Your role is {{ agent.role }}..."
+                  - generic [ref=e284]:
+                    - text: Prompt template is replayed on every heartbeat. Prefer small task framing and variables like
+                    - code [ref=e285]: "{{ context.* }}"
+                    - text: or
+                    - code [ref=e286]: "{{ run.* }}"
+                    - text: ; avoid repeating stable instructions here.
+                  - generic [ref=e287]:
+                    - generic [ref=e288]:
+                      - generic [ref=e289]: Agent instructions file
+                      - button [ref=e290]:
+                        - img [ref=e291]
+                    - generic [ref=e294]:
+                      - textbox "/absolute/path/to/AGENTS.md" [ref=e295]
+                      - button "Choose" [ref=e296]
+              - generic [ref=e297]:
+                - generic [ref=e298]: Permissions & Configuration
+                - generic [ref=e299]:
+                  - generic [ref=e300]:
+                    - generic [ref=e301]:
+                      - generic [ref=e302]: Command
+                      - button [ref=e303]:
+                        - img [ref=e304]
+                    - textbox "claude" [ref=e307]
+                  - generic [ref=e308]:
+                    - generic [ref=e309]:
+                      - generic [ref=e310]: Model
+                      - button [ref=e311]:
+                        - img [ref=e312]
+                    - button "Default" [ref=e315]:
+                      - generic [ref=e316]: Default
+                      - img [ref=e317]
+                  - generic [ref=e319]:
+                    - generic [ref=e320]:
+                      - generic [ref=e321]: Thinking effort
+                      - button [ref=e322]:
+                        - img [ref=e323]
+                    - button "Auto" [ref=e326]:
+                      - generic [ref=e327]: Auto
+                      - img [ref=e328]
+                  - generic [ref=e330]:
+                    - generic [ref=e331]:
+                      - generic [ref=e332]: Enable Chrome
+                      - button [ref=e333]:
+                        - img [ref=e334]
+                    - button [ref=e337]
+                  - generic [ref=e339]:
+                    - generic [ref=e340]:
+                      - generic [ref=e341]: Skip permissions
+                      - button [ref=e342]:
+                        - img [ref=e343]
+                    - button [ref=e346]
+                  - generic [ref=e348]:
+                    - generic [ref=e349]:
+                      - generic [ref=e350]: Max turns per run
+                      - button [ref=e351]:
+                        - img [ref=e352]
+                    - spinbutton [ref=e355]: "300"
+                  - generic [ref=e356]:
+                    - generic [ref=e357]:
+                      - generic [ref=e358]: Extra args (comma-separated)
+                      - button [ref=e359]:
+                        - img [ref=e360]
+                    - textbox "e.g. --verbose, --foo=bar" [ref=e363]
+                  - generic [ref=e364]:
+                    - generic [ref=e365]:
+                      - generic [ref=e366]: Environment variables
+                      - button [ref=e367]:
+                        - img [ref=e368]
+                    - generic [ref=e371]:
+                      - generic [ref=e372]:
+                        - textbox "KEY" [ref=e373]
+                        - combobox [ref=e374]:
+                          - option "Plain" [selected]
+                          - option "Secret"
+                        - textbox "value" [ref=e375]
+                        - button "Seal" [disabled] [ref=e376]
+                      - paragraph [ref=e377]: PAPERCLIP_* variables are injected automatically at runtime.
+              - generic [ref=e378]:
+                - generic [ref=e379]:
+                  - img [ref=e380]
+                  - text: Run Policy
+                - generic [ref=e384]:
+                  - generic [ref=e385]:
+                    - generic [ref=e386]: Heartbeat on interval
+                    - button [ref=e387]:
+                      - img [ref=e388]
+                  - button [ref=e391]
+            - generic [ref=e394]:
+              - generic [ref=e395]:
+                - heading "Company skills" [level=2] [ref=e396]
+                - paragraph [ref=e397]: Optional skills from the company library. Built-in Paperclip runtime skills are added automatically.
+              - paragraph [ref=e398]: No optional company skills installed yet.
+            - generic [ref=e400]:
+              - button "Cancel" [ref=e401]
+              - button "Create agent" [ref=e402]
+  - generic [ref=e403]:
+    - heading "Command Palette" [level=2] [ref=e404]
+    - paragraph [ref=e405]: Search for a command to run...

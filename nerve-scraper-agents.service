@@ -1,0 +1,14 @@
+[Unit]
+Description=BigDataClaw NERVE Scraper Agents
+After=network.target
+
+[Service]
+Type=simple
+User=jamie
+WorkingDirectory=/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw
+ExecStart=/usr/bin/python3 deploy_scraper_agents.py --daemon
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

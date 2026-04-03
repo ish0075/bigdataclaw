@@ -1,0 +1,219 @@
+- generic [ref=e4]:
+  - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e11]
+          - generic [ref=e13]:
+            - button "N" [ref=e14]:
+              - link "N" [ref=e15] [cursor=pointer]:
+                - /url: /NIAAAA/dashboard
+                - generic [ref=e17]:
+                  - img [ref=e18]
+                  - generic [ref=e19]: "N"
+            - button "T" [ref=e20]:
+              - link "T" [ref=e21] [cursor=pointer]:
+                - /url: /TES/dashboard
+                - generic [ref=e23]:
+                  - img [ref=e24]
+                  - generic [ref=e25]: T
+            - button "N" [ref=e26]:
+              - link "N" [ref=e27] [cursor=pointer]:
+                - /url: /NIAA/dashboard
+                - generic [ref=e29]:
+                  - img [ref=e30]
+                  - generic [ref=e31]: "N"
+            - button "N" [ref=e32]:
+              - link "N" [ref=e33] [cursor=pointer]:
+                - /url: /NIA/dashboard
+                - generic [ref=e35]:
+                  - img [ref=e36]
+                  - generic [ref=e37]: "N"
+            - button "T" [ref=e38]:
+              - link "T" [ref=e39] [cursor=pointer]:
+                - /url: /TESA/dashboard
+                - generic [ref=e41]:
+                  - img [ref=e42]
+                  - generic [ref=e43]: T
+            - button "N" [ref=e44]:
+              - link "N" [ref=e45] [cursor=pointer]:
+                - /url: /NIAAA/dashboard
+                - generic [ref=e47]:
+                  - img [ref=e48]
+                  - generic [ref=e49]: "N"
+            - button "T" [ref=e50]:
+              - link "T" [ref=e51] [cursor=pointer]:
+                - /url: /TESAAA/dashboard
+                - generic [ref=e53]:
+                  - img [ref=e54]
+                  - generic [ref=e55]: T
+            - button "A" [ref=e56]:
+              - link "A" [ref=e57] [cursor=pointer]:
+                - /url: /ABC/dashboard
+                - generic [ref=e59]:
+                  - img [ref=e60]
+                  - generic [ref=e61]: A
+            - button "F" [ref=e62]:
+              - link "F" [ref=e63] [cursor=pointer]:
+                - /url: /FAC/dashboard
+                - generic [ref=e65]:
+                  - img [ref=e66]
+                  - generic [ref=e67]: F
+            - button "M" [ref=e68]:
+              - link "M" [ref=e69] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - generic [ref=e72]:
+                  - img [ref=e73]
+                  - generic [ref=e74]: M
+            - status [ref=e75]
+          - button "Add company" [ref=e78]:
+            - img [ref=e79]
+        - complementary [ref=e81]:
+          - generic [ref=e82]:
+            - generic [ref=e84]: Mission Control - Real Estate Command Center
+            - button [ref=e85]:
+              - img
+          - navigation [ref=e86]:
+            - generic [ref=e87]:
+              - button "New Issue" [ref=e88]:
+                - img [ref=e89]
+                - generic [ref=e92]: New Issue
+              - link "Dashboard" [ref=e93] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - img [ref=e95]
+                - generic [ref=e100]: Dashboard
+              - link "Inbox 3" [ref=e101] [cursor=pointer]:
+                - /url: /TESAA/inbox
+                - img [ref=e103]
+                - generic [ref=e107]: Inbox
+                - generic [ref=e108]: "3"
+            - generic [ref=e109]:
+              - generic [ref=e110]: Work
+              - generic [ref=e111]:
+                - link "Issues" [ref=e112] [cursor=pointer]:
+                  - /url: /TESAA/issues
+                  - img [ref=e114]
+                  - generic [ref=e117]: Issues
+                - link "Routines Beta" [ref=e118] [cursor=pointer]:
+                  - /url: /TESAA/routines
+                  - img [ref=e120]
+                  - generic [ref=e125]: Routines
+                  - generic [ref=e126]: Beta
+                - link "Goals" [ref=e127] [cursor=pointer]:
+                  - /url: /TESAA/goals
+                  - img [ref=e129]
+                  - generic [ref=e133]: Goals
+            - generic [ref=e134]:
+              - generic [ref=e136]:
+                - button "Projects" [expanded] [ref=e137]:
+                  - img [ref=e138]
+                  - generic [ref=e140]: Projects
+                - button "New project" [ref=e141]:
+                  - img [ref=e142]
+              - status [ref=e143]
+            - generic [ref=e144]:
+              - generic [ref=e146]:
+                - button "Agents" [expanded] [ref=e147]:
+                  - img [ref=e148]
+                  - generic [ref=e150]: Agents
+                - button "New agent" [ref=e151]:
+                  - img [ref=e152]
+              - generic [ref=e154]:
+                - link "Capital Analyst" [ref=e155] [cursor=pointer]:
+                  - /url: /TESAA/agents/capital-analyst
+                  - img [ref=e156]
+                  - generic [ref=e159]: Capital Analyst
+                - link "CEO" [ref=e160] [cursor=pointer]:
+                  - /url: /TESAA/agents/ceo
+                  - img [ref=e161]
+                  - generic [ref=e164]: CEO
+                - link "Outreach Strategist" [ref=e165] [cursor=pointer]:
+                  - /url: /TESAA/agents/outreach-strategist
+                  - img [ref=e166]
+                  - generic [ref=e169]: Outreach Strategist
+            - generic [ref=e170]:
+              - generic [ref=e171]: Company
+              - generic [ref=e172]:
+                - link "Org" [ref=e173] [cursor=pointer]:
+                  - /url: /TESAA/org
+                  - img [ref=e175]
+                  - generic [ref=e180]: Org
+                - link "Skills" [ref=e181] [cursor=pointer]:
+                  - /url: /TESAA/skills
+                  - img [ref=e183]
+                  - generic [ref=e193]: Skills
+                - link "Costs" [ref=e194] [cursor=pointer]:
+                  - /url: /TESAA/costs
+                  - img [ref=e196]
+                  - generic [ref=e198]: Costs
+                - link "Activity" [ref=e199] [cursor=pointer]:
+                  - /url: /TESAA/activity
+                  - img [ref=e201]
+                  - generic [ref=e205]: Activity
+                - link "Settings" [ref=e206] [cursor=pointer]:
+                  - /url: /TESAA/company/settings
+                  - img [ref=e208]
+                  - generic [ref=e211]: Settings
+      - generic [ref=e213]:
+        - link "Documentation" [ref=e214] [cursor=pointer]:
+          - /url: https://docs.paperclip.ing/
+          - img [ref=e215]
+          - generic [ref=e217]: Documentation
+        - generic [ref=e218]: v
+        - link "Instance settings" [ref=e219] [cursor=pointer]:
+          - /url: /instance/settings/general
+          - img
+        - button "Switch to light mode" [ref=e220]:
+          - img
+    - generic [ref=e221]:
+      - heading "Agents" [level=1] [ref=e225]
+      - main [ref=e227]:
+        - generic [ref=e228]:
+          - generic [ref=e229]:
+            - tablist [ref=e231]:
+              - tab "All" [selected] [ref=e232]
+              - tab "Active" [ref=e233]
+              - tab "Paused" [ref=e234]
+              - tab "Error" [ref=e235]
+            - generic [ref=e236]:
+              - button "Filters" [ref=e238]:
+                - img [ref=e239]
+                - text: Filters
+              - generic [ref=e240]:
+                - button [ref=e241]:
+                  - img [ref=e242]
+                - button [ref=e243]:
+                  - img [ref=e244]
+              - button "New Agent" [ref=e248]:
+                - img
+                - text: New Agent
+          - paragraph [ref=e249]: 3 agents
+          - generic [ref=e250]:
+            - link "Capital AnalystResearcher nerve_gateway — idle" [ref=e252] [cursor=pointer]:
+              - /url: /TESAA/agents/capital-analyst
+              - generic [ref=e255]: Capital AnalystResearcher
+              - generic [ref=e257]:
+                - generic [ref=e258]: nerve_gateway
+                - generic [ref=e259]: —
+                - generic [ref=e261]: idle
+            - link "CEOGeneral - CEO Claude 3m ago error" [ref=e263] [cursor=pointer]:
+              - /url: /TESAA/agents/ceo
+              - generic [ref=e266]:
+                - text: CEO
+                - generic [ref=e267]: General - CEO
+              - generic [ref=e269]:
+                - generic [ref=e270]: Claude
+                - generic [ref=e271]: 3m ago
+                - generic [ref=e273]: error
+            - link "Outreach StrategistCMO Process — idle" [ref=e275] [cursor=pointer]:
+              - /url: /TESAA/agents/outreach-strategist
+              - generic [ref=e278]: Outreach StrategistCMO
+              - generic [ref=e280]:
+                - generic [ref=e281]: Process
+                - generic [ref=e282]: —
+                - generic [ref=e284]: idle
+  - generic [ref=e285]:
+    - heading "Command Palette" [level=2] [ref=e286]
+    - paragraph [ref=e287]: Search for a command to run...

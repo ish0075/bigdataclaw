@@ -1,0 +1,212 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "Uptop Mission Control" [level=1] [ref=e9]
+        - paragraph [ref=e10]: real estate command center
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Bot Boardroom" [ref=e46] [cursor=pointer]:
+        - /url: /bot-boardroom
+        - img [ref=e47]
+        - generic [ref=e53]: Bot Boardroom
+      - link "Obsidian Vault" [ref=e54] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e55]
+        - generic [ref=e59]: Obsidian Vault
+      - generic [ref=e60]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e61] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e62]
+        - generic [ref=e65]: EXP Agent Recruiter
+        - generic [ref=e66]: 96K
+      - link "Commercial Agents 6.7K" [ref=e67] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e68]
+        - generic [ref=e71]: Commercial Agents
+        - generic [ref=e72]: 6.7K
+      - link "Brokerages" [ref=e73] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e74]
+        - generic [ref=e77]: Brokerages
+      - generic [ref=e78]: AI Bots
+      - link "Buyer Intelligence AI" [ref=e79] [cursor=pointer]:
+        - /url: /buyer-bot
+        - img [ref=e80]
+        - generic [ref=e84]: Buyer Intelligence
+        - generic [ref=e85]: AI
+      - link "Seller Outreach AI" [active] [ref=e86] [cursor=pointer]:
+        - /url: /seller-outreach-bot
+        - img [ref=e87]
+        - generic [ref=e92]: Seller Outreach
+        - generic [ref=e93]: AI
+      - link "Property Valuation AI" [ref=e94] [cursor=pointer]:
+        - /url: /property-valuation-bot
+        - img [ref=e95]
+        - generic [ref=e97]: Property Valuation
+        - generic [ref=e98]: AI
+      - link "Vigil Monitor 24/7" [ref=e99] [cursor=pointer]:
+        - /url: /vigil
+        - img [ref=e100]
+        - generic [ref=e102]: Vigil Monitor
+        - generic [ref=e103]: 24/7
+      - link "Agent Workspaces NEW" [ref=e104] [cursor=pointer]:
+        - /url: /agent-workspaces
+        - img [ref=e105]
+        - generic [ref=e107]: Agent Workspaces
+        - generic [ref=e108]: NEW
+      - link "Bot Builder BUILD" [ref=e109] [cursor=pointer]:
+        - /url: /bot-builder
+        - img [ref=e110]
+        - generic [ref=e114]: Bot Builder
+        - generic [ref=e115]: BUILD
+      - generic [ref=e116]: Tools
+      - link "My Listings" [ref=e117] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e118]
+        - generic [ref=e122]: My Listings
+      - link "Buyer Matcher" [ref=e123] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e124]
+        - generic [ref=e129]: Buyer Matcher
+      - link "Agent Matcher" [ref=e130] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e131]
+        - generic [ref=e135]: Agent Matcher
+      - link "Lender Matcher" [ref=e136] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e137]
+        - generic [ref=e139]: Lender Matcher
+      - link "Builder Directory" [ref=e140] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e141]
+        - generic [ref=e145]: Builder Directory
+      - link "Property Upload" [ref=e146] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e147]
+        - generic [ref=e150]: Property Upload
+      - link "Olena Marketing" [ref=e151] [cursor=pointer]:
+        - /url: /olena-feature-sheet
+        - img [ref=e152]
+        - generic [ref=e155]: Olena Marketing
+      - link "Canva Editor" [ref=e156] [cursor=pointer]:
+        - /url: /canva-editor
+        - img [ref=e157]
+        - generic [ref=e163]: Canva Editor
+      - link "Skills & Agents" [ref=e164] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e165]
+        - generic [ref=e168]: Skills & Agents
+      - link "Map View" [ref=e169] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e170]
+        - generic [ref=e172]: Map View
+      - link "Data Manager" [ref=e173] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e174]
+        - generic [ref=e178]: Data Manager
+    - generic [ref=e182]: System Online
+  - generic [ref=e183]:
+    - banner [ref=e184]:
+      - generic [ref=e190]:
+        - img [ref=e408]
+        - generic [ref=e198]: Connected
+      - generic [ref=e201]:
+        - img [ref=e202]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e205]
+        - combobox [ref=e206]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e207]:
+        - button "Voice" [ref=e208] [cursor=pointer]:
+          - img [ref=e209]
+          - generic [ref=e215]: Voice
+        - generic [ref=e216]:
+          - img [ref=e217]
+          - generic [ref=e222]: $12.40
+        - link "Data Manager" [ref=e223] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e224]
+        - button [ref=e228] [cursor=pointer]:
+          - img [ref=e229]
+        - link [ref=e232] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e233]
+        - link "🦞" [ref=e236] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e237]: 🦞
+    - main [ref=e238]:
+      - generic [ref=e459]:
+        - generic [ref=e460]:
+          - generic [ref=e461]:
+            - generic [ref=e462]: 🏷️
+            - generic [ref=e463]:
+              - heading "Seller Intelligence Bot" [level=1] [ref=e464]
+              - paragraph [ref=e465]: Expert Seller Representative • Holdings Analysis & Motivation Intelligence
+          - generic [ref=e466]:
+            - button "Export Intelligence" [ref=e467] [cursor=pointer]:
+              - img [ref=e468]
+              - text: Export Intelligence
+            - button "Research New Seller" [ref=e471] [cursor=pointer]:
+              - img [ref=e472]
+              - text: Research New Seller
+        - generic [ref=e475]:
+          - generic [ref=e476]:
+            - generic [ref=e478]:
+              - img [ref=e479]
+              - textbox "Search sellers, entities, asset classes..." [ref=e482]
+            - generic [ref=e483]:
+              - heading "Qualified Sellers (2)" [level=3] [ref=e485]
+              - generic [ref=e486]:
+                - 'button "Robert Chen Chen Holdings Ltd. High Motivation Holdings: $29M • 8 properties" [ref=e487] [cursor=pointer]':
+                  - generic [ref=e488]:
+                    - generic [ref=e489]:
+                      - paragraph [ref=e490]: Robert Chen
+                      - paragraph [ref=e491]: Chen Holdings Ltd.
+                    - img [ref=e492]
+                  - generic [ref=e496]: High Motivation
+                  - paragraph [ref=e497]: "Holdings: $29M • 8 properties"
+                - 'button "Maria Santos Santos Family Trust Very High Motivation Holdings: $4M • 2 properties" [ref=e498] [cursor=pointer]':
+                  - generic [ref=e499]:
+                    - generic [ref=e500]:
+                      - paragraph [ref=e501]: Maria Santos
+                      - paragraph [ref=e502]: Santos Family Trust
+                    - img [ref=e503]
+                  - generic [ref=e507]: Very High Motivation
+                  - paragraph [ref=e508]: "Holdings: $4M • 2 properties"
+          - generic [ref=e510]:
+            - img [ref=e511]
+            - heading "No Seller Selected" [level=3] [ref=e516]
+            - paragraph [ref=e517]: Select a seller from the list to view their complete holdings analysis, motivation intelligence, and recommended contact strategy
+  - button "Ctrl+Shift+V" [ref=e403] [cursor=pointer]:
+    - img [ref=e404]
+    - generic [ref=e407]: Ctrl+Shift+V

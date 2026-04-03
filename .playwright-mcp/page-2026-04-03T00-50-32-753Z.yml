@@ -1,0 +1,227 @@
+- generic [ref=e4]:
+  - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e11]
+          - generic [ref=e13]:
+            - button "N" [ref=e14]:
+              - link "N" [ref=e15] [cursor=pointer]:
+                - /url: /NIAAAA/dashboard
+                - generic [ref=e17]:
+                  - img [ref=e18]
+                  - generic [ref=e19]: "N"
+            - button "T" [ref=e20]:
+              - link "T" [ref=e21] [cursor=pointer]:
+                - /url: /TES/dashboard
+                - generic [ref=e23]:
+                  - img [ref=e24]
+                  - generic [ref=e25]: T
+            - button "N" [ref=e26]:
+              - link "N" [ref=e27] [cursor=pointer]:
+                - /url: /NIAA/dashboard
+                - generic [ref=e29]:
+                  - img [ref=e30]
+                  - generic [ref=e31]: "N"
+            - button "N" [ref=e32]:
+              - link "N" [ref=e33] [cursor=pointer]:
+                - /url: /NIA/dashboard
+                - generic [ref=e35]:
+                  - img [ref=e36]
+                  - generic [ref=e37]: "N"
+            - button "T" [ref=e38]:
+              - link "T" [ref=e39] [cursor=pointer]:
+                - /url: /TESA/dashboard
+                - generic [ref=e41]:
+                  - img [ref=e42]
+                  - generic [ref=e43]: T
+            - button "N" [ref=e44]:
+              - link "N" [ref=e45] [cursor=pointer]:
+                - /url: /NIAAA/dashboard
+                - generic [ref=e47]:
+                  - img [ref=e48]
+                  - generic [ref=e49]: "N"
+            - button "T" [ref=e50]:
+              - link "T" [ref=e51] [cursor=pointer]:
+                - /url: /TESAAA/dashboard
+                - generic [ref=e53]:
+                  - img [ref=e54]
+                  - generic [ref=e55]: T
+            - button "A" [ref=e56]:
+              - link "A" [ref=e57] [cursor=pointer]:
+                - /url: /ABC/dashboard
+                - generic [ref=e59]:
+                  - img [ref=e60]
+                  - generic [ref=e61]: A
+            - button "F" [ref=e62]:
+              - link "F" [ref=e63] [cursor=pointer]:
+                - /url: /FAC/dashboard
+                - generic [ref=e65]:
+                  - img [ref=e66]
+                  - generic [ref=e67]: F
+            - button "M" [ref=e68]:
+              - link "M" [ref=e69] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - generic [ref=e72]:
+                  - img [ref=e73]
+                  - generic [ref=e74]: M
+            - status [ref=e75]
+          - button "Add company" [ref=e78]:
+            - img [ref=e79]
+        - complementary [ref=e81]:
+          - generic [ref=e82]:
+            - generic [ref=e84]: Mission Control - Real Estate Command Center
+            - button [ref=e85]:
+              - img
+          - navigation [ref=e86]:
+            - generic [ref=e87]:
+              - button "New Issue" [ref=e88]:
+                - img [ref=e89]
+                - generic [ref=e92]: New Issue
+              - link "Dashboard" [ref=e93] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - img [ref=e95]
+                - generic [ref=e100]: Dashboard
+              - link "Inbox 2" [ref=e101] [cursor=pointer]:
+                - /url: /TESAA/inbox
+                - img [ref=e103]
+                - generic [ref=e106]: Inbox
+                - generic [ref=e107]: "2"
+            - generic [ref=e108]:
+              - generic [ref=e109]: Work
+              - generic [ref=e110]:
+                - link "Issues" [ref=e111] [cursor=pointer]:
+                  - /url: /TESAA/issues
+                  - img [ref=e113]
+                  - generic [ref=e116]: Issues
+                - link "Routines Beta" [ref=e117] [cursor=pointer]:
+                  - /url: /TESAA/routines
+                  - img [ref=e119]
+                  - generic [ref=e124]: Routines
+                  - generic [ref=e125]: Beta
+                - link "Goals" [ref=e126] [cursor=pointer]:
+                  - /url: /TESAA/goals
+                  - img [ref=e128]
+                  - generic [ref=e132]: Goals
+            - generic [ref=e133]:
+              - generic [ref=e135]:
+                - button "Projects" [expanded] [ref=e136]:
+                  - img [ref=e137]
+                  - generic [ref=e139]: Projects
+                - button "New project" [ref=e140]:
+                  - img [ref=e141]
+              - status [ref=e142]
+            - generic [ref=e143]:
+              - generic [ref=e145]:
+                - button "Agents" [expanded] [ref=e146]:
+                  - img [ref=e147]
+                  - generic [ref=e149]: Agents
+                - button "New agent" [ref=e150]:
+                  - img [ref=e151]
+              - generic [ref=e153]:
+                - link "Capital Analyst" [ref=e154] [cursor=pointer]:
+                  - /url: /TESAA/agents/capital-analyst
+                  - img [ref=e155]
+                  - generic [ref=e158]: Capital Analyst
+                - link "CEO" [ref=e159] [cursor=pointer]:
+                  - /url: /TESAA/agents/ceo
+                  - img [ref=e160]
+                  - generic [ref=e163]: CEO
+                - link "Outreach Strategist" [ref=e164] [cursor=pointer]:
+                  - /url: /TESAA/agents/outreach-strategist
+                  - img [ref=e165]
+                  - generic [ref=e168]: Outreach Strategist
+            - generic [ref=e169]:
+              - generic [ref=e170]: Company
+              - generic [ref=e171]:
+                - link "Org" [ref=e172] [cursor=pointer]:
+                  - /url: /TESAA/org
+                  - img [ref=e174]
+                  - generic [ref=e179]: Org
+                - link "Skills" [ref=e180] [cursor=pointer]:
+                  - /url: /TESAA/skills
+                  - img [ref=e182]
+                  - generic [ref=e192]: Skills
+                - link "Costs" [ref=e193] [cursor=pointer]:
+                  - /url: /TESAA/costs
+                  - img [ref=e195]
+                  - generic [ref=e197]: Costs
+                - link "Activity" [ref=e198] [cursor=pointer]:
+                  - /url: /TESAA/activity
+                  - img [ref=e200]
+                  - generic [ref=e204]: Activity
+                - link "Settings" [ref=e205] [cursor=pointer]:
+                  - /url: /TESAA/company/settings
+                  - img [ref=e207]
+                  - generic [ref=e210]: Settings
+      - generic [ref=e212]:
+        - link "Documentation" [ref=e213] [cursor=pointer]:
+          - /url: https://docs.paperclip.ing/
+          - img [ref=e214]
+          - generic [ref=e216]: Documentation
+        - generic [ref=e217]: v
+        - link "Instance settings" [ref=e218] [cursor=pointer]:
+          - /url: /instance/settings/general
+          - img
+        - button "Switch to light mode" [ref=e219]:
+          - img
+    - generic [ref=e220]:
+      - heading "Inbox" [level=1] [ref=e224]
+      - main [ref=e226]:
+        - generic [ref=e227]:
+          - tablist [ref=e230]:
+            - tab "Mine" [selected] [ref=e231]
+            - tab "Recent" [ref=e232]
+            - tab "Unread" [ref=e233]
+            - tab "All" [ref=e234]
+          - generic [ref=e236]:
+            - generic [ref=e238]:
+              - generic:
+                - generic:
+                  - img
+                  - text: Archive
+              - generic [ref=e241]:
+                - button "Mark as read" [ref=e243]
+                - 'link "Hire Agent: CEO approved updated 1m ago" [ref=e245] [cursor=pointer]':
+                  - /url: /TESAA/approvals/fcb2c0ea-456f-462b-b916-f5094c1d1770
+                  - img [ref=e248]
+                  - generic [ref=e251]:
+                    - generic [ref=e252]: "Hire Agent: CEO"
+                    - generic [ref=e253]:
+                      - generic [ref=e254]: approved
+                      - generic [ref=e255]: updated 1m ago
+            - generic [ref=e257]:
+              - generic:
+                - generic:
+                  - img
+                  - text: Archive
+              - generic [ref=e260]:
+                - button "Mark as read" [ref=e262]
+                - generic [ref=e264]:
+                  - img [ref=e267]
+                  - generic [ref=e270]:
+                    - generic [ref=e271]: "Agent join request: OpenClaw"
+                    - generic [ref=e272]:
+                      - generic [ref=e273]: requested 21m ago from IP 127.0.0.1
+                      - generic [ref=e274]: "adapter: openclaw_gateway"
+                - generic [ref=e275]:
+                  - button "Approve" [ref=e276]
+                  - button "Reject" [ref=e277]
+            - generic [ref=e279]:
+              - generic:
+                - generic:
+                  - img
+                  - text: Archive
+              - link "Research Test Corp TESAA-1 updated 5h ago Dismiss from inbox" [ref=e281] [cursor=pointer]:
+                - /url: /TESAA/issues/TESAA-1?from=inbox
+                - generic [ref=e282]:
+                  - generic [ref=e283]: Research Test Corp
+                  - generic [ref=e287]: TESAA-1
+                - generic [ref=e289]: updated 5h ago
+                - button "Dismiss from inbox" [ref=e291]:
+                  - img [ref=e292]
+  - generic [ref=e295]:
+    - heading "Command Palette" [level=2] [ref=e296]
+    - paragraph [ref=e297]: Search for a command to run...

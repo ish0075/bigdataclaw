@@ -1,0 +1,60 @@
+======================================================================
+COMPANY CATEGORIZATION SUMMARY
+Generated: 2026-03-28 00:11:18
+======================================================================
+
+Total Companies Categorized: 34,848
+
+Categories:
+----------------------------------------------------------------------
+  General                  : 24,385
+  Builder                  :  4,833
+  Investment               :  4,566
+  Private Equity           :    406
+  Reit                     :    283
+  Lender                   :    200
+  Insurance                :     72
+  Pension Fund             :     67
+  Family Office            :     36
+  Asset Manager            :      0
+
+======================================================================
+DETECTION KEYWORDS:
+======================================================================
+
+Builder:
+  Keywords: develop, development, developer, developments, construction, constructor, builder, builders, building, homes
+  Priority: 1
+
+Investment:
+  Keywords: invest, investment, investor, investors, investing, capital, capital partners, investment group, investment corp, investment corporation
+  Priority: 2
+
+Reit:
+  Keywords: reit, real estate investment trust, realty income, income trust, property trust, real estate trust
+  Priority: 1
+
+Private Equity:
+  Keywords: private equity, pe , p.e., buyout, leveraged buyout, lbo, equity firm, equity partners, equity group, partners
+  Priority: 1
+
+Asset Manager:
+  Keywords: asset management, asset manager, fund management, fund manager, investment management, investment manager, portfolio management, portfolio manager, wealth management, wealth manager
+  Priority: 3
+
+Family Office:
+  Keywords: family office, family investment, family holding, family partners, legacy capital, generational wealth
+  Priority: 1
+
+Pension Fund:
+  Keywords: pension, pension fund, pension plan, retirement, retirement fund, retirement system, teacher retirement, public employees, cpp, canada pension
+  Priority: 1
+
+Insurance:
+  Keywords: insurance, insurer, life insurance, property insurance, casualty insurance, mutual insurance, assurance, manulife, sun life, great-west
+  Priority: 2
+
+Lender:
+  Keywords: bank, credit union, caisse, mortgage, lending, lender, loan, financing company, trust company, savings
+  Priority: 1
+

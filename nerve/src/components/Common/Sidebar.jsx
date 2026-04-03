@@ -32,8 +32,46 @@ import {
   ChevronRight,
   PanelLeftClose,
   PanelLeftOpen,
-  Bot
+  Bot,
+  Paperclip,
+  Scan,
+  ExternalLink,
+  Github
 } from 'lucide-react'
+
+const EXTERNAL_LINKS = [
+  {
+    id: 'external',
+    label: 'External',
+    items: [
+      { 
+        url: 'https://pablodelucca.github.io/pixel-agents/', 
+        label: 'Pixel Agents (Pablo)', 
+        icon: Scan, 
+        badge: 'EXACT',
+        description: 'Original pixel agent visualization by Pablo De Lucca'
+      },
+      { 
+        url: 'http://localhost:3100', 
+        label: 'Paperclip Dashboard', 
+        icon: Paperclip, 
+        badge: 'ORIGINAL',
+        description: 'Original Paperclip company dashboard'
+      },
+    ]
+  }
+]
+
+const INTERNAL_LINKS = [
+  {
+    id: 'original',
+    label: 'Original Implementations',
+    items: [
+      { path: '/pixel-agents-original', label: 'Pixel Agents (Exact)', icon: Scan, badge: 'PABLO' },
+      { path: '/paperclip-dashboard', label: 'Paperclip Dashboard', icon: Paperclip, badge: 'ORIGINAL' },
+    ]
+  }
+]
 
 const SECTIONS = [
   {
@@ -46,6 +84,9 @@ const SECTIONS = [
       { path: '/pipeline', label: 'Deal Pipeline', icon: Users },
       { path: '/opportunities', label: 'Opportunities', icon: Sparkles },
       { path: '/agents', label: 'Agent Workspace', icon: Cpu },
+      { path: '/paperclip-companies', label: 'Agent Companies', icon: Building2, badge: 'NEW' },
+      { path: '/paperclip-dashboard', label: 'Paperclip Dashboard (Local)', icon: Paperclip, badge: 'LOCAL' },
+      { path: '/mission-control', label: 'Pixel Agents (Local)', icon: Scan, badge: 'LOCAL' },
       { path: '/bot-boardroom', label: 'Bot Boardroom', icon: Radio, badge: 'AI' },
       { path: '/vault', label: 'Obsidian Vault', icon: Database },
     ]
@@ -60,6 +101,16 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'marketing',
+    label: 'Marketing Division',
+    items: [
+      { path: '/marketing/dashboard', label: 'Marketing Dashboard', icon: LayoutDashboard, badge: 'NEW' },
+      { path: '/marketing/videos', label: 'Video Production', icon: Scan, badge: 'VIDEO' },
+      { path: '/marketing/content', label: 'Content Generator', icon: FileText, badge: 'AI' },
+      { path: '/marketing/campaigns', label: 'Campaign Manager', icon: Sparkles, badge: 'ACTIVE' },
+    ]
+  },
+  {
     id: 'aiBots',
     label: 'AI Bots',
     items: [
@@ -69,7 +120,6 @@ const SECTIONS = [
       { path: '/vigil', label: 'Vigil Monitor', icon: Shield, badge: '24/7' },
       { path: '/agent-workspaces', label: 'Agent Workspaces', icon: Activity, badge: 'NEW' },
       { path: '/bot-builder', label: 'Bot Builder', icon: Hammer, badge: 'BUILD' },
-      { path: '/mission-control', label: 'Agent Visualizer', icon: Zap, badge: 'LIVE' },
     ]
   },
   {
@@ -250,6 +300,118 @@ const Sidebar = () => {
             </div>
           )
         })}
+        
+        {/* Original Implementations Section */}
+        {!compact && (
+          <div className="mt-4 pt-4 border-t border-border-subtle/50">
+            <div className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-text-muted">
+              Original Implementations
+            </div>
+            <div className="space-y-0.5 mt-1">
+              {INTERNAL_LINKS[0].items.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className={({ isActive }) => 
+                    `nav-item ${isActive ? 'active' : ''}`
+                  }
+                >
+                  <item.icon className="w-5 h-5 flex-shrink-0" />
+                  <span className="font-medium truncate">{item.label}</span>
+                  {item.badge && (
+                    <span className="ml-auto px-1.5 py-0.5 text-[10px] rounded flex-shrink-0 bg-accent-purple/20 text-accent-purple">
+                      {item.badge}
+                    </span>
+                  )}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {/* Compact mode internal links */}
+        {compact && (
+          <div className="mt-2 pt-2 border-t border-border-subtle/50 space-y-1">
+            {INTERNAL_LINKS[0].items.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                title={`${item.label} (${item.badge})`}
+                className={({ isActive }) => 
+                  `group relative flex items-center justify-center p-2.5 rounded-xl transition-all ${
+                    isActive 
+                      ? 'bg-accent-purple/15 text-accent-purple' 
+                      : 'text-text-muted hover:bg-bg-input hover:text-text-primary'
+                  }`
+                }
+              >
+                <item.icon className="w-5 h-5" />
+                {item.badge && (
+                  <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-accent-purple" />
+                )}
+                {/* Tooltip */}
+                <span className="absolute left-full ml-2 px-2 py-1 bg-bg-input border border-border-subtle rounded-md text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none z-50 transition-opacity">
+                  {item.label}
+                </span>
+              </NavLink>
+            ))}
+          </div>
+        )}
+        
+        {/* External Links Section */}
+        {!compact && (
+          <div className="mt-4 pt-4 border-t border-border-subtle/50">
+            <div className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-text-muted">
+              External Links
+            </div>
+            <div className="space-y-0.5 mt-1">
+              {EXTERNAL_LINKS[0].items.map((item) => (
+                <a
+                  key={item.url}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nav-item group"
+                  title={item.description}
+                >
+                  <item.icon className="w-5 h-5 flex-shrink-0" />
+                  <span className="font-medium truncate">{item.label}</span>
+                  <ExternalLink className="w-3 h-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-text-muted" />
+                  {item.badge && (
+                    <span className="ml-2 px-1.5 py-0.5 text-[10px] rounded flex-shrink-0 bg-accent-purple/20 text-accent-purple">
+                      {item.badge}
+                    </span>
+                  )}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {/* Compact mode external links */}
+        {compact && (
+          <div className="mt-2 pt-2 border-t border-border-subtle/50 space-y-1">
+            {EXTERNAL_LINKS[0].items.map((item) => (
+              <a
+                key={item.url}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={`${item.label} (${item.badge}) - ${item.description}`}
+                className="group relative flex items-center justify-center p-2.5 rounded-xl transition-all text-text-muted hover:bg-bg-input hover:text-text-primary"
+              >
+                <item.icon className="w-5 h-5" />
+                {item.badge && (
+                  <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-accent-purple" />
+                )}
+                {/* Tooltip */}
+                <span className="absolute left-full ml-2 px-2 py-1 bg-bg-input border border-border-subtle rounded-md text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none z-50 transition-opacity">
+                  {item.label}
+                </span>
+              </a>
+            ))}
+          </div>
+        )}
       </nav>
       
       {/* Bottom Status */}

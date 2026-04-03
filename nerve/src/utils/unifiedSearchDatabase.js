@@ -336,6 +336,23 @@ export const getRecentSearches = async (limit = 10) => {
 
 // Get counts for all modules
 export const getModuleCounts = async () => {
+  // First try to get from API
+  try {
+    const response = await fetch('/api/data-manager/stats')
+    if (response.ok) {
+      const data = await response.json()
+      // Convert API format to local format
+      const counts = {}
+      data.modules.forEach(module => {
+        counts[module.id] = module.count
+      })
+      return counts
+    }
+  } catch (err) {
+    console.log('API not available, falling back to local DB')
+  }
+  
+  // Fallback to local IndexedDB
   const db = await initDB()
   const counts = {}
   
@@ -355,6 +372,27 @@ export const clearModule = async (module) => {
 
 // Get module stats
 export const getModuleStats = async () => {
+  // Check if API is available
+  try {
+    const response = await fetch('/api/data-manager/stats')
+    if (response.ok) {
+      const data = await response.json()
+      // Return simple stats from API (without region/city breakdown)
+      const stats = {}
+      data.modules.forEach(module => {
+        stats[module.id] = {
+          count: module.count,
+          byRegion: {}, // Would need additional API endpoint for this
+          byCity: {}
+        }
+      })
+      return stats
+    }
+  } catch (err) {
+    console.log('API not available, falling back to local DB')
+  }
+  
+  // Fallback to local IndexedDB
   const db = await initDB()
   const stats = {}
   

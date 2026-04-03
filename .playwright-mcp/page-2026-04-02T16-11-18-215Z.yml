@@ -1,0 +1,263 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img "Control Shifter" [ref=e8]
+        - generic [ref=e9]:
+          - heading "Mission Control" [level=1] [ref=e10]
+          - paragraph [ref=e11]: Real Estate Command Center
+      - button "Collapse sidebar" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - generic [ref=e17]:
+        - button "Collapse all" [ref=e18] [cursor=pointer]
+        - button "Expand all" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - button "Main" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]: Main
+          - img [ref=e23]
+        - generic [ref=e25]:
+          - link "Mission Control" [ref=e26] [cursor=pointer]:
+            - /url: /
+            - img [ref=e27]
+            - generic [ref=e32]: Mission Control
+          - link "Property Research" [ref=e33] [cursor=pointer]:
+            - /url: /research
+            - img [ref=e34]
+            - generic [ref=e38]: Property Research
+          - link "Hot Money Radar" [ref=e39] [cursor=pointer]:
+            - /url: /hotmoney
+            - img [ref=e40]
+            - generic [ref=e42]: Hot Money Radar
+          - link "Deal Pipeline" [ref=e43] [cursor=pointer]:
+            - /url: /pipeline
+            - img [ref=e44]
+            - generic [ref=e49]: Deal Pipeline
+          - link "Opportunities" [ref=e50] [cursor=pointer]:
+            - /url: /opportunities
+            - img [ref=e51]
+            - generic [ref=e53]: Opportunities
+          - link "Agent Workspace" [ref=e54] [cursor=pointer]:
+            - /url: /agents
+            - img [ref=e55]
+            - generic [ref=e58]: Agent Workspace
+          - link "Bot Boardroom AI" [ref=e59] [cursor=pointer]:
+            - /url: /bot-boardroom
+            - img [ref=e60]
+            - generic [ref=e66]: Bot Boardroom
+            - generic [ref=e67]: AI
+          - link "Obsidian Vault" [ref=e68] [cursor=pointer]:
+            - /url: /vault
+            - img [ref=e69]
+            - generic [ref=e73]: Obsidian Vault
+      - generic [ref=e74]:
+        - button "Recruitment" [ref=e75] [cursor=pointer]:
+          - generic [ref=e76]: Recruitment
+          - img [ref=e77]
+        - generic [ref=e79]:
+          - link "EXP Agent Recruiter 96K" [ref=e80] [cursor=pointer]:
+            - /url: /exp-agent-recruiter
+            - img [ref=e81]
+            - generic [ref=e84]: EXP Agent Recruiter
+            - generic [ref=e85]: 96K
+          - link "Commercial Agents 6.7K" [ref=e86] [cursor=pointer]:
+            - /url: /commercial-agent-recruiter
+            - img [ref=e87]
+            - generic [ref=e90]: Commercial Agents
+            - generic [ref=e91]: 6.7K
+          - link "Brokerages" [ref=e92] [cursor=pointer]:
+            - /url: /brokerages
+            - img [ref=e93]
+            - generic [ref=e96]: Brokerages
+      - generic [ref=e97]:
+        - button "AI Bots" [ref=e98] [cursor=pointer]:
+          - generic [ref=e99]: AI Bots
+          - img [ref=e100]
+        - generic [ref=e102]:
+          - link "Buyer Intelligence AI" [ref=e103] [cursor=pointer]:
+            - /url: /buyer-bot
+            - img [ref=e104]
+            - generic [ref=e108]: Buyer Intelligence
+            - generic [ref=e109]: AI
+          - link "Seller Outreach AI" [ref=e110] [cursor=pointer]:
+            - /url: /seller-outreach-bot
+            - img [ref=e111]
+            - generic [ref=e116]: Seller Outreach
+            - generic [ref=e117]: AI
+          - link "Property Valuation AI" [ref=e118] [cursor=pointer]:
+            - /url: /property-valuation-bot
+            - img [ref=e119]
+            - generic [ref=e121]: Property Valuation
+            - generic [ref=e122]: AI
+          - link "Vigil Monitor 24/7" [ref=e123] [cursor=pointer]:
+            - /url: /vigil
+            - img [ref=e124]
+            - generic [ref=e126]: Vigil Monitor
+            - generic [ref=e127]: 24/7
+          - link "Agent Workspaces NEW" [ref=e128] [cursor=pointer]:
+            - /url: /agent-workspaces
+            - img [ref=e129]
+            - generic [ref=e131]: Agent Workspaces
+            - generic [ref=e132]: NEW
+          - link "Bot Builder BUILD" [ref=e133] [cursor=pointer]:
+            - /url: /bot-builder
+            - img [ref=e134]
+            - generic [ref=e138]: Bot Builder
+            - generic [ref=e139]: BUILD
+          - link "Agent Visualizer LIVE" [ref=e140] [cursor=pointer]:
+            - /url: /mission-control
+            - img [ref=e141]
+            - generic [ref=e143]: Agent Visualizer
+            - generic [ref=e144]: LIVE
+      - button "Tools" [ref=e146] [cursor=pointer]:
+        - generic [ref=e147]: Tools
+        - img [ref=e148]
+    - generic [ref=e153]: System Online
+  - generic [ref=e154]:
+    - banner [ref=e155]:
+      - generic [ref=e161]:
+        - img [ref=e768]
+        - generic [ref=e169]: Connected
+      - generic [ref=e172]:
+        - img [ref=e173]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e176]
+        - combobox [ref=e177]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e178]:
+        - button "Help" [ref=e180] [cursor=pointer]:
+          - img [ref=e181]
+          - generic [ref=e184]: Help
+        - button "Voice" [ref=e185] [cursor=pointer]:
+          - img [ref=e186]
+          - generic [ref=e192]: Voice
+        - generic [ref=e193]:
+          - img [ref=e194]
+          - generic [ref=e199]: $12.40
+        - link "Data Manager" [ref=e200] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e201]
+        - button [ref=e205] [cursor=pointer]:
+          - img [ref=e206]
+        - link [ref=e209] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e210]
+        - link "🦞" [ref=e213] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e214]: 🦞
+    - main [ref=e215]:
+      - generic [ref=e772]:
+        - generic [ref=e773]:
+          - button [ref=e774] [cursor=pointer]:
+            - img [ref=e775]
+          - generic [ref=e777]:
+            - heading "New Research Mission" [level=1] [ref=e778]
+            - paragraph [ref=e779]: Chat, upload documents, or fill the form manually
+        - generic [ref=e780]:
+          - button "AI Chat & Upload" [ref=e781] [cursor=pointer]:
+            - img [ref=e782]
+            - text: AI Chat & Upload
+          - button "Manual Form" [ref=e784] [cursor=pointer]:
+            - img [ref=e785]
+            - text: Manual Form
+        - generic [ref=e788]:
+          - generic [ref=e790]:
+            - generic [ref=e792]:
+              - img [ref=e794]
+              - generic [ref=e796]:
+                - heading "Kimi AI Assistant" [level=3] [ref=e797]
+                - paragraph [ref=e798]: Powered by Moonshot AI
+            - generic [ref=e799]:
+              - generic [ref=e800]:
+                - img [ref=e802]
+                - generic [ref=e804]:
+                  - generic [ref=e805]: Hi! I'm your property research assistant powered by Kimi AI. I can help you fill out this form by chatting, uploading documents, or using voice. What property would you like to research today?
+                  - text: 12:10 PM
+              - generic [ref=e806]:
+                - img [ref=e808]
+                - generic [ref=e810]:
+                  - generic [ref=e811]: 🎙️ Please allow microphone access to use voice input. Click the microphone icon and allow permissions when prompted.
+                  - text: 12:10 PM
+              - generic [ref=e812]:
+                - img [ref=e814]
+                - generic [ref=e816]:
+                  - generic [ref=e817]: 🎙️ Please allow microphone access to use voice input. Click the microphone icon and allow permissions when prompted.
+                  - text: 12:10 PM
+              - generic [ref=e893]:
+                - img [ref=e895]
+                - generic [ref=e898]:
+                  - generic [ref=e899]: Create a mission to find buyers and builders for 100 to 240 unit high rise buildings to be built in Niagara region
+                  - text: 12:11 PM
+              - generic [ref=e900]:
+                - img [ref=e902]
+                - generic [ref=e904]:
+                  - img [ref=e905]
+                  - generic [ref=e907]: Kimi is thinking...
+            - generic [ref=e818]:
+              - button "Upload PDF, Images, Docs" [ref=e820] [cursor=pointer]:
+                - img [ref=e821]
+                - text: Upload PDF, Images, Docs
+              - generic [ref=e823]:
+                - button "Start voice input" [ref=e824] [cursor=pointer]:
+                  - img [ref=e825]
+                - textbox "Ask Kimi about your property..." [disabled] [ref=e832]
+                - button [disabled] [ref=e833]:
+                  - img [ref=e834]
+          - generic [ref=e837]:
+            - generic [ref=e838]:
+              - heading "Form Preview" [level=3] [ref=e839]:
+                - img [ref=e840]
+                - text: Form Preview
+              - generic [ref=e843]:
+                - generic [ref=e844]:
+                  - paragraph [ref=e845]: Address
+                  - paragraph [ref=e846]: Not provided
+                - generic [ref=e847]:
+                  - generic [ref=e848]:
+                    - paragraph [ref=e849]: City
+                    - paragraph [ref=e850]: "-"
+                  - generic [ref=e851]:
+                    - paragraph [ref=e852]: Region
+                    - paragraph [ref=e853]: Niagara
+                - generic [ref=e854]:
+                  - generic [ref=e855]:
+                    - paragraph [ref=e856]: Asset Class
+                    - paragraph [ref=e857]: Industrial
+                  - generic [ref=e858]:
+                    - paragraph [ref=e859]: Price
+                    - paragraph [ref=e860]: "-"
+                - generic [ref=e861]:
+                  - paragraph [ref=e862]: Size
+                  - paragraph [ref=e863]: "-"
+            - generic [ref=e864]:
+              - heading "Research Configuration" [level=3] [ref=e865]
+              - generic [ref=e866]:
+                - generic [ref=e867] [cursor=pointer]:
+                  - radio "Quick Top 5 matches • 1-2 min" [ref=e868]
+                  - generic [ref=e869]:
+                    - paragraph [ref=e870]: Quick
+                    - paragraph [ref=e871]: Top 5 matches • 1-2 min
+                - generic [ref=e872] [cursor=pointer]:
+                  - radio "Standard Top 10 matches • 3-5 min" [checked] [ref=e873]
+                  - generic [ref=e874]:
+                    - paragraph [ref=e875]: Standard
+                    - paragraph [ref=e876]: Top 10 matches • 3-5 min
+                - generic [ref=e877] [cursor=pointer]:
+                  - radio "Deep Top 25 matches • 8-10 min" [ref=e878]
+                  - generic [ref=e879]:
+                    - paragraph [ref=e880]: Deep
+                    - paragraph [ref=e881]: Top 25 matches • 8-10 min
+            - generic [ref=e882]:
+              - heading "💡 Tips" [level=3] [ref=e883]
+              - list [ref=e884]:
+                - listitem [ref=e885]: • Upload an Offering Memorandum to auto-fill
+                - listitem [ref=e886]: • Use voice control for hands-free input
+                - listitem [ref=e887]: • Chat with me naturally about the property
+                - listitem [ref=e888]: • Include photos for better analysis
+  - button "Ctrl+Shift+V" [ref=e763] [cursor=pointer]:
+    - img [ref=e764]
+    - generic [ref=e767]: Ctrl+Shift+V

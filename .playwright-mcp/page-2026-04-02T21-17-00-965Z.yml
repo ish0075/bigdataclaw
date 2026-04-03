@@ -1,0 +1,230 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img "Control Shifter" [ref=e8]
+        - generic [ref=e9]:
+          - heading "Mission Control" [level=1] [ref=e10]
+          - paragraph [ref=e11]: Real Estate Command Center
+      - button "Collapse sidebar" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - generic [ref=e17]:
+        - button "Collapse all" [ref=e18] [cursor=pointer]
+        - button "Expand all" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - button "Main" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]: Main
+          - img [ref=e23]
+        - generic [ref=e25]:
+          - link "Mission Control" [ref=e26] [cursor=pointer]:
+            - /url: /
+            - img [ref=e27]
+            - generic [ref=e32]: Mission Control
+          - link "Property Research" [ref=e33] [cursor=pointer]:
+            - /url: /research
+            - img [ref=e34]
+            - generic [ref=e38]: Property Research
+          - link "Hot Money Radar" [ref=e39] [cursor=pointer]:
+            - /url: /hotmoney
+            - img [ref=e40]
+            - generic [ref=e42]: Hot Money Radar
+          - link "Deal Pipeline" [ref=e43] [cursor=pointer]:
+            - /url: /pipeline
+            - img [ref=e44]
+            - generic [ref=e49]: Deal Pipeline
+          - link "Opportunities" [ref=e50] [cursor=pointer]:
+            - /url: /opportunities
+            - img [ref=e51]
+            - generic [ref=e53]: Opportunities
+          - link "Agent Workspace" [ref=e54] [cursor=pointer]:
+            - /url: /agents
+            - img [ref=e55]
+            - generic [ref=e58]: Agent Workspace
+          - link "Agent Companies NEW" [ref=e59] [cursor=pointer]:
+            - /url: /paperclip-companies
+            - img [ref=e60]
+            - generic [ref=e64]: Agent Companies
+            - generic [ref=e65]: NEW
+          - link "Bot Boardroom AI" [ref=e66] [cursor=pointer]:
+            - /url: /bot-boardroom
+            - img [ref=e67]
+            - generic [ref=e73]: Bot Boardroom
+            - generic [ref=e74]: AI
+          - link "Obsidian Vault" [ref=e75] [cursor=pointer]:
+            - /url: /vault
+            - img [ref=e76]
+            - generic [ref=e80]: Obsidian Vault
+      - generic [ref=e81]:
+        - button "Recruitment" [ref=e82] [cursor=pointer]:
+          - generic [ref=e83]: Recruitment
+          - img [ref=e84]
+        - generic [ref=e86]:
+          - link "EXP Agent Recruiter 96K" [ref=e87] [cursor=pointer]:
+            - /url: /exp-agent-recruiter
+            - img [ref=e88]
+            - generic [ref=e91]: EXP Agent Recruiter
+            - generic [ref=e92]: 96K
+          - link "Commercial Agents 6.7K" [ref=e93] [cursor=pointer]:
+            - /url: /commercial-agent-recruiter
+            - img [ref=e94]
+            - generic [ref=e97]: Commercial Agents
+            - generic [ref=e98]: 6.7K
+          - link "Brokerages" [ref=e99] [cursor=pointer]:
+            - /url: /brokerages
+            - img [ref=e100]
+            - generic [ref=e103]: Brokerages
+      - generic [ref=e104]:
+        - button "AI Bots" [ref=e105] [cursor=pointer]:
+          - generic [ref=e106]: AI Bots
+          - img [ref=e107]
+        - generic [ref=e109]:
+          - link "Buyer Intelligence AI" [ref=e110] [cursor=pointer]:
+            - /url: /buyer-bot
+            - img [ref=e111]
+            - generic [ref=e115]: Buyer Intelligence
+            - generic [ref=e116]: AI
+          - link "Seller Outreach AI" [ref=e117] [cursor=pointer]:
+            - /url: /seller-outreach-bot
+            - img [ref=e118]
+            - generic [ref=e123]: Seller Outreach
+            - generic [ref=e124]: AI
+          - link "Property Valuation AI" [ref=e125] [cursor=pointer]:
+            - /url: /property-valuation-bot
+            - img [ref=e126]
+            - generic [ref=e128]: Property Valuation
+            - generic [ref=e129]: AI
+          - link "Vigil Monitor 24/7" [ref=e130] [cursor=pointer]:
+            - /url: /vigil
+            - img [ref=e131]
+            - generic [ref=e133]: Vigil Monitor
+            - generic [ref=e134]: 24/7
+          - link "Agent Workspaces NEW" [ref=e135] [cursor=pointer]:
+            - /url: /agent-workspaces
+            - img [ref=e136]
+            - generic [ref=e138]: Agent Workspaces
+            - generic [ref=e139]: NEW
+          - link "Bot Builder BUILD" [ref=e140] [cursor=pointer]:
+            - /url: /bot-builder
+            - img [ref=e141]
+            - generic [ref=e145]: Bot Builder
+            - generic [ref=e146]: BUILD
+          - link "Agent Visualizer LIVE" [ref=e147] [cursor=pointer]:
+            - /url: /mission-control
+            - img [ref=e148]
+            - generic [ref=e150]: Agent Visualizer
+            - generic [ref=e151]: LIVE
+      - button "Tools" [ref=e153] [cursor=pointer]:
+        - generic [ref=e154]: Tools
+        - img [ref=e155]
+    - generic [ref=e160]: System Online
+  - generic [ref=e161]:
+    - banner [ref=e162]:
+      - generic [ref=e168]:
+        - img [ref=e313]
+        - generic [ref=e176]: Connected
+      - generic [ref=e179]:
+        - img [ref=e180]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e183]
+        - combobox [ref=e184]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e185]:
+        - button "Help" [ref=e187] [cursor=pointer]:
+          - img [ref=e188]
+          - generic [ref=e191]: Help
+        - button "Voice" [ref=e192] [cursor=pointer]:
+          - img [ref=e193]
+          - generic [ref=e199]: Voice
+        - generic [ref=e200]:
+          - img [ref=e201]
+          - generic [ref=e206]: $12.40
+        - link "Data Manager" [ref=e207] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e208]
+        - button [ref=e212] [cursor=pointer]:
+          - img [ref=e213]
+        - link [ref=e216] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e217]
+        - link "🦞" [ref=e220] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e221]: 🦞
+    - main [ref=e222]:
+      - generic [ref=e224]:
+        - generic [ref=e225]:
+          - generic [ref=e226]:
+            - heading "Hot Money Radar" [level=1] [ref=e227]:
+              - img [ref=e228]
+              - text: Hot Money Radar
+            - paragraph [ref=e230]: 0 leads with $0 in fresh capital • Recently sold
+          - generic [ref=e231]:
+            - button "Paste Deal" [ref=e232] [cursor=pointer]:
+              - img [ref=e233]
+              - text: Paste Deal
+            - button "Refresh" [ref=e237] [cursor=pointer]:
+              - img [ref=e238]
+              - text: Refresh
+            - button "Filter" [ref=e240] [cursor=pointer]:
+              - img [ref=e241]
+              - text: Filter
+            - button "Export" [ref=e243] [cursor=pointer]:
+              - img [ref=e244]
+              - text: Export
+        - generic [ref=e247]:
+          - generic [ref=e249]:
+            - img [ref=e250]
+            - generic [ref=e252]:
+              - paragraph [ref=e253]: $0
+              - paragraph [ref=e254]: Total Hot Money
+          - generic [ref=e256]:
+            - img [ref=e257]
+            - generic [ref=e259]:
+              - paragraph [ref=e260]: "0"
+              - paragraph [ref=e261]: Active Alerts
+          - generic [ref=e263]:
+            - img [ref=e264]
+            - generic [ref=e268]:
+              - paragraph [ref=e269]: $0
+              - paragraph [ref=e270]: Avg Cash Position
+          - generic [ref=e272]:
+            - img [ref=e273]
+            - generic [ref=e275]:
+              - paragraph [ref=e276]: "0"
+              - paragraph [ref=e277]: Avg Match Score
+        - generic [ref=e279]:
+          - generic [ref=e280]:
+            - img [ref=e281]
+            - textbox "Search by entity name, location, or asset class... (or use voice 🎤)" [active] [ref=e284]: Beedie
+            - generic [ref=e285]:
+              - button "Search" [ref=e286] [cursor=pointer]:
+                - img [ref=e287]
+                - text: Search
+              - button "Start voice input" [ref=e291] [cursor=pointer]:
+                - img [ref=e292]
+          - combobox [ref=e296]:
+            - option "All Asset Classes" [selected]
+            - option "Industrial"
+            - option "Retail"
+            - option "Office"
+            - option "Multi-Family"
+            - option "Agricultural"
+            - option "Land"
+            - option "Mixed-Use"
+        - generic [ref=e297]:
+          - generic [ref=e299]:
+            - heading "Hot Money Leads" [level=3] [ref=e300]
+            - generic [ref=e301]:
+              - generic [ref=e302]: "Sorted by:"
+              - combobox [ref=e303]:
+                - option "Cash Amount (High → Low)" [selected]
+                - option "Date (Newest)"
+                - option "Match Score"
+          - generic [ref=e1164]: No leads found. Adjust your filters or refresh.
+  - button "Ctrl+Shift+V" [ref=e308] [cursor=pointer]:
+    - img [ref=e309]
+    - generic [ref=e312]: Ctrl+Shift+V

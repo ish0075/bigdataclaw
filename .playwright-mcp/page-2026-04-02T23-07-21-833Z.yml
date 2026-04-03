@@ -1,0 +1,398 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img "Control Shifter" [ref=e8]
+        - generic [ref=e9]:
+          - heading "Mission Control" [level=1] [ref=e10]
+          - paragraph [ref=e11]: Real Estate Command Center
+      - button "Collapse sidebar" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - generic [ref=e17]:
+        - button "Collapse all" [ref=e18] [cursor=pointer]
+        - button "Expand all" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - button "Main" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]: Main
+          - img [ref=e23]
+        - generic [ref=e25]:
+          - link "Mission Control" [ref=e26] [cursor=pointer]:
+            - /url: /
+            - img [ref=e27]
+            - generic [ref=e32]: Mission Control
+          - link "Property Research" [ref=e33] [cursor=pointer]:
+            - /url: /research
+            - img [ref=e34]
+            - generic [ref=e38]: Property Research
+          - link "Hot Money Radar" [ref=e39] [cursor=pointer]:
+            - /url: /hotmoney
+            - img [ref=e40]
+            - generic [ref=e42]: Hot Money Radar
+          - link "Deal Pipeline" [ref=e43] [cursor=pointer]:
+            - /url: /pipeline
+            - img [ref=e44]
+            - generic [ref=e49]: Deal Pipeline
+          - link "Opportunities" [ref=e50] [cursor=pointer]:
+            - /url: /opportunities
+            - img [ref=e51]
+            - generic [ref=e53]: Opportunities
+          - link "Agent Workspace" [ref=e54] [cursor=pointer]:
+            - /url: /agents
+            - img [ref=e55]
+            - generic [ref=e58]: Agent Workspace
+          - link "Agent Companies NEW" [ref=e59] [cursor=pointer]:
+            - /url: /paperclip-companies
+            - img [ref=e60]
+            - generic [ref=e64]: Agent Companies
+            - generic [ref=e65]: NEW
+          - link "Bot Boardroom AI" [ref=e66] [cursor=pointer]:
+            - /url: /bot-boardroom
+            - img [ref=e67]
+            - generic [ref=e73]: Bot Boardroom
+            - generic [ref=e74]: AI
+          - link "Obsidian Vault" [active] [ref=e75] [cursor=pointer]:
+            - /url: /vault
+            - img [ref=e76]
+            - generic [ref=e80]: Obsidian Vault
+      - generic [ref=e81]:
+        - button "Recruitment" [ref=e82] [cursor=pointer]:
+          - generic [ref=e83]: Recruitment
+          - img [ref=e84]
+        - generic [ref=e86]:
+          - link "EXP Agent Recruiter 96K" [ref=e87] [cursor=pointer]:
+            - /url: /exp-agent-recruiter
+            - img [ref=e88]
+            - generic [ref=e91]: EXP Agent Recruiter
+            - generic [ref=e92]: 96K
+          - link "Commercial Agents 6.7K" [ref=e93] [cursor=pointer]:
+            - /url: /commercial-agent-recruiter
+            - img [ref=e94]
+            - generic [ref=e97]: Commercial Agents
+            - generic [ref=e98]: 6.7K
+          - link "Brokerages" [ref=e99] [cursor=pointer]:
+            - /url: /brokerages
+            - img [ref=e100]
+            - generic [ref=e103]: Brokerages
+      - generic [ref=e104]:
+        - button "AI Bots" [ref=e105] [cursor=pointer]:
+          - generic [ref=e106]: AI Bots
+          - img [ref=e107]
+        - generic [ref=e109]:
+          - link "Buyer Intelligence AI" [ref=e110] [cursor=pointer]:
+            - /url: /buyer-bot
+            - img [ref=e111]
+            - generic [ref=e115]: Buyer Intelligence
+            - generic [ref=e116]: AI
+          - link "Seller Outreach AI" [ref=e117] [cursor=pointer]:
+            - /url: /seller-outreach-bot
+            - img [ref=e118]
+            - generic [ref=e123]: Seller Outreach
+            - generic [ref=e124]: AI
+          - link "Property Valuation AI" [ref=e125] [cursor=pointer]:
+            - /url: /property-valuation-bot
+            - img [ref=e126]
+            - generic [ref=e128]: Property Valuation
+            - generic [ref=e129]: AI
+          - link "Vigil Monitor 24/7" [ref=e130] [cursor=pointer]:
+            - /url: /vigil
+            - img [ref=e131]
+            - generic [ref=e133]: Vigil Monitor
+            - generic [ref=e134]: 24/7
+          - link "Agent Workspaces NEW" [ref=e135] [cursor=pointer]:
+            - /url: /agent-workspaces
+            - img [ref=e136]
+            - generic [ref=e138]: Agent Workspaces
+            - generic [ref=e139]: NEW
+          - link "Bot Builder BUILD" [ref=e140] [cursor=pointer]:
+            - /url: /bot-builder
+            - img [ref=e141]
+            - generic [ref=e145]: Bot Builder
+            - generic [ref=e146]: BUILD
+          - link "Agent Visualizer LIVE" [ref=e147] [cursor=pointer]:
+            - /url: /mission-control
+            - img [ref=e148]
+            - generic [ref=e150]: Agent Visualizer
+            - generic [ref=e151]: LIVE
+      - generic [ref=e152]:
+        - button "Tools" [ref=e153] [cursor=pointer]:
+          - generic [ref=e154]: Tools
+          - img [ref=e155]
+        - generic [ref=e157]:
+          - link "My Listings" [ref=e158] [cursor=pointer]:
+            - /url: /listings
+            - img [ref=e159]
+            - generic [ref=e163]: My Listings
+          - link "Buyer Matcher" [ref=e164] [cursor=pointer]:
+            - /url: /buyers
+            - img [ref=e165]
+            - generic [ref=e170]: Buyer Matcher
+          - link "Agent Matcher" [ref=e171] [cursor=pointer]:
+            - /url: /agents-matcher
+            - img [ref=e172]
+            - generic [ref=e176]: Agent Matcher
+          - link "Lender Matcher" [ref=e177] [cursor=pointer]:
+            - /url: /lenders
+            - img [ref=e178]
+            - generic [ref=e180]: Lender Matcher
+          - link "Builder Directory" [ref=e181] [cursor=pointer]:
+            - /url: /builders
+            - img [ref=e182]
+            - generic [ref=e186]: Builder Directory
+          - link "Property Upload" [ref=e187] [cursor=pointer]:
+            - /url: /upload
+            - img [ref=e188]
+            - generic [ref=e191]: Property Upload
+          - link "Olena Marketing NEW" [ref=e192] [cursor=pointer]:
+            - /url: /olena-feature-sheet
+            - img [ref=e193]
+            - generic [ref=e196]: Olena Marketing
+            - generic [ref=e197]: NEW
+          - link "Canva Editor NEW" [ref=e198] [cursor=pointer]:
+            - /url: /canva-editor
+            - img [ref=e199]
+            - generic [ref=e205]: Canva Editor
+            - generic [ref=e206]: NEW
+          - link "Skills & Agents" [ref=e207] [cursor=pointer]:
+            - /url: /skills
+            - img [ref=e208]
+            - generic [ref=e211]: Skills & Agents
+          - link "Map View" [ref=e212] [cursor=pointer]:
+            - /url: /map
+            - img [ref=e213]
+            - generic [ref=e215]: Map View
+          - link "Data Manager" [ref=e216] [cursor=pointer]:
+            - /url: /data-manager
+            - img [ref=e217]
+            - generic [ref=e221]: Data Manager
+          - link "AI Builder CODE" [ref=e222] [cursor=pointer]:
+            - /url: /ai-builder
+            - img [ref=e223]
+            - generic [ref=e226]: AI Builder
+            - generic [ref=e227]: CODE
+    - generic [ref=e231]: System Online
+  - generic [ref=e232]:
+    - banner [ref=e233]:
+      - generic [ref=e239]:
+        - img [ref=e372]
+        - generic [ref=e247]: Connected
+      - generic [ref=e250]:
+        - img [ref=e251]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e254]
+        - combobox [ref=e255]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e256]:
+        - button "Help" [ref=e258] [cursor=pointer]:
+          - img [ref=e259]
+          - generic [ref=e262]: Help
+        - button "Voice" [ref=e263] [cursor=pointer]:
+          - img [ref=e264]
+          - generic [ref=e270]: Voice
+        - generic [ref=e271]:
+          - img [ref=e272]
+          - generic [ref=e277]: $12.40
+        - link "Data Manager" [ref=e278] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e279]
+        - button [ref=e283] [cursor=pointer]:
+          - img [ref=e284]
+        - link [ref=e287] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e288]
+        - link "🦞" [ref=e291] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e292]: 🦞
+    - main [ref=e293]:
+      - generic [ref=e376]:
+        - generic [ref=e377]:
+          - generic [ref=e378]:
+            - heading "Obsidian Vault" [level=1] [ref=e379]:
+              - img [ref=e380]
+              - text: Obsidian Vault
+            - paragraph [ref=e384]: Browse, search, and sync your research notes
+          - generic [ref=e385]:
+            - button "Sync" [ref=e386] [cursor=pointer]:
+              - img [ref=e387]
+              - text: Sync
+            - button "Paste Sales" [ref=e392] [cursor=pointer]:
+              - img [ref=e393]
+              - text: Paste Sales
+            - button "Post Sale" [ref=e397] [cursor=pointer]:
+              - img [ref=e398]
+              - text: Post Sale
+            - button "New Note" [ref=e400] [cursor=pointer]:
+              - img [ref=e401]
+              - text: New Note
+        - generic [ref=e402]:
+          - generic [ref=e403]:
+            - paragraph [ref=e404]: Total Notes
+            - paragraph [ref=e405]: 1,247
+          - generic [ref=e406]:
+            - paragraph [ref=e407]: Total Links
+            - paragraph [ref=e408]: 3,420
+          - generic [ref=e409]:
+            - paragraph [ref=e410]: Orphan Notes
+            - paragraph [ref=e411]: "23"
+          - generic [ref=e412]:
+            - paragraph [ref=e413]: Last Modified
+            - paragraph [ref=e414]: 2 minutes ago
+        - generic [ref=e415]:
+          - generic [ref=e417]:
+            - generic [ref=e418]:
+              - generic [ref=e419]:
+                - heading "Vault Browser" [level=3] [ref=e420]
+                - generic [ref=e421]:
+                  - button "Refresh" [ref=e422] [cursor=pointer]:
+                    - img [ref=e423]
+                  - button "New Note" [ref=e428] [cursor=pointer]:
+                    - img [ref=e429]
+                  - button "More" [ref=e430] [cursor=pointer]:
+                    - img [ref=e431]
+              - generic [ref=e435]:
+                - img [ref=e436]
+                - textbox "Search vault..." [ref=e439]
+            - generic [ref=e440]:
+              - generic [ref=e442] [cursor=pointer]:
+                - img [ref=e443]
+                - img [ref=e445]
+                - generic [ref=e447]: Research
+              - generic [ref=e449] [cursor=pointer]:
+                - img [ref=e450]
+                - img [ref=e452]
+                - generic [ref=e454]: Deals
+              - generic [ref=e456] [cursor=pointer]:
+                - img [ref=e457]
+                - img [ref=e459]
+                - generic [ref=e461]: Buyers
+              - generic [ref=e463] [cursor=pointer]:
+                - img [ref=e464]
+                - img [ref=e466]
+                - generic [ref=e468]: Templates
+              - generic [ref=e469] [cursor=pointer]:
+                - img [ref=e470]
+                - generic [ref=e474]: Sync Status.md
+                - generic [ref=e475]: Just now
+            - generic [ref=e477]:
+              - generic [ref=e478]: 1,247 files
+              - generic [ref=e479]: Synced
+          - generic [ref=e483]:
+            - img [ref=e484]
+            - paragraph [ref=e487]: Select a file to preview
+          - generic [ref=e488]:
+            - generic [ref=e489]:
+              - generic [ref=e490]:
+                - heading "Obsidian Sync" [level=3] [ref=e491]:
+                  - img [ref=e492]
+                  - text: Obsidian Sync
+                - generic [ref=e494]:
+                  - img [ref=e495]
+                  - generic [ref=e498]: All changes synced
+              - generic [ref=e499]:
+                - generic [ref=e500]:
+                  - generic [ref=e501]:
+                    - img [ref=e502]
+                    - text: Files Synced
+                  - paragraph [ref=e505]: 1,247
+                - generic [ref=e506]:
+                  - generic [ref=e507]:
+                    - img [ref=e508]
+                    - text: Last Sync
+                  - paragraph [ref=e511]: 5 minutes ago
+                - generic [ref=e512]:
+                  - generic [ref=e513]:
+                    - img [ref=e514]
+                    - text: Pending Upload
+                  - paragraph [ref=e516]: "0"
+                - generic [ref=e517]:
+                  - generic [ref=e518]:
+                    - img [ref=e519]
+                    - text: Pending Download
+                  - paragraph [ref=e521]: "0"
+              - generic [ref=e522]:
+                - img [ref=e523]
+                - generic [ref=e525]: ~/Obsidian Vault/Mission Control
+              - generic [ref=e526]:
+                - heading "Recent Activity" [level=4] [ref=e527]
+                - generic [ref=e528]:
+                  - generic [ref=e529]:
+                    - generic [ref=e530]:
+                      - img [ref=e531]
+                      - generic [ref=e533]: Seaway Mall Block.md
+                    - generic [ref=e534]: 1m ago
+                  - generic [ref=e535]:
+                    - generic [ref=e536]:
+                      - img [ref=e537]
+                      - generic [ref=e539]: Hot Money Q1 2025.md
+                    - generic [ref=e540]: 5m ago
+                  - generic [ref=e541]:
+                    - generic [ref=e542]:
+                      - img [ref=e543]
+                      - generic [ref=e545]: Buyer Database.md
+                    - generic [ref=e546]: 10m ago
+                  - generic [ref=e547]:
+                    - generic [ref=e548]:
+                      - img [ref=e549]
+                      - generic [ref=e551]: Deal Pipeline.md
+                    - generic [ref=e552]: 15m ago
+              - button "Sync Now" [ref=e553] [cursor=pointer]:
+                - img [ref=e554]
+                - text: Sync Now
+            - generic [ref=e559]:
+              - generic [ref=e560]:
+                - heading "Recent Notes" [level=3] [ref=e561]
+                - button "View All" [ref=e562] [cursor=pointer]
+              - generic [ref=e563]:
+                - generic [ref=e564] [cursor=pointer]:
+                  - generic [ref=e565]:
+                    - generic [ref=e566]: Seaway Mall Block.md
+                    - generic [ref=e567]: 1 hour ago
+                  - generic [ref=e568]:
+                    - generic [ref=e569]: "#deal"
+                    - generic [ref=e570]: "#retail"
+                - generic [ref=e571] [cursor=pointer]:
+                  - generic [ref=e572]:
+                    - generic [ref=e573]: Hot Money Q1 2025.md
+                    - generic [ref=e574]: 3 hours ago
+                  - generic [ref=e575]:
+                    - generic [ref=e576]: "#analysis"
+                    - generic [ref=e577]: "#hot-money"
+                - generic [ref=e578] [cursor=pointer]:
+                  - generic [ref=e579]:
+                    - generic [ref=e580]: Dream Industrial Profile.md
+                    - generic [ref=e581]: 1 day ago
+                  - generic [ref=e582]:
+                    - generic [ref=e583]: "#buyer"
+                    - generic [ref=e584]: "#industrial"
+                - generic [ref=e585] [cursor=pointer]:
+                  - generic [ref=e586]:
+                    - generic [ref=e587]: Niagara Market Update.md
+                    - generic [ref=e588]: 2 days ago
+                  - generic [ref=e589]:
+                    - generic [ref=e590]: "#market"
+                    - generic [ref=e591]: "#research"
+            - generic [ref=e592]:
+              - heading "Quick Actions" [level=3] [ref=e593]
+              - generic [ref=e594]:
+                - button "Open in Obsidian Launch desktop app" [ref=e595] [cursor=pointer]:
+                  - img [ref=e596]
+                  - generic [ref=e598]:
+                    - paragraph [ref=e599]: Open in Obsidian
+                    - paragraph [ref=e600]: Launch desktop app
+                - button "Global Search Search all notes" [ref=e601] [cursor=pointer]:
+                  - img [ref=e602]
+                  - generic [ref=e605]:
+                    - paragraph [ref=e606]: Global Search
+                    - paragraph [ref=e607]: Search all notes
+                - button "Vault Settings Configure sync" [ref=e608] [cursor=pointer]:
+                  - img [ref=e609]
+                  - generic [ref=e612]:
+                    - paragraph [ref=e613]: Vault Settings
+                    - paragraph [ref=e614]: Configure sync
+  - button "Ctrl+Shift+V" [ref=e367] [cursor=pointer]:
+    - img [ref=e368]
+    - generic [ref=e371]: Ctrl+Shift+V

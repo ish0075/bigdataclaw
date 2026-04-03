@@ -1,0 +1,248 @@
+- generic [ref=e4]:
+  - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e11]
+          - generic [ref=e13]:
+            - button "N" [ref=e14]:
+              - link "N" [ref=e15] [cursor=pointer]:
+                - /url: /NIAAAA/dashboard
+                - generic [ref=e17]:
+                  - img [ref=e18]
+                  - generic [ref=e19]: "N"
+            - button "T" [ref=e20]:
+              - link "T" [ref=e21] [cursor=pointer]:
+                - /url: /TES/dashboard
+                - generic [ref=e23]:
+                  - img [ref=e24]
+                  - generic [ref=e25]: T
+            - button "N" [ref=e26]:
+              - link "N" [ref=e27] [cursor=pointer]:
+                - /url: /NIAA/dashboard
+                - generic [ref=e30]:
+                  - img [ref=e31]
+                  - generic [ref=e32]: "N"
+            - button "N" [ref=e33]:
+              - link "N" [ref=e34] [cursor=pointer]:
+                - /url: /NIA/dashboard
+                - generic [ref=e36]:
+                  - img [ref=e37]
+                  - generic [ref=e38]: "N"
+            - button "T" [ref=e39]:
+              - link "T" [ref=e40] [cursor=pointer]:
+                - /url: /TESA/dashboard
+                - generic [ref=e42]:
+                  - img [ref=e43]
+                  - generic [ref=e44]: T
+            - button "N" [ref=e45]:
+              - link "N" [ref=e46] [cursor=pointer]:
+                - /url: /NIAAA/dashboard
+                - generic [ref=e48]:
+                  - img [ref=e49]
+                  - generic [ref=e50]: "N"
+            - button "T" [ref=e51]:
+              - link "T" [ref=e52] [cursor=pointer]:
+                - /url: /TESAAA/dashboard
+                - generic [ref=e54]:
+                  - img [ref=e55]
+                  - generic [ref=e56]: T
+            - button "A" [ref=e57]:
+              - link "A" [ref=e58] [cursor=pointer]:
+                - /url: /ABC/dashboard
+                - generic [ref=e60]:
+                  - img [ref=e61]
+                  - generic [ref=e62]: A
+            - button "F" [ref=e63]:
+              - link "F" [ref=e64] [cursor=pointer]:
+                - /url: /FAC/dashboard
+                - generic [ref=e66]:
+                  - img [ref=e67]
+                  - generic [ref=e68]: F
+            - button "M" [ref=e69]:
+              - link "M" [ref=e70] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - generic [ref=e72]:
+                  - img [ref=e73]
+                  - generic [ref=e74]: M
+            - status [ref=e75]
+          - button "Add company" [ref=e78]:
+            - img [ref=e79]
+        - complementary [ref=e81]:
+          - generic [ref=e82]:
+            - img [ref=e83]
+            - generic [ref=e86]: Instance Settings
+          - navigation [ref=e87]:
+            - generic [ref=e88]:
+              - link "General" [ref=e89] [cursor=pointer]:
+                - /url: /instance/settings/general
+                - img [ref=e91]
+                - generic [ref=e92]: General
+              - link "Heartbeats" [ref=e93] [cursor=pointer]:
+                - /url: /instance/settings/heartbeats
+                - img [ref=e95]
+                - generic [ref=e98]: Heartbeats
+              - link "Experimental" [ref=e99] [cursor=pointer]:
+                - /url: /instance/settings/experimental
+                - img [ref=e101]
+                - generic [ref=e103]: Experimental
+              - link "Plugins" [ref=e104] [cursor=pointer]:
+                - /url: /instance/settings/plugins
+                - img [ref=e106]
+                - generic [ref=e108]: Plugins
+              - generic [ref=e109]:
+                - link "File Browser (Example)" [ref=e110] [cursor=pointer]:
+                  - /url: /instance/settings/plugins/c53b846c-fc22-4a2f-bb64-9b46cd6f95db
+                - link "Kitchen Sink (Example)" [ref=e111] [cursor=pointer]:
+                  - /url: /instance/settings/plugins/e3de38b7-a29f-49e2-b442-77b1ea6afdac
+                - link "Hello World Widget (Example)" [ref=e112] [cursor=pointer]:
+                  - /url: /instance/settings/plugins/9f889db2-3c11-4565-8760-3ebfb1f42ccf
+      - generic [ref=e114]:
+        - link "Documentation" [ref=e115] [cursor=pointer]:
+          - /url: https://docs.paperclip.ing/
+          - img [ref=e116]
+          - generic [ref=e118]: Documentation
+        - generic [ref=e119]: v
+        - link "Instance settings" [ref=e120] [cursor=pointer]:
+          - /url: /instance/settings/plugins
+          - img
+        - button "Switch to light mode" [ref=e121]:
+          - img
+    - generic [ref=e122]:
+      - navigation "breadcrumb" [ref=e126]:
+        - list [ref=e127]:
+          - listitem [ref=e128]:
+            - link "Niagara High-Rise Verified Mission Company" [ref=e129] [cursor=pointer]:
+              - /url: /NIAAAA/dashboard
+          - listitem [ref=e130]:
+            - img [ref=e131]
+          - listitem [ref=e133]:
+            - link "Settings" [ref=e134] [cursor=pointer]:
+              - /url: /instance/settings/heartbeats
+          - listitem [ref=e135]:
+            - img [ref=e136]
+          - listitem [ref=e138]:
+            - link "Plugins" [disabled] [ref=e139]
+      - main [ref=e141]:
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - generic [ref=e144]:
+              - img [ref=e145]
+              - heading "Plugin Manager" [level=1] [ref=e147]
+            - button "Install Plugin" [ref=e148]:
+              - img
+              - text: Install Plugin
+          - generic [ref=e150]:
+            - img [ref=e151]
+            - generic [ref=e153]:
+              - paragraph [ref=e154]: Plugins are alpha.
+              - paragraph [ref=e155]: The plugin runtime and API surface are still changing. Expect breaking changes while this feature settles.
+          - generic [ref=e156]:
+            - generic [ref=e157]:
+              - img [ref=e158]
+              - heading "Available Plugins" [level=2] [ref=e160]
+              - generic [ref=e161]: Examples
+            - list [ref=e162]:
+              - listitem [ref=e163]:
+                - generic [ref=e164]:
+                  - generic [ref=e165]:
+                    - generic [ref=e166]:
+                      - generic [ref=e167]: Hello World Widget (Example)
+                      - generic [ref=e168]: Example
+                      - generic [ref=e169]: ready
+                    - paragraph [ref=e170]: Reference UI plugin that adds a simple Hello World widget to the Paperclip dashboard.
+                    - paragraph [ref=e171]: "@paperclipai/plugin-hello-world-example"
+                  - link "Open Settings" [ref=e173] [cursor=pointer]:
+                    - /url: /instance/settings/plugins/9f889db2-3c11-4565-8760-3ebfb1f42ccf
+              - listitem [ref=e174]:
+                - generic [ref=e175]:
+                  - generic [ref=e176]:
+                    - generic [ref=e177]:
+                      - generic [ref=e178]: File Browser (Example)
+                      - generic [ref=e179]: Example
+                      - generic [ref=e180]: ready
+                    - paragraph [ref=e181]: Example plugin that adds a Files link in project navigation plus a project detail file browser.
+                    - paragraph [ref=e182]: "@paperclipai/plugin-file-browser-example"
+                  - link "Open Settings" [ref=e184] [cursor=pointer]:
+                    - /url: /instance/settings/plugins/c53b846c-fc22-4a2f-bb64-9b46cd6f95db
+              - listitem [ref=e185]:
+                - generic [ref=e186]:
+                  - generic [ref=e187]:
+                    - generic [ref=e188]:
+                      - generic [ref=e189]: Kitchen Sink (Example)
+                      - generic [ref=e190]: Example
+                      - generic [ref=e191]: ready
+                    - paragraph [ref=e192]: Reference plugin that demonstrates the current Paperclip plugin API surface, bridge flows, UI extension surfaces, jobs, webhooks, tools, streams, and trusted local workspace/process demos.
+                    - paragraph [ref=e193]: "@paperclipai/plugin-kitchen-sink-example"
+                  - link "Open Settings" [ref=e195] [cursor=pointer]:
+                    - /url: /instance/settings/plugins/e3de38b7-a29f-49e2-b442-77b1ea6afdac
+          - generic [ref=e196]:
+            - generic [ref=e197]:
+              - img [ref=e198]
+              - heading "Installed Plugins" [level=2] [ref=e200]
+            - list [ref=e201]:
+              - listitem [ref=e202]:
+                - generic [ref=e203]:
+                  - generic [ref=e204]:
+                    - generic [ref=e205]:
+                      - link "File Browser (Example)" [ref=e206] [cursor=pointer]:
+                        - /url: /instance/settings/plugins/c53b846c-fc22-4a2f-bb64-9b46cd6f95db
+                      - generic [ref=e207]: Example
+                    - paragraph [ref=e209]: "@paperclipai/plugin-file-browser-example · v0.2.0"
+                    - paragraph [ref=e210]: Example plugin that adds a Files link under each project in the sidebar, a file browser + editor tab on the project detail page, and per-comment file link annotations with a context menu action to open referenced files.
+                  - generic [ref=e212]:
+                    - generic [ref=e213]:
+                      - generic [ref=e214]: ready
+                      - button "Disable" [ref=e215]:
+                        - img
+                      - button "Uninstall" [ref=e216]:
+                        - img
+                    - link "Configure" [ref=e217] [cursor=pointer]:
+                      - /url: /instance/settings/plugins/c53b846c-fc22-4a2f-bb64-9b46cd6f95db
+                      - img
+                      - text: Configure
+              - listitem [ref=e218]:
+                - generic [ref=e219]:
+                  - generic [ref=e220]:
+                    - generic [ref=e221]:
+                      - link "Kitchen Sink (Example)" [ref=e222] [cursor=pointer]:
+                        - /url: /instance/settings/plugins/e3de38b7-a29f-49e2-b442-77b1ea6afdac
+                      - generic [ref=e223]: Example
+                    - paragraph [ref=e225]: "@paperclipai/plugin-kitchen-sink-example · v0.1.0"
+                    - paragraph [ref=e226]: Reference plugin that demonstrates the current Paperclip plugin API surface, UI surfaces, bridge actions, events, jobs, webhooks, tools, local workspace access, and runtime diagnostics in one place.
+                  - generic [ref=e228]:
+                    - generic [ref=e229]:
+                      - generic [ref=e230]: ready
+                      - button "Disable" [ref=e231]:
+                        - img
+                      - button "Uninstall" [ref=e232]:
+                        - img
+                    - link "Configure" [ref=e233] [cursor=pointer]:
+                      - /url: /instance/settings/plugins/e3de38b7-a29f-49e2-b442-77b1ea6afdac
+                      - img
+                      - text: Configure
+              - listitem [ref=e234]:
+                - generic [ref=e235]:
+                  - generic [ref=e236]:
+                    - generic [ref=e237]:
+                      - link "Hello World Widget (Example)" [ref=e238] [cursor=pointer]:
+                        - /url: /instance/settings/plugins/9f889db2-3c11-4565-8760-3ebfb1f42ccf
+                      - generic [ref=e239]: Example
+                    - paragraph [ref=e241]: "@paperclipai/plugin-hello-world-example · v0.1.0"
+                    - paragraph [ref=e242]: Reference UI plugin that adds a simple Hello World widget to the Paperclip dashboard.
+                  - generic [ref=e244]:
+                    - generic [ref=e245]:
+                      - generic [ref=e246]: ready
+                      - button "Disable" [ref=e247]:
+                        - img
+                      - button "Uninstall" [ref=e248]:
+                        - img
+                    - link "Configure" [ref=e249] [cursor=pointer]:
+                      - /url: /instance/settings/plugins/9f889db2-3c11-4565-8760-3ebfb1f42ccf
+                      - img
+                      - text: Configure
+  - generic [ref=e250]:
+    - heading "Command Palette" [level=2] [ref=e251]
+    - paragraph [ref=e252]: Search for a command to run...

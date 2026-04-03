@@ -1,0 +1,386 @@
+- generic:
+  - generic:
+    - generic:
+      - link:
+        - /url: "#main-content"
+        - text: Skip to Main Content
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - img
+              - generic:
+                - button:
+                  - link:
+                    - /url: /NIAAAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: "N"
+                - button:
+                  - link:
+                    - /url: /TES/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: T
+                - button:
+                  - link:
+                    - /url: /NIAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: "N"
+                - button:
+                  - link:
+                    - /url: /NIA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: "N"
+                - button:
+                  - link:
+                    - /url: /TESA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: T
+                - button:
+                  - link:
+                    - /url: /NIAAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: "N"
+                - button:
+                  - link:
+                    - /url: /TESAAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: T
+                - button:
+                  - link:
+                    - /url: /ABC/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: A
+                - button:
+                  - link:
+                    - /url: /FAC/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: F
+                - button:
+                  - link:
+                    - /url: /TESAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: M
+                - status
+              - generic:
+                - button:
+                  - img
+            - generic:
+              - complementary:
+                - generic:
+                  - generic: Niagara High-Rise Verified Mission Company
+                  - button:
+                    - img
+                - navigation:
+                  - generic:
+                    - button:
+                      - img
+                      - generic: New Issue
+                    - link:
+                      - /url: /NIAAAA/dashboard
+                      - generic:
+                        - img
+                      - generic: Dashboard
+                    - link:
+                      - /url: /NIAAAA/inbox
+                      - generic:
+                        - img
+                      - generic: Inbox
+                      - generic: "7"
+                    - generic:
+                      - generic:
+                        - link:
+                          - /url: /NIAAAA/kitchensink
+                          - generic:
+                            - img
+                          - generic: Kitchen Sink
+                  - generic:
+                    - generic: Work
+                    - generic:
+                      - link:
+                        - /url: /NIAAAA/issues
+                        - generic:
+                          - img
+                        - generic: Issues
+                      - link:
+                        - /url: /NIAAAA/routines
+                        - generic:
+                          - img
+                        - generic: Routines
+                        - generic: Beta
+                      - link:
+                        - /url: /NIAAAA/goals
+                        - generic:
+                          - img
+                        - generic: Goals
+                  - generic:
+                    - generic:
+                      - generic:
+                        - button [expanded]:
+                          - img
+                          - generic: Projects
+                        - button:
+                          - img
+                    - generic:
+                      - status
+                  - generic:
+                    - generic:
+                      - generic:
+                        - button [expanded]:
+                          - img
+                          - generic: Agents
+                        - button:
+                          - img
+                    - generic:
+                      - generic:
+                        - link:
+                          - /url: /NIAAAA/agents/builder-scout
+                          - img
+                          - generic: Builder Scout
+                        - link:
+                          - /url: /NIAAAA/agents/buyer-scout
+                          - img
+                          - generic: Buyer Scout
+                        - link:
+                          - /url: /NIAAAA/agents/ceo-strategy
+                          - img
+                          - generic: CEO Strategy
+                  - generic:
+                    - generic: Company
+                    - generic:
+                      - link:
+                        - /url: /NIAAAA/org
+                        - generic:
+                          - img
+                        - generic: Org
+                      - link:
+                        - /url: /NIAAAA/skills
+                        - generic:
+                          - img
+                        - generic: Skills
+                      - link:
+                        - /url: /NIAAAA/costs
+                        - generic:
+                          - img
+                        - generic: Costs
+                      - link:
+                        - /url: /NIAAAA/activity
+                        - generic:
+                          - img
+                        - generic: Activity
+                      - link:
+                        - /url: /NIAAAA/company/settings
+                        - generic:
+                          - img
+                        - generic: Settings
+                  - generic:
+                    - generic:
+                      - generic:
+                        - strong: Kitchen Sink Panel
+                        - generic: "Recent plugin records: 12"
+                        - link:
+                          - /url: /NIAAAA/kitchensink
+                          - text: Open plugin page
+          - generic:
+            - generic:
+              - link:
+                - /url: https://docs.paperclip.ing/
+                - img
+                - generic: Documentation
+              - generic: v
+              - link:
+                - /url: /instance/settings/general
+                - img
+              - button:
+                - img
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - heading [level=1]: Issues
+          - generic:
+            - main:
+              - generic:
+                - generic:
+                  - generic:
+                    - button:
+                      - img
+                      - generic: New Issue
+                    - generic:
+                      - img
+                      - textbox:
+                        - /placeholder: Search issues...
+                  - generic:
+                    - generic:
+                      - button:
+                        - img
+                      - button:
+                        - img
+                    - button:
+                      - img
+                      - generic: Filter
+                    - button:
+                      - img
+                      - generic: Sort
+                    - button:
+                      - img
+                      - generic: Group
+                - generic:
+                  - generic:
+                    - link:
+                      - /url: /NIAAAA/issues/NIAAAA-7?from=issues
+                      - generic:
+                        - generic: "CEO Strategic Brief: BigDataClaw Mission Control Overview"
+                        - generic:
+                          - generic: NIAAAA-7
+                      - generic:
+                        - button:
+                          - generic:
+                            - generic:
+                              - img
+                            - text: Assignee
+                        - generic: Apr 2, 2026
+                    - link:
+                      - /url: /NIAAAA/issues/NIAAAA-6?from=issues
+                      - generic:
+                        - generic: "Phase 6: Results Compilation"
+                        - generic:
+                          - generic: NIAAAA-6
+                      - generic:
+                        - button:
+                          - generic:
+                            - generic:
+                              - img
+                            - text: Assignee
+                        - generic: Apr 2, 2026
+                    - link:
+                      - /url: /NIAAAA/issues/NIAAAA-5?from=issues
+                      - generic:
+                        - generic: "Phase 5: Lender Matcher"
+                        - generic:
+                          - generic: NIAAAA-5
+                      - generic:
+                        - button:
+                          - generic:
+                            - generic:
+                              - img
+                            - text: Assignee
+                        - generic: Apr 2, 2026
+                    - link:
+                      - /url: /NIAAAA/issues/NIAAAA-4?from=issues
+                      - generic:
+                        - generic: "Phase 4: Agent Finder"
+                        - generic:
+                          - generic: NIAAAA-4
+                      - generic:
+                        - button:
+                          - generic:
+                            - generic:
+                              - img
+                            - text: Assignee
+                        - generic: Apr 2, 2026
+                    - link:
+                      - /url: /NIAAAA/issues/NIAAAA-3?from=issues
+                      - generic:
+                        - generic: "Phase 3: Portfolio Analyzer"
+                        - generic:
+                          - generic: NIAAAA-3
+                      - generic:
+                        - button:
+                          - generic:
+                            - generic:
+                              - img
+                            - text: Assignee
+                        - generic: Apr 2, 2026
+                    - link:
+                      - /url: /NIAAAA/issues/NIAAAA-2?from=issues
+                      - generic:
+                        - generic: "Phase 2: Hot Money Identifier"
+                        - generic:
+                          - generic: NIAAAA-2
+                      - generic:
+                        - button:
+                          - generic:
+                            - generic:
+                              - img
+                            - text: Assignee
+                        - generic: Apr 2, 2026
+                    - link:
+                      - /url: /NIAAAA/issues/NIAAAA-1?from=issues
+                      - generic:
+                        - generic: "Phase 1: Transaction Scout"
+                        - generic:
+                          - generic: NIAAAA-1
+                      - generic:
+                        - button:
+                          - generic:
+                            - generic:
+                              - img
+                            - text: Assignee
+                        - generic: Apr 2, 2026
+      - generic:
+        - heading [level=2]: Command Palette
+        - paragraph: Search for a command to run...
+  - dialog [ref=e392]:
+    - generic [ref=e393]:
+      - generic [ref=e394]:
+        - button "NIA" [ref=e395] [cursor=pointer]
+        - generic [ref=e396]: ›
+        - generic [ref=e397]: New issue
+      - generic [ref=e398]:
+        - button [ref=e399]:
+          - img
+        - button "×" [ref=e400]:
+          - generic [ref=e401]: ×
+    - textbox "Issue title" [ref=e403]: "STRATEGIC: Paperclip Business Agent Architecture for $1.56M ARR"
+    - generic [ref=e406]:
+      - generic [ref=e407]: For
+      - button "Assignee" [ref=e408]:
+        - generic [ref=e409]: Assignee
+      - generic [ref=e410]: in
+      - button "Project" [ref=e411]:
+        - generic [ref=e412]: Project
+    - generic [ref=e417]:
+      - textbox "editable markdown" [active] [ref=e419]:
+        - paragraph [ref=e420]
+      - generic:
+        - paragraph: Add description...
+    - generic [ref=e421]:
+      - button "Todo" [ref=e422]:
+        - img [ref=e423]
+        - text: Todo
+      - button "Priority" [ref=e426]:
+        - img [ref=e427]
+        - text: Priority
+      - button "Labels" [ref=e428]:
+        - img [ref=e429]
+        - text: Labels
+      - button "Upload" [ref=e432]:
+        - img [ref=e433]
+        - text: Upload
+      - button [ref=e435]:
+        - img [ref=e436]
+    - generic [ref=e440]:
+      - button "Discard Draft" [ref=e442]
+      - button "Create Issue" [ref=e443]:
+        - generic [ref=e445]: Create Issue

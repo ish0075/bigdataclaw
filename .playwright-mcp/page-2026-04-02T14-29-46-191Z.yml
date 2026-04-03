@@ -1,0 +1,257 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img "Control Shifter" [ref=e8]
+        - generic [ref=e9]:
+          - heading "Mission Control" [level=1] [ref=e10]
+          - paragraph [ref=e11]: Real Estate Command Center
+      - button "Collapse sidebar" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - generic [ref=e17]:
+        - button "Collapse all" [ref=e18] [cursor=pointer]
+        - button "Expand all" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - button "Main" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]: Main
+          - img [ref=e23]
+        - generic [ref=e25]:
+          - link "Mission Control" [ref=e26] [cursor=pointer]:
+            - /url: /
+            - img [ref=e27]
+            - generic [ref=e32]: Mission Control
+          - link "Property Research" [ref=e33] [cursor=pointer]:
+            - /url: /research
+            - img [ref=e34]
+            - generic [ref=e38]: Property Research
+          - link "Hot Money Radar" [ref=e39] [cursor=pointer]:
+            - /url: /hotmoney
+            - img [ref=e40]
+            - generic [ref=e42]: Hot Money Radar
+          - link "Deal Pipeline" [ref=e43] [cursor=pointer]:
+            - /url: /pipeline
+            - img [ref=e44]
+            - generic [ref=e49]: Deal Pipeline
+          - link "Opportunities" [ref=e50] [cursor=pointer]:
+            - /url: /opportunities
+            - img [ref=e51]
+            - generic [ref=e53]: Opportunities
+          - link "Agent Workspace" [ref=e54] [cursor=pointer]:
+            - /url: /agents
+            - img [ref=e55]
+            - generic [ref=e58]: Agent Workspace
+          - link "Bot Boardroom AI" [ref=e59] [cursor=pointer]:
+            - /url: /bot-boardroom
+            - img [ref=e60]
+            - generic [ref=e66]: Bot Boardroom
+            - generic [ref=e67]: AI
+          - link "Obsidian Vault" [ref=e68] [cursor=pointer]:
+            - /url: /vault
+            - img [ref=e69]
+            - generic [ref=e73]: Obsidian Vault
+      - generic [ref=e74]:
+        - button "Recruitment" [ref=e75] [cursor=pointer]:
+          - generic [ref=e76]: Recruitment
+          - img [ref=e77]
+        - generic [ref=e79]:
+          - link "EXP Agent Recruiter 96K" [ref=e80] [cursor=pointer]:
+            - /url: /exp-agent-recruiter
+            - img [ref=e81]
+            - generic [ref=e84]: EXP Agent Recruiter
+            - generic [ref=e85]: 96K
+          - link "Commercial Agents 6.7K" [ref=e86] [cursor=pointer]:
+            - /url: /commercial-agent-recruiter
+            - img [ref=e87]
+            - generic [ref=e90]: Commercial Agents
+            - generic [ref=e91]: 6.7K
+          - link "Brokerages" [ref=e92] [cursor=pointer]:
+            - /url: /brokerages
+            - img [ref=e93]
+            - generic [ref=e96]: Brokerages
+      - generic [ref=e97]:
+        - button "AI Bots" [ref=e98] [cursor=pointer]:
+          - generic [ref=e99]: AI Bots
+          - img [ref=e100]
+        - generic [ref=e102]:
+          - link "Buyer Intelligence AI" [ref=e103] [cursor=pointer]:
+            - /url: /buyer-bot
+            - img [ref=e104]
+            - generic [ref=e108]: Buyer Intelligence
+            - generic [ref=e109]: AI
+          - link "Seller Outreach AI" [ref=e110] [cursor=pointer]:
+            - /url: /seller-outreach-bot
+            - img [ref=e111]
+            - generic [ref=e116]: Seller Outreach
+            - generic [ref=e117]: AI
+          - link "Property Valuation AI" [ref=e118] [cursor=pointer]:
+            - /url: /property-valuation-bot
+            - img [ref=e119]
+            - generic [ref=e121]: Property Valuation
+            - generic [ref=e122]: AI
+          - link "Vigil Monitor 24/7" [ref=e123] [cursor=pointer]:
+            - /url: /vigil
+            - img [ref=e124]
+            - generic [ref=e126]: Vigil Monitor
+            - generic [ref=e127]: 24/7
+          - link "Agent Workspaces NEW" [ref=e128] [cursor=pointer]:
+            - /url: /agent-workspaces
+            - img [ref=e129]
+            - generic [ref=e131]: Agent Workspaces
+            - generic [ref=e132]: NEW
+          - link "Bot Builder BUILD" [ref=e133] [cursor=pointer]:
+            - /url: /bot-builder
+            - img [ref=e134]
+            - generic [ref=e138]: Bot Builder
+            - generic [ref=e139]: BUILD
+          - link "Agent Visualizer LIVE" [ref=e140] [cursor=pointer]:
+            - /url: /mission-control
+            - img [ref=e141]
+            - generic [ref=e143]: Agent Visualizer
+            - generic [ref=e144]: LIVE
+      - generic [ref=e145]:
+        - button "Tools" [ref=e146] [cursor=pointer]:
+          - generic [ref=e147]: Tools
+          - img [ref=e148]
+        - generic [ref=e150]:
+          - link "My Listings" [ref=e151] [cursor=pointer]:
+            - /url: /listings
+            - img [ref=e152]
+            - generic [ref=e156]: My Listings
+          - link "Buyer Matcher" [ref=e157] [cursor=pointer]:
+            - /url: /buyers
+            - img [ref=e158]
+            - generic [ref=e163]: Buyer Matcher
+          - link "Agent Matcher" [ref=e164] [cursor=pointer]:
+            - /url: /agents-matcher
+            - img [ref=e165]
+            - generic [ref=e169]: Agent Matcher
+          - link "Lender Matcher" [ref=e170] [cursor=pointer]:
+            - /url: /lenders
+            - img [ref=e171]
+            - generic [ref=e173]: Lender Matcher
+          - link "Builder Directory" [ref=e174] [cursor=pointer]:
+            - /url: /builders
+            - img [ref=e175]
+            - generic [ref=e179]: Builder Directory
+          - link "Property Upload" [ref=e180] [cursor=pointer]:
+            - /url: /upload
+            - img [ref=e181]
+            - generic [ref=e184]: Property Upload
+          - link "Olena Marketing NEW" [ref=e185] [cursor=pointer]:
+            - /url: /olena-feature-sheet
+            - img [ref=e186]
+            - generic [ref=e189]: Olena Marketing
+            - generic [ref=e190]: NEW
+          - link "Canva Editor NEW" [ref=e191] [cursor=pointer]:
+            - /url: /canva-editor
+            - img [ref=e192]
+            - generic [ref=e198]: Canva Editor
+            - generic [ref=e199]: NEW
+          - link "Skills & Agents" [ref=e200] [cursor=pointer]:
+            - /url: /skills
+            - img [ref=e201]
+            - generic [ref=e204]: Skills & Agents
+          - link "Map View" [ref=e205] [cursor=pointer]:
+            - /url: /map
+            - img [ref=e206]
+            - generic [ref=e208]: Map View
+          - link "Data Manager" [ref=e209] [cursor=pointer]:
+            - /url: /data-manager
+            - img [ref=e210]
+            - generic [ref=e214]: Data Manager
+          - link "AI Builder CODE" [ref=e215] [cursor=pointer]:
+            - /url: /ai-builder
+            - img [ref=e216]
+            - generic [ref=e219]: AI Builder
+            - generic [ref=e220]: CODE
+    - generic [ref=e224]: System Online
+  - generic [ref=e225]:
+    - banner [ref=e226]:
+      - generic [ref=e232]:
+        - img [ref=e233]
+        - generic [ref=e237]: Connected
+      - generic [ref=e240]:
+        - img [ref=e241]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e244]
+        - combobox [ref=e245]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e246]:
+        - button "Voice" [ref=e247] [cursor=pointer]:
+          - img [ref=e248]
+          - generic [ref=e254]: Voice
+        - generic [ref=e255]:
+          - img [ref=e256]
+          - generic [ref=e261]: $12.40
+        - link "Data Manager" [ref=e262] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e263]
+        - button [ref=e267] [cursor=pointer]:
+          - img [ref=e268]
+        - link [ref=e271] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e272]
+        - link "🦞" [ref=e275] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e276]: 🦞
+    - main [ref=e277]:
+      - generic [ref=e279]:
+        - generic [ref=e280]:
+          - generic [ref=e281]:
+            - img [ref=e283]
+            - generic [ref=e286]:
+              - heading "AI Builder" [level=1] [ref=e287]
+              - paragraph [ref=e288]: VS Code Style Editor
+          - generic [ref=e289]:
+            - button [ref=e290] [cursor=pointer]:
+              - img [ref=e291]
+            - button [ref=e294] [cursor=pointer]:
+              - img [ref=e295]
+            - button "Save" [disabled] [ref=e297]:
+              - img [ref=e298]
+              - text: Save
+        - generic [ref=e302]:
+          - generic [ref=e304]:
+            - generic [ref=e305]: Explorer
+            - generic [ref=e306]:
+              - button "New File" [ref=e307] [cursor=pointer]:
+                - img [ref=e308]
+              - button "Refresh" [ref=e309] [cursor=pointer]:
+                - img [ref=e310]
+          - generic [ref=e319]:
+            - img [ref=e320]
+            - paragraph [ref=e323]: Select a file to start editing
+            - paragraph [ref=e324]: or ask the AI to create one for you
+          - generic [ref=e325]:
+            - generic [ref=e326]:
+              - generic [ref=e327]:
+                - img [ref=e329]
+                - generic [ref=e332]:
+                  - text: AI Assistant
+                  - generic [ref=e333]: Online
+              - button [ref=e335] [cursor=pointer]:
+                - img [ref=e336]
+            - generic [ref=e341]:
+              - generic [ref=e342]:
+                - img [ref=e343]
+                - generic [ref=e345]: AI Assistant
+              - paragraph [ref=e346]: "👋 Hi! I'm your AI Builder assistant. I can help you: • Create new components • Fix bugs and errors • Add styling with Tailwind • Explain existing code • Refactor and optimize What would you like to build today?"
+              - generic [ref=e347]:
+                - button "Create a new component" [ref=e348] [cursor=pointer]
+                - button "Fix an error" [ref=e349] [cursor=pointer]
+                - button "Add styling" [ref=e350] [cursor=pointer]
+                - button "Explain this code" [ref=e351] [cursor=pointer]
+            - generic [ref=e352]:
+              - generic [ref=e353]:
+                - textbox "Ask AI to build something..." [ref=e354]
+                - button [disabled] [ref=e355]:
+                  - img [ref=e356]
+              - paragraph [ref=e360]: AI can create, edit, and explain code
+  - button "Ctrl+Shift+V" [ref=e361] [cursor=pointer]:
+    - img [ref=e362]
+    - generic [ref=e365]: Ctrl+Shift+V

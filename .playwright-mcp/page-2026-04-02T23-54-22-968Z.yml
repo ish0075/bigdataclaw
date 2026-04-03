@@ -1,0 +1,516 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - img "Control Shifter" [ref=e8]
+      - button "Expand sidebar" [ref=e999] [cursor=pointer]:
+        - img [ref=e1000]
+    - navigation [ref=e16]:
+      - generic [ref=e1003]:
+        - link "Mission Control" [ref=e1004] [cursor=pointer]:
+          - /url: /
+          - img [ref=e1005]
+          - generic: Mission Control
+        - link "Property Research" [ref=e1010] [cursor=pointer]:
+          - /url: /research
+          - img [ref=e1011]
+          - generic: Property Research
+        - link "Hot Money Radar" [ref=e1015] [cursor=pointer]:
+          - /url: /hotmoney
+          - img [ref=e1016]
+          - generic: Hot Money Radar
+        - link "Deal Pipeline" [ref=e1018] [cursor=pointer]:
+          - /url: /pipeline
+          - img [ref=e1019]
+          - generic: Deal Pipeline
+        - link "Opportunities" [ref=e1024] [cursor=pointer]:
+          - /url: /opportunities
+          - img [ref=e1025]
+          - generic: Opportunities
+        - link "Agent Workspace" [ref=e1027] [cursor=pointer]:
+          - /url: /agents
+          - img [ref=e1028]
+          - generic: Agent Workspace
+        - link "Agent Companies" [ref=e1031] [cursor=pointer]:
+          - /url: /paperclip-companies
+          - img [ref=e1032]
+          - generic: Agent Companies
+        - link "Paperclip Dashboard" [ref=e1037] [cursor=pointer]:
+          - /url: /paperclip-dashboard
+          - img [ref=e1038]
+          - generic: Paperclip Dashboard
+        - link "Pixel Agents" [ref=e1041] [cursor=pointer]:
+          - /url: /mission-control
+          - img [ref=e1042]
+          - generic: Pixel Agents
+        - link "Bot Boardroom" [ref=e1048] [cursor=pointer]:
+          - /url: /bot-boardroom
+          - img [ref=e1049]
+          - generic: Bot Boardroom
+        - link "Obsidian Vault" [ref=e1056] [cursor=pointer]:
+          - /url: /vault
+          - img [ref=e1057]
+          - generic: Obsidian Vault
+      - generic [ref=e1062]:
+        - link "EXP Agent Recruiter" [ref=e1063] [cursor=pointer]:
+          - /url: /exp-agent-recruiter
+          - img [ref=e1064]
+          - generic: EXP Agent Recruiter
+        - link "Commercial Agents" [ref=e1068] [cursor=pointer]:
+          - /url: /commercial-agent-recruiter
+          - img [ref=e1069]
+          - generic: Commercial Agents
+        - link "Brokerages" [ref=e1073] [cursor=pointer]:
+          - /url: /brokerages
+          - img [ref=e1074]
+          - generic: Brokerages
+      - generic [ref=e1078]:
+        - link "Buyer Intelligence" [ref=e1079] [cursor=pointer]:
+          - /url: /buyer-bot
+          - img [ref=e1080]
+          - generic: Buyer Intelligence
+        - link "Seller Outreach" [ref=e1085] [cursor=pointer]:
+          - /url: /seller-outreach-bot
+          - img [ref=e1086]
+          - generic: Seller Outreach
+        - link "Property Valuation" [ref=e1092] [cursor=pointer]:
+          - /url: /property-valuation-bot
+          - img [ref=e1093]
+          - generic: Property Valuation
+        - link "Vigil Monitor" [ref=e1096] [cursor=pointer]:
+          - /url: /vigil
+          - img [ref=e1097]
+          - generic: Vigil Monitor
+        - link "Agent Workspaces" [ref=e1100] [cursor=pointer]:
+          - /url: /agent-workspaces
+          - img [ref=e1101]
+          - generic: Agent Workspaces
+        - link "Bot Builder" [ref=e1104] [cursor=pointer]:
+          - /url: /bot-builder
+          - img [ref=e1105]
+          - generic: Bot Builder
+      - generic [ref=e1111]:
+        - link "My Listings" [ref=e1112] [cursor=pointer]:
+          - /url: /listings
+          - img [ref=e1113]
+          - generic: My Listings
+        - link "Buyer Matcher" [ref=e1117] [cursor=pointer]:
+          - /url: /buyers
+          - img [ref=e1118]
+          - generic: Buyer Matcher
+        - link "Agent Matcher" [ref=e1123] [cursor=pointer]:
+          - /url: /agents-matcher
+          - img [ref=e1124]
+          - generic: Agent Matcher
+        - link "Lender Matcher" [ref=e1128] [cursor=pointer]:
+          - /url: /lenders
+          - img [ref=e1129]
+          - generic: Lender Matcher
+        - link "Builder Directory" [ref=e1131] [cursor=pointer]:
+          - /url: /builders
+          - img [ref=e1132]
+          - generic: Builder Directory
+        - link "Property Upload" [ref=e1136] [cursor=pointer]:
+          - /url: /upload
+          - img [ref=e1137]
+          - generic: Property Upload
+        - link "Olena Marketing" [ref=e1140] [cursor=pointer]:
+          - /url: /olena-feature-sheet
+          - img [ref=e1141]
+          - generic: Olena Marketing
+        - link "Canva Editor" [ref=e1145] [cursor=pointer]:
+          - /url: /canva-editor
+          - img [ref=e1146]
+          - generic: Canva Editor
+        - link "Skills & Agents" [ref=e1153] [cursor=pointer]:
+          - /url: /skills
+          - img [ref=e1154]
+          - generic: Skills & Agents
+        - link "Map View" [ref=e1157] [cursor=pointer]:
+          - /url: /map
+          - img [ref=e1158]
+          - generic: Map View
+        - link "Data Manager" [ref=e1160] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e1161]
+          - generic: Data Manager
+        - link "AI Builder" [ref=e1165] [cursor=pointer]:
+          - /url: /ai-builder
+          - img [ref=e1166]
+          - generic: AI Builder
+  - generic [ref=e240]:
+    - banner [ref=e241]:
+      - generic [ref=e247]:
+        - img [ref=e1170]
+        - generic [ref=e255]: Connected
+      - generic [ref=e258]:
+        - img [ref=e259]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e262]
+        - combobox [ref=e263]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e264]:
+        - button "Voice" [ref=e265] [cursor=pointer]:
+          - img [ref=e266]
+          - generic [ref=e272]: Voice
+        - generic [ref=e273]:
+          - img [ref=e274]
+          - generic [ref=e279]: $12.40
+        - link "Data Manager" [ref=e280] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e281]
+        - button [ref=e285] [cursor=pointer]:
+          - img [ref=e286]
+        - link [ref=e289] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e290]
+        - link "🦞" [ref=e293] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e294]: 🦞
+    - main [ref=e295]:
+      - generic [ref=e297]:
+        - generic [ref=e298]:
+          - generic [ref=e299]:
+            - img [ref=e301]
+            - generic [ref=e304]:
+              - heading "Agent Mission Control" [level=1] [ref=e305]
+              - paragraph [ref=e306]: Visual Task Execution System
+          - generic [ref=e307]:
+            - generic [ref=e308]:
+              - generic [ref=e309]:
+                - img [ref=e310]
+                - generic [ref=e313]: 16 Done
+              - generic [ref=e314]:
+                - img [ref=e315]
+                - generic [ref=e317]: 0 Active
+              - generic [ref=e318]:
+                - img [ref=e319]
+                - generic [ref=e322]: 0 Queued
+            - generic [ref=e323]:
+              - button "Pause" [ref=e1174] [cursor=pointer]:
+                - img [ref=e1175]
+                - text: Pause
+              - button "Add Task" [ref=e327] [cursor=pointer]:
+                - img [ref=e328]
+                - text: Add Task
+              - button [ref=e329] [cursor=pointer]:
+                - img [ref=e330]
+        - generic [ref=e333]:
+          - generic [ref=e334]:
+            - heading "Active Agents (0/7)" [level=2] [ref=e1610]:
+              - img [ref=e337]
+              - text: Active Agents (0/7)
+            - generic [ref=e340]:
+              - generic [ref=e342]:
+                - generic [ref=e343]: 👨‍💻
+                - generic [ref=e344]:
+                  - generic [ref=e345]:
+                    - heading "CodeBuilder" [level=3] [ref=e346]
+                    - generic [ref=e347]: Idle
+                  - paragraph [ref=e348]: Developer
+                  - generic [ref=e1534]: Standby
+                  - generic [ref=e358]:
+                    - generic [ref=e359]: React
+                    - generic [ref=e360]: Python
+                    - generic [ref=e361]: CSS
+              - generic [ref=e363]:
+                - generic [ref=e364]: 👩‍💻
+                - generic [ref=e365]:
+                  - generic [ref=e366]:
+                    - heading "DataMiner" [level=3] [ref=e367]
+                    - generic [ref=e368]: Idle
+                  - paragraph [ref=e369]: Analyst
+                  - generic [ref=e1543]: Standby
+                  - generic [ref=e383]:
+                    - generic [ref=e384]: SQL
+                    - generic [ref=e385]: Pandas
+                    - generic [ref=e386]: APIs
+              - generic [ref=e388]:
+                - generic [ref=e389]: 🔍
+                - generic [ref=e390]:
+                  - generic [ref=e391]:
+                    - heading "WebScout" [level=3] [ref=e392]
+                    - generic [ref=e393]: Idle
+                  - paragraph [ref=e394]: Researcher
+                  - generic [ref=e1556]: Standby
+                  - generic [ref=e404]:
+                    - generic [ref=e405]: Scraping
+                    - generic [ref=e406]: Search
+                    - generic [ref=e407]: Validation
+              - generic [ref=e409]:
+                - generic [ref=e410]: ✍️
+                - generic [ref=e411]:
+                  - generic [ref=e412]:
+                    - heading "ContentBot" [level=3] [ref=e413]
+                    - generic [ref=e414]: Idle
+                  - paragraph [ref=e415]: Writer
+                  - generic [ref=e1614]: Standby
+                  - generic [ref=e425]:
+                    - generic [ref=e426]: Copy
+                    - generic [ref=e427]: Docs
+                    - generic [ref=e428]: Markdown
+              - generic [ref=e430]:
+                - generic [ref=e431]: 🧪
+                - generic [ref=e432]:
+                  - generic [ref=e433]:
+                    - heading "TestRunner" [level=3] [ref=e434]
+                    - generic [ref=e435]: Idle
+                  - paragraph [ref=e436]: QA
+                  - generic [ref=e1621]:
+                    - generic [ref=e1623]: Standby
+                    - generic [ref=e1625]:
+                      - img [ref=e1628]
+                      - img [ref=e1633]
+                  - generic [ref=e456]:
+                    - generic [ref=e457]: Testing
+                    - generic [ref=e458]: Debugging
+                    - generic [ref=e459]: Review
+              - generic [ref=e461]:
+                - generic [ref=e462]: 🔍
+                - generic [ref=e463]:
+                  - generic [ref=e464]:
+                    - heading "Skeptic" [level=3] [ref=e465]
+                    - generic [ref=e466]: Idle
+                  - paragraph [ref=e467]: Fact Checker
+                  - generic [ref=e1642]: Standby
+                  - generic [ref=e477]:
+                    - generic [ref=e478]: Validation
+                    - generic [ref=e479]: Sources
+                    - generic [ref=e480]: Logic
+              - generic [ref=e482]:
+                - generic [ref=e483]: 💡
+                - generic [ref=e484]:
+                  - generic [ref=e485]:
+                    - heading "Spark" [level=3] [ref=e486]
+                    - generic [ref=e487]: Idle
+                  - paragraph [ref=e488]: Ideation
+                  - generic [ref=e1651]: Standby
+                  - generic [ref=e498]:
+                    - generic [ref=e499]: Brainstorming
+                    - generic [ref=e500]: Optimization
+                    - generic [ref=e501]: Strategy
+          - generic:
+            - generic [ref=e502]:
+              - generic:
+                - heading "Task Queue" [level=2] [ref=e503]:
+                  - img [ref=e504]
+                  - text: Task Queue
+                - generic [ref=e508]: 1 tasks remaining
+              - generic [ref=e949] [cursor=pointer]:
+                - generic:
+                  - img [ref=e951]
+                  - generic [ref=e954]:
+                    - generic [ref=e955]:
+                      - heading "Rethink buyer matching strategy" [level=3] [ref=e956]
+                      - paragraph [ref=e957]: Ideation
+                    - generic [ref=e959]:
+                      - generic [ref=e961]: Ideating
+                      - img [ref=e967]
+                    - generic [ref=e974]: medium
+            - generic [ref=e1574]:
+              - heading "✅ Completed (16)" [level=3]
+              - generic:
+                - generic [ref=e1657]:
+                  - generic [ref=e1658]:
+                    - img [ref=e1659]
+                    - generic [ref=e1661]: Rethink buyer matching strategy
+                  - paragraph [ref=e1662]: ✓ Completed
+                - generic [ref=e1663]:
+                  - generic [ref=e1664]:
+                    - img [ref=e1665]
+                    - generic [ref=e1667]: Optimize outreach workflow
+                  - paragraph [ref=e1668]: ✓ Completed
+                - generic [ref=e1669]:
+                  - generic [ref=e1670]:
+                    - img [ref=e1671]
+                    - generic [ref=e1674]: Verify market report claims
+                  - paragraph [ref=e1675]: ✓ Completed
+                - generic [ref=e1676]:
+                  - generic [ref=e1677]:
+                    - img [ref=e1678]
+                    - generic [ref=e1681]: Fact-check listing descriptions
+                  - paragraph [ref=e1682]: ✓ Completed
+                - generic [ref=e1683]:
+                  - generic [ref=e1684]:
+                    - img [ref=e1685]
+                    - generic [ref=e1689]: Sync CRM records
+                  - paragraph [ref=e1690]: ✓ Completed
+                - generic [ref=e1691]:
+                  - generic [ref=e1692]:
+                    - img [ref=e1693]
+                    - generic [ref=e1695]: Score lead quality
+                  - paragraph [ref=e1696]: ✓ Completed
+                - generic [ref=e1697]:
+                  - generic [ref=e1698]:
+                    - img [ref=e1699]
+                    - generic [ref=e1702]: Draft email campaign
+                  - paragraph [ref=e1703]: ✓ Completed
+                - generic [ref=e1704]:
+                  - generic [ref=e1705]:
+                    - img [ref=e1706]
+                    - generic [ref=e1709]: Monitor price changes
+                  - paragraph [ref=e1710]: ✓ Completed
+                - generic [ref=e1711]:
+                  - generic [ref=e1712]:
+                    - img [ref=e1713]
+                    - generic [ref=e1716]: Research zoning laws
+                  - paragraph [ref=e1717]: ✓ Completed
+                - generic [ref=e1718]:
+                  - generic [ref=e1719]:
+                    - img [ref=e1720]
+                    - generic [ref=e1722]: Analyze buyer patterns
+                  - paragraph [ref=e1723]: ✓ Completed
+          - generic [ref=e979]:
+            - generic [ref=e980]:
+              - heading "Live Agent Logs" [level=2] [ref=e981]:
+                - img [ref=e982]
+                - text: Live Agent Logs
+              - button [ref=e984] [cursor=pointer]:
+                - img [ref=e985]
+            - generic [ref=e989]:
+              - generic [ref=e1431]:
+                - generic [ref=e1432]:
+                  - generic [ref=e1433]: 👨‍💻
+                  - generic [ref=e1434]: CodeBuilder
+                - generic [ref=e1435]:
+                  - generic [ref=e1436]:
+                    - generic [ref=e1437]: "[7:53:58 PM]"
+                    - text: 💭 Connecting disparate concepts...
+                  - generic [ref=e1438]:
+                    - generic [ref=e1439]: "[7:54:01 PM]"
+                    - text: 💭 Synthesizing best approach...
+                  - generic [ref=e1440]:
+                    - generic [ref=e1441]: "[7:54:02 PM]"
+                    - text: 💭 Questioning assumptions...
+                  - generic [ref=e1442]:
+                    - generic [ref=e1443]: "[7:54:04 PM]"
+                    - text: "✅ Completed: Optimize outreach workflow"
+                  - generic [ref=e1444]:
+                    - generic [ref=e1445]: "[7:54:06 PM]"
+                    - text: "✅ Completed: Rethink buyer matching strategy"
+              - generic [ref=e1446]:
+                - generic [ref=e1447]:
+                  - generic [ref=e1448]: 👩‍💻
+                  - generic [ref=e1449]: DataMiner
+                - generic [ref=e1450]:
+                  - generic [ref=e1451]:
+                    - generic [ref=e1452]: "[7:53:48 PM]"
+                    - text: 💭 Extracting contact info...
+                  - generic [ref=e1453]:
+                    - generic [ref=e1454]: "[7:53:49 PM]"
+                    - text: 💭 Validating scraped data...
+                  - generic [ref=e1455]:
+                    - generic [ref=e1456]: "[7:53:49 PM]"
+                    - text: "✅ Completed: Scrape agent contact data"
+                  - generic [ref=e1457]:
+                    - generic [ref=e1458]: "[7:53:49 PM]"
+                    - text: 💭 Drafting content...
+                  - generic [ref=e1459]:
+                    - generic [ref=e1460]: "[7:53:53 PM]"
+                    - text: "✅ Completed: Write API documentation"
+              - generic [ref=e1461]:
+                - generic [ref=e1462]:
+                  - generic [ref=e1463]: 🔍
+                  - generic [ref=e1464]: WebScout
+                - generic [ref=e1465]:
+                  - generic [ref=e1466]:
+                    - generic [ref=e1467]: "[7:53:48 PM]"
+                    - text: 💭 Running statistical models...
+                  - generic [ref=e1468]:
+                    - generic [ref=e1469]: "[7:53:49 PM]"
+                    - text: 💭 Identifying patterns...
+                  - generic [ref=e1470]:
+                    - generic [ref=e1471]: "[7:53:51 PM]"
+                    - text: 💭 Processing records...
+                  - generic [ref=e1472]:
+                    - generic [ref=e1473]: "[7:53:51 PM]"
+                    - text: "✅ Completed: Process database exports"
+                  - generic [ref=e1474]:
+                    - generic [ref=e1475]: "[7:53:53 PM]"
+                    - text: "✅ Completed: Analyze buyer patterns"
+              - generic [ref=e1476]:
+                - generic [ref=e1477]:
+                  - generic [ref=e1478]: ✍️
+                  - generic [ref=e1479]: ContentBot
+                - generic [ref=e1480]:
+                  - generic [ref=e1481]:
+                    - generic [ref=e1482]: "[7:53:51 PM]"
+                    - text: 💭 Writing JSX markup...
+                  - generic [ref=e1483]:
+                    - generic [ref=e1484]: "[7:53:53 PM]"
+                    - text: "✅ Completed: Build dashboard widget"
+                  - generic [ref=e1485]:
+                    - generic [ref=e1486]: "[7:53:53 PM]"
+                    - text: 💭 Formulating search queries...
+                  - generic [ref=e1487]:
+                    - generic [ref=e1488]: "[7:53:54 PM]"
+                    - text: 💭 Formulating search queries...
+                  - generic [ref=e1489]:
+                    - generic [ref=e1490]: "[7:53:54 PM]"
+                    - text: "✅ Completed: Research zoning laws"
+              - generic [ref=e1491]:
+                - generic [ref=e1492]:
+                  - generic [ref=e1493]: 🧪
+                  - generic [ref=e1494]: TestRunner
+                - generic [ref=e1495]:
+                  - generic [ref=e1496]:
+                    - generic [ref=e1497]: "[7:53:54 PM]"
+                    - text: 💭 Drafting content...
+                  - generic [ref=e1498]:
+                    - generic [ref=e1499]: "[7:53:56 PM]"
+                    - text: 💭 Locating data elements...
+                  - generic [ref=e1500]:
+                    - generic [ref=e1501]: "[7:53:56 PM]"
+                    - text: "✅ Completed: Monitor price changes"
+                  - generic [ref=e1502]:
+                    - generic [ref=e1503]: "[7:53:56 PM]"
+                    - text: 💭 Drafting content...
+                  - generic [ref=e1504]:
+                    - generic [ref=e1505]: "[7:53:56 PM]"
+                    - text: "✅ Completed: Draft email campaign"
+              - generic [ref=e1506]:
+                - generic [ref=e1507]:
+                  - generic [ref=e1508]: 🔍
+                  - generic [ref=e1509]: Skeptic
+                - generic [ref=e1510]:
+                  - generic [ref=e1511]:
+                    - generic [ref=e1512]: "[7:53:54 PM]"
+                    - text: 💭 Transforming data...
+                  - generic [ref=e1513]:
+                    - generic [ref=e1514]: "[7:53:56 PM]"
+                    - text: 💭 Calculating metrics...
+                  - generic [ref=e1515]:
+                    - generic [ref=e1516]: "[7:53:56 PM]"
+                    - text: "✅ Completed: Score lead quality"
+                  - generic [ref=e1517]:
+                    - generic [ref=e1518]: "[7:53:56 PM]"
+                    - text: 💭 Processing records...
+                  - generic [ref=e1604]:
+                    - generic [ref=e1605]: "[7:53:58 PM]"
+                    - text: "✅ Completed: Sync CRM records"
+              - generic [ref=e1519]:
+                - generic [ref=e1520]:
+                  - generic [ref=e1521]: 💡
+                  - generic [ref=e1522]: Spark
+                - generic [ref=e1523]:
+                  - generic [ref=e1524]:
+                    - generic [ref=e1525]: "[7:53:58 PM]"
+                    - text: 💭 Validating claims...
+                  - generic [ref=e1526]:
+                    - generic [ref=e1527]: "[7:53:59 PM]"
+                    - text: 💭 Looking for contradictions...
+                  - generic [ref=e1528]:
+                    - generic [ref=e1529]: "[7:53:59 PM]"
+                    - text: "✅ Completed: Fact-check listing descriptions"
+                  - generic [ref=e1606]:
+                    - generic [ref=e1607]: "[7:54:01 PM]"
+                    - text: 💭 Validating claims...
+                  - generic [ref=e1608]:
+                    - generic [ref=e1609]: "[7:54:01 PM]"
+                    - text: "✅ Completed: Verify market report claims"
+  - button "Ctrl+Shift+V" [ref=e994] [cursor=pointer]:
+    - img [ref=e995]
+    - generic [ref=e998]: Ctrl+Shift+V

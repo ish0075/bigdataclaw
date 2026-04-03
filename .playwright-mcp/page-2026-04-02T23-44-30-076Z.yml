@@ -1,0 +1,218 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img "Control Shifter" [ref=e8]
+        - generic [ref=e9]:
+          - heading "Mission Control" [level=1] [ref=e10]
+          - paragraph [ref=e11]: Real Estate Command Center
+      - button "Collapse sidebar" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - generic [ref=e17]:
+        - button "Collapse all" [ref=e18] [cursor=pointer]
+        - button "Expand all" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - button "Main" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]: Main
+          - img [ref=e23]
+        - generic [ref=e25]:
+          - link "Mission Control" [ref=e26] [cursor=pointer]:
+            - /url: /
+            - img [ref=e27]
+            - generic [ref=e32]: Mission Control
+          - link "Property Research" [ref=e33] [cursor=pointer]:
+            - /url: /research
+            - img [ref=e34]
+            - generic [ref=e38]: Property Research
+          - link "Hot Money Radar" [ref=e39] [cursor=pointer]:
+            - /url: /hotmoney
+            - img [ref=e40]
+            - generic [ref=e42]: Hot Money Radar
+          - link "Deal Pipeline" [ref=e43] [cursor=pointer]:
+            - /url: /pipeline
+            - img [ref=e44]
+            - generic [ref=e49]: Deal Pipeline
+          - link "Opportunities" [ref=e50] [cursor=pointer]:
+            - /url: /opportunities
+            - img [ref=e51]
+            - generic [ref=e53]: Opportunities
+          - link "Agent Workspace" [ref=e54] [cursor=pointer]:
+            - /url: /agents
+            - img [ref=e55]
+            - generic [ref=e58]: Agent Workspace
+          - link "Agent Companies NEW" [ref=e59] [cursor=pointer]:
+            - /url: /paperclip-companies
+            - img [ref=e60]
+            - generic [ref=e64]: Agent Companies
+            - generic [ref=e65]: NEW
+          - link "Paperclip Dashboard NEW" [ref=e66] [cursor=pointer]:
+            - /url: /paperclip-dashboard
+            - img [ref=e67]
+            - generic [ref=e69]: Paperclip Dashboard
+            - generic [ref=e70]: NEW
+          - link "Pixel Agents LIVE" [ref=e71] [cursor=pointer]:
+            - /url: /mission-control
+            - img [ref=e72]
+            - generic [ref=e77]: Pixel Agents
+            - generic [ref=e78]: LIVE
+          - link "Bot Boardroom AI" [ref=e79] [cursor=pointer]:
+            - /url: /bot-boardroom
+            - img [ref=e80]
+            - generic [ref=e86]: Bot Boardroom
+            - generic [ref=e87]: AI
+          - link "Obsidian Vault" [ref=e88] [cursor=pointer]:
+            - /url: /vault
+            - img [ref=e89]
+            - generic [ref=e93]: Obsidian Vault
+      - generic [ref=e94]:
+        - button "Recruitment" [ref=e95] [cursor=pointer]:
+          - generic [ref=e96]: Recruitment
+          - img [ref=e97]
+        - generic [ref=e99]:
+          - link "EXP Agent Recruiter 96K" [ref=e100] [cursor=pointer]:
+            - /url: /exp-agent-recruiter
+            - img [ref=e101]
+            - generic [ref=e104]: EXP Agent Recruiter
+            - generic [ref=e105]: 96K
+          - link "Commercial Agents 6.7K" [ref=e106] [cursor=pointer]:
+            - /url: /commercial-agent-recruiter
+            - img [ref=e107]
+            - generic [ref=e110]: Commercial Agents
+            - generic [ref=e111]: 6.7K
+          - link "Brokerages" [ref=e112] [cursor=pointer]:
+            - /url: /brokerages
+            - img [ref=e113]
+            - generic [ref=e116]: Brokerages
+      - generic [ref=e117]:
+        - button "AI Bots" [ref=e118] [cursor=pointer]:
+          - generic [ref=e119]: AI Bots
+          - img [ref=e120]
+        - generic [ref=e122]:
+          - link "Buyer Intelligence AI" [ref=e123] [cursor=pointer]:
+            - /url: /buyer-bot
+            - img [ref=e124]
+            - generic [ref=e128]: Buyer Intelligence
+            - generic [ref=e129]: AI
+          - link "Seller Outreach AI" [ref=e130] [cursor=pointer]:
+            - /url: /seller-outreach-bot
+            - img [ref=e131]
+            - generic [ref=e136]: Seller Outreach
+            - generic [ref=e137]: AI
+          - link "Property Valuation AI" [ref=e138] [cursor=pointer]:
+            - /url: /property-valuation-bot
+            - img [ref=e139]
+            - generic [ref=e141]: Property Valuation
+            - generic [ref=e142]: AI
+          - link "Vigil Monitor 24/7" [ref=e143] [cursor=pointer]:
+            - /url: /vigil
+            - img [ref=e144]
+            - generic [ref=e146]: Vigil Monitor
+            - generic [ref=e147]: 24/7
+          - link "Agent Workspaces NEW" [ref=e148] [cursor=pointer]:
+            - /url: /agent-workspaces
+            - img [ref=e149]
+            - generic [ref=e151]: Agent Workspaces
+            - generic [ref=e152]: NEW
+          - link "Bot Builder BUILD" [ref=e153] [cursor=pointer]:
+            - /url: /bot-builder
+            - img [ref=e154]
+            - generic [ref=e158]: Bot Builder
+            - generic [ref=e159]: BUILD
+      - generic [ref=e160]:
+        - button "Tools" [ref=e161] [cursor=pointer]:
+          - generic [ref=e162]: Tools
+          - img [ref=e163]
+        - generic [ref=e165]:
+          - link "My Listings" [ref=e166] [cursor=pointer]:
+            - /url: /listings
+            - img [ref=e167]
+            - generic [ref=e171]: My Listings
+          - link "Buyer Matcher" [ref=e172] [cursor=pointer]:
+            - /url: /buyers
+            - img [ref=e173]
+            - generic [ref=e178]: Buyer Matcher
+          - link "Agent Matcher" [ref=e179] [cursor=pointer]:
+            - /url: /agents-matcher
+            - img [ref=e180]
+            - generic [ref=e184]: Agent Matcher
+          - link "Lender Matcher" [ref=e185] [cursor=pointer]:
+            - /url: /lenders
+            - img [ref=e186]
+            - generic [ref=e188]: Lender Matcher
+          - link "Builder Directory" [ref=e189] [cursor=pointer]:
+            - /url: /builders
+            - img [ref=e190]
+            - generic [ref=e194]: Builder Directory
+          - link "Property Upload" [ref=e195] [cursor=pointer]:
+            - /url: /upload
+            - img [ref=e196]
+            - generic [ref=e199]: Property Upload
+          - link "Olena Marketing NEW" [ref=e200] [cursor=pointer]:
+            - /url: /olena-feature-sheet
+            - img [ref=e201]
+            - generic [ref=e204]: Olena Marketing
+            - generic [ref=e205]: NEW
+          - link "Canva Editor NEW" [ref=e206] [cursor=pointer]:
+            - /url: /canva-editor
+            - img [ref=e207]
+            - generic [ref=e213]: Canva Editor
+            - generic [ref=e214]: NEW
+          - link "Skills & Agents" [ref=e215] [cursor=pointer]:
+            - /url: /skills
+            - img [ref=e216]
+            - generic [ref=e219]: Skills & Agents
+          - link "Map View" [ref=e220] [cursor=pointer]:
+            - /url: /map
+            - img [ref=e221]
+            - generic [ref=e223]: Map View
+          - link "Data Manager" [ref=e224] [cursor=pointer]:
+            - /url: /data-manager
+            - img [ref=e225]
+            - generic [ref=e229]: Data Manager
+          - link "AI Builder CODE" [ref=e230] [cursor=pointer]:
+            - /url: /ai-builder
+            - img [ref=e231]
+            - generic [ref=e234]: AI Builder
+            - generic [ref=e235]: CODE
+    - generic [ref=e239]: System Online
+  - generic [ref=e240]:
+    - banner [ref=e241]:
+      - generic [ref=e247]:
+        - img [ref=e248]
+        - generic [ref=e255]: Reconnecting...
+      - generic [ref=e258]:
+        - img [ref=e259]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e262]
+        - combobox [ref=e263]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e264]:
+        - button "Voice" [ref=e265] [cursor=pointer]:
+          - img [ref=e266]
+          - generic [ref=e272]: Voice
+        - generic [ref=e273]:
+          - img [ref=e274]
+          - generic [ref=e279]: $12.40
+        - link "Data Manager" [ref=e280] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e281]
+        - button [ref=e285] [cursor=pointer]:
+          - img [ref=e286]
+        - link [ref=e289] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e290]
+        - link "🦞" [ref=e293] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e294]: 🦞
+    - main [ref=e295]:
+      - generic [ref=e297]:
+        - img [ref=e298]
+        - generic [ref=e303]: Loading Paperclip data...
+  - button "Ctrl+Shift+V" [ref=e304] [cursor=pointer]:
+    - img [ref=e305]
+    - generic [ref=e308]: Ctrl+Shift+V

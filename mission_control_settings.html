@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Control Settings - Data Source Configuration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #e4e4e7;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid #2a2a3e;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            background: linear-gradient(90deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #888;
+            font-size: 0.95rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: #14141f;
+            border: 1px solid #2a2a3e;
+            border-radius: 12px;
+            padding: 24px;
+            transition: border-color 0.2s;
+        }
+        
+        .card:hover {
+            border-color: #3a3a4e;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #2a2a3e;
+        }
+        
+        .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .icon.vault { background: #2d1f3d; }
+        .icon.database { background: #1f2d3d; }
+        .icon.api { background: #1f3d2d; }
+        .icon.sync { background: #3d2d1f; }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .status.connected {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+        
+        .status.disconnected {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+        
+        .status.readonly {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+        
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #1f1f2e;
+        }
+        
+        .data-row:last-child {
+            border-bottom: none;
+        }
+        
+        .data-label {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .data-value {
+            color: #fff;
+            font-weight: 500;
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+        
+        .data-value.highlight {
+            color: #feca57;
+        }
+        
+        .endpoint-list {
+            margin-top: 15px;
+        }
+        
+        .endpoint {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: #0f0f16;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85rem;
+        }
+        
+        .method {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .method.get { background: #22c55e; color: #000; }
+        .method.put { background: #3b82f6; color: #fff; }
+        .method.post { background: #f59e0b; color: #000; }
+        
+        .path {
+            color: #888;
+        }
+        
+        .description {
+            margin-left: auto;
+            color: #666;
+            font-size: 0.8rem;
+        }
+        
+        .note {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 3px solid #f59e0b;
+            padding: 12px 16px;
+            margin-top: 15px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.85rem;
+            color: #ccc;
+        }
+        
+        .note strong {
+            color: #f59e0b;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 15px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .stat-box {
+            background: #0f0f16;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #feca57;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+        
+        .error {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 3px solid #ef4444;
+            padding: 12px 16px;
+            color: #ef4444;
+            border-radius: 0 6px 6px 0;
+            margin-top: 15px;
+        }
+        
+        .refresh-indicator {
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Mission Control Settings</h1>
+            <p class="subtitle">Configure data source access for Jamie's Personal Vault, BDAIV2, and DBeaver databases</p>
+            <button class="btn" onclick="refreshData()">
+                <span id="refresh-icon">🔄</span> Refresh Connections
+            </button>
+        </header>
+        
+        <div id="content">
+            <div class="loading">Loading configuration...</div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        
+        async function fetchSettings() {
+            try {
+                const response = await fetch(`${API_BASE}/api/mission-control/settings`);
+                if (!response.ok) throw new Error('Failed to fetch settings');
+                return await response.json();
+            } catch (error) {
+                throw error;
+            }
+        }
+        
+        async function fetchSyncStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/api/mission-control/sync-status`);
+                if (!response.ok) throw new Error('Failed to fetch sync status');
+                return await response.json();
+            } catch (error) {
+                return null;
+            }
+        }
+        
+        function renderVaultCard(vaults) {
+            const main = vaults.main_working;
+            const bdaiv2 = vaults.bdaiv2;
+            
+            return `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon vault">🗃️</div>
+                        <div>
+                            <div class="card-title">Obsidian Vaults</div>
+                        </div>
+                    </div>
+                    
+                    <div class="data-row">
+                        <span class="data-label">Main Working Vault</span>
+                        <span class="status ${main.connected ? 'connected' : 'disconnected'}">
+                            ${main.connected ? '● Connected' : '○ Disconnected'}
+                        </span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Path</span>
+                        <span class="data-value" style="font-size: 0.8rem;">${main.path}</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Mode</span>
+                        <span class="data-value highlight">${main.mode}</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">API URL</span>
+                        <span class="data-value" style="font-size: 0.8rem;">${main.api_url}</span>
+                    </div>
+                    
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #2a2a3e;">
+                        <div class="data-row">
+                            <span class="data-label">BDAIV2 Vault</span>
+                            <span class="status readonly">● Read-Only</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Path</span>
+                            <span class="data-value" style="font-size: 0.8rem;">${bdaiv2.path}</span>
+                        </div>
+                        <div class="note">
+                            <strong>⚠️ Warning:</strong> ${bdaiv2.note}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderDatabaseCard(databases, syncStatus) {
+            const sqlite = databases.sqlite;
+            const obsidianFiles = syncStatus?.obsidian_files || {};
+            
+            return `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon database">🗄️</div>
+                        <div>
+                            <div class="card-title">Databases</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-value">${sqlite.tables.recruiters.count.toLocaleString()}</div>
+                            <div class="stat-label">Recruiters</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">${(obsidianFiles.Brokerages || 0).toLocaleString()}</div>
+                            <div class="stat-label">Brokerages in Vault</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">${sqlite.tables.lenders.count.toLocaleString()}</div>
+                            <div class="stat-label">Lenders</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">${sqlite.tables.buyers.count.toLocaleString()}</div>
+                            <div class="stat-label">Buyers</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <div class="data-row">
+                            <span class="data-label">SQLite Path</span>
+                            <span class="data-value" style="font-size: 0.8rem;">${sqlite.path}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Qdrant Host</span>
+                            <span class="data-value">${databases.qdrant.host}:${databases.qdrant.port}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Qdrant Status</span>
+                            <span class="status ${databases.qdrant.status === 'connected' ? 'connected' : 'disconnected'}">
+                                ${databases.qdrant.status === 'connected' ? '● Connected' : '○ Disconnected'}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderEndpointsCard(endpoints) {
+            return `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon api">🔌</div>
+                        <div>
+                            <div class="card-title">API Endpoints</div>
+                        </div>
+                    </div>
+                    
+                    <div class="endpoint-list">
+                        <div class="endpoint">
+                            <span class="method get">GET</span>
+                            <span class="path">/api/recruiters</span>
+                            <span class="description">Search recruiters</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method get">GET</span>
+                            <span class="path">/api/recruiters/{id}</span>
+                            <span class="description">Get recruiter by ID</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method put">PUT</span>
+                            <span class="path">/api/recruiters/{id}</span>
+                            <span class="description">Update recruiter</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method get">GET</span>
+                            <span class="path">/api/realtor-assistant/brokerages</span>
+                            <span class="description">DBeaver brokerages</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method get">GET</span>
+                            <span class="path">/api/realtor-assistant/lenders</span>
+                            <span class="description">Lenders database</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method get">GET</span>
+                            <span class="path">/api/obsidian/status</span>
+                            <span class="description">Vault connection</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderSyncCard(syncStatus) {
+            if (!syncStatus) return '';
+            
+            return `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon sync">🔄</div>
+                        <div>
+                            <div class="card-title">Synchronization</div>
+                        </div>
+                    </div>
+                    
+                    <div class="data-row">
+                        <span class="data-label">Status</span>
+                        <span class="status ${syncStatus.sync_status === 'active' ? 'connected' : 'disconnected'}">
+                            ${syncStatus.sync_status === 'active' ? '● Active' : '○ Inactive'}
+                        </span>
+                    </div>
+                    
+                    <div style="margin-top: 15px;">
+                        <div style="font-size: 0.85rem; color: #888; margin-bottom: 10px;">Obsidian Files Synced:</div>
+                        ${Object.entries(syncStatus.obsidian_files).map(([key, value]) => `
+                            <div class="data-row">
+                                <span class="data-label">${key}</span>
+                                <span class="data-value">${value.toLocaleString()} files</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        async function renderContent() {
+            const content = document.getElementById('content');
+            
+            try {
+                const [settings, syncStatus] = await Promise.all([
+                    fetchSettings(),
+                    fetchSyncStatus()
+                ]);
+                
+                content.innerHTML = `
+                    <div class="grid">
+                        ${renderVaultCard(settings.vaults)}
+                        ${renderDatabaseCard(settings.databases, syncStatus)}
+                        ${renderEndpointsCard(settings.endpoints)}
+                        ${renderSyncCard(syncStatus)}
+                    </div>
+                `;
+            } catch (error) {
+                content.innerHTML = `
+                    <div class="error">
+                        <strong>❌ Error loading configuration:</strong><br>
+                        ${error.message}<br><br>
+                        Make sure the API server is running on http://localhost:8000
+                    </div>
+                `;
+            }
+        }
+        
+        function refreshData() {
+            const icon = document.getElementById('refresh-icon');
+            icon.classList.add('refresh-indicator');
+            renderContent().then(() => {
+                setTimeout(() => icon.classList.remove('refresh-indicator'), 500);
+            });
+        }
+        
+        // Load data on page load
+        renderContent();
+        
+        // Auto-refresh every 30 seconds
+        setInterval(renderContent, 30000);
+    </script>
+</body>
+</html>

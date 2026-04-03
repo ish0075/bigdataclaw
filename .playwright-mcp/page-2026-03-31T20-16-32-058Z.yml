@@ -1,0 +1,661 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "BIGDATA CLAW" [level=1] [ref=e9]
+        - paragraph [ref=e10]: NERVE Mission Control
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [active] [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Obsidian Vault" [ref=e46] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e47]
+        - generic [ref=e51]: Obsidian Vault
+      - generic [ref=e52]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e53] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e54]
+        - generic [ref=e57]: EXP Agent Recruiter
+        - generic [ref=e58]: 96K
+      - link "Commercial Agents 6.7K" [ref=e59] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e60]
+        - generic [ref=e63]: Commercial Agents
+        - generic [ref=e64]: 6.7K
+      - link "Brokerages" [ref=e65] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e66]
+        - generic [ref=e69]: Brokerages
+      - generic [ref=e70]: Tools
+      - link "My Listings" [ref=e71] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e72]
+        - generic [ref=e76]: My Listings
+      - link "Buyer Matcher" [ref=e77] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e78]
+        - generic [ref=e83]: Buyer Matcher
+      - link "Agent Matcher" [ref=e84] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e85]
+        - generic [ref=e89]: Agent Matcher
+      - link "Lender Matcher" [ref=e90] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e91]
+        - generic [ref=e93]: Lender Matcher
+      - link "Builder Directory" [ref=e94] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e95]
+        - generic [ref=e99]: Builder Directory
+      - link "Property Upload" [ref=e100] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e101]
+        - generic [ref=e104]: Property Upload
+      - link "Skills & Agents" [ref=e105] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e106]
+        - generic [ref=e109]: Skills & Agents
+      - link "Map View" [ref=e110] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e111]
+        - generic [ref=e113]: Map View
+      - link "Data Manager" [ref=e114] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e115]
+        - generic [ref=e119]: Data Manager
+    - generic [ref=e123]: System Online
+  - generic [ref=e124]:
+    - banner [ref=e125]:
+      - generic [ref=e131]:
+        - img [ref=e566]
+        - generic [ref=e139]: Connected
+      - generic [ref=e142]:
+        - img [ref=e143]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e146]
+        - combobox [ref=e147]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e148]:
+        - button "Voice" [ref=e149] [cursor=pointer]:
+          - img [ref=e150]
+          - generic [ref=e156]: Voice
+        - generic [ref=e157]:
+          - img [ref=e158]
+          - generic [ref=e163]: $12.40
+        - link "Data Manager" [ref=e164] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e165]
+        - button [ref=e169] [cursor=pointer]:
+          - img [ref=e170]
+        - link [ref=e173] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e174]
+        - link "🦞" [ref=e177] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e178]: 🦞
+    - main [ref=e179]:
+      - generic [ref=e570]:
+        - generic [ref=e571]:
+          - generic [ref=e572]:
+            - heading "Hot Money Radar" [level=1] [ref=e573]:
+              - img [ref=e574]
+              - text: Hot Money Radar
+            - paragraph [ref=e576]: 20 leads with $1009.3M in fresh capital • Recently sold
+          - generic [ref=e577]:
+            - button "Paste Deal" [ref=e578] [cursor=pointer]:
+              - img [ref=e579]
+              - text: Paste Deal
+            - button "Refresh" [ref=e583] [cursor=pointer]:
+              - img [ref=e584]
+              - text: Refresh
+            - button "Filter" [ref=e586] [cursor=pointer]:
+              - img [ref=e587]
+              - text: Filter
+            - button "Export" [ref=e589] [cursor=pointer]:
+              - img [ref=e590]
+              - text: Export
+        - generic [ref=e593]:
+          - generic [ref=e595]:
+            - img
+            - generic [ref=e597]:
+              - paragraph [ref=e598]: $1009.3M
+              - paragraph [ref=e599]: Total Hot Money
+          - generic [ref=e601]:
+            - img [ref=e602]
+            - generic [ref=e604]:
+              - paragraph [ref=e605]: "20"
+              - paragraph [ref=e606]: Active Alerts
+          - generic [ref=e608]:
+            - img
+            - generic [ref=e612]:
+              - paragraph [ref=e613]: $50.5M
+              - paragraph [ref=e614]: Avg Cash Position
+          - generic [ref=e616]:
+            - img [ref=e617]
+            - generic [ref=e619]:
+              - paragraph [ref=e620]: "81"
+              - paragraph [ref=e621]: Avg Match Score
+        - generic [ref=e623]:
+          - generic [ref=e624]:
+            - img [ref=e625]
+            - textbox "Search by entity name, location, or asset class... (or use voice 🎤)" [ref=e628]
+            - generic [ref=e629]:
+              - button "Search" [ref=e630] [cursor=pointer]:
+                - img [ref=e631]
+                - text: Search
+              - button "Start voice input" [ref=e635] [cursor=pointer]:
+                - img [ref=e636]
+          - combobox [ref=e640]:
+            - option "All Asset Classes" [selected]
+            - option "Industrial"
+            - option "Retail"
+            - option "Office"
+            - option "Multi-Family"
+            - option "Agricultural"
+            - option "Land"
+            - option "Mixed-Use"
+        - generic [ref=e641]:
+          - generic [ref=e643]:
+            - heading "Hot Money Leads" [level=3] [ref=e644]
+            - generic [ref=e645]:
+              - generic [ref=e646]: "Sorted by:"
+              - combobox [ref=e647]:
+                - option "Cash Amount (High → Low)" [selected]
+                - option "Date (Newest)"
+                - option "Match Score"
+          - generic [ref=e648]:
+            - generic [ref=e650] [cursor=pointer]:
+              - img [ref=e653]
+              - generic [ref=e656]:
+                - generic [ref=e657]:
+                  - generic [ref=e658]:
+                    - heading "Facility Inc" [level=4] [ref=e659]
+                    - generic [ref=e660]: 29 days ago
+                  - generic [ref=e661]:
+                    - generic [ref=e662]:
+                      - img [ref=e663]
+                      - generic [ref=e665]: $467.0M cash
+                    - generic [ref=e666]: "|"
+                    - generic [ref=e667]:
+                      - img [ref=e668]
+                      - generic [ref=e670]: Sold Mar 2026
+                    - generic [ref=e671]: "|"
+                    - img [ref=e673]
+                  - paragraph [ref=e676]: Ontario land•467 MAIN ST E 46 GRANT AVE
+                - generic [ref=e677]:
+                  - generic [ref=e678]:
+                    - generic [ref=e679]: "80"
+                    - generic [ref=e680]: Match Score
+                  - button "View Profile" [ref=e682]
+            - generic [ref=e684] [cursor=pointer]:
+              - img [ref=e687]
+              - generic [ref=e690]:
+                - generic [ref=e691]:
+                  - generic [ref=e692]:
+                    - heading "Holdings Ltd" [level=4] [ref=e693]
+                    - generic [ref=e694]: 29 days ago
+                  - generic [ref=e695]:
+                    - generic [ref=e696]:
+                      - img [ref=e697]
+                      - generic [ref=e699]: $106.0M cash
+                    - generic [ref=e700]: "|"
+                    - generic [ref=e701]:
+                      - img [ref=e702]
+                      - generic [ref=e704]: Sold Mar 2026
+                    - generic [ref=e705]: "|"
+                    - img [ref=e707]
+                  - paragraph [ref=e710]: West Mall•180 ALLST
+                - generic [ref=e711]:
+                  - generic [ref=e712]:
+                    - generic [ref=e713]: "80"
+                    - generic [ref=e714]: Match Score
+                  - button "View Profile" [ref=e716]
+            - generic [ref=e718] [cursor=pointer]:
+              - img [ref=e721]
+              - generic [ref=e724]:
+                - generic [ref=e725]:
+                  - generic [ref=e726]:
+                    - heading "Peel Mutual Insurance Company" [level=4] [ref=e727]
+                    - generic [ref=e728]: 29 days ago
+                  - generic [ref=e729]:
+                    - generic [ref=e730]:
+                      - img [ref=e731]
+                      - generic [ref=e733]: $27.0M cash
+                    - generic [ref=e734]: "|"
+                    - generic [ref=e735]:
+                      - img [ref=e736]
+                      - generic [ref=e738]: Sold Mar 2026
+                    - generic [ref=e739]: "|"
+                    - img [ref=e741]
+                  - paragraph [ref=e744]: use building•103 QUEEN ST W 105 QUEEN ST W 7 ELIZABETH ST
+                - generic [ref=e745]:
+                  - generic [ref=e746]:
+                    - generic [ref=e747]: "80"
+                    - generic [ref=e748]: Match Score
+                  - button "View Profile" [ref=e750]
+            - generic [ref=e752] [cursor=pointer]:
+              - img [ref=e755]
+              - generic [ref=e758]:
+                - generic [ref=e759]:
+                  - generic [ref=e760]:
+                    - heading "Almak Holdings Inc" [level=4] [ref=e761]
+                    - generic [ref=e762]: 29 days ago
+                  - generic [ref=e763]:
+                    - generic [ref=e764]:
+                      - img [ref=e765]
+                      - generic [ref=e767]: $27.0M cash
+                    - generic [ref=e768]: "|"
+                    - generic [ref=e769]:
+                      - img [ref=e770]
+                      - generic [ref=e772]: Sold Mar 2026
+                    - generic [ref=e773]: "|"
+                    - img [ref=e775]
+                  - paragraph [ref=e778]: scenic farm•846 Lexicon Dr
+                - generic [ref=e779]:
+                  - generic [ref=e780]:
+                    - generic [ref=e781]: "80"
+                    - generic [ref=e782]: Match Score
+                  - button "View Profile" [ref=e784]
+            - generic [ref=e786] [cursor=pointer]:
+              - img [ref=e789]
+              - generic [ref=e792]:
+                - generic [ref=e793]:
+                  - generic [ref=e794]:
+                    - heading "Industrial Equities Guelph Corp" [level=4] [ref=e795]
+                    - generic [ref=e796]: 29 days ago
+                  - generic [ref=e797]:
+                    - generic [ref=e798]:
+                      - img [ref=e799]
+                      - generic [ref=e801]: $27.0M cash
+                    - generic [ref=e802]: "|"
+                    - generic [ref=e803]:
+                      - img [ref=e804]
+                      - generic [ref=e806]: Sold Mar 2026
+                    - generic [ref=e807]: "|"
+                    - img [ref=e809]
+                  - paragraph [ref=e812]: storage facility•426 CRAWLEY RD
+                - generic [ref=e813]:
+                  - generic [ref=e814]:
+                    - generic [ref=e815]: "80"
+                    - generic [ref=e816]: Match Score
+                  - button "View Profile" [ref=e818]
+            - generic [ref=e820] [cursor=pointer]:
+              - img [ref=e823]
+              - generic [ref=e826]:
+                - generic [ref=e827]:
+                  - generic [ref=e828]:
+                    - heading "Development Status Listed for sale as future residential development" [level=4] [ref=e829]
+                    - generic [ref=e830]: 29 days ago
+                  - generic [ref=e831]:
+                    - generic [ref=e832]:
+                      - img [ref=e833]
+                      - generic [ref=e835]: $27.0M cash
+                    - generic [ref=e836]: "|"
+                    - generic [ref=e837]:
+                      - img [ref=e838]
+                      - generic [ref=e840]: Sold Mar 2026
+                    - generic [ref=e841]: "|"
+                    - img [ref=e843]
+                  - paragraph [ref=e846]: of land•000 801 Cochrane St
+                - generic [ref=e847]:
+                  - generic [ref=e848]:
+                    - generic [ref=e849]: "80"
+                    - generic [ref=e850]: Match Score
+                  - button "View Profile" [ref=e852]
+            - generic [ref=e854] [cursor=pointer]:
+              - img [ref=e857]
+              - generic [ref=e860]:
+                - generic [ref=e861]:
+                  - generic [ref=e862]:
+                    - heading "Industrial Equities Guelph Corp" [level=4] [ref=e863]
+                    - generic [ref=e864]: 29 days ago
+                  - generic [ref=e865]:
+                    - generic [ref=e866]:
+                      - img [ref=e867]
+                      - generic [ref=e869]: $27.0M cash
+                    - generic [ref=e870]: "|"
+                    - generic [ref=e871]:
+                      - img [ref=e872]
+                      - generic [ref=e874]: Sold Mar 2026
+                    - generic [ref=e875]: "|"
+                    - img [ref=e877]
+                  - paragraph [ref=e880]: Industrial•426 CRAWLEY RD
+                - generic [ref=e881]:
+                  - generic [ref=e882]:
+                    - generic [ref=e883]: "80"
+                    - generic [ref=e884]: Match Score
+                  - button "View Profile" [ref=e886]
+            - generic [ref=e888] [cursor=pointer]:
+              - img [ref=e891]
+              - generic [ref=e894]:
+                - generic [ref=e895]:
+                  - generic [ref=e896]:
+                    - heading "typical for private rural holdings" [level=4] [ref=e897]
+                    - generic [ref=e898]: 29 days ago
+                  - generic [ref=e899]:
+                    - generic [ref=e900]:
+                      - img [ref=e901]
+                      - generic [ref=e903]: $26.0M cash
+                    - generic [ref=e904]: "|"
+                    - generic [ref=e905]:
+                      - img [ref=e906]
+                      - generic [ref=e908]: Sold Mar 2026
+                    - generic [ref=e909]: "|"
+                    - img [ref=e911]
+                  - paragraph [ref=e914]: Rossland•7711 605 Rossland Rd
+                - generic [ref=e915]:
+                  - generic [ref=e916]:
+                    - generic [ref=e917]: "80"
+                    - generic [ref=e918]: Match Score
+                  - button "View Profile" [ref=e920]
+            - generic [ref=e922] [cursor=pointer]:
+              - img [ref=e925]
+              - generic [ref=e928]:
+                - generic [ref=e929]:
+                  - generic [ref=e930]:
+                    - heading "5010779 Ontario Inc" [level=4] [ref=e931]
+                    - generic [ref=e932]: 29 days ago
+                  - generic [ref=e933]:
+                    - generic [ref=e934]:
+                      - img [ref=e935]
+                      - generic [ref=e937]: $26.0M cash
+                    - generic [ref=e938]: "|"
+                    - generic [ref=e939]:
+                      - img [ref=e940]
+                      - generic [ref=e942]: Sold Mar 2026
+                    - generic [ref=e943]: "|"
+                    - img [ref=e945]
+                  - paragraph [ref=e948]: institutional land•61 Claireville Dr
+                - generic [ref=e949]:
+                  - generic [ref=e950]:
+                    - generic [ref=e951]: "80"
+                    - generic [ref=e952]: Match Score
+                  - button "View Profile" [ref=e954]
+            - generic [ref=e956] [cursor=pointer]:
+              - img [ref=e959]
+              - generic [ref=e962]:
+                - generic [ref=e963]:
+                  - generic [ref=e964]:
+                    - heading "Fourteen Mile Farms Ltd" [level=4] [ref=e965]
+                    - generic [ref=e966]: 29 days ago
+                  - generic [ref=e967]:
+                    - generic [ref=e968]:
+                      - img [ref=e969]
+                      - generic [ref=e971]: $26.0M cash
+                    - generic [ref=e972]: "|"
+                    - generic [ref=e973]:
+                      - img [ref=e974]
+                      - generic [ref=e976]: Sold Mar 2026
+                    - generic [ref=e977]: "|"
+                    - img [ref=e979]
+                  - paragraph [ref=e982]: Mile Farm•22474 PROSPECT HILL RD
+                - generic [ref=e983]:
+                  - generic [ref=e984]:
+                    - generic [ref=e985]: "80"
+                    - generic [ref=e986]: Match Score
+                  - button "View Profile" [ref=e988]
+            - generic [ref=e990] [cursor=pointer]:
+              - img [ref=e993]
+              - generic [ref=e996]:
+                - generic [ref=e997]:
+                  - generic [ref=e998]:
+                    - heading "1734632 Ontario Inc" [level=4] [ref=e999]
+                    - generic [ref=e1000]: 29 days ago
+                  - generic [ref=e1001]:
+                    - generic [ref=e1002]:
+                      - img [ref=e1003]
+                      - generic [ref=e1005]: $26.0M cash
+                    - generic [ref=e1006]: "|"
+                    - generic [ref=e1007]:
+                      - img [ref=e1008]
+                      - generic [ref=e1010]: Sold Mar 2026
+                    - generic [ref=e1011]: "|"
+                    - img [ref=e1013]
+                  - paragraph [ref=e1016]: condo complex•95 INSPIRE BLVD
+                - generic [ref=e1017]:
+                  - generic [ref=e1018]:
+                    - generic [ref=e1019]: "80"
+                    - generic [ref=e1020]: Match Score
+                  - button "View Profile" [ref=e1022]
+            - generic [ref=e1024] [cursor=pointer]:
+              - img [ref=e1027]
+              - generic [ref=e1030]:
+                - generic [ref=e1031]:
+                  - generic [ref=e1032]:
+                    - heading "1295734 Ontario Inc" [level=4] [ref=e1033]
+                    - generic [ref=e1034]: 29 days ago
+                  - generic [ref=e1035]:
+                    - generic [ref=e1036]:
+                      - img [ref=e1037]
+                      - generic [ref=e1039]: $26.0M cash
+                    - generic [ref=e1040]: "|"
+                    - generic [ref=e1041]:
+                      - img [ref=e1042]
+                      - generic [ref=e1044]: Sold Mar 2026
+                    - generic [ref=e1045]: "|"
+                    - img [ref=e1047]
+                  - paragraph [ref=e1050]: condo complex•230 EDDYSTONE AVE
+                - generic [ref=e1051]:
+                  - generic [ref=e1052]:
+                    - generic [ref=e1053]: "80"
+                    - generic [ref=e1054]: Match Score
+                  - button "View Profile" [ref=e1056]
+            - generic [ref=e1058] [cursor=pointer]:
+              - img [ref=e1061]
+              - generic [ref=e1064]:
+                - generic [ref=e1065]:
+                  - generic [ref=e1066]:
+                    - heading "1520724 Ontario Inc" [level=4] [ref=e1067]
+                    - generic [ref=e1068]: 29 days ago
+                  - generic [ref=e1069]:
+                    - generic [ref=e1070]:
+                      - img [ref=e1071]
+                      - generic [ref=e1073]: $26.0M cash
+                    - generic [ref=e1074]: "|"
+                    - generic [ref=e1075]:
+                      - img [ref=e1076]
+                      - generic [ref=e1078]: Sold Mar 2026
+                    - generic [ref=e1079]: "|"
+                    - img [ref=e1081]
+                  - paragraph [ref=e1084]: ft warehouse•44 WEST DR
+                - generic [ref=e1085]:
+                  - generic [ref=e1086]:
+                    - generic [ref=e1087]: "80"
+                    - generic [ref=e1088]: Match Score
+                  - button "View Profile" [ref=e1090]
+            - generic [ref=e1092] [cursor=pointer]:
+              - img [ref=e1095]
+              - generic [ref=e1098]:
+                - generic [ref=e1099]:
+                  - generic [ref=e1100]:
+                    - heading "Perimeter Forest GP Inc 624 Huron Terrace Kinc" [level=4] [ref=e1101]
+                    - generic [ref=e1102]: 29 days ago
+                  - generic [ref=e1103]:
+                    - generic [ref=e1104]:
+                      - img [ref=e1105]
+                      - generic [ref=e1107]: $26.0M cash
+                    - generic [ref=e1108]: "|"
+                    - generic [ref=e1109]:
+                      - img [ref=e1110]
+                      - generic [ref=e1112]: Sold Mar 2026
+                    - generic [ref=e1113]: "|"
+                    - img [ref=e1115]
+                  - paragraph [ref=e1118]: forestland•624 Huron Terrace Kincard
+                - generic [ref=e1119]:
+                  - generic [ref=e1120]:
+                    - generic [ref=e1121]: "80"
+                    - generic [ref=e1122]: Match Score
+                  - button "View Profile" [ref=e1124]
+            - generic [ref=e1126] [cursor=pointer]:
+              - img [ref=e1129]
+              - generic [ref=e1132]:
+                - generic [ref=e1133]:
+                  - generic [ref=e1134]:
+                    - heading "Perimeter Forest GP Inc 624 Huron Terrace Kinc" [level=4] [ref=e1135]
+                    - generic [ref=e1136]: 29 days ago
+                  - generic [ref=e1137]:
+                    - generic [ref=e1138]:
+                      - img [ref=e1139]
+                      - generic [ref=e1141]: $26.0M cash
+                    - generic [ref=e1142]: "|"
+                    - generic [ref=e1143]:
+                      - img [ref=e1144]
+                      - generic [ref=e1146]: Sold Mar 2026
+                    - generic [ref=e1147]: "|"
+                    - img [ref=e1149]
+                  - paragraph [ref=e1152]: forestland•10021 Dist
+                - generic [ref=e1153]:
+                  - generic [ref=e1154]:
+                    - generic [ref=e1155]: "80"
+                    - generic [ref=e1156]: Match Score
+                  - button "View Profile" [ref=e1158]
+            - generic [ref=e1160] [cursor=pointer]:
+              - img [ref=e1163]
+              - generic [ref=e1166]:
+                - generic [ref=e1167]:
+                  - generic [ref=e1168]:
+                    - heading "2407993 Ontario Inc" [level=4] [ref=e1169]
+                    - generic [ref=e1170]: 29 days ago
+                  - generic [ref=e1171]:
+                    - generic [ref=e1172]:
+                      - img [ref=e1173]
+                      - generic [ref=e1175]: $25.0M cash
+                    - generic [ref=e1176]: "|"
+                    - generic [ref=e1177]:
+                      - img [ref=e1178]
+                      - generic [ref=e1180]: Sold Mar 2026
+                    - generic [ref=e1181]: "|"
+                    - img [ref=e1183]
+                  - paragraph [ref=e1186]: Industrial•322 RUTHERFORD RD
+                - generic [ref=e1187]:
+                  - generic [ref=e1188]:
+                    - generic [ref=e1189]: "80"
+                    - generic [ref=e1190]: Match Score
+                  - button "View Profile" [ref=e1192]
+            - generic [ref=e1194] [cursor=pointer]:
+              - img [ref=e1197]
+              - generic [ref=e1200]:
+                - generic [ref=e1201]:
+                  - generic [ref=e1202]:
+                    - heading "Royal Bank of Canada princ" [level=4] [ref=e1203]
+                    - generic [ref=e1204]: 29 days ago
+                  - generic [ref=e1205]:
+                    - generic [ref=e1206]:
+                      - img [ref=e1207]
+                      - generic [ref=e1209]: $25.0M cash
+                    - generic [ref=e1210]: "|"
+                    - generic [ref=e1211]:
+                      - img [ref=e1212]
+                      - generic [ref=e1214]: Sold Mar 2026
+                    - generic [ref=e1215]: "|"
+                    - img [ref=e1217]
+                  - paragraph [ref=e1220]: surplus land•4561 LANGSTAFF RD
+                - generic [ref=e1221]:
+                  - generic [ref=e1222]:
+                    - generic [ref=e1223]: "80"
+                    - generic [ref=e1224]: Match Score
+                  - button "View Profile" [ref=e1226]
+            - generic [ref=e1228] [cursor=pointer]:
+              - img [ref=e1231]
+              - generic [ref=e1234]:
+                - generic [ref=e1235]:
+                  - generic [ref=e1236]:
+                    - heading "2671044 Ontario Inc" [level=4] [ref=e1237]
+                    - generic [ref=e1238]: 29 days ago
+                  - generic [ref=e1239]:
+                    - generic [ref=e1240]:
+                      - img [ref=e1241]
+                      - generic [ref=e1243]: $25.0M cash
+                    - generic [ref=e1244]: "|"
+                    - generic [ref=e1245]:
+                      - img [ref=e1246]
+                      - generic [ref=e1248]: Sold Mar 2026
+                    - generic [ref=e1249]: "|"
+                    - img [ref=e1251]
+                  - paragraph [ref=e1254]: Industrial•90 PRODUCTION DR
+                - generic [ref=e1255]:
+                  - generic [ref=e1256]:
+                    - generic [ref=e1257]: "80"
+                    - generic [ref=e1258]: Match Score
+                  - button "View Profile" [ref=e1260]
+            - generic [ref=e1262] [cursor=pointer]:
+              - img [ref=e1265]
+              - generic [ref=e1268]:
+                - generic [ref=e1269]:
+                  - generic [ref=e1270]:
+                    - heading "Turnberry Holdings Inc" [level=4] [ref=e1271]
+                    - generic [ref=e1272]: 45 days ago
+                  - generic [ref=e1273]:
+                    - generic [ref=e1274]:
+                      - img [ref=e1275]
+                      - generic [ref=e1277]: $9.8M cash
+                    - generic [ref=e1278]: "|"
+                    - generic [ref=e1279]:
+                      - img [ref=e1280]
+                      - generic [ref=e1282]: Sold Jan 2025
+                    - generic [ref=e1283]: "|"
+                    - generic [ref=e1284]:
+                      - img [ref=e1285]
+                      - generic [ref=e1288]: Lincoln
+                  - paragraph [ref=e1289]: Retail/Office Mixed-Use•4556-4568 Lincoln Ave, Beamsville, ON L0R 1B0
+                - generic [ref=e1290]:
+                  - generic [ref=e1291]:
+                    - generic [ref=e1292]: "88"
+                    - generic [ref=e1293]: Match Score
+                  - button "View Profile" [ref=e1295]
+            - generic [ref=e1297] [cursor=pointer]:
+              - img [ref=e1300]
+              - generic [ref=e1303]:
+                - generic [ref=e1304]:
+                  - generic [ref=e1305]:
+                    - heading "Test Development Corp" [level=4] [ref=e1306]
+                    - generic [ref=e1307]: 20 days ago
+                  - generic [ref=e1308]:
+                    - generic [ref=e1309]:
+                      - img [ref=e1310]
+                      - generic [ref=e1312]: $8.5M cash
+                    - generic [ref=e1313]: "|"
+                    - generic [ref=e1314]:
+                      - img [ref=e1315]
+                      - generic [ref=e1317]: Sold Mar 2025
+                    - generic [ref=e1318]: "|"
+                    - generic [ref=e1319]:
+                      - img [ref=e1320]
+                      - generic [ref=e1323]: St. Catharines
+                  - paragraph [ref=e1324]: Retail/Office Development•45 James St, St. Catharines, ON
+                - generic [ref=e1325]:
+                  - generic [ref=e1326]:
+                    - generic [ref=e1327]: "90"
+                    - generic [ref=e1328]: Match Score
+                  - button "View Profile" [ref=e1330]
+  - button "Ctrl+Shift+V" [ref=e561] [cursor=pointer]:
+    - img [ref=e562]
+    - generic [ref=e565]: Ctrl+Shift+V

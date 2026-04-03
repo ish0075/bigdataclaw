@@ -1,0 +1,274 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "BIGDATA CLAW" [level=1] [ref=e9]
+        - paragraph [ref=e10]: NERVE Mission Control
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [active] [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Obsidian Vault" [ref=e46] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e47]
+        - generic [ref=e51]: Obsidian Vault
+      - generic [ref=e52]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e53] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e54]
+        - generic [ref=e57]: EXP Agent Recruiter
+        - generic [ref=e58]: 96K
+      - link "Commercial Agents 6.7K" [ref=e59] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e60]
+        - generic [ref=e63]: Commercial Agents
+        - generic [ref=e64]: 6.7K
+      - link "Brokerages" [ref=e65] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e66]
+        - generic [ref=e69]: Brokerages
+      - generic [ref=e70]: Tools
+      - link "My Listings" [ref=e71] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e72]
+        - generic [ref=e76]: My Listings
+      - link "Buyer Matcher" [ref=e77] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e78]
+        - generic [ref=e83]: Buyer Matcher
+      - link "Agent Matcher" [ref=e84] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e85]
+        - generic [ref=e89]: Agent Matcher
+      - link "Lender Matcher" [ref=e90] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e91]
+        - generic [ref=e93]: Lender Matcher
+      - link "Builder Directory" [ref=e94] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e95]
+        - generic [ref=e99]: Builder Directory
+      - link "Property Upload" [ref=e100] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e101]
+        - generic [ref=e104]: Property Upload
+      - link "Olena Marketing" [ref=e105] [cursor=pointer]:
+        - /url: /olena-feature-sheet
+        - img [ref=e106]
+        - generic [ref=e109]: Olena Marketing
+      - link "Canva Editor" [ref=e110] [cursor=pointer]:
+        - /url: /canva-editor
+        - img [ref=e111]
+        - generic [ref=e117]: Canva Editor
+      - link "Skills & Agents" [ref=e118] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e119]
+        - generic [ref=e122]: Skills & Agents
+      - link "Map View" [ref=e123] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e124]
+        - generic [ref=e126]: Map View
+      - link "Data Manager" [ref=e127] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e128]
+        - generic [ref=e132]: Data Manager
+    - generic [ref=e136]: System Online
+  - generic [ref=e137]:
+    - banner [ref=e138]:
+      - generic [ref=e144]:
+        - img [ref=e339]
+        - generic [ref=e152]: Connected
+      - generic [ref=e155]:
+        - img [ref=e156]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e159]
+        - combobox [ref=e160]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e161]:
+        - button "Help" [ref=e163] [cursor=pointer]:
+          - img [ref=e164]
+          - generic [ref=e167]: Help
+        - button "Voice" [ref=e168] [cursor=pointer]:
+          - img [ref=e169]
+          - generic [ref=e175]: Voice
+        - generic [ref=e176]:
+          - img [ref=e177]
+          - generic [ref=e182]: $12.40
+        - link "Data Manager" [ref=e183] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e184]
+        - button [ref=e188] [cursor=pointer]:
+          - img [ref=e189]
+        - link [ref=e192] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e193]
+        - link "🦞" [ref=e196] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e197]: 🦞
+    - main [ref=e198]:
+      - generic [ref=e343]:
+        - generic [ref=e344]:
+          - generic [ref=e345]:
+            - heading "Hot Money Radar" [level=1] [ref=e346]:
+              - img [ref=e347]
+              - text: Hot Money Radar
+            - paragraph [ref=e349]: 2 leads with $24.8M in fresh capital • Recently sold
+          - generic [ref=e350]:
+            - button "Paste Deal" [ref=e351] [cursor=pointer]:
+              - img [ref=e352]
+              - text: Paste Deal
+            - button "Refresh" [ref=e356] [cursor=pointer]:
+              - img [ref=e357]
+              - text: Refresh
+            - button "Filter" [ref=e359] [cursor=pointer]:
+              - img [ref=e360]
+              - text: Filter
+            - button "Export" [ref=e362] [cursor=pointer]:
+              - img [ref=e363]
+              - text: Export
+        - generic [ref=e366]:
+          - generic [ref=e368]:
+            - img
+            - generic [ref=e370]:
+              - paragraph [ref=e371]: $24.8M
+              - paragraph [ref=e372]: Total Hot Money
+          - generic [ref=e374]:
+            - img [ref=e375]
+            - generic [ref=e377]:
+              - paragraph [ref=e378]: "2"
+              - paragraph [ref=e379]: Active Alerts
+          - generic [ref=e381]:
+            - img
+            - generic [ref=e385]:
+              - paragraph [ref=e386]: $12.4M
+              - paragraph [ref=e387]: Avg Cash Position
+          - generic [ref=e389]:
+            - img [ref=e390]
+            - generic [ref=e392]:
+              - paragraph [ref=e393]: "90"
+              - paragraph [ref=e394]: Avg Match Score
+        - generic [ref=e396]:
+          - generic [ref=e397]:
+            - img [ref=e398]
+            - textbox "Search by entity name, location, or asset class... (or use voice 🎤)" [ref=e401]
+            - generic [ref=e402]:
+              - button "Search" [ref=e403] [cursor=pointer]:
+                - img [ref=e404]
+                - text: Search
+              - button "Start voice input" [ref=e408] [cursor=pointer]:
+                - img [ref=e409]
+          - combobox [ref=e413]:
+            - option "All Asset Classes" [selected]
+            - option "Industrial"
+            - option "Retail"
+            - option "Office"
+            - option "Multi-Family"
+            - option "Agricultural"
+            - option "Land"
+            - option "Mixed-Use"
+        - generic [ref=e414]:
+          - generic [ref=e416]:
+            - heading "Hot Money Leads" [level=3] [ref=e417]
+            - generic [ref=e418]:
+              - generic [ref=e419]: "Sorted by:"
+              - combobox [ref=e420]:
+                - option "Cash Amount (High → Low)" [selected]
+                - option "Date (Newest)"
+                - option "Match Score"
+          - generic [ref=e421]:
+            - generic [ref=e423] [cursor=pointer]:
+              - img [ref=e426]
+              - generic [ref=e428]:
+                - generic [ref=e429]:
+                  - generic [ref=e430]:
+                    - generic [ref=e431]:
+                      - heading "2650687 Ontario Ltd" [level=4] [ref=e432]
+                      - generic [ref=e433]: "Sale: May 2025"
+                    - generic [ref=e434]:
+                      - generic [ref=e435]:
+                        - img [ref=e436]
+                        - generic [ref=e438]: $15.0M cash
+                      - generic [ref=e439]: "|"
+                      - generic [ref=e440]:
+                        - img [ref=e441]
+                        - generic [ref=e443]: May 2025
+                      - generic [ref=e444]: "|"
+                      - generic [ref=e445]:
+                        - img [ref=e446]
+                        - generic [ref=e449]: West Lincoln
+                    - paragraph [ref=e450]: Development•Thirty Rd
+                  - generic [ref=e451]:
+                    - generic [ref=e452]:
+                      - generic [ref=e453]: "92"
+                      - generic [ref=e454]: Match Score
+                    - button "View Profile" [ref=e456]
+                - generic [ref=e457]:
+                  - generic [ref=e458]: "💰 Seller:"
+                  - link "Google" [ref=e459]:
+                    - /url: https://www.google.com/search?q=2650687%20Ontario%20Ltd
+                  - generic [ref=e460]: •
+                  - link "LI" [ref=e461]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=2650687%20Ontario%20Ltd
+            - generic [ref=e463] [cursor=pointer]:
+              - img [ref=e466]
+              - generic [ref=e468]:
+                - generic [ref=e469]:
+                  - generic [ref=e470]:
+                    - generic [ref=e471]:
+                      - heading "Turnberry Holdings Inc" [level=4] [ref=e472]
+                      - generic [ref=e473]: "Sale: Jan 2025"
+                    - generic [ref=e474]:
+                      - generic [ref=e475]:
+                        - img [ref=e476]
+                        - generic [ref=e478]: $9.8M cash
+                      - generic [ref=e479]: "|"
+                      - generic [ref=e480]:
+                        - img [ref=e481]
+                        - generic [ref=e483]: Jan 2025
+                      - generic [ref=e484]: "|"
+                      - generic [ref=e485]:
+                        - img [ref=e486]
+                        - generic [ref=e489]: Lincoln
+                    - paragraph [ref=e490]: Retail•4556-4568 Lincoln Ave
+                  - generic [ref=e491]:
+                    - generic [ref=e492]:
+                      - generic [ref=e493]: "88"
+                      - generic [ref=e494]: Match Score
+                    - button "View Profile" [ref=e496]
+                - generic [ref=e497]:
+                  - generic [ref=e498]: "💰 Seller:"
+                  - link "Google" [ref=e499]:
+                    - /url: https://www.google.com/search?q=Turnberry%20Holdings%20Inc
+                  - generic [ref=e500]: •
+                  - link "LI" [ref=e501]:
+                    - /url: https://www.linkedin.com/search/results/companies/?keywords=Turnberry%20Holdings%20Inc
+  - button "Ctrl+Shift+V" [ref=e334] [cursor=pointer]:
+    - img [ref=e335]
+    - generic [ref=e338]: Ctrl+Shift+V

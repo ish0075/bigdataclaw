@@ -1,0 +1,57 @@
+# Large data files
+*.csv
+*.db
+*.sqlite
+*.sqlite3
+recruiter_db_with_quicklinks.json
+QUICK_LINKS_*
+CONTEXTKEEP_*
+
+# Node modules
+node_modules/
+nerve/node_modules/
+
+# Large directories
+scraped_data/
+conversation_logs/
+logs/
+__pycache__/
+.codex/
+
+# Images and screenshots
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+
+# Documentation (not needed for build)
+*.md
+
+# Python cache
+*.pyc
+*.pyo
+
+# Git
+.git/
+.gitignore
+
+# DBeaver exports
+dbeaver_exports/
+dbeaver_final_exports/
+dbeaver_complete_exports/
+realtor_exports/
+buyers_data/
+bdaiv2_exports/
+COMPANIES_BY_CATEGORY/
+LENDERS_BY_SPECIALIZATION/
+quick_links_notes/
+desktop_resources/
+
+# Agents (Python code not needed for frontend build)
+agents/
+*.py
+
+# Deployment scripts
+*.sh
+*.service

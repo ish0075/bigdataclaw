@@ -1,0 +1,168 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "BIGDATA CLAW" [level=1] [ref=e9]
+        - paragraph [ref=e10]: NERVE Mission Control
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Obsidian Vault" [ref=e46] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e47]
+        - generic [ref=e51]: Obsidian Vault
+      - generic [ref=e52]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e53] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e54]
+        - generic [ref=e57]: EXP Agent Recruiter
+        - generic [ref=e58]: 96K
+      - link "Commercial Agents 6.7K" [ref=e59] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e60]
+        - generic [ref=e63]: Commercial Agents
+        - generic [ref=e64]: 6.7K
+      - link "Brokerages" [ref=e65] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e66]
+        - generic [ref=e69]: Brokerages
+      - generic [ref=e70]: Tools
+      - link "My Listings" [ref=e71] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e72]
+        - generic [ref=e76]: My Listings
+      - link "Buyer Matcher" [ref=e77] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e78]
+        - generic [ref=e83]: Buyer Matcher
+      - link "Agent Matcher" [ref=e84] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e85]
+        - generic [ref=e89]: Agent Matcher
+      - link "Lender Matcher" [ref=e90] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e91]
+        - generic [ref=e93]: Lender Matcher
+      - link "Builder Directory" [ref=e94] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e95]
+        - generic [ref=e99]: Builder Directory
+      - link "Property Upload" [ref=e100] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e101]
+        - generic [ref=e104]: Property Upload
+      - link "Skills & Agents" [ref=e105] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e106]
+        - generic [ref=e109]: Skills & Agents
+      - link "Map View" [ref=e110] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e111]
+        - generic [ref=e113]: Map View
+      - link "Data Manager" [ref=e114] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e115]
+        - generic [ref=e119]: Data Manager
+    - generic [ref=e123]: System Online
+  - generic [ref=e124]:
+    - banner [ref=e125]:
+      - generic [ref=e131]:
+        - img [ref=e132]
+        - generic [ref=e139]: Reconnecting...
+      - generic [ref=e142]:
+        - img [ref=e143]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e146]
+        - combobox [ref=e147]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e148]:
+        - button "Voice" [ref=e149] [cursor=pointer]:
+          - img [ref=e150]
+          - generic [ref=e156]: Voice
+        - generic [ref=e157]:
+          - img [ref=e158]
+          - generic [ref=e163]: $12.40
+        - link "Data Manager" [ref=e164] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e165]
+        - button [ref=e169] [cursor=pointer]:
+          - img [ref=e170]
+        - link [ref=e173] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e174]
+        - link "🦞" [ref=e177] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e178]: 🦞
+    - main [ref=e179]:
+      - generic [ref=e181]:
+        - generic [ref=e182]:
+          - heading "Property Upload" [level=1] [ref=e183]:
+            - img [ref=e184]
+            - text: Property Upload
+          - paragraph [ref=e187]: Upload property documents, photos, and offering memorandums
+        - generic [ref=e189]:
+          - img [ref=e191]
+          - heading "Drag & Drop files here" [level=3] [ref=e195]
+          - paragraph [ref=e196]: or click to browse
+          - generic [ref=e197] [cursor=pointer]: Select Files
+          - generic [ref=e198]:
+            - generic [ref=e199]:
+              - img [ref=e200]
+              - text: PDF
+            - generic [ref=e203]:
+              - img [ref=e204]
+              - text: Images
+            - generic [ref=e208]:
+              - img [ref=e209]
+              - text: Word
+            - generic [ref=e212]:
+              - img [ref=e213]
+              - text: Excel
+        - generic [ref=e216]:
+          - heading "Upload Tips" [level=3] [ref=e217]:
+            - img [ref=e218]
+            - text: Upload Tips
+          - list [ref=e220]:
+            - listitem [ref=e221]:
+              - generic [ref=e222]: ✓
+              - text: Upload Offering Memorandums (PDF) to auto-extract property details
+            - listitem [ref=e223]:
+              - generic [ref=e224]: ✓
+              - text: Include property photos for better marketing materials
+            - listitem [ref=e225]:
+              - generic [ref=e226]: ✓
+              - text: Financial statements help with buyer qualification
+            - listitem [ref=e227]:
+              - generic [ref=e228]: ✓
+              - text: Site plans and surveys are valuable for due diligence
+  - button "Ctrl+Shift+V" [ref=e229] [cursor=pointer]:
+    - img [ref=e230]
+    - generic [ref=e233]: Ctrl+Shift+V

@@ -1,0 +1,15 @@
+[Unit]
+Description=BigDataClaw Opportunity Automation
+After=network.target
+
+[Service]
+Type=simple
+User=jamie
+WorkingDirectory=/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw
+ExecStart=/usr/bin/python3 automation_runner.py
+Restart=always
+RestartSec=10
+Environment=PYTHONPATH=/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw
+
+[Install]
+WantedBy=multi-user.target

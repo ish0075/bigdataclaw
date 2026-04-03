@@ -1,0 +1,242 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+      - /url: "#main-content"
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]:
+          - generic [ref=e9]:
+            - img [ref=e11]
+            - generic [ref=e13]:
+              - button "N" [ref=e14]:
+                - link "N" [ref=e15] [cursor=pointer]:
+                  - /url: /NIAAAA/dashboard
+                  - generic [ref=e18]:
+                    - img [ref=e19]
+                    - generic [ref=e20]: "N"
+              - button "T" [ref=e21]:
+                - link "T" [active] [ref=e22] [cursor=pointer]:
+                  - /url: /TES/dashboard
+                  - generic [ref=e24]:
+                    - img [ref=e25]
+                    - generic [ref=e26]: T
+              - button "N" [ref=e27]:
+                - link "N" [ref=e28] [cursor=pointer]:
+                  - /url: /NIAA/dashboard
+                  - generic [ref=e30]:
+                    - img [ref=e31]
+                    - generic [ref=e32]: "N"
+              - button "N" [ref=e33]:
+                - link "N" [ref=e34] [cursor=pointer]:
+                  - /url: /NIA/dashboard
+                  - generic [ref=e36]:
+                    - img [ref=e37]
+                    - generic [ref=e38]: "N"
+              - button "T" [ref=e39]:
+                - link "T" [ref=e40] [cursor=pointer]:
+                  - /url: /TESA/dashboard
+                  - generic [ref=e42]:
+                    - img [ref=e43]
+                    - generic [ref=e44]: T
+              - button "N" [ref=e45]:
+                - link "N" [ref=e46] [cursor=pointer]:
+                  - /url: /NIAAA/dashboard
+                  - generic [ref=e48]:
+                    - img [ref=e49]
+                    - generic [ref=e50]: "N"
+              - button "T" [ref=e51]:
+                - link "T" [ref=e52] [cursor=pointer]:
+                  - /url: /TESAAA/dashboard
+                  - generic [ref=e54]:
+                    - img [ref=e55]
+                    - generic [ref=e56]: T
+              - button "A" [ref=e57]:
+                - link "A" [ref=e58] [cursor=pointer]:
+                  - /url: /ABC/dashboard
+                  - generic [ref=e60]:
+                    - img [ref=e61]
+                    - generic [ref=e62]: A
+              - button "F" [ref=e63]:
+                - link "F" [ref=e64] [cursor=pointer]:
+                  - /url: /FAC/dashboard
+                  - generic [ref=e66]:
+                    - img [ref=e67]
+                    - generic [ref=e68]: F
+              - button "T" [ref=e69]:
+                - link "T" [ref=e70] [cursor=pointer]:
+                  - /url: /TESAA/dashboard
+                  - generic [ref=e73]:
+                    - img [ref=e74]
+                    - generic [ref=e75]: T
+              - status [ref=e76]
+            - button "Add company" [ref=e79]:
+              - img [ref=e80]
+          - complementary [ref=e82]:
+            - generic [ref=e83]:
+              - generic [ref=e84]: Test NERVE Integration
+              - button [ref=e85]:
+                - img
+            - navigation [ref=e86]:
+              - generic [ref=e87]:
+                - button "New Issue" [ref=e88]:
+                  - img [ref=e89]
+                  - generic [ref=e92]: New Issue
+                - link "Dashboard" [ref=e93] [cursor=pointer]:
+                  - /url: /TES/dashboard
+                  - img [ref=e95]
+                  - generic [ref=e100]: Dashboard
+                - link "Inbox" [ref=e472] [cursor=pointer]:
+                  - /url: /TES/inbox
+                  - img [ref=e103]
+                  - generic [ref=e106]: Inbox
+              - generic [ref=e108]:
+                - generic [ref=e109]: Work
+                - generic [ref=e110]:
+                  - link "Issues" [ref=e111] [cursor=pointer]:
+                    - /url: /TES/issues
+                    - img [ref=e113]
+                    - generic [ref=e116]: Issues
+                  - link "Routines Beta" [ref=e117] [cursor=pointer]:
+                    - /url: /TES/routines
+                    - img [ref=e119]
+                    - generic [ref=e124]: Routines
+                    - generic [ref=e125]: Beta
+                  - link "Goals" [ref=e126] [cursor=pointer]:
+                    - /url: /TES/goals
+                    - img [ref=e128]
+                    - generic [ref=e132]: Goals
+              - generic [ref=e133]:
+                - generic [ref=e135]:
+                  - button "Projects" [expanded] [ref=e136]:
+                    - img [ref=e137]
+                    - generic [ref=e139]: Projects
+                  - button "New project" [ref=e140]:
+                    - img [ref=e141]
+                - status [ref=e142]
+              - generic [ref=e145]:
+                - button "Agents" [expanded] [ref=e146]:
+                  - img [ref=e147]
+                  - generic [ref=e149]: Agents
+                - button "New agent" [ref=e150]:
+                  - img [ref=e151]
+              - generic [ref=e164]:
+                - generic [ref=e165]: Company
+                - generic [ref=e166]:
+                  - link "Org" [ref=e167] [cursor=pointer]:
+                    - /url: /TES/org
+                    - img [ref=e169]
+                    - generic [ref=e174]: Org
+                  - link "Skills" [ref=e175] [cursor=pointer]:
+                    - /url: /TES/skills
+                    - img [ref=e177]
+                    - generic [ref=e187]: Skills
+                  - link "Costs" [ref=e188] [cursor=pointer]:
+                    - /url: /TES/costs
+                    - img [ref=e190]
+                    - generic [ref=e192]: Costs
+                  - link "Activity" [ref=e193] [cursor=pointer]:
+                    - /url: /TES/activity
+                    - img [ref=e195]
+                    - generic [ref=e199]: Activity
+                  - link "Settings" [ref=e200] [cursor=pointer]:
+                    - /url: /TES/company/settings
+                    - img [ref=e202]
+                    - generic [ref=e205]: Settings
+        - generic [ref=e207]:
+          - link "Documentation" [ref=e208] [cursor=pointer]:
+            - /url: https://docs.paperclip.ing/
+            - img [ref=e209]
+            - generic [ref=e211]: Documentation
+          - generic [ref=e212]: v
+          - link "Instance settings" [ref=e213] [cursor=pointer]:
+            - /url: /instance/settings/general
+            - img
+          - button "Switch to light mode" [ref=e214]:
+            - img
+      - generic [ref=e215]:
+        - heading "Dashboard" [level=1] [ref=e219]
+        - main [ref=e221]:
+          - generic [ref=e473]:
+            - generic [ref=e474]:
+              - generic [ref=e475]:
+                - img [ref=e476]
+                - paragraph [ref=e479]: You have no agents.
+              - button "Create one here" [ref=e480]
+            - generic [ref=e481]:
+              - heading "Agents" [level=3] [ref=e482]
+              - paragraph [ref=e484]: No recent agent runs.
+            - generic [ref=e485]:
+              - link "0 Agents Enabled 0 running, 0 paused, 0 errors" [ref=e486] [cursor=pointer]:
+                - /url: /TES/agents
+                - generic [ref=e488]:
+                  - generic [ref=e489]:
+                    - paragraph [ref=e490]: "0"
+                    - paragraph [ref=e491]: Agents Enabled
+                    - generic [ref=e493]: 0 running, 0 paused, 0 errors
+                  - img [ref=e494]
+              - link "0 Tasks In Progress 0 open, 0 blocked" [ref=e497] [cursor=pointer]:
+                - /url: /TES/issues
+                - generic [ref=e499]:
+                  - generic [ref=e500]:
+                    - paragraph [ref=e501]: "0"
+                    - paragraph [ref=e502]: Tasks In Progress
+                    - generic [ref=e504]: 0 open, 0 blocked
+                  - img [ref=e505]
+              - link "$0.00 Month Spend Unlimited budget" [ref=e508] [cursor=pointer]:
+                - /url: /TES/costs
+                - generic [ref=e510]:
+                  - generic [ref=e511]:
+                    - paragraph [ref=e512]: $0.00
+                    - paragraph [ref=e513]: Month Spend
+                    - generic [ref=e514]: Unlimited budget
+                  - img [ref=e515]
+              - link "0 Pending Approvals Awaiting board review" [ref=e517] [cursor=pointer]:
+                - /url: /TES/approvals
+                - generic [ref=e519]:
+                  - generic [ref=e520]:
+                    - paragraph [ref=e521]: "0"
+                    - paragraph [ref=e522]: Pending Approvals
+                    - generic [ref=e523]: Awaiting board review
+                  - img [ref=e524]
+            - generic [ref=e527]:
+              - generic [ref=e528]:
+                - generic [ref=e529]:
+                  - heading "Run Activity" [level=3] [ref=e530]
+                  - text: Last 14 days
+                - paragraph [ref=e531]: No runs yet
+              - generic [ref=e532]:
+                - generic [ref=e533]:
+                  - heading "Issues by Priority" [level=3] [ref=e534]
+                  - text: Last 14 days
+                - paragraph [ref=e535]: No issues
+              - generic [ref=e536]:
+                - generic [ref=e537]:
+                  - heading "Issues by Status" [level=3] [ref=e538]
+                  - text: Last 14 days
+                - paragraph [ref=e539]: No issues
+              - generic [ref=e540]:
+                - generic [ref=e541]:
+                  - heading "Success Rate" [level=3] [ref=e542]
+                  - text: Last 14 days
+                - paragraph [ref=e543]: No runs yet
+            - generic [ref=e544]:
+              - generic [ref=e545]:
+                - heading "Recent Activity" [level=3] [ref=e546]
+                - generic [ref=e549]:
+                  - paragraph [ref=e550]:
+                    - generic [ref=e551]:
+                      - generic [ref=e553]: BO
+                      - generic [ref=e554]: Board
+                    - generic [ref=e555]: created company
+                  - generic [ref=e556]: 7h ago
+              - generic [ref=e557]:
+                - heading "Recent Tasks" [level=3] [ref=e558]
+                - paragraph [ref=e560]: No tasks yet.
+    - generic [ref=e468]:
+      - heading "Command Palette" [level=2] [ref=e469]
+      - paragraph [ref=e470]: Search for a command to run...
+  - generic [ref=e562]:
+    - paragraph [ref=e563]: Test NERVE Integration
+    - img [ref=e565]
+    - tooltip "Test NERVE Integration" [ref=e567]:
+      - paragraph [ref=e568]: Test NERVE Integration

@@ -1,0 +1,347 @@
+- generic [ref=e4]:
+  - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e11]
+          - generic [ref=e13]:
+            - button "N" [ref=e14]:
+              - link "N" [ref=e15] [cursor=pointer]:
+                - /url: /NIAAAA/dashboard
+                - generic [ref=e18]:
+                  - img [ref=e19]
+                  - generic [ref=e20]: "N"
+            - button "T" [ref=e21]:
+              - link "T" [ref=e22] [cursor=pointer]:
+                - /url: /TES/dashboard
+                - generic [ref=e24]:
+                  - img [ref=e25]
+                  - generic [ref=e26]: T
+            - button "N" [ref=e27]:
+              - link "N" [ref=e28] [cursor=pointer]:
+                - /url: /NIAA/dashboard
+                - generic [ref=e30]:
+                  - img [ref=e31]
+                  - generic [ref=e32]: "N"
+            - button "N" [ref=e33]:
+              - link "N" [ref=e34] [cursor=pointer]:
+                - /url: /NIA/dashboard
+                - generic [ref=e36]:
+                  - img [ref=e37]
+                  - generic [ref=e38]: "N"
+            - button "T" [ref=e39]:
+              - link "T" [ref=e40] [cursor=pointer]:
+                - /url: /TESA/dashboard
+                - generic [ref=e42]:
+                  - img [ref=e43]
+                  - generic [ref=e44]: T
+            - button "N" [ref=e45]:
+              - link "N" [ref=e46] [cursor=pointer]:
+                - /url: /NIAAA/dashboard
+                - generic [ref=e48]:
+                  - img [ref=e49]
+                  - generic [ref=e50]: "N"
+            - button "T" [ref=e51]:
+              - link "T" [ref=e52] [cursor=pointer]:
+                - /url: /TESAAA/dashboard
+                - generic [ref=e54]:
+                  - img [ref=e55]
+                  - generic [ref=e56]: T
+            - button "A" [ref=e57]:
+              - link "A" [ref=e58] [cursor=pointer]:
+                - /url: /ABC/dashboard
+                - generic [ref=e60]:
+                  - img [ref=e61]
+                  - generic [ref=e62]: A
+            - button "F" [ref=e63]:
+              - link "F" [ref=e64] [cursor=pointer]:
+                - /url: /FAC/dashboard
+                - generic [ref=e66]:
+                  - img [ref=e67]
+                  - generic [ref=e68]: F
+            - button "T" [ref=e69]:
+              - link "T" [ref=e70] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - generic [ref=e73]:
+                  - img [ref=e74]
+                  - generic [ref=e75]: T
+            - status [ref=e76]
+          - button "Add company" [ref=e79]:
+            - img [ref=e80]
+        - complementary [ref=e82]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: Test Corp Hot Money Analysis
+            - button [ref=e85]:
+              - img
+          - navigation [ref=e86]:
+            - generic [ref=e87]:
+              - button "New Issue" [ref=e88]:
+                - img [ref=e89]
+                - generic [ref=e92]: New Issue
+              - link "Dashboard" [ref=e93] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - img [ref=e95]
+                - generic [ref=e100]: Dashboard
+              - link "Inbox 2" [ref=e101] [cursor=pointer]:
+                - /url: /TESAA/inbox
+                - img [ref=e103]
+                - generic [ref=e106]: Inbox
+                - generic [ref=e107]: "2"
+            - generic [ref=e108]:
+              - generic [ref=e109]: Work
+              - generic [ref=e110]:
+                - link "Issues" [ref=e111] [cursor=pointer]:
+                  - /url: /TESAA/issues
+                  - img [ref=e113]
+                  - generic [ref=e116]: Issues
+                - link "Routines Beta" [ref=e117] [cursor=pointer]:
+                  - /url: /TESAA/routines
+                  - img [ref=e119]
+                  - generic [ref=e124]: Routines
+                  - generic [ref=e125]: Beta
+                - link "Goals" [ref=e126] [cursor=pointer]:
+                  - /url: /TESAA/goals
+                  - img [ref=e128]
+                  - generic [ref=e132]: Goals
+            - generic [ref=e133]:
+              - generic [ref=e135]:
+                - button "Projects" [expanded] [ref=e136]:
+                  - img [ref=e137]
+                  - generic [ref=e139]: Projects
+                - button "New project" [ref=e140]:
+                  - img [ref=e141]
+              - status [ref=e142]
+            - generic [ref=e143]:
+              - generic [ref=e145]:
+                - button "Agents" [expanded] [ref=e146]:
+                  - img [ref=e147]
+                  - generic [ref=e149]: Agents
+                - button "New agent" [ref=e150]:
+                  - img [ref=e151]
+              - generic [ref=e153]:
+                - link "Capital Analyst" [ref=e154] [cursor=pointer]:
+                  - /url: /TESAA/agents/capital-analyst
+                  - img [ref=e155]
+                  - generic [ref=e158]: Capital Analyst
+                - link "Outreach Strategist" [ref=e159] [cursor=pointer]:
+                  - /url: /TESAA/agents/outreach-strategist
+                  - img [ref=e160]
+                  - generic [ref=e163]: Outreach Strategist
+            - generic [ref=e164]:
+              - generic [ref=e165]: Company
+              - generic [ref=e166]:
+                - link "Org" [ref=e167] [cursor=pointer]:
+                  - /url: /TESAA/org
+                  - img [ref=e169]
+                  - generic [ref=e174]: Org
+                - link "Skills" [ref=e175] [cursor=pointer]:
+                  - /url: /TESAA/skills
+                  - img [ref=e177]
+                  - generic [ref=e187]: Skills
+                - link "Costs" [ref=e188] [cursor=pointer]:
+                  - /url: /TESAA/costs
+                  - img [ref=e190]
+                  - generic [ref=e192]: Costs
+                - link "Activity" [ref=e193] [cursor=pointer]:
+                  - /url: /TESAA/activity
+                  - img [ref=e195]
+                  - generic [ref=e199]: Activity
+                - link "Settings" [ref=e200] [cursor=pointer]:
+                  - /url: /TESAA/company/settings
+                  - img [ref=e202]
+                  - generic [ref=e205]: Settings
+      - generic [ref=e207]:
+        - link "Documentation" [ref=e208] [cursor=pointer]:
+          - /url: https://docs.paperclip.ing/
+          - img [ref=e209]
+          - generic [ref=e211]: Documentation
+        - generic [ref=e212]: v
+        - link "Instance settings" [ref=e213] [cursor=pointer]:
+          - /url: /instance/settings/general
+          - img
+        - button "Switch to light mode" [ref=e214]:
+          - img
+    - generic [ref=e215]:
+      - heading "Dashboard" [level=1] [ref=e219]
+      - main [ref=e221]:
+        - generic [ref=e222]:
+          - generic [ref=e223]:
+            - heading "Agents" [level=3] [ref=e224]
+            - paragraph [ref=e226]: No recent agent runs.
+          - generic [ref=e227]:
+            - link "2 Agents Enabled 0 running, 0 paused, 0 errors" [ref=e228] [cursor=pointer]:
+              - /url: /TESAA/agents
+              - generic [ref=e230]:
+                - generic [ref=e231]:
+                  - paragraph [ref=e232]: "2"
+                  - paragraph [ref=e233]: Agents Enabled
+                  - generic [ref=e235]: 0 running, 0 paused, 0 errors
+                - img [ref=e236]
+            - link "0 Tasks In Progress 1 open, 0 blocked" [ref=e239] [cursor=pointer]:
+              - /url: /TESAA/issues
+              - generic [ref=e241]:
+                - generic [ref=e242]:
+                  - paragraph [ref=e243]: "0"
+                  - paragraph [ref=e244]: Tasks In Progress
+                  - generic [ref=e246]: 1 open, 0 blocked
+                - img [ref=e247]
+            - link "$0.00 Month Spend Unlimited budget" [ref=e250] [cursor=pointer]:
+              - /url: /TESAA/costs
+              - generic [ref=e252]:
+                - generic [ref=e253]:
+                  - paragraph [ref=e254]: $0.00
+                  - paragraph [ref=e255]: Month Spend
+                  - generic [ref=e256]: Unlimited budget
+                - img [ref=e257]
+            - link "0 Pending Approvals Awaiting board review" [ref=e259] [cursor=pointer]:
+              - /url: /TESAA/approvals
+              - generic [ref=e261]:
+                - generic [ref=e262]:
+                  - paragraph [ref=e263]: "0"
+                  - paragraph [ref=e264]: Pending Approvals
+                  - generic [ref=e265]: Awaiting board review
+                - img [ref=e266]
+          - generic [ref=e269]:
+            - generic [ref=e270]:
+              - generic [ref=e271]:
+                - heading "Run Activity" [level=3] [ref=e272]
+                - text: Last 14 days
+              - paragraph [ref=e273]: No runs yet
+            - generic [ref=e274]:
+              - generic [ref=e275]:
+                - heading "Issues by Priority" [level=3] [ref=e276]
+                - text: Last 14 days
+              - generic [ref=e277]:
+                - generic [ref=e278]:
+                  - 'generic "2026-03-21: 0 issues" [ref=e279]'
+                  - 'generic "2026-03-22: 0 issues" [ref=e281]'
+                  - 'generic "2026-03-23: 0 issues" [ref=e283]'
+                  - 'generic "2026-03-24: 0 issues" [ref=e285]'
+                  - 'generic "2026-03-25: 0 issues" [ref=e287]'
+                  - 'generic "2026-03-26: 0 issues" [ref=e289]'
+                  - 'generic "2026-03-27: 0 issues" [ref=e291]'
+                  - 'generic "2026-03-28: 0 issues" [ref=e293]'
+                  - 'generic "2026-03-29: 0 issues" [ref=e295]'
+                  - 'generic "2026-03-30: 0 issues" [ref=e297]'
+                  - 'generic "2026-03-31: 0 issues" [ref=e299]'
+                  - 'generic "2026-04-01: 0 issues" [ref=e301]'
+                  - 'generic "2026-04-02: 1 issues" [ref=e303]'
+                  - 'generic "2026-04-03: 0 issues" [ref=e306]'
+                - generic [ref=e308]:
+                  - generic [ref=e309]: 3/21
+                  - generic [ref=e315]: 3/27
+                  - generic [ref=e322]: 4/3
+                - generic [ref=e323]:
+                  - generic [ref=e324]: Critical
+                  - generic [ref=e326]: High
+                  - generic [ref=e328]: Medium
+                  - generic [ref=e330]: Low
+            - generic [ref=e332]:
+              - generic [ref=e333]:
+                - heading "Issues by Status" [level=3] [ref=e334]
+                - text: Last 14 days
+              - generic [ref=e335]:
+                - generic [ref=e336]:
+                  - 'generic "2026-03-21: 0 issues" [ref=e337]'
+                  - 'generic "2026-03-22: 0 issues" [ref=e339]'
+                  - 'generic "2026-03-23: 0 issues" [ref=e341]'
+                  - 'generic "2026-03-24: 0 issues" [ref=e343]'
+                  - 'generic "2026-03-25: 0 issues" [ref=e345]'
+                  - 'generic "2026-03-26: 0 issues" [ref=e347]'
+                  - 'generic "2026-03-27: 0 issues" [ref=e349]'
+                  - 'generic "2026-03-28: 0 issues" [ref=e351]'
+                  - 'generic "2026-03-29: 0 issues" [ref=e353]'
+                  - 'generic "2026-03-30: 0 issues" [ref=e355]'
+                  - 'generic "2026-03-31: 0 issues" [ref=e357]'
+                  - 'generic "2026-04-01: 0 issues" [ref=e359]'
+                  - 'generic "2026-04-02: 1 issues" [ref=e361]'
+                  - 'generic "2026-04-03: 0 issues" [ref=e364]'
+                - generic [ref=e366]:
+                  - generic [ref=e367]: 3/21
+                  - generic [ref=e373]: 3/27
+                  - generic [ref=e380]: 4/3
+                - generic [ref=e382]: Backlog
+            - generic [ref=e384]:
+              - generic [ref=e385]:
+                - heading "Success Rate" [level=3] [ref=e386]
+                - text: Last 14 days
+              - paragraph [ref=e387]: No runs yet
+          - generic [ref=e388]:
+            - generic [ref=e389]:
+              - heading "Recent Activity" [level=3] [ref=e390]
+              - generic [ref=e391]:
+                - generic [ref=e393]:
+                  - paragraph [ref=e394]:
+                    - generic [ref=e395]:
+                      - generic [ref=e397]: BO
+                      - generic [ref=e398]: Board
+                    - generic [ref=e399]: join requested
+                  - generic [ref=e400]: 1m ago
+                - generic [ref=e402]:
+                  - paragraph [ref=e403]:
+                    - generic [ref=e404]:
+                      - generic [ref=e406]: BO
+                      - generic [ref=e407]: Board
+                    - generic [ref=e408]: invite openclaw prompt created
+                  - generic [ref=e409]: 8m ago
+                - link "BO Board created TESAA-1— Research Test Corp 5h ago" [ref=e410] [cursor=pointer]:
+                  - /url: /TESAA/issues/TESAA-1
+                  - generic [ref=e411]:
+                    - paragraph [ref=e412]:
+                      - generic [ref=e413]:
+                        - generic [ref=e415]: BO
+                        - generic [ref=e416]: Board
+                      - generic [ref=e417]: created
+                      - text: TESAA-1
+                      - generic [ref=e418]: — Research Test Corp
+                    - generic [ref=e419]: 5h ago
+                - link "BO Board created Outreach Strategist 5h ago" [ref=e420] [cursor=pointer]:
+                  - /url: /TESAA/agents/fd2c0577-1673-4b9c-9272-01fe18536f53
+                  - generic [ref=e421]:
+                    - paragraph [ref=e422]:
+                      - generic [ref=e423]:
+                        - generic [ref=e425]: BO
+                        - generic [ref=e426]: Board
+                      - generic [ref=e427]: created
+                      - text: Outreach Strategist
+                    - generic [ref=e428]: 5h ago
+                - link "BO Board created Capital Analyst 5h ago" [ref=e429] [cursor=pointer]:
+                  - /url: /TESAA/agents/36272d56-7194-4379-94e9-618f0eae6bbb
+                  - generic [ref=e430]:
+                    - paragraph [ref=e431]:
+                      - generic [ref=e432]:
+                        - generic [ref=e434]: BO
+                        - generic [ref=e435]: Board
+                      - generic [ref=e436]: created
+                      - text: Capital Analyst
+                    - generic [ref=e437]: 5h ago
+                - link "BO Board created 5h ago" [ref=e438] [cursor=pointer]:
+                  - /url: /TESAA/goals/c57fc1e9-c59e-4fc2-8587-48bc068d911e
+                  - generic [ref=e439]:
+                    - paragraph [ref=e440]:
+                      - generic [ref=e441]:
+                        - generic [ref=e443]: BO
+                        - generic [ref=e444]: Board
+                      - generic [ref=e445]: created
+                    - generic [ref=e446]: 5h ago
+                - generic [ref=e448]:
+                  - paragraph [ref=e449]:
+                    - generic [ref=e450]:
+                      - generic [ref=e452]: BO
+                      - generic [ref=e453]: Board
+                    - generic [ref=e454]: created company
+                  - generic [ref=e455]: 5h ago
+            - generic [ref=e456]:
+              - heading "Recent Tasks" [level=3] [ref=e457]
+              - link "Research Test Corp TESAA-1 5h ago" [ref=e459] [cursor=pointer]:
+                - /url: /TESAA/issues/TESAA-1
+                - generic [ref=e461]:
+                  - generic [ref=e462]: Research Test Corp
+                  - generic [ref=e463]:
+                    - generic [ref=e466]: TESAA-1
+                    - generic [ref=e467]: 5h ago
+  - generic [ref=e468]:
+    - heading "Command Palette" [level=2] [ref=e469]
+    - paragraph [ref=e470]: Search for a command to run...

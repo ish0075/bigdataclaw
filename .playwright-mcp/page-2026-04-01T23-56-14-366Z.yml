@@ -1,0 +1,135 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "BIGDATA CLAW" [level=1] [ref=e9]
+        - paragraph [ref=e10]: NERVE Mission Control
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Obsidian Vault" [ref=e46] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e47]
+        - generic [ref=e51]: Obsidian Vault
+      - generic [ref=e52]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e53] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e54]
+        - generic [ref=e57]: EXP Agent Recruiter
+        - generic [ref=e58]: 96K
+      - link "Commercial Agents 6.7K" [ref=e59] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e60]
+        - generic [ref=e63]: Commercial Agents
+        - generic [ref=e64]: 6.7K
+      - link "Brokerages" [ref=e65] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e66]
+        - generic [ref=e69]: Brokerages
+      - generic [ref=e70]: Tools
+      - link "My Listings" [ref=e71] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e72]
+        - generic [ref=e76]: My Listings
+      - link "Buyer Matcher" [ref=e77] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e78]
+        - generic [ref=e83]: Buyer Matcher
+      - link "Agent Matcher" [ref=e84] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e85]
+        - generic [ref=e89]: Agent Matcher
+      - link "Lender Matcher" [ref=e90] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e91]
+        - generic [ref=e93]: Lender Matcher
+      - link "Builder Directory" [ref=e94] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e95]
+        - generic [ref=e99]: Builder Directory
+      - link "Property Upload" [ref=e100] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e101]
+        - generic [ref=e104]: Property Upload
+      - link "Olena Marketing" [ref=e105] [cursor=pointer]:
+        - /url: /olena-feature-sheet
+        - img [ref=e106]
+        - generic [ref=e109]: Olena Marketing
+      - link "Canva Editor" [ref=e110] [cursor=pointer]:
+        - /url: /canva-editor
+        - img [ref=e111]
+        - generic [ref=e117]: Canva Editor
+      - link "Skills & Agents" [ref=e118] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e119]
+        - generic [ref=e122]: Skills & Agents
+      - link "Map View" [ref=e123] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e124]
+        - generic [ref=e126]: Map View
+      - link "Data Manager" [ref=e127] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e128]
+        - generic [ref=e132]: Data Manager
+    - generic [ref=e136]: System Online
+  - generic [ref=e137]:
+    - banner [ref=e138]:
+      - generic [ref=e144]:
+        - img [ref=e198]
+        - generic [ref=e152]: Connected
+      - generic [ref=e155]:
+        - img [ref=e156]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e159]
+        - combobox [ref=e160]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e161]:
+        - button "Voice" [ref=e162] [cursor=pointer]:
+          - img [ref=e163]
+          - generic [ref=e169]: Voice
+        - generic [ref=e170]:
+          - img [ref=e171]
+          - generic [ref=e176]: $12.40
+        - link "Data Manager" [ref=e177] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e178]
+        - button [ref=e182] [cursor=pointer]:
+          - img [ref=e183]
+        - link [ref=e186] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e187]
+        - link "🦞" [ref=e190] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e191]: 🦞
+    - main [ref=e192]
+  - button "Ctrl+Shift+V" [ref=e193] [cursor=pointer]:
+    - img [ref=e194]
+    - generic [ref=e197]: Ctrl+Shift+V

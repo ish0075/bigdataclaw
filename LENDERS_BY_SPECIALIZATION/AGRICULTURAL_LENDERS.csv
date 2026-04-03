@@ -1,0 +1,65 @@
+1,Royal Bank of Canada,,,2023-10-13 11:00:06,'2023-10-30 12:43:01'),lender_type,asset_specializations,is_land_lender,is_construction_lender,is_commercial_lender
+17,Crowley Farms Norwood Ltd,,,2023-10-13 11:00:07,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+28,Farm Credit Canada,fcc-fac.ca,,2023-12-02 13:34:38,'2023-10-30 12:43:01'),Other,commercial|agricultural,0,0,1
+211,Romandale Farms Ltd,,,2023-10-13 11:00:16,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+240,Robbins Farms Ltd,,,2023-10-13 11:00:18,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+293,Maplebrae Farm Inc,,,2023-10-13 11:00:26,'2023-10-30 12:43:01'),Other,agricultural,0,0,0
+337,De Vries Family Farms Ltd,,,2023-10-13 11:00:33,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+338,Windy Stream Farms Inc,,,2023-10-13 11:00:33,'2023-10-30 12:43:01'),Other,agricultural,0,0,0
+343,Donker View Farms Inc,,,2023-10-13 11:00:34,'2023-10-30 12:43:01'),Other,agricultural,0,0,0
+371,Jedburgh Farms Ltd,,,2023-10-13 11:00:36,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+541,E &amp; J Horvath Farms Ltd,,,2023-10-13 11:02:48,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+547,E 3 Farms Ltd,,,2023-10-13 11:02:48,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+633,Treeola Farms Ltd,,,2023-10-13 11:02:59,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+721,Millar Berry Farms Inc,,,2023-10-13 11:12:13,'2023-10-30 12:43:01'),Other,agricultural,0,0,0
+764,Garson Farms Ltd,,,2023-10-13 11:13:46,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+776,Forbestfarm Inc,,,2023-10-13 11:13:49,'2023-10-30 12:43:01'),Other,agricultural,0,0,0
+1008,Munshaw Farms Ltd,,,2023-10-13 11:15:27,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+1046,Glendra Farms Ltd,,,2023-10-13 11:15:34,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+1270,Erlhaven Farms Ltd,,,2023-10-13 11:17:40,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+1295,Robintide Farms Ltd,,,2023-10-13 11:18:20,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+1302,Skipwell Farms Inc,,,2023-10-13 11:18:22,'2023-10-30 12:43:01'),Other,agricultural,0,0,0
+1312,Vinea Farm Ltd,,,2023-10-13 11:18:24,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+1734,Brian Domm Farms Ltd,,,2023-10-26 19:27:51,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+1832,Saul Farms Ltd,,,2023-10-29 16:55:02,'2023-10-30 12:43:01'),Major Bank,agricultural,0,0,0
+2267,Old Norwood Farm Ltd,,,2023-11-06 12:07:28,'2023-11-06 12:07:28'),Major Bank,agricultural,0,0,0
+2365,Big A Brand Fruit Farms Ltd,,,2023-11-07 11:35:49,'2023-11-07 11:35:49'),Major Bank,agricultural,0,0,0
+2460,Redick Farms Inc,,,2023-11-10 12:57:20,'2023-11-10 12:57:20'),Other,agricultural,0,0,0
+2557,Marcor Farms Ltd,,,2023-11-12 19:41:25,'2023-11-12 19:41:25'),Major Bank,agricultural,0,0,0
+2559,Knip Farms Inc,,,2023-11-12 19:41:26,'2023-11-12 19:41:26'),Other,agricultural,0,0,0
+2665,Van Der Burg Farms Inc,,,2023-11-14 19:35:03,'2023-11-14 19:35:03'),Other,agricultural,0,0,0
+3243,RJM Farms Inc,,,2023-11-27 10:48:55,'2023-11-27 10:48:55'),Other,agricultural,0,0,0
+3259,Church&#039;s Farm Supplies Ltd,,,2023-11-27 10:49:00,'2023-11-27 10:49:00'),Major Bank,agricultural,0,0,0
+3403,Loa-De-Mere Farms Ltd,,,2023-11-28 14:57:45,'2023-11-28 14:57:45'),Major Bank,agricultural,0,0,0
+3524,Murray Township Farms Ltd,,,2023-11-28 14:58:08,'2023-11-28 14:58:08'),Major Bank,agricultural,0,0,0
+3646,Fantasy Farm Inc,,,2023-11-30 12:57:19,'2023-11-30 12:57:19'),Other,agricultural,0,0,0
+3880,Dierick Farms Ltd,,,2023-12-03 16:44:31,'2023-12-03 16:44:31'),Major Bank,agricultural,0,0,0
+3919,GDA Farms Ltd,,,2023-12-03 16:44:46,'2023-12-03 16:44:46'),Major Bank,agricultural,0,0,0
+3943,Schothorst Farms Ltd,,,2023-12-03 16:45:00,'2023-12-03 16:45:00'),Major Bank,agricultural,0,0,0
+3972,Hermica Farms Inc,,,2023-12-03 16:45:12,'2023-12-03 16:45:12'),Private Lender,agricultural,0,0,0
+4051,Mar-View Farm Ltd,,,2023-12-05 17:46:02,'2023-12-05 17:46:02'),Major Bank,agricultural,0,0,0
+4145,Weldon Farms Ltd and 5 other,,,2023-12-06 18:40:21,'2023-12-06 18:40:21'),Major Bank,agricultural,0,0,0
+4294,Big Spring Farms Ltd,,,2023-12-08 20:20:31,'2023-12-08 20:20:31'),Major Bank,agricultural,0,0,0
+4309,Hewitt Creek Farms Ltd,,,2023-12-08 20:20:38,'2023-12-08 20:20:38'),Major Bank,commercial|agricultural,0,0,1
+4356,Vine Hill Farms Ltd,,,2023-12-11 14:00:22,'2023-12-11 14:00:22'),Major Bank,agricultural,0,0,0
+4407,Badger Farms Ltd,,,2023-12-11 14:00:49,'2023-12-11 14:00:49'),Major Bank,agricultural,0,0,0
+4527,Calapa Farms Ltd,,,2024-03-06 16:31:58,'2024-03-06 16:31:58'),Major Bank,agricultural,0,0,0
+4591,Farm Credit Corporatio,,,2024-04-15 20:57:20,'2024-04-15 20:57:20'),Other,commercial|agricultural,0,0,1
+4629,Bosrand Farms Ltd,,,2024-06-01 15:59:16,'2024-06-01 15:59:16'),Major Bank,agricultural,0,0,0
+4655,Glandine Farms Ltd,,,2024-06-01 16:41:10,'2024-06-01 16:41:10'),Major Bank,land|agricultural,1,0,0
+4671,Aljac Farms Inc,,,2024-06-01 20:18:02,'2024-06-01 20:18:02'),Other,agricultural,0,0,0
+4705,Snyder Farms Ltd,,,2024-06-03 16:40:16,'2024-06-03 16:40:16'),Major Bank,agricultural,0,0,0
+4758,Braeben Farms Ltd,,,2024-06-04 11:21:33,'2024-06-04 11:21:33'),Major Bank,agricultural,0,0,0
+4778,Walnut Ridge Poultry Farm Ltd,,,2024-06-27 12:44:04,'2024-06-27 12:44:04'),Major Bank,agricultural,0,0,0
+4784,Joanal Farms Ltd,,,2024-06-27 12:44:07,'2024-06-27 12:44:07'),Major Bank,agricultural,0,0,0
+4827,Quality Sod Farms Ltd,,,2024-06-27 12:44:18,'2024-06-27 12:44:18'),Major Bank,agricultural,0,0,0
+4834,TPN Farms Two Inc,,,2024-06-27 12:44:20,'2024-06-27 12:44:20'),Other,agricultural,0,0,0
+4884,Flinkert Farms Inc,,,2024-10-03 13:40:59,'2024-10-03 13:40:59'),Other,agricultural,0,0,0
+4899,Klessens Dairy Farms Ltd,,,2024-10-28 15:12:09,'2024-10-28 15:12:09'),Major Bank,agricultural,0,0,0
+4919,Niagara Regional Agricultural Society,,,2024-11-11 14:45:18,'2024-11-11 14:45:18'),Other,agricultural,0,0,0
+4937,Baitley Farms Ltd,,,2024-11-11 14:45:30,'2024-11-11 14:45:30'),Major Bank,agricultural,0,0,0
+4956,LSM Angus Farm (2024) Ltd,,,2025-01-09 19:50:18,'2025-01-09 19:50:18'),Major Bank,agricultural,0,0,0
+4998,Sylvan Oak Farm GP Inc,,,2025-01-10 03:20:21,'2025-01-10 03:20:21'),Other,agricultural,0,0,0
+5008,LSM Farms Ltd,,,2025-01-11 19:02:13,'2025-01-11 19:02:13'),Major Bank,agricultural,0,0,0
+5017,Farm Credit Cor,,,2025-01-15 15:10:58,'2025-01-15 15:10:58'),Other,commercial|agricultural,0,0,1
+5056,Hoylock Farm Ltd,,,2025-02-18 16:04:44,'2025-02-18 16:04:44'),Major Bank,agricultural,0,0,0

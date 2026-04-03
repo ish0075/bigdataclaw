@@ -35,6 +35,11 @@ import Opportunities from './views/Opportunities'
 import OlenaFeatureSheet from './views/OlenaFeatureSheet'
 import CanvaEditor from './components/OlenaFeatureSheet/CanvaEditor'
 import GlobalSearch from './components/GlobalSearch'
+import PaperclipCompanies from './views/PaperclipCompanies'
+import PaperclipCompanyDetail from './views/PaperclipCompanyDetail'
+import PaperclipOrgChart from './views/PaperclipOrgChart'
+import PaperclipDashboard from './views/PaperclipDashboard'
+import PixelAgentsOriginal from './views/PixelAgentsOriginal'
 import { useWebSocket } from './hooks/useWebSocket'
 
 function App() {
@@ -97,6 +102,11 @@ function App() {
         <Route path="/bot-swarm" element={<BotSwarmDemo />} />
         <Route path="/ai-builder" element={<AIBuilder />} />
         <Route path="/mission-control" element={<AgentMissionControl />} />
+        <Route path="/paperclip-companies" element={<PaperclipCompanies />} />
+        <Route path="/paperclip-companies/:companyId" element={<PaperclipCompanyDetail />} />
+        <Route path="/paperclip-companies/:companyId/org" element={<PaperclipOrgChart />} />
+        <Route path="/paperclip-dashboard" element={<PaperclipDashboard />} />
+        <Route path="/pixel-agents-original" element={<PixelAgentsOriginal />} />
       </Routes>
     </Layout>
   )

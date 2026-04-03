@@ -24,6 +24,7 @@ import uvicorn
 from data_connector import get_connector, BigDataClawDataConnector
 from obsidian_connector import get_vault_connector, ObsidianVaultConnector
 from ai_research import research_property_with_fallback, generate_obsidian_markdown
+from paperclip_bridge import spawn_paperclip_company_for_mission, mission_company_map
 
 # Perplexity API Configuration
 PERPLEXITY_API_KEY = os.getenv("PERPLEXITY_API_KEY", "")
@@ -393,6 +394,24 @@ async def health_check():
 async def create_mission(data: MissionCreate, background_tasks: BackgroundTasks):
     mission_id = store.create_mission(data)
     background_tasks.add_task(run_mission_phases, mission_id)
+    
+    # Spawn a Paperclip company for this mission
+    property_data = {
+        "address": data.property.address,
+        "city": data.property.city,
+        "region": data.property.region,
+        "asset_class": data.property.asset_class,
+        "price": data.property.price,
+        "size_sf": data.property.size_sf,
+        "property_type": data.property.property_type,
+    }
+    background_tasks.add_task(
+        spawn_paperclip_company_for_mission,
+        mission_id,
+        property_data,
+        data.research_depth,
+    )
+    
     return store.get_mission(mission_id)
 
 
@@ -401,6 +420,9 @@ async def list_missions(status: Optional[str] = None):
     missions = list(store.missions.values())
     if status:
         missions = [m for m in missions if m["status"] == status]
+    # Enrich with Paperclip company IDs
+    for m in missions:
+        m["paperclip_company_id"] = mission_company_map.get(m["id"])
     return missions
 
 
@@ -409,6 +431,7 @@ async def get_mission(mission_id: str):
     mission = store.get_mission(mission_id)
     if not mission:
         raise HTTPException(status_code=404, detail="Mission not found")
+    mission["paperclip_company_id"] = mission_company_map.get(mission_id)
     return mission
 
 

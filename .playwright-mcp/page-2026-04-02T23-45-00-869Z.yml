@@ -1,0 +1,324 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img "Control Shifter" [ref=e8]
+        - generic [ref=e9]:
+          - heading "Mission Control" [level=1] [ref=e10]
+          - paragraph [ref=e11]: Real Estate Command Center
+      - button "Collapse sidebar" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - generic [ref=e17]:
+        - button "Collapse all" [ref=e18] [cursor=pointer]
+        - button "Expand all" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - button "Main" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]: Main
+          - img [ref=e23]
+        - generic [ref=e25]:
+          - link "Mission Control" [ref=e26] [cursor=pointer]:
+            - /url: /
+            - img [ref=e27]
+            - generic [ref=e32]: Mission Control
+          - link "Property Research" [ref=e33] [cursor=pointer]:
+            - /url: /research
+            - img [ref=e34]
+            - generic [ref=e38]: Property Research
+          - link "Hot Money Radar" [ref=e39] [cursor=pointer]:
+            - /url: /hotmoney
+            - img [ref=e40]
+            - generic [ref=e42]: Hot Money Radar
+          - link "Deal Pipeline" [ref=e43] [cursor=pointer]:
+            - /url: /pipeline
+            - img [ref=e44]
+            - generic [ref=e49]: Deal Pipeline
+          - link "Opportunities" [ref=e50] [cursor=pointer]:
+            - /url: /opportunities
+            - img [ref=e51]
+            - generic [ref=e53]: Opportunities
+          - link "Agent Workspace" [ref=e54] [cursor=pointer]:
+            - /url: /agents
+            - img [ref=e55]
+            - generic [ref=e58]: Agent Workspace
+          - link "Agent Companies NEW" [active] [ref=e59] [cursor=pointer]:
+            - /url: /paperclip-companies
+            - img [ref=e60]
+            - generic [ref=e64]: Agent Companies
+            - generic [ref=e65]: NEW
+          - link "Paperclip Dashboard NEW" [ref=e66] [cursor=pointer]:
+            - /url: /paperclip-dashboard
+            - img [ref=e67]
+            - generic [ref=e69]: Paperclip Dashboard
+            - generic [ref=e70]: NEW
+          - link "Pixel Agents LIVE" [ref=e71] [cursor=pointer]:
+            - /url: /mission-control
+            - img [ref=e72]
+            - generic [ref=e77]: Pixel Agents
+            - generic [ref=e78]: LIVE
+          - link "Bot Boardroom AI" [ref=e79] [cursor=pointer]:
+            - /url: /bot-boardroom
+            - img [ref=e80]
+            - generic [ref=e86]: Bot Boardroom
+            - generic [ref=e87]: AI
+          - link "Obsidian Vault" [ref=e88] [cursor=pointer]:
+            - /url: /vault
+            - img [ref=e89]
+            - generic [ref=e93]: Obsidian Vault
+      - generic [ref=e94]:
+        - button "Recruitment" [ref=e95] [cursor=pointer]:
+          - generic [ref=e96]: Recruitment
+          - img [ref=e97]
+        - generic [ref=e99]:
+          - link "EXP Agent Recruiter 96K" [ref=e100] [cursor=pointer]:
+            - /url: /exp-agent-recruiter
+            - img [ref=e101]
+            - generic [ref=e104]: EXP Agent Recruiter
+            - generic [ref=e105]: 96K
+          - link "Commercial Agents 6.7K" [ref=e106] [cursor=pointer]:
+            - /url: /commercial-agent-recruiter
+            - img [ref=e107]
+            - generic [ref=e110]: Commercial Agents
+            - generic [ref=e111]: 6.7K
+          - link "Brokerages" [ref=e112] [cursor=pointer]:
+            - /url: /brokerages
+            - img [ref=e113]
+            - generic [ref=e116]: Brokerages
+      - generic [ref=e117]:
+        - button "AI Bots" [ref=e118] [cursor=pointer]:
+          - generic [ref=e119]: AI Bots
+          - img [ref=e120]
+        - generic [ref=e122]:
+          - link "Buyer Intelligence AI" [ref=e123] [cursor=pointer]:
+            - /url: /buyer-bot
+            - img [ref=e124]
+            - generic [ref=e128]: Buyer Intelligence
+            - generic [ref=e129]: AI
+          - link "Seller Outreach AI" [ref=e130] [cursor=pointer]:
+            - /url: /seller-outreach-bot
+            - img [ref=e131]
+            - generic [ref=e136]: Seller Outreach
+            - generic [ref=e137]: AI
+          - link "Property Valuation AI" [ref=e138] [cursor=pointer]:
+            - /url: /property-valuation-bot
+            - img [ref=e139]
+            - generic [ref=e141]: Property Valuation
+            - generic [ref=e142]: AI
+          - link "Vigil Monitor 24/7" [ref=e143] [cursor=pointer]:
+            - /url: /vigil
+            - img [ref=e144]
+            - generic [ref=e146]: Vigil Monitor
+            - generic [ref=e147]: 24/7
+          - link "Agent Workspaces NEW" [ref=e148] [cursor=pointer]:
+            - /url: /agent-workspaces
+            - img [ref=e149]
+            - generic [ref=e151]: Agent Workspaces
+            - generic [ref=e152]: NEW
+          - link "Bot Builder BUILD" [ref=e153] [cursor=pointer]:
+            - /url: /bot-builder
+            - img [ref=e154]
+            - generic [ref=e158]: Bot Builder
+            - generic [ref=e159]: BUILD
+      - generic [ref=e160]:
+        - button "Tools" [ref=e161] [cursor=pointer]:
+          - generic [ref=e162]: Tools
+          - img [ref=e163]
+        - generic [ref=e165]:
+          - link "My Listings" [ref=e166] [cursor=pointer]:
+            - /url: /listings
+            - img [ref=e167]
+            - generic [ref=e171]: My Listings
+          - link "Buyer Matcher" [ref=e172] [cursor=pointer]:
+            - /url: /buyers
+            - img [ref=e173]
+            - generic [ref=e178]: Buyer Matcher
+          - link "Agent Matcher" [ref=e179] [cursor=pointer]:
+            - /url: /agents-matcher
+            - img [ref=e180]
+            - generic [ref=e184]: Agent Matcher
+          - link "Lender Matcher" [ref=e185] [cursor=pointer]:
+            - /url: /lenders
+            - img [ref=e186]
+            - generic [ref=e188]: Lender Matcher
+          - link "Builder Directory" [ref=e189] [cursor=pointer]:
+            - /url: /builders
+            - img [ref=e190]
+            - generic [ref=e194]: Builder Directory
+          - link "Property Upload" [ref=e195] [cursor=pointer]:
+            - /url: /upload
+            - img [ref=e196]
+            - generic [ref=e199]: Property Upload
+          - link "Olena Marketing NEW" [ref=e200] [cursor=pointer]:
+            - /url: /olena-feature-sheet
+            - img [ref=e201]
+            - generic [ref=e204]: Olena Marketing
+            - generic [ref=e205]: NEW
+          - link "Canva Editor NEW" [ref=e206] [cursor=pointer]:
+            - /url: /canva-editor
+            - img [ref=e207]
+            - generic [ref=e213]: Canva Editor
+            - generic [ref=e214]: NEW
+          - link "Skills & Agents" [ref=e215] [cursor=pointer]:
+            - /url: /skills
+            - img [ref=e216]
+            - generic [ref=e219]: Skills & Agents
+          - link "Map View" [ref=e220] [cursor=pointer]:
+            - /url: /map
+            - img [ref=e221]
+            - generic [ref=e223]: Map View
+          - link "Data Manager" [ref=e224] [cursor=pointer]:
+            - /url: /data-manager
+            - img [ref=e225]
+            - generic [ref=e229]: Data Manager
+          - link "AI Builder CODE" [ref=e230] [cursor=pointer]:
+            - /url: /ai-builder
+            - img [ref=e231]
+            - generic [ref=e234]: AI Builder
+            - generic [ref=e235]: CODE
+    - generic [ref=e239]: System Online
+  - generic [ref=e240]:
+    - banner [ref=e241]:
+      - generic [ref=e247]:
+        - img [ref=e309]
+        - generic [ref=e255]: Connected
+      - generic [ref=e258]:
+        - img [ref=e259]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e262]
+        - combobox [ref=e263]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e264]:
+        - button "Voice" [ref=e265] [cursor=pointer]:
+          - img [ref=e266]
+          - generic [ref=e272]: Voice
+        - generic [ref=e273]:
+          - img [ref=e274]
+          - generic [ref=e279]: $12.40
+        - link "Data Manager" [ref=e280] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e281]
+        - button [ref=e285] [cursor=pointer]:
+          - img [ref=e286]
+        - link [ref=e289] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e290]
+        - link "🦞" [ref=e293] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e294]: 🦞
+    - main [ref=e295]:
+      - generic [ref=e834]:
+        - generic [ref=e835]:
+          - generic [ref=e836]:
+            - heading "Agent Companies" [level=1] [ref=e837]
+            - paragraph [ref=e838]: Paperclip-powered AI companies orchestrating your missions
+          - button "Refresh" [ref=e839] [cursor=pointer]:
+            - img [ref=e840]
+            - generic [ref=e845]: Refresh
+        - generic [ref=e846]:
+          - 'link "active Niagara High-Rise Verified Mission Company No mission statement Budget: $0/mo" [ref=e847] [cursor=pointer]':
+            - /url: /paperclip-companies/5bae9f16-3f16-4774-9aea-b484d9de4b85
+            - generic [ref=e848]:
+              - img [ref=e850]
+              - generic [ref=e854]: active
+            - heading "Niagara High-Rise Verified Mission Company" [level=3] [ref=e855]
+            - paragraph [ref=e856]: No mission statement
+            - generic [ref=e857]:
+              - generic [ref=e858]: "Budget: $0/mo"
+              - img [ref=e859]
+          - 'link "active Test NERVE Integration No mission statement Budget: $0/mo" [ref=e861] [cursor=pointer]':
+            - /url: /paperclip-companies/4ad8ddb7-ff2c-4362-b8a8-cbed6a14ea89
+            - generic [ref=e862]:
+              - img [ref=e864]
+              - generic [ref=e868]: active
+            - heading "Test NERVE Integration" [level=3] [ref=e869]
+            - paragraph [ref=e870]: No mission statement
+            - generic [ref=e871]:
+              - generic [ref=e872]: "Budget: $0/mo"
+              - img [ref=e873]
+          - 'link "active Niagara High-Rise Test 3 Mission Company No mission statement Budget: $0/mo" [ref=e875] [cursor=pointer]':
+            - /url: /paperclip-companies/1166be19-f83b-4258-81dc-ed37824f264b
+            - generic [ref=e876]:
+              - img [ref=e878]
+              - generic [ref=e882]: active
+            - heading "Niagara High-Rise Test 3 Mission Company" [level=3] [ref=e883]
+            - paragraph [ref=e884]: No mission statement
+            - generic [ref=e885]:
+              - generic [ref=e886]: "Budget: $0/mo"
+              - img [ref=e887]
+          - 'link "active Niagara High-Rise Test 2 Mission Company No mission statement Budget: $0/mo" [ref=e889] [cursor=pointer]':
+            - /url: /paperclip-companies/2d414da9-3f1e-41a1-8c4c-f75c0085b5c1
+            - generic [ref=e890]:
+              - img [ref=e892]
+              - generic [ref=e896]: active
+            - heading "Niagara High-Rise Test 2 Mission Company" [level=3] [ref=e897]
+            - paragraph [ref=e898]: No mission statement
+            - generic [ref=e899]:
+              - generic [ref=e900]: "Budget: $0/mo"
+              - img [ref=e901]
+          - 'link "active Test Hybrid Integration Mission Company No mission statement Budget: $0/mo" [ref=e903] [cursor=pointer]':
+            - /url: /paperclip-companies/a6d8a7a0-cdcf-4875-b36d-775ad03834b9
+            - generic [ref=e904]:
+              - img [ref=e906]
+              - generic [ref=e910]: active
+            - heading "Test Hybrid Integration Mission Company" [level=3] [ref=e911]
+            - paragraph [ref=e912]: No mission statement
+            - generic [ref=e913]:
+              - generic [ref=e914]: "Budget: $0/mo"
+              - img [ref=e915]
+          - 'link "active Niagara High-Rise Final Test Mission Company No mission statement Budget: $0/mo" [ref=e917] [cursor=pointer]':
+            - /url: /paperclip-companies/9b40c9b7-8b5a-4a07-b3b7-7010de936117
+            - generic [ref=e918]:
+              - img [ref=e920]
+              - generic [ref=e924]: active
+            - heading "Niagara High-Rise Final Test Mission Company" [level=3] [ref=e925]
+            - paragraph [ref=e926]: No mission statement
+            - generic [ref=e927]:
+              - generic [ref=e928]: "Budget: $0/mo"
+              - img [ref=e929]
+          - 'link "active Test Capital Group Hot Money Analysis No mission statement Budget: $0/mo" [ref=e931] [cursor=pointer]':
+            - /url: /paperclip-companies/09398e31-c570-41bb-97fa-c62379203861
+            - generic [ref=e932]:
+              - img [ref=e934]
+              - generic [ref=e938]: active
+            - heading "Test Capital Group Hot Money Analysis" [level=3] [ref=e939]
+            - paragraph [ref=e940]: No mission statement
+            - generic [ref=e941]:
+              - generic [ref=e942]: "Budget: $0/mo"
+              - img [ref=e943]
+          - 'link "active ABC Capital Hot Money Analysis No mission statement Budget: $0/mo" [ref=e945] [cursor=pointer]':
+            - /url: /paperclip-companies/df5a726d-71ae-4e5b-adbf-b29d12fb223e
+            - generic [ref=e946]:
+              - img [ref=e948]
+              - generic [ref=e952]: active
+            - heading "ABC Capital Hot Money Analysis" [level=3] [ref=e953]
+            - paragraph [ref=e954]: No mission statement
+            - generic [ref=e955]:
+              - generic [ref=e956]: "Budget: $0/mo"
+              - img [ref=e957]
+          - 'link "active Facility Inc Hot Money Analysis No mission statement Budget: $0/mo" [ref=e959] [cursor=pointer]':
+            - /url: /paperclip-companies/e5e40b9b-3b5c-4625-bed4-67b7380b625f
+            - generic [ref=e960]:
+              - img [ref=e962]
+              - generic [ref=e966]: active
+            - heading "Facility Inc Hot Money Analysis" [level=3] [ref=e967]
+            - paragraph [ref=e968]: No mission statement
+            - generic [ref=e969]:
+              - generic [ref=e970]: "Budget: $0/mo"
+              - img [ref=e971]
+          - 'link "active Test Corp Hot Money Analysis No mission statement Budget: $0/mo" [ref=e973] [cursor=pointer]':
+            - /url: /paperclip-companies/48826eea-3284-4ea6-82bf-9b568daba2ce
+            - generic [ref=e974]:
+              - img [ref=e976]
+              - generic [ref=e980]: active
+            - heading "Test Corp Hot Money Analysis" [level=3] [ref=e981]
+            - paragraph [ref=e982]: No mission statement
+            - generic [ref=e983]:
+              - generic [ref=e984]: "Budget: $0/mo"
+              - img [ref=e985]
+  - button "Ctrl+Shift+V" [ref=e304] [cursor=pointer]:
+    - img [ref=e305]
+    - generic [ref=e308]: Ctrl+Shift+V

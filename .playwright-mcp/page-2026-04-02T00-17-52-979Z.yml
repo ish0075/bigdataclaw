@@ -1,0 +1,239 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "BIGDATA CLAW" [level=1] [ref=e9]
+        - paragraph [ref=e10]: NERVE Mission Control
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Obsidian Vault" [ref=e46] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e47]
+        - generic [ref=e51]: Obsidian Vault
+      - generic [ref=e52]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e53] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e54]
+        - generic [ref=e57]: EXP Agent Recruiter
+        - generic [ref=e58]: 96K
+      - link "Commercial Agents 6.7K" [ref=e59] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e60]
+        - generic [ref=e63]: Commercial Agents
+        - generic [ref=e64]: 6.7K
+      - link "Brokerages" [ref=e65] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e66]
+        - generic [ref=e69]: Brokerages
+      - generic [ref=e70]: Tools
+      - link "My Listings" [ref=e71] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e72]
+        - generic [ref=e76]: My Listings
+      - link "Buyer Matcher" [ref=e77] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e78]
+        - generic [ref=e83]: Buyer Matcher
+      - link "Agent Matcher" [ref=e84] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e85]
+        - generic [ref=e89]: Agent Matcher
+      - link "Lender Matcher" [ref=e90] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e91]
+        - generic [ref=e93]: Lender Matcher
+      - link "Builder Directory" [ref=e94] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e95]
+        - generic [ref=e99]: Builder Directory
+      - link "Property Upload" [ref=e100] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e101]
+        - generic [ref=e104]: Property Upload
+      - link "Olena Marketing" [ref=e105] [cursor=pointer]:
+        - /url: /olena-feature-sheet
+        - img [ref=e106]
+        - generic [ref=e109]: Olena Marketing
+      - link "Canva Editor" [ref=e110] [cursor=pointer]:
+        - /url: /canva-editor
+        - img [ref=e111]
+        - generic [ref=e117]: Canva Editor
+      - link "Skills & Agents" [ref=e118] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e119]
+        - generic [ref=e122]: Skills & Agents
+      - link "Map View" [ref=e123] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e124]
+        - generic [ref=e126]: Map View
+      - link "Data Manager" [ref=e127] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e128]
+        - generic [ref=e132]: Data Manager
+    - generic [ref=e136]: System Online
+  - generic [ref=e137]:
+    - banner [ref=e138]:
+      - generic [ref=e144]:
+        - img [ref=e145]
+        - generic [ref=e149]: Connected
+      - generic [ref=e152]:
+        - img [ref=e153]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e156]
+        - combobox [ref=e157]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e158]:
+        - button "Help" [ref=e160] [cursor=pointer]:
+          - img [ref=e161]
+          - generic [ref=e164]: Help
+        - button "Voice" [ref=e165] [cursor=pointer]:
+          - img [ref=e166]
+          - generic [ref=e172]: Voice
+        - generic [ref=e173]:
+          - img [ref=e174]
+          - generic [ref=e179]: $12.40
+        - link "Data Manager" [ref=e180] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e181]
+        - button [ref=e185] [cursor=pointer]:
+          - img [ref=e186]
+        - link [ref=e189] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e190]
+        - link "🦞" [ref=e193] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e194]: 🦞
+    - main [ref=e195]:
+      - generic [ref=e197]:
+        - generic [ref=e198]:
+          - heading "Skills & Agents" [level=1] [ref=e199]:
+            - img [ref=e200]
+            - text: Skills & Agents
+          - paragraph [ref=e202]: Manage AI skills and agent configurations
+        - generic [ref=e203]:
+          - button "Skills (8)" [ref=e204] [cursor=pointer]
+          - button "Custom Agents (4)" [ref=e205] [cursor=pointer]
+          - button "System Logs" [ref=e206] [cursor=pointer]
+        - generic [ref=e336]:
+          - generic [ref=e337]:
+            - heading "Custom Agents (4)" [level=3] [ref=e338]
+            - button "Create Agent" [ref=e339] [cursor=pointer]:
+              - img [ref=e340]
+              - text: Create Agent
+          - generic [ref=e341]:
+            - generic [ref=e343]:
+              - generic [ref=e344]:
+                - img [ref=e346]
+                - generic [ref=e348]:
+                  - heading "Transaction Scout" [level=4] [ref=e349]
+                  - generic [ref=e350]:
+                    - generic [ref=e351]:
+                      - img [ref=e352]
+                      - text: 2 min ago
+                    - generic [ref=e355]:
+                      - img [ref=e356]
+                      - text: 99.2% success
+                    - generic [ref=e359]: 45 tasks
+              - generic [ref=e360]:
+                - generic [ref=e361]: active
+                - button [ref=e362] [cursor=pointer]:
+                  - img [ref=e363]
+                - button [ref=e366] [cursor=pointer]:
+                  - img [ref=e367]
+                - button [ref=e370] [cursor=pointer]:
+                  - img [ref=e371]
+            - generic [ref=e375]:
+              - generic [ref=e376]:
+                - img [ref=e378]
+                - generic [ref=e380]:
+                  - heading "Hot Money Tracker" [level=4] [ref=e381]
+                  - generic [ref=e382]:
+                    - generic [ref=e383]:
+                      - img [ref=e384]
+                      - text: 5 min ago
+                    - generic [ref=e387]:
+                      - img [ref=e388]
+                      - text: 98.8% success
+                    - generic [ref=e391]: 156 tasks
+              - generic [ref=e392]:
+                - generic [ref=e393]: active
+                - button [ref=e394] [cursor=pointer]:
+                  - img [ref=e395]
+                - button [ref=e398] [cursor=pointer]:
+                  - img [ref=e399]
+                - button [ref=e402] [cursor=pointer]:
+                  - img [ref=e403]
+            - generic [ref=e407]:
+              - generic [ref=e408]:
+                - img [ref=e410]
+                - generic [ref=e412]:
+                  - heading "Portfolio Analyzer" [level=4] [ref=e413]
+                  - generic [ref=e414]:
+                    - generic [ref=e415]:
+                      - img [ref=e416]
+                      - text: 1 hour ago
+                    - generic [ref=e419]:
+                      - img [ref=e420]
+                      - text: 97.5% success
+                    - generic [ref=e423]: 23 tasks
+              - generic [ref=e424]:
+                - generic [ref=e425]: paused
+                - button [ref=e426] [cursor=pointer]:
+                  - img [ref=e427]
+                - button [ref=e429] [cursor=pointer]:
+                  - img [ref=e430]
+                - button [ref=e433] [cursor=pointer]:
+                  - img [ref=e434]
+            - generic [ref=e438]:
+              - generic [ref=e439]:
+                - img [ref=e441]
+                - generic [ref=e443]:
+                  - heading "Obsidian Sync" [level=4] [ref=e444]
+                  - generic [ref=e445]:
+                    - generic [ref=e446]:
+                      - img [ref=e447]
+                      - text: Just now
+                    - generic [ref=e450]:
+                      - img [ref=e451]
+                      - text: 99.9% success
+                    - generic [ref=e454]: 1247 tasks
+              - generic [ref=e455]:
+                - generic [ref=e456]: active
+                - button [ref=e457] [cursor=pointer]:
+                  - img [ref=e458]
+                - button [ref=e461] [cursor=pointer]:
+                  - img [ref=e462]
+                - button [ref=e465] [cursor=pointer]:
+                  - img [ref=e466]
+  - button "Ctrl+Shift+V" [ref=e331] [cursor=pointer]:
+    - img [ref=e332]
+    - generic [ref=e335]: Ctrl+Shift+V

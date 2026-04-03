@@ -12,6 +12,7 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
+      // Python API Server (bigdataclaw.db + DBeaver data)
       '/api/lenders': {
         target: 'http://localhost:8000',
         changeOrigin: true,
@@ -32,6 +33,43 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
       },
+      '/api/paperclip': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+      '/api/obsidian': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+      '/api/realtor-assistant': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+      '/api/mission-control': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+      '/api/agents': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+      '/api/buyers': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+      '/api/transactions': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+      '/api/lenders': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+      '/api/data-manager': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+      // NERVE Server (WebSocket, missions)
       '/api': {
         target: 'http://localhost:3090',
         changeOrigin: true,

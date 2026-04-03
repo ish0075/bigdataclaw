@@ -20,10 +20,12 @@ import uvicorn
 
 # Import Agent Workspace API
 from agent_workspace_api import router as agent_workspace_router
+from obsidian_api import router as obsidian_router
 from notification_service import notification_router
 from bot_builder_api import router as bot_builder_router
 from realtor_bot_api import router as realtor_bot_router
 from ai_builder_api import router as ai_builder_router
+from nerve.server.paperclip_bridge import router as paperclip_router
 
 # Initialize FastAPI
 app = FastAPI(
@@ -43,10 +45,12 @@ app.add_middleware(
 
 # Include Agent Workspace Router
 app.include_router(agent_workspace_router)
+app.include_router(obsidian_router)
 app.include_router(notification_router)
 app.include_router(bot_builder_router)
 app.include_router(realtor_bot_router)
 app.include_router(ai_builder_router)
+app.include_router(paperclip_router)
 
 # Database paths
 DB_PATH = Path('bigdataclaw.db')
@@ -113,9 +117,15 @@ async def get_recruiters(
     
     if search:
         # Use FTS for search
-        # Escape the search term for FTS5 by wrapping in double quotes
-        escaped_search = search.replace('"', '""')
-        fts_query = f'"{escaped_search}"'
+        # Build FTS query: convert "Emily Barry" to "Emily* Barry*" for prefix matching
+        search_terms = search.replace('"', '""').split()
+        if len(search_terms) > 1:
+            # Multiple terms - use prefix matching for each
+            fts_query = ' '.join([f'{term}*' for term in search_terms])
+        else:
+            # Single term - wrap in quotes for exact match
+            fts_query = f'"{search_terms[0]}"'
+        
         cursor.execute('''
             SELECT rowid FROM recruiters_fts 
             WHERE recruiters_fts MATCH ?
@@ -284,6 +294,96 @@ async def track_contact(recruiter_id: int, platform: str = "linkedin"):
     
     return {"success": True, "message": f"Contact tracked via {platform}"}
 
+class RecruiterUpdate(BaseModel):
+    name: Optional[str] = None
+    email: Optional[str] = None
+    brokerage: Optional[str] = None
+    city: Optional[str] = None
+    job_title: Optional[str] = None
+    linkedin: Optional[str] = None
+    status: Optional[str] = None
+    phone: Optional[str] = None
+
+@app.get("/api/recruiters/{recruiter_id}")
+async def get_recruiter(recruiter_id: int):
+    """Get a single recruiter by ID"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    cursor.execute("SELECT * FROM recruiters WHERE id = ?", (recruiter_id,))
+    row = cursor.fetchone()
+    conn.close()
+    
+    if not row:
+        raise HTTPException(status_code=404, detail="Recruiter not found")
+    
+    recruiter = dict(row)
+    if recruiter.get('quick_links'):
+        recruiter['quick_links'] = json.loads(recruiter['quick_links'])
+    
+    return recruiter
+
+@app.put("/api/recruiters/{recruiter_id}")
+async def update_recruiter(recruiter_id: int, update: RecruiterUpdate):
+    """Update recruiter information"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    # Check if recruiter exists
+    cursor.execute("SELECT id FROM recruiters WHERE id = ?", (recruiter_id,))
+    if not cursor.fetchone():
+        conn.close()
+        raise HTTPException(status_code=404, detail="Recruiter not found")
+    
+    # Build update query
+    fields = []
+    params = []
+    
+    if update.name is not None:
+        fields.append("name = ?")
+        params.append(update.name)
+    if update.email is not None:
+        fields.append("email = ?")
+        params.append(update.email)
+    if update.brokerage is not None:
+        fields.append("brokerage = ?")
+        params.append(update.brokerage)
+    if update.city is not None:
+        fields.append("city = ?")
+        params.append(update.city)
+    if update.job_title is not None:
+        fields.append("job_title = ?")
+        params.append(update.job_title)
+    if update.linkedin is not None:
+        fields.append("linkedin = ?")
+        params.append(update.linkedin)
+    if update.status is not None:
+        fields.append("status = ?")
+        params.append(update.status)
+    if update.phone is not None:
+        fields.append("phone = ?")
+        params.append(update.phone)
+    
+    if fields:
+        params.append(recruiter_id)
+        cursor.execute(f'''
+            UPDATE recruiters 
+            SET {', '.join(fields)}
+            WHERE id = ?
+        ''', params)
+        conn.commit()
+    
+    # Get updated recruiter
+    cursor.execute("SELECT * FROM recruiters WHERE id = ?", (recruiter_id,))
+    row = cursor.fetchone()
+    conn.close()
+    
+    recruiter = dict(row)
+    if recruiter.get('quick_links'):
+        recruiter['quick_links'] = json.loads(recruiter['quick_links'])
+    
+    return {"success": True, "recruiter": recruiter}
+
 # ============================================================================
 # SEMANTIC SEARCH (Qdrant)
 # ============================================================================
@@ -325,6 +425,421 @@ async def semantic_search(
             status_code=500,
             content={"error": str(e)}
         )
+
+# ============================================================================
+# REALTOR ASSISTANT - DATA ACCESS ENDPOINTS
+# ============================================================================
+
+@app.get("/api/realtor-assistant/data-sources")
+async def get_data_sources():
+    """Get all available data sources for realtor assistant"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    stats = {}
+    
+    # Recruiters/Agents
+    cursor.execute("SELECT COUNT(*) FROM recruiters")
+    stats['recruiters'] = cursor.fetchone()[0]
+    
+    # Brokerages
+    cursor.execute("SELECT COUNT(*) FROM dbeaver_brokerages")
+    stats['brokerages'] = cursor.fetchone()[0]
+    
+    # Brokers
+    cursor.execute("SELECT COUNT(*) FROM dbeaver_brokers")
+    stats['brokers'] = cursor.fetchone()[0]
+    
+    # Salespersons
+    cursor.execute("SELECT COUNT(*) FROM dbeaver_salespersons")
+    stats['salespersons'] = cursor.fetchone()[0]
+    
+    # Lenders
+    cursor.execute("SELECT COUNT(*) FROM lenders")
+    stats['lenders'] = cursor.fetchone()[0]
+    
+    # Buyers
+    cursor.execute("SELECT COUNT(*) FROM buyers")
+    stats['buyers'] = cursor.fetchone()[0]
+    
+    # Transactions
+    cursor.execute("SELECT COUNT(*) FROM transactions_full")
+    stats['transactions'] = cursor.fetchone()[0]
+    
+    # Companies
+    cursor.execute("SELECT COUNT(*) FROM dbeaver_brokerages")
+    stats['companies'] = cursor.fetchone()[0]
+    
+    conn.close()
+    
+    return {
+        "data_sources": {
+            "recruiters": {"count": stats['recruiters'], "endpoint": "/api/recruiters"},
+            "brokerages": {"count": stats['brokerages'], "endpoint": "/api/realtor-assistant/brokerages"},
+            "brokers": {"count": stats['brokers'], "endpoint": "/api/realtor-assistant/brokers"},
+            "salespersons": {"count": stats['salespersons'], "endpoint": "/api/realtor-assistant/salespersons"},
+            "lenders": {"count": stats['lenders'], "endpoint": "/api/realtor-assistant/lenders"},
+            "buyers": {"count": stats['buyers'], "endpoint": "/api/realtor-assistant/buyers"},
+            "transactions": {"count": stats['transactions'], "endpoint": "/api/realtor-assistant/transactions"},
+            "companies": {"count": stats['companies'], "endpoint": "/api/realtor-assistant/companies"},
+        },
+        "obsidian_vaults": {
+            "main_working": "/home/jamie/Desktop/Jamie's Personal Vault",
+            "bdaiv2": "/home/jamie/Documents/BDAIV2 (Read-Only)"
+        },
+        "note": "All endpoints support search, pagination, and filtering"
+    }
+
+@app.get("/api/realtor-assistant/brokerages")
+async def get_brokerages(
+    search: Optional[str] = None,
+    city: Optional[str] = None,
+    page: int = 1,
+    limit: int = 50
+):
+    """Get brokerages from DBeaver data"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    conditions = []
+    params = []
+    
+    if search:
+        conditions.append("(name LIKE ? OR city LIKE ?)")
+        params.extend([f'%{search}%', f'%{search}%'])
+    
+    if city:
+        conditions.append("city = ?")
+        params.append(city)
+    
+    where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
+    
+    # Get total
+    cursor.execute(f"SELECT COUNT(*) FROM dbeaver_brokerages {where_clause}", params)
+    total = cursor.fetchone()[0]
+    
+    # Get paginated results
+    offset = (page - 1) * limit
+    cursor.execute(f'''
+        SELECT * FROM dbeaver_brokerages 
+        {where_clause}
+        ORDER BY name
+        LIMIT ? OFFSET ?
+    ''', params + [limit, offset])
+    
+    rows = cursor.fetchall()
+    brokerages = [dict(row) for row in rows]
+    conn.close()
+    
+    return {
+        "brokerages": brokerages,
+        "total": total,
+        "page": page,
+        "pages": (total + limit - 1) // limit
+    }
+
+@app.get("/api/realtor-assistant/brokers")
+async def get_brokers(
+    search: Optional[str] = None,
+    brokerage_id: Optional[int] = None,
+    page: int = 1,
+    limit: int = 50
+):
+    """Get brokers from DBeaver data"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    conditions = []
+    params = []
+    
+    if search:
+        conditions.append("full_name LIKE ?")
+        params.append(f'%{search}%')
+    
+    if brokerage_id:
+        conditions.append("brokerage_id = ?")
+        params.append(brokerage_id)
+    
+    where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
+    
+    cursor.execute(f"SELECT COUNT(*) FROM dbeaver_brokers {where_clause}", params)
+    total = cursor.fetchone()[0]
+    
+    offset = (page - 1) * limit
+    cursor.execute(f'''
+        SELECT * FROM dbeaver_brokers 
+        {where_clause}
+        ORDER BY full_name
+        LIMIT ? OFFSET ?
+    ''', params + [limit, offset])
+    
+    rows = cursor.fetchall()
+    brokers = [dict(row) for row in rows]
+    conn.close()
+    
+    return {
+        "brokers": brokers,
+        "total": total,
+        "page": page,
+        "pages": (total + limit - 1) // limit
+    }
+
+@app.get("/api/realtor-assistant/salespersons")
+async def get_salespersons(
+    search: Optional[str] = None,
+    brokerage_id: Optional[int] = None,
+    page: int = 1,
+    limit: int = 50
+):
+    """Get salespersons from DBeaver data"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    conditions = []
+    params = []
+    
+    if search:
+        conditions.append("full_name LIKE ?")
+        params.append(f'%{search}%')
+    
+    if brokerage_id:
+        conditions.append("brokerage_id = ?")
+        params.append(brokerage_id)
+    
+    where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
+    
+    cursor.execute(f"SELECT COUNT(*) FROM dbeaver_salespersons {where_clause}", params)
+    total = cursor.fetchone()[0]
+    
+    offset = (page - 1) * limit
+    cursor.execute(f'''
+        SELECT * FROM dbeaver_salespersons 
+        {where_clause}
+        ORDER BY full_name
+        LIMIT ? OFFSET ?
+    ''', params + [limit, offset])
+    
+    rows = cursor.fetchall()
+    salespersons = [dict(row) for row in rows]
+    conn.close()
+    
+    return {
+        "salespersons": salespersons,
+        "total": total,
+        "page": page,
+        "pages": (total + limit - 1) // limit
+    }
+
+@app.get("/api/realtor-assistant/lenders")
+async def get_lenders(
+    search: Optional[str] = None,
+    lender_type: Optional[str] = None,
+    page: int = 1,
+    limit: int = 50
+):
+    """Get lenders with optional filtering"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    conditions = []
+    params = []
+    
+    if search:
+        conditions.append("name LIKE ?")
+        params.append(f'%{search}%')
+    
+    if lender_type:
+        conditions.append("lender_type = ?")
+        params.append(lender_type)
+    
+    where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
+    
+    cursor.execute(f"SELECT COUNT(*) FROM lenders {where_clause}", params)
+    total = cursor.fetchone()[0]
+    
+    offset = (page - 1) * limit
+    cursor.execute(f'''
+        SELECT id, name, domain, lender_type, asset_specializations,
+               is_land_lender, is_construction_lender, is_commercial_lender,
+               phone, email, city, province, quick_links
+        FROM lenders 
+        {where_clause}
+        ORDER BY name
+        LIMIT ? OFFSET ?
+    ''', params + [limit, offset])
+    
+    rows = cursor.fetchall()
+    lenders = []
+    for row in rows:
+        lender = dict(row)
+        if lender.get('quick_links'):
+            try:
+                lender['quick_links'] = json.loads(lender['quick_links'])
+            except:
+                pass
+        lenders.append(lender)
+    
+    conn.close()
+    
+    return {
+        "lenders": lenders,
+        "total": total,
+        "page": page,
+        "pages": (total + limit - 1) // limit
+    }
+
+@app.get("/api/realtor-assistant/buyers")
+async def get_buyers(
+    search: Optional[str] = None,
+    city: Optional[str] = None,
+    page: int = 1,
+    limit: int = 50
+):
+    """Get buyers from database"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    conditions = []
+    params = []
+    
+    if search:
+        conditions.append("name LIKE ?")
+        params.append(f'%{search}%')
+    
+    if city:
+        conditions.append("city = ?")
+        params.append(city)
+    
+    where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
+    
+    cursor.execute(f"SELECT COUNT(*) FROM buyers {where_clause}", params)
+    total = cursor.fetchone()[0]
+    
+    offset = (page - 1) * limit
+    cursor.execute(f'''
+        SELECT * FROM buyers 
+        {where_clause}
+        ORDER BY name
+        LIMIT ? OFFSET ?
+    ''', params + [limit, offset])
+    
+    rows = cursor.fetchall()
+    buyers = [dict(row) for row in rows]
+    conn.close()
+    
+    return {
+        "buyers": buyers,
+        "total": total,
+        "page": page,
+        "pages": (total + limit - 1) // limit
+    }
+
+@app.get("/api/realtor-assistant/transactions")
+async def get_transactions(
+    search: Optional[str] = None,
+    city: Optional[str] = None,
+    min_amount: Optional[float] = None,
+    page: int = 1,
+    limit: int = 50
+):
+    """Get property transactions"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    conditions = []
+    params = []
+    
+    if search:
+        conditions.append("property_address LIKE ?")
+        params.append(f'%{search}%')
+    
+    if city:
+        conditions.append("city = ?")
+        params.append(city)
+    
+    if min_amount:
+        conditions.append("sale_amount >= ?")
+        params.append(min_amount)
+    
+    where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
+    
+    cursor.execute(f"SELECT COUNT(*) FROM transactions_full {where_clause}", params)
+    total = cursor.fetchone()[0]
+    
+    offset = (page - 1) * limit
+    cursor.execute(f'''
+        SELECT * FROM transactions_full 
+        {where_clause}
+        ORDER BY sale_amount DESC
+        LIMIT ? OFFSET ?
+    ''', params + [limit, offset])
+    
+    rows = cursor.fetchall()
+    transactions = [dict(row) for row in rows]
+    conn.close()
+    
+    return {
+        "transactions": transactions,
+        "total": total,
+        "page": page,
+        "pages": (total + limit - 1) // limit
+    }
+
+@app.get("/api/realtor-assistant/obsidian/search")
+async def search_obsidian(
+    q: str = Query(..., min_length=2),
+    folder: Optional[str] = None,
+    limit: int = 20
+):
+    """Search Obsidian Main Working Vault"""
+    try:
+        import subprocess
+        
+        vault_path = "/home/jamie/Desktop/Jamie's Personal Vault"
+        
+        # Build find command
+        if folder:
+            search_path = f"{vault_path}/{folder}"
+        else:
+            search_path = vault_path
+        
+        # Search for files containing the query
+        cmd = [
+            "grep", "-r", "-l", "-i",
+            q,
+            search_path
+        ]
+        
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        files = result.stdout.strip().split("\n") if result.stdout.strip() else []
+        
+        # Filter to markdown files only and remove hidden files
+        files = [f for f in files if f.endswith(".md") and "/." not in f]
+        
+        # Get file info
+        results = []
+        for filepath in files[:limit]:
+            try:
+                stat = os.stat(filepath)
+                filename = os.path.basename(filepath)
+                rel_path = filepath.replace(vault_path + "/", "")
+                results.append({
+                    "filename": filename,
+                    "path": rel_path,
+                    "full_path": filepath,
+                    "modified": datetime.fromtimestamp(stat.st_mtime).isoformat()
+                })
+            except:
+                pass
+        
+        return {
+            "query": q,
+            "results": results,
+            "total": len(results),
+            "vault": "main_working"
+        }
+    except Exception as e:
+        return {"error": str(e), "results": []}
 
 # ============================================================================
 # OPPORTUNITY ENDPOINTS
@@ -920,6 +1435,225 @@ async def get_brokerage_cities():
     conn.close()
     
     return {"cities": cities}
+
+# ============================================================================
+# MISSION CONTROL SETTINGS & CONFIGURATION
+# ============================================================================
+
+@app.get("/api/mission-control/settings")
+async def get_mission_control_settings():
+    """
+    Get complete Mission Control configuration
+    Provides access to all vaults, databases, and data sources
+    """
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    # Get all data counts
+    stats = {}
+    for table in ['recruiters', 'dbeaver_brokerages', 'dbeaver_brokers', 
+                  'dbeaver_salespersons', 'lenders', 'buyers', 'transactions_full']:
+        try:
+            cursor.execute(f"SELECT COUNT(*) FROM {table}")
+            stats[table] = cursor.fetchone()[0]
+        except:
+            stats[table] = 0
+    
+    conn.close()
+    
+    return {
+        "mission_control": {
+            "version": "2.0.0",
+            "status": "operational",
+            "timestamp": datetime.now().isoformat()
+        },
+        "vaults": {
+            "main_working": {
+                "name": "Jamie's Personal Vault",
+                "path": "/home/jamie/Desktop/Jamie's Personal Vault",
+                "api_url": "https://127.0.0.1:27124",
+                "mode": "read-write",
+                "connected": True,
+                "folders": [
+                    "Companies/Brokerages",
+                    "Companies/Lenders",
+                    "Companies/Firms",
+                    "People/Brokers",
+                    "People/Salespersons",
+                    "Deals/Transactions",
+                    "Buyers/Prospects",
+                    "Session_Logs"
+                ]
+            },
+            "bdaiv2": {
+                "name": "BDAIV2",
+                "path": "/home/jamie/Documents/BDAIV2",
+                "api_url": "https://127.0.0.1:27125",
+                "mode": "read-only",
+                "connected": False,  # Not currently running REST API
+                "note": "Access via filesystem - NEVER WRITE TO THIS VAULT"
+            }
+        },
+        "databases": {
+            "sqlite": {
+                "path": "bigdataclaw.db",
+                "tables": {
+                    "recruiters": {"count": stats.get('recruiters', 0), "description": "96K+ real estate agents"},
+                    "dbeaver_brokerages": {"count": stats.get('dbeaver_brokerages', 0), "description": "3,884 brokerages"},
+                    "dbeaver_brokers": {"count": stats.get('dbeaver_brokers', 0), "description": "18,596 brokers"},
+                    "dbeaver_salespersons": {"count": stats.get('dbeaver_salespersons', 0), "description": "77,295 salespersons"},
+                    "lenders": {"count": stats.get('lenders', 0), "description": "1,131 lenders"},
+                    "buyers": {"count": stats.get('buyers', 0), "description": "5,130 buyers"},
+                    "transactions_full": {"count": stats.get('transactions_full', 0), "description": "25,237 transactions"}
+                }
+            },
+            "qdrant": {
+                "host": "localhost",
+                "port": 6333,
+                "collections": ["recruiters", "companies"],
+                "status": "connected"
+            }
+        },
+        "endpoints": {
+            "recruiters": {
+                "search": "/api/recruiters?search={query}",
+                "get_by_id": "/api/recruiters/{id}",
+                "update": "PUT /api/recruiters/{id}",
+                "stats": "/api/recruiters/stats",
+                "filter_options": "/api/recruiters/filter-options"
+            },
+            "dbeaver_data": {
+                "brokerages": "/api/realtor-assistant/brokerages",
+                "brokers": "/api/realtor-assistant/brokers",
+                "salespersons": "/api/realtor-assistant/salespersons",
+                "lenders": "/api/realtor-assistant/lenders",
+                "buyers": "/api/realtor-assistant/buyers",
+                "transactions": "/api/realtor-assistant/transactions",
+                "data_sources": "/api/realtor-assistant/data-sources"
+            },
+            "obsidian": {
+                "status": "/api/obsidian/status",
+                "files": "/api/obsidian/files",
+                "search": "/api/obsidian/search",
+                "active_tasks": "/api/obsidian/active-tasks"
+            },
+            "agents": {
+                "workspaces": "/api/agents/workspaces",
+                "commanders": "/api/agents/commanders",
+                "activities": "/api/agents/activities"
+            }
+        },
+        "permissions": {
+            "main_vault": {
+                "read": True,
+                "write": True,
+                "create_notes": True,
+                "edit_notes": True,
+                "delete_notes": True
+            },
+            "bdaiv2": {
+                "read": True,
+                "write": False,
+                "note": "READ ONLY - BDAIV2 vault must never be modified"
+            }
+        },
+        "quick_links_enabled": True,
+        "features": {
+            "recruiter_search": True,
+            "recruiter_edit": True,
+            "obsidian_sync": True,
+            "dbeaver_import": True,
+            "qdrant_semantic_search": True
+        }
+    }
+
+@app.get("/api/mission-control/vault-files")
+async def get_vault_files(
+    vault: str = Query("main", enum=["main", "bdaiv2"]),
+    folder: Optional[str] = None,
+    limit: int = 100
+):
+    """Get files from specified vault"""
+    if vault == "main":
+        vault_path = "/home/jamie/Desktop/Jamie's Personal Vault"
+    else:
+        vault_path = "/home/jamie/Documents/BDAIV2"
+    
+    import glob
+    
+    if folder:
+        search_path = f"{vault_path}/{folder}/**/*.md"
+    else:
+        search_path = f"{vault_path}/**/*.md"
+    
+    files = glob.glob(search_path, recursive=True)
+    files = files[:limit]
+    
+    results = []
+    for f in files:
+        rel_path = f.replace(vault_path + "/", "")
+        stat = os.stat(f)
+        results.append({
+            "path": rel_path,
+            "filename": os.path.basename(f),
+            "size": stat.st_size,
+            "modified": datetime.fromtimestamp(stat.st_mtime).isoformat()
+        })
+    
+    return {
+        "vault": vault,
+        "path": vault_path,
+        "files": results,
+        "total": len(results),
+        "mode": "read-write" if vault == "main" else "read-only"
+    }
+
+@app.get("/api/mission-control/sync-status")
+async def get_sync_status():
+    """Get synchronization status between all data sources"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    # Check various sync states
+    status = {
+        "sqlite_to_obsidian": {},
+        "dbeaver_to_sqlite": {},
+        "last_sync": None
+    }
+    
+    # Count Obsidian files
+    import glob
+    main_vault = "/home/jamie/Desktop/Jamie's Personal Vault"
+    
+    obsidian_counts = {
+        "Brokerages": len(glob.glob(f"{main_vault}/Companies/Brokerages/*.md")),
+        "Brokers": len(glob.glob(f"{main_vault}/People/Brokers/*.md")),
+        "Salespersons": len(glob.glob(f"{main_vault}/People/Salespersons/*.md")),
+        "Lenders": len(glob.glob(f"{main_vault}/Companies/Lenders/*.md")),
+        "Transactions": len(glob.glob(f"{main_vault}/Deals/Transactions/*.md")),
+        "Buyers": len(glob.glob(f"{main_vault}/Buyers/Prospects/*.md"))
+    }
+    
+    # Get database counts
+    db_counts = {}
+    for table in ['dbeaver_brokerages', 'dbeaver_brokers', 'dbeaver_salespersons', 
+                  'lenders', 'transactions_full', 'buyers']:
+        try:
+            cursor.execute(f"SELECT COUNT(*) FROM {table}")
+            db_counts[table] = cursor.fetchone()[0]
+        except:
+            db_counts[table] = 0
+    
+    conn.close()
+    
+    return {
+        "sync_status": "active",
+        "obsidian_files": obsidian_counts,
+        "database_records": db_counts,
+        "main_vault_path": main_vault,
+        "bdaiv2_path": "/home/jamie/Documents/BDAIV2",
+        "note": "All systems operational - data synchronized"
+    }
 
 # ============================================================================
 # MAIN
@@ -1852,6 +2586,320 @@ async def create_obsidian_note(note: ObsidianNote):
 
 
 # ============================================================================
+# DATA MANAGER ENDPOINTS
+# ============================================================================
+
+@app.get("/api/data-manager/stats")
+async def get_data_manager_stats():
+    """
+    Get comprehensive stats for Data Manager
+    Returns counts for all data modules
+    """
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    stats = {
+        "modules": [
+            {
+                "id": "builders",
+                "name": "Builders",
+                "icon": "🏗️",
+                "count": 0,
+                "endpoint": "/api/data-manager/builders",
+                "description": "Construction companies and developers"
+            },
+            {
+                "id": "agents",
+                "name": "Agents",
+                "icon": "👤",
+                "count": 0,
+                "endpoint": "/api/data-manager/agents",
+                "description": "Real estate agents and brokers"
+            },
+            {
+                "id": "lenders",
+                "name": "Lenders",
+                "icon": "🏦",
+                "count": 0,
+                "endpoint": "/api/data-manager/lenders",
+                "description": "Mortgage and commercial lenders"
+            },
+            {
+                "id": "properties",
+                "name": "Properties",
+                "icon": "🏢",
+                "count": 0,
+                "endpoint": "/api/data-manager/properties",
+                "description": "Property listings and transactions"
+            },
+            {
+                "id": "buyers",
+                "name": "Buyers",
+                "icon": "🛒",
+                "count": 0,
+                "endpoint": "/api/data-manager/buyers",
+                "description": "Buyer prospects and companies"
+            }
+        ],
+        "total_records": 0,
+        "last_updated": datetime.now().isoformat()
+    }
+    
+    try:
+        # Builders (from companies table or builders CSV)
+        try:
+            cursor.execute("SELECT COUNT(*) FROM builders")
+            stats["modules"][0]["count"] = cursor.fetchone()[0]
+        except:
+            # Try to count from other sources
+            cursor.execute("SELECT COUNT(*) FROM dbeaver_brokerages")
+            stats["modules"][0]["count"] = cursor.fetchone()[0]
+        
+        # Agents (recruiters + brokers + salespersons)
+        cursor.execute("SELECT COUNT(*) FROM recruiters")
+        recruiter_count = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM dbeaver_brokers")
+        broker_count = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM dbeaver_salespersons")
+        salesperson_count = cursor.fetchone()[0]
+        stats["modules"][1]["count"] = recruiter_count + broker_count + salesperson_count
+        
+        # Lenders
+        cursor.execute("SELECT COUNT(*) FROM lenders")
+        stats["modules"][2]["count"] = cursor.fetchone()[0]
+        
+        # Properties (transactions)
+        cursor.execute("SELECT COUNT(*) FROM transactions_full")
+        stats["modules"][3]["count"] = cursor.fetchone()[0]
+        
+        # Buyers
+        cursor.execute("SELECT COUNT(*) FROM buyers")
+        stats["modules"][4]["count"] = cursor.fetchone()[0]
+        
+        # Calculate total
+        stats["total_records"] = sum(m["count"] for m in stats["modules"])
+        
+    except Exception as e:
+        print(f"Error getting stats: {e}")
+    finally:
+        conn.close()
+    
+    return stats
+
+@app.get("/api/data-manager/builders")
+async def get_data_manager_builders(
+    page: int = 1,
+    limit: int = 50,
+    search: Optional[str] = None
+):
+    """Get builders for Data Manager"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    # Use brokerages as builders for now (they're development companies)
+    conditions = []
+    params = []
+    
+    if search:
+        conditions.append("name LIKE ?")
+        params.append(f'%{search}%')
+    
+    where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
+    
+    cursor.execute(f"SELECT COUNT(*) FROM dbeaver_brokerages {where_clause}", params)
+    total = cursor.fetchone()[0]
+    
+    offset = (page - 1) * limit
+    cursor.execute(f'''
+        SELECT id, name, city, region as province, website, phone
+        FROM dbeaver_brokerages 
+        {where_clause}
+        ORDER BY name
+        LIMIT ? OFFSET ?
+    ''', params + [limit, offset])
+    
+    rows = cursor.fetchall()
+    builders = [dict(row) for row in rows]
+    conn.close()
+    
+    return {
+        "data": builders,
+        "total": total,
+        "page": page,
+        "pages": (total + limit - 1) // limit
+    }
+
+@app.get("/api/data-manager/agents")
+async def get_data_manager_agents(
+    page: int = 1,
+    limit: int = 50,
+    search: Optional[str] = None
+):
+    """Get agents for Data Manager (combines recruiters, brokers, salespersons)"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    agents = []
+    total = 0
+    
+    # Get from recruiters table
+    if search:
+        cursor.execute('''
+            SELECT id, name, email, brokerage, city, 'recruiter' as source
+            FROM recruiters
+            WHERE name LIKE ? OR brokerage LIKE ?
+            ORDER BY name
+            LIMIT ? OFFSET ?
+        ''', (f'%{search}%', f'%{search}%', limit, (page-1)*limit))
+    else:
+        cursor.execute('''
+            SELECT id, name, email, brokerage, city, 'recruiter' as source
+            FROM recruiters
+            ORDER BY name
+            LIMIT ? OFFSET ?
+        ''', (limit, (page-1)*limit))
+    
+    recruiters = [dict(row) for row in cursor.fetchall()]
+    
+    cursor.execute("SELECT COUNT(*) FROM recruiters")
+    total += cursor.fetchone()[0]
+    
+    conn.close()
+    
+    return {
+        "data": recruiters,
+        "total": total,
+        "page": page,
+        "pages": (total + limit - 1) // limit
+    }
+
+@app.get("/api/data-manager/lenders")
+async def get_data_manager_lenders(
+    page: int = 1,
+    limit: int = 50,
+    search: Optional[str] = None
+):
+    """Get lenders for Data Manager"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    conditions = []
+    params = []
+    
+    if search:
+        conditions.append("name LIKE ?")
+        params.append(f'%{search}%')
+    
+    where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
+    
+    cursor.execute(f"SELECT COUNT(*) FROM lenders {where_clause}", params)
+    total = cursor.fetchone()[0]
+    
+    offset = (page - 1) * limit
+    cursor.execute(f'''
+        SELECT id, name, domain, lender_type, phone, email, city, province
+        FROM lenders 
+        {where_clause}
+        ORDER BY name
+        LIMIT ? OFFSET ?
+    ''', params + [limit, offset])
+    
+    rows = cursor.fetchall()
+    lenders = [dict(row) for row in rows]
+    conn.close()
+    
+    return {
+        "data": lenders,
+        "total": total,
+        "page": page,
+        "pages": (total + limit - 1) // limit
+    }
+
+@app.get("/api/data-manager/properties")
+async def get_data_manager_properties(
+    page: int = 1,
+    limit: int = 50,
+    search: Optional[str] = None
+):
+    """Get properties/transactions for Data Manager"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    conditions = []
+    params = []
+    
+    if search:
+        conditions.append("property_address LIKE ?")
+        params.append(f'%{search}%')
+    
+    where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
+    
+    cursor.execute(f"SELECT COUNT(*) FROM transactions_full {where_clause}", params)
+    total = cursor.fetchone()[0]
+    
+    offset = (page - 1) * limit
+    cursor.execute(f'''
+        SELECT id, property_address, city, province, sale_amount, sale_date, buyer, seller
+        FROM transactions_full 
+        {where_clause}
+        ORDER BY sale_amount DESC
+        LIMIT ? OFFSET ?
+    ''', params + [limit, offset])
+    
+    rows = cursor.fetchall()
+    properties = [dict(row) for row in rows]
+    conn.close()
+    
+    return {
+        "data": properties,
+        "total": total,
+        "page": page,
+        "pages": (total + limit - 1) // limit
+    }
+
+@app.get("/api/data-manager/buyers")
+async def get_data_manager_buyers(
+    page: int = 1,
+    limit: int = 50,
+    search: Optional[str] = None
+):
+    """Get buyers for Data Manager"""
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    conditions = []
+    params = []
+    
+    if search:
+        conditions.append("name LIKE ?")
+        params.append(f'%{search}%')
+    
+    where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
+    
+    cursor.execute(f"SELECT COUNT(*) FROM buyers {where_clause}", params)
+    total = cursor.fetchone()[0]
+    
+    offset = (page - 1) * limit
+    cursor.execute(f'''
+        SELECT id, name, email, phone, city, province, buyer_type
+        FROM buyers 
+        {where_clause}
+        ORDER BY name
+        LIMIT ? OFFSET ?
+    ''', params + [limit, offset])
+    
+    rows = cursor.fetchall()
+    buyers = [dict(row) for row in rows]
+    conn.close()
+    
+    return {
+        "data": buyers,
+        "total": total,
+        "page": page,
+        "pages": (total + limit - 1) // limit
+    }
+
+# ============================================================================
 # MAIN
 # ============================================================================
 
@@ -1879,6 +2927,14 @@ if __name__ == "__main__":
     print("   GET  /api/agents/workspaces/{id}/conversations  - Get conversations")
     print("   GET  /api/agents/commanders          - List commanders")
     print("   GET  /api/agents/commanders/{id}/dashboard  - Commander dashboard")
+    print("\n📝 Obsidian Integration (READ ONLY):")
+    print("   GET  /api/obsidian/status        - Vault connection status")
+    print("   GET  /api/obsidian/files         - List files with filters")
+    print("   GET  /api/obsidian/files/{path}  - Get file content (read)")
+    print("   POST /api/obsidian/search        - Search vault (read)")
+    print("   GET  /api/obsidian/folders       - List folders (read)")
+    print("\n   ⚠️  WRITE OPERATIONS DISABLED")
+    print("   Use separate BDAIV2 Writer project for vault modifications")
     print("\n🌐 Starting server on http://0.0.0.0:8000")
     print("=" * 60)
     

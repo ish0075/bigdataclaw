@@ -1,0 +1,574 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img "Control Shifter" [ref=e8]
+        - generic [ref=e1001]:
+          - heading "Mission Control" [level=1] [ref=e1002]
+          - paragraph [ref=e1003]: Real Estate Command Center
+      - button "Collapse sidebar" [active] [ref=e1004] [cursor=pointer]:
+        - img [ref=e1005]
+    - navigation [ref=e16]:
+      - generic [ref=e1008]:
+        - button "Collapse all" [ref=e1009] [cursor=pointer]
+        - button "Expand all" [ref=e1010] [cursor=pointer]
+      - generic [ref=e20]:
+        - button "Main" [ref=e1011] [cursor=pointer]:
+          - generic [ref=e1012]: Main
+          - img [ref=e1013]
+        - generic [ref=e1015]:
+          - link "Mission Control" [ref=e1016] [cursor=pointer]:
+            - /url: /
+            - img [ref=e1017]
+            - generic [ref=e1022]: Mission Control
+          - link "Property Research" [ref=e1023] [cursor=pointer]:
+            - /url: /research
+            - img [ref=e1024]
+            - generic [ref=e1028]: Property Research
+          - link "Hot Money Radar" [ref=e1029] [cursor=pointer]:
+            - /url: /hotmoney
+            - img [ref=e1030]
+            - generic [ref=e1032]: Hot Money Radar
+          - link "Deal Pipeline" [ref=e1033] [cursor=pointer]:
+            - /url: /pipeline
+            - img [ref=e1034]
+            - generic [ref=e1039]: Deal Pipeline
+          - link "Opportunities" [ref=e1040] [cursor=pointer]:
+            - /url: /opportunities
+            - img [ref=e1041]
+            - generic [ref=e1043]: Opportunities
+          - link "Agent Workspace" [ref=e1044] [cursor=pointer]:
+            - /url: /agents
+            - img [ref=e1045]
+            - generic [ref=e1048]: Agent Workspace
+          - link "Bot Boardroom AI" [ref=e1049] [cursor=pointer]:
+            - /url: /bot-boardroom
+            - img [ref=e1050]
+            - generic [ref=e1056]: Bot Boardroom
+            - generic [ref=e1057]: AI
+          - link "Obsidian Vault" [ref=e1058] [cursor=pointer]:
+            - /url: /vault
+            - img [ref=e1059]
+            - generic [ref=e1063]: Obsidian Vault
+      - generic [ref=e74]:
+        - button "Recruitment" [ref=e1064] [cursor=pointer]:
+          - generic [ref=e1065]: Recruitment
+          - img [ref=e1066]
+        - generic [ref=e1068]:
+          - link "EXP Agent Recruiter 96K" [ref=e1069] [cursor=pointer]:
+            - /url: /exp-agent-recruiter
+            - img [ref=e1070]
+            - generic [ref=e1073]: EXP Agent Recruiter
+            - generic [ref=e1074]: 96K
+          - link "Commercial Agents 6.7K" [ref=e1075] [cursor=pointer]:
+            - /url: /commercial-agent-recruiter
+            - img [ref=e1076]
+            - generic [ref=e1079]: Commercial Agents
+            - generic [ref=e1080]: 6.7K
+          - link "Brokerages" [ref=e1081] [cursor=pointer]:
+            - /url: /brokerages
+            - img [ref=e1082]
+            - generic [ref=e1085]: Brokerages
+      - generic [ref=e97]:
+        - button "AI Bots" [ref=e1086] [cursor=pointer]:
+          - generic [ref=e1087]: AI Bots
+          - img [ref=e1088]
+        - generic [ref=e1090]:
+          - link "Buyer Intelligence AI" [ref=e1091] [cursor=pointer]:
+            - /url: /buyer-bot
+            - img [ref=e1092]
+            - generic [ref=e1096]: Buyer Intelligence
+            - generic [ref=e1097]: AI
+          - link "Seller Outreach AI" [ref=e1098] [cursor=pointer]:
+            - /url: /seller-outreach-bot
+            - img [ref=e1099]
+            - generic [ref=e1104]: Seller Outreach
+            - generic [ref=e1105]: AI
+          - link "Property Valuation AI" [ref=e1106] [cursor=pointer]:
+            - /url: /property-valuation-bot
+            - img [ref=e1107]
+            - generic [ref=e1109]: Property Valuation
+            - generic [ref=e1110]: AI
+          - link "Vigil Monitor 24/7" [ref=e1111] [cursor=pointer]:
+            - /url: /vigil
+            - img [ref=e1112]
+            - generic [ref=e1114]: Vigil Monitor
+            - generic [ref=e1115]: 24/7
+          - link "Agent Workspaces NEW" [ref=e1116] [cursor=pointer]:
+            - /url: /agent-workspaces
+            - img [ref=e1117]
+            - generic [ref=e1119]: Agent Workspaces
+            - generic [ref=e1120]: NEW
+          - link "Bot Builder BUILD" [ref=e1121] [cursor=pointer]:
+            - /url: /bot-builder
+            - img [ref=e1122]
+            - generic [ref=e1126]: Bot Builder
+            - generic [ref=e1127]: BUILD
+          - link "Agent Visualizer LIVE" [ref=e1128] [cursor=pointer]:
+            - /url: /mission-control
+            - img [ref=e1129]
+            - generic [ref=e1131]: Agent Visualizer
+            - generic [ref=e1132]: LIVE
+      - generic [ref=e145]:
+        - button "Tools" [ref=e1133] [cursor=pointer]:
+          - generic [ref=e1134]: Tools
+          - img [ref=e1135]
+        - generic [ref=e1137]:
+          - link "My Listings" [ref=e1138] [cursor=pointer]:
+            - /url: /listings
+            - img [ref=e1139]
+            - generic [ref=e1143]: My Listings
+          - link "Buyer Matcher" [ref=e1144] [cursor=pointer]:
+            - /url: /buyers
+            - img [ref=e1145]
+            - generic [ref=e1150]: Buyer Matcher
+          - link "Agent Matcher" [ref=e1151] [cursor=pointer]:
+            - /url: /agents-matcher
+            - img [ref=e1152]
+            - generic [ref=e1156]: Agent Matcher
+          - link "Lender Matcher" [ref=e1157] [cursor=pointer]:
+            - /url: /lenders
+            - img [ref=e1158]
+            - generic [ref=e1160]: Lender Matcher
+          - link "Builder Directory" [ref=e1161] [cursor=pointer]:
+            - /url: /builders
+            - img [ref=e1162]
+            - generic [ref=e1166]: Builder Directory
+          - link "Property Upload" [ref=e1167] [cursor=pointer]:
+            - /url: /upload
+            - img [ref=e1168]
+            - generic [ref=e1171]: Property Upload
+          - link "Olena Marketing NEW" [ref=e1172] [cursor=pointer]:
+            - /url: /olena-feature-sheet
+            - img [ref=e1173]
+            - generic [ref=e1176]: Olena Marketing
+            - generic [ref=e1177]: NEW
+          - link "Canva Editor NEW" [ref=e1178] [cursor=pointer]:
+            - /url: /canva-editor
+            - img [ref=e1179]
+            - generic [ref=e1185]: Canva Editor
+            - generic [ref=e1186]: NEW
+          - link "Skills & Agents" [ref=e1187] [cursor=pointer]:
+            - /url: /skills
+            - img [ref=e1188]
+            - generic [ref=e1191]: Skills & Agents
+          - link "Map View" [ref=e1192] [cursor=pointer]:
+            - /url: /map
+            - img [ref=e1193]
+            - generic [ref=e1195]: Map View
+          - link "Data Manager" [ref=e1196] [cursor=pointer]:
+            - /url: /data-manager
+            - img [ref=e1197]
+            - generic [ref=e1201]: Data Manager
+          - link "AI Builder CODE" [ref=e1202] [cursor=pointer]:
+            - /url: /ai-builder
+            - img [ref=e1203]
+            - generic [ref=e1206]: AI Builder
+            - generic [ref=e1207]: CODE
+    - generic [ref=e1208]: System Online
+  - generic [ref=e225]:
+    - banner [ref=e226]:
+      - generic [ref=e232]:
+        - img [ref=e839]
+        - generic [ref=e240]: Connected
+      - generic [ref=e243]:
+        - img [ref=e244]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e247]
+        - combobox [ref=e248]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e249]:
+        - button "Help" [ref=e251] [cursor=pointer]:
+          - img [ref=e252]
+          - generic [ref=e255]: Help
+        - button "Voice" [ref=e256] [cursor=pointer]:
+          - img [ref=e257]
+          - generic [ref=e263]: Voice
+        - generic [ref=e264]:
+          - img [ref=e265]
+          - generic [ref=e270]: $12.40
+        - link "Data Manager" [ref=e271] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e272]
+        - button [ref=e276] [cursor=pointer]:
+          - img [ref=e277]
+        - link [ref=e280] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e281]
+        - link "🦞" [ref=e284] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e285]: 🦞
+    - main [ref=e286]:
+      - generic [ref=e288]:
+        - generic [ref=e289]:
+          - generic [ref=e290]:
+            - heading "Mission Control" [level=1] [ref=e291]
+            - paragraph [ref=e292]: Real-time CRE intelligence & agent orchestration
+          - button "New Mission" [ref=e293] [cursor=pointer]:
+            - img [ref=e294]
+            - generic [ref=e299]: New Mission
+        - generic [ref=e300]:
+          - generic [ref=e302]:
+            - generic [ref=e303]:
+              - paragraph [ref=e304]: Active Missions
+              - heading "0" [level=3] [ref=e305]
+              - generic [ref=e306]:
+                - img [ref=e307]
+                - generic [ref=e310]: +3 new
+            - img [ref=e312]
+          - generic [ref=e315]:
+            - generic [ref=e316]:
+              - paragraph [ref=e317]: Hot Money Alerts
+              - heading "0" [level=3] [ref=e318]
+              - generic [ref=e319]:
+                - img [ref=e320]
+                - generic [ref=e323]: +8 new
+            - img [ref=e325]
+          - generic [ref=e328]:
+            - generic [ref=e329]:
+              - paragraph [ref=e330]: Tracked Capital
+              - heading "$0.0B" [level=3] [ref=e331]
+              - generic [ref=e332]:
+                - img [ref=e333]
+                - generic [ref=e336]: +12 growth
+            - img [ref=e338]
+          - generic [ref=e342]:
+            - generic [ref=e343]:
+              - paragraph [ref=e344]: Matches Today
+              - heading "0" [level=3] [ref=e345]
+              - generic [ref=e346]:
+                - img [ref=e347]
+                - generic [ref=e350]: +24 new
+            - img [ref=e352]
+        - generic [ref=e356]:
+          - generic [ref=e357]:
+            - generic [ref=e358]:
+              - heading "🎯 Active Missions" [level=3] [ref=e359]:
+                - generic [ref=e360]: 🎯
+                - text: Active Missions
+              - generic [ref=e361]: 2 running
+            - generic [ref=e362]:
+              - generic [ref=e364]:
+                - generic [ref=e365]:
+                  - heading "1500 Michael Drive, Welland" [level=4] [ref=e368]
+                  - paragraph [ref=e369]: Industrial • Phase 2/6
+                  - paragraph [ref=e373]: Running analysis...
+                - generic [ref=e374]:
+                  - button [ref=e375] [cursor=pointer]:
+                    - img [ref=e376]
+                  - button [ref=e378] [cursor=pointer]:
+                    - img [ref=e379]
+              - generic [ref=e382]:
+                - generic [ref=e383]:
+                  - heading "Ridgeway 40-acre Farm, Port Colborne" [level=4] [ref=e386]
+                  - paragraph [ref=e387]: Agricultural • Phase 1/6
+                  - paragraph [ref=e390]: Queued • Starting soon
+                - button [ref=e392] [cursor=pointer]:
+                  - img [ref=e393]
+            - button "+ New Mission" [ref=e395] [cursor=pointer]:
+              - generic [ref=e396]: +
+              - generic [ref=e397]: New Mission
+          - generic [ref=e398]:
+            - generic [ref=e399]:
+              - heading "💰 Hot Money Radar" [level=3] [ref=e400]:
+                - generic [ref=e401]: 💰
+                - text: Hot Money Radar
+              - generic [ref=e402]: 3 new alerts
+            - generic [ref=e403]:
+              - generic [ref=e405]:
+                - generic [ref=e406]:
+                  - generic [ref=e407]:
+                    - generic [ref=e408]:
+                      - img [ref=e409]
+                      - generic [ref=e411]: HOT
+                    - heading "2650687 Ontario Ltd" [level=4] [ref=e412]
+                  - generic [ref=e413]:
+                    - generic [ref=e414]:
+                      - img [ref=e415]
+                      - generic [ref=e417]: $15.0M cash
+                    - generic [ref=e418]: •
+                    - generic [ref=e419]: May 2025
+                  - paragraph [ref=e420]: Thirty Rd • West Lincoln
+                - generic [ref=e421]:
+                  - button "Contact" [ref=e422] [cursor=pointer]:
+                    - img [ref=e423]
+                  - button "View Profile" [ref=e425] [cursor=pointer]:
+                    - img [ref=e426]
+              - generic [ref=e431]:
+                - generic [ref=e432]:
+                  - generic [ref=e433]:
+                    - generic [ref=e434]:
+                      - img [ref=e435]
+                      - generic [ref=e437]: HOT
+                    - heading "Turnberry Holdings Inc" [level=4] [ref=e438]
+                  - generic [ref=e439]:
+                    - generic [ref=e440]:
+                      - img [ref=e441]
+                      - generic [ref=e443]: $9.8M cash
+                    - generic [ref=e444]: •
+                    - generic [ref=e445]: Jan 2025
+                  - paragraph [ref=e446]: Multiple Properties • Lincoln
+                - generic [ref=e447]:
+                  - button "Contact" [ref=e448] [cursor=pointer]:
+                    - img [ref=e449]
+                  - button "View Profile" [ref=e451] [cursor=pointer]:
+                    - img [ref=e452]
+              - generic [ref=e457]:
+                - generic [ref=e458]:
+                  - generic [ref=e459]:
+                    - generic [ref=e460]:
+                      - img [ref=e461]
+                      - generic [ref=e463]: HOT
+                    - heading "1863570 Ontario Inc" [level=4] [ref=e464]
+                  - generic [ref=e465]:
+                    - generic [ref=e466]:
+                      - img [ref=e467]
+                      - generic [ref=e469]: $7.0M cash
+                    - generic [ref=e470]: •
+                    - generic [ref=e471]: Jan 2025
+                  - paragraph [ref=e472]: 981 Pelham St • Pelham
+                - generic [ref=e473]:
+                  - button "Contact" [ref=e474] [cursor=pointer]:
+                    - img [ref=e475]
+                  - button "View Profile" [ref=e477] [cursor=pointer]:
+                    - img [ref=e478]
+            - button "View All Hot Money Leads →" [ref=e482] [cursor=pointer]
+        - generic [ref=e483]:
+          - generic [ref=e484]:
+            - heading "🤖 Agent Fleet Status" [level=3] [ref=e485]:
+              - generic [ref=e486]: 🤖
+              - text: Agent Fleet Status
+            - generic [ref=e487]:
+              - generic [ref=e488]: 5 Active
+              - generic [ref=e490]: 0 Queued
+              - generic [ref=e492]: 3 Idle
+          - generic [ref=e494]:
+            - generic [ref=e495]:
+              - generic [ref=e496]:
+                - generic [ref=e497]:
+                  - generic [ref=e498]: 🎯
+                  - generic [ref=e499]:
+                    - heading "Transaction Scout" [level=4] [ref=e500]
+                    - generic [ref=e501]: ACTIVE
+                - generic [ref=e502]:
+                  - button "Pause" [ref=e503] [cursor=pointer]:
+                    - img [ref=e504]
+                  - button "Stop" [ref=e507] [cursor=pointer]:
+                    - img [ref=e508]
+              - paragraph [ref=e510]: Find recent transactions in target market
+              - generic [ref=e513]: Scanning transactions
+              - generic [ref=e524]:
+                - generic [ref=e525]: "Running: 0 missions"
+                - generic [ref=e526]: "Completed: 42"
+              - generic [ref=e527]:
+                - button "Logs" [ref=e528] [cursor=pointer]:
+                  - img [ref=e529]
+                  - text: Logs
+                - button "Config" [ref=e532] [cursor=pointer]:
+                  - img [ref=e533]
+                  - text: Config
+            - generic [ref=e536]:
+              - generic [ref=e537]:
+                - generic [ref=e538]:
+                  - generic [ref=e539]: 🔥
+                  - generic [ref=e540]:
+                    - heading "Hot Money Tracker" [level=4] [ref=e541]
+                    - generic [ref=e542]: IDLE
+                - button "Start" [ref=e544] [cursor=pointer]:
+                  - img [ref=e545]
+              - paragraph [ref=e547]: Identify sellers with fresh capital
+              - generic [ref=e550]: Standby
+              - generic [ref=e557]:
+                - generic [ref=e558]: Ready to run
+                - generic [ref=e559]: "Last: 2h ago"
+                - generic [ref=e560]: "Watching: 156 entities"
+                - generic [ref=e561]: 0 alerts
+              - generic [ref=e562]:
+                - button "Logs" [ref=e563] [cursor=pointer]:
+                  - img [ref=e564]
+                  - text: Logs
+                - button "Config" [ref=e567] [cursor=pointer]:
+                  - img [ref=e568]
+                  - text: Config
+            - generic [ref=e571]:
+              - generic [ref=e572]:
+                - generic [ref=e573]:
+                  - generic [ref=e574]: 💼
+                  - generic [ref=e575]:
+                    - heading "Portfolio Analyzer" [level=4] [ref=e576]
+                    - generic [ref=e577]: ACTIVE
+                - generic [ref=e578]:
+                  - button "Pause" [ref=e579] [cursor=pointer]:
+                    - img [ref=e580]
+                  - button "Stop" [ref=e583] [cursor=pointer]:
+                    - img [ref=e584]
+              - paragraph [ref=e586]: Match asset class portfolios
+              - generic [ref=e589]: Analyzing portfolios
+              - generic [ref=e603]:
+                - generic [ref=e604]: "Running: 0 missions"
+                - generic [ref=e605]: "Completed:"
+                - generic [ref=e606]: "Pending: 0 tasks"
+                - generic [ref=e607]: "Avg: 3m"
+              - generic [ref=e608]:
+                - button "Logs" [ref=e609] [cursor=pointer]:
+                  - img [ref=e610]
+                  - text: Logs
+                - button "Config" [ref=e613] [cursor=pointer]:
+                  - img [ref=e614]
+                  - text: Config
+            - generic [ref=e617]:
+              - generic [ref=e618]:
+                - generic [ref=e619]:
+                  - generic [ref=e620]: 👤
+                  - generic [ref=e621]:
+                    - heading "Agent Finder" [level=4] [ref=e622]
+                    - generic [ref=e623]: IDLE
+                - button "Start" [ref=e625] [cursor=pointer]:
+                  - img [ref=e626]
+              - paragraph [ref=e628]: Find active brokers in market
+              - generic [ref=e629]:
+                - generic [ref=e631]: Standby
+                - img [ref=e635]
+              - generic [ref=e639]:
+                - generic [ref=e640]: Ready to run
+                - generic [ref=e641]: "Last: 2h ago"
+              - generic [ref=e642]:
+                - button "Logs" [ref=e643] [cursor=pointer]:
+                  - img [ref=e644]
+                  - text: Logs
+                - button "Config" [ref=e647] [cursor=pointer]:
+                  - img [ref=e648]
+                  - text: Config
+            - generic [ref=e651]:
+              - generic [ref=e652]:
+                - generic [ref=e653]:
+                  - generic [ref=e654]: 🏦
+                  - generic [ref=e655]:
+                    - heading "Lender Matcher" [level=4] [ref=e656]
+                    - generic [ref=e657]: ACTIVE
+                - generic [ref=e658]:
+                  - button "Pause" [ref=e659] [cursor=pointer]:
+                    - img [ref=e660]
+                  - button "Stop" [ref=e663] [cursor=pointer]:
+                    - img [ref=e664]
+              - paragraph [ref=e666]: Match financing sources
+              - generic [ref=e667]:
+                - generic [ref=e669]: Matching lenders
+                - img [ref=e678]
+              - generic [ref=e682]:
+                - generic [ref=e683]: "Running: 0 missions"
+                - generic [ref=e684]: "Completed:"
+              - generic [ref=e685]:
+                - button "Logs" [ref=e686] [cursor=pointer]:
+                  - img [ref=e687]
+                  - text: Logs
+                - button "Config" [ref=e690] [cursor=pointer]:
+                  - img [ref=e691]
+                  - text: Config
+            - generic [ref=e694]:
+              - generic [ref=e695]:
+                - generic [ref=e696]:
+                  - generic [ref=e697]: 📝
+                  - generic [ref=e698]:
+                    - heading "Obsidian Sync" [level=4] [ref=e699]
+                    - generic [ref=e700]: IDLE
+                - button "Start" [ref=e702] [cursor=pointer]:
+                  - img [ref=e703]
+              - paragraph [ref=e705]: Sync with Obsidian vault
+              - generic [ref=e706]:
+                - generic [ref=e708]: Standby
+                - img [ref=e711]
+              - generic [ref=e714]:
+                - generic [ref=e715]: Ready to run
+                - generic [ref=e716]: "Last: 2h ago"
+              - generic [ref=e717]:
+                - button "Logs" [ref=e718] [cursor=pointer]:
+                  - img [ref=e719]
+                  - text: Logs
+                - button "Config" [ref=e722] [cursor=pointer]:
+                  - img [ref=e723]
+                  - text: Config
+            - generic [ref=e726]:
+              - generic [ref=e727]:
+                - generic [ref=e728]:
+                  - generic [ref=e729]: 🔍
+                  - generic [ref=e730]:
+                    - heading "Skeptic" [level=4] [ref=e731]
+                    - generic [ref=e732]: ACTIVE
+                - generic [ref=e733]:
+                  - button "Pause" [ref=e734] [cursor=pointer]:
+                    - img [ref=e735]
+                  - button "Stop" [ref=e738] [cursor=pointer]:
+                    - img [ref=e739]
+              - paragraph [ref=e741]: Validate claims and verify sources
+              - generic [ref=e742]:
+                - generic [ref=e744]: Verifying facts
+                - generic [ref=e749]:
+                  - img [ref=e750]
+                  - img [ref=e755]
+              - generic [ref=e759]:
+                - generic [ref=e760]: "Running: missions"
+                - generic [ref=e761]: "Completed:"
+              - generic [ref=e762]:
+                - button "Logs" [ref=e763] [cursor=pointer]:
+                  - img [ref=e764]
+                  - text: Logs
+                - button "Config" [ref=e767] [cursor=pointer]:
+                  - img [ref=e768]
+                  - text: Config
+            - generic [ref=e771]:
+              - generic [ref=e772]:
+                - generic [ref=e773]:
+                  - generic [ref=e774]: 💡
+                  - generic [ref=e775]:
+                    - heading "Spark" [level=4] [ref=e776]
+                    - generic [ref=e777]: ACTIVE
+                - generic [ref=e778]:
+                  - button "Pause" [ref=e779] [cursor=pointer]:
+                    - img [ref=e780]
+                  - button "Stop" [ref=e783] [cursor=pointer]:
+                    - img [ref=e784]
+              - paragraph [ref=e786]: Generate improvements and optimizations
+              - generic [ref=e787]:
+                - generic [ref=e789]: Generating ideas
+                - img [ref=e795]
+              - generic [ref=e803]:
+                - generic [ref=e804]: "Running: missions"
+                - generic [ref=e805]: "Completed:"
+              - generic [ref=e806]:
+                - button "Logs" [ref=e807] [cursor=pointer]:
+                  - img [ref=e808]
+                  - text: Logs
+                - button "Config" [ref=e811] [cursor=pointer]:
+                  - img [ref=e812]
+                  - text: Config
+        - generic [ref=e815]:
+          - heading "Quick Actions" [level=3] [ref=e816]
+          - generic [ref=e817]:
+            - link "🎯 Research Property Start new property analysis" [ref=e818] [cursor=pointer]:
+              - /url: /research
+              - generic [ref=e819]: 🎯
+              - generic [ref=e820]: Research Property
+              - generic [ref=e821]: Start new property analysis
+            - link "🔥 View Hot Money See recent seller leads" [ref=e822] [cursor=pointer]:
+              - /url: /hotmoney
+              - generic [ref=e823]: 🔥
+              - generic [ref=e824]: View Hot Money
+              - generic [ref=e825]: See recent seller leads
+            - link "📊 Deal Pipeline 2 new deals waiting" [ref=e826] [cursor=pointer]:
+              - /url: /pipeline
+              - generic [ref=e827]: 📊
+              - generic [ref=e828]: Deal Pipeline
+              - generic [ref=e829]: 2 new deals waiting
+            - link "🤖 Agent Workspace 5 agents active" [ref=e830] [cursor=pointer]:
+              - /url: /agents
+              - generic [ref=e831]: 🤖
+              - generic [ref=e832]: Agent Workspace
+              - generic [ref=e833]: 5 agents active
+  - button "Ctrl+Shift+V" [ref=e834] [cursor=pointer]:
+    - img [ref=e835]
+    - generic [ref=e838]: Ctrl+Shift+V

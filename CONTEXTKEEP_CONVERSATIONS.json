@@ -1,527 +1,7 @@
 [
   {
-    "title": "Conversation: 2026-03-30 - Hot Money Radar with AI Profile Intelligence",
-    "content": "# Conversation Summary - 2026-03-30\n\n**Summary:** Enhanced Hot Money Radar with full profile modal, local LLM integration (Qwen 2.5 & Llama 3.1), and AI-powered profile pulling. Added Paste Deal feature with smart text extraction and Obsidian integration.\n\n**Topics:** Hot Money Radar, Profile Modal, Local LLM Integration, Qwen 2.5, Llama 3.1, Deal Parsing, Obsidian Export, Profile Intelligence\n\n**Decisions:**\n- Use local LLM (Llama 3.1 8B) for fast deal extraction and profiling\n- Qwen 2.5 14B available for advanced reasoning tasks\n- Profiles save to Obsidian: `Deals/Profiles/Profile_-_Entity_Name.md`\n- Smart paste auto-extracts: entity, cash, property type, location, dates\n- Cards are fully clickable for better UX\n\n**Action Items:**\n- [ ] Test LLM profile pulling with real entities\n- [ ] Add more sophisticated web scraping for profile enrichment\n- [ ] Consider vector search for similar deal matching\n- [ ] Add email/phone extraction from web search\n\n**Files Changed:**\n\n**Frontend:**\n- `nerve/src/views/HotMoneyRadar.jsx` - Added LeadDetailModal, PasteDealModal, Profile Intelligence section, clickable cards\n\n**Backend:**\n- `api_server.py` - Added:\n  - `/api/hotmoney/*` - Full CRUD for hot money leads\n  - `/api/hotmoney/stats` - Statistics endpoint\n  - `/api/llm/status` - LLM health check\n  - `/api/llm/generate` - Text generation\n  - `/api/llm/chat` - Chat completion\n  - `/api/llm/extract-deal` - Smart deal parsing\n  - `/api/llm/pull-profile` - AI profile research\n  - `/api/obsidian/quick-link` - Obsidian note creation\n\n**Database:**\n- `hot_money_leads` table with: entity, cash_amount, property_type, asset_class, address, contacts (JSON), notes\n\n**Features Implemented:**\n1. Full profile modal with editable fields (entity, cash, asset class, property details, contacts, notes)\n2. Auto-generated quick links (Google, LinkedIn, Corporation, Realtor.ca)\n3. Smart Paste Deal - paste any text, AI extracts structured data\n4. Profile Intelligence - AI researches entity and generates profile\n5. Obsidian integration - deals and profiles auto-save to vault\n6. Clickable cards - entire lead card opens profile\n7. Database persistence - all data saved to SQLite\n\n**Local LLM Models Available:**\n- `llama3.1:8b` - Default, fast (20s), good for extraction\n- `qwen2.5:14b` - 14.8B params, slower, advanced reasoning\n- `deepseek-r1:8b` - Code/math tasks\n- `re-analyst:latest` - 1.2B, very fast property analysis\n",
-    "tags": [
-      "conversation",
-      "log",
-      "daily",
-      "hot-money-radar",
-      "profile-intelligence",
-      "local-llm",
-      "qwen",
-      "llama",
-      "obsidian-integration"
-    ],
-    "category": "conversations",
-    "created_at": "2026-03-30T16:07:45.913109",
-    "metadata": {
-      "type": "conversation_log",
-      "participants": [
-        "Jamie",
-        "Claude"
-      ],
-      "date": "2026-03-30",
-      "decisions_count": 5,
-      "action_items_count": 4,
-      "files_changed": 2
-    }
-  },
-  {
-    "title": "Conversation: 2026-03-28 - Quick Links v2.1 Enhancement",
-    "content": "# Conversation Summary - 2026-03-28\n\n**Summary:** Completed Quick Links v2.1 with WhatsApp, TikTok, and chat platforms. \nExported 37,943 contacts to ContextKeep. Discussed Qdrant implementation for semantic search.\n\n**Topics:** Quick Links v2.1 Enhancement, WhatsApp/TikTok Integration, ContextKeep Export, Qdrant Vector Database, Data Empire Architecture\n\n**Decisions:**\n- Add Qdrant for vector search (not ContextKeep)\n- Keep ContextKeep for conversation memory\n- Build 24/7 monitoring system\n- Deploy agent ecosystem for automation\n\n**Action Items:**\n- [ ] Install Qdrant vector database\n- [ ] Create monitoring dashboard\n- [ ] Deploy scraper agents\n- [ ] Index 164K contacts to Qdrant\n- [ ] Set up conversation logger\n\n**Files Changed:** 0\n",
-    "tags": [
-      "conversation",
-      "log",
-      "daily",
-      "quick-links-v2.1-enhancement",
-      "whatsapp/tiktok-integration",
-      "contextkeep-export"
-    ],
-    "category": "conversations",
-    "created_at": "2026-03-28T00:37:05.205613",
-    "metadata": {
-      "type": "conversation_log",
-      "participants": [
-        "Jamie",
-        "Claude"
-      ],
-      "date": "2026-03-28",
-      "decisions_count": 4,
-      "action_items_count": 5,
-      "files_changed": 0
-    }
-  },
-  {
-    "title": "Conversation: 2026-03-28 - Quick Links v2.1 Enhancement",
-    "content": "# Conversation Summary - 2026-03-28\n\n**Summary:** Completed Quick Links v2.1 with WhatsApp, TikTok, and chat platforms. \nExported 37,943 contacts to ContextKeep. Discussed Qdrant implementation for semantic search.\n\n**Topics:** Quick Links v2.1 Enhancement, WhatsApp/TikTok Integration, ContextKeep Export, Qdrant Vector Database, Data Empire Architecture\n\n**Decisions:**\n- Add Qdrant for vector search (not ContextKeep)\n- Keep ContextKeep for conversation memory\n- Build 24/7 monitoring system\n- Deploy agent ecosystem for automation\n\n**Action Items:**\n- [ ] Install Qdrant vector database\n- [ ] Create monitoring dashboard\n- [ ] Deploy scraper agents\n- [ ] Index 164K contacts to Qdrant\n- [ ] Set up conversation logger\n\n**Files Changed:** 0\n",
-    "tags": [
-      "conversation",
-      "log",
-      "daily",
-      "quick-links-v2.1-enhancement",
-      "whatsapp/tiktok-integration",
-      "contextkeep-export"
-    ],
-    "category": "conversations",
-    "created_at": "2026-03-28T00:47:18.348867",
-    "metadata": {
-      "type": "conversation_log",
-      "participants": [
-        "Jamie",
-        "Claude"
-      ],
-      "date": "2026-03-28",
-      "decisions_count": 4,
-      "action_items_count": 5,
-      "files_changed": 0
-    }
-  },
-  {
-    "title": "BigDataClaw Development Session - 2026-03-28",
-    "content": "# BigDataClaw Development Session - 2026-03-28\n\n**Session ID:** session_2026-03-28_13:50:25\n**Timestamp:** 2026-03-28T13:50:25.420449\n\n## Work Completed\n\n### 1. Qdrant Experience Agent \u2705\n24/7 Vector Database Management System\n\n**Stats:**\n- Recruiters Indexed: 28,505 / 28,505 (100%)\n- Collections: 24\n- Status: Healthy\n\n**Features:**\n- Health monitoring every 5 minutes\n- Auto-optimization of collections\n- Auto-indexing of new recruiters\n- HTML dashboard with real-time stats\n\n### 2. EXP Agent Recruiter Update \u2705\nConnected to real database of 28,505 agents\n\n**Stats:**\n- total_agents: 28505\n- brokerages: 165\n- initial_load: 1000\n\n### 3. Opportunities Page & Automation \u2705\nFull automation system for off-market properties\n\n**Features:**\n- Auto-scraper for expired LoopNet listings\n- 7 asset classes (Multifamily, Industrial, Office, etc.)\n- Database matching engine\n- Email alert system\n- Map view with Leaflet.js\n- Auto broker lookup\n- List/Map toggle view\n- Obsidian export integration\n\n## Quick Commands\n\n```bash\n# Qdrant Agent Status\npython3 qdrant_experience_agent.py --status\n\n# Run Opportunity Scanner\npython3 automation_runner.py --run-now\n\n# Start Automation Daemon\npython3 automation_runner.py --daemon\n\n# Semantic Search\npython3 index_contacts_to_qdrant.py --search 'Keller Williams'\n```\n\n## URLs\n- nerve_dashboard: http://localhost:3001\n- opportunities_page: http://localhost:3001/opportunities\n- exp_recruiter: http://localhost:3001/exp-agent-recruiter\n- qdrant_ui: http://localhost:6333/dashboard\n- qdrant_dashboard: file:///home/jamie/Desktop/Jamie's%20Personal%20Vault/bigdataclaw/qdrant_dashboard.html\n\n## Next Steps\n- [ ] Run: python3 automation_runner.py --daemon\n- [ ] Setup email: python3 automation_runner.py --setup-email\n- [ ] Install service: sudo cp opportunity-automation.service /etc/systemd/system/\n- [ ] Monitor logs: tail -f logs/opportunity_automation.log\n- [ ] Test email: python3 test_email_alerts.py\n",
-    "tags": [
-      "development-session",
-      "qdrant",
-      "automation",
-      "opportunities",
-      "bigdataclaw",
-      "session-2026-03-28"
-    ],
-    "category": "development_logs",
-    "created_at": "2026-03-28T13:50:25.420493",
-    "metadata": {
-      "type": "session_summary",
-      "version": "1.0",
-      "project": "BigDataClaw NERVE",
-      "session_id": "session_2026-03-28_13:50:25"
-    }
-  },
-  {
-    "title": "BigDataClaw Database Rebuild & Recruiter Fix - 2026-03-28",
-    "content": "# BigDataClaw Database Rebuild & Recruiter Fix - 2026-03-28\n\n**Session ID:** session_2026-03-28_14:53:39\n**Timestamp:** 2026-03-28T14:53:39.689479\n\n## Work Completed\n\n### 1. Recruiter Database Rebuild \u2705\nRebuilt entire recruiter database from DBeaver exports with actual cities/regions\n\n**Stats:**\n- Total Agents: 96,265 (up from 28,505)\n- Unique Cities: 93\n- Unique Brokerages: 2978\n- Top City: Toronto (37,624)\n\n**Features:**\n- Joined realtor_brokers + realtor_salespersons with realtor_brokerages\n- Real city data: 93 unique cities across Ontario\n- Proper quick links generated for all 96,265 agents\n- SQLite FTS5 search fixed for special characters (St. Catharines)\n- JSON bloat reduced from 395MB to 77MB\n- Frontend switched to EXAgentRecruiterUpdated component\n- Vercel deployment config fixed to build nerve/ directory\n\n### 2. Frontend Routing Fix \u2705\nFixed EXP Agent Recruiter not displaying and city filter returning 0 results\n\n**Fixes:**\n- App.jsx now routes to EXAgentRecruiterUpdated instead of old component\n- City dropdown searches across all agent fields instead of exact city match\n- JSON fallback when API server is offline\n- Added 500/page pagination option\n- Vercel builds from nerve/ directory with correct output path\n\n### 3. API Search Fix \u2705\nFixed SQLite FTS5 search breaking on special characters in city names\n\nFix: FTS5 queries now wrapped in double quotes to escape periods and special chars\n\n## Pattern for Other Data Types\n\nSame DBeaver join \u2192 SQLite \u2192 JSON \u2192 Frontend pattern applies to all data types\n\n**Applies to:**\n- Builders (companys_final.csv + company_contacts_final.csv)\n- Buyers (sale_agents_final.csv)\n- Sellers (sale_agents_final.csv)\n- Commercial Realtors (realtor_brokers_final.csv filtered by job_title)\n- Brokers (realtor_brokers_final.csv)\n- Companies (companys_final.csv)\n- Lenders (lenders_final.csv + lender_contacts_final.csv)\n\n**Steps:**\n- 1. Identify the DBeaver CSV files for the entity type\n- 2. Join parent/child tables on foreign keys (e.g., broker_id)\n- 3. Generate quick links for each record\n- 4. Create/update SQLite table with proper indexes and FTS5\n- 5. Export lean JSON to nerve/public/data/ for frontend fallback\n- 6. Update/create frontend view component\n- 7. Add API endpoints in api_server.py\n- 8. Wire up routing in nerve/src/App.jsx\n\n## Quick Commands\n\n```bash\n# Rebuild recruiters\npython3 rebuild_recruiters_from_dbeaver.py\n\n# Start API server\npython3 api_server.py\n\n# Check agent count\nsqlite3 bigdataclaw.db 'SELECT COUNT(*) FROM recruiters;'\n\n# Check city distribution\nsqlite3 bigdataclaw.db 'SELECT city, COUNT(*) FROM recruiters GROUP BY city ORDER BY COUNT(*) DESC LIMIT 20;'\n\n# Build frontend\ncd nerve && npm run build\n```\n\n## URLs\n- nerve_dashboard: http://localhost:5173\n- exp_recruiter: http://localhost:5173/exp-agent-recruiter\n- api_base: http://localhost:8000/api\n- api_health: http://localhost:8000/api/health\n- vercel_deploy: https://bigdataclaw-6ks8i50gg-ish0075s-projects.vercel.app\n\n## Next Steps\n- [ ] Restart api_server.py to serve the new 96K recruiter database\n- [ ] Redeploy frontend to Vercel with updated vercel.json\n- [ ] Test city filters: Toronto (~37K), Mississauga (~10K), Markham (~9K)\n- [ ] Apply same rebuild pattern to Builders directory\n- [ ] Apply same rebuild pattern to Lenders matcher\n- [ ] Apply same rebuild pattern to Buyer/Seller agents\n- [ ] Add company data to Company search/matcher\n",
-    "tags": [
-      "development-session",
-      "database-rebuild",
-      "recruiters",
-      "dbeaver",
-      "frontend-fix",
-      "bigdataclaw",
-      "session-2026-03-28"
-    ],
-    "category": "development_logs",
-    "created_at": "2026-03-28T14:53:39.689535",
-    "metadata": {
-      "type": "session_summary",
-      "version": "1.0",
-      "project": "BigDataClaw NERVE",
-      "session_id": "session_2026-03-28_14:53:39"
-    }
-  },
-  {
-    "title": "BigDataClaw Database Rebuild & Recruiter Fix - 2026-03-28",
-    "content": "# BigDataClaw Database Rebuild & Recruiter Fix - 2026-03-28\n\n**Session ID:** session_2026-03-28_21:00:01\n**Timestamp:** 2026-03-28T21:00:01.066278\n\n## Work Completed\n\n### 1. Recruiter Database Rebuild \u2705\nRebuilt entire recruiter database from DBeaver exports with actual cities/regions\n\n**Stats:**\n- Total Agents: 96,265 (up from 28,505)\n- Unique Cities: 93\n- Unique Brokerages: 2978\n- Top City: Toronto (37,624)\n\n**Features:**\n- Joined realtor_brokers + realtor_salespersons with realtor_brokerages\n- Real city data: 93 unique cities across Ontario\n- Proper quick links generated for all 96,265 agents\n- SQLite FTS5 search fixed for special characters (St. Catharines)\n- JSON bloat reduced from 395MB to 77MB\n- Frontend switched to EXAgentRecruiterUpdated component\n- Vercel deployment config fixed to build nerve/ directory\n\n### 2. Frontend Routing Fix \u2705\nFixed EXP Agent Recruiter not displaying and city filter returning 0 results\n\n**Fixes:**\n- App.jsx now routes to EXAgentRecruiterUpdated instead of old component\n- City dropdown searches across all agent fields instead of exact city match\n- JSON fallback when API server is offline\n- Added 500/page pagination option\n- Vercel builds from nerve/ directory with correct output path\n\n### 3. API Search Fix \u2705\nFixed SQLite FTS5 search breaking on special characters in city names\n\nFix: FTS5 queries now wrapped in double quotes to escape periods and special chars\n\n## Pattern for Other Data Types\n\nSame DBeaver join \u2192 SQLite \u2192 JSON \u2192 Frontend pattern applies to all data types\n\n**Applies to:**\n- Builders (companys_final.csv + company_contacts_final.csv)\n- Buyers (sale_agents_final.csv)\n- Sellers (sale_agents_final.csv)\n- Commercial Realtors (realtor_brokers_final.csv filtered by job_title)\n- Brokers (realtor_brokers_final.csv)\n- Companies (companys_final.csv)\n- Lenders (lenders_final.csv + lender_contacts_final.csv)\n\n**Steps:**\n- 1. Identify the DBeaver CSV files for the entity type\n- 2. Join parent/child tables on foreign keys (e.g., broker_id)\n- 3. Generate quick links for each record\n- 4. Create/update SQLite table with proper indexes and FTS5\n- 5. Export lean JSON to nerve/public/data/ for frontend fallback\n- 6. Update/create frontend view component\n- 7. Add API endpoints in api_server.py\n- 8. Wire up routing in nerve/src/App.jsx\n\n## Quick Commands\n\n```bash\n# Rebuild recruiters\npython3 rebuild_recruiters_from_dbeaver.py\n\n# Start API server\npython3 api_server.py\n\n# Check agent count\nsqlite3 bigdataclaw.db 'SELECT COUNT(*) FROM recruiters;'\n\n# Check city distribution\nsqlite3 bigdataclaw.db 'SELECT city, COUNT(*) FROM recruiters GROUP BY city ORDER BY COUNT(*) DESC LIMIT 20;'\n\n# Build frontend\ncd nerve && npm run build\n```\n\n## URLs\n- nerve_dashboard: http://localhost:5173\n- exp_recruiter: http://localhost:5173/exp-agent-recruiter\n- api_base: http://localhost:8000/api\n- api_health: http://localhost:8000/api/health\n- vercel_deploy: https://bigdataclaw-6ks8i50gg-ish0075s-projects.vercel.app\n\n## Next Steps\n- [ ] Restart api_server.py to serve the new 96K recruiter database\n- [ ] Redeploy frontend to Vercel with updated vercel.json\n- [ ] Test city filters: Toronto (~37K), Mississauga (~10K), Markham (~9K)\n- [ ] Apply same rebuild pattern to Builders directory\n- [ ] Apply same rebuild pattern to Lenders matcher\n- [ ] Apply same rebuild pattern to Buyer/Seller agents\n- [ ] Add company data to Company search/matcher\n",
-    "tags": [
-      "development-session",
-      "database-rebuild",
-      "recruiters",
-      "dbeaver",
-      "frontend-fix",
-      "bigdataclaw",
-      "session-2026-03-28"
-    ],
-    "category": "development_logs",
-    "created_at": "2026-03-28T21:00:01.066376",
-    "metadata": {
-      "type": "session_summary",
-      "version": "1.0",
-      "project": "BigDataClaw NERVE",
-      "session_id": "session_2026-03-28_21:00:01"
-    }
-  },
-  {
-    "title": "Sovereign AI Corridor Website - Production Build - 2026-03-28",
-    "content": "# Sovereign AI Corridor Website - Production Build - 2026-03-28\n\n**Session ID:** session_2026-03-28_20:30:00\n**Timestamp:** 2026-03-28T20:30:00.000000\n**Project:** Sovereign AI Corridor Marketing Website\n**Status:** Production Ready \u2705\n\n## Work Completed\n\n### 1. Site Structure Finalization \u2705\nReduced from 4 nodes to 2 core nodes:\n- **Node 1: Allanburg** - 230 kV energised Crown campus\n- **Node 2: Nanticoke** - 500 kV Crown power anchor\n\nRemoved Welland and Port Colborne nodes and all associated imagery.\n\n### 2. Crown Land Acreage Finalized \u2705\n**Exact verified Crown land parcels only (no Hayes Road):**\n\n**Allanburg (3 parcels):**\n- Federal Crown: 243.248 acres\n- Provincial Crown: 41.431 acres (LI-zoned)\n- Provincial Crown: 23.6 acres (transformer station pad)\n- **Allanburg Total: 308.279 acres**\n\n**Nanticoke (1 parcel):**\n- Provincial Crown: 237.208 acres\n\n**Corridor Total: 545+ acres**\n\n### 3. Location Anonymization \u2705\nRemoved all specific location references:\n- \u274c Allanport Road\n- \u274c Transport Canada land\n- \u274c Welland Canal\n- \u274c Allanburg TS\n- \u274c Queen Victoria / Welland Canal Company\n- \u2705 Generic \"Crown land\" language throughout\n\n### 4. Legal Pages \u2705\nCreated standalone HTML pages:\n- `/terms.html` - Terms & Conditions\n- `/privacy.html` - Privacy Policy\n- Footer links updated\n- Removed inline Terms/Privacy from React app\n\n### 5. Hero Image Optimization \u2705\n- Opacity reduced from 45% to 40%\n- Fixed positioning (removed sm:object-[70%_center] offset)\n- Now properly centered across all breakpoints\n\n### 6. Slide Gallery Component \u2705\nReplaced PowerPoint download with full-screen slide gallery:\n- 8 slides from \"The Sovereign AI Corridor.pdf\"\n- Left/right arrow navigation\n- Dot indicators (clickable)\n- Slide counter (e.g., \"3 / 8\")\n- Keyboard support (arrow keys)\n- Smooth fade transitions\n- 16:9 aspect ratio with object-contain\n\n### 7. Contact Form \u2705\n- Email: spv@sovereignaicorridor.ca\n- Phone: 647 801 7532\n- Functional POST to /api/contact\n\n## Files Changed\n- `src/App.tsx` - Major updates to all sections\n- `public/terms.html` - Created\n- `public/privacy.html` - Created\n- `public/slides/` - 8 new slide PNGs from PDF\n- `generate_corridor_infographic.py` - Updated acreage\n\n## Build Status\n\u2705 TypeScript compilation clean\n\u2705 Vite build successful\n\u2705 All assets in dist/\n\u2705 Ready for Vercel deployment\n\n## Deployment Command\n```bash\ncd \"/home/jamie/Desktop/Jamies VAULTS/Kimi_Agent_Niagara AI Power Belt/app\" && npx vercel --prod\n```\n\n## Notes\nUser confirmed: \"looks amazing\" - site is production ready",
-    "tags": [
-      "development-session",
-      "sovereign-ai-corridor",
-      "website",
-      "production-build",
-      "vercel",
-      "react",
-      "vite",
-      "crown-land",
-      "session-2026-03-28"
-    ],
-    "category": "development_logs",
-    "created_at": "2026-03-28T20:30:00.000000",
-    "metadata": {
-      "type": "session_summary",
-      "version": "1.0",
-      "project": "Sovereign AI Corridor Website",
-      "session_id": "session_2026-03-28_20:30:00"
-    }
-  },
-  {
-    "id": "exp-agent-recruiter-20260329-150114",
-    "title": "EXP Agent Recruiter - Agent Cards Implementation",
-    "timestamp": "2026-03-29T15:01:14.313256",
-    "category": "exp-agent-recruiter",
-    "tags": [
-      "agent-cards",
-      "ui",
-      "quick-links",
-      "voice",
-      "obsidian-clipper"
-    ],
-    "summary": "Complete implementation of EXP Agent Recruiter agent cards including:\n- Builder-style card design with avatar, stats, main buttons\n- Quick Links expansion with Social Media, Messaging, Professional sections\n- Voice search integration (Ctrl+Shift+V)\n- Obsidian Web Clipper integration for capturing contact info\n- Smart button display (Call \u2192 Email \u2192 Clip based on data availability)\n- All links use Google search with Realtor keyword\n- EXP agents sorted last with reduced opacity\n- Fixed name display issues (. prefix removal)\n- WhatsApp and WeChat messaging links\n- Email button properly clickable",
-    "files_modified": [
-      "nerve/src/views/EXAgentRecruiterEnhanced.jsx",
-      "nerve/src/components/Common/VoiceInput.jsx",
-      "nerve/src/components/Common/ObsidianClipper.jsx",
-      "nerve/src/components/Common/VoiceDictation.jsx",
-      "nerve/src/components/Common/Layout.jsx",
-      "nerve/src/App.jsx",
-      "nerve/src/components/Common/Sidebar.jsx"
-    ],
-    "key_features": {
-      "card_design": "Builder-style with avatar, name, brokerage, stats row",
-      "main_buttons": "Facebook, Realtor.ca, Instagram, Email/Phone/Clip",
-      "quick_links_sections": [
-        "Social Media",
-        "Messaging",
-        "Professional",
-        "Search"
-      ],
-      "voice_dictation": "Ctrl+Shift+V global shortcut",
-      "obsidian_clipper": "Capture phone numbers from Realtor.ca",
-      "smart_sorting": "EXP agents at bottom, filtered single-name Sunny",
-      "link_format": "Google search with +Realtor+platform"
-    }
-  },
-  {
-    "id": "commercial-agent-recruiter-20260329-151553",
-    "title": "Commercial Agent Recruiter - Separate Page for DBeaver Data",
-    "timestamp": "2026-03-29T15:15:53.540483",
-    "category": "commercial-agent-recruiter",
-    "tags": [
-      "commercial",
-      "dbeaver",
-      "separate-page",
-      "linked-in-focused"
-    ],
-    "summary": "Built separate Commercial Agent Recruiter page for DBeaver commercial agents (6,697) distinct from residential agents (96K).\n\nKey differences:\n- Data source: DBeaver broker_agents_final.csv vs QUICK_LINKS_ALL_REALTORS\n- Focus: LinkedIn/LoopNet vs Facebook/Realtor.ca\n- Company detection from email domains\n- Avatar colors by company (CBRE=blue, Colliers=orange, etc.)\n- No EXP sorting (not relevant for commercial)\n\nFiles created:\n- CommercialAgentRecruiter.jsx\n- scripts/import_commercial_agents.py\n- commercial_agents_full.json (6,697 agents)\n- COMMERCIAL_AGENT_RECRUITER.md\n\nSidebar now shows both:\n- EXP Agent Recruiter (96K) - Residential\n- Commercial Agents (6.7K) - Commercial",
-    "files_created": [
-      "nerve/src/views/CommercialAgentRecruiter.jsx",
-      "scripts/import_commercial_agents.py",
-      "nerve/public/data/commercial_agents_full.json",
-      "nerve/public/data/commercial_agents_sample.json",
-      "nerve/public/data/commercial_agents_meta.json",
-      "COMMERCIAL_AGENT_RECRUITER.md"
-    ],
-    "files_modified": [
-      "nerve/src/App.jsx",
-      "nerve/src/components/Common/Sidebar.jsx"
-    ]
-  },
-  {
-    "id": "builder-directory-livabl-20260329-152245",
-    "title": "Builder Directory - LIVABL Google Search Link",
-    "timestamp": "2026-03-29T15:22:45.792419",
-    "category": "builder-directory",
-    "tags": [
-      "builders",
-      "livabl",
-      "quick-links",
-      "google-search"
-    ],
-    "summary": "Updated Builder Directory LIVABL quick link to use Google search format.\n\nChange made:\n- Before: Direct link to livabl.com/builders/{builder-name}\n- After: Google search link (google.com/search?q={builder-name}+livabl)\n\nThis matches the existing Google search pattern:\n- Google: google.com/search?q={builder}+builder\n- LIVABL: google.com/search?q={builder}+livabl\n\nBenefits:\n- More reliable than direct linking\n- Shows search results for builder on LIVABL\n- Consistent with other Google search links in the app\n\nFile modified:\n- nerve/src/views/BuilderDirectory.jsx (line 315)",
-    "files_modified": [
-      "nerve/src/views/BuilderDirectory.jsx"
-    ],
-    "key_change": {
-      "line": 315,
-      "before": "livabl: ",
-      "after": "livabl: "
-    }
-  },
-  {
-    "id": "logs-march-28-29-20260329-152706",
-    "title": "System Logs: March 28-29 (Last Night + Today)",
-    "timestamp": "2026-03-29T15:27:06.719835",
-    "category": "logs",
-    "summary": "Consolidated system logs from March 28 evening through March 29 afternoon. Includes API server activity, NERVE backend WebSocket connections, monitoring warnings, Qdrant indexing, and scraper agent logs.",
-    "tags": [
-      "logs",
-      "system",
-      "march-28",
-      "march-29",
-      "api-server",
-      "monitoring",
-      "qdrant"
-    ],
-    "content": "=== CONSOLIDATED SYSTEM LOGS: MARCH 28-29 ===\n\nDate Range: March 28, 2025 (evening) - March 29, 2025 (afternoon)\n\n=== API SERVER RESTART LOG ===\n- Server started on http://0.0.0.0:8000\n- Endpoints active: /api/health, /api/info, /api/recruiters, /api/recruiters/stats, /api/recruiters/filter-options, /api/recruiters/search, /api/opportunities\n- Heavy recruiter API usage - paginated requests (50-100 items per page)\n- POST /api/recruiters/60939/contact called twice (contact form submissions)\n\n=== MONITORING LOG ===\n- Dashboard started March 28 12:27:05\n- Repeated \"System health warning!\" messages throughout the day\n- Multiple \"Broken pipe\" errors (WebSocket/connection issues)\n- Monitoring was active from 12:27 PM to 2:26 PM (approx 2 hours)\n\n=== NERVE BACKEND LOG ===\n- Uvicorn running on http://127.0.0.1:3090\n- Loaded 520 transactions\n- Loaded 5666 buyer records\n- Loaded 2109 fresh leads\n- MatchingEngine initialized\n- Obsidian Agent: 1 property indexed in knowledge base\n- AgentOrchestrator initialized\n- WebSocket /ws endpoint active - many connections opened/closed\n- Hot money tracked: 3 sources, 1.84M capital\n\n=== QDRANT EXPERIENCE AGENT LOG ===\n- Agent initialized successfully\n- Experience tracking active\n\n=== SCRAPER AGENTS LOG ===\n- Deployed to /home/jamie/Desktop/bigdataclaw/scrapers\n- Production deployment completed\n- Service configured for auto-start\n\n=== KEY INSIGHTS ===\n1. API server handling heavy recruiter traffic (96K residential agents)\n2. NERVE backend managing 5,666 buyers + 2,109 fresh leads\n3. WebSocket connections cycling frequently (normal for dev environment)\n4. Monitoring warnings may indicate resource pressure\n5. All core systems operational\n\n=== SYSTEM STATUS ===\n\u2713 API Server: Healthy\n\u2713 NERVE Backend: Operational\n\u2713 Obsidian Agent: Active\n\u2713 Qdrant Indexing: Complete\n\u2713 Scraper Agents: Deployed\n"
-  },
-  {
-    "id": "sovereign-ai-corridor-code-20260329-152706",
-    "title": "Sovereign AI Corridor Website - React/TypeScript Code",
-    "timestamp": "2026-03-29T15:27:06.719865",
-    "category": "code",
-    "summary": "Complete React/TypeScript codebase for the Sovereign AI Corridor website. Features hero video background, GSAP animations, audio player component, navigation, and responsive design.",
-    "tags": [
-      "code",
-      "sovereign-ai-corridor",
-      "react",
-      "typescript",
-      "gsap",
-      "website"
-    ],
-    "content": "=== SOVEREIGN AI CORRIDOR WEBSITE - CODE ARCHIVE ===\n\nLocation: /home/jamie/Desktop/sovereign-ai-corridor-dev/\nBuild: /home/jamie/Desktop/sovereignaicorridor-site/sovereignaicorridor.ca/\n\n=== TECH STACK ===\n- React + TypeScript\n- Vite build tool\n- Tailwind CSS\n- GSAP + ScrollTrigger for animations\n- Lucide React icons\n\n=== FILE STRUCTURE ===\nsrc/\n\u251c\u2500\u2500 App.tsx (2110 lines - main component)\n\u251c\u2500\u2500 App.css (custom CSS + animations)\n\u251c\u2500\u2500 components/ui/ (shadcn components)\n\u251c\u2500\u2500 hooks/\n\u2514\u2500\u2500 lib/\n\n=== KEY COMPONENTS (from App.tsx) ===\n\n1. NAVIGATION COMPONENT\n   - Fixed top navigation with scroll detection\n   - Mobile menu toggle\n   - Links: Home, Corridor, Allanburg, Welland, Port Colborne, Mandate, Contact\n   - CTA: Request Briefing button\n\n2. AUDIO PLAYER COMPONENT\n   - Custom audio player with play/pause\n   - Progress bar with seek functionality\n   - Time display (current/duration)\n   - Visualizer bars (decorative)\n   - Hero variant with glow effects\n   - File: /audio/allanburg-briefing.m4a\n\n3. HERO SECTION\n   - Full-screen background video (hero-video-new.mp4)\n   - Fallback poster: /robot-hero-new.jpg\n   - Gradient overlays for text readability\n   - GSAP text reveal animation with stagger\n   - Audio player CTA\n   - Stats display\n\n4. TECH STACK USED\n   import { gsap } from 'gsap';\n   import { ScrollTrigger } from 'gsap/ScrollTrigger';\n   import { Cpu, Zap, MapPin, Shield, TrendingUp, Users, Wind, Battery, \n            ChevronRight, ChevronLeft, Mail, ExternalLink, Menu, X, \n            CheckCircle2, Play, Pause, Volume2, Headphones } from 'lucide-react';\n\n5. CSS FEATURES (App.css)\n   - Orbitron font from Google Fonts\n   - Neon glow effects (cyan, magenta, lime)\n   - Gradient border effects\n   - Animated gradient background\n   - Card hover lift animations\n   - Pulse animations\n\n=== BUILD STATUS ===\n- Production build: dist/ folder exists\n- Deployed to: sovereignaicorridor.ca\n- Last build: March 28, 2025\n\n=== DEPENDENCIES ===\n- gsap\n- lucide-react\n- tailwindcss\n- Various shadcn/ui components\n\n=== WEBSITE SECTIONS ===\n1. Hero (with video background)\n2. Corridor Overview\n3. Allanburg (Phase 1)\n4. Welland (Phase 2)\n5. Port Colborne (Phase 3)\n6. Mandate\n7. Contact\n"
-  },
-  {
-    "id": "sovereign-ai-website-sync-20260329-152951",
-    "title": "Sovereign AI Corridor Website - www and non-www Sync",
-    "timestamp": "2026-03-29T15:29:51.819389",
-    "category": "deployment",
-    "tags": [
-      "deployment",
-      "sovereign-ai-corridor",
-      "www",
-      "sync",
-      "production"
-    ],
-    "summary": "Synced latest dev build to production folder. Both www.sovereignaicorridor.ca and sovereignaicorridor.ca now serve identical content from /home/jamie/Desktop/sovereignaicorridor-site/sovereignaicorridor.ca/",
-    "content": "=== SOVEREIGN AI CORRIDOR WEBSITE - SYNC COMPLETED ===\n\nDate: March 29, 2025\n\n=== WHAT WAS SYNCED ===\nSource: /home/jamie/Desktop/sovereign-ai-corridor-dev/dist/\nDestination: /home/jamie/Desktop/sovereignaicorridor-site/sovereignaicorridor.ca/\n\n=== FILES SYNCED ===\n- index.html (updated asset hashes)\n- assets/index-CiiY-n9m.js (400KB)\n- assets/index-Bxo8s7wC.css (98KB)\n- hero-video-new.mp4 (1.6MB)\n- hero-video-loop.mp4 (26MB)\n- hero-video.mp4 (12MB)\n- robot-hero-new.jpg\n- allanburg-map.jpg\n- corridor-map.jpg\n- portcolborne-map.jpg\n- welland-map.jpg + welland-map-new.jpg\n- danloney.jpg\n- data-center.jpg\n- niagara-ai-power-belt.png\n- robot-clean.jpg\n- robot-hero.png\n- robot-power-cube.jpg\n- audio/allanburg-briefing.m4a\n- slides/ (17 slide images + PDF)\n\n=== ASSET HASH CHANGES ===\nOLD (deployed):\n- index-Dq8D0f0t.js\n- index-DZyN3kJq.css\n\nNEW (current):\n- index-CiiY-n9m.js\n- index-Bxo8s7wC.css\n\n=== WWW vs NON-WWW ===\nBoth versions now serve identical content:\n- https://sovereignaicorridor.ca/\n- https://www.sovereignaicorridor.ca/\n\nThe web server (nginx/Apache) handles the www redirect at the server level.\nThe production folder is the same for both domains.\n\n=== NEXT STEPS FOR CHANGES ===\nWhen making changes:\n1. Edit source in: /home/jamie/Desktop/sovereign-ai-corridor-dev/src/App.tsx\n2. Run: npm run build (creates new dist/ with hashed assets)\n3. Sync: rsync -av --delete dist/ /home/jamie/Desktop/sovereignaicorridor-site/sovereignaicorridor.ca/\n4. Both www and non-www will serve the updated content\n"
-  },
-  {
-    "id": "sovereign-ai-corridor-text-update-20260329-162609",
-    "title": "Sovereign AI Corridor - Updated Main Description",
-    "timestamp": "2026-03-29T16:26:09.280869",
-    "category": "content-update",
-    "tags": [
-      "content",
-      "sovereign-ai-corridor",
-      "corridor-section",
-      "nanticoke",
-      "SMR"
-    ],
-    "summary": "Updated the main description under \"Three Nodes, One Corridor\" heading. Replaced generic corridor description with powerful statement about existing infrastructure (500kV/230kV) and added OPG SMR Nanticoke mention on new line.",
-    "content": "=== CONTENT UPDATE: CORRIDOR SECTION ===\n\nLocation: App.tsx, CorridorSection component (around line 599)\n\n=== OLD TEXT ===\nA sovereign AI infrastructure corridor spanning from Thorold to Port Colborne, connected by clean hydro power, Crown\u2011controlled canal lands, and high\u2011voltage grid nodes ready for AI compute and large\u2011scale batteries.\n\n=== NEW TEXT ===\nParagraph 1:\nThe Corridor Already Exists. 500 kV runs on both sides. 230 kV is already energised today. The parcels sit directly on Crown\u2011owned, sovereign\u2011controlled land, formally classified for industrial\u2011scale energy and infrastructure use. This is not a what\u2011if \u2014 this is built.\n\nParagraph 2 (new line):\nOntario Power Generation's (OPG) proposed SMR development at Nanticoke would also enable Sovereign AI Corridor Inc. to grow alongside new nuclear, zero\u2011emissions baseload power.\n\n=== KEY CHANGES ===\n- Stronger opening: \"The Corridor Already Exists\"\n- Specific voltage mentions: 500 kV and 230 kV\n- Crown land emphasis: \"sovereign\u2011controlled land\"\n- Urgency/clarity: \"This is not a what\u2011if \u2014 this is built.\"\n- Future growth: OPG SMR at Nanticoke mention\n- Nuclear angle: \"zero\u2011emissions baseload power\"\n\n=== DEPLOYMENT ===\n- Built: npm run build (new JS hash: index-DK7AU5AB.js)\n- Synced: rsync to sovereignaicorridor-site/\n- Both domains updated:\n  * https://sovereignaicorridor.ca/\n  * https://www.sovereignaicorridor.ca/\n"
-  },
-  {
-    "id": "sovereign-ai-nanticoke-card-20260329-163242",
-    "title": "Sovereign AI Corridor - Node 2 Updated to Nanticoke",
-    "timestamp": "2026-03-29T16:32:42.283562",
-    "category": "content-update",
-    "tags": [
-      "content",
-      "sovereign-ai-corridor",
-      "nanticoke",
-      "node-2",
-      "500kv"
-    ],
-    "summary": "Updated Phase 2 card from \"Welland AI + BESS Campus\" to \"Nanticoke 500kV Crown Node\". Changed badge from \"Phase 2\" to \"Node 2\", updated description to emphasize Crown land, 500kV access, OPG Nanticoke Generating Station, and SMR nuclear expansion potential.",
-    "content": "=== NODE 2 CARD UPDATE ===\n\nLocation: App.tsx, CorridorSection component\n\n=== OLD PHASE 2 CARD ===\nTitle: Welland AI + BESS Campus\nBadge: Phase 2\nDescription: AI compute plus battery energy storage. Indigenous partnership opportunities.\nStats: +300 MW, BESS Ready\nLink: #welland\n\n=== NEW NODE 2 CARD ===\nTitle: Nanticoke 500kV Crown Node\nBadge: Node 2\nDescription: Provincial Crown land. Direct 500kV access. Adjacent to OPG Nanticoke Generating Station. OPG's proposed SMR development would also enable our expansion alongside new nuclear, zero-emissions baseload power.\nStats: 500kV, Crown Land\nLink: #nanticoke\n\n=== KEY CHANGES ===\n- Title emphasizes 500kV and Crown Node status\n- Badge changed from \"Phase 2\" to \"Node 2\"\n- Description highlights:\n  * Provincial Crown land\n  * Direct 500kV access (higher voltage than 230kV)\n  * Adjacent to OPG Nanticoke Generating Station\n  * OPG SMR development for nuclear expansion\n  * Zero-emissions baseload power\n- Stats updated to 500kV and Crown Land\n- Anchor link changed to #nanticoke\n\n=== DEPLOYMENT ===\n- Built: npm run build (new JS hash: index-DmZ0ptLx.js)\n- Synced to production\n- Both domains updated\n"
-  },
-  {
-    "id": "sovereign-ai-nanticoke-section-20260329-163506",
-    "title": "Sovereign AI Corridor - NEW Nanticoke Section Created",
-    "timestamp": "2026-03-29T16:35:06.198227",
-    "category": "feature",
-    "tags": [
-      "feature",
-      "sovereign-ai-corridor",
-      "nanticoke",
-      "section",
-      "500kv",
-      "SMR",
-      "OPG"
-    ],
-    "summary": "Created complete NanticokeSection component with id=\"nanticoke\" anchor. User was on https://sovereignaicorridor.ca/#nanticoke but section did not exist. Now includes stats grid, OPG SMR highlight box, features list, and strategic advantages.",
-    "content": "=== NEW NANTICOKE SECTION CREATED ===\n\nTrigger: User was on https://sovereignaicorridor.ca/#nanticoke but section did not exist (404 anchor)\n\n=== SECTION COMPONENTS ===\n\n1. Header\n   - Badges: \"Node 2\" + \"500 kV Crown Node\"\n   - Title: Nanticoke 500kV Crown Node\n   - Subtitle: Provincial Crown land with direct 500 kV access and nuclear expansion potential\n\n2. Intro Box\n   - Describes Nanticoke as \"crown jewel\" of the corridor\n   - 500 kV transmission access\n   - Adjacent to OPG Nanticoke Generating Station\n   - OPG SMR development potential\n\n3. Stats Grid (4 cards)\n   - 500 kV | Grid Voltage\n   - 500+ | Acres Crown Land\n   - GW+ | Power Potential\n   - SMR | Nuclear Ready\n\n4. OPG SMR Highlight Box\n   - Shield icon\n   - Describes SMR development enabling zero-emissions baseload\n   - Blue gradient styling\n\n5. Strategic Advantages (7 features)\n   - Direct 500 kV transmission access\n   - Provincial Crown land classification\n   - Adjacent to OPG Nanticoke Generating Station\n   - OPG proposed SMR development\n   - Massive scale potential (500+ acres)\n   - Deepwater access via Lake Erie\n   - Connected to Sovereign AI Corridor\n\n6. Quote Box\n   \"Nanticoke combines 500 kV grid access, Provincial Crown land, and OPG's proposed SMR \n   nuclear development to create Canada's premier sovereign AI infrastructure node...\"\n\n=== PAGE ORDER (updated) ===\n1. HeroSection\n2. CorridorSection\n3. WhyNiagaraSection\n4. SlideCarousel\n5. InfographicSection\n6. AllanburgSection (Phase 1)\n7. NanticokeSection (Node 2) \u2190 NEW\n8. WellandSection (Phase 2)\n9. PortColborneSection (Phase 3)\n10. MandateSection\n11. ContactSection\n\n=== DEPLOYMENT ===\n- Built: npm run build\n- JS: index-CmRFxc2T.js (407KB)\n- CSS: index-CFawo9aQ.css (99KB)\n- Synced: Both domains updated\n- URL: https://sovereignaicorridor.ca/#nanticoke\n"
-  },
-  {
-    "id": "sovereign-ai-2-edits-20260329-164910",
-    "title": "Sovereign AI Corridor - 2 Text Edits Applied",
-    "timestamp": "2026-03-29T16:49:10.013079",
-    "category": "content-update",
-    "tags": [
-      "content",
-      "sovereign-ai-corridor",
-      "nanticoke",
-      "OPG",
-      "SMR"
-    ],
-    "summary": "Applied 2 text edits: 1) Added OPG SMR paragraph under The Corridor Already Exists section. 2) Updated Node 2 card description to include SMR text.",
-    "content": "Edit 1: Added OPG SMR paragraph under The Corridor Already Exists section. Edit 2: Updated Node 2 card description to include SMR text about zero-emissions baseload power."
-  },
-  {
-    "id": "sovereign-ai-corridor-master-reference-20260329-165102",
-    "title": "Sovereign AI Corridor - Master Build Reference",
-    "timestamp": "2026-03-29T16:51:02.012203",
-    "category": "reference",
-    "tags": [
-      "reference",
-      "sovereign-ai-corridor",
-      "build",
-      "deployment",
-      "vercel",
-      "master"
-    ],
-    "summary": "Master reference for Sovereign AI Corridor website. Source: Jamies VAULTS/Kimi_Agent_Niagara AI Power Belt/app/. Build: npm run build. Deploy: rsync to sovereignaicorridor-site/.",
-    "content": "SOURCE: /home/jamie/Desktop/Jamies VAULTS/Kimi_Agent_Niagara AI Power Belt/app/ | BUILD: npm run build | DEPLOY: rsync -av --delete dist/ to /home/jamie/Desktop/sovereignaicorridor-site/sovereignaicorridor.ca/ | LIVE: sovereignaicorridor.ca | VERCEL: ish0075s-projects/sovereignaicorridor | KEY: Always use Jamies VAULTS location, NOT Desktop/sovereign-ai-corridor-dev (outdated)"
-  },
-  {
-    "id": "sovereign-ai-corridor-site-updated-20260329-165409",
-    "title": "Sovereign AI Corridor Site - DESKTOP LOCATION UPDATED",
-    "timestamp": "2026-03-29T16:54:09.048987",
-    "category": "reference",
-    "tags": [
-      "reference",
-      "sovereign-ai-corridor",
-      "site",
-      "desktop",
-      "updated"
-    ],
-    "summary": "UPDATED: Desktop folder now contains correct source. Old outdated folder backed up. New location: /home/jamie/Desktop/sovereign-ai-corridor-site/ (synced from Jamies VAULTS)",
-    "content": "UPDATED DESKTOP LOCATION: /home/jamie/Desktop/sovereign-ai-corridor-site/ | Old folder backed up to: sovereign-ai-corridor-dev-BACKUP-[timestamp] | Source is now synced between Jamies VAULTS and Desktop. Either location can be used for builds. Use Desktop location for easier access."
-  },
-  {
-    "id": "sovereign-ai-corridor-site-all-locations-20260329-165634",
-    "title": "Sovereign AI Corridor Site - ALL 3 LOCATIONS SYNCED",
-    "timestamp": "2026-03-29T16:56:34.261559",
-    "category": "reference",
-    "tags": [
-      "reference",
-      "sovereign-ai-corridor",
-      "site",
-      "all-locations",
-      "synced"
-    ],
-    "summary": "ALL 3 LOCATIONS NOW IDENTICAL: Desktop/, Jamies VAULTS/, and Jamies Personal Vault/ all contain the same sovereign-ai-corridor-site source code. Use whichever is most convenient.",
-    "content": "ALL 3 LOCATIONS SYNCED: 1) /home/jamie/Desktop/sovereign-ai-corridor-site/ (primary desktop), 2) /home/jamie/Desktop/Jamies VAULTS/Kimi_Agent_Niagara AI Power Belt/app/ (original), 3) /home/jamie/Desktop/Jamies Personal Vault/sovereign-ai-corridor-site/ (new vault location). All contain identical source. Use any location for builds."
-  },
-  {
-    "id": "sovereign-ai-live-deploy-20260329-165929",
-    "title": "Sovereign AI Corridor - LIVE DEPLOYED",
-    "timestamp": "2026-03-29T16:59:29.325998",
-    "category": "deployment",
-    "tags": [
-      "deployment",
-      "sovereign-ai-corridor",
-      "live",
-      "www",
-      "verified"
-    ],
-    "summary": "Deployed latest build to production. Both www.sovereignaicorridor.ca and sovereignaicorridor.ca are now live with the OPG SMR text updates.",
-    "content": "LIVE DEPLOYMENT: Build index-DasQXukV.js + index-DZ_biE44.css deployed to sovereignaicorridor-site/sovereignaicorridor.ca/. Both domains active: www.sovereignaicorridor.ca and sovereignaicorridor.ca. Changes: OPG SMR paragraph added to Corridor section, Node 2 card updated with SMR text."
-  },
-  {
-    "id": "sovereign-ai-both-domains-live-20260329-185150",
-    "title": "Sovereign AI Corridor - BOTH DOMAINS LIVE",
-    "timestamp": "2026-03-29T18:51:50.767653",
-    "category": "deployment",
-    "tags": [
-      "deployment",
-      "sovereign-ai-corridor",
-      "live",
-      "www",
-      "both-domains"
-    ],
-    "summary": "Both www.sovereignaicorridor.ca and sovereignaicorridor.ca are now LIVE with updated content. Deployed to both Vercel projects: sovereignaicorridor and sovereign-ai-corridor.",
-    "content": "BOTH DOMAINS LIVE: www.sovereignaicorridor.ca and sovereignaicorridor.ca now serve identical content with OPG SMR text updates. Two Vercel projects: 1) sovereignaicorridor (main), 2) sovereign-ai-corridor (www). Both deployed with latest build containing Ontario Power Generation SMR text in Corridor section and Node 2 card."
-  },
-  {
-    "id": "sovereign-ai-corridor-final-20260329-191330",
-    "title": "Sovereign AI Corridor Site - FINAL WORKING CONFIG",
-    "timestamp": "2026-03-29T19:13:30.232390",
-    "category": "reference",
-    "tags": [
-      "reference",
-      "sovereign-ai-corridor",
-      "final",
-      "working",
-      "both-domains",
-      "vercel"
-    ],
-    "summary": "FINAL WORKING CONFIG: Both www.sovereignaicorridor.ca and sovereignaicorridor.ca are live with identical content. Two Vercel projects (sovereignaicorridor and sovereign-ai-corridor) both deployed with latest code. Source in Desktop/sovereign-ai-corridor-site/.",
-    "content": "FINAL CONFIG: Two Vercel projects serving same content: 1) sovereignaicorridor (non-www), 2) sovereign-ai-corridor (www). Both deployed from /home/jamie/Desktop/sovereign-ai-corridor-site/. Text changes: OPG SMR paragraph added to Corridor section, Node 2 card updated with SMR text. GitHub: ish0075/sovereign-ai-corridor. To update: edit src/App.tsx, commit, then deploy to both projects using vercel --prod with project linking."
-  },
-  {
-    "id": "sovereign-ai-remove-briefing-20260329-191906",
-    "title": "Sovereign AI Corridor - Removed Corridor Briefing Section",
-    "timestamp": "2026-03-29T19:19:06.344087",
-    "category": "content-update",
-    "tags": [
-      "content",
-      "sovereign-ai-corridor",
-      "removed",
-      "briefing",
-      "presentation-deck"
-    ],
-    "summary": "Removed the Corridor Briefing section (Presentation Deck download) from the website. Section included The Sovereign AI Corridor Briefing heading, Nanticoke image, and Download PowerPoint button.",
-    "content": "REMOVED: Corridor Briefing section containing Presentation Deck heading, Strategic Briefing Deck description, Nanticoke Crown Assembly image, and Download PowerPoint button. Removed BriefingDeckSection component and its call from App. Deployed to both Vercel projects (sovereignaicorridor and sovereign-ai-corridor). Both sites updated."
-  },
-  {
-    "session_id": "session_20260401_094632",
-    "timestamp": "2026-04-01T09:46:32.339630",
-    "title": "Crown Land Applications + Coming Soon Page Deployment",
-    "category": "deployment",
-    "summary": "Prepared Crown Land submission package (34 files), created GitHub repo, deployed Coming Soon page to Vercel, transferred sovereignaicorridor.ca domain",
-    "key_accomplishments": [
-      "Crown Land Application Package: 34 files prepared for 3 agencies (Transport Canada, MTO, Infrastructure Ontario)",
-      "GeoWarehouse data extracted for 3 PINs: 640550550 (243 acres), 640590236 (41 acres), 640590239 (23 acres)",
-      "GitHub repo created: https://github.com/ish0075/sovereignaicorridor-coming-soon",
-      "Coming Soon page deployed to: https://sovereignaicorridorca.vercel.app",
-      "Domain sovereignaicorridor.ca assigned to new Vercel project",
-      "Contact email updated to: spv@sovereignaicorridor.ca"
-    ],
-    "action_items": [
-      "MONDAY 9AM: Call Baffour Apraku (Transport Canada) 866-995-9737",
-      "MONDAY PM: Call MTO Property Section 416-235-4686",
-      "TUESDAY AM: Email Adam Carr (Infrastructure Ontario)",
-      "DNS UPDATE NEEDED: Point sovereignaicorridor.ca to Vercel (76.76.21.21)"
-    ],
-    "files_created": [
-      "/home/jamie/Desktop/THOROLD_CROWN_LAND_PACKAGE/FINAL_DOCUMENTS/ - 34 total files",
-      "/home/jamie/Desktop/sovereignaicorridor-site/sovereignaicorridor.ca/index.html - Coming Soon page",
-      "GitHub: ish0075/sovereignaicorridor-coming-soon"
-    ],
-    "urls": {
-      "github_repo": "https://github.com/ish0075/sovereignaicorridor-coming-soon",
-      "live_site_temp": "https://sovereignaicorridorca.vercel.app",
-      "live_site_custom": "https://sovereignaicorridor.ca (pending DNS update)"
-    },
-    "contacts": {
-      "transport_canada": "Baffour Apraku, 866-995-9737, baffour.apraku@tc.gc.ca",
-      "mto": "Property Section, 416-235-4686",
-      "infrastructure_ontario": "Adam Carr, 416-327-3937, adam.carr@infrastructureontario.ca"
-    }
-  },
-  {
-    "title": "BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-01",
-    "content": "# BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-01\n\n**Session ID:** session_2026-04-01_23:10:49\n**Timestamp:** 2026-04-01T23:10:49.532149\n\n## Work Completed\n\n### 1. Recruiter Database Rebuild \u2705\nRebuilt entire recruiter database from DBeaver exports with actual cities/regions\n\n**Stats:**\n- Total Agents: 96,265 (up from 28,505)\n- Unique Cities: 93\n- Unique Brokerages: 2978\n- Top City: Toronto (37,624)\n\n**Features:**\n- Joined realtor_brokers + realtor_salespersons with realtor_brokerages\n- Real city data: 93 unique cities across Ontario\n- Proper quick links generated for all 96,265 agents\n- SQLite FTS5 search fixed for special characters (St. Catharines)\n- JSON bloat reduced from 395MB to 77MB\n- Frontend switched to EXAgentRecruiterUpdated component\n- Vercel deployment config fixed to build nerve/ directory\n\n### 2. Frontend Routing Fix \u2705\nFixed EXP Agent Recruiter not displaying and city filter returning 0 results\n\n**Fixes:**\n- App.jsx now routes to EXAgentRecruiterUpdated instead of old component\n- City dropdown searches across all agent fields instead of exact city match\n- JSON fallback when API server is offline\n- Added 500/page pagination option\n- Vercel builds from nerve/ directory with correct output path\n\n### 3. API Search Fix \u2705\nFixed SQLite FTS5 search breaking on special characters in city names\n\nFix: FTS5 queries now wrapped in double quotes to escape periods and special chars\n\n## Pattern for Other Data Types\n\nSame DBeaver join \u2192 SQLite \u2192 JSON \u2192 Frontend pattern applies to all data types\n\n**Applies to:**\n- Builders (companys_final.csv + company_contacts_final.csv)\n- Buyers (sale_agents_final.csv)\n- Sellers (sale_agents_final.csv)\n- Commercial Realtors (realtor_brokers_final.csv filtered by job_title)\n- Brokers (realtor_brokers_final.csv)\n- Companies (companys_final.csv)\n- Lenders (lenders_final.csv + lender_contacts_final.csv)\n\n**Steps:**\n- 1. Identify the DBeaver CSV files for the entity type\n- 2. Join parent/child tables on foreign keys (e.g., broker_id)\n- 3. Generate quick links for each record\n- 4. Create/update SQLite table with proper indexes and FTS5\n- 5. Export lean JSON to nerve/public/data/ for frontend fallback\n- 6. Update/create frontend view component\n- 7. Add API endpoints in api_server.py\n- 8. Wire up routing in nerve/src/App.jsx\n\n## Quick Commands\n\n```bash\n# Rebuild recruiters\npython3 rebuild_recruiters_from_dbeaver.py\n\n# Start API server\npython3 api_server.py\n\n# Check agent count\nsqlite3 bigdataclaw.db 'SELECT COUNT(*) FROM recruiters;'\n\n# Check city distribution\nsqlite3 bigdataclaw.db 'SELECT city, COUNT(*) FROM recruiters GROUP BY city ORDER BY COUNT(*) DESC LIMIT 20;'\n\n# Build frontend\ncd nerve && npm run build\n```\n\n## URLs\n- nerve_dashboard: http://localhost:5173\n- exp_recruiter: http://localhost:5173/exp-agent-recruiter\n- api_base: http://localhost:8000/api\n- api_health: http://localhost:8000/api/health\n- vercel_deploy: https://bigdataclaw-6ks8i50gg-ish0075s-projects.vercel.app\n\n## Next Steps\n- [ ] Restart api_server.py to serve the new 96K recruiter database\n- [ ] Redeploy frontend to Vercel with updated vercel.json\n- [ ] Test city filters: Toronto (~37K), Mississauga (~10K), Markham (~9K)\n- [ ] Apply same rebuild pattern to Builders directory\n- [ ] Apply same rebuild pattern to Lenders matcher\n- [ ] Apply same rebuild pattern to Buyer/Seller agents\n- [ ] Add company data to Company search/matcher\n",
-    "tags": [
-      "development-session",
-      "database-rebuild",
-      "recruiters",
-      "dbeaver",
-      "frontend-fix",
-      "bigdataclaw",
-      "session-2026-04-01"
-    ],
-    "category": "development_logs",
-    "created_at": "2026-04-01T23:10:49.532218",
-    "metadata": {
-      "type": "session_summary",
-      "version": "1.0",
-      "project": "BigDataClaw NERVE",
-      "session_id": "session_2026-04-01_23:10:49"
-    }
-  },
-  {
     "title": "BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-02",
-    "content": "# BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-02\n\n**Session ID:** session_2026-04-02_03:26:37\n**Timestamp:** 2026-04-02T03:26:37.858371\n\n## Work Completed\n\n### 1. Recruiter Database Rebuild \u2705\nRebuilt entire recruiter database from DBeaver exports with actual cities/regions\n\n**Stats:**\n- Total Agents: 96,265 (up from 28,505)\n- Unique Cities: 93\n- Unique Brokerages: 2978\n- Top City: Toronto (37,624)\n\n**Features:**\n- Joined realtor_brokers + realtor_salespersons with realtor_brokerages\n- Real city data: 93 unique cities across Ontario\n- Proper quick links generated for all 96,265 agents\n- SQLite FTS5 search fixed for special characters (St. Catharines)\n- JSON bloat reduced from 395MB to 77MB\n- Frontend switched to EXAgentRecruiterUpdated component\n- Vercel deployment config fixed to build nerve/ directory\n\n### 2. Frontend Routing Fix \u2705\nFixed EXP Agent Recruiter not displaying and city filter returning 0 results\n\n**Fixes:**\n- App.jsx now routes to EXAgentRecruiterUpdated instead of old component\n- City dropdown searches across all agent fields instead of exact city match\n- JSON fallback when API server is offline\n- Added 500/page pagination option\n- Vercel builds from nerve/ directory with correct output path\n\n### 3. API Search Fix \u2705\nFixed SQLite FTS5 search breaking on special characters in city names\n\nFix: FTS5 queries now wrapped in double quotes to escape periods and special chars\n\n## Pattern for Other Data Types\n\nSame DBeaver join \u2192 SQLite \u2192 JSON \u2192 Frontend pattern applies to all data types\n\n**Applies to:**\n- Builders (companys_final.csv + company_contacts_final.csv)\n- Buyers (sale_agents_final.csv)\n- Sellers (sale_agents_final.csv)\n- Commercial Realtors (realtor_brokers_final.csv filtered by job_title)\n- Brokers (realtor_brokers_final.csv)\n- Companies (companys_final.csv)\n- Lenders (lenders_final.csv + lender_contacts_final.csv)\n\n**Steps:**\n- 1. Identify the DBeaver CSV files for the entity type\n- 2. Join parent/child tables on foreign keys (e.g., broker_id)\n- 3. Generate quick links for each record\n- 4. Create/update SQLite table with proper indexes and FTS5\n- 5. Export lean JSON to nerve/public/data/ for frontend fallback\n- 6. Update/create frontend view component\n- 7. Add API endpoints in api_server.py\n- 8. Wire up routing in nerve/src/App.jsx\n\n## Quick Commands\n\n```bash\n# Rebuild recruiters\npython3 rebuild_recruiters_from_dbeaver.py\n\n# Start API server\npython3 api_server.py\n\n# Check agent count\nsqlite3 bigdataclaw.db 'SELECT COUNT(*) FROM recruiters;'\n\n# Check city distribution\nsqlite3 bigdataclaw.db 'SELECT city, COUNT(*) FROM recruiters GROUP BY city ORDER BY COUNT(*) DESC LIMIT 20;'\n\n# Build frontend\ncd nerve && npm run build\n```\n\n## URLs\n- nerve_dashboard: http://localhost:5173\n- exp_recruiter: http://localhost:5173/exp-agent-recruiter\n- api_base: http://localhost:8000/api\n- api_health: http://localhost:8000/api/health\n- vercel_deploy: https://bigdataclaw-6ks8i50gg-ish0075s-projects.vercel.app\n\n## Next Steps\n- [ ] Restart api_server.py to serve the new 96K recruiter database\n- [ ] Redeploy frontend to Vercel with updated vercel.json\n- [ ] Test city filters: Toronto (~37K), Mississauga (~10K), Markham (~9K)\n- [ ] Apply same rebuild pattern to Builders directory\n- [ ] Apply same rebuild pattern to Lenders matcher\n- [ ] Apply same rebuild pattern to Buyer/Seller agents\n- [ ] Add company data to Company search/matcher\n",
+    "content": "# BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-02\n\n**Session ID:** session_2026-04-02_17:13:26\n**Timestamp:** 2026-04-02T17:13:26.547041\n\n## Work Completed\n\n### 1. Recruiter Database Rebuild \u2705\nRebuilt entire recruiter database from DBeaver exports with actual cities/regions\n\n**Stats:**\n- Total Agents: 96,265 (up from 28,505)\n- Unique Cities: 93\n- Unique Brokerages: 2978\n- Top City: Toronto (37,624)\n\n**Features:**\n- Joined realtor_brokers + realtor_salespersons with realtor_brokerages\n- Real city data: 93 unique cities across Ontario\n- Proper quick links generated for all 96,265 agents\n- SQLite FTS5 search fixed for special characters (St. Catharines)\n- JSON bloat reduced from 395MB to 77MB\n- Frontend switched to EXAgentRecruiterUpdated component\n- Vercel deployment config fixed to build nerve/ directory\n\n### 2. Frontend Routing Fix \u2705\nFixed EXP Agent Recruiter not displaying and city filter returning 0 results\n\n**Fixes:**\n- App.jsx now routes to EXAgentRecruiterUpdated instead of old component\n- City dropdown searches across all agent fields instead of exact city match\n- JSON fallback when API server is offline\n- Added 500/page pagination option\n- Vercel builds from nerve/ directory with correct output path\n\n### 3. API Search Fix \u2705\nFixed SQLite FTS5 search breaking on special characters in city names\n\nFix: FTS5 queries now wrapped in double quotes to escape periods and special chars\n\n## Pattern for Other Data Types\n\nSame DBeaver join \u2192 SQLite \u2192 JSON \u2192 Frontend pattern applies to all data types\n\n**Applies to:**\n- Builders (companys_final.csv + company_contacts_final.csv)\n- Buyers (sale_agents_final.csv)\n- Sellers (sale_agents_final.csv)\n- Commercial Realtors (realtor_brokers_final.csv filtered by job_title)\n- Brokers (realtor_brokers_final.csv)\n- Companies (companys_final.csv)\n- Lenders (lenders_final.csv + lender_contacts_final.csv)\n\n**Steps:**\n- 1. Identify the DBeaver CSV files for the entity type\n- 2. Join parent/child tables on foreign keys (e.g., broker_id)\n- 3. Generate quick links for each record\n- 4. Create/update SQLite table with proper indexes and FTS5\n- 5. Export lean JSON to nerve/public/data/ for frontend fallback\n- 6. Update/create frontend view component\n- 7. Add API endpoints in api_server.py\n- 8. Wire up routing in nerve/src/App.jsx\n\n## Quick Commands\n\n```bash\n# Rebuild recruiters\npython3 rebuild_recruiters_from_dbeaver.py\n\n# Start API server\npython3 api_server.py\n\n# Check agent count\nsqlite3 bigdataclaw.db 'SELECT COUNT(*) FROM recruiters;'\n\n# Check city distribution\nsqlite3 bigdataclaw.db 'SELECT city, COUNT(*) FROM recruiters GROUP BY city ORDER BY COUNT(*) DESC LIMIT 20;'\n\n# Build frontend\ncd nerve && npm run build\n```\n\n## URLs\n- nerve_dashboard: http://localhost:5173\n- exp_recruiter: http://localhost:5173/exp-agent-recruiter\n- api_base: http://localhost:8000/api\n- api_health: http://localhost:8000/api/health\n- vercel_deploy: https://bigdataclaw-6ks8i50gg-ish0075s-projects.vercel.app\n\n## Next Steps\n- [ ] Restart api_server.py to serve the new 96K recruiter database\n- [ ] Redeploy frontend to Vercel with updated vercel.json\n- [ ] Test city filters: Toronto (~37K), Mississauga (~10K), Markham (~9K)\n- [ ] Apply same rebuild pattern to Builders directory\n- [ ] Apply same rebuild pattern to Lenders matcher\n- [ ] Apply same rebuild pattern to Buyer/Seller agents\n- [ ] Add company data to Company search/matcher\n",
     "tags": [
       "development-session",
       "database-rebuild",
@@ -532,17 +12,17 @@
       "session-2026-04-02"
     ],
     "category": "development_logs",
-    "created_at": "2026-04-02T03:26:37.858427",
+    "created_at": "2026-04-02T17:13:26.547136",
     "metadata": {
       "type": "session_summary",
       "version": "1.0",
       "project": "BigDataClaw NERVE",
-      "session_id": "session_2026-04-02_03:26:37"
+      "session_id": "session_2026-04-02_17:13:26"
     }
   },
   {
     "title": "BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-02",
-    "content": "# BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-02\n\n**Session ID:** session_2026-04-02_09:52:37\n**Timestamp:** 2026-04-02T09:52:37.781001\n\n## Work Completed\n\n### 1. Recruiter Database Rebuild \u2705\nRebuilt entire recruiter database from DBeaver exports with actual cities/regions\n\n**Stats:**\n- Total Agents: 96,265 (up from 28,505)\n- Unique Cities: 93\n- Unique Brokerages: 2978\n- Top City: Toronto (37,624)\n\n**Features:**\n- Joined realtor_brokers + realtor_salespersons with realtor_brokerages\n- Real city data: 93 unique cities across Ontario\n- Proper quick links generated for all 96,265 agents\n- SQLite FTS5 search fixed for special characters (St. Catharines)\n- JSON bloat reduced from 395MB to 77MB\n- Frontend switched to EXAgentRecruiterUpdated component\n- Vercel deployment config fixed to build nerve/ directory\n\n### 2. Frontend Routing Fix \u2705\nFixed EXP Agent Recruiter not displaying and city filter returning 0 results\n\n**Fixes:**\n- App.jsx now routes to EXAgentRecruiterUpdated instead of old component\n- City dropdown searches across all agent fields instead of exact city match\n- JSON fallback when API server is offline\n- Added 500/page pagination option\n- Vercel builds from nerve/ directory with correct output path\n\n### 3. API Search Fix \u2705\nFixed SQLite FTS5 search breaking on special characters in city names\n\nFix: FTS5 queries now wrapped in double quotes to escape periods and special chars\n\n## Pattern for Other Data Types\n\nSame DBeaver join \u2192 SQLite \u2192 JSON \u2192 Frontend pattern applies to all data types\n\n**Applies to:**\n- Builders (companys_final.csv + company_contacts_final.csv)\n- Buyers (sale_agents_final.csv)\n- Sellers (sale_agents_final.csv)\n- Commercial Realtors (realtor_brokers_final.csv filtered by job_title)\n- Brokers (realtor_brokers_final.csv)\n- Companies (companys_final.csv)\n- Lenders (lenders_final.csv + lender_contacts_final.csv)\n\n**Steps:**\n- 1. Identify the DBeaver CSV files for the entity type\n- 2. Join parent/child tables on foreign keys (e.g., broker_id)\n- 3. Generate quick links for each record\n- 4. Create/update SQLite table with proper indexes and FTS5\n- 5. Export lean JSON to nerve/public/data/ for frontend fallback\n- 6. Update/create frontend view component\n- 7. Add API endpoints in api_server.py\n- 8. Wire up routing in nerve/src/App.jsx\n\n## Quick Commands\n\n```bash\n# Rebuild recruiters\npython3 rebuild_recruiters_from_dbeaver.py\n\n# Start API server\npython3 api_server.py\n\n# Check agent count\nsqlite3 bigdataclaw.db 'SELECT COUNT(*) FROM recruiters;'\n\n# Check city distribution\nsqlite3 bigdataclaw.db 'SELECT city, COUNT(*) FROM recruiters GROUP BY city ORDER BY COUNT(*) DESC LIMIT 20;'\n\n# Build frontend\ncd nerve && npm run build\n```\n\n## URLs\n- nerve_dashboard: http://localhost:5173\n- exp_recruiter: http://localhost:5173/exp-agent-recruiter\n- api_base: http://localhost:8000/api\n- api_health: http://localhost:8000/api/health\n- vercel_deploy: https://bigdataclaw-6ks8i50gg-ish0075s-projects.vercel.app\n\n## Next Steps\n- [ ] Restart api_server.py to serve the new 96K recruiter database\n- [ ] Redeploy frontend to Vercel with updated vercel.json\n- [ ] Test city filters: Toronto (~37K), Mississauga (~10K), Markham (~9K)\n- [ ] Apply same rebuild pattern to Builders directory\n- [ ] Apply same rebuild pattern to Lenders matcher\n- [ ] Apply same rebuild pattern to Buyer/Seller agents\n- [ ] Add company data to Company search/matcher\n",
+    "content": "# BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-02\n\n**Session ID:** session_2026-04-02_17:19:00\n**Timestamp:** 2026-04-02T17:19:00.798984\n\n## Work Completed\n\n### 1. Recruiter Database Rebuild \u2705\nRebuilt entire recruiter database from DBeaver exports with actual cities/regions\n\n**Stats:**\n- Total Agents: 96,265 (up from 28,505)\n- Unique Cities: 93\n- Unique Brokerages: 2978\n- Top City: Toronto (37,624)\n\n**Features:**\n- Joined realtor_brokers + realtor_salespersons with realtor_brokerages\n- Real city data: 93 unique cities across Ontario\n- Proper quick links generated for all 96,265 agents\n- SQLite FTS5 search fixed for special characters (St. Catharines)\n- JSON bloat reduced from 395MB to 77MB\n- Frontend switched to EXAgentRecruiterUpdated component\n- Vercel deployment config fixed to build nerve/ directory\n\n### 2. Frontend Routing Fix \u2705\nFixed EXP Agent Recruiter not displaying and city filter returning 0 results\n\n**Fixes:**\n- App.jsx now routes to EXAgentRecruiterUpdated instead of old component\n- City dropdown searches across all agent fields instead of exact city match\n- JSON fallback when API server is offline\n- Added 500/page pagination option\n- Vercel builds from nerve/ directory with correct output path\n\n### 3. API Search Fix \u2705\nFixed SQLite FTS5 search breaking on special characters in city names\n\nFix: FTS5 queries now wrapped in double quotes to escape periods and special chars\n\n## Pattern for Other Data Types\n\nSame DBeaver join \u2192 SQLite \u2192 JSON \u2192 Frontend pattern applies to all data types\n\n**Applies to:**\n- Builders (companys_final.csv + company_contacts_final.csv)\n- Buyers (sale_agents_final.csv)\n- Sellers (sale_agents_final.csv)\n- Commercial Realtors (realtor_brokers_final.csv filtered by job_title)\n- Brokers (realtor_brokers_final.csv)\n- Companies (companys_final.csv)\n- Lenders (lenders_final.csv + lender_contacts_final.csv)\n\n**Steps:**\n- 1. Identify the DBeaver CSV files for the entity type\n- 2. Join parent/child tables on foreign keys (e.g., broker_id)\n- 3. Generate quick links for each record\n- 4. Create/update SQLite table with proper indexes and FTS5\n- 5. Export lean JSON to nerve/public/data/ for frontend fallback\n- 6. Update/create frontend view component\n- 7. Add API endpoints in api_server.py\n- 8. Wire up routing in nerve/src/App.jsx\n\n## Quick Commands\n\n```bash\n# Rebuild recruiters\npython3 rebuild_recruiters_from_dbeaver.py\n\n# Start API server\npython3 api_server.py\n\n# Check agent count\nsqlite3 bigdataclaw.db 'SELECT COUNT(*) FROM recruiters;'\n\n# Check city distribution\nsqlite3 bigdataclaw.db 'SELECT city, COUNT(*) FROM recruiters GROUP BY city ORDER BY COUNT(*) DESC LIMIT 20;'\n\n# Build frontend\ncd nerve && npm run build\n```\n\n## URLs\n- nerve_dashboard: http://localhost:5173\n- exp_recruiter: http://localhost:5173/exp-agent-recruiter\n- api_base: http://localhost:8000/api\n- api_health: http://localhost:8000/api/health\n- vercel_deploy: https://bigdataclaw-6ks8i50gg-ish0075s-projects.vercel.app\n\n## Next Steps\n- [ ] Restart api_server.py to serve the new 96K recruiter database\n- [ ] Redeploy frontend to Vercel with updated vercel.json\n- [ ] Test city filters: Toronto (~37K), Mississauga (~10K), Markham (~9K)\n- [ ] Apply same rebuild pattern to Builders directory\n- [ ] Apply same rebuild pattern to Lenders matcher\n- [ ] Apply same rebuild pattern to Buyer/Seller agents\n- [ ] Add company data to Company search/matcher\n",
     "tags": [
       "development-session",
       "database-rebuild",
@@ -553,12 +33,146 @@
       "session-2026-04-02"
     ],
     "category": "development_logs",
-    "created_at": "2026-04-02T09:52:37.781069",
+    "created_at": "2026-04-02T17:19:00.799049",
     "metadata": {
       "type": "session_summary",
       "version": "1.0",
       "project": "BigDataClaw NERVE",
-      "session_id": "session_2026-04-02_09:52:37"
+      "session_id": "session_2026-04-02_17:19:00"
+    }
+  },
+  {
+    "title": "BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-02",
+    "content": "# BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-02\n\n**Session ID:** session_2026-04-02_17:26:02\n**Timestamp:** 2026-04-02T17:26:02.773539\n\n## Work Completed\n\n### 1. Recruiter Database Rebuild \u2705\nRebuilt entire recruiter database from DBeaver exports with actual cities/regions\n\n**Stats:**\n- Total Agents: 96,265 (up from 28,505)\n- Unique Cities: 93\n- Unique Brokerages: 2978\n- Top City: Toronto (37,624)\n\n**Features:**\n- Joined realtor_brokers + realtor_salespersons with realtor_brokerages\n- Real city data: 93 unique cities across Ontario\n- Proper quick links generated for all 96,265 agents\n- SQLite FTS5 search fixed for special characters (St. Catharines)\n- JSON bloat reduced from 395MB to 77MB\n- Frontend switched to EXAgentRecruiterUpdated component\n- Vercel deployment config fixed to build nerve/ directory\n\n### 2. Frontend Routing Fix \u2705\nFixed EXP Agent Recruiter not displaying and city filter returning 0 results\n\n**Fixes:**\n- App.jsx now routes to EXAgentRecruiterUpdated instead of old component\n- City dropdown searches across all agent fields instead of exact city match\n- JSON fallback when API server is offline\n- Added 500/page pagination option\n- Vercel builds from nerve/ directory with correct output path\n\n### 3. API Search Fix \u2705\nFixed SQLite FTS5 search breaking on special characters in city names\n\nFix: FTS5 queries now wrapped in double quotes to escape periods and special chars\n\n## Pattern for Other Data Types\n\nSame DBeaver join \u2192 SQLite \u2192 JSON \u2192 Frontend pattern applies to all data types\n\n**Applies to:**\n- Builders (companys_final.csv + company_contacts_final.csv)\n- Buyers (sale_agents_final.csv)\n- Sellers (sale_agents_final.csv)\n- Commercial Realtors (realtor_brokers_final.csv filtered by job_title)\n- Brokers (realtor_brokers_final.csv)\n- Companies (companys_final.csv)\n- Lenders (lenders_final.csv + lender_contacts_final.csv)\n\n**Steps:**\n- 1. Identify the DBeaver CSV files for the entity type\n- 2. Join parent/child tables on foreign keys (e.g., broker_id)\n- 3. Generate quick links for each record\n- 4. Create/update SQLite table with proper indexes and FTS5\n- 5. Export lean JSON to nerve/public/data/ for frontend fallback\n- 6. Update/create frontend view component\n- 7. Add API endpoints in api_server.py\n- 8. Wire up routing in nerve/src/App.jsx\n\n## Quick Commands\n\n```bash\n# Rebuild recruiters\npython3 rebuild_recruiters_from_dbeaver.py\n\n# Start API server\npython3 api_server.py\n\n# Check agent count\nsqlite3 bigdataclaw.db 'SELECT COUNT(*) FROM recruiters;'\n\n# Check city distribution\nsqlite3 bigdataclaw.db 'SELECT city, COUNT(*) FROM recruiters GROUP BY city ORDER BY COUNT(*) DESC LIMIT 20;'\n\n# Build frontend\ncd nerve && npm run build\n```\n\n## URLs\n- nerve_dashboard: http://localhost:5173\n- exp_recruiter: http://localhost:5173/exp-agent-recruiter\n- api_base: http://localhost:8000/api\n- api_health: http://localhost:8000/api/health\n- vercel_deploy: https://bigdataclaw-6ks8i50gg-ish0075s-projects.vercel.app\n\n## Next Steps\n- [ ] Restart api_server.py to serve the new 96K recruiter database\n- [ ] Redeploy frontend to Vercel with updated vercel.json\n- [ ] Test city filters: Toronto (~37K), Mississauga (~10K), Markham (~9K)\n- [ ] Apply same rebuild pattern to Builders directory\n- [ ] Apply same rebuild pattern to Lenders matcher\n- [ ] Apply same rebuild pattern to Buyer/Seller agents\n- [ ] Add company data to Company search/matcher\n",
+    "tags": [
+      "development-session",
+      "database-rebuild",
+      "recruiters",
+      "dbeaver",
+      "frontend-fix",
+      "bigdataclaw",
+      "session-2026-04-02"
+    ],
+    "category": "development_logs",
+    "created_at": "2026-04-02T17:26:02.773593",
+    "metadata": {
+      "type": "session_summary",
+      "version": "1.0",
+      "project": "BigDataClaw NERVE",
+      "session_id": "session_2026-04-02_17:26:02"
+    }
+  },
+  {
+    "title": "BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-02",
+    "content": "# BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-02\n\n**Session ID:** session_2026-04-02_17:31:21\n**Timestamp:** 2026-04-02T17:31:21.495280\n\n## Work Completed\n\n### 1. Recruiter Database Rebuild \u2705\nRebuilt entire recruiter database from DBeaver exports with actual cities/regions\n\n**Stats:**\n- Total Agents: 96,265 (up from 28,505)\n- Unique Cities: 93\n- Unique Brokerages: 2978\n- Top City: Toronto (37,624)\n\n**Features:**\n- Joined realtor_brokers + realtor_salespersons with realtor_brokerages\n- Real city data: 93 unique cities across Ontario\n- Proper quick links generated for all 96,265 agents\n- SQLite FTS5 search fixed for special characters (St. Catharines)\n- JSON bloat reduced from 395MB to 77MB\n- Frontend switched to EXAgentRecruiterUpdated component\n- Vercel deployment config fixed to build nerve/ directory\n\n### 2. Frontend Routing Fix \u2705\nFixed EXP Agent Recruiter not displaying and city filter returning 0 results\n\n**Fixes:**\n- App.jsx now routes to EXAgentRecruiterUpdated instead of old component\n- City dropdown searches across all agent fields instead of exact city match\n- JSON fallback when API server is offline\n- Added 500/page pagination option\n- Vercel builds from nerve/ directory with correct output path\n\n### 3. API Search Fix \u2705\nFixed SQLite FTS5 search breaking on special characters in city names\n\nFix: FTS5 queries now wrapped in double quotes to escape periods and special chars\n\n## Pattern for Other Data Types\n\nSame DBeaver join \u2192 SQLite \u2192 JSON \u2192 Frontend pattern applies to all data types\n\n**Applies to:**\n- Builders (companys_final.csv + company_contacts_final.csv)\n- Buyers (sale_agents_final.csv)\n- Sellers (sale_agents_final.csv)\n- Commercial Realtors (realtor_brokers_final.csv filtered by job_title)\n- Brokers (realtor_brokers_final.csv)\n- Companies (companys_final.csv)\n- Lenders (lenders_final.csv + lender_contacts_final.csv)\n\n**Steps:**\n- 1. Identify the DBeaver CSV files for the entity type\n- 2. Join parent/child tables on foreign keys (e.g., broker_id)\n- 3. Generate quick links for each record\n- 4. Create/update SQLite table with proper indexes and FTS5\n- 5. Export lean JSON to nerve/public/data/ for frontend fallback\n- 6. Update/create frontend view component\n- 7. Add API endpoints in api_server.py\n- 8. Wire up routing in nerve/src/App.jsx\n\n## Quick Commands\n\n```bash\n# Rebuild recruiters\npython3 rebuild_recruiters_from_dbeaver.py\n\n# Start API server\npython3 api_server.py\n\n# Check agent count\nsqlite3 bigdataclaw.db 'SELECT COUNT(*) FROM recruiters;'\n\n# Check city distribution\nsqlite3 bigdataclaw.db 'SELECT city, COUNT(*) FROM recruiters GROUP BY city ORDER BY COUNT(*) DESC LIMIT 20;'\n\n# Build frontend\ncd nerve && npm run build\n```\n\n## URLs\n- nerve_dashboard: http://localhost:5173\n- exp_recruiter: http://localhost:5173/exp-agent-recruiter\n- api_base: http://localhost:8000/api\n- api_health: http://localhost:8000/api/health\n- vercel_deploy: https://bigdataclaw-6ks8i50gg-ish0075s-projects.vercel.app\n\n## Next Steps\n- [ ] Restart api_server.py to serve the new 96K recruiter database\n- [ ] Redeploy frontend to Vercel with updated vercel.json\n- [ ] Test city filters: Toronto (~37K), Mississauga (~10K), Markham (~9K)\n- [ ] Apply same rebuild pattern to Builders directory\n- [ ] Apply same rebuild pattern to Lenders matcher\n- [ ] Apply same rebuild pattern to Buyer/Seller agents\n- [ ] Add company data to Company search/matcher\n",
+    "tags": [
+      "development-session",
+      "database-rebuild",
+      "recruiters",
+      "dbeaver",
+      "frontend-fix",
+      "bigdataclaw",
+      "session-2026-04-02"
+    ],
+    "category": "development_logs",
+    "created_at": "2026-04-02T17:31:21.495342",
+    "metadata": {
+      "type": "session_summary",
+      "version": "1.0",
+      "project": "BigDataClaw NERVE",
+      "session_id": "session_2026-04-02_17:31:21"
+    }
+  },
+  {
+    "title": "BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-02",
+    "content": "# BigDataClaw Database Rebuild & Recruiter Fix - 2026-04-02\n\n**Session ID:** session_2026-04-02_17:47:19\n**Timestamp:** 2026-04-02T17:47:19.013658\n\n## Work Completed\n\n### 1. Recruiter Database Rebuild \u2705\nRebuilt entire recruiter database from DBeaver exports with actual cities/regions\n\n**Stats:**\n- Total Agents: 96,265 (up from 28,505)\n- Unique Cities: 93\n- Unique Brokerages: 2978\n- Top City: Toronto (37,624)\n\n**Features:**\n- Joined realtor_brokers + realtor_salespersons with realtor_brokerages\n- Real city data: 93 unique cities across Ontario\n- Proper quick links generated for all 96,265 agents\n- SQLite FTS5 search fixed for special characters (St. Catharines)\n- JSON bloat reduced from 395MB to 77MB\n- Frontend switched to EXAgentRecruiterUpdated component\n- Vercel deployment config fixed to build nerve/ directory\n\n### 2. Frontend Routing Fix \u2705\nFixed EXP Agent Recruiter not displaying and city filter returning 0 results\n\n**Fixes:**\n- App.jsx now routes to EXAgentRecruiterUpdated instead of old component\n- City dropdown searches across all agent fields instead of exact city match\n- JSON fallback when API server is offline\n- Added 500/page pagination option\n- Vercel builds from nerve/ directory with correct output path\n\n### 3. API Search Fix \u2705\nFixed SQLite FTS5 search breaking on special characters in city names\n\nFix: FTS5 queries now wrapped in double quotes to escape periods and special chars\n\n## Pattern for Other Data Types\n\nSame DBeaver join \u2192 SQLite \u2192 JSON \u2192 Frontend pattern applies to all data types\n\n**Applies to:**\n- Builders (companys_final.csv + company_contacts_final.csv)\n- Buyers (sale_agents_final.csv)\n- Sellers (sale_agents_final.csv)\n- Commercial Realtors (realtor_brokers_final.csv filtered by job_title)\n- Brokers (realtor_brokers_final.csv)\n- Companies (companys_final.csv)\n- Lenders (lenders_final.csv + lender_contacts_final.csv)\n\n**Steps:**\n- 1. Identify the DBeaver CSV files for the entity type\n- 2. Join parent/child tables on foreign keys (e.g., broker_id)\n- 3. Generate quick links for each record\n- 4. Create/update SQLite table with proper indexes and FTS5\n- 5. Export lean JSON to nerve/public/data/ for frontend fallback\n- 6. Update/create frontend view component\n- 7. Add API endpoints in api_server.py\n- 8. Wire up routing in nerve/src/App.jsx\n\n## Quick Commands\n\n```bash\n# Rebuild recruiters\npython3 rebuild_recruiters_from_dbeaver.py\n\n# Start API server\npython3 api_server.py\n\n# Check agent count\nsqlite3 bigdataclaw.db 'SELECT COUNT(*) FROM recruiters;'\n\n# Check city distribution\nsqlite3 bigdataclaw.db 'SELECT city, COUNT(*) FROM recruiters GROUP BY city ORDER BY COUNT(*) DESC LIMIT 20;'\n\n# Build frontend\ncd nerve && npm run build\n```\n\n## URLs\n- nerve_dashboard: http://localhost:5173\n- exp_recruiter: http://localhost:5173/exp-agent-recruiter\n- api_base: http://localhost:8000/api\n- api_health: http://localhost:8000/api/health\n- vercel_deploy: https://bigdataclaw-6ks8i50gg-ish0075s-projects.vercel.app\n\n## Next Steps\n- [ ] Restart api_server.py to serve the new 96K recruiter database\n- [ ] Redeploy frontend to Vercel with updated vercel.json\n- [ ] Test city filters: Toronto (~37K), Mississauga (~10K), Markham (~9K)\n- [ ] Apply same rebuild pattern to Builders directory\n- [ ] Apply same rebuild pattern to Lenders matcher\n- [ ] Apply same rebuild pattern to Buyer/Seller agents\n- [ ] Add company data to Company search/matcher\n",
+    "tags": [
+      "development-session",
+      "database-rebuild",
+      "recruiters",
+      "dbeaver",
+      "frontend-fix",
+      "bigdataclaw",
+      "session-2026-04-02"
+    ],
+    "category": "development_logs",
+    "created_at": "2026-04-02T17:47:19.013706",
+    "metadata": {
+      "type": "session_summary",
+      "version": "1.0",
+      "project": "BigDataClaw NERVE",
+      "session_id": "session_2026-04-02_17:47:19"
+    }
+  },
+  {
+    "title": "Obsidian Integration V2 - READ ONLY Architecture",
+    "content": "Fixed architecture to be READ ONLY. NERVE/BigDataClaw only reads/listens to BDAIV2 - NO WRITE OPERATIONS. Created obsidian_api.py with read-only ObsidianReader class that blocks all write operations (PUT/POST/DELETE). Removed all write endpoints, removed session logging to BDAIV2 (now ContextKeep only), renamed session exporter to save_session_to_contextkeep.py (BDAIV2 removed). Tested successfully - write operations blocked with PermissionError, read operations work (259 files accessible).",
+    "tags": [
+      "development-session",
+      "session-2026-04-02"
+    ],
+    "category": "development_logs",
+    "created_at": "2026-04-02T17:53:08.319915",
+    "metadata": {
+      "type": "session_summary",
+      "version": "2.0-readonly",
+      "project": "BigDataClaw NERVE",
+      "session_id": "session_2026-04-02_17:53:08",
+      "bdaiv2_access": "read-only",
+      "writes": "disabled"
+    }
+  },
+  {
+    "title": "Obsidian Vault Path Confirmed",
+    "content": "Confirmed main working vault path: /home/jamie/Desktop/Jamie's Personal Vault (NOT BDAIV2). Updated obsidian_api.py VAULT_PATH configuration. Tested successfully - API connected with 259 files accessible in read-only mode. Vault contains key folders: Agents, Builders, Commercial Realtors, Land_Lenders, Lenders, and files like NERVE_BIGDATACLAW_SETUP.md, 281 Chippawa Rd Port Colborne Buyers Report.md.",
+    "tags": [
+      "development-session",
+      "session-2026-04-02"
+    ],
+    "category": "development_logs",
+    "created_at": "2026-04-02T17:56:46.426945",
+    "metadata": {
+      "type": "session_summary",
+      "version": "2.0-readonly",
+      "project": "BigDataClaw NERVE",
+      "session_id": "session_2026-04-02_17:56:46",
+      "bdaiv2_access": "read-only",
+      "writes": "disabled"
+    }
+  },
+  {
+    "title": "CORRECTED Architecture - Main Vault Write, BDAIV2 Read-Only",
+    "content": "Fixed architecture: Main Working Vault (/home/jamie/Desktop/Jamie's Personal Vault) is READ + WRITE - all sessions, agent workspaces, and files are written here. BDAIV2 is READ ONLY - never written to. Created ObsidianVaultClient with read_only flag. Main vault client accepts writes, BDAIV2 client blocks all writes with PermissionError. Session exporter updated to write to Main Vault Session_Logs/ folder via API.",
+    "tags": [
+      "development-session",
+      "session-2026-04-02"
+    ],
+    "category": "development_logs",
+    "created_at": "2026-04-02T18:07:09.190716",
+    "metadata": {
+      "type": "session_summary",
+      "version": "2.0",
+      "project": "BigDataClaw NERVE",
+      "session_id": "session_2026-04-02_18:07:09",
+      "vault_write": "Main Working Vault"
+    }
+  },
+  {
+    "title": "DBeaver Data Import Complete - 25,237 Transactions + 5,130 Buyers",
+    "content": "Successfully imported ALL DBeaver data: 25,237 transactions (sales), 5,130 buyers from bdaiv2_buyers.csv into SQLite database. Exported top 20 transactions and 50 buyers to Obsidian Main Working Vault. Top transaction: AIRPORT RD Mississauga .6B. Total data now in system: 96,265 recruiters, 25,237 transactions, 5,130 buyers, 1,131 lenders, 29 hot money leads.",
+    "tags": [
+      "development-session",
+      "session-2026-04-02"
+    ],
+    "category": "development_logs",
+    "created_at": "2026-04-02T18:23:15.535264",
+    "metadata": {
+      "type": "session_summary",
+      "version": "2.0-readonly",
+      "project": "BigDataClaw NERVE",
+      "session_id": "session_2026-04-02_18:23:15",
+      "bdaiv2_access": "read-only",
+      "writes": "disabled"
     }
   }
 ]

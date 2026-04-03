@@ -1,0 +1,51 @@
+date,price,rt_number,address,city,property_type,buyer,seller
+,4000000000.0,,NEWS Unknown Unknown 02f6e8b3,,Uncategorized,,
+,1100000000.0,,NEWS Vancouver Unknown 297ea1bd,Vancouver,Uncategorized,,
+,1100000000.0,,NEWS Vancouver Unknown 8e8ba371,Vancouver,Uncategorized,,
+,1100000000.0,,NEWS Vancouver Unknown aae8f9c5,Vancouver,Uncategorized,,
+,565000000.0,,NEWS Unknown Unknown ad45eaaf,,Uncategorized,,
+,565000000.0,,NEWS Unknown Unknown ea71a10d,,Uncategorized,,
+,513000000.0,,Unknown Location Vaughan,Vaughan,Uncategorized,SmartCentres,
+2025-09-29,300500000.0,RT19,item 1762219804,Innisfil,Land,[[Veyron/Innisfil Leasing ULC]],[[DSV Contact Logistics Inc]]
+2025-09-29,300500000.0,RT19,item 1762220062,Innisfil,Land,[[Veyron/Innisfil Leasing ULC]],[[DSV Contact Logistics Inc]]
+2025-09-29,300500000.0,RT19,item 1762219483,,Land,[[Veyron/Innisfil Leasing ULC]],[[DSV Contact Logistics Inc]]
+2025-09-29,300500000.0,RT19,item 1762220349,Innisfil,Land,[[Veyron/Innisfil Leasing ULC]],[[DSV Contact Logistics Inc]]
+2025-09-29,300500000.0,RT19,item 1762219681,Innisfil,Land,[[Veyron/Innisfil Leasing ULC]],[[DSV Contact Logistics Inc]]
+2025-09-29,300500000.0,RT19,item 1762258330,Innisfil,Land,[[Veyron/Innisfil Leasing ULC]],[[DSV Contact Logistics Inc]]
+2025-09-29,300500000.0,RT19,item 1762219852,Innisfil,Land,[[Veyron/Innisfil Leasing ULC]],[[DSV Contact Logistics Inc]]
+2025-09-29,300500000.0,RT19,item 1762220198,Innisfil,Land,[[Veyron/Innisfil Leasing ULC]],[[DSV Contact Logistics Inc]]
+2025-09-29,300500000.0,RT19,item 1762219611,Innisfil,Land,[[Veyron/Innisfil Leasing ULC]],[[DSV Contact Logistics Inc]]
+2025-09-29,300500000.0,RT916,INNISFIL (Location Only),Innisfil,25M_Plus,Veyron/Innisfil Leasing ULC,DSV Contact Logistics Inc
+2025-09-29,300500000.0,RT916,INNISFIL (Location Only),Innisfil,25M_Plus,Veyron/Innisfil Leasing ULC,[[DSV Contact Logistics Inc]]
+2025-09-29,300500000.0,RT916,INNISFIL (Location Only),Innisfil,25M_Plus,[[Veyron/Innisfil Leasing ULC]],DSV Contact Logistics Inc
+2025-09-29,300500000.0,RT916,INNISFIL (Location Only),Innisfil,25M_Plus,[[Veyron/Innisfil Leasing ULC]],[[DSV Contact Logistics Inc]]
+2025-09-29,300500000.0,RT446,INNISFIL BEACH RD,Innisfil,25M_Plus,Veyron Global LLC,DSV Contact Logistics Inc
+2025-09-29,300500000.0,RT446,INNISFIL BEACH RD,Innisfil,25M_Plus,Veyron Global LLC,[[DSV Contact Logistics Inc]]
+2025-09-29,300500000.0,RT446,INNISFIL BEACH RD,Innisfil,25M_Plus,[[Veyron Global LLC]],DSV Contact Logistics Inc
+2025-09-29,300500000.0,RT446,INNISFIL BEACH RD,Innisfil,25M_Plus,[[Veyron Global LLC]],[[DSV Contact Logistics Inc]]
+,296400000.0,,NEWS Unknown Unknown f88c8f27,,Uncategorized,,
+,275000000.0,,NEWS Toronto Unknown 76b2b4c4,Toronto,Uncategorized,,
+2025-03-27,253000000.0,RT900,7900 AIRPORT RD,Brampton,25M_Plus,Crestpoint Real Estate Investments Ltd,Unilever Canada Inc
+2025-03-27,253000000.0,RT900,7900 AIRPORT RD,Brampton,25M_Plus,Crestpoint Real Estate Investments Ltd,[[Unilever Canada Inc]]
+2025-03-27,253000000.0,RT900,7900 AIRPORT RD,Brampton,25M_Plus,[[Crestpoint Real Estate Investments Ltd]],Unilever Canada Inc
+2025-03-27,253000000.0,RT900,7900 AIRPORT RD,Brampton,25M_Plus,[[Crestpoint Real Estate Investments Ltd]],[[Unilever Canada Inc]]
+2025-07-24,247654000.0,RT683,181 WELLINGTON ST W,Toronto,25M_Plus,RZ JV Nominee Ltd,Simcoe Wellington Residences Inc
+2025-07-24,247654000.0,RT683,181 WELLINGTON ST W,Toronto,25M_Plus,RZ JV Nominee Ltd,[[Simcoe Wellington Residences Inc]]
+2025-07-24,247654000.0,RT683,181 WELLINGTON ST W,Toronto,25M_Plus,[[RZ JV Nominee Ltd]],Simcoe Wellington Residences Inc
+2025-07-24,247654000.0,RT683,181 WELLINGTON ST W,Toronto,25M_Plus,[[RZ JV Nominee Ltd]],[[Simcoe Wellington Residences Inc]]
+,247000000.0,,NEWS Unknown Unknown 576ba4cb,,Uncategorized,,
+2025-06-17,235000000.0,RT466,LIME RIDGE MALL,Hamilton,25M_Plus,Primaris REIT,CF/Realty Holdings Inc
+2025-06-17,235000000.0,RT466,LIME RIDGE MALL,Hamilton,25M_Plus,Primaris REIT,[[CF/Realty Holdings Inc]]
+2025-06-17,235000000.0,RT466,LIME RIDGE MALL,Hamilton,25M_Plus,Primaris REIT,[[(s)CF/Realty Holdings Inc]]
+2025-06-17,235000000.0,RT466,LIME RIDGE MALL,Hamilton,25M_Plus,[[Primaris REIT]],CF/Realty Holdings Inc
+2025-06-17,235000000.0,RT466,LIME RIDGE MALL,Hamilton,25M_Plus,[[Primaris REIT]],[[CF/Realty Holdings Inc]]
+2025-06-17,235000000.0,RT466,LIME RIDGE MALL,Hamilton,25M_Plus,[[Primaris REIT]],[[(s)CF/Realty Holdings Inc]]
+2025-06-17,235000000.0,RT466,LIME RIDGE MALL,Hamilton,25M_Plus,[[(s)Lime Ridge Holdings Inc]],CF/Realty Holdings Inc
+2025-06-17,235000000.0,RT466,LIME RIDGE MALL,Hamilton,25M_Plus,[[(s)Lime Ridge Holdings Inc]],[[CF/Realty Holdings Inc]]
+2025-06-17,235000000.0,RT466,LIME RIDGE MALL,Hamilton,25M_Plus,[[(s)Lime Ridge Holdings Inc]],[[(s)CF/Realty Holdings Inc]]
+2025-09-25,223150000.0,RT194512,1680 RICHMOND ST,London,25M_Plus,KingSett Capital,CF/Realty Holdings Inc
+2025-09-25,223150000.0,RT194512,1680 RICHMOND ST,London,25M_Plus,KingSett Capital,[[CF/Realty Holdings Inc]]
+2025-09-25,223150000.0,RT194512,1680 RICHMOND ST,London,25M_Plus,KS Masonville Inc,CF/Realty Holdings Inc
+2025-09-25,223150000.0,RT194512,1680 RICHMOND ST,London,25M_Plus,KS Masonville Inc,[[CF/Realty Holdings Inc]]
+2025-09-25,223150000.0,RT194512,1680 RICHMOND ST,London,25M_Plus,[[KS Masonville Inc]],CF/Realty Holdings Inc
+2025-09-25,223150000.0,RT194512,1680 RICHMOND ST,London,25M_Plus,[[KS Masonville Inc]],[[CF/Realty Holdings Inc]]

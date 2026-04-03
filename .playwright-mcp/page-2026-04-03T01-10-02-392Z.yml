@@ -1,0 +1,134 @@
+- generic [ref=e4]:
+  - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e11]
+          - generic [ref=e13]:
+            - button "N" [ref=e14]:
+              - link "N" [ref=e15] [cursor=pointer]:
+                - /url: /NIAAAA/dashboard
+                - generic [ref=e17]:
+                  - img [ref=e18]
+                  - generic [ref=e19]: "N"
+            - button "T" [ref=e20]:
+              - link "T" [ref=e21] [cursor=pointer]:
+                - /url: /TES/dashboard
+                - generic [ref=e23]:
+                  - img [ref=e24]
+                  - generic [ref=e25]: T
+            - button "N" [ref=e26]:
+              - link "N" [ref=e27] [cursor=pointer]:
+                - /url: /NIAA/dashboard
+                - generic [ref=e30]:
+                  - img [ref=e31]
+                  - generic [ref=e32]: "N"
+            - button "N" [ref=e33]:
+              - link "N" [ref=e34] [cursor=pointer]:
+                - /url: /NIA/dashboard
+                - generic [ref=e36]:
+                  - img [ref=e37]
+                  - generic [ref=e38]: "N"
+            - button "T" [ref=e39]:
+              - link "T" [ref=e40] [cursor=pointer]:
+                - /url: /TESA/dashboard
+                - generic [ref=e42]:
+                  - img [ref=e43]
+                  - generic [ref=e44]: T
+            - button "N" [ref=e45]:
+              - link "N" [ref=e46] [cursor=pointer]:
+                - /url: /NIAAA/dashboard
+                - generic [ref=e48]:
+                  - img [ref=e49]
+                  - generic [ref=e50]: "N"
+            - button "T" [ref=e51]:
+              - link "T" [ref=e52] [cursor=pointer]:
+                - /url: /TESAAA/dashboard
+                - generic [ref=e54]:
+                  - img [ref=e55]
+                  - generic [ref=e56]: T
+            - button "A" [ref=e57]:
+              - link "A" [ref=e58] [cursor=pointer]:
+                - /url: /ABC/dashboard
+                - generic [ref=e60]:
+                  - img [ref=e61]
+                  - generic [ref=e62]: A
+            - button "F" [ref=e63]:
+              - link "F" [ref=e64] [cursor=pointer]:
+                - /url: /FAC/dashboard
+                - generic [ref=e66]:
+                  - img [ref=e67]
+                  - generic [ref=e68]: F
+            - button "M" [ref=e69]:
+              - link "M" [ref=e70] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - generic [ref=e72]:
+                  - img [ref=e73]
+                  - generic [ref=e74]: M
+            - status [ref=e75]
+          - button "Add company" [ref=e78]:
+            - img [ref=e79]
+        - complementary [ref=e81]:
+          - generic [ref=e82]:
+            - img [ref=e83]
+            - generic [ref=e86]: Instance Settings
+          - navigation [ref=e87]:
+            - generic [ref=e88]:
+              - link "General" [ref=e89] [cursor=pointer]:
+                - /url: /instance/settings/general
+                - img [ref=e91]
+                - generic [ref=e92]: General
+              - link "Heartbeats" [ref=e93] [cursor=pointer]:
+                - /url: /instance/settings/heartbeats
+                - img [ref=e95]
+                - generic [ref=e98]: Heartbeats
+              - link "Experimental" [ref=e99] [cursor=pointer]:
+                - /url: /instance/settings/experimental
+                - img [ref=e101]
+                - generic [ref=e103]: Experimental
+              - link "Plugins" [ref=e104] [cursor=pointer]:
+                - /url: /instance/settings/plugins
+                - img [ref=e106]
+                - generic [ref=e108]: Plugins
+              - generic [ref=e109]:
+                - link "File Browser (Example)" [ref=e110] [cursor=pointer]:
+                  - /url: /instance/settings/plugins/c53b846c-fc22-4a2f-bb64-9b46cd6f95db
+                - link "Kitchen Sink (Example)" [ref=e111] [cursor=pointer]:
+                  - /url: /instance/settings/plugins/e3de38b7-a29f-49e2-b442-77b1ea6afdac
+                - link "Hello World Widget (Example)" [ref=e112] [cursor=pointer]:
+                  - /url: /instance/settings/plugins/9f889db2-3c11-4565-8760-3ebfb1f42ccf
+      - generic [ref=e114]:
+        - link "Documentation" [ref=e115] [cursor=pointer]:
+          - /url: https://docs.paperclip.ing/
+          - img [ref=e116]
+          - generic [ref=e118]: Documentation
+        - generic [ref=e119]: v
+        - link "Instance settings" [ref=e120] [cursor=pointer]:
+          - /url: /instance/settings/general
+          - img
+        - button "Switch to light mode" [ref=e121]:
+          - img
+    - generic [ref=e122]:
+      - heading "Not Found" [level=1] [ref=e126]
+      - main [ref=e128]:
+        - generic [ref=e130]:
+          - generic [ref=e131]:
+            - img [ref=e133]
+            - generic [ref=e135]:
+              - heading "Company not found" [level=1] [ref=e136]
+              - paragraph [ref=e137]: No company matches prefix "INSTANCE".
+          - generic [ref=e138]:
+            - text: "Requested path:"
+            - code [ref=e139]: /instance/plugins
+          - generic [ref=e140]:
+            - link "Open dashboard" [ref=e141] [cursor=pointer]:
+              - /url: /NIAAAA/dashboard
+              - img
+              - text: Open dashboard
+            - link "Go home" [ref=e142] [cursor=pointer]:
+              - /url: /
+  - generic [ref=e143]:
+    - heading "Command Palette" [level=2] [ref=e144]
+    - paragraph [ref=e145]: Search for a command to run...

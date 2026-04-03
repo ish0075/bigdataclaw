@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Play, Square, ChevronRight, Clock } from 'lucide-react'
+import { Play, Square, ChevronRight, Clock, Building2 } from 'lucide-react'
 
 const ActiveMissions = ({ missions }) => {
   const navigate = useNavigate()
@@ -90,6 +90,17 @@ const MissionCard = ({ mission }) => {
             <p className="text-xs text-text-muted mt-1">
               {isActive ? 'Running analysis...' : 'Queued • Starting soon'}
             </p>
+            
+            {mission.paperclip_company_id && (
+              <a
+                href={`/paperclip-companies/${mission.paperclip_company_id}`}
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-1.5 mt-2 text-xs px-2 py-1 rounded-md bg-accent-primary/10 text-accent-primary hover:bg-accent-primary/20 transition-colors"
+              >
+                <Building2 className="w-3 h-3" />
+                Agent Company
+              </a>
+            )}
           </div>
         </div>
         

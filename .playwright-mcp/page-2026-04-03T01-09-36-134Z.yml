@@ -1,0 +1,418 @@
+- generic [ref=e4]:
+  - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e11]
+          - generic [ref=e13]:
+            - button "N" [ref=e14]:
+              - link "N" [ref=e15] [cursor=pointer]:
+                - /url: /NIAAAA/dashboard
+                - generic [ref=e18]:
+                  - img [ref=e19]
+                  - generic [ref=e20]: "N"
+            - button "T" [ref=e21]:
+              - link "T" [ref=e22] [cursor=pointer]:
+                - /url: /TES/dashboard
+                - generic [ref=e24]:
+                  - img [ref=e25]
+                  - generic [ref=e26]: T
+            - button "N" [ref=e27]:
+              - link "N" [ref=e28] [cursor=pointer]:
+                - /url: /NIAA/dashboard
+                - generic [ref=e31]:
+                  - img [ref=e32]
+                  - generic [ref=e33]: "N"
+            - button "N" [ref=e34]:
+              - link "N" [ref=e35] [cursor=pointer]:
+                - /url: /NIA/dashboard
+                - generic [ref=e37]:
+                  - img [ref=e38]
+                  - generic [ref=e39]: "N"
+            - button "T" [ref=e40]:
+              - link "T" [ref=e41] [cursor=pointer]:
+                - /url: /TESA/dashboard
+                - generic [ref=e43]:
+                  - img [ref=e44]
+                  - generic [ref=e45]: T
+            - button "N" [ref=e46]:
+              - link "N" [ref=e47] [cursor=pointer]:
+                - /url: /NIAAA/dashboard
+                - generic [ref=e49]:
+                  - img [ref=e50]
+                  - generic [ref=e51]: "N"
+            - button "T" [ref=e52]:
+              - link "T" [ref=e53] [cursor=pointer]:
+                - /url: /TESAAA/dashboard
+                - generic [ref=e55]:
+                  - img [ref=e56]
+                  - generic [ref=e57]: T
+            - button "A" [ref=e58]:
+              - link "A" [ref=e59] [cursor=pointer]:
+                - /url: /ABC/dashboard
+                - generic [ref=e61]:
+                  - img [ref=e62]
+                  - generic [ref=e63]: A
+            - button "F" [ref=e64]:
+              - link "F" [ref=e65] [cursor=pointer]:
+                - /url: /FAC/dashboard
+                - generic [ref=e67]:
+                  - img [ref=e68]
+                  - generic [ref=e69]: F
+            - button "M" [ref=e70]:
+              - link "M" [ref=e71] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - generic [ref=e73]:
+                  - img [ref=e74]
+                  - generic [ref=e75]: M
+            - status [ref=e76]
+          - button "Add company" [ref=e79]:
+            - img [ref=e80]
+        - complementary [ref=e82]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: Niagara High-Rise Verified Mission Company
+            - button [ref=e85]:
+              - img
+          - navigation [ref=e86]:
+            - generic [ref=e87]:
+              - button "New Issue" [ref=e88]:
+                - img [ref=e89]
+                - generic [ref=e92]: New Issue
+              - link "Dashboard" [ref=e93] [cursor=pointer]:
+                - /url: /NIAAAA/dashboard
+                - img [ref=e95]
+                - generic [ref=e100]: Dashboard
+              - link "Inbox 6" [ref=e101] [cursor=pointer]:
+                - /url: /NIAAAA/inbox
+                - img [ref=e103]
+                - generic [ref=e106]: Inbox
+                - generic [ref=e107]: "6"
+              - generic [ref=e109]: "Kitchen Sink (Example): Kitchen Sink"
+            - generic [ref=e110]:
+              - generic [ref=e111]: Work
+              - generic [ref=e112]:
+                - link "Issues" [ref=e113] [cursor=pointer]:
+                  - /url: /NIAAAA/issues
+                  - img [ref=e115]
+                  - generic [ref=e118]: Issues
+                - link "Routines Beta" [ref=e119] [cursor=pointer]:
+                  - /url: /NIAAAA/routines
+                  - img [ref=e121]
+                  - generic [ref=e126]: Routines
+                  - generic [ref=e127]: Beta
+                - link "Goals" [ref=e128] [cursor=pointer]:
+                  - /url: /NIAAAA/goals
+                  - img [ref=e130]
+                  - generic [ref=e134]: Goals
+            - generic [ref=e135]:
+              - generic [ref=e137]:
+                - button "Projects" [expanded] [ref=e138]:
+                  - img [ref=e139]
+                  - generic [ref=e141]: Projects
+                - button "New project" [ref=e142]:
+                  - img [ref=e143]
+              - status [ref=e144]
+            - generic [ref=e145]:
+              - generic [ref=e147]:
+                - button "Agents" [expanded] [ref=e148]:
+                  - img [ref=e149]
+                  - generic [ref=e151]: Agents
+                - button "New agent" [ref=e152]:
+                  - img [ref=e153]
+              - generic [ref=e155]:
+                - link "Builder Scout" [ref=e156] [cursor=pointer]:
+                  - /url: /NIAAAA/agents/builder-scout
+                  - img [ref=e157]
+                  - generic [ref=e160]: Builder Scout
+                - link "Buyer Scout" [ref=e161] [cursor=pointer]:
+                  - /url: /NIAAAA/agents/buyer-scout
+                  - img [ref=e162]
+                  - generic [ref=e165]: Buyer Scout
+                - link "CEO Strategy" [ref=e166] [cursor=pointer]:
+                  - /url: /NIAAAA/agents/ceo-strategy
+                  - img [ref=e167]
+                  - generic [ref=e170]: CEO Strategy
+            - generic [ref=e171]:
+              - generic [ref=e172]: Company
+              - generic [ref=e173]:
+                - link "Org" [ref=e174] [cursor=pointer]:
+                  - /url: /NIAAAA/org
+                  - img [ref=e176]
+                  - generic [ref=e181]: Org
+                - link "Skills" [ref=e182] [cursor=pointer]:
+                  - /url: /NIAAAA/skills
+                  - img [ref=e184]
+                  - generic [ref=e194]: Skills
+                - link "Costs" [ref=e195] [cursor=pointer]:
+                  - /url: /NIAAAA/costs
+                  - img [ref=e197]
+                  - generic [ref=e199]: Costs
+                - link "Activity" [ref=e200] [cursor=pointer]:
+                  - /url: /NIAAAA/activity
+                  - img [ref=e202]
+                  - generic [ref=e206]: Activity
+                - link "Settings" [ref=e207] [cursor=pointer]:
+                  - /url: /NIAAAA/company/settings
+                  - img [ref=e209]
+                  - generic [ref=e212]: Settings
+            - generic [ref=e214]: "Kitchen Sink (Example): Kitchen Sink Panel"
+      - generic [ref=e216]:
+        - link "Documentation" [ref=e217] [cursor=pointer]:
+          - /url: https://docs.paperclip.ing/
+          - img [ref=e218]
+          - generic [ref=e220]: Documentation
+        - generic [ref=e221]: v
+        - link "Instance settings" [ref=e222] [cursor=pointer]:
+          - /url: /instance/settings/general
+          - img
+        - button "Switch to light mode" [ref=e223]:
+          - img
+    - generic [ref=e224]:
+      - heading "Dashboard" [level=1] [ref=e228]
+      - main [ref=e230]:
+        - generic [ref=e231]:
+          - generic [ref=e232]:
+            - heading "Agents" [level=3] [ref=e233]
+            - paragraph [ref=e235]: No recent agent runs.
+          - generic [ref=e236]:
+            - link "3 Agents Enabled 0 running, 0 paused, 0 errors" [ref=e237] [cursor=pointer]:
+              - /url: /NIAAAA/agents
+              - generic [ref=e239]:
+                - generic [ref=e240]:
+                  - paragraph [ref=e241]: "3"
+                  - paragraph [ref=e242]: Agents Enabled
+                  - generic [ref=e244]: 0 running, 0 paused, 0 errors
+                - img [ref=e245]
+            - link "0 Tasks In Progress 6 open, 0 blocked" [ref=e248] [cursor=pointer]:
+              - /url: /NIAAAA/issues
+              - generic [ref=e250]:
+                - generic [ref=e251]:
+                  - paragraph [ref=e252]: "0"
+                  - paragraph [ref=e253]: Tasks In Progress
+                  - generic [ref=e255]: 6 open, 0 blocked
+                - img [ref=e256]
+            - link "$0.00 Month Spend Unlimited budget" [ref=e259] [cursor=pointer]:
+              - /url: /NIAAAA/costs
+              - generic [ref=e261]:
+                - generic [ref=e262]:
+                  - paragraph [ref=e263]: $0.00
+                  - paragraph [ref=e264]: Month Spend
+                  - generic [ref=e265]: Unlimited budget
+                - img [ref=e266]
+            - link "0 Pending Approvals Awaiting board review" [ref=e268] [cursor=pointer]:
+              - /url: /NIAAAA/approvals
+              - generic [ref=e270]:
+                - generic [ref=e271]:
+                  - paragraph [ref=e272]: "0"
+                  - paragraph [ref=e273]: Pending Approvals
+                  - generic [ref=e274]: Awaiting board review
+                - img [ref=e275]
+          - generic [ref=e278]:
+            - generic [ref=e279]:
+              - generic [ref=e280]:
+                - heading "Run Activity" [level=3] [ref=e281]
+                - text: Last 14 days
+              - paragraph [ref=e282]: No runs yet
+            - generic [ref=e283]:
+              - generic [ref=e284]:
+                - heading "Issues by Priority" [level=3] [ref=e285]
+                - text: Last 14 days
+              - generic [ref=e286]:
+                - generic [ref=e287]:
+                  - 'generic "2026-03-21: 0 issues" [ref=e288]'
+                  - 'generic "2026-03-22: 0 issues" [ref=e290]'
+                  - 'generic "2026-03-23: 0 issues" [ref=e292]'
+                  - 'generic "2026-03-24: 0 issues" [ref=e294]'
+                  - 'generic "2026-03-25: 0 issues" [ref=e296]'
+                  - 'generic "2026-03-26: 0 issues" [ref=e298]'
+                  - 'generic "2026-03-27: 0 issues" [ref=e300]'
+                  - 'generic "2026-03-28: 0 issues" [ref=e302]'
+                  - 'generic "2026-03-29: 0 issues" [ref=e304]'
+                  - 'generic "2026-03-30: 0 issues" [ref=e306]'
+                  - 'generic "2026-03-31: 0 issues" [ref=e308]'
+                  - 'generic "2026-04-01: 0 issues" [ref=e310]'
+                  - 'generic "2026-04-02: 6 issues" [ref=e312]'
+                  - 'generic "2026-04-03: 0 issues" [ref=e315]'
+                - generic [ref=e317]:
+                  - generic [ref=e318]: 3/21
+                  - generic [ref=e324]: 3/27
+                  - generic [ref=e331]: 4/3
+                - generic [ref=e332]:
+                  - generic [ref=e333]: Critical
+                  - generic [ref=e335]: High
+                  - generic [ref=e337]: Medium
+                  - generic [ref=e339]: Low
+            - generic [ref=e341]:
+              - generic [ref=e342]:
+                - heading "Issues by Status" [level=3] [ref=e343]
+                - text: Last 14 days
+              - generic [ref=e344]:
+                - generic [ref=e345]:
+                  - 'generic "2026-03-21: 0 issues" [ref=e346]'
+                  - 'generic "2026-03-22: 0 issues" [ref=e348]'
+                  - 'generic "2026-03-23: 0 issues" [ref=e350]'
+                  - 'generic "2026-03-24: 0 issues" [ref=e352]'
+                  - 'generic "2026-03-25: 0 issues" [ref=e354]'
+                  - 'generic "2026-03-26: 0 issues" [ref=e356]'
+                  - 'generic "2026-03-27: 0 issues" [ref=e358]'
+                  - 'generic "2026-03-28: 0 issues" [ref=e360]'
+                  - 'generic "2026-03-29: 0 issues" [ref=e362]'
+                  - 'generic "2026-03-30: 0 issues" [ref=e364]'
+                  - 'generic "2026-03-31: 0 issues" [ref=e366]'
+                  - 'generic "2026-04-01: 0 issues" [ref=e368]'
+                  - 'generic "2026-04-02: 6 issues" [ref=e370]'
+                  - 'generic "2026-04-03: 0 issues" [ref=e373]'
+                - generic [ref=e375]:
+                  - generic [ref=e376]: 3/21
+                  - generic [ref=e382]: 3/27
+                  - generic [ref=e389]: 4/3
+                - generic [ref=e391]: Backlog
+            - generic [ref=e393]:
+              - generic [ref=e394]:
+                - heading "Success Rate" [level=3] [ref=e395]
+                - text: Last 14 days
+              - paragraph [ref=e396]: No runs yet
+          - generic [ref=e397]:
+            - generic [ref=e398]:
+              - heading "Recent Activity" [level=3] [ref=e399]
+              - generic [ref=e400]:
+                - generic [ref=e402]:
+                  - paragraph [ref=e403]:
+                    - generic [ref=e404]:
+                      - generic [ref=e406]: BO
+                      - generic [ref=e407]: Board
+                    - generic [ref=e408]: plugin installed
+                  - generic [ref=e409]: 1m ago
+                - generic [ref=e411]:
+                  - paragraph [ref=e412]:
+                    - generic [ref=e413]:
+                      - generic [ref=e415]: BO
+                      - generic [ref=e416]: Board
+                    - generic [ref=e417]: plugin installed
+                  - generic [ref=e418]: 1m ago
+                - generic [ref=e420]:
+                  - paragraph [ref=e421]:
+                    - generic [ref=e422]:
+                      - generic [ref=e424]: BO
+                      - generic [ref=e425]: Board
+                    - generic [ref=e426]: plugin installed
+                  - generic [ref=e427]: 1m ago
+                - generic [ref=e429]:
+                  - paragraph [ref=e430]:
+                    - generic [ref=e431]:
+                      - generic [ref=e433]: BO
+                      - generic [ref=e434]: Board
+                    - generic [ref=e435]: instance settings experimental updated
+                  - generic [ref=e436]: 34m ago
+                - generic [ref=e438]:
+                  - paragraph [ref=e439]:
+                    - generic [ref=e440]:
+                      - generic [ref=e442]: BO
+                      - generic [ref=e443]: Board
+                    - generic [ref=e444]: instance settings experimental updated
+                  - generic [ref=e445]: 34m ago
+                - 'link "BO Board issue read marked NIAAAA-6— Phase 6: Results Compilation 53m ago" [ref=e446] [cursor=pointer]':
+                  - /url: /NIAAAA/issues/NIAAAA-6
+                  - generic [ref=e447]:
+                    - paragraph [ref=e448]:
+                      - generic [ref=e449]:
+                        - generic [ref=e451]: BO
+                        - generic [ref=e452]: Board
+                      - generic [ref=e453]: issue read marked
+                      - text: NIAAAA-6
+                      - generic [ref=e454]: "— Phase 6: Results Compilation"
+                    - generic [ref=e455]: 53m ago
+                - 'link "BO Board created NIAAAA-6— Phase 6: Results Compilation 7h ago" [ref=e456] [cursor=pointer]':
+                  - /url: /NIAAAA/issues/NIAAAA-6
+                  - generic [ref=e457]:
+                    - paragraph [ref=e458]:
+                      - generic [ref=e459]:
+                        - generic [ref=e461]: BO
+                        - generic [ref=e462]: Board
+                      - generic [ref=e463]: created
+                      - text: NIAAAA-6
+                      - generic [ref=e464]: "— Phase 6: Results Compilation"
+                    - generic [ref=e465]: 7h ago
+                - 'link "BO Board created NIAAAA-5— Phase 5: Lender Matcher 7h ago" [ref=e466] [cursor=pointer]':
+                  - /url: /NIAAAA/issues/NIAAAA-5
+                  - generic [ref=e467]:
+                    - paragraph [ref=e468]:
+                      - generic [ref=e469]:
+                        - generic [ref=e471]: BO
+                        - generic [ref=e472]: Board
+                      - generic [ref=e473]: created
+                      - text: NIAAAA-5
+                      - generic [ref=e474]: "— Phase 5: Lender Matcher"
+                    - generic [ref=e475]: 7h ago
+                - 'link "BO Board created NIAAAA-4— Phase 4: Agent Finder 7h ago" [ref=e476] [cursor=pointer]':
+                  - /url: /NIAAAA/issues/NIAAAA-4
+                  - generic [ref=e477]:
+                    - paragraph [ref=e478]:
+                      - generic [ref=e479]:
+                        - generic [ref=e481]: BO
+                        - generic [ref=e482]: Board
+                      - generic [ref=e483]: created
+                      - text: NIAAAA-4
+                      - generic [ref=e484]: "— Phase 4: Agent Finder"
+                    - generic [ref=e485]: 7h ago
+                - 'link "BO Board created NIAAAA-3— Phase 3: Portfolio Analyzer 7h ago" [ref=e486] [cursor=pointer]':
+                  - /url: /NIAAAA/issues/NIAAAA-3
+                  - generic [ref=e487]:
+                    - paragraph [ref=e488]:
+                      - generic [ref=e489]:
+                        - generic [ref=e491]: BO
+                        - generic [ref=e492]: Board
+                      - generic [ref=e493]: created
+                      - text: NIAAAA-3
+                      - generic [ref=e494]: "— Phase 3: Portfolio Analyzer"
+                    - generic [ref=e495]: 7h ago
+            - generic [ref=e496]:
+              - heading "Recent Tasks" [level=3] [ref=e497]
+              - generic [ref=e498]:
+                - 'link "Phase 6: Results Compilation NIAAAA-6 7h ago" [ref=e499] [cursor=pointer]':
+                  - /url: /NIAAAA/issues/NIAAAA-6
+                  - generic [ref=e501]:
+                    - generic [ref=e502]: "Phase 6: Results Compilation"
+                    - generic [ref=e503]:
+                      - generic [ref=e506]: NIAAAA-6
+                      - generic [ref=e507]: 7h ago
+                - 'link "Phase 5: Lender Matcher NIAAAA-5 7h ago" [ref=e508] [cursor=pointer]':
+                  - /url: /NIAAAA/issues/NIAAAA-5
+                  - generic [ref=e510]:
+                    - generic [ref=e511]: "Phase 5: Lender Matcher"
+                    - generic [ref=e512]:
+                      - generic [ref=e515]: NIAAAA-5
+                      - generic [ref=e516]: 7h ago
+                - 'link "Phase 4: Agent Finder NIAAAA-4 7h ago" [ref=e517] [cursor=pointer]':
+                  - /url: /NIAAAA/issues/NIAAAA-4
+                  - generic [ref=e519]:
+                    - generic [ref=e520]: "Phase 4: Agent Finder"
+                    - generic [ref=e521]:
+                      - generic [ref=e524]: NIAAAA-4
+                      - generic [ref=e525]: 7h ago
+                - 'link "Phase 3: Portfolio Analyzer NIAAAA-3 7h ago" [ref=e526] [cursor=pointer]':
+                  - /url: /NIAAAA/issues/NIAAAA-3
+                  - generic [ref=e528]:
+                    - generic [ref=e529]: "Phase 3: Portfolio Analyzer"
+                    - generic [ref=e530]:
+                      - generic [ref=e533]: NIAAAA-3
+                      - generic [ref=e534]: 7h ago
+                - 'link "Phase 2: Hot Money Identifier NIAAAA-2 7h ago" [ref=e535] [cursor=pointer]':
+                  - /url: /NIAAAA/issues/NIAAAA-2
+                  - generic [ref=e537]:
+                    - generic [ref=e538]: "Phase 2: Hot Money Identifier"
+                    - generic [ref=e539]:
+                      - generic [ref=e542]: NIAAAA-2
+                      - generic [ref=e543]: 7h ago
+                - 'link "Phase 1: Transaction Scout NIAAAA-1 7h ago" [ref=e544] [cursor=pointer]':
+                  - /url: /NIAAAA/issues/NIAAAA-1
+                  - generic [ref=e546]:
+                    - generic [ref=e547]: "Phase 1: Transaction Scout"
+                    - generic [ref=e548]:
+                      - generic [ref=e551]: NIAAAA-1
+                      - generic [ref=e552]: 7h ago
+  - generic [ref=e553]:
+    - heading "Command Palette" [level=2] [ref=e554]
+    - paragraph [ref=e555]: Search for a command to run...

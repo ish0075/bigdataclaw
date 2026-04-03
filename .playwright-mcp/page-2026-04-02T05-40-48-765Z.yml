@@ -1,0 +1,292 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "Uptop Mission Control" [level=1] [ref=e9]
+        - paragraph [ref=e10]: real estate command center
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Bot Boardroom" [ref=e46] [cursor=pointer]:
+        - /url: /bot-boardroom
+        - img [ref=e47]
+        - generic [ref=e53]: Bot Boardroom
+      - link "Obsidian Vault" [ref=e54] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e55]
+        - generic [ref=e59]: Obsidian Vault
+      - generic [ref=e60]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e61] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e62]
+        - generic [ref=e65]: EXP Agent Recruiter
+        - generic [ref=e66]: 96K
+      - link "Commercial Agents 6.7K" [ref=e67] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e68]
+        - generic [ref=e71]: Commercial Agents
+        - generic [ref=e72]: 6.7K
+      - link "Brokerages" [ref=e73] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e74]
+        - generic [ref=e77]: Brokerages
+      - generic [ref=e78]: AI Bots
+      - link "Buyer Intelligence AI" [ref=e79] [cursor=pointer]:
+        - /url: /buyer-bot
+        - img [ref=e80]
+        - generic [ref=e84]: Buyer Intelligence
+        - generic [ref=e85]: AI
+      - link "Seller Outreach AI" [ref=e86] [cursor=pointer]:
+        - /url: /seller-outreach-bot
+        - img [ref=e87]
+        - generic [ref=e92]: Seller Outreach
+        - generic [ref=e93]: AI
+      - link "Property Valuation AI" [ref=e94] [cursor=pointer]:
+        - /url: /property-valuation-bot
+        - img [ref=e95]
+        - generic [ref=e97]: Property Valuation
+        - generic [ref=e98]: AI
+      - link "Vigil Monitor 24/7" [ref=e99] [cursor=pointer]:
+        - /url: /vigil
+        - img [ref=e100]
+        - generic [ref=e102]: Vigil Monitor
+        - generic [ref=e103]: 24/7
+      - link "Agent Workspaces NEW" [ref=e104] [cursor=pointer]:
+        - /url: /agent-workspaces
+        - img [ref=e105]
+        - generic [ref=e107]: Agent Workspaces
+        - generic [ref=e108]: NEW
+      - link "Bot Builder BUILD" [ref=e109] [cursor=pointer]:
+        - /url: /bot-builder
+        - img [ref=e110]
+        - generic [ref=e114]: Bot Builder
+        - generic [ref=e115]: BUILD
+      - generic [ref=e116]: Tools
+      - link "My Listings" [ref=e117] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e118]
+        - generic [ref=e122]: My Listings
+      - link "Buyer Matcher" [ref=e123] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e124]
+        - generic [ref=e129]: Buyer Matcher
+      - link "Agent Matcher" [ref=e130] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e131]
+        - generic [ref=e135]: Agent Matcher
+      - link "Lender Matcher" [ref=e136] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e137]
+        - generic [ref=e139]: Lender Matcher
+      - link "Builder Directory" [ref=e140] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e141]
+        - generic [ref=e145]: Builder Directory
+      - link "Property Upload" [ref=e146] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e147]
+        - generic [ref=e150]: Property Upload
+      - link "Olena Marketing" [ref=e151] [cursor=pointer]:
+        - /url: /olena-feature-sheet
+        - img [ref=e152]
+        - generic [ref=e155]: Olena Marketing
+      - link "Canva Editor" [ref=e156] [cursor=pointer]:
+        - /url: /canva-editor
+        - img [ref=e157]
+        - generic [ref=e163]: Canva Editor
+      - link "Skills & Agents" [ref=e164] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e165]
+        - generic [ref=e168]: Skills & Agents
+      - link "Map View" [ref=e169] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e170]
+        - generic [ref=e172]: Map View
+      - link "Data Manager" [ref=e173] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e174]
+        - generic [ref=e178]: Data Manager
+    - generic [ref=e182]: System Online
+  - generic [ref=e183]:
+    - banner [ref=e184]:
+      - generic [ref=e190]:
+        - img [ref=e410]
+        - generic [ref=e198]: Connected
+      - generic [ref=e201]:
+        - img [ref=e202]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e205]
+        - combobox [ref=e206]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e207]:
+        - button "Voice" [ref=e208] [cursor=pointer]:
+          - img [ref=e209]
+          - generic [ref=e215]: Voice
+        - generic [ref=e216]:
+          - img [ref=e217]
+          - generic [ref=e222]: $12.40
+        - link "Data Manager" [ref=e223] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e224]
+        - button [ref=e228] [cursor=pointer]:
+          - img [ref=e229]
+        - link [ref=e232] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e233]
+        - link "🦞" [ref=e236] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e237]: 🦞
+    - main [ref=e238]:
+      - generic [ref=e240]:
+        - generic [ref=e241]:
+          - generic [ref=e242]:
+            - img [ref=e244]
+            - generic [ref=e246]:
+              - heading "Bot Swarm Visualization" [level=1] [ref=e247]
+              - paragraph [ref=e248]: Watch AI agents collaborate in real-time
+          - button "Back to Boardroom" [ref=e250] [cursor=pointer]
+        - generic [ref=e252]:
+          - generic [ref=e253]:
+            - img [ref=e254]
+            - combobox [ref=e258]:
+              - option "Property Deal Analysis" [selected]
+              - option "Intensive Buyer Search"
+              - option "Full Swarm Activation"
+          - generic [ref=e259]:
+            - button "Play" [active] [ref=e436] [cursor=pointer]:
+              - img [ref=e437]
+              - text: Play
+            - button [ref=e263] [cursor=pointer]:
+              - img [ref=e264]
+          - generic [ref=e269]: 20s / 20s
+        - generic [ref=e270]:
+          - generic [ref=e273]: Core Analysis
+          - generic [ref=e274]: Property Analysis
+          - generic [ref=e275]: Operations
+          - generic [ref=e276]: Transaction Team
+          - generic [ref=e278] [cursor=pointer]:
+            - generic [ref=e279]: S
+            - paragraph [ref=e280]: Sam
+            - paragraph [ref=e281]: Deal Analyst
+          - generic [ref=e283] [cursor=pointer]:
+            - generic [ref=e284]: J
+            - paragraph [ref=e285]: Jordan
+            - paragraph [ref=e286]: Market Researcher
+          - generic [ref=e288] [cursor=pointer]:
+            - generic [ref=e289]: P
+            - paragraph [ref=e290]: Parker
+            - paragraph [ref=e291]: Property Profiler
+            - paragraph [ref=e423]: 100%
+          - generic [ref=e293] [cursor=pointer]:
+            - generic [ref=e294]: Q
+            - paragraph [ref=e295]: Quinn
+            - paragraph [ref=e296]: Legal/Compliance
+          - generic [ref=e298] [cursor=pointer]:
+            - generic [ref=e299]: S
+            - paragraph [ref=e300]: Scout
+            - paragraph [ref=e301]: Property Intelligence
+          - generic [ref=e303] [cursor=pointer]:
+            - generic [ref=e304]: L
+            - paragraph [ref=e305]: Lens
+            - paragraph [ref=e306]: Photo Inspector
+          - generic [ref=e308] [cursor=pointer]:
+            - generic [ref=e309]: T
+            - paragraph [ref=e310]: Taylor
+            - paragraph [ref=e311]: Operations Coordinator
+          - generic [ref=e313] [cursor=pointer]:
+            - generic [ref=e314]: R
+            - paragraph [ref=e315]: Radar
+            - paragraph [ref=e316]: Deal Watchdog
+          - generic [ref=e318] [cursor=pointer]:
+            - generic [ref=e319]: F
+            - paragraph [ref=e320]: File
+            - paragraph [ref=e321]: Deal Secretary
+          - generic [ref=e323] [cursor=pointer]:
+            - generic [ref=e324]: A
+            - paragraph [ref=e325]: Alex
+            - paragraph [ref=e326]: Recruiting Specialist
+          - generic [ref=e328] [cursor=pointer]:
+            - generic [ref=e329]: A
+            - paragraph [ref=e330]: Ace
+            - paragraph [ref=e331]: Sales Director
+          - generic [ref=e333] [cursor=pointer]:
+            - generic [ref=e334]: B
+            - paragraph [ref=e335]: Buzz
+            - paragraph [ref=e336]: Social Media Manager
+          - generic [ref=e338] [cursor=pointer]:
+            - generic [ref=e339]: E
+            - paragraph [ref=e340]: Echo
+            - paragraph [ref=e341]: Inquiry Specialist
+          - generic [ref=e343] [cursor=pointer]:
+            - generic [ref=e344]: H
+            - paragraph [ref=e345]: Hunter
+            - paragraph [ref=e346]: Buyer Specialist
+          - generic [ref=e348] [cursor=pointer]:
+            - generic [ref=e349]: S
+            - paragraph [ref=e350]: Stage
+            - paragraph [ref=e351]: Listing Manager
+          - generic [ref=e353] [cursor=pointer]:
+            - generic [ref=e354]: S
+            - paragraph [ref=e355]: Scribe
+            - paragraph [ref=e356]: Content Creator
+            - paragraph [ref=e450]: 50%
+          - generic [ref=e357]:
+            - generic [ref=e358]:
+              - generic [ref=e359]:
+                - img [ref=e360]
+                - generic [ref=e365]: 9 Active
+              - generic [ref=e366]:
+                - img [ref=e367]
+                - generic [ref=e369]: 0 Speaking
+              - generic [ref=e370]:
+                - img [ref=e371]
+                - generic [ref=e373]: 0 Skills Active
+            - generic [ref=e374]: Property Deal Analysis
+        - generic [ref=e375]:
+          - generic [ref=e376]:
+            - img [ref=e378]
+            - heading "16 AI Agents" [level=3] [ref=e383]
+            - paragraph [ref=e384]: Across 6 specialized teams working together
+          - generic [ref=e385]:
+            - img [ref=e387]
+            - heading "Real-time Collab" [level=3] [ref=e389]
+            - paragraph [ref=e390]: Agents communicate and share insights instantly
+          - generic [ref=e391]:
+            - img [ref=e393]
+            - heading "Consensus Building" [level=3] [ref=e397]
+            - paragraph [ref=e398]: 3-round decision making for optimal outcomes
+          - generic [ref=e399]:
+            - img [ref=e401]
+            - heading "Skill Showcase" [level=3] [ref=e403]
+            - paragraph [ref=e404]: 30+ specialized skills across all agents
+  - button "Ctrl+Shift+V" [ref=e405] [cursor=pointer]:
+    - img [ref=e406]
+    - generic [ref=e409]: Ctrl+Shift+V

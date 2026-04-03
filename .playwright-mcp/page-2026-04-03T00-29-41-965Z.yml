@@ -1,0 +1,400 @@
+- generic [ref=e4]:
+  - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e11]
+          - generic [ref=e13]:
+            - button "N" [ref=e14]:
+              - link "N" [ref=e15] [cursor=pointer]:
+                - /url: /NIAAAA/dashboard
+                - generic [ref=e18]:
+                  - img [ref=e19]
+                  - generic [ref=e20]: "N"
+            - button "T" [ref=e21]:
+              - link "T" [ref=e22] [cursor=pointer]:
+                - /url: /TES/dashboard
+                - generic [ref=e24]:
+                  - img [ref=e25]
+                  - generic [ref=e26]: T
+            - button "N" [ref=e27]:
+              - link "N" [ref=e28] [cursor=pointer]:
+                - /url: /NIAA/dashboard
+                - generic [ref=e30]:
+                  - img [ref=e31]
+                  - generic [ref=e32]: "N"
+            - button "N" [ref=e33]:
+              - link "N" [ref=e34] [cursor=pointer]:
+                - /url: /NIA/dashboard
+                - generic [ref=e36]:
+                  - img [ref=e37]
+                  - generic [ref=e38]: "N"
+            - button "T" [ref=e39]:
+              - link "T" [ref=e40] [cursor=pointer]:
+                - /url: /TESA/dashboard
+                - generic [ref=e42]:
+                  - img [ref=e43]
+                  - generic [ref=e44]: T
+            - button "N" [ref=e45]:
+              - link "N" [ref=e46] [cursor=pointer]:
+                - /url: /NIAAA/dashboard
+                - generic [ref=e48]:
+                  - img [ref=e49]
+                  - generic [ref=e50]: "N"
+            - button "T" [ref=e51]:
+              - link "T" [ref=e52] [cursor=pointer]:
+                - /url: /TESAAA/dashboard
+                - generic [ref=e54]:
+                  - img [ref=e55]
+                  - generic [ref=e56]: T
+            - button "A" [ref=e57]:
+              - link "A" [ref=e58] [cursor=pointer]:
+                - /url: /ABC/dashboard
+                - generic [ref=e60]:
+                  - img [ref=e61]
+                  - generic [ref=e62]: A
+            - button "F" [ref=e63]:
+              - link "F" [ref=e64] [cursor=pointer]:
+                - /url: /FAC/dashboard
+                - generic [ref=e66]:
+                  - img [ref=e67]
+                  - generic [ref=e68]: F
+            - button "T" [ref=e69]:
+              - link "T" [ref=e70] [cursor=pointer]:
+                - /url: /TESAA/dashboard
+                - generic [ref=e72]:
+                  - img [ref=e73]
+                  - generic [ref=e74]: T
+            - status [ref=e75]
+          - button "Add company" [ref=e78]:
+            - img [ref=e79]
+        - complementary [ref=e81]:
+          - generic [ref=e82]:
+            - generic [ref=e83]: Niagara High-Rise Verified Mission Company
+            - button [ref=e84]:
+              - img
+          - navigation [ref=e85]:
+            - generic [ref=e86]:
+              - button "New Issue" [ref=e87]:
+                - img [ref=e88]
+                - generic [ref=e91]: New Issue
+              - link "Dashboard" [ref=e92] [cursor=pointer]:
+                - /url: /NIAAAA/dashboard
+                - img [ref=e94]
+                - generic [ref=e99]: Dashboard
+              - link "Inbox 6" [ref=e100] [cursor=pointer]:
+                - /url: /NIAAAA/inbox
+                - img [ref=e102]
+                - generic [ref=e105]: Inbox
+                - generic [ref=e106]: "6"
+            - generic [ref=e107]:
+              - generic [ref=e108]: Work
+              - generic [ref=e109]:
+                - link "Issues" [ref=e110] [cursor=pointer]:
+                  - /url: /NIAAAA/issues
+                  - img [ref=e112]
+                  - generic [ref=e115]: Issues
+                - link "Routines Beta" [ref=e116] [cursor=pointer]:
+                  - /url: /NIAAAA/routines
+                  - img [ref=e118]
+                  - generic [ref=e123]: Routines
+                  - generic [ref=e124]: Beta
+                - link "Goals" [ref=e125] [cursor=pointer]:
+                  - /url: /NIAAAA/goals
+                  - img [ref=e127]
+                  - generic [ref=e131]: Goals
+            - generic [ref=e132]:
+              - generic [ref=e134]:
+                - button "Projects" [expanded] [ref=e135]:
+                  - img [ref=e136]
+                  - generic [ref=e138]: Projects
+                - button "New project" [ref=e139]:
+                  - img [ref=e140]
+              - status [ref=e141]
+            - generic [ref=e142]:
+              - generic [ref=e144]:
+                - button "Agents" [expanded] [ref=e145]:
+                  - img [ref=e146]
+                  - generic [ref=e148]: Agents
+                - button "New agent" [ref=e149]:
+                  - img [ref=e150]
+              - generic [ref=e152]:
+                - link "Builder Scout" [ref=e153] [cursor=pointer]:
+                  - /url: /NIAAAA/agents/builder-scout
+                  - img [ref=e154]
+                  - generic [ref=e157]: Builder Scout
+                - link "Buyer Scout" [ref=e158] [cursor=pointer]:
+                  - /url: /NIAAAA/agents/buyer-scout
+                  - img [ref=e159]
+                  - generic [ref=e162]: Buyer Scout
+                - link "CEO Strategy" [ref=e163] [cursor=pointer]:
+                  - /url: /NIAAAA/agents/ceo-strategy
+                  - img [ref=e164]
+                  - generic [ref=e167]: CEO Strategy
+            - generic [ref=e168]:
+              - generic [ref=e169]: Company
+              - generic [ref=e170]:
+                - link "Org" [ref=e171] [cursor=pointer]:
+                  - /url: /NIAAAA/org
+                  - img [ref=e173]
+                  - generic [ref=e178]: Org
+                - link "Skills" [ref=e179] [cursor=pointer]:
+                  - /url: /NIAAAA/skills
+                  - img [ref=e181]
+                  - generic [ref=e191]: Skills
+                - link "Costs" [ref=e192] [cursor=pointer]:
+                  - /url: /NIAAAA/costs
+                  - img [ref=e194]
+                  - generic [ref=e196]: Costs
+                - link "Activity" [ref=e197] [cursor=pointer]:
+                  - /url: /NIAAAA/activity
+                  - img [ref=e199]
+                  - generic [ref=e203]: Activity
+                - link "Settings" [ref=e204] [cursor=pointer]:
+                  - /url: /NIAAAA/company/settings
+                  - img [ref=e206]
+                  - generic [ref=e209]: Settings
+      - generic [ref=e211]:
+        - link "Documentation" [ref=e212] [cursor=pointer]:
+          - /url: https://docs.paperclip.ing/
+          - img [ref=e213]
+          - generic [ref=e215]: Documentation
+        - generic [ref=e216]: v
+        - link "Instance settings" [ref=e217] [cursor=pointer]:
+          - /url: /instance/settings/general
+          - img
+        - button "Switch to light mode" [ref=e218]:
+          - img
+    - generic [ref=e219]:
+      - heading "Companies" [level=1] [ref=e223]
+      - main [ref=e225]:
+        - generic [ref=e226]:
+          - button "New Company" [ref=e228]:
+            - img
+            - text: New Company
+          - generic [ref=e230]:
+            - button "Niagara High-Rise Verified Mission Company active 3 agents 6 issues $0.00Unlimited budget Created 6h ago" [ref=e231] [cursor=pointer]:
+              - generic [ref=e232]:
+                - generic [ref=e234]:
+                  - heading "Niagara High-Rise Verified Mission Company" [level=3] [ref=e235]
+                  - generic [ref=e236]: active
+                  - button [ref=e237]:
+                    - img
+                - button [ref=e239]:
+                  - img
+              - generic [ref=e240]:
+                - generic [ref=e241]:
+                  - img [ref=e242]
+                  - generic [ref=e247]: 3 agents
+                - generic [ref=e248]:
+                  - img [ref=e249]
+                  - generic [ref=e252]: 6 issues
+                - generic [ref=e253]:
+                  - img [ref=e254]
+                  - generic [ref=e256]: $0.00Unlimited budget
+                - generic [ref=e257]:
+                  - img [ref=e258]
+                  - generic [ref=e260]: Created 6h ago
+            - button "Test NERVE Integration active 0 agents 0 issues $0.00Unlimited budget Created 8h ago" [ref=e261] [cursor=pointer]:
+              - generic [ref=e262]:
+                - generic [ref=e264]:
+                  - heading "Test NERVE Integration" [level=3] [ref=e265]
+                  - generic [ref=e266]: active
+                  - button [ref=e267]:
+                    - img
+                - button [ref=e269]:
+                  - img
+              - generic [ref=e270]:
+                - generic [ref=e271]:
+                  - img [ref=e272]
+                  - generic [ref=e277]: 0 agents
+                - generic [ref=e278]:
+                  - img [ref=e279]
+                  - generic [ref=e282]: 0 issues
+                - generic [ref=e283]:
+                  - img [ref=e284]
+                  - generic [ref=e286]: $0.00Unlimited budget
+                - generic [ref=e287]:
+                  - img [ref=e288]
+                  - generic [ref=e290]: Created 8h ago
+            - button "Niagara High-Rise Test 3 Mission Company active 1 agent 6 issues $0.00Unlimited budget Created 8h ago" [ref=e291] [cursor=pointer]:
+              - generic [ref=e292]:
+                - generic [ref=e294]:
+                  - heading "Niagara High-Rise Test 3 Mission Company" [level=3] [ref=e295]
+                  - generic [ref=e296]: active
+                  - button [ref=e297]:
+                    - img
+                - button [ref=e299]:
+                  - img
+              - generic [ref=e300]:
+                - generic [ref=e301]:
+                  - img [ref=e302]
+                  - generic [ref=e307]: 1 agent
+                - generic [ref=e308]:
+                  - img [ref=e309]
+                  - generic [ref=e312]: 6 issues
+                - generic [ref=e313]:
+                  - img [ref=e314]
+                  - generic [ref=e316]: $0.00Unlimited budget
+                - generic [ref=e317]:
+                  - img [ref=e318]
+                  - generic [ref=e320]: Created 8h ago
+            - button "Niagara High-Rise Test 2 Mission Company active 3 agents 6 issues $0.00Unlimited budget Created 8h ago" [ref=e321] [cursor=pointer]:
+              - generic [ref=e322]:
+                - generic [ref=e324]:
+                  - heading "Niagara High-Rise Test 2 Mission Company" [level=3] [ref=e325]
+                  - generic [ref=e326]: active
+                  - button [ref=e327]:
+                    - img
+                - button [ref=e329]:
+                  - img
+              - generic [ref=e330]:
+                - generic [ref=e331]:
+                  - img [ref=e332]
+                  - generic [ref=e337]: 3 agents
+                - generic [ref=e338]:
+                  - img [ref=e339]
+                  - generic [ref=e342]: 6 issues
+                - generic [ref=e343]:
+                  - img [ref=e344]
+                  - generic [ref=e346]: $0.00Unlimited budget
+                - generic [ref=e347]:
+                  - img [ref=e348]
+                  - generic [ref=e350]: Created 8h ago
+            - button "Test Hybrid Integration Mission Company active 1 agent 6 issues $0.00Unlimited budget Created 8h ago" [ref=e351] [cursor=pointer]:
+              - generic [ref=e352]:
+                - generic [ref=e354]:
+                  - heading "Test Hybrid Integration Mission Company" [level=3] [ref=e355]
+                  - generic [ref=e356]: active
+                  - button [ref=e357]:
+                    - img
+                - button [ref=e359]:
+                  - img
+              - generic [ref=e360]:
+                - generic [ref=e361]:
+                  - img [ref=e362]
+                  - generic [ref=e367]: 1 agent
+                - generic [ref=e368]:
+                  - img [ref=e369]
+                  - generic [ref=e372]: 6 issues
+                - generic [ref=e373]:
+                  - img [ref=e374]
+                  - generic [ref=e376]: $0.00Unlimited budget
+                - generic [ref=e377]:
+                  - img [ref=e378]
+                  - generic [ref=e380]: Created 8h ago
+            - button "Niagara High-Rise Final Test Mission Company active 2 agents 6 issues $0.00Unlimited budget Created 6h ago" [ref=e381] [cursor=pointer]:
+              - generic [ref=e382]:
+                - generic [ref=e384]:
+                  - heading "Niagara High-Rise Final Test Mission Company" [level=3] [ref=e385]
+                  - generic [ref=e386]: active
+                  - button [ref=e387]:
+                    - img
+                - button [ref=e389]:
+                  - img
+              - generic [ref=e390]:
+                - generic [ref=e391]:
+                  - img [ref=e392]
+                  - generic [ref=e397]: 2 agents
+                - generic [ref=e398]:
+                  - img [ref=e399]
+                  - generic [ref=e402]: 6 issues
+                - generic [ref=e403]:
+                  - img [ref=e404]
+                  - generic [ref=e406]: $0.00Unlimited budget
+                - generic [ref=e407]:
+                  - img [ref=e408]
+                  - generic [ref=e410]: Created 6h ago
+            - button "Test Capital Group Hot Money Analysis active 2 agents 1 issue $0.00Unlimited budget Created 5h ago" [ref=e411] [cursor=pointer]:
+              - generic [ref=e412]:
+                - generic [ref=e414]:
+                  - heading "Test Capital Group Hot Money Analysis" [level=3] [ref=e415]
+                  - generic [ref=e416]: active
+                  - button [ref=e417]:
+                    - img
+                - button [ref=e419]:
+                  - img
+              - generic [ref=e420]:
+                - generic [ref=e421]:
+                  - img [ref=e422]
+                  - generic [ref=e427]: 2 agents
+                - generic [ref=e428]:
+                  - img [ref=e429]
+                  - generic [ref=e432]: 1 issue
+                - generic [ref=e433]:
+                  - img [ref=e434]
+                  - generic [ref=e436]: $0.00Unlimited budget
+                - generic [ref=e437]:
+                  - img [ref=e438]
+                  - generic [ref=e440]: Created 5h ago
+            - button "ABC Capital Hot Money Analysis active 2 agents 1 issue $0.00Unlimited budget Created 5h ago" [ref=e441] [cursor=pointer]:
+              - generic [ref=e442]:
+                - generic [ref=e444]:
+                  - heading "ABC Capital Hot Money Analysis" [level=3] [ref=e445]
+                  - generic [ref=e446]: active
+                  - button [ref=e447]:
+                    - img
+                - button [ref=e449]:
+                  - img
+              - generic [ref=e450]:
+                - generic [ref=e451]:
+                  - img [ref=e452]
+                  - generic [ref=e457]: 2 agents
+                - generic [ref=e458]:
+                  - img [ref=e459]
+                  - generic [ref=e462]: 1 issue
+                - generic [ref=e463]:
+                  - img [ref=e464]
+                  - generic [ref=e466]: $0.00Unlimited budget
+                - generic [ref=e467]:
+                  - img [ref=e468]
+                  - generic [ref=e470]: Created 5h ago
+            - button "Facility Inc Hot Money Analysis active 2 agents 1 issue $0.00Unlimited budget Created 6h ago" [ref=e471] [cursor=pointer]:
+              - generic [ref=e472]:
+                - generic [ref=e474]:
+                  - heading "Facility Inc Hot Money Analysis" [level=3] [ref=e475]
+                  - generic [ref=e476]: active
+                  - button [ref=e477]:
+                    - img
+                - button [ref=e479]:
+                  - img
+              - generic [ref=e480]:
+                - generic [ref=e481]:
+                  - img [ref=e482]
+                  - generic [ref=e487]: 2 agents
+                - generic [ref=e488]:
+                  - img [ref=e489]
+                  - generic [ref=e492]: 1 issue
+                - generic [ref=e493]:
+                  - img [ref=e494]
+                  - generic [ref=e496]: $0.00Unlimited budget
+                - generic [ref=e497]:
+                  - img [ref=e498]
+                  - generic [ref=e500]: Created 6h ago
+            - button "Test Corp Hot Money Analysis active 2 agents 1 issue $0.00Unlimited budget Created 5h ago" [ref=e501] [cursor=pointer]:
+              - generic [ref=e502]:
+                - generic [ref=e504]:
+                  - heading "Test Corp Hot Money Analysis" [level=3] [ref=e505]
+                  - generic [ref=e506]: active
+                  - button [ref=e507]:
+                    - img
+                - button [ref=e509]:
+                  - img
+              - generic [ref=e510]:
+                - generic [ref=e511]:
+                  - img [ref=e512]
+                  - generic [ref=e517]: 2 agents
+                - generic [ref=e518]:
+                  - img [ref=e519]
+                  - generic [ref=e522]: 1 issue
+                - generic [ref=e523]:
+                  - img [ref=e524]
+                  - generic [ref=e526]: $0.00Unlimited budget
+                - generic [ref=e527]:
+                  - img [ref=e528]
+                  - generic [ref=e530]: Created 5h ago
+  - generic [ref=e531]:
+    - heading "Command Palette" [level=2] [ref=e532]
+    - paragraph [ref=e533]: Search for a command to run...

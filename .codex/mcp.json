@@ -1,0 +1,39 @@
+{
+  "mcpServers": {
+    "contextkeep": {
+      "name": "ContextKeep Beta v1.2",
+      "description": "Semantic memory search and retrieval for Obsidian vault",
+      "transport": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@contextkeep/mcp-server@beta"
+      ],
+      "env": {
+        "CONTEXTKEEP_API_KEY": "${CONTEXTKEEP_API_KEY}",
+        "OBSIDIAN_VAULT_PATH": "${OBSIDIAN_VAULT_PATH}",
+        "MEMORY_INDEX_PATH": "${MEMORY_INDEX_PATH}"
+      },
+      "disabled": false,
+      "alwaysAllow": [
+        "list_all_memories",
+        "query_memories",
+        "add_memory",
+        "get_memory",
+        "update_memory"
+      ]
+    },
+    "contextkeep-sse": {
+      "name": "ContextKeep SSE (Alternative)",
+      "description": "Server-Sent Events transport for ContextKeep",
+      "transport": "sse",
+      "url": "http://127.0.0.1:8080/sse",
+      "disabled": true,
+      "alwaysAllow": [
+        "list_all_memories",
+        "query_memories",
+        "add_memory"
+      ]
+    }
+  }
+}

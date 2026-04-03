@@ -1,0 +1,338 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🦞
+      - generic [ref=e8]:
+        - heading "BIGDATA CLAW" [level=1] [ref=e9]
+        - paragraph [ref=e10]: NERVE Mission Control
+    - navigation [ref=e11]:
+      - generic [ref=e12]: Main
+      - link "Mission Control" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: Mission Control
+      - link "Property Research" [ref=e20] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e21]
+        - generic [ref=e25]: Property Research
+      - link "Hot Money Radar" [ref=e26] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e27]
+        - generic [ref=e29]: Hot Money Radar
+      - link "Deal Pipeline" [ref=e30] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e31]
+        - generic [ref=e36]: Deal Pipeline
+      - link "Opportunities" [active] [ref=e37] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e38]
+        - generic [ref=e40]: Opportunities
+      - link "Agent Workspace" [ref=e41] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e42]
+        - generic [ref=e45]: Agent Workspace
+      - link "Obsidian Vault" [ref=e46] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e47]
+        - generic [ref=e51]: Obsidian Vault
+      - generic [ref=e52]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e53] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e54]
+        - generic [ref=e57]: EXP Agent Recruiter
+        - generic [ref=e58]: 96K
+      - link "Commercial Agents 6.7K" [ref=e59] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e60]
+        - generic [ref=e63]: Commercial Agents
+        - generic [ref=e64]: 6.7K
+      - link "Brokerages" [ref=e65] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e66]
+        - generic [ref=e69]: Brokerages
+      - generic [ref=e70]: Tools
+      - link "My Listings" [ref=e71] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e72]
+        - generic [ref=e76]: My Listings
+      - link "Buyer Matcher" [ref=e77] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e78]
+        - generic [ref=e83]: Buyer Matcher
+      - link "Agent Matcher" [ref=e84] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e85]
+        - generic [ref=e89]: Agent Matcher
+      - link "Lender Matcher" [ref=e90] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e91]
+        - generic [ref=e93]: Lender Matcher
+      - link "Builder Directory" [ref=e94] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e95]
+        - generic [ref=e99]: Builder Directory
+      - link "Property Upload" [ref=e100] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e101]
+        - generic [ref=e104]: Property Upload
+      - link "Olena Marketing" [ref=e105] [cursor=pointer]:
+        - /url: /olena-feature-sheet
+        - img [ref=e106]
+        - generic [ref=e109]: Olena Marketing
+      - link "Canva Editor" [ref=e110] [cursor=pointer]:
+        - /url: /canva-editor
+        - img [ref=e111]
+        - generic [ref=e117]: Canva Editor
+      - link "Skills & Agents" [ref=e118] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e119]
+        - generic [ref=e122]: Skills & Agents
+      - link "Map View" [ref=e123] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e124]
+        - generic [ref=e126]: Map View
+      - link "Data Manager" [ref=e127] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e128]
+        - generic [ref=e132]: Data Manager
+    - generic [ref=e136]: System Online
+  - generic [ref=e137]:
+    - banner [ref=e138]:
+      - generic [ref=e144]:
+        - img [ref=e301]
+        - generic [ref=e152]: Connected
+      - generic [ref=e155]:
+        - img [ref=e156]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e159]
+        - combobox [ref=e160]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e161]:
+        - button "Voice" [ref=e162] [cursor=pointer]:
+          - img [ref=e163]
+          - generic [ref=e169]: Voice
+        - generic [ref=e170]:
+          - img [ref=e171]
+          - generic [ref=e176]: $12.40
+        - link "Data Manager" [ref=e177] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e178]
+        - button [ref=e182] [cursor=pointer]:
+          - img [ref=e183]
+        - link [ref=e186] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e187]
+        - link "🦞" [ref=e190] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e191]: 🦞
+    - main [ref=e192]:
+      - generic [ref=e305]:
+        - generic [ref=e306]:
+          - generic [ref=e307]:
+            - generic [ref=e308]:
+              - heading "Opportunities" [level=1] [ref=e309]:
+                - img [ref=e310]
+                - text: Opportunities
+              - generic [ref=e312]: AUTO-SCANNING
+            - paragraph [ref=e313]: Automated off-market property discovery
+          - button "Run Scanner" [ref=e315] [cursor=pointer]:
+            - img [ref=e316]
+            - text: Run Scanner
+        - generic [ref=e322]:
+          - img [ref=e324]
+          - generic [ref=e327]:
+            - heading "Automation Status" [level=3] [ref=e328]
+            - paragraph [ref=e329]: "Last run: 2026-03-28 06:00 • Next run: 2026-03-29 06:00"
+          - generic [ref=e330]:
+            - generic [ref=e331]:
+              - paragraph [ref=e332]: "12"
+              - paragraph [ref=e333]: Total Found
+            - generic [ref=e334]:
+              - paragraph [ref=e335]: "3"
+              - paragraph [ref=e336]: New Today
+        - generic [ref=e337]:
+          - generic [ref=e338]:
+            - paragraph [ref=e339]: Total
+            - paragraph [ref=e340]: "3"
+          - generic [ref=e341]:
+            - paragraph [ref=e342]: Opportunities
+            - paragraph [ref=e343]: "2"
+          - generic [ref=e344]:
+            - paragraph [ref=e345]: Sold (DB Check)
+            - paragraph [ref=e346]: "1"
+          - generic [ref=e347]:
+            - paragraph [ref=e348]: New Today
+            - paragraph [ref=e349]: "3"
+        - generic [ref=e350]:
+          - generic [ref=e351]:
+            - img [ref=e352]
+            - heading "Search Configuration" [level=2] [ref=e355]
+          - generic [ref=e356]:
+            - generic [ref=e357]: Asset Class
+            - generic [ref=e358]:
+              - button "Multifamily / Apartments" [ref=e359] [cursor=pointer]:
+                - img [ref=e360]
+                - generic [ref=e363]: Multifamily / Apartments
+              - button "Shopping Malls" [ref=e364] [cursor=pointer]:
+                - img [ref=e365]
+                - generic [ref=e370]: Shopping Malls
+              - button "Retail Commercial Plaza" [ref=e371] [cursor=pointer]:
+                - img [ref=e372]
+                - generic [ref=e377]: Retail Commercial Plaza
+              - button "Land Development" [ref=e378] [cursor=pointer]:
+                - img [ref=e379]
+                - generic [ref=e381]: Land Development
+              - button "Industrial" [ref=e382] [cursor=pointer]:
+                - img [ref=e383]
+                - generic [ref=e385]: Industrial
+              - button "Office" [ref=e386] [cursor=pointer]:
+                - img [ref=e387]
+                - generic [ref=e391]: Office
+              - button "Medical" [ref=e392] [cursor=pointer]:
+                - img [ref=e393]
+                - generic [ref=e397]: Medical
+          - generic [ref=e398]:
+            - generic [ref=e399]:
+              - img [ref=e400]
+              - combobox [ref=e403]:
+                - option "Ontario" [selected]
+                - option "British Columbia"
+                - option "Alberta"
+                - option "Quebec"
+                - option "Manitoba"
+                - option "Saskatchewan"
+                - option "Nova Scotia"
+                - option "New Brunswick"
+                - option "Newfoundland"
+                - option "PEI"
+                - option "All Canada"
+            - button "LoopNet" [ref=e404] [cursor=pointer]:
+              - img [ref=e405]
+              - text: LoopNet
+            - button "Google Search" [ref=e409] [cursor=pointer]:
+              - img [ref=e410]
+              - text: Google Search
+          - generic [ref=e413]:
+            - paragraph [ref=e414]: "Google Search Query:"
+            - code [ref=e415]: "\"THIS MULTIFAMILY PROPERTY IS NO LONGER ADVERTISED ON LOOPNET.CA\""
+        - generic [ref=e416]:
+          - generic [ref=e417]:
+            - generic [ref=e418]:
+              - button "List" [ref=e419] [cursor=pointer]:
+                - img [ref=e420]
+                - text: List
+              - button "Map" [ref=e421] [cursor=pointer]:
+                - img [ref=e422]
+                - text: Map
+            - combobox [ref=e424]:
+              - option "All Status" [selected]
+              - option "🎯 Opportunities Only"
+              - option "✓ Sold (DB Check)"
+              - option "📋 Off Market"
+          - generic [ref=e425]:
+            - img [ref=e426]
+            - textbox "Search opportunities..." [ref=e429]
+        - generic [ref=e430]:
+          - generic [ref=e432]:
+            - img [ref=e434]
+            - generic [ref=e437]:
+              - generic [ref=e439]:
+                - generic [ref=e440]:
+                  - heading "45-Unit Apartment Building" [level=3] [ref=e441]
+                  - generic [ref=e442]: 🎯 OPPORTUNITY
+                - paragraph [ref=e443]: 123 Main St, Hamilton, ON
+                - generic [ref=e444]:
+                  - generic [ref=e445]:
+                    - img [ref=e446]
+                    - text: $4,200,000
+                  - generic [ref=e448]:
+                    - img [ref=e449]
+                    - text: 2026-03-28
+                  - generic [ref=e451]: OFF MARKET
+              - generic [ref=e452]:
+                - paragraph [ref=e453]: "Suggested Brokers (2):"
+                - generic [ref=e454]:
+                  - generic [ref=e455]: John Mitchell (RE/MAX)
+                  - generic [ref=e456]: Sarah Johnson (Century 21)
+              - generic [ref=e457]:
+                - button "Save to Obsidian" [ref=e458] [cursor=pointer]:
+                  - img [ref=e459]
+                  - text: Save to Obsidian
+                - button "All Brokers" [ref=e463] [cursor=pointer]:
+                  - img [ref=e464]
+                  - text: All Brokers
+                - button "Google" [ref=e467] [cursor=pointer]:
+                  - img [ref=e468]
+                  - text: Google
+          - generic [ref=e473]:
+            - img [ref=e475]
+            - generic [ref=e477]:
+              - generic [ref=e479]:
+                - generic [ref=e480]:
+                  - heading "50,000 SF Warehouse" [level=3] [ref=e481]
+                  - generic [ref=e482]: ✓ IN DATABASE
+                - paragraph [ref=e483]: 500 Industrial Pkwy, Mississauga, ON
+                - generic [ref=e484]:
+                  - generic [ref=e485]:
+                    - img [ref=e486]
+                    - text: $8,500,000
+                  - generic [ref=e488]:
+                    - img [ref=e489]
+                    - text: 2026-03-27
+                  - generic [ref=e491]: SOLD
+              - generic [ref=e492]:
+                - paragraph [ref=e493]:
+                  - img [ref=e494]
+                  - text: Match Found in Database
+                - paragraph [ref=e498]: "Buyer: ABC Investments"
+              - generic [ref=e499]:
+                - paragraph [ref=e500]: "Suggested Brokers (1):"
+                - generic [ref=e502]: Michael Chen (Colliers)
+              - generic [ref=e503]:
+                - button "Saved" [ref=e504] [cursor=pointer]:
+                  - img [ref=e505]
+                  - text: Saved
+                - button "All Brokers" [ref=e508] [cursor=pointer]:
+                  - img [ref=e509]
+                  - text: All Brokers
+                - button "Google" [ref=e512] [cursor=pointer]:
+                  - img [ref=e513]
+                  - text: Google
+          - generic [ref=e518]:
+            - img [ref=e520]
+            - generic [ref=e524]:
+              - generic [ref=e526]:
+                - generic [ref=e527]:
+                  - heading "Class A Office Building" [level=3] [ref=e528]
+                  - generic [ref=e529]: 🎯 OPPORTUNITY
+                - paragraph [ref=e530]: 100 King St W, Toronto, ON
+                - generic [ref=e531]:
+                  - generic [ref=e532]:
+                    - img [ref=e533]
+                    - text: $25,000,000
+                  - generic [ref=e535]:
+                    - img [ref=e536]
+                    - text: 2026-03-26
+                  - generic [ref=e538]: OFF MARKET
+              - generic [ref=e539]:
+                - paragraph [ref=e540]: "Suggested Brokers (2):"
+                - generic [ref=e541]:
+                  - generic [ref=e542]: Jennifer Williams (CBRE)
+                  - generic [ref=e543]: David Park (JLL)
+              - generic [ref=e544]:
+                - button "Save to Obsidian" [ref=e545] [cursor=pointer]:
+                  - img [ref=e546]
+                  - text: Save to Obsidian
+                - button "All Brokers" [ref=e550] [cursor=pointer]:
+                  - img [ref=e551]
+                  - text: All Brokers
+                - button "Google" [ref=e554] [cursor=pointer]:
+                  - img [ref=e555]
+                  - text: Google
+  - button "Ctrl+Shift+V" [ref=e296] [cursor=pointer]:
+    - img [ref=e297]
+    - generic [ref=e300]: Ctrl+Shift+V

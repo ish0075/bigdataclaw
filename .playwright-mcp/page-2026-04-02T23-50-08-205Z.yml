@@ -1,0 +1,581 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img "Control Shifter" [ref=e8]
+        - generic [ref=e9]:
+          - heading "Mission Control" [level=1] [ref=e10]
+          - paragraph [ref=e11]: Real Estate Command Center
+      - button "Collapse sidebar" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - generic [ref=e17]:
+        - button "Collapse all" [ref=e18] [cursor=pointer]
+        - button "Expand all" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - button "Main" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]: Main
+          - img [ref=e23]
+        - generic [ref=e25]:
+          - link "Mission Control" [ref=e26] [cursor=pointer]:
+            - /url: /
+            - img [ref=e27]
+            - generic [ref=e32]: Mission Control
+          - link "Property Research" [ref=e33] [cursor=pointer]:
+            - /url: /research
+            - img [ref=e34]
+            - generic [ref=e38]: Property Research
+          - link "Hot Money Radar" [ref=e39] [cursor=pointer]:
+            - /url: /hotmoney
+            - img [ref=e40]
+            - generic [ref=e42]: Hot Money Radar
+          - link "Deal Pipeline" [ref=e43] [cursor=pointer]:
+            - /url: /pipeline
+            - img [ref=e44]
+            - generic [ref=e49]: Deal Pipeline
+          - link "Opportunities" [ref=e50] [cursor=pointer]:
+            - /url: /opportunities
+            - img [ref=e51]
+            - generic [ref=e53]: Opportunities
+          - link "Agent Workspace" [ref=e54] [cursor=pointer]:
+            - /url: /agents
+            - img [ref=e55]
+            - generic [ref=e58]: Agent Workspace
+          - link "Agent Companies NEW" [ref=e59] [cursor=pointer]:
+            - /url: /paperclip-companies
+            - img [ref=e60]
+            - generic [ref=e64]: Agent Companies
+            - generic [ref=e65]: NEW
+          - link "Paperclip Dashboard NEW" [ref=e66] [cursor=pointer]:
+            - /url: /paperclip-dashboard
+            - img [ref=e67]
+            - generic [ref=e69]: Paperclip Dashboard
+            - generic [ref=e70]: NEW
+          - link "Pixel Agents LIVE" [ref=e71] [cursor=pointer]:
+            - /url: /mission-control
+            - img [ref=e72]
+            - generic [ref=e77]: Pixel Agents
+            - generic [ref=e78]: LIVE
+          - link "Bot Boardroom AI" [ref=e79] [cursor=pointer]:
+            - /url: /bot-boardroom
+            - img [ref=e80]
+            - generic [ref=e86]: Bot Boardroom
+            - generic [ref=e87]: AI
+          - link "Obsidian Vault" [ref=e88] [cursor=pointer]:
+            - /url: /vault
+            - img [ref=e89]
+            - generic [ref=e93]: Obsidian Vault
+      - generic [ref=e94]:
+        - button "Recruitment" [ref=e95] [cursor=pointer]:
+          - generic [ref=e96]: Recruitment
+          - img [ref=e97]
+        - generic [ref=e99]:
+          - link "EXP Agent Recruiter 96K" [ref=e100] [cursor=pointer]:
+            - /url: /exp-agent-recruiter
+            - img [ref=e101]
+            - generic [ref=e104]: EXP Agent Recruiter
+            - generic [ref=e105]: 96K
+          - link "Commercial Agents 6.7K" [ref=e106] [cursor=pointer]:
+            - /url: /commercial-agent-recruiter
+            - img [ref=e107]
+            - generic [ref=e110]: Commercial Agents
+            - generic [ref=e111]: 6.7K
+          - link "Brokerages" [ref=e112] [cursor=pointer]:
+            - /url: /brokerages
+            - img [ref=e113]
+            - generic [ref=e116]: Brokerages
+      - generic [ref=e117]:
+        - button "AI Bots" [ref=e118] [cursor=pointer]:
+          - generic [ref=e119]: AI Bots
+          - img [ref=e120]
+        - generic [ref=e122]:
+          - link "Buyer Intelligence AI" [ref=e123] [cursor=pointer]:
+            - /url: /buyer-bot
+            - img [ref=e124]
+            - generic [ref=e128]: Buyer Intelligence
+            - generic [ref=e129]: AI
+          - link "Seller Outreach AI" [ref=e130] [cursor=pointer]:
+            - /url: /seller-outreach-bot
+            - img [ref=e131]
+            - generic [ref=e136]: Seller Outreach
+            - generic [ref=e137]: AI
+          - link "Property Valuation AI" [ref=e138] [cursor=pointer]:
+            - /url: /property-valuation-bot
+            - img [ref=e139]
+            - generic [ref=e141]: Property Valuation
+            - generic [ref=e142]: AI
+          - link "Vigil Monitor 24/7" [ref=e143] [cursor=pointer]:
+            - /url: /vigil
+            - img [ref=e144]
+            - generic [ref=e146]: Vigil Monitor
+            - generic [ref=e147]: 24/7
+          - link "Agent Workspaces NEW" [ref=e148] [cursor=pointer]:
+            - /url: /agent-workspaces
+            - img [ref=e149]
+            - generic [ref=e151]: Agent Workspaces
+            - generic [ref=e152]: NEW
+          - link "Bot Builder BUILD" [ref=e153] [cursor=pointer]:
+            - /url: /bot-builder
+            - img [ref=e154]
+            - generic [ref=e158]: Bot Builder
+            - generic [ref=e159]: BUILD
+      - generic [ref=e160]:
+        - button "Tools" [ref=e161] [cursor=pointer]:
+          - generic [ref=e162]: Tools
+          - img [ref=e163]
+        - generic [ref=e165]:
+          - link "My Listings" [ref=e166] [cursor=pointer]:
+            - /url: /listings
+            - img [ref=e167]
+            - generic [ref=e171]: My Listings
+          - link "Buyer Matcher" [ref=e172] [cursor=pointer]:
+            - /url: /buyers
+            - img [ref=e173]
+            - generic [ref=e178]: Buyer Matcher
+          - link "Agent Matcher" [ref=e179] [cursor=pointer]:
+            - /url: /agents-matcher
+            - img [ref=e180]
+            - generic [ref=e184]: Agent Matcher
+          - link "Lender Matcher" [ref=e185] [cursor=pointer]:
+            - /url: /lenders
+            - img [ref=e186]
+            - generic [ref=e188]: Lender Matcher
+          - link "Builder Directory" [ref=e189] [cursor=pointer]:
+            - /url: /builders
+            - img [ref=e190]
+            - generic [ref=e194]: Builder Directory
+          - link "Property Upload" [ref=e195] [cursor=pointer]:
+            - /url: /upload
+            - img [ref=e196]
+            - generic [ref=e199]: Property Upload
+          - link "Olena Marketing NEW" [ref=e200] [cursor=pointer]:
+            - /url: /olena-feature-sheet
+            - img [ref=e201]
+            - generic [ref=e204]: Olena Marketing
+            - generic [ref=e205]: NEW
+          - link "Canva Editor NEW" [ref=e206] [cursor=pointer]:
+            - /url: /canva-editor
+            - img [ref=e207]
+            - generic [ref=e213]: Canva Editor
+            - generic [ref=e214]: NEW
+          - link "Skills & Agents" [ref=e215] [cursor=pointer]:
+            - /url: /skills
+            - img [ref=e216]
+            - generic [ref=e219]: Skills & Agents
+          - link "Map View" [ref=e220] [cursor=pointer]:
+            - /url: /map
+            - img [ref=e221]
+            - generic [ref=e223]: Map View
+          - link "Data Manager" [ref=e224] [cursor=pointer]:
+            - /url: /data-manager
+            - img [ref=e225]
+            - generic [ref=e229]: Data Manager
+          - link "AI Builder CODE" [ref=e230] [cursor=pointer]:
+            - /url: /ai-builder
+            - img [ref=e231]
+            - generic [ref=e234]: AI Builder
+            - generic [ref=e235]: CODE
+    - generic [ref=e239]: System Online
+  - generic [ref=e240]:
+    - banner [ref=e241]:
+      - generic [ref=e247]:
+        - img [ref=e248]
+        - generic [ref=e255]: Reconnecting...
+      - generic [ref=e258]:
+        - img [ref=e259]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e262]
+        - combobox [ref=e263]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e264]:
+        - button "Voice" [ref=e265] [cursor=pointer]:
+          - img [ref=e266]
+          - generic [ref=e272]: Voice
+        - generic [ref=e273]:
+          - img [ref=e274]
+          - generic [ref=e279]: $12.40
+        - link "Data Manager" [ref=e280] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e281]
+        - button [ref=e285] [cursor=pointer]:
+          - img [ref=e286]
+        - link [ref=e289] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e290]
+        - link "🦞" [ref=e293] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e294]: 🦞
+    - main [ref=e295]:
+      - generic [ref=e297]:
+        - generic [ref=e298]:
+          - generic [ref=e299]:
+            - img [ref=e301]
+            - generic [ref=e304]:
+              - heading "Agent Mission Control" [level=1] [ref=e305]
+              - paragraph [ref=e306]: Visual Task Execution System
+          - generic [ref=e307]:
+            - generic [ref=e308]:
+              - generic [ref=e309]:
+                - img [ref=e310]
+                - generic [ref=e313]: 0 Done
+              - generic [ref=e314]:
+                - img [ref=e315]
+                - generic [ref=e317]: 0 Active
+              - generic [ref=e318]:
+                - img [ref=e319]
+                - generic [ref=e322]: 16 Queued
+            - generic [ref=e323]:
+              - button "Start" [ref=e324] [cursor=pointer]:
+                - img [ref=e325]
+                - text: Start
+              - button "Add Task" [ref=e327] [cursor=pointer]:
+                - img [ref=e328]
+                - text: Add Task
+              - button [ref=e329] [cursor=pointer]:
+                - img [ref=e330]
+        - generic [ref=e333]:
+          - generic [ref=e334]:
+            - heading "Active Agents (0/7)" [level=2] [ref=e336]:
+              - img [ref=e337]
+              - text: Active Agents (0/7)
+            - generic [ref=e340]:
+              - generic [ref=e342]:
+                - generic [ref=e343]: 👨‍💻
+                - generic [ref=e344]:
+                  - generic [ref=e345]:
+                    - heading "CodeBuilder" [level=3] [ref=e346]
+                    - generic [ref=e347]: Idle
+                  - paragraph [ref=e348]: Developer
+                  - generic [ref=e352]: Standby
+                  - generic [ref=e358]:
+                    - generic [ref=e359]: React
+                    - generic [ref=e360]: Python
+                    - generic [ref=e361]: CSS
+              - generic [ref=e363]:
+                - generic [ref=e364]: 👩‍💻
+                - generic [ref=e365]:
+                  - generic [ref=e366]:
+                    - heading "DataMiner" [level=3] [ref=e367]
+                    - generic [ref=e368]: Idle
+                  - paragraph [ref=e369]: Analyst
+                  - generic [ref=e373]: Standby
+                  - generic [ref=e383]:
+                    - generic [ref=e384]: SQL
+                    - generic [ref=e385]: Pandas
+                    - generic [ref=e386]: APIs
+              - generic [ref=e388]:
+                - generic [ref=e389]: 🔍
+                - generic [ref=e390]:
+                  - generic [ref=e391]:
+                    - heading "WebScout" [level=3] [ref=e392]
+                    - generic [ref=e393]: Idle
+                  - paragraph [ref=e394]: Researcher
+                  - generic [ref=e398]: Standby
+                  - generic [ref=e404]:
+                    - generic [ref=e405]: Scraping
+                    - generic [ref=e406]: Search
+                    - generic [ref=e407]: Validation
+              - generic [ref=e409]:
+                - generic [ref=e410]: ✍️
+                - generic [ref=e411]:
+                  - generic [ref=e412]:
+                    - heading "ContentBot" [level=3] [ref=e413]
+                    - generic [ref=e414]: Idle
+                  - paragraph [ref=e415]: Writer
+                  - generic [ref=e419]: Standby
+                  - generic [ref=e425]:
+                    - generic [ref=e426]: Copy
+                    - generic [ref=e427]: Docs
+                    - generic [ref=e428]: Markdown
+              - generic [ref=e430]:
+                - generic [ref=e431]: 🧪
+                - generic [ref=e432]:
+                  - generic [ref=e433]:
+                    - heading "TestRunner" [level=3] [ref=e434]
+                    - generic [ref=e435]: Idle
+                  - paragraph [ref=e436]: QA
+                  - generic [ref=e438]:
+                    - generic [ref=e440]: Standby
+                    - generic [ref=e442]:
+                      - img [ref=e445]
+                      - img [ref=e450]
+                  - generic [ref=e456]:
+                    - generic [ref=e457]: Testing
+                    - generic [ref=e458]: Debugging
+                    - generic [ref=e459]: Review
+              - generic [ref=e461]:
+                - generic [ref=e462]: 🔍
+                - generic [ref=e463]:
+                  - generic [ref=e464]:
+                    - heading "Skeptic" [level=3] [ref=e465]
+                    - generic [ref=e466]: Idle
+                  - paragraph [ref=e467]: Fact Checker
+                  - generic [ref=e471]: Standby
+                  - generic [ref=e477]:
+                    - generic [ref=e478]: Validation
+                    - generic [ref=e479]: Sources
+                    - generic [ref=e480]: Logic
+              - generic [ref=e482]:
+                - generic [ref=e483]: 💡
+                - generic [ref=e484]:
+                  - generic [ref=e485]:
+                    - heading "Spark" [level=3] [ref=e486]
+                    - generic [ref=e487]: Idle
+                  - paragraph [ref=e488]: Ideation
+                  - generic [ref=e492]: Standby
+                  - generic [ref=e498]:
+                    - generic [ref=e499]: Brainstorming
+                    - generic [ref=e500]: Optimization
+                    - generic [ref=e501]: Strategy
+          - generic [ref=e502]:
+            - generic:
+              - heading "Task Queue" [level=2] [ref=e503]:
+                - img [ref=e504]
+                - text: Task Queue
+              - generic [ref=e508]: 16 tasks remaining
+            - generic:
+              - generic [ref=e509] [cursor=pointer]:
+                - generic:
+                  - img [ref=e511]
+                  - generic [ref=e514]:
+                    - generic [ref=e515]:
+                      - generic [ref=e516]:
+                        - heading "Create PropertyCard component" [level=3] [ref=e517]
+                        - paragraph [ref=e518]: Code Generation
+                      - generic [ref=e522]: Coding
+                      - generic [ref=e531]: high
+                    - generic [ref=e532]:
+                      - img [ref=e533]
+                      - text: Waiting for available agent...
+              - generic [ref=e536] [cursor=pointer]:
+                - generic:
+                  - img [ref=e538]
+                  - generic [ref=e541]:
+                    - generic [ref=e542]:
+                      - generic [ref=e543]:
+                        - heading "Research Toronto market trends" [level=3] [ref=e544]
+                        - paragraph [ref=e545]: Research
+                      - generic [ref=e547]:
+                        - generic [ref=e549]: Researching
+                        - img [ref=e556]
+                      - generic [ref=e561]: medium
+                    - generic [ref=e562]:
+                      - img [ref=e563]
+                      - text: Waiting for available agent...
+              - generic [ref=e566] [cursor=pointer]:
+                - generic:
+                  - img [ref=e568]
+                  - generic [ref=e571]:
+                    - generic [ref=e572]:
+                      - generic [ref=e573]:
+                        - heading "Scrape agent contact data" [level=3] [ref=e574]
+                        - paragraph [ref=e575]: Web Scraping
+                      - generic [ref=e579]: Scraping web
+                      - generic [ref=e589]: high
+                    - generic [ref=e590]:
+                      - img [ref=e591]
+                      - text: Waiting for available agent...
+              - generic [ref=e594] [cursor=pointer]:
+                - generic:
+                  - img [ref=e596]
+                  - generic [ref=e599]:
+                    - generic [ref=e600]:
+                      - generic [ref=e601]:
+                        - heading "Write API documentation" [level=3] [ref=e602]
+                        - paragraph [ref=e603]: Content Writing
+                      - generic [ref=e607]: Writing
+                      - generic [ref=e616]: low
+                    - generic [ref=e617]:
+                      - img [ref=e618]
+                      - text: Waiting for available agent...
+              - generic [ref=e621] [cursor=pointer]:
+                - generic:
+                  - img [ref=e623]
+                  - generic [ref=e625]:
+                    - generic [ref=e626]:
+                      - generic [ref=e627]:
+                        - heading "Analyze buyer patterns" [level=3] [ref=e628]
+                        - paragraph [ref=e629]: Analysis
+                      - generic [ref=e631]:
+                        - generic [ref=e633]: Analyzing
+                        - img [ref=e642]
+                      - generic [ref=e645]: medium
+                    - generic [ref=e646]:
+                      - img [ref=e647]
+                      - text: Waiting for available agent...
+              - generic [ref=e650] [cursor=pointer]:
+                - generic:
+                  - img [ref=e652]
+                  - generic [ref=e656]:
+                    - generic [ref=e657]:
+                      - generic [ref=e658]:
+                        - heading "Process database exports" [level=3] [ref=e659]
+                        - paragraph [ref=e660]: Data Processing
+                      - generic [ref=e664]: Processing data
+                      - generic [ref=e677]: high
+                    - generic [ref=e678]:
+                      - img [ref=e679]
+                      - text: Waiting for available agent...
+              - generic [ref=e682] [cursor=pointer]:
+                - generic:
+                  - img [ref=e684]
+                  - generic [ref=e687]:
+                    - generic [ref=e688]:
+                      - generic [ref=e689]:
+                        - heading "Build dashboard widget" [level=3] [ref=e690]
+                        - paragraph [ref=e691]: Code Generation
+                      - generic [ref=e695]: Coding
+                      - generic [ref=e704]: medium
+                    - generic [ref=e705]:
+                      - img [ref=e706]
+                      - text: Waiting for available agent...
+              - generic [ref=e709] [cursor=pointer]:
+                - generic:
+                  - img [ref=e711]
+                  - generic [ref=e714]:
+                    - generic [ref=e715]:
+                      - generic [ref=e716]:
+                        - heading "Research zoning laws" [level=3] [ref=e717]
+                        - paragraph [ref=e718]: Research
+                      - generic [ref=e720]:
+                        - generic [ref=e722]: Researching
+                        - img [ref=e729]
+                      - generic [ref=e734]: high
+                    - generic [ref=e735]:
+                      - img [ref=e736]
+                      - text: Waiting for available agent...
+              - generic [ref=e739] [cursor=pointer]:
+                - generic:
+                  - img [ref=e741]
+                  - generic [ref=e744]:
+                    - generic [ref=e745]:
+                      - generic [ref=e746]:
+                        - heading "Monitor price changes" [level=3] [ref=e747]
+                        - paragraph [ref=e748]: Web Scraping
+                      - generic [ref=e752]: Scraping web
+                      - generic [ref=e762]: medium
+                    - generic [ref=e763]:
+                      - img [ref=e764]
+                      - text: Waiting for available agent...
+              - generic [ref=e767] [cursor=pointer]:
+                - generic:
+                  - img [ref=e769]
+                  - generic [ref=e772]:
+                    - generic [ref=e773]:
+                      - generic [ref=e774]:
+                        - heading "Draft email campaign" [level=3] [ref=e775]
+                        - paragraph [ref=e776]: Content Writing
+                      - generic [ref=e780]: Writing
+                      - generic [ref=e789]: high
+                    - generic [ref=e790]:
+                      - img [ref=e791]
+                      - text: Waiting for available agent...
+              - generic [ref=e794] [cursor=pointer]:
+                - generic:
+                  - img [ref=e796]
+                  - generic [ref=e798]:
+                    - generic [ref=e799]:
+                      - generic [ref=e800]:
+                        - heading "Score lead quality" [level=3] [ref=e801]
+                        - paragraph [ref=e802]: Analysis
+                      - generic [ref=e804]:
+                        - generic [ref=e806]: Analyzing
+                        - img [ref=e815]
+                      - generic [ref=e818]: high
+                    - generic [ref=e819]:
+                      - img [ref=e820]
+                      - text: Waiting for available agent...
+              - generic [ref=e823] [cursor=pointer]:
+                - generic:
+                  - img [ref=e825]
+                  - generic [ref=e829]:
+                    - generic [ref=e830]:
+                      - generic [ref=e831]:
+                        - heading "Sync CRM records" [level=3] [ref=e832]
+                        - paragraph [ref=e833]: Data Processing
+                      - generic [ref=e837]: Processing data
+                      - generic [ref=e850]: low
+                    - generic [ref=e851]:
+                      - img [ref=e852]
+                      - text: Waiting for available agent...
+              - generic [ref=e855] [cursor=pointer]:
+                - generic:
+                  - img [ref=e857]
+                  - generic [ref=e860]:
+                    - generic [ref=e861]:
+                      - generic [ref=e862]:
+                        - heading "Verify market report claims" [level=3] [ref=e863]
+                        - paragraph [ref=e864]: Fact Checking
+                      - generic [ref=e866]:
+                        - generic [ref=e868]: Fact checking
+                        - generic [ref=e873]:
+                          - img [ref=e874]
+                          - img [ref=e879]
+                      - generic [ref=e882]: high
+                    - generic [ref=e883]:
+                      - img [ref=e884]
+                      - text: Waiting for available agent...
+              - generic [ref=e887] [cursor=pointer]:
+                - generic:
+                  - img [ref=e889]
+                  - generic [ref=e892]:
+                    - generic [ref=e893]:
+                      - generic [ref=e894]:
+                        - heading "Fact-check listing descriptions" [level=3] [ref=e895]
+                        - paragraph [ref=e896]: Fact Checking
+                      - generic [ref=e898]:
+                        - generic [ref=e900]: Fact checking
+                        - generic [ref=e905]:
+                          - img [ref=e906]
+                          - img [ref=e911]
+                      - generic [ref=e914]: medium
+                    - generic [ref=e915]:
+                      - img [ref=e916]
+                      - text: Waiting for available agent...
+              - generic [ref=e919] [cursor=pointer]:
+                - generic:
+                  - img [ref=e921]
+                  - generic [ref=e923]:
+                    - generic [ref=e924]:
+                      - generic [ref=e925]:
+                        - heading "Optimize outreach workflow" [level=3] [ref=e926]
+                        - paragraph [ref=e927]: Ideation
+                      - generic [ref=e929]:
+                        - generic [ref=e931]: Ideating
+                        - img [ref=e937]
+                      - generic [ref=e944]: high
+                    - generic [ref=e945]:
+                      - img [ref=e946]
+                      - text: Waiting for available agent...
+              - generic [ref=e949] [cursor=pointer]:
+                - generic:
+                  - img [ref=e951]
+                  - generic [ref=e953]:
+                    - generic [ref=e954]:
+                      - generic [ref=e955]:
+                        - heading "Rethink buyer matching strategy" [level=3] [ref=e956]
+                        - paragraph [ref=e957]: Ideation
+                      - generic [ref=e959]:
+                        - generic [ref=e961]: Ideating
+                        - img [ref=e967]
+                      - generic [ref=e974]: medium
+                    - generic [ref=e975]:
+                      - img [ref=e976]
+                      - text: Waiting for available agent...
+          - generic [ref=e979]:
+            - generic [ref=e980]:
+              - heading "Live Agent Logs" [level=2] [ref=e981]:
+                - img [ref=e982]
+                - text: Live Agent Logs
+              - button [ref=e984] [cursor=pointer]:
+                - img [ref=e985]
+            - generic [ref=e990]:
+              - img [ref=e991]
+              - paragraph [ref=e993]: Start the simulation to see agent activity
+  - button "Ctrl+Shift+V" [ref=e994] [cursor=pointer]:
+    - img [ref=e995]
+    - generic [ref=e998]: Ctrl+Shift+V

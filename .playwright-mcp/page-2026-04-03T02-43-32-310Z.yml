@@ -1,0 +1,356 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img "Control Shifter" [ref=e8]
+        - generic [ref=e9]:
+          - heading "Mission Control" [level=1] [ref=e10]
+          - paragraph [ref=e11]: Real Estate Command Center
+      - button "Collapse sidebar" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - generic [ref=e17]:
+        - button "Collapse all" [ref=e18] [cursor=pointer]
+        - button "Expand all" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - button "Main" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]: Main
+          - img [ref=e23]
+        - generic [ref=e25]:
+          - link "Mission Control" [ref=e26] [cursor=pointer]:
+            - /url: /
+            - img [ref=e27]
+            - generic [ref=e32]: Mission Control
+          - link "Property Research" [ref=e33] [cursor=pointer]:
+            - /url: /research
+            - img [ref=e34]
+            - generic [ref=e38]: Property Research
+          - link "Hot Money Radar" [ref=e39] [cursor=pointer]:
+            - /url: /hotmoney
+            - img [ref=e40]
+            - generic [ref=e42]: Hot Money Radar
+          - link "Deal Pipeline" [ref=e43] [cursor=pointer]:
+            - /url: /pipeline
+            - img [ref=e44]
+            - generic [ref=e49]: Deal Pipeline
+          - link "Opportunities" [ref=e50] [cursor=pointer]:
+            - /url: /opportunities
+            - img [ref=e51]
+            - generic [ref=e53]: Opportunities
+          - link "Agent Workspace" [ref=e54] [cursor=pointer]:
+            - /url: /agents
+            - img [ref=e55]
+            - generic [ref=e58]: Agent Workspace
+          - link "Agent Companies NEW" [ref=e59] [cursor=pointer]:
+            - /url: /paperclip-companies
+            - img [ref=e60]
+            - generic [ref=e64]: Agent Companies
+            - generic [ref=e65]: NEW
+          - link "Paperclip Dashboard (Local) LOCAL" [ref=e66] [cursor=pointer]:
+            - /url: /paperclip-dashboard
+            - img [ref=e67]
+            - generic [ref=e69]: Paperclip Dashboard (Local)
+            - generic [ref=e70]: LOCAL
+          - link "Pixel Agents (Local) LOCAL" [ref=e71] [cursor=pointer]:
+            - /url: /mission-control
+            - img [ref=e72]
+            - generic [ref=e77]: Pixel Agents (Local)
+            - generic [ref=e78]: LOCAL
+          - link "Bot Boardroom AI" [ref=e79] [cursor=pointer]:
+            - /url: /bot-boardroom
+            - img [ref=e80]
+            - generic [ref=e86]: Bot Boardroom
+            - generic [ref=e87]: AI
+          - link "Obsidian Vault" [ref=e88] [cursor=pointer]:
+            - /url: /vault
+            - img [ref=e89]
+            - generic [ref=e93]: Obsidian Vault
+      - generic [ref=e94]:
+        - button "Recruitment" [ref=e95] [cursor=pointer]:
+          - generic [ref=e96]: Recruitment
+          - img [ref=e97]
+        - generic [ref=e99]:
+          - link "EXP Agent Recruiter 96K" [ref=e100] [cursor=pointer]:
+            - /url: /exp-agent-recruiter
+            - img [ref=e101]
+            - generic [ref=e104]: EXP Agent Recruiter
+            - generic [ref=e105]: 96K
+          - link "Commercial Agents 6.7K" [ref=e106] [cursor=pointer]:
+            - /url: /commercial-agent-recruiter
+            - img [ref=e107]
+            - generic [ref=e110]: Commercial Agents
+            - generic [ref=e111]: 6.7K
+          - link "Brokerages" [ref=e112] [cursor=pointer]:
+            - /url: /brokerages
+            - img [ref=e113]
+            - generic [ref=e116]: Brokerages
+      - generic [ref=e117]:
+        - button "AI Bots" [ref=e118] [cursor=pointer]:
+          - generic [ref=e119]: AI Bots
+          - img [ref=e120]
+        - generic [ref=e122]:
+          - link "Buyer Intelligence AI" [ref=e123] [cursor=pointer]:
+            - /url: /buyer-bot
+            - img [ref=e124]
+            - generic [ref=e128]: Buyer Intelligence
+            - generic [ref=e129]: AI
+          - link "Seller Outreach AI" [ref=e130] [cursor=pointer]:
+            - /url: /seller-outreach-bot
+            - img [ref=e131]
+            - generic [ref=e136]: Seller Outreach
+            - generic [ref=e137]: AI
+          - link "Property Valuation AI" [ref=e138] [cursor=pointer]:
+            - /url: /property-valuation-bot
+            - img [ref=e139]
+            - generic [ref=e141]: Property Valuation
+            - generic [ref=e142]: AI
+          - link "Vigil Monitor 24/7" [ref=e143] [cursor=pointer]:
+            - /url: /vigil
+            - img [ref=e144]
+            - generic [ref=e146]: Vigil Monitor
+            - generic [ref=e147]: 24/7
+          - link "Agent Workspaces NEW" [ref=e148] [cursor=pointer]:
+            - /url: /agent-workspaces
+            - img [ref=e149]
+            - generic [ref=e151]: Agent Workspaces
+            - generic [ref=e152]: NEW
+          - link "Bot Builder BUILD" [ref=e153] [cursor=pointer]:
+            - /url: /bot-builder
+            - img [ref=e154]
+            - generic [ref=e158]: Bot Builder
+            - generic [ref=e159]: BUILD
+      - generic [ref=e160]:
+        - button "Tools" [ref=e161] [cursor=pointer]:
+          - generic [ref=e162]: Tools
+          - img [ref=e163]
+        - generic [ref=e165]:
+          - link "My Listings" [ref=e166] [cursor=pointer]:
+            - /url: /listings
+            - img [ref=e167]
+            - generic [ref=e171]: My Listings
+          - link "Buyer Matcher" [ref=e172] [cursor=pointer]:
+            - /url: /buyers
+            - img [ref=e173]
+            - generic [ref=e178]: Buyer Matcher
+          - link "Agent Matcher" [ref=e179] [cursor=pointer]:
+            - /url: /agents-matcher
+            - img [ref=e180]
+            - generic [ref=e184]: Agent Matcher
+          - link "Lender Matcher" [ref=e185] [cursor=pointer]:
+            - /url: /lenders
+            - img [ref=e186]
+            - generic [ref=e188]: Lender Matcher
+          - link "Builder Directory" [ref=e189] [cursor=pointer]:
+            - /url: /builders
+            - img [ref=e190]
+            - generic [ref=e194]: Builder Directory
+          - link "Property Upload" [ref=e195] [cursor=pointer]:
+            - /url: /upload
+            - img [ref=e196]
+            - generic [ref=e199]: Property Upload
+          - link "Olena Marketing NEW" [ref=e200] [cursor=pointer]:
+            - /url: /olena-feature-sheet
+            - img [ref=e201]
+            - generic [ref=e204]: Olena Marketing
+            - generic [ref=e205]: NEW
+          - link "Canva Editor NEW" [ref=e206] [cursor=pointer]:
+            - /url: /canva-editor
+            - img [ref=e207]
+            - generic [ref=e213]: Canva Editor
+            - generic [ref=e214]: NEW
+          - link "Skills & Agents" [ref=e215] [cursor=pointer]:
+            - /url: /skills
+            - img [ref=e216]
+            - generic [ref=e219]: Skills & Agents
+          - link "Map View" [ref=e220] [cursor=pointer]:
+            - /url: /map
+            - img [ref=e221]
+            - generic [ref=e223]: Map View
+          - link "Data Manager" [ref=e224] [cursor=pointer]:
+            - /url: /data-manager
+            - img [ref=e225]
+            - generic [ref=e229]: Data Manager
+          - link "AI Builder CODE" [ref=e230] [cursor=pointer]:
+            - /url: /ai-builder
+            - img [ref=e231]
+            - generic [ref=e234]: AI Builder
+            - generic [ref=e235]: CODE
+      - generic [ref=e236]:
+        - generic [ref=e237]: Original Implementations
+        - generic [ref=e238]:
+          - link "Pixel Agents (Exact) PABLO" [ref=e239] [cursor=pointer]:
+            - /url: /pixel-agents-original
+            - img [ref=e240]
+            - generic [ref=e245]: Pixel Agents (Exact)
+            - generic [ref=e246]: PABLO
+          - link "Paperclip Dashboard ORIGINAL" [ref=e247] [cursor=pointer]:
+            - /url: /paperclip-dashboard
+            - img [ref=e248]
+            - generic [ref=e250]: Paperclip Dashboard
+            - generic [ref=e251]: ORIGINAL
+      - generic [ref=e252]:
+        - generic [ref=e253]: External Links
+        - generic [ref=e254]:
+          - link "Pixel Agents (Pablo) EXACT" [ref=e255] [cursor=pointer]:
+            - /url: https://pablodelucca.github.io/pixel-agents/
+            - img [ref=e256]
+            - generic [ref=e261]: Pixel Agents (Pablo)
+            - img [ref=e262]
+            - generic [ref=e266]: EXACT
+          - link "Paperclip Dashboard ORIGINAL" [ref=e267] [cursor=pointer]:
+            - /url: http://localhost:3100
+            - img [ref=e268]
+            - generic [ref=e270]: Paperclip Dashboard
+            - img [ref=e271]
+            - generic [ref=e275]: ORIGINAL
+    - generic [ref=e279]: System Online
+  - generic [ref=e280]:
+    - banner [ref=e281]:
+      - generic [ref=e287]:
+        - img [ref=e288]
+        - generic [ref=e295]: Reconnecting...
+      - generic [ref=e298]:
+        - img [ref=e299]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e302]
+        - combobox [ref=e303]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e304]:
+        - button "Voice" [ref=e305] [cursor=pointer]:
+          - img [ref=e306]
+          - generic [ref=e312]: Voice
+        - generic [ref=e313]:
+          - img [ref=e314]
+          - generic [ref=e319]: $12.40
+        - link "Data Manager" [ref=e320] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e321]
+        - button [ref=e325] [cursor=pointer]:
+          - img [ref=e326]
+        - link [ref=e329] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e330]
+        - link "🦞" [ref=e333] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e334]: 🦞
+    - main [ref=e335]:
+      - generic [ref=e337]:
+        - generic [ref=e338]:
+          - generic [ref=e339]:
+            - heading "Pixel Agents" [level=1] [ref=e340]:
+              - img [ref=e341]
+              - text: Pixel Agents
+            - paragraph [ref=e346]: Original pixel agent visualization by Pablo De Lucca
+          - generic [ref=e347]:
+            - link "GitHub Repo" [ref=e348] [cursor=pointer]:
+              - /url: https://github.com/pablodelucca/pixel-agents
+              - img [ref=e349]
+              - generic [ref=e352]: GitHub Repo
+            - link "Open Live Demo" [ref=e353] [cursor=pointer]:
+              - /url: https://pablodelucca.github.io/pixel-agents/
+              - img [ref=e354]
+              - generic [ref=e358]: Open Live Demo
+        - generic [ref=e359]:
+          - generic [ref=e360]:
+            - img [ref=e362]
+            - heading "Original Implementation" [level=3] [ref=e364]
+            - paragraph [ref=e365]: The exact pixel agent visualization system created by Pablo De Lucca. Features canvas-based animated pixel characters with real-time status updates.
+          - generic [ref=e366]:
+            - img [ref=e368]
+            - heading "Agent States" [level=3] [ref=e370]
+            - paragraph [ref=e371]: Visual representations for idle, running, thinking, typing, delegating, and error states. Each agent has unique pixel art and animations.
+          - generic [ref=e372]:
+            - img [ref=e374]
+            - heading "Integration Ready" [level=3] [ref=e379]
+            - paragraph [ref=e380]: Designed to connect with Paperclip's agent system. Can display BigDataClaw's 20+ agents with real-time status from NERVE API.
+        - generic [ref=e381]:
+          - generic [ref=e382]:
+            - heading "Live Preview" [level=3] [ref=e383]:
+              - img [ref=e384]
+              - text: Live Preview
+            - link "Open in full screen" [ref=e389] [cursor=pointer]:
+              - /url: https://pablodelucca.github.io/pixel-agents/
+              - text: Open in full screen
+              - img [ref=e390]
+          - generic [ref=e394]:
+            - iframe [ref=e395]:
+              - generic [ref=f1e2]:
+                - heading "404" [level=1] [ref=f1e3]
+                - paragraph [ref=f1e4]:
+                  - strong [ref=f1e5]: There isn't a GitHub Pages site here.
+                - paragraph [ref=f1e6]:
+                  - text: If you're trying to publish one,
+                  - link "read the full documentation" [ref=f1e7] [cursor=pointer]:
+                    - /url: https://help.github.com/pages/
+                  - text: to learn how to set up
+                  - strong [ref=f1e8]: GitHub Pages
+                  - text: for your repository, organization, or user account.
+                - generic [ref=f1e9]:
+                  - link "GitHub Status" [ref=f1e10] [cursor=pointer]:
+                    - /url: https://githubstatus.com
+                  - text: —
+                  - link "@githubstatus" [ref=f1e11] [cursor=pointer]:
+                    - /url: https://twitter.com/githubstatus
+                - link [ref=f1e12] [cursor=pointer]:
+                  - /url: /
+            - generic: Click to interact
+        - generic [ref=e396]:
+          - heading "BigDataClaw Integration Plan" [level=3] [ref=e397]:
+            - img [ref=e398]
+            - text: BigDataClaw Integration Plan
+          - generic [ref=e403]:
+            - paragraph [ref=e404]:
+              - strong [ref=e405]: "Phase 1:"
+              - text: Connect Pixel Agents to NERVE API WebSocket for real-time agent status
+            - paragraph [ref=e406]:
+              - strong [ref=e407]: "Phase 2:"
+              - text: Map Paperclip agent states (idle, running, error, paused) to pixel animations
+            - paragraph [ref=e408]:
+              - strong [ref=e409]: "Phase 3:"
+              - text: Display all 20+ BigDataClaw agents with their org chart hierarchy
+            - paragraph [ref=e410]:
+              - strong [ref=e411]: "Phase 4:"
+              - text: Add click-to-inspect for agent details, logs, and budget status
+          - generic [ref=e412]:
+            - link "View Local Integration" [ref=e413] [cursor=pointer]:
+              - /url: http://localhost:8081/mission-control
+            - generic [ref=e414]: Local Mission Control pixel agent visualization
+        - generic [ref=e415]:
+          - heading "Agent State Mapping" [level=3] [ref=e416]
+          - generic [ref=e417]:
+            - generic [ref=e420]:
+              - generic [ref=e421]: 💤 Idle
+              - generic [ref=e422]: Waiting for task
+            - generic [ref=e424]:
+              - generic [ref=e425]: ⚡ Running
+              - generic [ref=e426]: Active processing
+            - generic [ref=e429]:
+              - generic [ref=e430]: 🤔 Thinking
+              - generic [ref=e431]: Analyzing data
+            - generic [ref=e434]:
+              - generic [ref=e435]: ⌨️ Typing
+              - generic [ref=e436]: Writing output
+            - generic [ref=e438]:
+              - generic [ref=e439]: 🔗 Delegating
+              - generic [ref=e440]: Assigning tasks
+            - generic [ref=e442]:
+              - generic [ref=e443]: ❌ Error
+              - generic [ref=e444]: Failed/Blocked
+            - generic [ref=e447]:
+              - generic [ref=e448]: ⏸️ Paused
+              - generic [ref=e449]: Manually paused
+            - generic [ref=e451]:
+              - generic [ref=e452]: ✅ Completed
+              - generic [ref=e453]: Task finished
+        - paragraph [ref=e455]:
+          - text: Pixel Agents by
+          - link "Pablo De Lucca" [ref=e456] [cursor=pointer]:
+            - /url: https://github.com/pablodelucca
+          - text: • Integrated with BigDataClaw Mission Control
+  - button "Ctrl+Shift+V" [ref=e457] [cursor=pointer]:
+    - img [ref=e458]
+    - generic [ref=e461]: Ctrl+Shift+V

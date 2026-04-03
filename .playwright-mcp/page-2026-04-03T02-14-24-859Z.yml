@@ -1,0 +1,531 @@
+- generic:
+  - generic:
+    - generic:
+      - link:
+        - /url: "#main-content"
+        - text: Skip to Main Content
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - img
+              - generic:
+                - button:
+                  - link:
+                    - /url: /NIAAAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: "N"
+                - button:
+                  - link:
+                    - /url: /TES/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: T
+                - button:
+                  - link:
+                    - /url: /NIAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: "N"
+                - button:
+                  - link:
+                    - /url: /NIA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: "N"
+                - button:
+                  - link:
+                    - /url: /TESA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: T
+                - button:
+                  - link:
+                    - /url: /NIAAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: "N"
+                - button:
+                  - link:
+                    - /url: /TESAAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: T
+                - button:
+                  - link:
+                    - /url: /ABC/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: A
+                - button:
+                  - link:
+                    - /url: /FAC/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: F
+                - button:
+                  - link:
+                    - /url: /TESAA/dashboard
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: M
+                - status
+              - generic:
+                - button:
+                  - img
+            - generic:
+              - complementary:
+                - generic:
+                  - generic: Niagara High-Rise Verified Mission Company
+                  - button:
+                    - img
+                - navigation:
+                  - generic:
+                    - button:
+                      - img
+                      - generic: New Issue
+                    - link:
+                      - /url: /NIAAAA/dashboard
+                      - generic:
+                        - img
+                      - generic: Dashboard
+                    - link:
+                      - /url: /NIAAAA/inbox
+                      - generic:
+                        - img
+                      - generic: Inbox
+                      - generic: "6"
+                    - generic:
+                      - generic:
+                        - link:
+                          - /url: /NIAAAA/kitchensink
+                          - generic:
+                            - img
+                          - generic: Kitchen Sink
+                  - generic:
+                    - generic: Work
+                    - generic:
+                      - link:
+                        - /url: /NIAAAA/issues
+                        - generic:
+                          - img
+                        - generic: Issues
+                      - link:
+                        - /url: /NIAAAA/routines
+                        - generic:
+                          - img
+                        - generic: Routines
+                        - generic: Beta
+                      - link:
+                        - /url: /NIAAAA/goals
+                        - generic:
+                          - img
+                        - generic: Goals
+                  - generic:
+                    - generic:
+                      - generic:
+                        - button [expanded]:
+                          - img
+                          - generic: Projects
+                        - button:
+                          - img
+                    - generic:
+                      - status
+                  - generic:
+                    - generic:
+                      - generic:
+                        - button [expanded]:
+                          - img
+                          - generic: Agents
+                        - button:
+                          - img
+                    - generic:
+                      - generic:
+                        - link:
+                          - /url: /NIAAAA/agents/builder-scout
+                          - img
+                          - generic: Builder Scout
+                        - link:
+                          - /url: /NIAAAA/agents/buyer-scout
+                          - img
+                          - generic: Buyer Scout
+                        - link:
+                          - /url: /NIAAAA/agents/ceo-strategy
+                          - img
+                          - generic: CEO Strategy
+                  - generic:
+                    - generic: Company
+                    - generic:
+                      - link:
+                        - /url: /NIAAAA/org
+                        - generic:
+                          - img
+                        - generic: Org
+                      - link:
+                        - /url: /NIAAAA/skills
+                        - generic:
+                          - img
+                        - generic: Skills
+                      - link:
+                        - /url: /NIAAAA/costs
+                        - generic:
+                          - img
+                        - generic: Costs
+                      - link:
+                        - /url: /NIAAAA/activity
+                        - generic:
+                          - img
+                        - generic: Activity
+                      - link:
+                        - /url: /NIAAAA/company/settings
+                        - generic:
+                          - img
+                        - generic: Settings
+                  - generic:
+                    - generic:
+                      - generic:
+                        - strong: Kitchen Sink Panel
+                        - generic: "Recent plugin records: 1"
+                        - link:
+                          - /url: /NIAAAA/kitchensink
+                          - text: Open plugin page
+          - generic:
+            - generic:
+              - link:
+                - /url: https://docs.paperclip.ing/
+                - img
+                - generic: Documentation
+              - generic: v
+              - link:
+                - /url: /instance/settings/general
+                - img
+              - button:
+                - img
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - heading [level=1]: Dashboard
+          - generic:
+            - main:
+              - generic:
+                - generic:
+                  - heading [level=3]: Agents
+                  - generic:
+                    - paragraph: No recent agent runs.
+                - generic:
+                  - link:
+                    - /url: /NIAAAA/agents
+                    - generic:
+                      - generic:
+                        - generic:
+                          - paragraph: "3"
+                          - paragraph: Agents Enabled
+                          - generic:
+                            - generic: 0 running, 0 paused, 0 errors
+                        - img
+                  - link:
+                    - /url: /NIAAAA/issues
+                    - generic:
+                      - generic:
+                        - generic:
+                          - paragraph: "0"
+                          - paragraph: Tasks In Progress
+                          - generic:
+                            - generic: 6 open, 0 blocked
+                        - img
+                  - link:
+                    - /url: /NIAAAA/costs
+                    - generic:
+                      - generic:
+                        - generic:
+                          - paragraph: $0.00
+                          - paragraph: Month Spend
+                          - generic: Unlimited budget
+                        - img
+                  - link:
+                    - /url: /NIAAAA/approvals
+                    - generic:
+                      - generic:
+                        - generic:
+                          - paragraph: "0"
+                          - paragraph: Pending Approvals
+                          - generic: Awaiting board review
+                        - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Run Activity
+                      - text: Last 14 days
+                    - paragraph: No runs yet
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Issues by Priority
+                      - text: Last 14 days
+                    - generic:
+                      - generic:
+                        - generic: 3/21
+                        - generic: 3/27
+                        - generic: 4/3
+                      - generic:
+                        - generic: Critical
+                        - generic: High
+                        - generic: Medium
+                        - generic: Low
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Issues by Status
+                      - text: Last 14 days
+                    - generic:
+                      - generic:
+                        - generic: 3/21
+                        - generic: 3/27
+                        - generic: 4/3
+                      - generic:
+                        - generic: Backlog
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Success Rate
+                      - text: Last 14 days
+                    - paragraph: No runs yet
+                - generic:
+                  - generic:
+                    - region:
+                      - strong: Hello world
+                      - generic: This widget was added by @paperclipai/plugin-hello-world-example.
+                      - generic: "Company context: 5bae9f16-3f16-4774-9aea-b484d9de4b85"
+                  - generic:
+                    - generic:
+                      - generic:
+                        - strong: Kitchen Sink
+                        - generic: dashboardWidget
+                      - generic: Plugin runtime surface demo for the current company.
+                      - generic:
+                        - generic: "Recent records: 1"
+                        - generic: "Projects: 0"
+                        - generic: "Issues: 6"
+                      - generic:
+                        - link:
+                          - /url: /kitchensink
+                          - text: Open page
+                        - button: Write metric
+                - generic:
+                  - generic:
+                    - heading [level=3]: Recent Activity
+                    - generic:
+                      - generic:
+                        - generic:
+                          - paragraph:
+                            - generic:
+                              - generic:
+                                - generic: BO
+                              - generic: Board
+                            - generic: plugin installed
+                          - generic: 1h ago
+                      - generic:
+                        - generic:
+                          - paragraph:
+                            - generic:
+                              - generic:
+                                - generic: BO
+                              - generic: Board
+                            - generic: plugin installed
+                          - generic: 1h ago
+                      - generic:
+                        - generic:
+                          - paragraph:
+                            - generic:
+                              - generic:
+                                - generic: BO
+                              - generic: Board
+                            - generic: plugin installed
+                          - generic: 1h ago
+                      - generic:
+                        - generic:
+                          - paragraph:
+                            - generic:
+                              - generic:
+                                - generic: BO
+                              - generic: Board
+                            - generic: instance settings experimental updated
+                          - generic: 1h ago
+                      - generic:
+                        - generic:
+                          - paragraph:
+                            - generic:
+                              - generic:
+                                - generic: BO
+                              - generic: Board
+                            - generic: instance settings experimental updated
+                          - generic: 1h ago
+                      - link:
+                        - /url: /NIAAAA/issues/NIAAAA-6
+                        - generic:
+                          - paragraph:
+                            - generic:
+                              - generic:
+                                - generic: BO
+                              - generic: Board
+                            - generic: issue read marked
+                            - text: NIAAAA-6
+                            - generic: "— Phase 6: Results Compilation"
+                          - generic: 1h ago
+                      - link:
+                        - /url: /NIAAAA/issues/NIAAAA-6
+                        - generic:
+                          - paragraph:
+                            - generic:
+                              - generic:
+                                - generic: BO
+                              - generic: Board
+                            - generic: created
+                            - text: NIAAAA-6
+                            - generic: "— Phase 6: Results Compilation"
+                          - generic: 8h ago
+                      - link:
+                        - /url: /NIAAAA/issues/NIAAAA-5
+                        - generic:
+                          - paragraph:
+                            - generic:
+                              - generic:
+                                - generic: BO
+                              - generic: Board
+                            - generic: created
+                            - text: NIAAAA-5
+                            - generic: "— Phase 5: Lender Matcher"
+                          - generic: 8h ago
+                      - link:
+                        - /url: /NIAAAA/issues/NIAAAA-4
+                        - generic:
+                          - paragraph:
+                            - generic:
+                              - generic:
+                                - generic: BO
+                              - generic: Board
+                            - generic: created
+                            - text: NIAAAA-4
+                            - generic: "— Phase 4: Agent Finder"
+                          - generic: 8h ago
+                      - link:
+                        - /url: /NIAAAA/issues/NIAAAA-3
+                        - generic:
+                          - paragraph:
+                            - generic:
+                              - generic:
+                                - generic: BO
+                              - generic: Board
+                            - generic: created
+                            - text: NIAAAA-3
+                            - generic: "— Phase 3: Portfolio Analyzer"
+                          - generic: 8h ago
+                  - generic:
+                    - heading [level=3]: Recent Tasks
+                    - generic:
+                      - link:
+                        - /url: /NIAAAA/issues/NIAAAA-6
+                        - generic:
+                          - generic:
+                            - generic: "Phase 6: Results Compilation"
+                            - generic:
+                              - generic: NIAAAA-6
+                              - generic: 8h ago
+                      - link:
+                        - /url: /NIAAAA/issues/NIAAAA-5
+                        - generic:
+                          - generic:
+                            - generic: "Phase 5: Lender Matcher"
+                            - generic:
+                              - generic: NIAAAA-5
+                              - generic: 8h ago
+                      - link:
+                        - /url: /NIAAAA/issues/NIAAAA-4
+                        - generic:
+                          - generic:
+                            - generic: "Phase 4: Agent Finder"
+                            - generic:
+                              - generic: NIAAAA-4
+                              - generic: 8h ago
+                      - link:
+                        - /url: /NIAAAA/issues/NIAAAA-3
+                        - generic:
+                          - generic:
+                            - generic: "Phase 3: Portfolio Analyzer"
+                            - generic:
+                              - generic: NIAAAA-3
+                              - generic: 8h ago
+                      - link:
+                        - /url: /NIAAAA/issues/NIAAAA-2
+                        - generic:
+                          - generic:
+                            - generic: "Phase 2: Hot Money Identifier"
+                            - generic:
+                              - generic: NIAAAA-2
+                              - generic: 8h ago
+                      - link:
+                        - /url: /NIAAAA/issues/NIAAAA-1
+                        - generic:
+                          - generic:
+                            - generic: "Phase 1: Transaction Scout"
+                            - generic:
+                              - generic: NIAAAA-1
+                              - generic: 8h ago
+      - generic:
+        - heading [level=2]: Command Palette
+        - paragraph: Search for a command to run...
+  - dialog [ref=e586]:
+    - generic [ref=e587]:
+      - generic [ref=e588]:
+        - button "NIA" [ref=e589] [cursor=pointer]
+        - generic [ref=e590]: ›
+        - generic [ref=e591]: New issue
+      - generic [ref=e592]:
+        - button [ref=e593]:
+          - img
+        - button "×" [ref=e594]:
+          - generic [ref=e595]: ×
+    - textbox "Issue title" [active] [ref=e597]
+    - generic [ref=e600]:
+      - generic [ref=e601]: For
+      - button "Assignee" [ref=e602]:
+        - generic [ref=e603]: Assignee
+      - generic [ref=e604]: in
+      - button "Project" [ref=e605]:
+        - generic [ref=e606]: Project
+    - generic [ref=e611]:
+      - textbox "editable markdown" [ref=e613]:
+        - paragraph [ref=e614]
+      - generic:
+        - paragraph: Add description...
+    - generic [ref=e615]:
+      - button "Todo" [ref=e616]:
+        - img [ref=e617]
+        - text: Todo
+      - button "Priority" [ref=e620]:
+        - img [ref=e621]
+        - text: Priority
+      - button "Labels" [ref=e622]:
+        - img [ref=e623]
+        - text: Labels
+      - button "Upload" [ref=e626]:
+        - img [ref=e627]
+        - text: Upload
+      - button [ref=e629]:
+        - img [ref=e630]
+    - generic [ref=e634]:
+      - button "Discard Draft" [disabled]
+      - generic [ref=e635]:
+        - button "Create Issue" [disabled]:
+          - generic:
+            - generic: Create Issue

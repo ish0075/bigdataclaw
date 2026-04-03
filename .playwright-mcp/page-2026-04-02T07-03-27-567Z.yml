@@ -1,0 +1,386 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - img "Control Shifter" [ref=e8]
+      - generic [ref=e9]:
+        - heading "Mission Control" [level=1] [ref=e10]
+        - paragraph [ref=e11]: Real Estate Command Center
+    - navigation [ref=e12]:
+      - generic [ref=e13]: Main
+      - link "Mission Control" [ref=e14] [cursor=pointer]:
+        - /url: /
+        - img [ref=e15]
+        - generic [ref=e20]: Mission Control
+      - link "Property Research" [ref=e21] [cursor=pointer]:
+        - /url: /research
+        - img [ref=e22]
+        - generic [ref=e26]: Property Research
+      - link "Hot Money Radar" [ref=e27] [cursor=pointer]:
+        - /url: /hotmoney
+        - img [ref=e28]
+        - generic [ref=e30]: Hot Money Radar
+      - link "Deal Pipeline" [active] [ref=e31] [cursor=pointer]:
+        - /url: /pipeline
+        - img [ref=e32]
+        - generic [ref=e37]: Deal Pipeline
+      - link "Opportunities" [ref=e38] [cursor=pointer]:
+        - /url: /opportunities
+        - img [ref=e39]
+        - generic [ref=e41]: Opportunities
+      - link "Agent Workspace" [ref=e42] [cursor=pointer]:
+        - /url: /agents
+        - img [ref=e43]
+        - generic [ref=e46]: Agent Workspace
+      - link "Bot Boardroom" [ref=e47] [cursor=pointer]:
+        - /url: /bot-boardroom
+        - img [ref=e48]
+        - generic [ref=e54]: Bot Boardroom
+      - link "Obsidian Vault" [ref=e55] [cursor=pointer]:
+        - /url: /vault
+        - img [ref=e56]
+        - generic [ref=e60]: Obsidian Vault
+      - generic [ref=e61]: Recruitment
+      - link "EXP Agent Recruiter 96K" [ref=e62] [cursor=pointer]:
+        - /url: /exp-agent-recruiter
+        - img [ref=e63]
+        - generic [ref=e66]: EXP Agent Recruiter
+        - generic [ref=e67]: 96K
+      - link "Commercial Agents 6.7K" [ref=e68] [cursor=pointer]:
+        - /url: /commercial-agent-recruiter
+        - img [ref=e69]
+        - generic [ref=e72]: Commercial Agents
+        - generic [ref=e73]: 6.7K
+      - link "Brokerages" [ref=e74] [cursor=pointer]:
+        - /url: /brokerages
+        - img [ref=e75]
+        - generic [ref=e78]: Brokerages
+      - generic [ref=e79]: AI Bots
+      - link "Buyer Intelligence AI" [ref=e80] [cursor=pointer]:
+        - /url: /buyer-bot
+        - img [ref=e81]
+        - generic [ref=e85]: Buyer Intelligence
+        - generic [ref=e86]: AI
+      - link "Seller Outreach AI" [ref=e87] [cursor=pointer]:
+        - /url: /seller-outreach-bot
+        - img [ref=e88]
+        - generic [ref=e93]: Seller Outreach
+        - generic [ref=e94]: AI
+      - link "Property Valuation AI" [ref=e95] [cursor=pointer]:
+        - /url: /property-valuation-bot
+        - img [ref=e96]
+        - generic [ref=e98]: Property Valuation
+        - generic [ref=e99]: AI
+      - link "Vigil Monitor 24/7" [ref=e100] [cursor=pointer]:
+        - /url: /vigil
+        - img [ref=e101]
+        - generic [ref=e103]: Vigil Monitor
+        - generic [ref=e104]: 24/7
+      - link "Agent Workspaces NEW" [ref=e105] [cursor=pointer]:
+        - /url: /agent-workspaces
+        - img [ref=e106]
+        - generic [ref=e108]: Agent Workspaces
+        - generic [ref=e109]: NEW
+      - link "Bot Builder BUILD" [ref=e110] [cursor=pointer]:
+        - /url: /bot-builder
+        - img [ref=e111]
+        - generic [ref=e115]: Bot Builder
+        - generic [ref=e116]: BUILD
+      - link "Agent Visualizer LIVE" [ref=e117] [cursor=pointer]:
+        - /url: /mission-control
+        - img [ref=e118]
+        - generic [ref=e120]: Agent Visualizer
+        - generic [ref=e121]: LIVE
+      - generic [ref=e122]: Tools
+      - link "My Listings" [ref=e123] [cursor=pointer]:
+        - /url: /listings
+        - img [ref=e124]
+        - generic [ref=e128]: My Listings
+      - link "Buyer Matcher" [ref=e129] [cursor=pointer]:
+        - /url: /buyers
+        - img [ref=e130]
+        - generic [ref=e135]: Buyer Matcher
+      - link "Agent Matcher" [ref=e136] [cursor=pointer]:
+        - /url: /agents-matcher
+        - img [ref=e137]
+        - generic [ref=e141]: Agent Matcher
+      - link "Lender Matcher" [ref=e142] [cursor=pointer]:
+        - /url: /lenders
+        - img [ref=e143]
+        - generic [ref=e145]: Lender Matcher
+      - link "Builder Directory" [ref=e146] [cursor=pointer]:
+        - /url: /builders
+        - img [ref=e147]
+        - generic [ref=e151]: Builder Directory
+      - link "Property Upload" [ref=e152] [cursor=pointer]:
+        - /url: /upload
+        - img [ref=e153]
+        - generic [ref=e156]: Property Upload
+      - link "Olena Marketing" [ref=e157] [cursor=pointer]:
+        - /url: /olena-feature-sheet
+        - img [ref=e158]
+        - generic [ref=e161]: Olena Marketing
+      - link "Canva Editor" [ref=e162] [cursor=pointer]:
+        - /url: /canva-editor
+        - img [ref=e163]
+        - generic [ref=e169]: Canva Editor
+      - link "Skills & Agents" [ref=e170] [cursor=pointer]:
+        - /url: /skills
+        - img [ref=e171]
+        - generic [ref=e174]: Skills & Agents
+      - link "Map View" [ref=e175] [cursor=pointer]:
+        - /url: /map
+        - img [ref=e176]
+        - generic [ref=e178]: Map View
+      - link "Data Manager" [ref=e179] [cursor=pointer]:
+        - /url: /data-manager
+        - img [ref=e180]
+        - generic [ref=e184]: Data Manager
+      - link "AI Builder" [ref=e185] [cursor=pointer]:
+        - /url: /ai-builder
+        - img [ref=e186]
+        - generic [ref=e189]: AI Builder
+    - generic [ref=e193]: System Online
+  - generic [ref=e194]:
+    - banner [ref=e195]:
+      - generic [ref=e201]:
+        - img [ref=e481]
+        - generic [ref=e209]: Connected
+      - generic [ref=e212]:
+        - img [ref=e213]
+        - textbox "Search builders, agents, lenders, properties..." [ref=e216]
+        - combobox [ref=e217]:
+          - option "All" [selected]
+          - option "Builders"
+          - option "Agents"
+          - option "Lenders"
+          - option "Properties"
+          - option "Buyers"
+      - generic [ref=e218]:
+        - button "Help" [ref=e486] [cursor=pointer]:
+          - img [ref=e487]
+          - generic [ref=e490]: Help
+        - button "Voice" [ref=e219] [cursor=pointer]:
+          - img [ref=e220]
+          - generic [ref=e226]: Voice
+        - generic [ref=e227]:
+          - img [ref=e228]
+          - generic [ref=e233]: $12.40
+        - link "Data Manager" [ref=e234] [cursor=pointer]:
+          - /url: /data-manager
+          - img [ref=e235]
+        - button [ref=e239] [cursor=pointer]:
+          - img [ref=e240]
+        - link [ref=e243] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e244]
+        - link "🦞" [ref=e247] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e248]: 🦞
+    - main [ref=e249]:
+      - generic [ref=e491]:
+        - generic [ref=e492]:
+          - generic [ref=e493]:
+            - heading "Deal Pipeline" [level=1] [ref=e494]
+            - paragraph [ref=e495]: Track your active deals from lead to close
+          - generic [ref=e496]:
+            - generic [ref=e497]:
+              - img [ref=e498]
+              - textbox "Search deals..." [ref=e501]
+            - button "Filter" [ref=e502] [cursor=pointer]:
+              - img [ref=e503]
+              - text: Filter
+            - button "Export" [ref=e505] [cursor=pointer]:
+              - img [ref=e506]
+              - text: Export
+            - button "New Deal" [ref=e509] [cursor=pointer]:
+              - img [ref=e510]
+              - text: New Deal
+        - generic [ref=e511]:
+          - generic [ref=e512]:
+            - generic [ref=e514]:
+              - generic [ref=e515]:
+                - generic [ref=e516]: 🔵
+                - generic [ref=e517]: New
+              - generic [ref=e518]: (2)
+            - generic [ref=e519]:
+              - generic [ref=e520]:
+                - generic [ref=e521]:
+                  - generic [ref=e522]:
+                    - heading "Dream Industrial REIT" [level=4] [ref=e523]
+                    - paragraph [ref=e524]: $5.0M • Industrial
+                    - paragraph [ref=e525]: Welland
+                  - generic [ref=e526]: "95"
+                - generic [ref=e527]:
+                  - generic [ref=e528]: New
+                  - button "Move to Contacted" [ref=e529] [cursor=pointer]:
+                    - img [ref=e530]
+                - generic [ref=e532]:
+                  - button "Call" [ref=e533] [cursor=pointer]:
+                    - img [ref=e534]
+                  - button "Email" [ref=e536] [cursor=pointer]:
+                    - img [ref=e537]
+                  - button "LinkedIn" [ref=e540] [cursor=pointer]:
+                    - img [ref=e541]
+                  - button "More" [ref=e545] [cursor=pointer]:
+                    - img [ref=e546]
+                - generic [ref=e550]:
+                  - img [ref=e551]
+                  - generic [ref=e553]: Updated 4/2/2026
+              - generic [ref=e554]:
+                - generic [ref=e555]:
+                  - generic [ref=e556]:
+                    - heading "Stone Eagle Winery" [level=4] [ref=e557]
+                    - paragraph [ref=e558]: $7.0M • Vineyard
+                    - paragraph [ref=e559]: NOTL
+                  - generic [ref=e560]: "92"
+                - generic [ref=e561]:
+                  - generic [ref=e562]: New
+                  - button "Move to Contacted" [ref=e563] [cursor=pointer]:
+                    - img [ref=e564]
+                - generic [ref=e566]:
+                  - button "Call" [ref=e567] [cursor=pointer]:
+                    - img [ref=e568]
+                  - button "Email" [ref=e570] [cursor=pointer]:
+                    - img [ref=e571]
+                  - button "LinkedIn" [ref=e574] [cursor=pointer]:
+                    - img [ref=e575]
+                  - button "More" [ref=e579] [cursor=pointer]:
+                    - img [ref=e580]
+                - generic [ref=e584]:
+                  - img [ref=e585]
+                  - generic [ref=e587]: Updated 4/2/2026
+          - generic [ref=e588]:
+            - generic [ref=e590]:
+              - generic [ref=e591]:
+                - generic [ref=e592]: 🟡
+                - generic [ref=e593]: Contacted
+              - generic [ref=e594]: (2)
+            - generic [ref=e595]:
+              - generic [ref=e596]:
+                - generic [ref=e597]:
+                  - generic [ref=e598]:
+                    - heading "Tregunno Fruit Farms" [level=4] [ref=e599]
+                    - paragraph [ref=e600]: $8.0M • Farm
+                    - paragraph [ref=e601]: NOTL
+                  - generic [ref=e602]: "88"
+                - generic [ref=e603]:
+                  - button "Move to New" [ref=e604] [cursor=pointer]:
+                    - img [ref=e605]
+                  - generic [ref=e607]: Contacted
+                  - button "Move to Offer Out" [ref=e608] [cursor=pointer]:
+                    - img [ref=e609]
+                - generic [ref=e611]:
+                  - button "Call" [ref=e612] [cursor=pointer]:
+                    - img [ref=e613]
+                  - button "Email" [ref=e615] [cursor=pointer]:
+                    - img [ref=e616]
+                  - button "LinkedIn" [ref=e619] [cursor=pointer]:
+                    - img [ref=e620]
+                  - button "More" [ref=e624] [cursor=pointer]:
+                    - img [ref=e625]
+                - generic [ref=e629]:
+                  - img [ref=e630]
+                  - generic [ref=e632]: Updated 4/2/2026
+              - generic [ref=e633]:
+                - generic [ref=e634]:
+                  - generic [ref=e635]:
+                    - heading "Walker Industries" [level=4] [ref=e636]
+                    - paragraph [ref=e637]: $4.0M • Land
+                    - paragraph [ref=e638]: Niagara
+                  - generic [ref=e639]: "85"
+                - generic [ref=e640]:
+                  - button "Move to New" [ref=e641] [cursor=pointer]:
+                    - img [ref=e642]
+                  - generic [ref=e644]: Contacted
+                  - button "Move to Offer Out" [ref=e645] [cursor=pointer]:
+                    - img [ref=e646]
+                - generic [ref=e648]:
+                  - button "Call" [ref=e649] [cursor=pointer]:
+                    - img [ref=e650]
+                  - button "Email" [ref=e652] [cursor=pointer]:
+                    - img [ref=e653]
+                  - button "LinkedIn" [ref=e656] [cursor=pointer]:
+                    - img [ref=e657]
+                  - button "More" [ref=e661] [cursor=pointer]:
+                    - img [ref=e662]
+                - generic [ref=e666]:
+                  - img [ref=e667]
+                  - generic [ref=e669]: Updated 4/2/2026
+          - generic [ref=e670]:
+            - generic [ref=e672]:
+              - generic [ref=e673]:
+                - generic [ref=e674]: 🟠
+                - generic [ref=e675]: Offer Out
+              - generic [ref=e676]: (1)
+            - generic [ref=e678]:
+              - generic [ref=e679]:
+                - generic [ref=e680]:
+                  - heading "Pure Industrial" [level=4] [ref=e681]
+                  - paragraph [ref=e682]: $3.5M • Industrial
+                  - paragraph [ref=e683]: Welland
+                - generic [ref=e684]: "88"
+              - generic [ref=e685]:
+                - button "Move to Contacted" [ref=e686] [cursor=pointer]:
+                  - img [ref=e687]
+                - generic [ref=e689]: Offer Out
+                - button "Move to Closing" [ref=e690] [cursor=pointer]:
+                  - img [ref=e691]
+              - generic [ref=e693]:
+                - button "Call" [ref=e694] [cursor=pointer]:
+                  - img [ref=e695]
+                - button "Email" [ref=e697] [cursor=pointer]:
+                  - img [ref=e698]
+                - button "LinkedIn" [ref=e701] [cursor=pointer]:
+                  - img [ref=e702]
+                - button "More" [ref=e706] [cursor=pointer]:
+                  - img [ref=e707]
+              - generic [ref=e711]:
+                - img [ref=e712]
+                - generic [ref=e714]: Updated 4/2/2026
+          - generic [ref=e715]:
+            - generic [ref=e717]:
+              - generic [ref=e718]:
+                - generic [ref=e719]: 🟢
+                - generic [ref=e720]: Closing
+              - generic [ref=e721]: (1)
+            - generic [ref=e723]:
+              - generic [ref=e724]:
+                - generic [ref=e725]:
+                  - heading "Carttera" [level=4] [ref=e726]
+                  - paragraph [ref=e727]: $12.0M • Mixed-Use
+                  - paragraph [ref=e728]: Niagara
+                - generic [ref=e729]: "92"
+              - generic [ref=e730]:
+                - button "Move to Offer Out" [ref=e731] [cursor=pointer]:
+                  - img [ref=e732]
+                - generic [ref=e734]: Closing
+              - generic [ref=e735]:
+                - button "Call" [ref=e736] [cursor=pointer]:
+                  - img [ref=e737]
+                - button "Email" [ref=e739] [cursor=pointer]:
+                  - img [ref=e740]
+                - button "LinkedIn" [ref=e743] [cursor=pointer]:
+                  - img [ref=e744]
+                - button "More" [ref=e748] [cursor=pointer]:
+                  - img [ref=e749]
+              - generic [ref=e753]:
+                - img [ref=e754]
+                - generic [ref=e756]: Updated 4/2/2026
+        - generic [ref=e757]:
+          - heading "Pipeline Summary" [level=3] [ref=e758]
+          - generic [ref=e759]:
+            - generic [ref=e760]:
+              - paragraph [ref=e761]: Total Pipeline Value
+              - paragraph [ref=e762]: $39.5M
+            - generic [ref=e763]:
+              - paragraph [ref=e764]: Active Deals
+              - paragraph [ref=e765]: "6"
+            - generic [ref=e766]:
+              - paragraph [ref=e767]: Avg Match Score
+              - paragraph [ref=e768]: "90"
+            - generic [ref=e769]:
+              - paragraph [ref=e770]: Closing This Month
+              - paragraph [ref=e771]: "1"
+  - button "Ctrl+Shift+V" [ref=e476] [cursor=pointer]:
+    - img [ref=e477]
+    - generic [ref=e480]: Ctrl+Shift+V

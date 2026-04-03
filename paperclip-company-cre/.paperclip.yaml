@@ -1,0 +1,152 @@
+schema: paperclip/v1
+
+# Company-wide settings
+company:
+  requireBoardApprovalForNewAgents: true
+  budgetMonthlyCents: 10000000  # $100K monthly budget
+  feedbackDataSharingEnabled: false
+
+# Agent configurations
+agents:
+  ceo:
+    adapter:
+      type: process
+      config:
+        command: node
+        args: ["--eval", "console.log('CEO heartbeat')"]
+        timeoutSec: 300
+        cwd: ./agents/ceo
+    budgetMonthlyCents: 2000000  # $20K
+    permissions:
+      canCreateAgents: true
+      canApproveHires: true
+      canSetStrategy: true
+    skills:
+      - paperclip-nerve-gateway
+      - cre-research
+      
+  cto:
+    adapter:
+      type: nerve_gateway
+      config:
+        url: http://127.0.0.1:8000
+        timeoutSec: 120
+        apiKey: "${NERVE_API_KEY}"
+    budgetMonthlyCents: 1500000  # $15K
+    permissions:
+      canCreateAgents: true
+    skills:
+      - paperclip-nerve-gateway
+      - cre-research
+      - hot-money-analysis
+      
+  cmo:
+    adapter:
+      type: process
+      config:
+        command: node
+        args: ["--eval", "console.log('CMO heartbeat')"]
+        timeoutSec: 180
+    budgetMonthlyCents: 1500000  # $15K
+    permissions:
+      canCreateAgents: true
+    skills:
+      - outreach-drafting
+      - cre-research
+      
+  buyer-scout:
+    adapter:
+      type: nerve_gateway
+      config:
+        url: http://127.0.0.1:8000
+        timeoutSec: 60
+        apiKey: "${NERVE_API_KEY}"
+    budgetMonthlyCents: 1000000  # $10K
+    skills:
+      - paperclip-nerve-gateway
+      - hot-money-analysis
+      - cre-research
+      
+  builder-scout:
+    adapter:
+      type: nerve_gateway
+      config:
+        url: http://127.0.0.1:8000
+        timeoutSec: 60
+        apiKey: "${NERVE_API_KEY}"
+    budgetMonthlyCents: 1000000  # $10K
+    skills:
+      - paperclip-nerve-gateway
+      - cre-research
+      
+  capital-analyst:
+    adapter:
+      type: nerve_gateway
+      config:
+        url: http://127.0.0.1:8000
+        timeoutSec: 120
+        apiKey: "${NERVE_API_KEY}"
+    budgetMonthlyCents: 1000000  # $10K
+    skills:
+      - paperclip-nerve-gateway
+      - hot-money-analysis
+      - cre-research
+      
+  outreach-strategist:
+    adapter:
+      type: process
+      config:
+        command: node
+        args: ["--eval", "console.log('Outreach heartbeat')"]
+        timeoutSec: 120
+    budgetMonthlyCents: 800000  # $8K
+    skills:
+      - outreach-drafting
+      
+  market-researcher:
+    adapter:
+      type: nerve_gateway
+      config:
+        url: http://127.0.0.1:8000
+        timeoutSec: 90
+        apiKey: "${NERVE_API_KEY}"
+    budgetMonthlyCents: 800000  # $8K
+    skills:
+      - paperclip-nerve-gateway
+      - cre-research
+      - property-valuation
+      
+  transaction-scout:
+    adapter:
+      type: nerve_gateway
+      config:
+        url: http://127.0.0.1:8000
+        timeoutSec: 60
+        apiKey: "${NERVE_API_KEY}"
+    budgetMonthlyCents: 800000  # $8K
+    skills:
+      - paperclip-nerve-gateway
+      - cre-research
+
+# Routines (recurring tasks)
+routines:
+  daily-market-scan:
+    agent: buyer-scout
+    triggers:
+      - kind: schedule
+        cronExpression: "0 9 * * *"
+        timezone: America/New_York
+    
+  weekly-outreach-review:
+    agent: cmo
+    triggers:
+      - kind: schedule
+        cronExpression: "0 10 * * 1"
+        timezone: America/New_York
+    
+  monthly-portfolio-review:
+    agent: ceo
+    triggers:
+      - kind: schedule
+        cronExpression: "0 9 1 * *"
+        timezone: America/New_York
