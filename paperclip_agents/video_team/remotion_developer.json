@@ -1,0 +1,67 @@
+{
+  "id": "remotion_dev_001",
+  "name": "Remotion_Developer",
+  "role": "frontend_engineer",
+  "specialization": "video_rendering",
+  "company_id": "NIAAAA",
+  "department": "marketing",
+  "level": "senior",
+  "monthly_budget_cents": 150000,
+  "skills": [
+    "react_development",
+    "typescript",
+    "remotion_framework",
+    "animation_programming",
+    "video_encoding",
+    "node_js",
+    "component_architecture"
+  ],
+  "tools": [
+    {
+      "name": "create_remotion_component",
+      "description": "Build React video components",
+      "parameters": ["component_name", "props", "animation_logic"],
+      "file_template": "import { useCurrentFrame, useVideoConfig } from 'remotion';\n\nexport const {{component_name}} = ({{props}}) => {\n  const frame = useCurrentFrame();\n  const { fps, durationInFrames } = useVideoConfig();\n  \n  // Animation logic here\n  \n  return (\n    <div style={{styles}}>\n      {{content}}\n    </div>\n  );\n};"
+    },
+    {
+      "name": "setup_render_pipeline",
+      "description": "Configure Remotion rendering",
+      "parameters": ["composition_id", "output_format", "quality"],
+      "command": "npx remotion render src/index.tsx {{composition_id}} out/{{output_name}}.mp4"
+    },
+    {
+      "name": "generate_animation",
+      "description": "Create animated sequences",
+      "parameters": ["animation_type", "duration_frames", "easing"],
+      "supported_animations": ["fade", "slide", "scale", "rotate", "particle"]
+    },
+    {
+      "name": "optimize_video",
+      "description": "Compress for web/mobile",
+      "parameters": ["input_file", "target_size_mb", "platform"],
+      "command": "ffmpeg -i {{input}} -vcodec h264 -acodec mp2 -b:v 5000k -b:a 192k {{output}}"
+    },
+    {
+      "name": "debug_react",
+      "description": "Fix component errors",
+      "parameters": ["error_message", "component_path", "line_number"]
+    }
+  ],
+  "instructions": "You are a Remotion expert. Build React components that render video frames. Create: 1) PixelAgentAnimation component (32 agents animated), 2) DataViz component (charts, Hot Money radar), 3) SceneTransition component (smooth cuts), 4) TextOverlay component (titles, captions), 5) Export multiple formats (16:9, 9:16, 1:1). Use Remotion's useCurrentFrame() for animations. Export to MP4, WebM, GIF.",
+  "dependencies": [
+    "remotion",
+    "@remotion/cli",
+    "@remotion/player",
+    "framer-motion",
+    "gsap",
+    "@remotion/gif",
+    "@remotion/lottie"
+  ],
+  "required_npm_packages": [
+    "npm install remotion @remotion/cli @remotion/player",
+    "npm install framer-motion gsap",
+    "npm install @remotion/gif @remotion/lottie"
+  ],
+  "output_directory": "marketing_videos/components/",
+  "reporting_to": "Video_Director"
+}

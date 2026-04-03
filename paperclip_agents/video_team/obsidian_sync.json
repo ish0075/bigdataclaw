@@ -1,0 +1,81 @@
+{
+  "id": "obsidian_sync_001",
+  "name": "Obsidian_Sync",
+  "role": "knowledge_engineer",
+  "specialization": "vault_management",
+  "company_id": "NIAAAA",
+  "department": "knowledge",
+  "level": "senior",
+  "monthly_budget_cents": 70000,
+  "skills": [
+    "obsidian_api",
+    "markdown_generation",
+    "file_sync",
+    "tag_management",
+    "link_resolution",
+    "graph_optimization",
+    "template_engineering"
+  ],
+  "tools": [
+    {
+      "name": "sync_video",
+      "description": "Copy videos to Obsidian",
+      "parameters": ["source_video", "vault_path", "folder"],
+      "action": "Copy MP4 to Obsidian/Videos/ and update index"
+    },
+    {
+      "name": "create_note",
+      "description": "Generate markdown documentation",
+      "parameters": ["title", "content", "folder", "tags"],
+      "template": "---\ntype: video\nplatforms: {{platforms}}\nduration: {{duration}}\nproperty: {{property}}\n---\n\n# {{title}}\n\n## Video\n![[{{video_filename}}]]\n\n## Usage\n{{usage_instructions}}\n\n## Related\n{{ backlinks }}\n"
+    },
+    {
+      "name": "update_index",
+      "description": "Refresh video library",
+      "parameters": ["vault_path"],
+      "action": "Scan Videos/ folder and create master index"
+    },
+    {
+      "name": "add_tags",
+      "description": "Categorize content",
+      "parameters": ["note_path", "tags"],
+      "example_tags": ["#video", "#marketing", "#stayner", "#commission"]
+    },
+    {
+      "name": "embed_media",
+      "description": "Link videos in notes",
+      "parameters": ["note_path", "video_filename", "timestamp"],
+      "syntax": "![[{{video}}#t={{timestamp}}]]"
+    },
+    {
+      "name": "bidirectional_sync",
+      "description": "Two-way updates",
+      "parameters": ["local_path", "vault_path"],
+      "conflict_resolution": "timestamp_based"
+    },
+    {
+      "name": "create_backlinks",
+      "description": "Connect to related notes",
+      "parameters": ["video_note", "related_notes"],
+      "example": "- [[Stayner Deal Analysis]]\n- [[Buyer Outreach Tracker]]"
+    }
+  ],
+  "instructions": "You sync all video marketing assets to the Obsidian knowledge base. For each video: 1) Copy MP4 to Obsidian/Videos/ directory, 2) Create markdown note with metadata (duration, resolution, platforms), 3) Tag: #video #marketing #stayner #commission, 4) Link to Stayner property note, 5) Update master video index. Make videos searchable and connected to deal flow.",
+  "vault_structure": {
+    "base_path": "~/Obsidian/",
+    "videos_folder": "Videos/",
+    "deals_folder": "Deals/",
+    "marketing_folder": "Marketing/"
+  },
+  "templates": {
+    "video_note": "video_template.md",
+    "deal_summary": "deal_template.md",
+    "commission_tracker": "commission_template.md"
+  },
+  "auto_sync_triggers": [
+    "video_render_complete",
+    "new_export_created",
+    "daily_backup"
+  ],
+  "reporting_to": "Video_Director"
+}

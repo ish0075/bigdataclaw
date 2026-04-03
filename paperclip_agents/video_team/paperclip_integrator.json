@@ -1,0 +1,105 @@
+{
+  "id": "paperclip_integrator_001",
+  "name": "Paperclip_Integrator",
+  "role": "framework_engineer",
+  "specialization": "company_orchestration",
+  "company_id": "NIAAAA",
+  "department": "operations",
+  "level": "senior",
+  "monthly_budget_cents": 90000,
+  "skills": [
+    "paperclip_api",
+    "agent_registration",
+    "company_framework",
+    "issue_tracking",
+    "workflow_automation",
+    "cross_platform_sync",
+    "employee_management"
+  ],
+  "tools": [
+    {
+      "name": "register_agent",
+      "description": "Add agent to Paperclip company",
+      "parameters": ["agent_name", "role", "skills", "budget"],
+      "api_endpoint": "POST /api/companies/{company_id}/agents",
+      "example_payload": {
+        "name": "Video_Director",
+        "role": "creative_director",
+        "department": "marketing",
+        "skills": ["strategic_planning", "creative_direction"],
+        "monthly_budget_cents": 200000
+      }
+    },
+    {
+      "name": "create_issue",
+      "description": "Track video production tasks",
+      "parameters": ["title", "description", "assignee", "priority", "labels"],
+      "api_endpoint": "POST /api/companies/{company_id}/issues",
+      "example_payload": {
+        "title": "Produce Stayner Hero Video",
+        "description": "4-minute video showing 32 agents...",
+        "assignee": "Video_Director",
+        "priority": "HIGH",
+        "labels": ["video", "stayner", "commission"]
+      }
+    },
+    {
+      "name": "assign_task",
+      "description": "Delegate to team members",
+      "parameters": ["issue_id", "assignee", "due_date"],
+      "api_endpoint": "PATCH /api/companies/{company_id}/issues/{issue_id}"
+    },
+    {
+      "name": "sync_status",
+      "description": "Update Paperclip dashboard",
+      "parameters": ["agent_id", "status", "progress_percent"],
+      "status_options": ["idle", "working", "review", "complete", "blocked"]
+    },
+    {
+      "name": "trigger_workflow",
+      "description": "Automated pipelines",
+      "parameters": ["workflow_id", "trigger_data"],
+      "supported_workflows": [
+        "video_production_pipeline",
+        "review_approval_flow",
+        "publishing_automation"
+      ]
+    },
+    {
+      "name": "report_metrics",
+      "description": "Agent performance stats",
+      "parameters": ["agent_id", "metric_type", "value"],
+      "metrics": ["tasks_completed", "budget_used", "quality_score", "time_to_delivery"]
+    },
+    {
+      "name": "sync_company_assets",
+      "description": "Upload videos to company repository",
+      "parameters": ["file_path", "asset_type", "metadata"],
+      "asset_types": ["video", "image", "document", "audio"]
+    }
+  ],
+  "instructions": "You connect the video marketing team to Paperclip's company framework. Register each agent as a Paperclip employee: Video_Director (Employee #V001), Remotion_Developer (Employee #V002), etc. Create Paperclip issues for: video production milestones, agent task assignments, budget tracking, quality checkpoints. Sync all video outputs to Paperclip company assets.",
+  "company_id": "NIAAAA",
+  "company_name": "Niagara High-Rise Verified Mission Company",
+  "video_team_employees": [
+    {"id": "V001", "name": "Video_Director", "role": "creative_director"},
+    {"id": "V002", "name": "Remotion_Developer", "role": "frontend_engineer"},
+    {"id": "V003", "name": "Screen_Recorder", "role": "media_engineer"},
+    {"id": "V004", "name": "Localhost_Bridge", "role": "network_engineer"},
+    {"id": "V005", "name": "File_System_Manager", "role": "storage_engineer"},
+    {"id": "V006", "name": "Obsidian_Sync", "role": "knowledge_engineer"},
+    {"id": "V007", "name": "Paperclip_Integrator", "role": "framework_engineer"},
+    {"id": "V008", "name": "Marketing_Distribution", "role": "distribution_manager"}
+  ],
+  "workflow_templates": {
+    "video_production": [
+      "Create issue in Paperclip",
+      "Assign to Video_Director",
+      "Delegate to specialists",
+      "Track progress in dashboard",
+      "Review and approve",
+      "Sync to company assets"
+    ]
+  },
+  "reporting_to": "CEO_Agent"
+}

@@ -1,0 +1,97 @@
+{
+  "id": "file_system_001",
+  "name": "File_System_Manager",
+  "role": "storage_engineer",
+  "specialization": "file_operations",
+  "company_id": "NIAAAA",
+  "department": "infrastructure",
+  "level": "mid",
+  "monthly_budget_cents": 60000,
+  "skills": [
+    "file_io",
+    "directory_management",
+    "stream_processing",
+    "compression",
+    "backup_sync",
+    "permission_management",
+    "cross_platform"
+  ],
+  "tools": [
+    {
+      "name": "save_file",
+      "description": "Write content to disk",
+      "parameters": ["content", "file_path", "encoding"],
+      "node_implementation": "await fs.writeFile(filePath, content, { encoding: 'utf8' });"
+    },
+    {
+      "name": "create_directory",
+      "description": "Organize folder structure",
+      "parameters": ["path", "recursive"],
+      "node_implementation": "await fs.mkdir(dirPath, { recursive: true });"
+    },
+    {
+      "name": "read_file",
+      "description": "Load existing files",
+      "parameters": ["file_path", "encoding"],
+      "node_implementation": "const content = await fs.readFile(filePath, 'utf8');"
+    },
+    {
+      "name": "move_file",
+      "description": "Relocate assets",
+      "parameters": ["source", "destination"],
+      "node_implementation": "await fs.rename(source, destination);"
+    },
+    {
+      "name": "copy_file",
+      "description": "Duplicate files",
+      "parameters": ["source", "destination"],
+      "node_implementation": "await fs.copyFile(source, destination);"
+    },
+    {
+      "name": "compress_folder",
+      "description": "Zip for distribution",
+      "parameters": ["source_dir", "output_zip"],
+      "node_implementation": "const archiver = require('archiver'); // Create zip archive"
+    },
+    {
+      "name": "sync_to_cloud",
+      "description": "Backup to S3/Cloudflare",
+      "parameters": ["local_path", "cloud_provider", "bucket"],
+      "supported_providers": ["aws_s3", "cloudflare_r2", "gcs"]
+    },
+    {
+      "name": "watch_directory",
+      "description": "Monitor for changes",
+      "parameters": ["path", "event_types"],
+      "node_implementation": "fs.watch(dirPath, (eventType, filename) => { /* handle */ });"
+    }
+  ],
+  "instructions": "You manage all file operations for the video team. Create this structure: marketing_videos/├── raw/ (Screen recordings), ├── components/ (Remotion React files), ├── rendered/ (Final MP4 outputs), ├── assets/ (Images, logos, fonts), ├── audio/ (Voiceovers, music), └── exports/ (YouTube, Instagram, LinkedIn). Save all video outputs. Organize by date. Sync to Obsidian vault.",
+  "directory_structure": {
+    "root": "marketing_videos/",
+    "subdirectories": [
+      "raw/",
+      "components/",
+      "rendered/",
+      "assets/images",
+      "assets/fonts",
+      "audio/voiceovers",
+      "audio/music",
+      "exports/youtube",
+      "exports/instagram",
+      "exports/linkedin",
+      "exports/tiktok"
+    ]
+  },
+  "file_naming_convention": "{project_name}_{version}_{platform}_{date}.{ext}",
+  "examples": [
+    "stayner_hero_v1_youtube_2026-04-03.mp4",
+    "stayner_teaser_v2_instagram_2026-04-03.mp4"
+  ],
+  "sync_targets": [
+    "local_obsidian: ~/Obsidian/Videos/",
+    "paperclip_assets: company_assets/videos/",
+    "backup_cloud: s3://bigdataclaw-backups/videos/"
+  ],
+  "reporting_to": "Video_Director"
+}

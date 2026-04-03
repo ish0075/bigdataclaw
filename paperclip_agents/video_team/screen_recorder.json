@@ -1,0 +1,76 @@
+{
+  "id": "screen_recorder_001",
+  "name": "Screen_Recorder",
+  "role": "media_engineer",
+  "specialization": "screencast",
+  "company_id": "NIAAAA",
+  "department": "marketing",
+  "level": "senior",
+  "monthly_budget_cents": 100000,
+  "skills": [
+    "screen_capture",
+    "ffmpeg_encoding",
+    "puppeteer_automation",
+    "x11_grab",
+    "video_editing",
+    "audio_sync",
+    "resolution_management"
+  ],
+  "tools": [
+    {
+      "name": "start_recording",
+      "description": "Begin screen capture",
+      "parameters": ["capture_mode", "resolution", "fps", "output_path"],
+      "ffmpeg_commands": {
+        "full_screen": "ffmpeg -f x11grab -r {{fps}} -s {{resolution}} -i :0.0 -f pulse -i default -pix_fmt yuv420p {{output}}",
+        "window": "ffmpeg -f x11grab -r {{fps}} -s {{resolution}} -i :0.0+{{x}},{{y}} -c:v libx264 -preset fast {{output}}",
+        "region": "ffmpeg -f x11grab -r {{fps}} -s {{width}}x{{height}} -i :0.0+{{x}},{{y}} {{output}}"
+      }
+    },
+    {
+      "name": "stop_recording",
+      "description": "End and save file",
+      "parameters": ["process_id"],
+      "action": "Send SIGTERM to ffmpeg process"
+    },
+    {
+      "name": "capture_mission_control",
+      "description": "Record BigDataClaw dashboard",
+      "parameters": ["duration_seconds", "focus_area"],
+      "target_url": "http://localhost:8081",
+      "puppeteer_script": "const browser = await puppeteer.launch(); const page = await browser.newPage(); await page.goto('http://localhost:8081'); // Record for duration"
+    },
+    {
+      "name": "add_audio",
+      "description": "Synchronize voiceover",
+      "parameters": ["video_file", "audio_file", "sync_point"],
+      "ffmpeg_command": "ffmpeg -i {{video}} -i {{audio}} -c:v copy -c:a aac -shortest {{output}}"
+    },
+    {
+      "name": "export_format",
+      "description": "Export to various formats",
+      "parameters": ["input_file", "format", "quality"],
+      "supported_formats": ["mp4", "avi", "webm", "mov", "gif"]
+    },
+    {
+      "name": "trim_video",
+      "description": "Cut unwanted sections",
+      "parameters": ["input_file", "start_time", "end_time"],
+      "ffmpeg_command": "ffmpeg -i {{input}} -ss {{start}} -to {{end}} -c copy {{output}}"
+    }
+  ],
+  "instructions": "You capture BigDataClaw Mission Control in action. Your tasks: 1) Record terminal showing 10 agents activating, 2) Record Mission Control dashboard (localhost:8081), 3) Record Hot Money Radar detecting Stayner deal, 4) Capture 32-agent swarm visualization, 5) Export clean footage for editing. Use FFmpeg for screen capture. Record at 1920x1080, 60fps. Save to marketing_videos/raw/",
+  "system_requirements": {
+    "linux": "sudo apt install ffmpeg x11-utils",
+    "mac": "brew install ffmpeg",
+    "windows": "choco install ffmpeg or download from ffmpeg.org"
+  },
+  "output_settings": {
+    "resolution": "1920x1080",
+    "fps": 60,
+    "codec": "libx264",
+    "preset": "fast",
+    "output_directory": "marketing_videos/raw/"
+  },
+  "reporting_to": "Video_Director"
+}

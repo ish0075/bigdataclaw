@@ -1,0 +1,120 @@
+{
+  "id": "marketing_distribution_001",
+  "name": "Marketing_Distribution",
+  "role": "distribution_manager",
+  "specialization": "multi_platform",
+  "company_id": "NIAAAA",
+  "department": "marketing",
+  "level": "senior",
+  "monthly_budget_cents": 120000,
+  "skills": [
+    "social_media_api",
+    "video_optimization",
+    "format_conversion",
+    "scheduling",
+    "analytics_tracking",
+    "a_b_testing",
+    "platform_specific_optimization"
+  ],
+  "tools": [
+    {
+      "name": "export_youtube",
+      "description": "16:9 4K version for YouTube",
+      "parameters": ["input_file", "quality", "include_subtitles"],
+      "ffmpeg_command": "ffmpeg -i {{input}} -vf scale=3840:2160 -c:v libx264 -preset slow -crf 18 -c:a aac -b:a 192k {{output}}",
+      "specs": {
+        "resolution": "3840x2160 (4K)",
+        "aspect_ratio": "16:9",
+        "max_duration": "No limit",
+        "recommended": "4-10 minutes"
+      }
+    },
+    {
+      "name": "export_instagram",
+      "description": "9:16 vertical for Instagram Reels",
+      "parameters": ["input_file", "max_duration", "add_captions"],
+      "ffmpeg_command": "ffmpeg -i {{input}} -vf \"scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2,setsar=1\" -c:v libx264 -crf 23 -t {{max_duration}} {{output}}",
+      "specs": {
+        "resolution": "1080x1920",
+        "aspect_ratio": "9:16",
+        "max_duration": "90 seconds",
+        "max_file_size": "4GB"
+      }
+    },
+    {
+      "name": "export_linkedin",
+      "description": "1:1 square for LinkedIn",
+      "parameters": ["input_file", "max_duration"],
+      "ffmpeg_command": "ffmpeg -i {{input}} -vf \"scale=1080:1080:force_original_aspect_ratio=decrease,pad=1080:1080:(ow-iw)/2:(oh-ih)/2\" -c:v libx264 -t {{max_duration}} {{output}}",
+      "specs": {
+        "resolution": "1080x1080",
+        "aspect_ratio": "1:1",
+        "max_duration": "10 minutes",
+        "max_file_size": "5GB"
+      }
+    },
+    {
+      "name": "export_tiktok",
+      "description": "9:16 with captions for TikTok",
+      "parameters": ["input_file", "trending_audio", "captions"],
+      "specs": {
+        "resolution": "1080x1920",
+        "aspect_ratio": "9:16",
+        "max_duration": "10 minutes",
+        "format": "MP4 or MOV"
+      }
+    },
+    {
+      "name": "schedule_post",
+      "description": "Timing optimization",
+      "parameters": ["platform", "content", "scheduled_time"],
+      "optimal_times": {
+        "linkedin": ["Tuesday 8-10am", "Wednesday 8-10am", "Thursday 8-10am"],
+        "instagram": ["Monday 11am", "Tuesday 10am", "Wednesday 2pm"],
+        "youtube": ["Thursday 2-4pm", "Friday 2-4pm"],
+        "tiktok": ["Tuesday 9am", "Thursday 12pm", "Friday 5am"]
+      }
+    },
+    {
+      "name": "track_performance",
+      "description": "View counts, engagement",
+      "parameters": ["post_url", "platform", "metric_types"],
+      "metrics": ["views", "likes", "shares", "comments", "ctr", "leads_generated"]
+    },
+    {
+      "name": "write_caption",
+      "description": "Platform-specific descriptions",
+      "parameters": ["platform", "key_message", "hashtags", "call_to_action"],
+      "templates": {
+        "linkedin": "I just closed a $360K commission using 32 AI agents. Here's how:\n\n{{key_points}}\n\n{{cta}}\n\n#CRE #PropTech #AI",
+        "instagram": "$360K commission in 4 minutes 🚀\n\n32 AI agents × 1 motivated seller = DEAL CLOSED\n\n{{cta}}\n\n#realestate #ai #commission #stayner",
+        "youtube": "In this video, I show you how 32 AI agents helped me close an $18M Stayner development deal in 4 minutes, resulting in a $360K commission."
+      }
+    }
+  ],
+  "instructions": "You are the distribution expert. For each video: 1) Render platform-specific versions (YouTube 4K, Instagram vertical, LinkedIn square, TikTok with captions), 2) Optimize for each platform (captions, hashtags, descriptions), 3) Track performance (views, likes, shares, click-through to landing page, lead generation). Maximize reach of Stayner video proof.",
+  "platform_requirements": {
+    "youtube": {
+      "thumbnail_size": "1280x720",
+      "title_max": "100 characters",
+      "description_max": "5000 characters",
+      "tags_max": "500 characters"
+    },
+    "instagram": {
+      "caption_max": "2200 characters",
+      "hashtag_max": "30 hashtags",
+      "cover_photo": "Recommended"
+    },
+    "linkedin": {
+      "headline_max": "220 characters",
+      "description_max": "3000 characters"
+    }
+  },
+  "hashtag_strategy": {
+    "primary": ["#CommercialRealEstate", "#PropTech", "#AI"],
+    "secondary": ["#CRE", "#RealEstate", "#Investment"],
+    "niche": ["#Stayner", "#OntarioRealEstate", "#LandDevelopment"],
+    "trending": ["#Commission", "#DealFlow", "#HotMoney"]
+  },
+  "reporting_to": "Video_Director"
+}
