@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 
-from fastapi import FastAPI, Query, HTTPException, UploadFile, File
+from fastapi import FastAPI, Query, HTTPException, UploadFile, File, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -1843,6 +1843,10 @@ class HotMoneyLead(BaseModel):
     days_ago: int = 0
     notes: Optional[str] = None
     contacts: Optional[List[Dict[str, Any]]] = None
+    enriched_data: Optional[Dict[str, Any]] = None
+    enrichment_status: Optional[str] = None
+    enrichment_timestamp: Optional[str] = None
+    obsidian_path: Optional[str] = None
 
 @app.get("/api/hotmoney")
 async def get_hotmoney_leads(
@@ -1904,6 +1908,11 @@ async def get_hotmoney_leads(
         lead = dict(row)
         if lead.get('contacts'):
             lead['contacts'] = json.loads(lead['contacts'])
+        if lead.get('enriched_data'):
+            try:
+                lead['enriched_data'] = json.loads(lead['enriched_data'])
+            except:
+                lead['enriched_data'] = None
         leads.append(lead)
     
     conn.close()
@@ -1990,31 +1999,56 @@ async def get_hotmoney_lead(lead_id: int):
     lead = dict(row)
     if lead.get('contacts'):
         lead['contacts'] = json.loads(lead['contacts'])
+    if lead.get('enriched_data'):
+        try:
+            lead['enriched_data'] = json.loads(lead['enriched_data'])
+        except:
+            lead['enriched_data'] = None
     
     conn.close()
     return lead
 
 @app.post("/api/hotmoney")
-async def create_hotmoney_lead(lead: HotMoneyLead):
-    """Create a new hot money lead"""
+async def create_hotmoney_lead(lead: HotMoneyLead, background_tasks: BackgroundTasks):
+    """Create a new hot money lead and trigger enrichment"""
     conn = get_db()
     cursor = conn.cursor()
     
     cursor.execute('''
         INSERT INTO hot_money_leads 
-        (entity, cash_amount, sale_date, location, property, match_score, property_type, asset_class, address, days_ago, notes, contacts)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (entity, cash_amount, sale_date, location, property, match_score, property_type, asset_class, address, days_ago, notes, contacts, enrichment_status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ''', (
         lead.entity, lead.cash_amount, lead.sale_date, lead.location, 
         lead.property, lead.match_score, lead.property_type, lead.asset_class,
-        lead.address, lead.days_ago, lead.notes, json.dumps(lead.contacts or [])
+        lead.address, lead.days_ago, lead.notes, json.dumps(lead.contacts or []), 'pending'
     ))
     
     lead_id = cursor.lastrowid
     conn.commit()
     conn.close()
     
-    return {"id": lead_id, "message": "Lead created successfully"}
+    # Trigger enrichment in background
+    import hot_money_enrichment
+    background_tasks.add_task(hot_money_enrichment.enrich_hot_money_lead, lead_id)
+    
+    return {"id": lead_id, "message": "Lead created successfully", "enrichment": "pending"}
+
+@app.post("/api/hotmoney/{lead_id}/enrich")
+async def enrich_hotmoney_lead(lead_id: int, background_tasks: BackgroundTasks):
+    """Manually trigger enrichment for a hot money lead"""
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id FROM hot_money_leads WHERE id = ?", (lead_id,))
+    row = cursor.fetchone()
+    conn.close()
+    
+    if not row:
+        raise HTTPException(status_code=404, detail="Lead not found")
+    
+    import hot_money_enrichment
+    background_tasks.add_task(hot_money_enrichment.enrich_hot_money_lead, lead_id)
+    return {"success": True, "lead_id": lead_id, "message": "Enrichment started"}
 
 @app.put("/api/hotmoney/{lead_id}")
 async def update_hotmoney_lead(lead_id: int, lead: HotMoneyLead):

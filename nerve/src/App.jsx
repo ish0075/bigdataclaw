@@ -40,9 +40,7 @@ import PaperclipCompanyDetail from './views/PaperclipCompanyDetail'
 import PaperclipOrgChart from './views/PaperclipOrgChart'
 import PaperclipDashboard from './views/PaperclipDashboard'
 import PixelAgentsOriginal from './views/PixelAgentsOriginal'
-import MissionControlV2 from './views/MissionControlV2'
 import MissionControlV3 from './views/MissionControlV3'
-import MissionControlSimple from './views/MissionControlSimple'
 import { useWebSocket } from './hooks/useWebSocket'
 
 // Hook to detect if we're on V3 route (for hash-based routing)
@@ -132,8 +130,8 @@ function AppRoutes() {
         <Route path="/paperclip-companies/:companyId/org" element={<PaperclipOrgChart />} />
         <Route path="/paperclip-dashboard" element={<PaperclipDashboard />} />
         <Route path="/pixel-agents-original" element={<PixelAgentsOriginal />} />
-        <Route path="/v2" element={<MissionControlV2 />} />
-        <Route path="/simple" element={<MissionControlSimple />} />
+        <Route path="/v2" element={<MissionControl />} />
+        <Route path="/simple" element={<MissionControl />} />
       </Routes>
     </Layout>
   )

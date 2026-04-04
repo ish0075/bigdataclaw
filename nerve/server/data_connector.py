@@ -111,7 +111,8 @@ class BigDataClawDataConnector:
             # Query hot_money_leads table for last N days
             cursor.execute("""
                 SELECT id, entity, cash_amount, sale_date, location, property,
-                       match_score, property_type, asset_class, address, days_ago, notes, contacts
+                       match_score, property_type, asset_class, address, days_ago, notes, contacts,
+                       enriched_data, enrichment_status, enrichment_timestamp, obsidian_path
                 FROM hot_money_leads
                 WHERE days_ago <= ?
                 ORDER BY cash_amount DESC
@@ -135,7 +136,11 @@ class BigDataClawDataConnector:
                     'days_ago': row['days_ago'],
                     'match_score': row['match_score'] or 80,
                     'notes': row['notes'] or '',
-                    'contacts': json.loads(row['contacts']) if row['contacts'] else []
+                    'contacts': json.loads(row['contacts']) if row['contacts'] else [],
+                    'enriched_data': json.loads(row['enriched_data']) if row['enriched_data'] else None,
+                    'enrichment_status': row['enrichment_status'] or '',
+                    'enrichment_timestamp': row['enrichment_timestamp'] or '',
+                    'obsidian_path': row['obsidian_path'] or ''
                 }
                 leads.append(lead)
             

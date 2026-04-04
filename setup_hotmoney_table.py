@@ -29,6 +29,10 @@ def setup_hotmoney_table():
             days_ago INTEGER DEFAULT 0,
             notes TEXT,
             contacts TEXT,  -- JSON array
+            enriched_data TEXT,  -- JSON object with LLM enrichment
+            enrichment_status TEXT DEFAULT '',  -- pending/running/complete/failed
+            enrichment_timestamp TIMESTAMP,
+            obsidian_path TEXT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
@@ -39,6 +43,7 @@ def setup_hotmoney_table():
     cursor.execute('CREATE INDEX IF NOT EXISTS idx_hotmoney_location ON hot_money_leads(location)')
     cursor.execute('CREATE INDEX IF NOT EXISTS idx_hotmoney_cash ON hot_money_leads(cash_amount)')
     cursor.execute('CREATE INDEX IF NOT EXISTS idx_hotmoney_property_type ON hot_money_leads(property_type)')
+    cursor.execute('CREATE INDEX IF NOT EXISTS idx_hotmoney_enrichment ON hot_money_leads(enrichment_status)')
     
     # Insert sample data if table is empty
     cursor.execute('SELECT COUNT(*) FROM hot_money_leads')

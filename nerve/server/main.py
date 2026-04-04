@@ -26,6 +26,13 @@ from obsidian_connector import get_vault_connector, ObsidianVaultConnector
 from ai_research import research_property_with_fallback, generate_obsidian_markdown
 from paperclip_bridge import spawn_paperclip_company_for_mission, mission_company_map
 
+# Import hot money enrichment
+import sys
+project_root = Path(__file__).parent.parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+import hot_money_enrichment
+
 # Perplexity API Configuration
 PERPLEXITY_API_KEY = os.getenv("PERPLEXITY_API_KEY", "")
 PERPLEXITY_API_URL = "https://api.perplexity.ai/chat/completions"
@@ -463,7 +470,8 @@ async def get_hot_money_lead(lead_id: int):
         
         cursor.execute("""
             SELECT id, entity, cash_amount, sale_date, location, property,
-                   match_score, property_type, asset_class, address, days_ago, notes, contacts
+                   match_score, property_type, asset_class, address, days_ago, notes, contacts,
+                   enriched_data, enrichment_status, enrichment_timestamp, obsidian_path
             FROM hot_money_leads
             WHERE id = ?
         """, (lead_id,))
@@ -478,6 +486,11 @@ async def get_hot_money_lead(lead_id: int):
                     lead['contacts'] = json.loads(lead['contacts'])
                 except:
                     lead['contacts'] = []
+            if lead.get('enriched_data'):
+                try:
+                    lead['enriched_data'] = json.loads(lead['enriched_data'])
+                except:
+                    lead['enriched_data'] = None
             return lead
         else:
             raise HTTPException(status_code=404, detail="Lead not found")
@@ -570,8 +583,8 @@ async def update_hot_money_lead(lead_id: int, data: HotMoneyLeadUpdate):
 
 
 @app.post("/api/hotmoney")
-async def create_hot_money_lead(data: HotMoneyLeadUpdate):
-    """Create a new hot money lead"""
+async def create_hot_money_lead(data: HotMoneyLeadUpdate, background_tasks: BackgroundTasks):
+    """Create a new hot money lead and trigger enrichment"""
     try:
         db_path = Path("/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db")
         conn = sqlite3.connect(str(db_path))
@@ -580,22 +593,47 @@ async def create_hot_money_lead(data: HotMoneyLeadUpdate):
         cursor.execute("""
             INSERT INTO hot_money_leads 
             (entity, cash_amount, sale_date, location, property, property_type, asset_class, 
-             address, days_ago, notes, contacts)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+             address, days_ago, notes, contacts, enrichment_status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             data.entity, data.cash_amount, data.sale_date, data.location, data.property,
             data.property_type, data.asset_class, data.address, data.days_ago, data.notes,
-            json.dumps(data.contacts) if data.contacts else '[]'
+            json.dumps(data.contacts) if data.contacts else '[]', 'pending'
         ))
         
         conn.commit()
         new_id = cursor.lastrowid
         conn.close()
         
-        return {"success": True, "id": new_id, "message": "Lead created successfully"}
+        # Trigger enrichment in background
+        background_tasks.add_task(hot_money_enrichment.enrich_hot_money_lead, new_id)
+        
+        return {"success": True, "id": new_id, "message": "Lead created successfully", "enrichment": "pending"}
         
     except Exception as e:
         print(f"Error creating hot money lead: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/hotmoney/{lead_id}/enrich")
+async def enrich_hot_money_lead_endpoint(lead_id: int, background_tasks: BackgroundTasks):
+    """Manually trigger enrichment for a hot money lead"""
+    try:
+        db_path = Path("/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db")
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        cursor.execute("SELECT id FROM hot_money_leads WHERE id = ?", (lead_id,))
+        row = cursor.fetchone()
+        conn.close()
+        
+        if not row:
+            raise HTTPException(status_code=404, detail="Lead not found")
+        
+        background_tasks.add_task(hot_money_enrichment.enrich_hot_money_lead, lead_id)
+        return {"success": True, "lead_id": lead_id, "message": "Enrichment started"}
+        
+    except Exception as e:
+        print(f"Error triggering enrichment: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
