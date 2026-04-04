@@ -61,12 +61,12 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
       },
-      '/api/lenders': {
+      '/api/data-manager': {
         target: 'http://localhost:8000',
         changeOrigin: true,
       },
-      '/api/data-manager': {
-        target: 'http://localhost:8000',
+      '/api/openclaw': {
+        target: 'http://localhost:10000',
         changeOrigin: true,
       },
       // NERVE Server (WebSocket, missions)

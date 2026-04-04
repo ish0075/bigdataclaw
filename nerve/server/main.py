@@ -15,7 +15,7 @@ from typing import Dict, List, Optional, Set
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException, BackgroundTasks
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException, BackgroundTasks, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
@@ -365,7 +365,7 @@ app = FastAPI(
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"],
+    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173", "http://localhost:8083", "http://127.0.0.1:8083"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -446,9 +446,9 @@ async def abort_mission(mission_id: str):
 
 
 @app.get("/api/hotmoney")
-async def get_hot_money(limit: int = 20):
+async def get_hot_money(limit: int = 20, days: int = 90):
     if data_connector:
-        return data_connector.get_hot_money_leads(limit)
+        return data_connector.get_hot_money_leads(limit, days)
     return []
 
 
@@ -1514,17 +1514,54 @@ def parse_transactions_from_text(text):
         elif len(address_lines) > 1:
             city = address_lines[-1]
         
-        # Extract transferor/seller
+        def clean_company_name(name):
+            """Strip trailing phone numbers and extra whitespace from company names"""
+            # Remove trailing phone numbers like 416-227-2220 or (416) 227-2220
+            name = re.sub(r'\s+\(?\d{3}\)?[-.\s]\d{3}[-.\s]\d{4}\s*$', '', name)
+            # Remove trailing Ontario, Canada postal codes
+            name = re.sub(r'\s+[A-Z]\d[A-Z]\s?\d[A-Z]\d\s*$', '', name)
+            return name.strip()
+        
+        def extract_contact(lines):
+            """Extract Attn: or Pres: contact from block lines"""
+            for line in lines[1:]:
+                if line.lower().startswith('attn:'):
+                    return line
+                elif 'attn:' in line.lower():
+                    idx = line.lower().find('attn:')
+                    return line[idx:].strip()
+                elif line.lower().startswith('pres:'):
+                    return line
+                elif 'pres:' in line.lower():
+                    idx = line.lower().find('pres:')
+                    return line[idx:].strip()
+            return ""
+        
+        # Extract transferor/seller with contact
         seller = "Unknown"
+        seller_contact = ""
         seller_match = re.search(r'Transferor\(s\)\s*\n+([^\n]+(?:\n(?!Transferee)[^\n]+)*)', block)
         if seller_match:
-            seller = seller_match.group(1).strip().split('\n')[0]
+            seller_lines = [l.strip() for l in seller_match.group(1).strip().split('\n') if l.strip()]
+            if seller_lines:
+                seller = clean_company_name(seller_lines[0])
+                seller_contact = extract_contact(seller_lines)
         
-        # Extract transferee/buyer
+        # Extract transferee/buyer with contact
         buyer = ""
+        buyer_contact = ""
         buyer_match = re.search(r'Transferee\(s\)\s*\n+([^\n]+(?:\n(?!Site|PIN|Consideration)[^\n]+)*)', block)
         if buyer_match:
-            buyer = buyer_match.group(1).strip().split('\n')[0]
+            buyer_lines = [l.strip() for l in buyer_match.group(1).strip().split('\n') if l.strip()]
+            if buyer_lines:
+                buyer = clean_company_name(buyer_lines[0])
+                buyer_contact = extract_contact(buyer_lines)
+        
+        # Combine company + contact for display
+        if seller_contact:
+            seller = f"{seller} | {seller_contact}"
+        if buyer_contact:
+            buyer = f"{buyer} | {buyer_contact}"
         
         # Extract site
         site_match = re.search(r'Site\s*\n+([^\n]+(?:\n(?!PIN|Consideration)[^\n]+)*)', block)
@@ -1720,6 +1757,100 @@ async def create_transactions_bulk(data: List[TransactionCreate]):
         
     except Exception as e:
         print(f"Error creating bulk transactions: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/transactions/upload-doc")
+async def upload_transactions_doc(
+    files: List[UploadFile] = File(default_factory=list),
+    file: UploadFile = File(None)
+):
+    """Upload multiple .doc or .docx files (or a folder), extract text, parse transactions, and save to database"""
+    try:
+        import io
+        from docx import Document
+        
+        all_transactions = []
+        processed_files = 0
+        
+        # Handle both single file and multiple files uploads
+        upload_files = []
+        if file and file.filename:
+            upload_files.append(file)
+        upload_files.extend(files or [])
+        
+        if not upload_files:
+            return {"success": False, "error": "No files provided", "count": 0, "ids": [], "file_count": 0}
+        
+        for upload_file in upload_files:
+            if not (upload_file.filename.lower().endswith('.doc') or upload_file.filename.lower().endswith('.docx')):
+                continue
+            
+            content = await upload_file.read()
+            
+            try:
+                doc = Document(io.BytesIO(content))
+                full_text = "\n".join([para.text for para in doc.paragraphs])
+                transactions = parse_transactions_from_text(full_text)
+                all_transactions.extend(transactions)
+                processed_files += 1
+            except Exception as doc_err:
+                print(f"Error reading {upload_file.filename}: {doc_err}")
+                continue
+        
+        if not all_transactions:
+            return {"success": False, "error": "No transactions found in documents", "count": 0, "ids": [], "file_count": processed_files}
+        
+        # Save to database
+        db_path = Path("/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db")
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        created_ids = []
+        
+        for tx in all_transactions:
+            days_ago = 0
+            if tx.get('sale_date'):
+                try:
+                    from datetime import datetime
+                    sale_dt = datetime.strptime(tx['sale_date'], '%Y-%m-%d')
+                    days_ago = (datetime.now() - sale_dt).days
+                except:
+                    days_ago = 0
+            
+            cursor.execute("""
+                INSERT INTO transactions 
+                (seller_name, buyer_name, property_address, city, province, sale_price, 
+                 property_type, asset_class, sale_date, days_ago, notes, source)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'doc_upload')
+            """, (
+                tx.get('seller_name', ''),
+                tx.get('buyer_name', ''),
+                tx.get('property_address', ''),
+                tx.get('city', ''),
+                tx.get('province', 'ON'),
+                tx.get('sale_price', 0),
+                tx.get('property_type', 'Commercial'),
+                tx.get('asset_class', ''),
+                tx.get('sale_date', ''),
+                days_ago,
+                tx.get('notes', '')
+            ))
+            created_ids.append(cursor.lastrowid)
+        
+        conn.commit()
+        conn.close()
+        
+        return {
+            "success": True,
+            "total_count": len(created_ids),
+            "file_count": processed_files,
+            "ids": created_ids,
+            "first_deal": all_transactions[0] if all_transactions else None,
+            "message": f"Created {len(created_ids)} transactions from {processed_files} file(s)"
+        }
+        
+    except Exception as e:
+        print(f"Error processing doc upload: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 

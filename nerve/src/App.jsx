@@ -1,5 +1,5 @@
-import React from 'react'
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom'
 import Layout from './components/Common/Layout'
 import MissionControl from './views/MissionControl'
 import PropertyResearch from './views/PropertyResearch'
@@ -40,9 +40,43 @@ import PaperclipCompanyDetail from './views/PaperclipCompanyDetail'
 import PaperclipOrgChart from './views/PaperclipOrgChart'
 import PaperclipDashboard from './views/PaperclipDashboard'
 import PixelAgentsOriginal from './views/PixelAgentsOriginal'
+import MissionControlV2 from './views/MissionControlV2'
+import MissionControlV3 from './views/MissionControlV3'
+import MissionControlSimple from './views/MissionControlSimple'
 import { useWebSocket } from './hooks/useWebSocket'
 
-function App() {
+// Hook to detect if we're on V3 route (for hash-based routing)
+function useIsV3Route() {
+  const [isV3, setIsV3] = useState(false)
+  const location = useLocation()
+  
+  useEffect(() => {
+    // Check both pathname (for non-hash routing) and hash (for hash routing)
+    const checkV3 = () => {
+      const hash = window.location.hash
+      const pathname = window.location.pathname
+      const isV3Route = pathname === '/v3' || hash === '#/v3' || hash.startsWith('#/v3')
+      setIsV3(isV3Route)
+    }
+    
+    checkV3()
+    
+    // Listen for hash changes
+    const handleHashChange = () => checkV3()
+    window.addEventListener('hashchange', handleHashChange)
+    
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [location])
+  
+  return isV3
+}
+
+// Full page routes that don't use the default layout
+function FullPageRoutes() {
+  return <MissionControlV3 />
+}
+
+function AppRoutes() {
   // Initialize WebSocket connection
   const { connected } = useWebSocket()
   const navigate = useNavigate()
@@ -56,15 +90,7 @@ function App() {
   }
   
   return (
-    <Layout 
-      connected={connected}
-      globalSearch={
-        <GlobalSearch 
-          onResultClick={handleSearchResult}
-          placeholder="Search builders, agents, lenders, properties..."
-        />
-      }
-    >
+    <Layout>
       <Routes>
         <Route path="/" element={<MissionControl />} />
         <Route path="/research" element={<PropertyResearch />} />
@@ -74,27 +100,26 @@ function App() {
         <Route path="/vault" element={<ObsidianVault />} />
         <Route path="/listings" element={<MyListings />} />
         <Route path="/buyers" element={<BuyerMatcher />} />
-        <Route path="/buyer-matcher" element={<BuyerMatcher />} />
         <Route path="/agents-matcher" element={<AgentMatcher />} />
         <Route path="/lenders" element={<LenderMatcher />} />
         <Route path="/builders" element={<BuilderDirectory />} />
         <Route path="/upload" element={<PropertyUpload />} />
         <Route path="/skills" element={<SkillsAndAgents />} />
         <Route path="/bot-boardroom" element={<BotBoardroom />} />
+        <Route path="/map" element={<MapView />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="/buyer-bot" element={<BuyerBot />} />
         <Route path="/seller-outreach-bot" element={<SellerBot />} />
         <Route path="/property-valuation-bot" element={<PropertyBot />} />
         <Route path="/vigil" element={<VigilBot />} />
-        <Route path="/map" element={<MapView />} />
-        <Route path="/settings" element={<Settings />} />
         <Route path="/exp-agent-recruiter" element={<EXAgentRecruiterEnhanced />} />
         <Route path="/commercial-agent-recruiter" element={<CommercialAgentRecruiter />} />
         <Route path="/brokerages" element={<BrokeragesView />} />
-        <Route path="/residential-recruiter" element={<Navigate to="/exp-agent-recruiter" replace />} />
         <Route path="/data-manager" element={<DataManager />} />
         <Route path="/opportunities" element={<Opportunities />} />
         <Route path="/olena-feature-sheet" element={<OlenaFeatureSheet />} />
         <Route path="/canva-editor" element={<CanvaEditor />} />
+        <Route path="/marketing/*" element={<Navigate to="/" replace />} />
         <Route path="/agent-workspaces" element={<AgentWorkspaces />} />
         <Route path="/agent-workspace/:agentId" element={<AgentWorkspace />} />
         <Route path="/commander-dashboard/:commanderId" element={<CommanderDashboard />} />
@@ -107,9 +132,22 @@ function App() {
         <Route path="/paperclip-companies/:companyId/org" element={<PaperclipOrgChart />} />
         <Route path="/paperclip-dashboard" element={<PaperclipDashboard />} />
         <Route path="/pixel-agents-original" element={<PixelAgentsOriginal />} />
+        <Route path="/v2" element={<MissionControlV2 />} />
+        <Route path="/simple" element={<MissionControlSimple />} />
       </Routes>
     </Layout>
   )
+}
+
+function App() {
+  const isV3 = useIsV3Route()
+  
+  // For V3 route, render without Layout wrapper
+  if (isV3) {
+    return <FullPageRoutes />
+  }
+  
+  return <AppRoutes />
 }
 
 export default App

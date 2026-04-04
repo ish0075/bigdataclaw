@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 
-from fastapi import FastAPI, Query, HTTPException
+from fastapi import FastAPI, Query, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -1713,13 +1713,21 @@ async def get_dbeaver_brokerages(
     total = cursor.fetchone()[0]
     
     # Get brokerages with agent counts
+    # Sort: largest real brokerages first, then EXP, then Ontario Inc numbered companies last
     cursor.execute(f'''
         SELECT b.*, COUNT(s.id) as agent_count
         FROM dbeaver_brokerages b
         LEFT JOIN dbeaver_salespersons s ON s.brokerage_id = b.id
         {where_clause}
         GROUP BY b.id
-        ORDER BY b.name
+        ORDER BY 
+            CASE 
+                WHEN b.name LIKE '%Ontario Inc.%' OR b.name LIKE '%Ontario Inc%' THEN 3
+                WHEN LOWER(b.name) LIKE '%exp%' OR LOWER(b.name) LIKE '%exprealty%' THEN 2
+                ELSE 1
+            END,
+            agent_count DESC,
+            b.name
         LIMIT ? OFFSET ?
     ''', params + [limit, (page - 1) * limit])
     
@@ -2064,6 +2072,433 @@ async def delete_hotmoney_lead(lead_id: int):
     conn.close()
     
     return {"message": "Lead deleted successfully"}
+
+
+# ============================================================================
+# COMPREHENSIVE BUYER MATCHING API
+# ============================================================================
+
+class PropertyMatchRequest(BaseModel):
+    description: str
+    property_type: Optional[str] = None
+    location: Optional[str] = None
+    price_range: Optional[Dict[str, Any]] = None
+
+@app.get("/api/buyer-matcher/all-sources")
+async def get_all_buyer_sources(
+    limit: int = 100,
+    offset: int = 0,
+    search: Optional[str] = None
+):
+    """
+    Get buyers from ALL sources:
+    - Direct buyers (from buyers table)
+    - Sellers who might have buyer connections
+    - Lenders who can finance deals
+    - Hot money leads (recent sellers with cash)
+    """
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    results = []
+    search_filter = f"%{search}%" if search else None
+    
+    # 1. DIRECT BUYERS (18,496 records)
+    try:
+        if search:
+            cursor.execute('''
+                SELECT id, company_name, contact_name, contact_title, email, phone, website, linkedin_url,
+                       'direct_buyer' as source, 'Active Buyer' as buyer_type
+                FROM buyers 
+                WHERE company_name LIKE ? OR contact_name LIKE ?
+                ORDER BY company_name
+                LIMIT ? OFFSET ?
+            ''', (search_filter, search_filter, limit, offset))
+        else:
+            cursor.execute('''
+                SELECT id, company_name, contact_name, contact_title, email, phone, website, linkedin_url,
+                       'direct_buyer' as source, 'Active Buyer' as buyer_type
+                FROM buyers 
+                ORDER BY company_name
+                LIMIT ? OFFSET ?
+            ''', (limit, offset))
+        
+        for row in cursor.fetchall():
+            buyer = dict(row)
+            buyer['cash'] = 10000000  # Assume $10M default
+            buyer['locations'] = ['Ontario']
+            buyer['score'] = 85
+            results.append(buyer)
+    except Exception as e:
+        print(f"Error fetching buyers: {e}")
+    
+    # 2. SELLERS (19,223 records) - they often know buyers
+    try:
+        remaining = limit - len(results)
+        if remaining > 0:
+            if search:
+                cursor.execute('''
+                    SELECT id, company_name, contact_name, contact_title, email, phone, website, linkedin_url,
+                           'seller_network' as source, 'Seller (Has Buyer Network)' as buyer_type
+                    FROM sellers 
+                    WHERE company_name LIKE ? OR contact_name LIKE ?
+                    ORDER BY company_name
+                    LIMIT ?
+                ''', (search_filter, search_filter, remaining))
+            else:
+                cursor.execute('''
+                    SELECT id, company_name, contact_name, contact_title, email, phone, website, linkedin_url,
+                           'seller_network' as source, 'Seller (Has Buyer Network)' as buyer_type
+                    FROM sellers 
+                    ORDER BY company_name
+                    LIMIT ?
+                ''', (remaining,))
+            
+            for row in cursor.fetchall():
+                seller = dict(row)
+                seller['cash'] = 5000000  # Assume $5M
+                seller['locations'] = ['Ontario']
+                seller['score'] = 75
+                results.append(seller)
+    except Exception as e:
+        print(f"Error fetching sellers: {e}")
+    
+    # 3. LENDERS (5,113 records) - they know qualified buyers
+    try:
+        remaining = limit - len(results)
+        if remaining > 0:
+            if search:
+                cursor.execute('''
+                    SELECT id, name as company_name, NULL as contact_name, NULL as contact_title,
+                           email, phone, NULL as website, NULL as linkedin_url,
+                           lender_type, asset_specializations,
+                           'lender_referral' as source, 
+                           CASE 
+                               WHEN is_land_lender = 1 THEN 'Land Lender'
+                               WHEN is_construction_lender = 1 THEN 'Construction Lender'
+                               ELSE 'Commercial Lender'
+                           END as buyer_type,
+                           city, province, quick_links
+                    FROM lenders 
+                    WHERE name LIKE ?
+                    ORDER BY name
+                    LIMIT ?
+                ''', (search_filter, remaining))
+            else:
+                cursor.execute('''
+                    SELECT id, name as company_name, NULL as contact_name, NULL as contact_title,
+                           email, phone, NULL as website, NULL as linkedin_url,
+                           lender_type, asset_specializations,
+                           'lender_referral' as source, 
+                           CASE 
+                               WHEN is_land_lender = 1 THEN 'Land Lender'
+                               WHEN is_construction_lender = 1 THEN 'Construction Lender'
+                               ELSE 'Commercial Lender'
+                           END as buyer_type,
+                           city, province, quick_links
+                    FROM lenders 
+                    ORDER BY name
+                    LIMIT ?
+                ''', (remaining,))
+            
+            for row in cursor.fetchall():
+                lender = dict(row)
+                lender['cash'] = 20000000  # Lenders have access to more capital
+                lender['locations'] = [lender.get('city', 'Ontario')] if lender.get('city') else ['Ontario']
+                lender['score'] = 70
+                results.append(lender)
+    except Exception as e:
+        print(f"Error fetching lenders: {e}")
+    
+    # 4. HOT MONEY LEADS (29 records) - recent sellers with cash
+    try:
+        remaining = limit - len(results)
+        if remaining > 0:
+            cursor.execute('''
+                SELECT id, entity as company_name, cash_amount as cash, location, 
+                       property_type, asset_class, sale_date, match_score as score,
+                       'hot_money' as source, 'Hot Money (Just Sold)' as buyer_type,
+                       contacts
+                FROM hot_money_leads
+                ORDER BY cash_amount DESC
+                LIMIT ?
+            ''', (remaining,))
+            
+            for row in cursor.fetchall():
+                hot = dict(row)
+                hot['locations'] = [hot['location']] if hot['location'] else ['Ontario']
+                # Parse contacts JSON if present
+                if hot.get('contacts'):
+                    try:
+                        contacts = json.loads(hot['contacts'])
+                        if contacts and len(contacts) > 0:
+                            hot['contact_name'] = contacts[0].get('name', '')
+                            hot['contact_title'] = contacts[0].get('role', '')
+                            hot['email'] = contacts[0].get('email', '')
+                            hot['phone'] = contacts[0].get('phone', '')
+                    except:
+                        pass
+                results.append(hot)
+    except Exception as e:
+        print(f"Error fetching hot money: {e}")
+    
+    # Get counts for pagination info
+    cursor.execute("SELECT COUNT(*) FROM buyers")
+    buyers_count = cursor.fetchone()[0]
+    
+    cursor.execute("SELECT COUNT(*) FROM sellers")
+    sellers_count = cursor.fetchone()[0]
+    
+    cursor.execute("SELECT COUNT(*) FROM lenders")
+    lenders_count = cursor.fetchone()[0]
+    
+    cursor.execute("SELECT COUNT(*) FROM hot_money_leads")
+    hotmoney_count = cursor.fetchone()[0]
+    
+    conn.close()
+    
+    return {
+        "buyers": results,
+        "counts": {
+            "direct_buyers": buyers_count,
+            "sellers_network": sellers_count,
+            "lenders": lenders_count,
+            "hot_money": hotmoney_count,
+            "total": buyers_count + sellers_count + lenders_count + hotmoney_count
+        },
+        "returned": len(results),
+        "limit": limit,
+        "offset": offset
+    }
+
+
+@app.post("/api/buyer-matcher/match")
+async def match_property_to_buyers(request: PropertyMatchRequest):
+    """
+    Analyze property description and find matching buyers from all sources
+    """
+    import re
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    desc = request.description.lower()
+    
+    # Extract property type from description
+    property_type = request.property_type
+    if not property_type:
+        if 'industrial' in desc:
+            property_type = 'Industrial'
+        elif 'retail' in desc:
+            property_type = 'Retail'
+        elif 'office' in desc:
+            property_type = 'Office'
+        elif 'land' in desc or 'development' in desc:
+            property_type = 'Land/Development'
+        elif 'multifamily' in desc or 'apartment' in desc or 'residential' in desc:
+            property_type = 'Multifamily'
+        else:
+            property_type = 'Commercial'
+    
+    # Extract price
+    price = 0
+    price_match = re.search(r'(\d+(?:\.\d+)?)\s*(million|m|M)', desc)
+    if price_match:
+        price = float(price_match[1]) * 1000000
+    else:
+        # Try without decimal
+        price_match = re.search(r'(\d{1,3}(?:,\d{3})+)', desc)
+        if price_match:
+            price = int(price_match[1].replace(',', ''))
+    
+    # Extract location
+    location = request.location
+    if not location:
+        locations = ['niagara', 'hamilton', 'toronto', 'gta', 'welland', 'st. catharines', 
+                     'lincoln', 'pelham', 'west lincoln', 'forterie', 'buffalo']
+        for loc in locations:
+            if loc in desc:
+                location = loc.title()
+                break
+    
+    matches = []
+    
+    # 1. Match DIRECT BUYERS
+    try:
+        cursor.execute('''
+            SELECT id, company_name, contact_name, contact_title, email, phone, website, linkedin_url,
+                   'direct_buyer' as source, 'Active Buyer' as buyer_type
+            FROM buyers 
+            LIMIT 500
+        ''')
+        
+        for row in cursor.fetchall():
+            buyer = dict(row)
+            score = 0
+            reasons = []
+            
+            # Company name analysis for type matching
+            company_lower = buyer.get('company_name', '').lower()
+            if property_type.lower() in company_lower:
+                score += 30
+                reasons.append(f"Company specializes in {property_type}")
+            elif any(x in company_lower for x in ['reit', 'properties', 'holdings', 'investments']):
+                score += 20
+                reasons.append("Active real estate investor")
+            
+            # Has contact info bonus
+            if buyer.get('email') or buyer.get('phone'):
+                score += 15
+                reasons.append("Direct contact available")
+            
+            # LinkedIn presence
+            if buyer.get('linkedin_url'):
+                score += 10
+                reasons.append("LinkedIn profile available")
+            
+            if score >= 40:
+                buyer['match_score'] = min(score, 95)
+                buyer['match_reasons'] = reasons[:3]
+                buyer['cash'] = 10000000
+                buyer['locations'] = ['Ontario']
+                matches.append(buyer)
+    except Exception as e:
+        print(f"Error matching buyers: {e}")
+    
+    # 2. Match SELLERS (as buyer sources)
+    try:
+        cursor.execute('''
+            SELECT id, company_name, contact_name, contact_title, email, phone, website, linkedin_url,
+                   'seller_network' as source, 'Seller (Has Buyer Network)' as buyer_type
+            FROM sellers 
+            LIMIT 300
+        ''')
+        
+        for row in cursor.fetchall():
+            seller = dict(row)
+            score = 50  # Base score for sellers
+            reasons = ["Recent seller - knows active buyers in market"]
+            
+            if seller.get('email') or seller.get('phone'):
+                score += 15
+                reasons.append("Contact information available")
+            
+            seller['match_score'] = min(score, 90)
+            seller['match_reasons'] = reasons
+            seller['cash'] = 5000000
+            seller['locations'] = ['Ontario']
+            matches.append(seller)
+    except Exception as e:
+        print(f"Error matching sellers: {e}")
+    
+    # 3. Match LENDERS
+    try:
+        if 'land' in desc or 'development' in desc:
+            # Prioritize land lenders
+            cursor.execute('''
+                SELECT id, name as company_name, lender_type, asset_specializations,
+                       email, phone, city, province,
+                       'lender_referral' as source, 'Land Lender' as buyer_type
+                FROM lenders WHERE is_land_lender = 1
+                LIMIT 100
+            ''')
+        else:
+            cursor.execute('''
+                SELECT id, name as company_name, lender_type, asset_specializations,
+                       email, phone, city, province,
+                       'lender_referral' as source, 'Commercial Lender' as buyer_type
+                FROM lenders 
+                LIMIT 200
+            ''')
+        
+        for row in cursor.fetchall():
+            lender = dict(row)
+            score = 45
+            reasons = ["Lender - knows qualified buyers seeking financing"]
+            
+            if lender.get('asset_specializations'):
+                specs = lender['asset_specializations'].lower()
+                if property_type.lower() in specs:
+                    score += 25
+                    reasons.append(f"Specializes in {property_type} financing")
+            
+            if lender.get('city') and location and lender['city'].lower() in location.lower():
+                score += 15
+                reasons.append(f"Active in {location}")
+            
+            lender['match_score'] = min(score, 88)
+            lender['match_reasons'] = reasons
+            lender['cash'] = 25000000
+            lender['locations'] = [lender.get('city', 'Ontario')] if lender.get('city') else ['Ontario']
+            matches.append(lender)
+    except Exception as e:
+        print(f"Error matching lenders: {e}")
+    
+    # 4. Match HOT MONEY LEADS (highest priority)
+    try:
+        cursor.execute('''
+            SELECT id, entity as company_name, cash_amount, location, 
+                   property_type as hot_property_type, asset_class, sale_date, match_score,
+                   'hot_money' as source, 'Hot Money (Just Sold - Has Cash!)' as buyer_type,
+                   contacts
+            FROM hot_money_leads
+            ORDER BY cash_amount DESC
+            LIMIT 50
+        ''')
+        
+        for row in cursor.fetchall():
+            hot = dict(row)
+            score = hot.get('match_score', 85) or 85
+            reasons = [f"Just sold for {hot.get('cash_amount', 0)/1000000:.1f}M - has liquid cash NOW!"]
+            
+            if hot.get('location'):
+                hot['locations'] = [hot['location']]
+                if location and hot['location'].lower() in (location or '').lower():
+                    score += 10
+                    reasons.append(f"Active in {hot['location']}")
+            else:
+                hot['locations'] = ['Ontario']
+            
+            # Parse contacts
+            if hot.get('contacts'):
+                try:
+                    contacts = json.loads(hot['contacts'])
+                    if contacts and len(contacts) > 0:
+                        hot['contact_name'] = contacts[0].get('name', '')
+                        hot['contact_title'] = contacts[0].get('role', '')
+                        hot['email'] = contacts[0].get('email', '')
+                        hot['phone'] = contacts[0].get('phone', '')
+                        if hot['contact_name']:
+                            reasons.append(f"Contact: {hot['contact_name']}")
+                except:
+                    pass
+            
+            hot['match_score'] = min(score, 98)
+            hot['match_reasons'] = reasons
+            matches.append(hot)
+    except Exception as e:
+        print(f"Error matching hot money: {e}")
+    
+    conn.close()
+    
+    # Sort by match score
+    matches.sort(key=lambda x: x.get('match_score', 0), reverse=True)
+    
+    return {
+        "property_analyzed": {
+            "type": property_type,
+            "location": location,
+            "price": price,
+            "description": request.description[:200] + "..." if len(request.description) > 200 else request.description
+        },
+        "matches": matches[:50],  # Return top 50 matches
+        "total_matches": len(matches),
+        "sources": {
+            "direct_buyers": sum(1 for m in matches if m.get('source') == 'direct_buyer'),
+            "seller_network": sum(1 for m in matches if m.get('source') == 'seller_network'),
+            "lender_referrals": sum(1 for m in matches if m.get('source') == 'lender_referral'),
+            "hot_money": sum(1 for m in matches if m.get('source') == 'hot_money')
+        }
+    }
 
 
 # ============================================================================
@@ -2900,6 +3335,367 @@ async def get_data_manager_buyers(
     }
 
 # ============================================================================
+# GEMMA 4 CEO EXECUTIVE ASSISTANT ENDPOINTS
+# ============================================================================
+
+# Import Gemma 4 modules (lazy import to handle missing dependencies gracefully)
+_gemma4_engine = None
+_google_earth = None
+_document_processor = None
+_voice_interface = None
+_briefing_scheduler = None
+
+def get_gemma4_engine():
+    global _gemma4_engine
+    if _gemma4_engine is None:
+        try:
+            import sys
+            sys.path.insert(0, 'bigdataclaw/gemma4')
+            from gemma4_engine import Gemma4Engine
+            _gemma4_engine = Gemma4Engine()
+        except Exception as e:
+            print(f"⚠️ Gemma 4 engine not available: {e}")
+    return _gemma4_engine
+
+def get_google_earth():
+    global _google_earth
+    if _google_earth is None:
+        try:
+            import sys
+            sys.path.insert(0, 'bigdataclaw/gemma4')
+            from google_earth import PropertyVisualizer
+            _google_earth = PropertyVisualizer()
+        except Exception as e:
+            print(f"⚠️ Google Earth integration not available: {e}")
+    return _google_earth
+
+def get_document_processor():
+    global _document_processor
+    if _document_processor is None:
+        try:
+            import sys
+            sys.path.insert(0, 'bigdataclaw/gemma4')
+            from document_processor import DocumentAnalyzer
+            _document_processor = DocumentAnalyzer()
+        except Exception as e:
+            print(f"⚠️ Document processor not available: {e}")
+    return _document_processor
+
+def get_voice_interface():
+    global _voice_interface
+    if _voice_interface is None:
+        try:
+            import sys
+            sys.path.insert(0, 'bigdataclaw/gemma4')
+            from voice_interface import create_voice_interface
+            _voice_interface = create_voice_interface()
+        except Exception as e:
+            print(f"⚠️ Voice interface not available: {e}")
+    return _voice_interface
+
+def get_briefing_scheduler():
+    global _briefing_scheduler
+    if _briefing_scheduler is None:
+        try:
+            import sys
+            sys.path.insert(0, 'bigdataclaw/gemma4')
+            from daily_briefing import BriefingScheduler
+            _briefing_scheduler = BriefingScheduler()
+        except Exception as e:
+            print(f"⚠️ Briefing scheduler not available: {e}")
+    return _briefing_scheduler
+
+class Gemma4ChatRequest(BaseModel):
+    message: str
+    context: Optional[str] = None
+    stream: bool = False
+
+class Gemma4AnalyzeRequest(BaseModel):
+    address: str
+    include_demographics: bool = True
+
+@app.get("/api/gemma4/status")
+async def gemma4_status():
+    """Check Gemma 4 AI Assistant status."""
+    engine = get_gemma4_engine()
+    earth = get_google_earth()
+    doc_processor = get_document_processor()
+    voice = get_voice_interface()
+    briefing = get_briefing_scheduler()
+    
+    return {
+        "status": "operational" if engine else "unavailable",
+        "engine_loaded": engine is not None,
+        "google_earth_loaded": earth is not None,
+        "document_processor_loaded": doc_processor is not None,
+        "voice_interface_loaded": voice is not None,
+        "briefing_scheduler_loaded": briefing is not None,
+        "models": ["gemma:2b", "gemma:7b"],
+        "features": [
+            "chat",
+            "database_query",
+            "property_analysis",
+            "satellite_imagery",
+            "site_analysis",
+            "document_upload",
+            "pdf_analysis",
+            "ocr",
+            "voice_commands",
+            "text_to_speech",
+            "wake_word_detection",
+            "daily_briefing",
+            "automated_reports"
+        ],
+        "timestamp": datetime.now().isoformat()
+    }
+
+@app.post("/api/gemma4/chat")
+async def gemma4_chat(request: Gemma4ChatRequest):
+    """Chat with Gemma 4 CEO Assistant."""
+    engine = get_gemma4_engine()
+    
+    if not engine:
+        # Fallback response when engine unavailable
+        return {
+            "response": "Gemma 4 AI Assistant is currently initializing. Please try again in a moment.",
+            "model": "unavailable",
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    try:
+        response = engine.chat(request.message, context=request.context)
+        return {
+            "response": response,
+            "model": engine.model,
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {
+            "response": f"I apologize, but I encountered an error: {str(e)}",
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+@app.post("/api/gemma4/analyze-property")
+async def gemma4_analyze_property(request: Gemma4AnalyzeRequest):
+    """Analyze a property with satellite imagery and site context."""
+    earth = get_google_earth()
+    
+    if not earth:
+        return {
+            "error": "Property analysis service unavailable",
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    try:
+        package = earth.create_property_package(
+            request.address, 
+            include_demographics=request.include_demographics
+        )
+        return package
+    except Exception as e:
+        return {
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+@app.get("/api/gemma4/satellite")
+async def gemma4_satellite(address: str, zoom: int = 19):
+    """Get satellite imagery for an address."""
+    earth = get_google_earth()
+    
+    if not earth:
+        return {"error": "Satellite service unavailable"}
+    
+    try:
+        from google_earth import get_property_satellite
+        result = get_property_satellite(address)
+        return result
+    except Exception as e:
+        return {"error": str(e)}
+
+@app.post("/api/gemma4/upload-document")
+async def gemma4_upload_document(
+    file: UploadFile = File(...)
+):
+    """Upload and analyze a document (PDF, DOCX, TXT, XLSX, images)."""
+    doc_processor = get_document_processor()
+    
+    if not doc_processor:
+        return {
+            "error": "Document processing service unavailable",
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    try:
+        content = await file.read()
+        result = doc_processor.analyze_document(
+            content, 
+            file.filename, 
+            file.content_type or 'application/octet-stream'
+        )
+        return result
+    except Exception as e:
+        return {
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+# Voice Interface Endpoints
+active_voice_sessions = {}
+
+@app.post("/api/gemma4/voice/start")
+async def gemma4_voice_start():
+    """Start a new voice session."""
+    voice = get_voice_interface()
+    
+    if not voice:
+        return {
+            "status": "unavailable",
+            "message": "Voice interface not available",
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    try:
+        session = voice.start_session()
+        session_id = session['session_id']
+        active_voice_sessions[session_id] = voice
+        return session
+    except Exception as e:
+        return {
+            "status": "error",
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+@app.post("/api/gemma4/voice/{session_id}/audio")
+async def gemma4_voice_audio(session_id: str, audio: UploadFile = File(...)):
+    """Process audio chunk from client."""
+    voice = active_voice_sessions.get(session_id)
+    
+    if not voice:
+        return {
+            "error": "Session not found or expired",
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    try:
+        audio_bytes = await audio.read()
+        result = voice.process_audio_chunk(audio_bytes)
+        return result
+    except Exception as e:
+        return {
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+@app.post("/api/gemma4/voice/{session_id}/text")
+async def gemma4_voice_text(session_id: str, request: Gemma4ChatRequest):
+    """Send text command to voice session (for testing without audio)."""
+    voice = active_voice_sessions.get(session_id)
+    
+    if not voice:
+        return {
+            "error": "Session not found or expired",
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    try:
+        engine = get_gemma4_engine()
+        result = voice.generate_response(request.message, gemma_engine=engine)
+        return result
+    except Exception as e:
+        return {
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+@app.post("/api/gemma4/voice/{session_id}/end")
+async def gemma4_voice_end(session_id: str):
+    """End a voice session."""
+    voice = active_voice_sessions.get(session_id)
+    
+    if not voice:
+        return {
+            "error": "Session not found",
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    try:
+        result = voice.end_session()
+        del active_voice_sessions[session_id]
+        return result
+    except Exception as e:
+        return {
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+# Daily Briefing Endpoints
+@app.get("/api/gemma4/briefing/today")
+async def gemma4_daily_briefing():
+    """Generate today's daily briefing."""
+    scheduler = get_briefing_scheduler()
+    
+    if not scheduler:
+        return {
+            "error": "Briefing service unavailable",
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    try:
+        result = scheduler.generate_and_deliver()
+        return result
+    except Exception as e:
+        return {
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+@app.get("/api/gemma4/briefing/markdown")
+async def gemma4_briefing_markdown():
+    """Get daily briefing as markdown."""
+    try:
+        import sys
+        sys.path.insert(0, 'bigdataclaw/gemma4')
+        from daily_briefing import DailyBriefingGenerator
+        
+        generator = DailyBriefingGenerator()
+        briefing = generator.generate_briefing()
+        markdown = generator.to_markdown(briefing)
+        
+        return {
+            "markdown": markdown,
+            "date": briefing.date,
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+@app.post("/api/gemma4/briefing/schedule")
+async def gemma4_schedule_briefing(time: str = "08:00", timezone: str = "America/Toronto"):
+    """Schedule automated daily briefings."""
+    scheduler = get_briefing_scheduler()
+    
+    if not scheduler:
+        return {
+            "error": "Briefing scheduler unavailable",
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    try:
+        result = scheduler.schedule_briefing(time, timezone)
+        return result
+    except Exception as e:
+        return {
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+# ============================================================================
 # MAIN
 # ============================================================================
 
@@ -2933,6 +3729,21 @@ if __name__ == "__main__":
     print("   GET  /api/obsidian/files/{path}  - Get file content (read)")
     print("   POST /api/obsidian/search        - Search vault (read)")
     print("   GET  /api/obsidian/folders       - List folders (read)")
+    print("\n🧠 Gemma 4 CEO Assistant:")
+    print("   GET  /api/gemma4/status              - Assistant status")
+    print("   POST /api/gemma4/chat                - Chat with Gemma 4")
+    print("   POST /api/gemma4/analyze-property    - Property analysis with satellite")
+    print("   GET  /api/gemma4/satellite           - Satellite imagery")
+    print("   POST /api/gemma4/upload-document     - Document upload & analysis")
+    print("\n🎤 Voice Interface:")
+    print("   POST /api/gemma4/voice/start         - Start voice session")
+    print("   POST /api/gemma4/voice/{id}/audio    - Send audio chunk")
+    print("   POST /api/gemma4/voice/{id}/text     - Send text command")
+    print("   POST /api/gemma4/voice/{id}/end      - End voice session")
+    print("\n📰 Daily Briefing:")
+    print("   GET  /api/gemma4/briefing/today      - Generate today's briefing")
+    print("   GET  /api/gemma4/briefing/markdown   - Get briefing as markdown")
+    print("   POST /api/gemma4/briefing/schedule   - Schedule automated briefings")
     print("\n   ⚠️  WRITE OPERATIONS DISABLED")
     print("   Use separate BDAIV2 Writer project for vault modifications")
     print("\n🌐 Starting server on http://0.0.0.0:8000")

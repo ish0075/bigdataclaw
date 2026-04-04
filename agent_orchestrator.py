@@ -64,7 +64,13 @@ class AgentOrchestrator:
                 # Restore tasks
                 for task_data in config.get('tasks', []):
                     task = AgentTask(**task_data)
-                    task.status = AgentStatus(task.status) if isinstance(task.status, str) else task.status
+                    if isinstance(task.status, str):
+                        # Handle 'AgentStatus.IDLE' format
+                        status_str = task.status.replace('AgentStatus.', '')
+                        try:
+                            task.status = AgentStatus[status_str]
+                        except KeyError:
+                            task.status = AgentStatus.IDLE
                     self.tasks.append(task)
     
     def _save_config(self):
@@ -214,8 +220,21 @@ class AgentOrchestrator:
                     AgentStatus.RETRYING: "🔄"
                 }.get(task.status, "❓")
                 
-                next_run = task.next_run.strftime('%Y-%m-%d %H:%M') if task.next_run else 'N/A'
-                last_run = task.last_run.strftime('%Y-%m-%d %H:%M') if task.last_run else 'Never'
+                if task.next_run:
+                    if isinstance(task.next_run, str):
+                        next_run = task.next_run[:16]  # Trim to YYYY-MM-DD HH:MM
+                    else:
+                        next_run = task.next_run.strftime('%Y-%m-%d %H:%M')
+                else:
+                    next_run = 'N/A'
+                    
+                if task.last_run:
+                    if isinstance(task.last_run, str):
+                        last_run = task.last_run[:16]
+                    else:
+                        last_run = task.last_run.strftime('%Y-%m-%d %H:%M')
+                else:
+                    last_run = 'Never'
                 
                 print(f"  {status_icon} {task.id}")
                 print(f"     Schedule: {task.schedule}")

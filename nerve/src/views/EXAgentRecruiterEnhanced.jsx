@@ -923,7 +923,7 @@ const EXAgentRecruiterEnhanced = ({ initialViewMode = 'agents' }) => {
   const [brokerageLoading, setBrokerageLoading] = useState(false);
   const [brokerageSearch, setBrokerageSearch] = useState('');
   const [brokerageCity, setBrokerageCity] = useState('All Cities');
-  const [brokerageSortBy, setBrokerageSortBy] = useState('name'); // 'agents' | 'name'
+  const [brokerageSortBy, setBrokerageSortBy] = useState('agents'); // 'agents' | 'name'
   const [brokeragePage, setBrokeragePage] = useState(1);
   const [brokeragePageSize, setBrokeragePageSize] = useState(50); // Default 50 per page
   const [brokerageTotal, setBrokerageTotal] = useState(0);
@@ -1200,8 +1200,14 @@ const EXAgentRecruiterEnhanced = ({ initialViewMode = 'agents' }) => {
       groups[key].push(agent);
     });
     
-    // Sort groups by count descending
-    return Object.entries(groups).sort((a, b) => b[1].length - a[1].length);
+    // Sort groups: non-EXP first, then EXP last; within each, sort by count descending
+    return Object.entries(groups).sort((a, b) => {
+      const aIsExp = a[0].toLowerCase().includes('exp');
+      const bIsExp = b[0].toLowerCase().includes('exp');
+      if (aIsExp && !bIsExp) return 1;
+      if (!aIsExp && bIsExp) return -1;
+      return b[1].length - a[1].length;
+    });
   }, [agents, activeGroup]);
 
   const toggleGroup = (groupName) => {
@@ -1317,10 +1323,7 @@ const EXAgentRecruiterEnhanced = ({ initialViewMode = 'agents' }) => {
                 <span className="text-amber-400 ml-1">EXP agents sorted last</span>
               </p>
               
-              {/* Line 4: Sample label */}
-              <p className="text-lg font-semibold text-blue-400 mt-2">
-                Sample ({agents.length.toLocaleString()})
-              </p>
+              {/* Sample count - moved to results section */}
             </div>
           ) : (
             <div>

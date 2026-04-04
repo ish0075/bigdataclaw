@@ -20,8 +20,10 @@ const generateQuickLinks = (entityName, contactName = null, buyerEntity = null) 
       google: `https://www.google.com/search?q=${encoded}`,
       linkedin: `https://www.google.com/search?q=${encoded}+linkedin`,
       linkedinCompany: `https://www.linkedin.com/search/results/companies/?keywords=${encoded}`,
+      linkedinPerson: contactName ? `https://www.linkedin.com/search/results/people/?keywords=${encodedContact}` : null,
       facebook: `https://www.facebook.com/search/pages?q=${encoded}`,
       corporation: `https://www.google.com/search?q=${encoded}+corporation+canada`,
+      openCorporate: `https://opencorporates.com/companies?q=${encoded}`,
     },
     // BUYER (Purchased the property)
     buyer: encodedBuyer ? {
@@ -30,6 +32,7 @@ const generateQuickLinks = (entityName, contactName = null, buyerEntity = null) 
       linkedinCompany: `https://www.linkedin.com/search/results/companies/?keywords=${encodedBuyer}`,
       facebook: `https://www.facebook.com/search/pages?q=${encodedBuyer}`,
       corporation: `https://www.google.com/search?q=${encodedBuyer}+corporation+canada`,
+      openCorporate: `https://opencorporates.com/companies?q=${encodedBuyer}`,
     } : null,
     // Individual contact (if available)
     person: contactName ? {
@@ -39,25 +42,54 @@ const generateQuickLinks = (entityName, contactName = null, buyerEntity = null) 
   }
 }
 
+// Extract contact and buyer info from notes text
+const parseNotesForContacts = (notes = '') => {
+  if (!notes) return { contactName: null, buyerEntity: null }
+  
+  // Extract Attn: contact
+  let contactName = null
+  const attnMatch = notes.match(/Attn:\s*([^\n]+)/i)
+  if (attnMatch) {
+    contactName = attnMatch[1].trim()
+  }
+  
+  // Extract buyer company from Transferee(s) block
+  let buyerEntity = null
+  const transfereeMatch = notes.match(/Transferee\(s\)\s*\n+([A-Za-z0-9][^\n]+)/i)
+  if (transfereeMatch) {
+    buyerEntity = transfereeMatch[1].trim()
+    // Strip trailing phone numbers
+    buyerEntity = buyerEntity.replace(/\s+\(?\d{3}\)?[-.\s]\d{3}[-.\s]\d{4}\s*$/, '')
+  }
+  
+  return { contactName, buyerEntity }
+}
+
 const API_BASE = '/api'
 
 // Helper to convert API snake_case to frontend camelCase
-const apiToFrontend = (lead) => ({
-  id: String(lead.id),
-  entity: lead.entity,
-  cashAmount: lead.cash_amount,
-  saleDate: lead.sale_date,
-  location: lead.location,
-  property: lead.property,
-  matchScore: lead.match_score,
-  propertyType: lead.property_type,
-  assetClass: lead.asset_class,
-  address: lead.address,
-  daysAgo: lead.days_ago,
-  notes: lead.notes || '',
-  contacts: lead.contacts || [],
-  quickLinks: generateQuickLinks(lead.entity)
-})
+const apiToFrontend = (lead) => {
+  const notes = lead.notes || ''
+  const { contactName, buyerEntity } = parseNotesForContacts(notes)
+  return {
+    id: String(lead.id),
+    entity: lead.entity,
+    cashAmount: lead.cash_amount,
+    saleDate: lead.sale_date,
+    location: lead.location,
+    property: lead.property,
+    matchScore: lead.match_score,
+    propertyType: lead.property_type,
+    assetClass: lead.asset_class,
+    address: lead.address,
+    daysAgo: lead.days_ago,
+    notes: notes,
+    contacts: lead.contacts || [],
+    contactName: contactName,
+    buyerEntity: buyerEntity,
+    quickLinks: generateQuickLinks(lead.entity, contactName, buyerEntity)
+  }
+}
 
 // Helper to convert frontend camelCase to API snake_case
 const frontendToApi = (lead) => ({
@@ -91,20 +123,22 @@ const HotMoneyRadar = () => {
     propertyType: 'all',
     minCash: '',
     maxCash: '',
-    location: ''
+    location: '',
+    daysAgo: 90
   })
   
   // Load leads from API
   useEffect(() => {
     fetchLeads()
-  }, [])
+  }, [filters.daysAgo])
   
   const fetchLeads = async () => {
     try {
       setLoading(true)
       setError(null)
+      const days = filters.daysAgo || 90
       console.log('Fetching hot money leads...')
-      const response = await fetch(`${API_BASE}/hotmoney`)
+      const response = await fetch(`${API_BASE}/hotmoney?limit=200&days=${days}`)
       if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       const data = await response.json()
       console.log('Received data:', data)
@@ -128,7 +162,14 @@ const HotMoneyRadar = () => {
   // Apply filters
   const displayLeads = useMemo(() => {
     return allLeads.filter(lead => {
-      if (filters.propertyType !== 'all' && lead.propertyType !== filters.propertyType) return false
+      if (filters.propertyType !== 'all') {
+        const pt = lead.propertyType || ''
+        const ac = lead.assetClass || ''
+        const filterVal = filters.propertyType
+        // Match either propertyType or assetClass (partial match supported)
+        const matchesType = pt === filterVal || ac === filterVal || pt.includes(filterVal) || ac.includes(filterVal)
+        if (!matchesType) return false
+      }
       if (filters.minCash && lead.cashAmount < parseInt(filters.minCash)) return false
       if (filters.maxCash && lead.cashAmount > parseInt(filters.maxCash)) return false
       if (filters.location && !lead.location.toLowerCase().includes(filters.location.toLowerCase())) return false
@@ -222,6 +263,10 @@ const HotMoneyRadar = () => {
           editingLead={editingLead}
           onSave={handleSaveEdit}
           formatCash={formatCash}
+          onFilterByAssetClass={(assetClass) => {
+            setFilters({...filters, propertyType: assetClass})
+            setShowDetailModal(false)
+          }}
         />
       ) : null}
       
@@ -245,7 +290,7 @@ const HotMoneyRadar = () => {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <Flame className="w-6 h-6 text-red-500" />
-            Hot Money Radar
+            Who's got the money? Hot money radar
           </h1>
           <p className="text-slate-400 mt-1">
             {displayLeads.length} leads with {formatCash(totalCapital)} in fresh capital • Recently sold
@@ -361,6 +406,23 @@ const HotMoneyRadar = () => {
           </div>
           
           <div className="flex flex-wrap gap-2">
+            {/* Time Range Toggles */}
+            <div className="flex items-center bg-slate-900/50 rounded-lg border border-slate-700 overflow-hidden">
+              {[30, 60, 90].map((days) => (
+                <button
+                  key={days}
+                  onClick={() => setFilters({...filters, daysAgo: days})}
+                  className={`px-3 py-2 text-sm font-medium transition-colors ${
+                    filters.daysAgo === days
+                      ? 'bg-red-600 text-white'
+                      : 'text-slate-300 hover:bg-slate-800'
+                  }`}
+                >
+                  {days}D
+                </button>
+              ))}
+            </div>
+            
             <select
               value={filters.propertyType}
               onChange={(e) => setFilters({...filters, propertyType: e.target.value})}
@@ -423,6 +485,7 @@ const HotMoneyRadar = () => {
                 formatCash={formatCash}
                 onViewProfile={() => handleViewProfile(lead)}
                 onSpawnPaperclip={(e) => spawnPaperclipMission(lead, e)}
+                onFilterByAssetClass={(assetClass) => setFilters({...filters, propertyType: assetClass})}
               />
             ))
           )}
@@ -434,7 +497,7 @@ const HotMoneyRadar = () => {
 }
 
 // Lead Detail Modal Component
-const LeadDetailModal = ({ lead, onClose, onEdit, editingLead, onSave, formatCash }) => {
+const LeadDetailModal = ({ lead, onClose, onEdit, editingLead, onSave, formatCash, onFilterByAssetClass }) => {
   const [editedData, setEditedData] = useState(editingLead || lead)
   const [pullingProfile, setPullingProfile] = useState(false)
   const [profileData, setProfileData] = useState(null)
@@ -685,7 +748,20 @@ ${lead.notes || 'No notes yet.'}
                     placeholder="e.g. Industrial Warehouse"
                   />
                 ) : (
-                  <p className="text-white font-medium">{data.assetClass || data.propertyType}</p>
+                  <p className="text-white font-medium">
+                    {onFilterByAssetClass && (data.assetClass || data.propertyType) ? (
+                      <button
+                        type="button"
+                        onClick={() => onFilterByAssetClass(data.assetClass || data.propertyType)}
+                        className="text-white hover:text-blue-400 hover:underline cursor-pointer transition-colors"
+                        title={`Filter by ${data.assetClass || data.propertyType}`}
+                      >
+                        {data.assetClass || data.propertyType}
+                      </button>
+                    ) : (
+                      <span>{data.assetClass || data.propertyType}</span>
+                    )}
+                  </p>
                 )}
               </div>
               
@@ -904,54 +980,54 @@ ${lead.notes || 'No notes yet.'}
                     Google
                   </a>
                   <a
-                    href={`https://www.google.com/search?q=${encodeURIComponent(data.entity)}+linkedin`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 py-2 bg-amber-900/30 hover:bg-amber-900/50 text-amber-300 border border-amber-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    LinkedIn
-                  </a>
-                  <a
                     href={`https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(data.entity)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-3 py-2 bg-amber-900/30 hover:bg-amber-900/50 text-amber-300 border border-amber-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
                   >
                     <Building className="w-4 h-4" />
-                    LinkedIn Company
+                    LinkedIn Co
                   </a>
                   <a
                     href={`https://www.facebook.com/search/pages?q=${encodeURIComponent(data.entity)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-2 bg-amber-900/30 hover:bg-amber-900/50 text-amber-300 border border-amber-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    className="px-3 py-2 bg-indigo-900/30 hover:bg-indigo-900/50 text-indigo-300 border border-indigo-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
                   >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    <ExternalLink className="w-4 h-4" />
                     Facebook
+                  </a>
+                  <a
+                    href={`https://opencorporates.com/companies?q=${encodeURIComponent(data.entity)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-2 bg-emerald-900/30 hover:bg-emerald-900/50 text-emerald-300 border border-emerald-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                  >
+                    <Building className="w-4 h-4" />
+                    Corp Registry
                   </a>
                   <a
                     href={`https://www.google.com/search?q=${encodeURIComponent(data.entity)}+corporation+canada`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-2 bg-amber-900/30 hover:bg-amber-900/50 text-amber-300 border border-amber-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    className="px-3 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 border border-slate-600 rounded-lg text-sm flex items-center gap-2 transition-colors"
                   >
-                    <Building className="w-4 h-4" />
-                    Corporation
+                    <FileText className="w-4 h-4" />
+                    Canada Corp
                   </a>
                 </div>
               </div>
               
               {/* BUYER (Purchased the Property) */}
-              {data.contacts && data.contacts.find(c => c.type === 'company') && (
+              {(data.buyerEntity || (data.contacts && data.contacts.find(c => c.type === 'company'))) && (
                 <div className="space-y-2 p-3 bg-blue-500/10 border border-blue-500/20 rounded-xl">
                   <p className="text-xs text-blue-400 uppercase tracking-wider font-semibold flex items-center gap-1">
                     <span className="text-lg">🏢</span> Buyer (Property Purchaser)
                   </p>
-                  <p className="text-sm text-slate-300">{data.contacts.find(c => c.type === 'company').value}</p>
+                  <p className="text-sm text-slate-300">{data.buyerEntity || data.contacts.find(c => c.type === 'company').value}</p>
                   <div className="flex flex-wrap gap-2">
                     <a
-                      href={`https://www.google.com/search?q=${encodeURIComponent(data.contacts.find(c => c.type === 'company').value)}`}
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.buyerEntity || data.contacts.find(c => c.type === 'company').value)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-3 py-2 bg-blue-900/30 hover:bg-blue-900/50 text-blue-300 border border-blue-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
@@ -960,7 +1036,7 @@ ${lead.notes || 'No notes yet.'}
                       Google
                     </a>
                     <a
-                      href={`https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(data.contacts.find(c => c.type === 'company').value)}`}
+                      href={`https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(data.buyerEntity || data.contacts.find(c => c.type === 'company').value)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-3 py-2 bg-blue-900/30 hover:bg-blue-900/50 text-blue-300 border border-blue-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
@@ -973,15 +1049,15 @@ ${lead.notes || 'No notes yet.'}
               )}
               
               {/* Individual/Person Contact */}
-              {data.contacts && data.contacts.find(c => c.type === 'person') && (
+              {(data.contactName || (data.contacts && data.contacts.find(c => c.type === 'person'))) && (
                 <div className="space-y-2 p-3 bg-purple-500/10 border border-purple-500/20 rounded-xl">
                   <p className="text-xs text-purple-400 uppercase tracking-wider font-semibold flex items-center gap-1">
                     <span className="text-lg">👤</span> Key Contact
                   </p>
-                  <p className="text-sm text-slate-300">{data.contacts.find(c => c.type === 'person').value}</p>
+                  <p className="text-sm text-slate-300">{data.contactName || data.contacts.find(c => c.type === 'person').value}</p>
                   <div className="flex flex-wrap gap-2">
                     <a
-                      href={`https://www.google.com/search?q=${encodeURIComponent(data.contacts.find(c => c.type === 'person').value)}`}
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.contactName || data.contacts.find(c => c.type === 'person').value)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-3 py-2 bg-purple-900/30 hover:bg-purple-900/50 text-purple-300 border border-purple-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
@@ -990,13 +1066,13 @@ ${lead.notes || 'No notes yet.'}
                       Google
                     </a>
                     <a
-                      href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(data.contacts.find(c => c.type === 'person').value)}`}
+                      href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(data.contactName || data.contacts.find(c => c.type === 'person').value)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-3 py-2 bg-purple-900/30 hover:bg-purple-900/50 text-purple-300 border border-purple-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
                     >
                       <ExternalLink className="w-4 h-4" />
-                      LinkedIn
+                      LinkedIn Person
                     </a>
                   </div>
                 </div>
@@ -1344,12 +1420,15 @@ const FilterModal = ({ show, onClose, filters, setFilters }) => {
   )
 }
 
-const HotMoneyListItem = ({ lead, formatCash, onViewProfile, onSpawnPaperclip }) => {
+const HotMoneyListItem = ({ lead, formatCash, onViewProfile, onSpawnPaperclip, onFilterByAssetClass }) => {
   const getScoreColor = (score) => {
     if (score >= 90) return 'text-emerald-400'
     if (score >= 70) return 'text-yellow-400'
     return 'text-red-400'
   }
+  
+  const assetClassLabel = lead.assetClass || lead.propertyType
+  const ql = lead.quickLinks || {}
   
   return (
     <div 
@@ -1367,13 +1446,23 @@ const HotMoneyListItem = ({ lead, formatCash, onViewProfile, onSpawnPaperclip })
         {/* Main Content */}
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between">
-            <div>
-              <div className="flex items-center gap-3">
+            <div className="min-w-0">
+              {/* Company Name */}
+              <div className="flex items-center gap-3 flex-wrap">
                 <h4 className="font-semibold text-white text-lg group-hover:text-red-400 transition-colors">{lead.entity}</h4>
                 <span className="px-2 py-0.5 rounded-full bg-red-500/10 text-red-400 text-xs font-medium">
                   Sale: {lead.saleDate || "Date unknown"}
                 </span>
               </div>
+              
+              {/* Personal Contact Name */}
+              {lead.contactName && (
+                <p className="text-sm text-purple-400 mt-1 flex items-center gap-1.5">
+                  <UserCircle className="w-3.5 h-3.5" />
+                  <span className="font-medium">Contact:</span>
+                  <span>{lead.contactName}</span>
+                </p>
+              )}
               
               <div className="flex items-center gap-4 mt-2 text-sm">
                 <div className="flex items-center gap-1.5 text-red-400 font-semibold">
@@ -1392,15 +1481,153 @@ const HotMoneyListItem = ({ lead, formatCash, onViewProfile, onSpawnPaperclip })
                 </div>
               </div>
               
-              <p className="text-slate-500 text-sm mt-1">
-                <span className="text-slate-400">{lead.assetClass || lead.propertyType}</span>
-                <span className="mx-2">•</span>
+              <p className="text-slate-500 text-sm mt-1 flex items-center gap-2">
+                {onFilterByAssetClass && assetClassLabel && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      onFilterByAssetClass(assetClassLabel)
+                    }}
+                    className="text-slate-400 hover:text-blue-400 hover:underline cursor-pointer transition-colors"
+                    title={`Filter by ${assetClassLabel}`}
+                  >
+                    {assetClassLabel}
+                  </button>
+                )}
+                {(!onFilterByAssetClass || !assetClassLabel) && (
+                  <span className="text-slate-400">{assetClassLabel}</span>
+                )}
+                <span className="mx-1">•</span>
                 <span>{lead.address || lead.property}</span>
               </p>
+              
+              {/* Quick Links Bar */}
+              <div className="mt-3 flex flex-wrap items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+                {/* Company Google */}
+                {ql.seller?.google && (
+                  <a
+                    href={ql.seller.google}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 transition-colors"
+                    title="Google Search Company"
+                  >
+                    <Search className="w-3 h-3" />
+                    Google
+                  </a>
+                )}
+                
+                {/* LinkedIn Company */}
+                {ql.seller?.linkedinCompany && (
+                  <a
+                    href={ql.seller.linkedinCompany}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-blue-900/20 hover:bg-blue-900/40 border border-blue-700/30 text-xs text-blue-300 transition-colors"
+                    title="LinkedIn Company"
+                  >
+                    <Building className="w-3 h-3" />
+                    LinkedIn Co
+                  </a>
+                )}
+                
+                {/* LinkedIn Person */}
+                {ql.seller?.linkedinPerson && (
+                  <a
+                    href={ql.seller.linkedinPerson}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-purple-900/20 hover:bg-purple-900/40 border border-purple-700/30 text-xs text-purple-300 transition-colors"
+                    title={`LinkedIn: ${lead.contactName}`}
+                  >
+                    <UserCircle className="w-3 h-3" />
+                    LinkedIn Person
+                  </a>
+                )}
+                
+                {/* Facebook Company */}
+                {ql.seller?.facebook && (
+                  <a
+                    href={ql.seller.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-indigo-900/20 hover:bg-indigo-900/40 border border-indigo-700/30 text-xs text-indigo-300 transition-colors"
+                    title="Facebook Company"
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                    Facebook
+                  </a>
+                )}
+                
+                {/* OpenCorporates */}
+                {ql.seller?.openCorporate && (
+                  <a
+                    href={ql.seller.openCorporate}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-900/20 hover:bg-emerald-900/40 border border-emerald-700/30 text-xs text-emerald-300 transition-colors"
+                    title="OpenCorporates Search"
+                  >
+                    <Building className="w-3 h-3" />
+                    Corp Registry
+                  </a>
+                )}
+                
+                {/* Corporation Canada */}
+                {ql.seller?.corporation && (
+                  <a
+                    href={ql.seller.corporation}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-amber-900/20 hover:bg-amber-900/40 border border-amber-700/30 text-xs text-amber-300 transition-colors"
+                    title="Corporation Canada Search"
+                  >
+                    <FileText className="w-3 h-3" />
+                    Canada Corp
+                  </a>
+                )}
+                
+                {/* BUYER Quick Links */}
+                {lead.buyerEntity && ql.buyer && (
+                  <>
+                    <span className="text-slate-600 mx-1">|</span>
+                    <span className="text-xs text-slate-500">Buyer:</span>
+                    <a
+                      href={ql.buyer.google}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 transition-colors"
+                      title={`Google: ${lead.buyerEntity}`}
+                    >
+                      <Search className="w-3 h-3" />
+                      {lead.buyerEntity.length > 20 ? lead.buyerEntity.slice(0, 18) + '...' : lead.buyerEntity}
+                    </a>
+                    <a
+                      href={ql.buyer.linkedinCompany}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-blue-900/20 hover:bg-blue-900/40 border border-blue-700/30 text-xs text-blue-300 transition-colors"
+                      title="LinkedIn Buyer"
+                    >
+                      <Building className="w-3 h-3" />
+                      LI
+                    </a>
+                  </>
+                )}
+              </div>
             </div>
             
             {/* Score & Actions */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 flex-shrink-0">
               <div className="text-center">
                 <div className={`text-3xl font-bold ${getScoreColor(lead.matchScore)}`}>
                   {lead.matchScore}
@@ -1431,65 +1658,6 @@ const HotMoneyListItem = ({ lead, formatCash, onViewProfile, onSpawnPaperclip })
                 </button>
               </div>
             </div>
-          </div>
-          
-          {/* Quick Links - Compact Row */}
-          <div className="mt-3 flex flex-wrap gap-2" onClick={(e) => e.stopPropagation()}>
-            {/* SELLER (Hot Money - Has the Cash!) */}
-            <span className="text-xs text-amber-400 font-medium mr-1">💰 Seller:</span>
-            <a
-              href={`https://www.google.com/search?q=${encodeURIComponent(lead.entity)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-amber-400 hover:text-amber-300 flex items-center gap-1"
-              onClick={(e) => e.stopPropagation()}
-            >
-              Google
-            </a>
-            <span className="text-slate-600">•</span>
-            <a
-              href={`https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(lead.entity)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-amber-400 hover:text-amber-300 flex items-center gap-1"
-              onClick={(e) => e.stopPropagation()}
-            >
-              LI
-            </a>
-            
-            {/* BUYER (If available in notes/contacts) */}
-            {lead.contacts && lead.contacts.find(c => c.type === 'company') && (
-              <>
-                <span className="text-slate-600 mx-1">|</span>
-                <span className="text-xs text-blue-400 mr-1">Buyer:</span>
-                <a
-                  href={`https://www.google.com/search?q=${encodeURIComponent(lead.contacts.find(c => c.type === 'company').value)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  Google
-                </a>
-              </>
-            )}
-            
-            {/* Individual Contact */}
-            {lead.contacts && lead.contacts[0] && lead.contacts[0].type === 'person' && (
-              <>
-                <span className="text-slate-600 mx-1">|</span>
-                <span className="text-xs text-purple-400 mr-1">Contact:</span>
-                <a
-                  href={`https://www.google.com/search?q=${encodeURIComponent(lead.contacts[0].value)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-purple-400 hover:text-purple-300 flex items-center gap-1"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {lead.contacts[0].value}
-                </a>
-              </>
-            )}
           </div>
         </div>
       </div>

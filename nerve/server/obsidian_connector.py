@@ -62,9 +62,17 @@ class ObsidianVaultConnector:
         filename = self._sanitize_filename(entity_name) + ".md"
         filepath = self.buyers_dir / filename
         
+        # Parse company vs contact if combined with pipe
+        company_name = entity_name
+        contact_person = buyer_data.get('contact_name', '')
+        if '|' in entity_name:
+            parts = entity_name.split('|', 1)
+            company_name = parts[0].strip()
+            contact_person = parts[1].strip()
+        
         # Build frontmatter
         frontmatter = {
-            'title': entity_name,
+            'title': company_name,
             'type': 'buyer-profile',
             'created': datetime.now().isoformat(),
             'cash_position': buyer_data.get('cash_amount', 0),
@@ -72,13 +80,26 @@ class ObsidianVaultConnector:
             'tags': ['buyer', buyer_data.get('property_type', 'commercial').lower()],
         }
         
+        notes = buyer_data.get('notes', '')
+        notes_section = f"\n{notes}\n" if notes else "_Add your notes here..._\n"
+        buyer_name = buyer_data.get('buyer_name', '')
+        
+        # Parse buyer company vs contact if combined with pipe
+        buyer_company = buyer_name
+        buyer_contact = ""
+        if '|' in buyer_name:
+            parts = buyer_name.split('|', 1)
+            buyer_company = parts[0].strip()
+            buyer_contact = parts[1].strip()
+        
         # Build content
         content = f"""{self._format_frontmatter(frontmatter)}
 
-# {entity_name}
+# {company_name}
 
 ## Overview
-- **Entity**: {entity_name}
+- **Entity**: {company_name}
+- **Contact**: {contact_person or 'N/A'}
 - **Cash Position**: ${buyer_data.get('cash_amount', 0):,}
 - **Match Score**: {buyer_data.get('match_score', 0)}/100
 - **Last Sale**: {buyer_data.get('sale_date', 'Unknown')}
@@ -87,6 +108,9 @@ class ObsidianVaultConnector:
 - **Property**: {buyer_data.get('property', 'N/A')}
 - **Location**: {buyer_data.get('location', 'N/A')}
 - **Type**: {buyer_data.get('property_type', 'N/A')}
+- **Asset Class**: {buyer_data.get('asset_class', 'N/A')}
+- **Buyer**: {buyer_company or 'N/A'}
+- **Buyer Contact**: {buyer_contact or 'N/A'}
 
 ## Contact Information
 - **Email**: {buyer_data.get('contact_email', 'N/A')}
@@ -99,9 +123,8 @@ class ObsidianVaultConnector:
 - [ ] Schedule Meeting
 - [ ] Add to Deal Pipeline
 
-## Notes
-_Add your notes here..._
-
+## Transaction Notes
+{notes_section}
 ---
 *Exported from BigDataClaw Nerve on {datetime.now().strftime('%Y-%m-%d %H:%M')}*
 """

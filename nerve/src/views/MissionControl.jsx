@@ -4,7 +4,7 @@ import { useMissionStore } from '../stores/missionStore'
 import { useAgentStore } from '../stores/agentStore'
 import { useDealStore } from '../stores/dealStore'
 import StatCard from '../components/Common/StatCard'
-import ActiveMissions from '../components/Mission/ActiveMissions'
+import OpenClawChat from '../components/Mission/OpenClawChat'
 import HotMoneyRadar from '../components/Mission/HotMoneyRadar'
 import AgentFleet from '../components/Agent/AgentFleet'
 import { Rocket, Activity, DollarSign, Target, TrendingUp, TrendingDown } from 'lucide-react'
@@ -71,8 +71,8 @@ const MissionControl = () => {
       
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Active Missions */}
-        <ActiveMissions missions={missions.filter(m => m.status === 'active')} />
+        {/* OpenClaw Chat */}
+        <OpenClawChat />
         
         {/* Hot Money Radar */}
         <HotMoneyRadar leads={hotMoneyLeads.slice(0, 5)} />

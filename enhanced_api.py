@@ -17,7 +17,12 @@ from agents.orchestrator import AgentOrchestrator
 from datetime import datetime
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173", "http://localhost:3000"])
+CORS(app, origins=[
+    "http://localhost:5173",  # Vite dev server
+    "http://localhost:3000",  # React dev server
+    "http://localhost:8081",  # Mission Control
+    "http://127.0.0.1:8081",
+])
 
 # Initialize both engines
 print("=" * 70)
@@ -306,6 +311,175 @@ def obsidian_status():
             "connected": False,
             "status": f"Not connected: {str(e)}"
         })
+
+# OpenClaw Chat with Kimi LLM
+OPENCLAW_SYSTEM_PROMPT = """You are OpenClaw, the Commercial Real Estate (CRE) intelligence assistant for BigDataClaw NERVE.
+You help real estate professionals find buyers, sellers, lenders, and market intelligence.
+
+Your capabilities include:
+- Finding qualified buyers for properties (institutional, REITs, private equity, family offices)
+- Identifying active sellers and off-market opportunities
+- Matching deals with appropriate lenders (construction, bridge, permanent, mezzanine)
+- Providing market research and transaction data
+- Connecting users with specialized agents and brokers
+
+When responding:
+1. Be professional but conversational
+2. Provide specific, actionable information when possible
+3. Suggest relevant tools or pages the user can navigate to
+4. Format responses with markdown for readability (bold, bullet points)
+
+If the user asks about:
+- Buyers: Mention you can search the buyer database and match properties
+- Sellers/Listings: Reference the property database and seller outreach tools
+- Lenders: Mention the 750+ lender database with matching capabilities
+- Market data: Reference research tools and transaction databases
+- General help: List the main capabilities
+
+Keep responses concise but informative (2-4 paragraphs max).
+"""
+
+KIMI_API_KEY = os.getenv("KIMI_API_KEY")
+KIMI_API_URL = "https://api.moonshot.cn/v1/chat/completions"
+KIMI_MODEL = "moonshot-v1-8k"
+
+
+def format_openclaw_response(kimi_response, query):
+    """Format Kimi response with suggested actions based on query"""
+    lower_query = query.lower()
+    actions = []
+    
+    # Determine relevant actions based on query
+    if any(word in lower_query for word in ['buyer', 'buy', 'purchase', 'acquire']):
+        actions = [
+            {"label": "Find Buyers", "to": "/buyers", "primary": True},
+            {"label": "Match Property", "to": "/buyer-matcher", "primary": False}
+        ]
+    elif any(word in lower_query for word in ['seller', 'sell', 'listing', 'list']):
+        actions = [
+            {"label": "View Listings", "to": "/my-listings", "primary": True},
+            {"label": "Seller Outreach", "to": "/agents/seller-outreach", "primary": False}
+        ]
+    elif any(word in lower_query for word in ['lender', 'loan', 'finance', 'financing', 'mortgage']):
+        actions = [
+            {"label": "Match Lenders", "to": "/lender-matcher", "primary": True},
+            {"label": "Browse Lenders", "to": "/lenders", "primary": False}
+        ]
+    elif any(word in lower_query for word in ['market', 'data', 'research', 'analytics']):
+        actions = [
+            {"label": "Property Research", "to": "/research", "primary": True},
+            {"label": "View Map", "to": "/map", "primary": False}
+        ]
+    elif any(word in lower_query for word in ['agent', 'broker', 'realtor']):
+        actions = [
+            {"label": "Find Agents", "to": "/agents/residential-recruiter", "primary": True},
+            {"label": "Agent Network", "to": "/agents", "primary": False}
+        ]
+    else:
+        actions = [
+            {"label": "Property Research", "to": "/research", "primary": True},
+            {"label": "Buyer Matcher", "to": "/buyers", "primary": False}
+        ]
+    
+    return {
+        "response": kimi_response,
+        "actions": actions
+    }
+
+
+@app.route('/api/openclaw/chat', methods=['POST'])
+def openclaw_chat():
+    """
+    OpenClaw Chat endpoint - Kimi LLM integration
+    """
+    try:
+        data = request.get_json()
+        user_message = data.get('message', '')
+        conversation_history = data.get('conversation_history', [])
+        
+        if not user_message:
+            return jsonify({"error": "Message is required"}), 400
+        
+        # Check if Kimi API key is available
+        if not KIMI_API_KEY:
+            # Fallback response when API key not available
+            return jsonify({
+                "response": "I'm OpenClaw, your CRE intelligence assistant. I can help you find buyers, sellers, lenders, and market data. However, my AI brain (Kimi) is currently offline. Please try again later or contact support.",
+                "actions": [
+                    {"label": "Property Research", "to": "/research", "primary": True},
+                    {"label": "Buyer Matcher", "to": "/buyers", "primary": False}
+                ]
+            })
+        
+        # Build messages for Kimi
+        messages = [{"role": "system", "content": OPENCLAW_SYSTEM_PROMPT}]
+        
+        # Add conversation history
+        for msg in conversation_history:
+            messages.append({
+                "role": msg.get('role', 'user'),
+                "content": msg.get('content', '')
+            })
+        
+        # Add current message
+        messages.append({"role": "user", "content": user_message})
+        
+        # Call Kimi API
+        import urllib3
+        import json
+        
+        http = urllib3.PoolManager()
+        
+        payload = {
+            "model": KIMI_MODEL,
+            "messages": messages,
+            "temperature": 0.7,
+            "max_tokens": 800
+        }
+        
+        headers = {
+            "Authorization": f"Bearer {KIMI_API_KEY}",
+            "Content-Type": "application/json"
+        }
+        
+        response = http.request(
+            'POST',
+            KIMI_API_URL,
+            body=json.dumps(payload),
+            headers=headers,
+            timeout=30.0
+        )
+        
+        if response.status != 200:
+            print(f"Kimi API error: {response.status} - {response.data}")
+            return jsonify({
+                "response": "I apologize, but I'm having trouble connecting to my AI backend. Please try again in a moment.",
+                "actions": [
+                    {"label": "Property Research", "to": "/research", "primary": True},
+                    {"label": "Contact Support", "to": "/support", "primary": False}
+                ]
+            }), 500
+        
+        # Parse response
+        result = json.loads(response.data.decode('utf-8'))
+        ai_content = result["choices"][0]["message"]["content"]
+        
+        # Format response with actions
+        formatted_response = format_openclaw_response(ai_content, user_message)
+        
+        return jsonify(formatted_response)
+        
+    except Exception as e:
+        print(f"Error in openclaw_chat: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            "response": f"I encountered an error: {str(e)}. Please try again.",
+            "actions": [
+                {"label": "Property Research", "to": "/research", "primary": True}
+            ]
+        }), 500
+
 
 if __name__ == '__main__':
     print("\n" + "=" * 70)

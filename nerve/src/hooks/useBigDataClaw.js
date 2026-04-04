@@ -34,7 +34,7 @@ export const useMission Control = () => {
     setError(null)
     
     try {
-      const response = await fetch(`${API_BASE_URL}/api/hotmoney`)
+      const response = await fetch(`${API_BASE_URL}/api/hotmoney?limit=200`)
       if (!response.ok) throw new Error('Failed to fetch hot money leads')
       return await response.json()
     } catch (err) {

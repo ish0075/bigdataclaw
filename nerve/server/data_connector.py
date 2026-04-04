@@ -93,8 +93,8 @@ class BigDataClawDataConnector:
             except Exception as e:
                 print(f"⚠ Could not initialize AgentOrchestrator: {e}")
     
-    def get_hot_money_leads(self, limit: int = 20) -> List[Dict]:
-        """Get hot money leads from SQLite database - last 90 days"""
+    def get_hot_money_leads(self, limit: int = 20, days: int = 90) -> List[Dict]:
+        """Get hot money leads from SQLite database - last N days"""
         leads = []
         
         try:
@@ -108,15 +108,15 @@ class BigDataClawDataConnector:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
             
-            # Query hot_money_leads table for last 90 days
+            # Query hot_money_leads table for last N days
             cursor.execute("""
                 SELECT id, entity, cash_amount, sale_date, location, property,
                        match_score, property_type, asset_class, address, days_ago, notes, contacts
                 FROM hot_money_leads
-                WHERE days_ago <= 90
+                WHERE days_ago <= ?
                 ORDER BY cash_amount DESC
                 LIMIT ?
-            """, (limit,))
+            """, (days, limit))
             
             rows = cursor.fetchall()
             conn.close()
