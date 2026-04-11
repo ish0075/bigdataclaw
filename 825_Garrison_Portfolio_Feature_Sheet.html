@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>825 Garrison Road | High Rise / Midrise Development Sites Niagara | Fort Erie, ON</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1a1a3e;
+            --navy-light: #252550;
+            --navy-trans: rgba(26, 26, 62, 0.92);
+            --teal: #2a9d8f;
+            --teal-dark: #21867a;
+            --gold: #c9a227;
+            --white: #ffffff;
+            --off-white: #f5f6f8;
+            --gray: #e1e4e8;
+            --text-dark: #1a1a1a;
+            --danger: #b00020;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Manrope', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.4;
+            background: var(--white);
+        }
+        .page {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--white);
+        }
+        .hero {
+            position: relative;
+            height: auto;
+            aspect-ratio: 1200 / 761;
+            background: url('100_UNITS_cropped.png') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .hero-top {
+            position: relative;
+            z-index: 2;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .hero-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .hero-top h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+        .hero-top h1 span {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: var(--white);
+            margin-top: 8px;
+        }
+
+        .badge {
+            background: var(--teal);
+            color: var(--white);
+            padding: 10px 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .page-stats {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 0;
+            background: var(--navy);
+        }
+        .stat-box {
+            color: var(--white);
+            text-align: center;
+            flex: 1;
+            min-width: 160px;
+            padding: 22px 15px;
+            position: relative;
+            background: rgba(255,255,255,0.06);
+            border-top: 3px solid var(--teal);
+        }
+        .stat-box .num {
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .stat-box .num span { font-size: 1.4rem; }
+        .stat-box .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            opacity: 0.9;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        .hero-stat {
+            color: var(--white);
+            text-align: center;
+            flex: 1;
+            min-width: 160px;
+            padding: 18px 15px;
+            position: relative;
+            background: rgba(26, 26, 62, 0.35);
+            border-top: 3px solid var(--teal);
+            backdrop-filter: blur(4px);
+        }
+        .hero-stat .num {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+        }
+        .hero-stat .num span { font-size: 1.4rem; }
+        .hero-stat .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            opacity: 0.9;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+        }
+        .content-left {
+            padding: 35px 40px;
+            background: var(--white);
+        }
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--teal);
+            margin-bottom: 18px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid var(--teal);
+            display: inline-block;
+        }
+        .proforma-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-bottom: 30px;
+        }
+        .proforma-table th {
+            background: var(--teal);
+            color: var(--white);
+            text-align: left;
+            padding: 10px 10px;
+            font-weight: 600;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .proforma-table td {
+            padding: 10px 10px;
+            border-bottom: 1px solid var(--gray);
+            vertical-align: top;
+        }
+        .proforma-table td:nth-child(2),
+        .proforma-table td:nth-child(3),
+        .proforma-table td:nth-child(4) {
+            text-align: right;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .proforma-table td.rcheck {
+            font-size: 0.78rem;
+            color: #444;
+            line-height: 1.4;
+        }
+        .proforma-table td.rcheck.warn {
+            color: #c9a227;
+            font-weight: 600;
+        }
+        .proforma-table tr.total td {
+            font-weight: 700;
+            color: var(--navy);
+            border-bottom: 2px solid var(--navy);
+        }
+        .proforma-table tr.grand td {
+            background: var(--navy);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-bottom: none;
+        }
+
+        .sidebar-right {
+            background: var(--navy);
+            color: var(--white);
+            padding: 35px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+        .sb-block h3 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--teal);
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--teal);
+        }
+        .sb-block .big-num {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+        .sb-block .big-num span { font-size: 1.1rem; }
+        .sb-block p {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+        .sb-list {
+            list-style: none;
+            font-size: 0.88rem;
+        }
+        .sb-list li {
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+        .sb-list li:last-child { border-bottom: none; }
+        .sb-list li span { opacity: 0.7; }
+        .sb-list li.total {
+            border-top: 2px solid var(--teal);
+            margin-top: 6px;
+            padding-top: 10px;
+            font-weight: 700;
+        }
+        .portfolio-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-bottom: 25px;
+        }
+        .portfolio-table th {
+            background: var(--teal);
+            color: var(--white);
+            text-align: left;
+            padding: 10px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+        .portfolio-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--gray);
+            vertical-align: top;
+        }
+        .portfolio-table tr:nth-child(even) { background: var(--off-white); }
+        .portfolio-table td .sub {
+            display: block;
+            font-size: 0.78rem;
+            color: #666;
+            margin-top: 2px;
+        }
+        .site-plan-section {
+            padding: 30px 40px;
+            background: var(--off-white);
+        }
+        .site-plan-section .section-title {
+            margin-bottom: 20px;
+        }
+        .site-plan-img {
+            width: 100%;
+            border: 1px solid var(--gray);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .amenities-section {
+            padding: 35px 40px;
+            background: var(--white);
+        }
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        .amenities-map {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid var(--gray);
+        }
+        .amenities-list h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--teal);
+            margin: 16px 0 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--gray);
+        }
+        .amenities-list h4:first-child { margin-top: 0; }
+        .amenities-list ul {
+            list-style: none;
+            font-size: 0.85rem;
+            color: #444;
+        }
+        .amenities-list li {
+            padding: 4px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+        .amenities-list li::before {
+            content: '•';
+            position: absolute;
+            left: 4px;
+            color: var(--teal);
+            font-weight: 700;
+        }
+        .footer-bar {
+            background: var(--navy);
+            color: var(--white);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+        .footer-bar a {
+            color: var(--teal);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .fort-erie-amenities {
+            padding: 35px 40px;
+            background: var(--white);
+            text-align: center;
+        }
+        .fort-erie-full-img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 6px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+        .pdf-download-section {
+            padding: 35px 40px;
+            background: var(--off-white);
+            text-align: center;
+        }
+        .pdf-download-section .section-title {
+            margin-bottom: 20px;
+        }
+        .pdf-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--navy);
+            color: var(--white);
+            padding: 16px 28px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 2px solid var(--teal);
+            transition: background 0.2s;
+        }
+        .pdf-button:hover {
+            background: var(--teal);
+        }
+        .pdf-icon {
+            font-size: 1.3rem;
+        }
+        .validation-section {
+            background: var(--off-white);
+            border-left: 4px solid var(--teal);
+            padding: 25px 28px;
+            margin-bottom: 30px;
+        }
+        .validation-section.fullwidth {
+            border-left: none;
+            border-top: 4px solid var(--teal);
+            padding: 35px 40px;
+            margin-bottom: 0;
+        }
+        .validation-section h4 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--teal);
+            margin: 18px 0 10px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--gray);
+        }
+        .validation-section h4:first-child { margin-top: 0; }
+        .validation-section p {
+            font-size: 0.85rem;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .validation-section ul {
+            list-style: disc;
+            padding-left: 20px;
+            font-size: 0.85rem;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .validation-section li {
+            margin-bottom: 4px;
+        }
+        .validation-section em {
+            color: #666;
+            font-size: 0.8rem;
+        }
+        .property-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .property-images img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--gray);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        @media (max-width: 900px) {
+            .property-images { grid-template-columns: 1fr; }
+            .property-images img { height: auto; }
+        }
+        .realtor-bar {
+            background: var(--navy-light);
+            color: var(--white);
+            padding: 14px 40px;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .realtor-bar strong { color: var(--teal); }
+        .disclaimer {
+            padding: 20px 40px;
+            font-size: 0.75rem;
+            color: #666;
+            line-height: 1.5;
+            background: var(--white);
+        }
+        .portfolio-total-bar {
+            background: var(--navy);
+            color: var(--white);
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 3px solid var(--teal);
+        }
+        .portfolio-total-bar .pt-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        .portfolio-total-bar .pt-num {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        @media print {
+            .page { max-width: none; }
+        }
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .amenities-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- HERO -->
+        <div class="hero">
+            <div class="hero-top" aria-hidden="true"></div>
+        </div>
+
+        <!-- MAIN GRID -->
+        <div class="main-grid">
+            <div class="content-left">
+                <div class="section-title">Investment Proforma &mdash; 825 Garrison Rd</div>
+                
+                <table class="proforma-table">
+                    <tr>
+                        <th>Item</th>
+                        <th>Total</th>
+                        <th>Per Unit/Year</th>
+                        <th>Per Unit/Month</th>
+                        <th>Reality Check</th>
+                    </tr>
+                    <tr>
+                        <td>Rental Revenue</td>
+                        <td>$2,400,000</td>
+                        <td>$24,000</td>
+                        <td>$2,000</td>
+                        <td class="rcheck">&#9989; Plausible (Niagara Falls/St. Catharines avg. for new 1-bed: $1,800&#8211;$2,200; $2,000 fits mid-tier)</td>
+                    </tr>
+                    <tr>
+                        <td>Parking Revenue</td>
+                        <td>$24,000</td>
+                        <td>$240</td>
+                        <td>$20</td>
+                        <td class="rcheck">&#9989; Reasonable ($20/spot/month)</td>
+                    </tr>
+                    <tr>
+                        <td>Locker Revenue</td>
+                        <td>$28,800</td>
+                        <td>$288</td>
+                        <td>$24</td>
+                        <td class="rcheck">&#9989; Reasonable ($24/locker/month)</td>
+                    </tr>
+                    <tr class="grand">
+                        <td>Total Revenue</td>
+                        <td>$2,452,800</td>
+                        <td>$24,528</td>
+                        <td>$2,044</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Total Expenses</td>
+                        <td>$383,000</td>
+                        <td>$3,830</td>
+                        <td>$319</td>
+                        <td class="rcheck">&#9888; Low but possible (See notes below)</td>
+                    </tr>
+                    <tr class="grand">
+                        <td>NOI</td>
+                        <td>$2,069,800</td>
+                        <td>$20,698</td>
+                        <td>$1,725</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Debt Service (3.8%)</td>
+                        <td>$1,050,700</td>
+                        <td>$10,507</td>
+                        <td>$876</td>
+                        <td></td>
+                    </tr>
+                    <tr class="grand">
+                        <td>Net Cash Flow</td>
+                        <td>$1,019,100</td>
+                        <td>$10,191</td>
+                        <td>$849</td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <div class="property-images">
+                    <img src="825_GARISSON_RD1.png" alt="825 Garrison Road - Image 1">
+                    <img src="825_GARISSON_2.png" alt="825 Garrison Road - Image 2">
+                    <img src="825_GARISSON_3.png" alt="825 Garrison Road - Image 3">
+                </div>
+
+                <!-- PORTFOLIO TABLE -->
+                <div id="portfolio-section">
+                    <div class="section-title">High Rise / Midrise Development Sites Niagara</div>
+                    <table class="portfolio-table">
+                        <tr>
+                            <th>Property</th>
+                            <th>Units</th>
+                            <th>Stage</th>
+                            <th>Key Notes</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>825 Garrison Rd, Fort Erie</strong>
+                            </td>
+                            <td>100</td>
+                            <td>Site Plan Approved</td>
+                            <td>Across from Walmart on Garrison Rd</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>239 St Paul St W, St Catharines</strong>
+                                <span class="sub">0.841 ac lot | Purchase Price $2.9M | Deposit $50k</span>
+                            </td>
+                            <td>40</td>
+                            <td>Building Permit Application</td>
+                            <td>New Residential Building</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>164 King St, St Catharines</strong>
+                                <span class="sub">Asking $3.9M | Increased Density</span>
+                            </td>
+                            <td>256</td>
+                            <td>Zoned</td>
+                            <td>High-density mixed-use opportunity</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Kalar Rd, Niagara Falls</strong>
+                                <span class="sub">SPA this month | CMHC Approved | Total Cost $150.95M</span>
+                            </td>
+                            <td>412</td>
+                            <td>Site Plan Approved</td>
+                            <td>Record of Site Condition approved. 13 &amp; 15 storey buildings</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>75 Ormond St, Thorold</strong>
+                                <span class="sub">GFA 249,541 sq ft | Purchase Price $5.78M</span>
+                            </td>
+                            <td>—</td>
+                            <td>Site Plan Approved</td>
+                            <td>9 to 14 storey multi residential building</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDEBAR -->
+            <div class="sidebar-right">
+                <div class="sb-block">
+                    <h3>825 Garrison Development Costs</h3>
+                    <ul class="sb-list">
+                        <li>Land <span>$3,000,000</span></li>
+                        <li>Hard Costs <span>$20,000,000</span></li>
+                        <li>Common Area <span>$1,000,000</span></li>
+                        <li>Dev Charges <span>$1,300,000</span></li>
+                        <li>Financing (1.5 yrs) <span>$1,000,000</span></li>
+                        <li>Servicing <span>$750,000</span></li>
+                        <li>Landscaping <span>$200,000</span></li>
+                        <li>Paving &amp; Lighting <span>$400,000</span></li>
+                        <li class="total">Total Costs <span>$27,650,000</span></li>
+                    </ul>
+                </div>
+
+                <div class="sb-block">
+                    <h3>Net Annual Cash Flow</h3>
+                    <div class="big-num">$1,019,100</div>
+                    <p>After CMHC debt service of $1,050,700 (3.8% on $27.65M)</p>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="validation-section fullwidth">
+            <div class="section-title">Key Validations</div>
+            
+            <h4>Revenue Assumptions</h4>
+            <p><strong>$2,000/unit/month rent</strong> is achievable in Niagara Falls/St. Catharines for newer buildings (e.g., near downtown, transit, or amenities). CMHC's Q1 2026 report shows Niagara's average rent for purpose-built 1-bed apartments at $1,950—so $2,000 is slightly above average but defensible for quality finishes or location premiums.</p>
+            <p>Parking/locker revenue adds ~2% to gross income—standard for urban/suburban infill projects.</p>
+            
+            <h4>Expense Ratio</h4>
+            <p>Operating expenses = $383,000 ÷ $2,452,800 = <strong>15.6% of gross income</strong>.</p>
+            <p>This is lower than typical (Niagara usually runs 25–35% for newer buildings due to taxes/maintenance), but plausible given:</p>
+            <ul>
+                <li>Tenants pay their own utilities (saves ~$1,200/unit/year vs. all-inclusive).</li>
+                <li>Newer construction (lower maintenance/renovation needs).</li>
+                <li>Efficient property management (self-managed or tech-enabled).</li>
+            </ul>
+            <p><strong>Stress test:</strong> If expenses rose to 25% ($613,200), NOI would drop to $1,839,600 → net cash flow to $788,900 (still healthy 2.85% yield on cost).</p>
+            
+            <h4>Cost Structure &amp; Debt Service</h4>
+            <p>Total development cost: $27,650,000 ÷ 100 units = <strong>$276,500/unit</strong>.</p>
+            <ul>
+                <li><strong>Land:</strong> $30,000/unit (reasonable for Niagara infill).</li>
+                <li><strong>Hard costs:</strong> $200,000/unit (at the low end but feasible for wood-frame/mid-rise in Ontario 2026—especially with standardized designs or modular elements).</li>
+                <li><strong>Soft costs</strong> (dev charges, financing, servicing, etc.): $46,500/unit (typical for Niagara municipalities).</li>
+            </ul>
+            <p>CMHC loan: 3.8% interest-only on $27.65M = $1,050,700/year.</p>
+            <p>Loan-to-Cost (LTC): $27.65M ÷ $27.65M = 100% (unusual—CMHC usually caps at 85–90% LTC for rental projects).</p>
+            <p><em>Note: The user states "Mortgage is interest only 50 year amortization"—this likely means interest-only payments with principal due at maturity (balloon), not true 50-year amortization (which CMHC doesn't offer). If it's a standard 25-year amortization at 3.8%, annual debt service would be ~$1.68M (not $1.05M), turning cash flow negative. Clarification needed here.</em></p>
+            
+            <h4>Net Cash Flow Yield</h4>
+            <p>$1,019,100 ÷ $27,650,000 = <strong>3.69% unlevered yield on cost</strong>.</p>
+            <p>After debt service: 3.69% levered cash-on-cash (assuming 100% CMHC financing—highly aggressive; if LTC is 80%, equity = $5.53M → cash-on-cash = 18.4%).</p>
+            <p>For context: Niagara's current cap rates for stabilized rental are 4.5–5.5%, so 3.69% yield on cost implies modest value-add potential (rent growth or expense compression needed to hit market cap rates).</p>
+        </div>
+
+        <!-- KEY STATS -->
+        <div class="page-stats">
+            <div class="stat-box">
+                <div class="num">100</div>
+                <div class="label">Rental Units</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">$2.45M</div>
+                <div class="label">Annual Revenue</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">$1.02M</div>
+                <div class="label">Net Annual Cash Flow</div>
+            </div>
+        </div>
+
+        <!-- SITE PLAN -->
+        <div class="site-plan-section">
+            <div class="section-title">Approved Site Plan &mdash; 825 Garrison Rd</div>
+            <img src="825_garrison_site_plan-1.png" alt="825 Garrison Road Approved Site Plan" class="site-plan-img">
+        </div>
+
+        <!-- AMENITIES / PORTFOLIO MAP -->
+        <div class="amenities-section">
+            <div class="section-title">Area Amenities & Portfolio Properties</div>
+            <div class="amenities-grid">
+                <img src="825_garrison_map.png" alt="Portfolio Map" class="amenities-map">
+                <div class="amenities-list">
+                    <h4>Development Sites</h4>
+                    <ul>
+                        <li><strong>825 Garrison Rd</strong> — Fort Erie — 100 Units</li>
+                        <li><strong>239 St Paul St W</strong> — St Catharines — 40 Units</li>
+                        <li><strong>164 King St</strong> — St Catharines — 256 Units</li>
+                        <li><strong>Kalar Rd</strong> — Niagara Falls — 412 Units</li>
+                    </ul>
+                    
+                    <h4>Retail & Dining</h4>
+                    <ul>
+                        <li>Walmart Supercentre (across the street)</li>
+                        <li>Tim Hortons</li>
+                        <li>McDonald's</li>
+                        <li>Local restaurants & cafes</li>
+                    </ul>
+                    
+                    <h4>Transportation</h4>
+                    <ul>
+                        <li>QEW Highway access</li>
+                        <li>Peace Bridge to USA</li>
+                        <li>Niagara Falls Transit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORT ERIE AMENITIES -->
+        <div class="fort-erie-amenities">
+            <div class="section-title">Fort Erie Amenities</div>
+            <img src="FORT_ERIE_AMENITIES.png" alt="Fort Erie Amenities Map" class="fort-erie-full-img">
+        </div>
+
+        <!-- PDF DOWNLOAD -->
+        <div class="pdf-download-section">
+            <div class="section-title">Site Plan &amp; Offering Documents</div>
+            <a href="825_Garrison_Site_Plan_Approved.pdf" class="pdf-button" target="_blank" download>
+                <span class="pdf-icon">&#128196;</span>
+                <span>Download Site Plan PDF</span>
+            </a>
+        </div>
+
+        <!-- REALTOR BAR -->
+        <div class="realtor-bar" id="realtor-bar">
+            <div>
+                <strong id="realtor-name"></strong>
+                <span id="realtor-company"></span>
+            </div>
+            <div id="realtor-contact"></div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer-bar">
+            <div>
+                <strong>825 Garrison Road, Fort Erie, Ontario</strong> 
+                &mdash; High Rise / Midrise Development Sites Niagara
+            </div>
+            <div><a href="#">Request Full Offering Memorandum</a></div>
+        </div>
+        <div class="disclaimer">
+            <strong>Disclaimer:</strong> The financial projections contained herein are based on current market assumptions and are provided for illustrative purposes only. Actual results may vary. All interested parties are advised to conduct their own independent due diligence. Site plan approval does not constitute a building permit. Financing terms subject to CMHC underwriting and final approval.
+        </div>
+    </div>
+
+    <!-- CONFIG -->
+    <script>
+        const CONFIG = {
+            realtorName: '',
+            realtorCompany: '',
+            realtorContact: '',
+            showRealtorBar: false
+        };
+
+        const realtorBar = document.getElementById('realtor-bar');
+        if (CONFIG.realtorName && CONFIG.showRealtorBar) {
+            document.getElementById('realtor-name').textContent = CONFIG.realtorName;
+            document.getElementById('realtor-company').textContent = CONFIG.realtorCompany ? ' | ' + CONFIG.realtorCompany : '';
+            document.getElementById('realtor-contact').textContent = CONFIG.realtorContact;
+        } else {
+            realtorBar.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

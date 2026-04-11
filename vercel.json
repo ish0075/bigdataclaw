@@ -1,31 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd nerve && npm install && npm run build",
-  "outputDirectory": "nerve/dist",
-  "installCommand": "npm install",
+  "buildCommand": null,
+  "framework": null,
+  "outputDirectory": ".",
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
-      ]
+      "source": "/",
+      "destination": "/825_Garrison_Portfolio_Feature_Sheet.html"
     }
   ]
 }
