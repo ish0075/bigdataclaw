@@ -12,6 +12,8 @@ import {
   Building2, MapPin, Linkedin, Wrench
 } from 'lucide-react';
 
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 const RealtorBotWidget = ({ context = 'exp-agent-recruiter' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
@@ -46,7 +48,7 @@ const RealtorBotWidget = ({ context = 'exp-agent-recruiter' }) => {
     setIsLoading(true);
     
     try {
-      const chatRes = await fetch('http://localhost:8000/api/realtor-bot/chat', {
+      const chatRes = await fetch('${API_BASE}/api/realtor-bot/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: content, context })
@@ -63,7 +65,7 @@ const RealtorBotWidget = ({ context = 'exp-agent-recruiter' }) => {
           timestamp: new Date()
         }]);
         
-        const searchRes = await fetch('http://localhost:8000/api/realtor-bot/search', {
+        const searchRes = await fetch('${API_BASE}/api/realtor-bot/search', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ query: chatData.query, context })

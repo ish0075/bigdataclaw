@@ -144,6 +144,39 @@ export const useAgentStore = create((set, get) => ({
 
   setAgents: (agents) => set({ agents }),
   
+  loadStarOfficeAgents: async () => {
+    try {
+      const bases = [import.meta.env.VITE_API_URL || 'http://localhost:8000', 'http://localhost:3090']
+      for (const base of bases) {
+        try {
+          const res = await fetch(`${base}/api/agent-fleet/status`)
+          if (res.ok) {
+            const data = await res.json()
+            const mapped = data.agents.map(a => ({
+              id: a.id,
+              name: a.name,
+              description: a.detail || `${a.name} — ${a.area || 'Star Office agent'}`,
+              icon: '🤖',
+              status: a.status,
+              activeMissions: a.starOfficeState === 'executing' ? 1 : 0,
+              completedMissions: 0,
+              lastLog: a.detail ? { message: a.detail, timestamp: new Date(a.updatedAt || Date.now()), level: 'info' } : null,
+              area: a.area,
+              starOfficeState: a.starOfficeState,
+              starOfficeUrl: data.starOfficeUrl,
+            }))
+            set({ agents: mapped })
+            return
+          }
+        } catch (e) {
+          // try next base
+        }
+      }
+    } catch (e) {
+      console.error('Failed to load Star Office agents:', e)
+    }
+  },
+  
   getAgentLogs: (agentId) => {
     return get().logs.filter(l => l.agentId === agentId)
   },

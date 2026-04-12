@@ -11,6 +11,9 @@ import {
 } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 const CommanderDashboard = () => {
   const { commanderId } = useParams();
   const navigate = useNavigate();
@@ -24,7 +27,7 @@ const CommanderDashboard = () => {
     const loadDashboard = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:8000/api/agents/commanders/${commanderId}/dashboard`);
+        const res = await fetch(`${API_BASE}/api/agents/commanders/${commanderId}/dashboard`);
         if (!res.ok) throw new Error('Dashboard not found');
         const data = await res.json();
         setDashboard(data);
@@ -44,7 +47,7 @@ const CommanderDashboard = () => {
     if (!broadcastMessage.trim()) return;
     
     try {
-      const res = await fetch(`http://localhost:8000/api/agents/commanders/${commanderId}/broadcast`, {
+      const res = await fetch(`${API_BASE}/api/agents/commanders/${commanderId}/broadcast`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: broadcastMessage, requires_response: false })

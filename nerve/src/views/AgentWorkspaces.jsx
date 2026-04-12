@@ -10,6 +10,9 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 const AgentWorkspaces = () => {
   const navigate = useNavigate();
   const [workspaces, setWorkspaces] = useState([]);
@@ -26,17 +29,17 @@ const AgentWorkspaces = () => {
         setLoading(true);
         
         // Load workspaces
-        const wsRes = await fetch('http://localhost:8000/api/agents/workspaces');
+        const wsRes = await fetch('${API_BASE}/api/agents/workspaces');
         const wsData = await wsRes.json();
         setWorkspaces(wsData);
         
         // Load commanders
-        const cmdrRes = await fetch('http://localhost:8000/api/agents/commanders');
+        const cmdrRes = await fetch('${API_BASE}/api/agents/commanders');
         const cmdrData = await cmdrRes.json();
         setCommanders(cmdrData);
         
         // Load division stats
-        const statsRes = await fetch('http://localhost:8000/api/agents/divisions/stats');
+        const statsRes = await fetch('${API_BASE}/api/agents/divisions/stats');
         const statsData = await statsRes.json();
         setStats(statsData.divisions || {});
         

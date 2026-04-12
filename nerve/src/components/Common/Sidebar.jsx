@@ -10,7 +10,9 @@ import {
   Cpu, 
   Map, 
   LayoutDashboard,
+  Search,
   Flame,
+  History,
   Database,
   UserPlus,
   Hammer,
@@ -36,7 +38,8 @@ import {
   Paperclip,
   Scan,
   ExternalLink,
-  Github
+  Github,
+  TrendingUp
 } from 'lucide-react'
 
 const EXTERNAL_LINKS = [
@@ -68,7 +71,6 @@ const INTERNAL_LINKS = [
     label: 'Original Implementations',
     items: [
       { path: '/pixel-agents-original', label: 'Pixel Agents (Exact)', icon: Scan, badge: 'PABLO' },
-      { path: '/paperclip-dashboard', label: 'Paperclip Dashboard', icon: Paperclip, badge: 'ORIGINAL' },
     ]
   }
 ]
@@ -80,12 +82,14 @@ const SECTIONS = [
     items: [
       { path: '/', label: 'Mission Control', icon: LayoutDashboard },
       { path: '/research', label: 'Property Research', icon: Building2 },
+      { path: '/property-matcher', label: 'Property Matcher', icon: Search, badge: 'AI' },
       { path: '/hotmoney', label: 'Hot Money Radar', icon: Flame },
+      { path: '/solds', label: 'Historical Sales', icon: History, badge: 'SOLDS' },
       { path: '/pipeline', label: 'Deal Pipeline', icon: Users },
       { path: '/opportunities', label: 'Opportunities', icon: Sparkles },
+      { path: '/market-trends', label: 'Market Trends', icon: TrendingUp, badge: 'LIVE' },
       { path: '/agents', label: 'Agent Workspace', icon: Cpu },
       { path: '/paperclip-companies', label: 'Agent Companies', icon: Building2, badge: 'NEW' },
-      { path: '/paperclip-dashboard', label: 'Paperclip Dashboard (Local)', icon: Paperclip, badge: 'LOCAL' },
       { path: '/mission-control', label: 'Pixel Agents (Local)', icon: Scan, badge: 'LOCAL' },
       { path: '/bot-boardroom', label: 'Bot Boardroom', icon: Radio, badge: 'AI' },
       { path: '/vault', label: 'Obsidian Vault', icon: Database },

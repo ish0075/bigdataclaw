@@ -1,0 +1,18 @@
+[Unit]
+Description=BigDataClaw Agent Orchestrator
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/bigdataclaw
+ExecStart=/opt/bigdataclaw/venv/bin/python /opt/bigdataclaw/agent_orchestrator.py
+Restart=on-failure
+RestartSec=5
+EnvironmentFile=/opt/bigdataclaw/.env
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

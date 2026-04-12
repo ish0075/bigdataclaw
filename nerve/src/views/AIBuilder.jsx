@@ -14,6 +14,9 @@ import {
 } from 'lucide-react';
 import Editor from '@monaco-editor/react';
 
+
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 // File icon mapping
 const getFileIcon = (filename) => {
   const ext = filename.split('.').pop()?.toLowerCase();
@@ -76,7 +79,7 @@ const AIBuilder = () => {
   
   const loadFiles = async (path = '') => {
     try {
-      const res = await fetch(`http://localhost:8000/api/ai-builder/files?path=${encodeURIComponent(path)}`);
+      const res = await fetch(`${API_BASE}/api/ai-builder/files?path=${encodeURIComponent(path)}`);
       const data = await res.json();
       setFiles(data.items);
       setCurrentPath(data.current_path);
@@ -87,7 +90,7 @@ const AIBuilder = () => {
   
   const loadModels = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/ai-builder/models');
+      const res = await fetch('${API_BASE}/api/ai-builder/models');
       const data = await res.json();
       setAvailableModels(data.models || {});
     } catch (error) {
@@ -97,7 +100,7 @@ const AIBuilder = () => {
   
   const loadFile = async (path) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/ai-builder/file?path=${encodeURIComponent(path)}`);
+      const res = await fetch(`${API_BASE}/api/ai-builder/file?path=${encodeURIComponent(path)}`);
       const data = await res.json();
       
       // Add to open files if not already
@@ -116,7 +119,7 @@ const AIBuilder = () => {
     if (!activeFile) return;
     
     try {
-      await fetch('http://localhost:8000/api/ai-builder/file', {
+      await fetch('${API_BASE}/api/ai-builder/file', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -152,7 +155,7 @@ const AIBuilder = () => {
     setIsLoading(true);
     
     try {
-      const res = await fetch('http://localhost:8000/api/ai-builder/chat', {
+      const res = await fetch('${API_BASE}/api/ai-builder/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -182,7 +185,7 @@ const AIBuilder = () => {
         for (const action of data.actions) {
           if (action.type === 'create_file' && data.code_blocks?.[0]) {
             // Auto-create the file
-            await fetch('http://localhost:8000/api/ai-builder/file', {
+            await fetch('${API_BASE}/api/ai-builder/file', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -228,7 +231,7 @@ const AIBuilder = () => {
     if (!searchQuery.trim()) return;
     
     try {
-      const res = await fetch(`http://localhost:8000/api/ai-builder/search?q=${encodeURIComponent(searchQuery)}`);
+      const res = await fetch(`${API_BASE}/api/ai-builder/search?q=${encodeURIComponent(searchQuery)}`);
       const data = await res.json();
       setSearchResults(data.results);
     } catch (error) {

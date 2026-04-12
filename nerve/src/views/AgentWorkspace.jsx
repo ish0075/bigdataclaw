@@ -13,6 +13,9 @@ import {
 } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 // Task Status Badge Component
 const TaskStatusBadge = ({ status }) => {
   const styles = {
@@ -673,23 +676,23 @@ const AgentWorkspace = () => {
         setLoading(true);
         
         // Load workspace details
-        const wsRes = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}`);
+        const wsRes = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}`);
         if (!wsRes.ok) throw new Error('Workspace not found');
         const wsData = await wsRes.json();
         setWorkspace(wsData);
         
         // Load tasks
-        const tasksRes = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}/tasks`);
+        const tasksRes = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}/tasks`);
         const tasksData = await tasksRes.json();
         setTasks(tasksData);
         
         // Load memories
-        const memRes = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}/memory`);
+        const memRes = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}/memory`);
         const memData = await memRes.json();
         setMemories(memData);
         
         // Load conversations
-        const convRes = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}/conversations`);
+        const convRes = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}/conversations`);
         const convData = await convRes.json();
         setConversations(convData);
         
@@ -718,13 +721,13 @@ const AgentWorkspace = () => {
   // Task handlers
   const handleTaskCreate = async (taskData) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}/tasks`, {
+      const res = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}/tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(taskData)
       });
       if (res.ok) {
-        const tasksRes = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}/tasks`);
+        const tasksRes = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}/tasks`);
         const tasksData = await tasksRes.json();
         setTasks(tasksData);
       }
@@ -735,13 +738,13 @@ const AgentWorkspace = () => {
   
   const handleTaskUpdate = async (taskId, updates) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}/tasks/${taskId}`, {
+      const res = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}/tasks/${taskId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates)
       });
       if (res.ok) {
-        const tasksRes = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}/tasks`);
+        const tasksRes = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}/tasks`);
         const tasksData = await tasksRes.json();
         setTasks(tasksData);
       }
@@ -752,7 +755,7 @@ const AgentWorkspace = () => {
   
   const handleTaskDelete = async (taskId) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}/tasks/${taskId}`, {
+      const res = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}/tasks/${taskId}`, {
         method: 'DELETE'
       });
       if (res.ok) {
@@ -766,13 +769,13 @@ const AgentWorkspace = () => {
   // Memory handler
   const handleCreateMemory = async (memoryData) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}/memory`, {
+      const res = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}/memory`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(memoryData)
       });
       if (res.ok) {
-        const memRes = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}/memory`);
+        const memRes = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}/memory`);
         const memData = await memRes.json();
         setMemories(memData);
       }
@@ -784,13 +787,13 @@ const AgentWorkspace = () => {
   // Chat handler
   const handleSendMessage = async (content) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}/conversations`, {
+      const res = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}/conversations`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content, requires_response: true })
       });
       if (res.ok) {
-        const convRes = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}/conversations`);
+        const convRes = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}/conversations`);
         const convData = await convRes.json();
         setConversations(convData);
       }
@@ -802,7 +805,7 @@ const AgentWorkspace = () => {
   // SoulMD handlers
   const handleSaveSoulMD = async (soulmd) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/agents/workspaces/${agentId}/soulmd`, {
+      const res = await fetch(`${API_BASE}/api/agents/workspaces/${agentId}/soulmd`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(soulmd)

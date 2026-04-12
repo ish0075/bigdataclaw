@@ -1,0 +1,18 @@
+# BigDataClaw Caddyfile for Hostinger VPS
+# Auto-SSL for the API subdomain
+
+api.srv1368913.hstgr.cloud {
+    reverse_proxy bigdataclaw-api:8000
+    
+    # CORS headers for Vercel frontend
+    header {
+        Access-Control-Allow-Origin "*"
+        Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+        Access-Control-Allow-Headers "Content-Type, Authorization"
+    }
+    
+    @options {
+        method OPTIONS
+    }
+    respond @options 204
+}

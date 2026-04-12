@@ -1,0 +1,99 @@
+version: '3.8'
+
+# BigDataClaw Backend Stack for Hostinger VPS
+# Includes: FastAPI backend, Qdrant, Caddy reverse proxy
+# Agent Orchestrator runs separately via systemd
+
+services:
+  # Qdrant Vector Database (internal only)
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: bigdataclaw-qdrant
+    volumes:
+      - qdrant-storage:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE__HTTP_PORT=6333
+      - QDRANT__SERVICE__GRPC_PORT=6334
+    restart: unless-stopped
+    networks:
+      - bigdataclaw-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # BigDataClaw FastAPI Backend
+  bigdataclaw-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: bigdataclaw-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./bigdataclaw.db:/app/bigdataclaw.db:rw
+      - ./logs:/app/logs:rw
+      - ./reports:/app/reports:rw
+      - ./data_exports:/app/data_exports:rw
+      - ./quick_links_notes:/app/quick_links_notes:rw
+      - ./deals:/app/deals:rw
+      - ./buyers_data:/app/buyers_data:rw
+      - ./agents:/app/agents:rw
+      - ./agent_status.json:/app/agent_status.json:rw
+      - ./agent_orchestrator.log:/app/agent_orchestrator.log:rw
+      - ./agent_orchestrator.pid:/app/agent_orchestrator.pid:rw
+      - ./recruiter_db_with_quicklinks.json:/app/recruiter_db_with_quicklinks.json:rw
+      - ./CONTEXTKEEP_QUICKLINKS_EXPORT.json:/app/CONTEXTKEEP_QUICKLINKS_EXPORT.json:rw
+    environment:
+      - KIMI_API_KEY=${KIMI_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - OLLAMA_HOST=${OLLAMA_HOST:-http://host.docker.internal:11434}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-qwen3:latest}
+      - OBSIDIAN_API_KEY=${OBSIDIAN_API_KEY:-}
+      - OBSIDIAN_BASE_URL=${OBSIDIAN_BASE_URL:-https://127.0.0.1:27124}
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    networks:
+      - bigdataclaw-network
+    depends_on:
+      qdrant:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  # Caddy Reverse Proxy with Auto SSL
+  caddy:
+    image: caddy:2-alpine
+    container_name: bigdataclaw-caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    restart: unless-stopped
+    networks:
+      - bigdataclaw-network
+    depends_on:
+      - bigdataclaw-api
+
+networks:
+  bigdataclaw-network:
+    driver: bridge
+
+volumes:
+  qdrant-storage:
+    driver: local
+  caddy-data:
+    driver: local
+  caddy-config:
+    driver: local

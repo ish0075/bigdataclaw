@@ -1,21 +1,17 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useMissionStore } from '../stores/missionStore'
-import { useAgentStore } from '../stores/agentStore'
 import { useDealStore } from '../stores/dealStore'
 import StatCard from '../components/Common/StatCard'
 import OpenClawChat from '../components/Mission/OpenClawChat'
 import HotMoneyRadar from '../components/Mission/HotMoneyRadar'
-import AgentFleet from '../components/Agent/AgentFleet'
 import { Rocket, Activity, DollarSign, Target, TrendingUp, TrendingDown } from 'lucide-react'
 
 const MissionControl = () => {
   const navigate = useNavigate()
   const { stats, missions, hotMoneyLeads } = useMissionStore()
-  const { agents } = useAgentStore()
   const { deals } = useDealStore()
   
-  const activeAgentsCount = agents.filter(a => a.status === 'active').length
   const newDealsCount = deals.filter(d => d.stage === 'new').length
   
   return (
@@ -78,9 +74,6 @@ const MissionControl = () => {
         <HotMoneyRadar leads={hotMoneyLeads.slice(0, 5)} />
       </div>
       
-      {/* Agent Fleet */}
-      <AgentFleet agents={agents} />
-      
       {/* Quick Actions */}
       <div className="card p-6">
         <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
@@ -104,10 +97,10 @@ const MissionControl = () => {
             to="/pipeline"
           />
           <QuickActionButton 
-            label="Agent Workspace" 
-            description={`${activeAgentsCount} agents active`}
-            icon="🤖"
-            to="/agents"
+            label="Obsidian Vault" 
+            description="Browse research notes"
+            icon="📝"
+            to="/vault"
           />
         </div>
       </div>
@@ -116,14 +109,14 @@ const MissionControl = () => {
 }
 
 const QuickActionButton = ({ label, description, icon, to }) => (
-  <a 
-    href={to}
+  <Link
+    to={to}
     className="card-hover p-4 flex flex-col items-center text-center gap-2"
   >
     <span className="text-3xl">{icon}</span>
     <span className="font-medium text-text-primary">{label}</span>
     <span className="text-xs text-text-secondary">{description}</span>
-  </a>
+  </Link>
 )
 
 export default MissionControl
