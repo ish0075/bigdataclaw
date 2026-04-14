@@ -1,0 +1,6 @@
+public/data/recruiters_full.json
+dist/data/recruiters_full.json
+*.log
+__pycache__
+*.pid
+node_modules
