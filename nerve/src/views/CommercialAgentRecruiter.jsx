@@ -476,25 +476,36 @@ const CommercialAgentRecruiter = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <div className="flex items-center gap-3">
+      <div className="space-y-4">
+        <div className="flex items-start justify-between gap-4">
+          <div>
             <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-              <Briefcase className="w-6 h-6 text-purple-400" />
+              <Briefcase className="w-6 h-6 text-violet-500" />
               Commercial Agent Recruiter
             </h1>
-            <span className="px-2 py-1 rounded-full bg-purple-500/10 text-purple-400 text-xs font-medium">
-              DBeaver Data
-            </span>
+            <p className="text-slate-400 mt-1">Target commercial-focused agents and teams for recruitment and partnership.</p>
           </div>
-          <p className="text-slate-400 mt-1">
-            {totalCount.toLocaleString()} commercial agents • {filteredAgents.length} showing
-          </p>
+          <button onClick={loadAgents} className="btn-secondary flex items-center gap-2">
+            <RefreshCw className="w-4 h-4" />
+            Refresh
+          </button>
         </div>
-        <button onClick={loadAgents} className="btn-secondary flex items-center gap-2">
-          <RefreshCw className="w-4 h-4" />
-          Refresh
-        </button>
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <ul className="space-y-2 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <span className="text-violet-500 mt-0.5">•</span>
+              <span>Filter agents by commercial experience and specialization</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-violet-500 mt-0.5">•</span>
+              <span>Access brokerage breakdowns and board coverage</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-violet-500 mt-0.5">•</span>
+              <span>Build targeted outreach lists for CRE recruitment</span>
+            </li>
+          </ul>
+        </div>
       </div>
 
       {/* Stats */}

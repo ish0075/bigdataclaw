@@ -1,79 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { 
-  MessageSquare, 
   Building2, 
   Users, 
   UserCircle, 
   Landmark, 
-  Upload, 
-  Cpu, 
-  Map, 
   LayoutDashboard,
-  Search,
   Flame,
-  History,
-  Database,
   UserPlus,
   Hammer,
-  Settings,
-  Sparkles,
   Briefcase,
   Building,
-  FileText,
-  Palette,
-  Radio,
   Target,
   Handshake,
   Calculator,
   Shield,
   Activity,
-  Code,
-  Zap,
   ChevronDown,
   ChevronRight,
   PanelLeftClose,
   PanelLeftOpen,
-  Bot,
-  Paperclip,
-  Scan,
-  ExternalLink,
-  Github,
-  TrendingUp
+  Paperclip
 } from 'lucide-react'
 
-const EXTERNAL_LINKS = [
-  {
-    id: 'external',
-    label: 'External',
-    items: [
-      { 
-        url: 'https://pablodelucca.github.io/pixel-agents/', 
-        label: 'Pixel Agents (Pablo)', 
-        icon: Scan, 
-        badge: 'EXACT',
-        description: 'Original pixel agent visualization by Pablo De Lucca'
-      },
-      { 
-        url: 'http://localhost:3100', 
-        label: 'Paperclip Dashboard', 
-        icon: Paperclip, 
-        badge: 'ORIGINAL',
-        description: 'Original Paperclip company dashboard'
-      },
-    ]
-  }
-]
+const EXTERNAL_LINKS = []
 
-const INTERNAL_LINKS = [
-  {
-    id: 'original',
-    label: 'Original Implementations',
-    items: [
-      { path: '/pixel-agents-original', label: 'Pixel Agents (Exact)', icon: Scan, badge: 'PABLO' },
-    ]
-  }
-]
+const INTERNAL_LINKS = []
 
 const SECTIONS = [
   {
@@ -81,18 +33,9 @@ const SECTIONS = [
     label: 'Main',
     items: [
       { path: '/', label: 'Mission Control', icon: LayoutDashboard },
-      { path: '/research', label: 'Property Research', icon: Building2 },
-      { path: '/property-matcher', label: 'Property Matcher', icon: Search, badge: 'AI' },
       { path: '/hotmoney', label: 'Hot Money Radar', icon: Flame },
-      { path: '/solds', label: 'Historical Sales', icon: History, badge: 'SOLDS' },
-      { path: '/pipeline', label: 'Deal Pipeline', icon: Users },
-      { path: '/opportunities', label: 'Opportunities', icon: Sparkles },
-      { path: '/market-trends', label: 'Market Trends', icon: TrendingUp, badge: 'LIVE' },
-      { path: '/agents', label: 'Agent Workspace', icon: Cpu },
-      { path: '/paperclip-companies', label: 'Agent Companies', icon: Building2, badge: 'NEW' },
-      { path: '/mission-control', label: 'Pixel Agents (Local)', icon: Scan, badge: 'LOCAL' },
-      { path: '/bot-boardroom', label: 'Bot Boardroom', icon: Radio, badge: 'AI' },
-      { path: '/vault', label: 'Obsidian Vault', icon: Database },
+      { path: '/opportunities', label: 'Opportunities', icon: Target, badge: 'AI' },
+      { path: '/paperclip-dashboard', label: 'Paperclip Dashboard', icon: Paperclip, badge: 'NEW' },
     ]
   },
   {
@@ -105,43 +48,25 @@ const SECTIONS = [
     ]
   },
   {
-    id: 'marketing',
-    label: 'Marketing Division',
-    items: [
-      { path: '/marketing/dashboard', label: 'Marketing Dashboard', icon: LayoutDashboard, badge: 'NEW' },
-      { path: '/marketing/videos', label: 'Video Production', icon: Scan, badge: 'VIDEO' },
-      { path: '/marketing/content', label: 'Content Generator', icon: FileText, badge: 'AI' },
-      { path: '/marketing/campaigns', label: 'Campaign Manager', icon: Sparkles, badge: 'ACTIVE' },
-    ]
-  },
-  {
-    id: 'aiBots',
-    label: 'AI Bots',
+    id: 'intelligence',
+    label: 'Intelligence',
     items: [
       { path: '/buyer-bot', label: 'Buyer Intelligence', icon: Target, badge: 'AI' },
       { path: '/seller-outreach-bot', label: 'Seller Outreach', icon: Handshake, badge: 'AI' },
       { path: '/property-valuation-bot', label: 'Property Valuation', icon: Calculator, badge: 'AI' },
-      { path: '/vigil', label: 'Vigil Monitor', icon: Shield, badge: '24/7' },
-      { path: '/agent-workspaces', label: 'Agent Workspaces', icon: Activity, badge: 'NEW' },
-      { path: '/bot-builder', label: 'Bot Builder', icon: Hammer, badge: 'BUILD' },
+      { path: '/vigil', label: 'Virgil Monitor', icon: Shield, badge: '24/7' },
     ]
   },
   {
-    id: 'tools',
-    label: 'Tools',
+    id: 'matchers',
+    label: 'Matchers',
     items: [
       { path: '/listings', label: 'My Listings', icon: Building2 },
       { path: '/buyers', label: 'Buyer Matcher', icon: Users },
       { path: '/agents-matcher', label: 'Agent Matcher', icon: UserCircle },
       { path: '/lenders', label: 'Lender Matcher', icon: Landmark },
       { path: '/builders', label: 'Builder Directory', icon: Hammer },
-      { path: '/upload', label: 'Property Upload', icon: Upload },
-      { path: '/olena-feature-sheet', label: 'Olena Marketing', icon: FileText, badge: 'NEW' },
-      { path: '/canva-editor', label: 'Canva Editor', icon: Palette, badge: 'NEW' },
-      { path: '/skills', label: 'Skills & Agents', icon: Cpu },
-      { path: '/map', label: 'Map View', icon: Map },
-      { path: '/data-manager', label: 'Data Manager', icon: Database },
-      { path: '/ai-builder', label: 'AI Builder', icon: Code, badge: 'CODE' },
+      { path: '/agent-workspaces', label: 'Agent Workspaces', icon: Activity, badge: 'NEW' },
     ]
   }
 ]
@@ -261,7 +186,7 @@ const Sidebar = () => {
                           {item.badge && (
                             <span className={`ml-auto px-1.5 py-0.5 text-[10px] rounded flex-shrink-0 ${
                               section.id === 'recruitment' ? 'bg-accent-blue/20 text-accent-blue' :
-                              section.id === 'aiBots' ? 'bg-accent-purple/20 text-accent-purple' :
+                              section.id === 'intelligence' ? 'bg-accent-purple/20 text-accent-purple' :
                               'bg-accent-green/20 text-accent-green'
                             }`}>
                               {item.badge}
@@ -298,7 +223,7 @@ const Sidebar = () => {
                       </span>
                     </NavLink>
                   ))}
-                  {section.id !== 'tools' && <div className="h-px bg-border-subtle/50 mx-2 my-1" />}
+                  {section.id !== 'matchers' && <div className="h-px bg-border-subtle/50 mx-2 my-1" />}
                 </div>
               )}
             </div>
@@ -306,13 +231,13 @@ const Sidebar = () => {
         })}
         
         {/* Original Implementations Section */}
-        {!compact && (
+        {!compact && INTERNAL_LINKS.length > 0 && (
           <div className="mt-4 pt-4 border-t border-border-subtle/50">
             <div className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-text-muted">
               Original Implementations
             </div>
             <div className="space-y-0.5 mt-1">
-              {INTERNAL_LINKS[0].items.map((item) => (
+              {INTERNAL_LINKS[0]?.items?.map((item) => (
                 <NavLink
                   key={item.path}
                   to={item.path}
@@ -334,9 +259,9 @@ const Sidebar = () => {
         )}
         
         {/* Compact mode internal links */}
-        {compact && (
+        {compact && INTERNAL_LINKS.length > 0 && (
           <div className="mt-2 pt-2 border-t border-border-subtle/50 space-y-1">
-            {INTERNAL_LINKS[0].items.map((item) => (
+            {INTERNAL_LINKS[0]?.items?.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
@@ -363,13 +288,13 @@ const Sidebar = () => {
         )}
         
         {/* External Links Section */}
-        {!compact && (
+        {!compact && EXTERNAL_LINKS.length > 0 && (
           <div className="mt-4 pt-4 border-t border-border-subtle/50">
             <div className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-text-muted">
               External Links
             </div>
             <div className="space-y-0.5 mt-1">
-              {EXTERNAL_LINKS[0].items.map((item) => (
+              {EXTERNAL_LINKS[0]?.items?.map((item) => (
                 <a
                   key={item.url}
                   href={item.url}
@@ -380,7 +305,6 @@ const Sidebar = () => {
                 >
                   <item.icon className="w-5 h-5 flex-shrink-0" />
                   <span className="font-medium truncate">{item.label}</span>
-                  <ExternalLink className="w-3 h-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-text-muted" />
                   {item.badge && (
                     <span className="ml-2 px-1.5 py-0.5 text-[10px] rounded flex-shrink-0 bg-accent-purple/20 text-accent-purple">
                       {item.badge}
@@ -393,9 +317,9 @@ const Sidebar = () => {
         )}
         
         {/* Compact mode external links */}
-        {compact && (
+        {compact && EXTERNAL_LINKS.length > 0 && (
           <div className="mt-2 pt-2 border-t border-border-subtle/50 space-y-1">
-            {EXTERNAL_LINKS[0].items.map((item) => (
+            {EXTERNAL_LINKS[0]?.items?.map((item) => (
               <a
                 key={item.url}
                 href={item.url}

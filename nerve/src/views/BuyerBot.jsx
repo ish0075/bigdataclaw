@@ -311,7 +311,31 @@ const BuyerBot = () => {
 
   return (
     <div className="p-6 space-y-6">
-      {/* Header */}
+      {/* Descriptive Header */}
+      <div className="space-y-4">
+        <div>
+          <h1 className="text-3xl font-bold text-white">Buyer Intelligence</h1>
+          <p className="text-slate-400 mt-1">Identify active commercial buyers by asset class, geography, and acquisition history.</p>
+        </div>
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <span className="text-teal-400 mt-0.5">•</span>
+              <span>Search buyer databases by city and property type</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-teal-400 mt-0.5">•</span>
+              <span>View acquisition history and contact intelligence</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-teal-400 mt-0.5">•</span>
+              <span>Export matched buyers for outreach or referral agreements</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Header -->
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-xl bg-teal-600 flex items-center justify-center text-3xl">

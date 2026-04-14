@@ -1,639 +1,676 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { 
   Search, ExternalLink, Building2, Home, Store, Factory, 
-  TreePine, Stethoscope, Briefcase, MapPin, DollarSign, 
-  Calendar, AlertCircle, CheckCircle, XCircle, Filter,
-  Download, Plus, ClipboardCopy, RefreshCw, Send,
-  Database, Eye, Save, Trash2, Sparkles, Bell, TrendingUp,
-  Target, Mail, Phone, User, Map as MapIcon, List
+  TreePine, Stethoscope, MapPin, DollarSign, 
+  Calendar, AlertCircle, TrendingUp, Filter,
+  RefreshCw, Flame, Scale, Gavel, Hammer, Anchor,
+  Briefcase, ChevronRight, Target, Clock, Sparkles,
+  Landmark, HardHat, ShoppingBag, Loader2
 } from 'lucide-react'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css'
 
-/**
- * Opportunities Page - FULL AUTOMATION VERSION
- * 
- * Features:
- * - Auto-scraper for expired LoopNet listings
- * - Database matching (checks if property exists)
- * - Email alerts for new opportunities
- * - Map view with property locations
- * - Auto broker lookup
- */
+const API_BASE_CANDIDATES = Array.from(new Set([
+  import.meta.env.VITE_API_URL,
+  '/api',
+  'http://127.0.0.1:3090/api',
+  'http://localhost:3090/api',
+  'http://127.0.0.1:8000/api',
+  'http://localhost:8000/api',
+].filter(Boolean).map((value) => value.replace(/\/$/, ''))))
 
-const ASSET_CLASSES = [
-  { id: 'multifamily', label: 'Multifamily / Apartments', icon: Home, color: 'bg-blue-500', searchTerm: 'MULTIFAMILY' },
-  { id: 'shopping_mall', label: 'Shopping Malls', icon: Store, color: 'bg-purple-500', searchTerm: 'SHOPPING CENTER' },
-  { id: 'retail_plaza', label: 'Retail Commercial Plaza', icon: Store, color: 'bg-pink-500', searchTerm: 'RETAIL' },
-  { id: 'land', label: 'Land Development', icon: TreePine, color: 'bg-green-500', searchTerm: 'LAND' },
-  { id: 'industrial', label: 'Industrial', icon: Factory, color: 'bg-orange-500', searchTerm: 'INDUSTRIAL' },
-  { id: 'office', label: 'Office', icon: Building2, color: 'bg-cyan-500', searchTerm: 'OFFICE' },
-  { id: 'medical', label: 'Medical', icon: Stethoscope, color: 'bg-red-500', searchTerm: 'MEDICAL' }
-]
+let resolvedApiBase = null
 
-const PROVINCES = [
-  { code: 'ON', name: 'Ontario' },
-  { code: 'BC', name: 'British Columbia' },
-  { code: 'AB', name: 'Alberta' },
-  { code: 'QC', name: 'Quebec' },
-  { code: 'MB', name: 'Manitoba' },
-  { code: 'SK', name: 'Saskatchewan' },
-  { code: 'NS', name: 'Nova Scotia' },
-  { code: 'NB', name: 'New Brunswick' },
-  { code: 'NL', name: 'Newfoundland' },
-  { code: 'PE', name: 'PEI' },
-  { code: 'ALL', name: 'All Canada' }
-]
-
-// Generate Google search URL
-const generateSearchUrl = (assetClass, province = 'ALL') => {
-  const basePhrase = `THIS ${assetClass.searchTerm} PROPERTY IS NO LONGER ADVERTISED ON LOOPNET.CA`
-  let query = basePhrase
-  if (province !== 'ALL') query += ` ${province}`
-  query += ` "off market" OR "sold" OR "expired listing"`
-  return `https://www.google.com/search?q=${encodeURIComponent(query)}`
+const shouldRetryWithNextApiBase = (message) => {
+  const normalized = message.toLowerCase()
+  return (
+    normalized.includes('failed to fetch') ||
+    normalized.includes('networkerror') ||
+    normalized.includes('file not found') ||
+    normalized.includes('cannot get') ||
+    normalized.includes('http 404') ||
+    normalized.includes('http 502') ||
+    normalized.includes('http 503')
+  )
 }
 
-// Sample opportunities with coordinates for map
-const SAMPLE_OPPORTUNITIES = [
-  {
-    id: 1,
-    propertyType: 'multifamily',
-    title: '45-Unit Apartment Building',
-    address: '123 Main St, Hamilton, ON',
-    location: { lat: 43.2557, lng: -79.8711 },
-    previousPrice: '$4,200,000',
-    status: 'off_market',
-    dateFound: '2026-03-28',
-    source: 'LoopNet',
-    notes: 'Listing expired 2 weeks ago. Contact broker to check availability.',
-    tags: ['expired', 'multifamily', 'hamilton'],
-    captured: false,
-    inDatabase: false, // Not in our database = OPPORTUNITY!
-    suggestedBrokers: [
-      { name: 'John Mitchell', brokerage: 'RE/MAX', email: 'john@remax.com', phone: '905-555-0100' },
-      { name: 'Sarah Johnson', brokerage: 'Century 21', email: 'sarah@c21.ca', phone: '905-555-0200' }
-    ],
-    matchedProperties: []
-  },
-  {
-    id: 2,
-    propertyType: 'industrial',
-    title: '50,000 SF Warehouse',
-    address: '500 Industrial Pkwy, Mississauga, ON',
-    location: { lat: 43.5890, lng: -79.6441 },
-    previousPrice: '$8,500,000',
-    status: 'sold',
-    dateFound: '2026-03-27',
-    source: 'LoopNet',
-    notes: 'Sold - checking database for buyer match.',
-    tags: ['sold', 'industrial', 'mississauga'],
-    captured: true,
-    inDatabase: true, // IN DATABASE = We have the buyer!
-    suggestedBrokers: [
-      { name: 'Michael Chen', brokerage: 'Colliers', email: 'michael@colliers.com', phone: '905-555-0300' }
-    ],
-    matchedProperties: [
-      { address: '500 Industrial Pkwy', buyer: 'ABC Investments', date: '2026-03-25' }
-    ]
-  },
-  {
-    id: 3,
-    propertyType: 'office',
-    title: 'Class A Office Building',
-    address: '100 King St W, Toronto, ON',
-    location: { lat: 43.6487, lng: -79.3819 },
-    previousPrice: '$25,000,000',
-    status: 'off_market',
-    dateFound: '2026-03-26',
-    source: 'LoopNet',
-    notes: 'Premium downtown location. Off market - opportunity!',
-    tags: ['off_market', 'office', 'toronto', 'premium'],
-    captured: false,
-    inDatabase: false,
-    suggestedBrokers: [
-      { name: 'Jennifer Williams', brokerage: 'CBRE', email: 'jennifer@cbre.com', phone: '416-555-0400' },
-      { name: 'David Park', brokerage: 'JLL', email: 'david@jll.com', phone: '416-555-0500' }
-    ],
-    matchedProperties: []
+const createHttpError = async (response) => {
+  let detail = ''
+  try {
+    const contentType = response.headers.get('content-type') || ''
+    if (contentType.includes('application/json')) {
+      const body = await response.json()
+      detail = body?.detail || body?.error || ''
+    } else {
+      detail = (await response.text()).trim()
+    }
+  } catch { detail = '' }
+  return new Error(detail ? `HTTP ${response.status}: ${detail}` : `HTTP ${response.status}: ${response.statusText}`)
+}
+
+const fetchApi = async (path, init) => {
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`
+  const candidates = resolvedApiBase ? [resolvedApiBase] : API_BASE_CANDIDATES
+  let lastError = null
+  for (const base of candidates) {
+    try {
+      const response = await fetch(`${base}${normalizedPath}`, init)
+      if (!response.ok) throw await createHttpError(response)
+      resolvedApiBase = base
+      return response
+    } catch (err) {
+      lastError = err
+      if (!shouldRetryWithNextApiBase(err instanceof Error ? err.message : String(err))) throw err
+    }
   }
+  throw lastError || new Error('API unavailable')
+}
+
+const formatCash = (amount) => {
+  if (!amount) return '$0'
+  if (amount >= 1e9) return `$${(amount / 1e9).toFixed(1)}B`
+  if (amount >= 1e6) return `$${(amount / 1e6).toFixed(1)}M`
+  if (amount >= 1e3) return `$${(amount / 1e3).toFixed(0)}K`
+  return `$${amount}`
+}
+
+const ASSET_CLASSES = [
+  { value: 'all', label: 'All', icon: Building2, color: 'slate' },
+  { value: 'Agricultural', label: 'Agricultural', icon: TreePine, color: 'green' },
+  { value: 'Hotel', label: 'Hotel', icon: Briefcase, color: 'rose' },
+  { value: 'Industrial', label: 'Industrial', icon: Factory, color: 'blue' },
+  { value: 'Land', label: 'Land', icon: MapPin, color: 'orange' },
+  { value: 'Multifamily', label: 'Multifamily', icon: Home, color: 'amber' },
+  { value: 'Office', label: 'Office', icon: Building2, color: 'purple' },
+  { value: 'Retail', label: 'Retail', icon: Store, color: 'emerald' },
+  { value: 'Senior Living', label: 'Senior Living', icon: Stethoscope, color: 'cyan' },
+  { value: 'Healthcare', label: 'Healthcare', icon: Stethoscope, color: 'teal' },
 ]
 
+const URGENCY_FILTERS = [
+  { value: 'all', label: 'All Flagged', color: 'slate' },
+  { value: 'critical', label: 'Critical (≥70%)', color: 'red' },
+  { value: 'high', label: 'High (≥50%)', color: 'orange' },
+  { value: 'medium', label: 'Medium (≥30%)', color: 'yellow' },
+  { value: 'watch', label: 'Watch (≥10%)', color: 'blue' },
+]
+
+const PRICE_RANGES = [
+  { value: 'all', label: 'All Prices' },
+  { value: '<$1M', label: '<$1M' },
+  { value: '$1M - $5M', label: '$1M - $5M' },
+  { value: '$5M - $10M', label: '$5M - $10M' },
+  { value: '$10M - $50M', label: '$10M - $50M' },
+  { value: '$50M+', label: '$50M+' },
+]
+
+const SIGNAL_ICONS = {
+  extreme_rate: Flame,
+  high_rate: Flame,
+  peak_market: TrendingUp,
+  distressed_entity: Gavel,
+  underwater: Anchor,
+  matured: Clock,
+  due_soon: Clock,
+  pre_covid: Calendar,
+  high_value: DollarSign,
+  vacancy: AlertCircle,
+  redevelopment: Hammer,
+}
+
+const UrgencyBadge = ({ label }) => {
+  const colors = {
+    CRITICAL: 'bg-red-600 text-white border-red-500',
+    HIGH: 'bg-orange-600 text-white border-orange-500',
+    MEDIUM: 'bg-yellow-500 text-black border-yellow-400',
+    WATCH: 'bg-blue-600 text-white border-blue-500',
+  }
+  return (
+    <span className={`px-2 py-1 rounded-lg text-xs font-bold uppercase tracking-wide border ${colors[label] || colors.WATCH}`}>
+      {label}
+    </span>
+  )
+}
+
+const UrgencyBar = ({ score }) => {
+  let color = 'bg-blue-500'
+  if (score >= 70) color = 'bg-red-500'
+  else if (score >= 50) color = 'bg-orange-500'
+  else if (score >= 30) color = 'bg-yellow-500'
+  
+  return (
+    <div className="w-full bg-slate-700 rounded-full h-2.5 mt-2">
+      <div className={`${color} h-2.5 rounded-full transition-all`} style={{ width: `${score}%` }} />
+    </div>
+  )
+}
+
 const Opportunities = () => {
-  const [opportunities, setOpportunities] = useState(SAMPLE_OPPORTUNITIES)
-  const [selectedAsset, setSelectedAsset] = useState(ASSET_CLASSES[0])
-  const [selectedProvince, setSelectedProvince] = useState('ON')
-  const [loading, setLoading] = useState(false)
-  const [viewMode, setViewMode] = useState('list') // 'list' or 'map'
-  const [filter, setFilter] = useState('all') // all, off_market, sold, opportunity
+  const [activeTab, setActiveTab] = useState('goldmine')
+  const [opportunities, setOpportunities] = useState([])
+  const [stats, setStats] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [distressedLoading, setDistressedLoading] = useState(false)
+  const [distressedError, setDistressedError] = useState(null)
+  const [flaggedReports, setFlaggedReports] = useState([])
+  
+  const [assetClassFilter, setAssetClassFilter] = useState('all')
+  const [urgencyFilter, setUrgencyFilter] = useState('all')
+  const [priceFilter, setPriceFilter] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedOpportunity, setSelectedOpportunity] = useState(null)
-  const [showBrokerModal, setShowBrokerModal] = useState(false)
-  const [automationStatus, setAutomationStatus] = useState({
-    lastRun: '2026-03-28 06:00',
-    nextRun: '2026-03-29 06:00',
-    totalFound: 12,
-    newToday: 3
-  })
+  const [sortBy, setSortBy] = useState('urgency')
 
-  // Filter opportunities
+  const fetchOpportunities = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+      const params = new URLSearchParams()
+      if (assetClassFilter && assetClassFilter !== 'all') params.append('asset_class', assetClassFilter)
+      params.append('limit', '500')
+      const response = await fetchApi(`/opportunities/gold?${params.toString()}`)
+      const data = await response.json()
+      setOpportunities(data.opportunities || [])
+      setStats(data.stats || null)
+    } catch (err) {
+      console.error('Error fetching opportunities:', err)
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const fetchFlaggedReports = async () => {
+    try {
+      setDistressedLoading(true)
+      setDistressedError(null)
+      // Try the flagged-opportunities endpoint if it exists; otherwise fall back gracefully
+      const response = await fetchApi('/opportunities/flagged')
+      const data = await response.json()
+      setFlaggedReports(data.reports || [])
+    } catch (err) {
+      console.error('Error fetching flagged reports:', err)
+      setDistressedError(err.message)
+    } finally {
+      setDistressedLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchOpportunities()
+  }, [assetClassFilter])
+
+  useEffect(() => {
+    if (activeTab === 'distressed') {
+      fetchFlaggedReports()
+    }
+  }, [activeTab])
+
   const filteredOpportunities = useMemo(() => {
-    return opportunities.filter(opp => {
-      if (filter === 'opportunity' && opp.inDatabase) return false
-      if (filter === 'sold' && opp.status !== 'sold') return false
-      if (filter === 'off_market' && opp.status !== 'off_market') return false
-      if (searchQuery && !opp.title.toLowerCase().includes(searchQuery.toLowerCase())) return false
-      return true
-    })
-  }, [opportunities, filter, searchQuery])
-
-  // Statistics
-  const stats = useMemo(() => ({
-    total: opportunities.length,
-    opportunities: opportunities.filter(o => !o.inDatabase).length,
-    sold: opportunities.filter(o => o.status === 'sold').length,
-    newToday: automationStatus.newToday
-  }), [opportunities, automationStatus])
-
-  const openGoogleSearch = () => {
-    const url = generateSearchUrl(selectedAsset, selectedProvince)
-    window.open(url, '_blank', 'noopener,noreferrer')
-  }
-
-  const captureOpportunity = (opp) => {
-    // Generate Obsidian note
-    const note = `# ${opp.title}
-
-**Status:** ${opp.status}
-**Address:** ${opp.address}
-**Previous Price:** ${opp.previousPrice}
-**In Database:** ${opp.inDatabase ? 'Yes ✓' : 'No - OPPORTUNITY!'}
-
-## Notes
-${opp.notes}
-
-## Suggested Brokers
-${opp.suggestedBrokers.map(b => `- ${b.name} (${b.brokerage}) - ${b.email}`).join('\n')}
-
-## Actions
-- [ ] Contact broker
-- [ ] Verify current status
-- [ ] ${opp.inDatabase ? 'Contact buyer from database' : 'Add to prospecting list'}
-
-*Captured: ${new Date().toISOString()}*
-`
+    let filtered = [...opportunities]
     
-    // Copy to clipboard
-    navigator.clipboard.writeText(note)
+    // Urgency filter
+    if (urgencyFilter !== 'all') {
+      filtered = filtered.filter(o => o.urgency_label.toLowerCase() === urgencyFilter)
+    }
     
-    // Mark as captured
-    setOpportunities(prev => prev.map(o => 
-      o.id === opp.id ? { ...o, captured: true } : o
-    ))
+    // Price filter
+    if (priceFilter !== 'all') {
+      filtered = filtered.filter(o => o.price_range === priceFilter)
+    }
     
-    alert('Opportunity saved to clipboard! Paste into Obsidian.')
-  }
+    // Search
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase()
+      filtered = filtered.filter(o => 
+        (o.entity || '').toLowerCase().includes(q) ||
+        (o.location || '').toLowerCase().includes(q) ||
+        (o.asset_class || '').toLowerCase().includes(q) ||
+        (o.address || '').toLowerCase().includes(q)
+      )
+    }
+    
+    // Sort
+    if (sortBy === 'urgency') {
+      filtered.sort((a, b) => b.urgency_score - a.urgency_score || b.cash_amount - a.cash_amount)
+    } else if (sortBy === 'cash') {
+      filtered.sort((a, b) => b.cash_amount - a.cash_amount)
+    } else if (sortBy === 'date') {
+      filtered.sort((a, b) => (b.sale_date || '').localeCompare(a.sale_date || ''))
+    }
+    
+    return filtered
+  }, [opportunities, urgencyFilter, priceFilter, searchQuery, sortBy])
 
-  const runAutomation = async () => {
-    setLoading(true)
-    // Simulate automation run
-    await new Promise(r => setTimeout(r, 2000))
-    setAutomationStatus(prev => ({
-      ...prev,
-      lastRun: new Date().toISOString().split('T')[0] + ' ' + new Date().toLocaleTimeString(),
-      newToday: prev.newToday + 1
-    }))
-    setLoading(false)
-  }
+  const totalFlaggedCapital = useMemo(() => {
+    return filteredOpportunities.reduce((sum, o) => sum + (o.cash_amount || 0), 0)
+  }, [filteredOpportunities])
 
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-text-primary flex items-center gap-2">
-              <Sparkles className="w-6 h-6 text-accent-yellow" />
-              Opportunities
-            </h1>
-            <span className="px-2 py-1 rounded-full bg-accent-green/10 text-accent-green text-xs font-medium">
-              AUTO-SCANNING
-            </span>
-          </div>
-          <p className="text-text-secondary mt-1">
-            Automated off-market property discovery
+          <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+            <Target className="w-7 h-7 text-accent-yellow" />
+            Opportunity Goldmine
+          </h1>
+          <p className="text-slate-400 mt-1">
+            {stats ? `${stats.total_flagged.toLocaleString()} distressed and high-urgency deals flagged by AI` : 'Loading opportunities...'}
           </p>
         </div>
         <div className="flex items-center gap-3">
           <button 
-            onClick={runAutomation}
+            onClick={fetchOpportunities}
             disabled={loading}
-            className="btn-primary flex items-center gap-2"
+            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 rounded-lg text-slate-300 text-sm font-medium flex items-center gap-2 transition-colors"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-            Run Scanner
+            Refresh
           </button>
         </div>
       </div>
 
-      {/* Automation Status */}
-      <div className="card p-4">
-        <div className="flex items-center gap-4">
-          <div className="p-3 rounded-xl bg-accent-green/20">
-            <TrendingUp className="w-6 h-6 text-accent-green" />
+      {/* Tab Switcher */}
+      <div className="flex items-center gap-2 border-b border-slate-700/50">
+        <button
+          onClick={() => setActiveTab('goldmine')}
+          className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+            activeTab === 'goldmine'
+              ? 'border-accent-yellow text-accent-yellow'
+              : 'border-transparent text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          Goldmine
+        </button>
+        <button
+          onClick={() => setActiveTab('distressed')}
+          className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+            activeTab === 'distressed'
+              ? 'border-accent-yellow text-accent-yellow'
+              : 'border-transparent text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          Distressed
+        </button>
+      </div>
+
+      {activeTab === 'goldmine' && (
+        <>
+          {/* Stats Row */}
+          {stats && (
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="bg-gradient-to-br from-red-600/20 to-orange-600/20 rounded-xl p-4 border border-red-500/20">
+                <p className="text-3xl font-bold text-white">{stats.critical}</p>
+                <p className="text-sm text-slate-400">Critical</p>
+              </div>
+              <div className="bg-gradient-to-br from-orange-600/20 to-yellow-600/20 rounded-xl p-4 border border-orange-500/20">
+                <p className="text-3xl font-bold text-white">{stats.high}</p>
+                <p className="text-sm text-slate-400">High</p>
+              </div>
+              <div className="bg-gradient-to-br from-yellow-600/20 to-amber-600/20 rounded-xl p-4 border border-yellow-500/20">
+                <p className="text-3xl font-bold text-white">{stats.medium}</p>
+                <p className="text-sm text-slate-400">Medium</p>
+              </div>
+              <div className="bg-gradient-to-br from-blue-600/20 to-indigo-600/20 rounded-xl p-4 border border-blue-500/20">
+                <p className="text-3xl font-bold text-white">{stats.watch}</p>
+                <p className="text-sm text-slate-400">Watch</p>
+              </div>
+              <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+                <p className="text-2xl font-bold text-emerald-400">{formatCash(totalFlaggedCapital)}</p>
+                <p className="text-sm text-slate-400">Filtered Capital</p>
+              </div>
+            </div>
+          )}
+
+          {/* Filters */}
+          <div className="bg-slate-800/40 rounded-xl border border-slate-700/50 p-4 space-y-4">
+            {/* Row 1: Search & Sort */}
+            <div className="flex flex-col md:flex-row gap-3">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                <input 
+                  type="text" 
+                  placeholder="Search entity, location, address..." 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white text-sm"
+                />
+              </div>
+              <select 
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white text-sm"
+              >
+                <option value="urgency">Sort: Urgency</option>
+                <option value="cash">Sort: Cash ↓</option>
+                <option value="date">Sort: Sale Date</option>
+              </select>
+            </div>
+
+            {/* Row 2: Urgency Filters */}
+            <div className="flex flex-wrap gap-2">
+              {URGENCY_FILTERS.map((f) => {
+                const isActive = urgencyFilter === f.value
+                const activeClasses = {
+                  slate: 'bg-slate-600 text-white border-slate-500',
+                  red: 'bg-red-600 text-white border-red-500',
+                  orange: 'bg-orange-600 text-white border-orange-500',
+                  yellow: 'bg-yellow-500 text-black border-yellow-400',
+                  blue: 'bg-blue-600 text-white border-blue-500',
+                }
+                return (
+                  <button
+                    key={f.value}
+                    onClick={() => setUrgencyFilter(f.value)}
+                    className={`px-3 py-2 rounded-lg text-sm font-medium border transition-all ${
+                      isActive ? activeClasses[f.color] : 'bg-slate-900/60 text-slate-300 border-slate-700 hover:bg-slate-800'
+                    }`}
+                  >
+                    {f.label}
+                  </button>
+                )
+              })}
+            </div>
+
+            {/* Row 3: Asset Class Chips */}
+            <div className="flex flex-wrap gap-2">
+              {ASSET_CLASSES.map((btn) => {
+                const isActive = assetClassFilter === btn.value || (assetClassFilter === '' && btn.value === 'all')
+                const count = btn.value === 'all' ? (stats?.total_flagged || 0) : (stats?.by_asset_class?.[btn.value] || 0)
+                const activeClasses = {
+                  slate: 'bg-slate-600 text-white border-slate-500',
+                  green: 'bg-green-600 text-white border-green-500',
+                  rose: 'bg-rose-600 text-white border-rose-500',
+                  blue: 'bg-blue-600 text-white border-blue-500',
+                  orange: 'bg-orange-600 text-white border-orange-500',
+                  amber: 'bg-amber-600 text-white border-amber-500',
+                  purple: 'bg-purple-600 text-white border-purple-500',
+                  emerald: 'bg-emerald-600 text-white border-emerald-500',
+                  cyan: 'bg-cyan-600 text-white border-cyan-500',
+                  teal: 'bg-teal-600 text-white border-teal-500',
+                }
+                return (
+                  <button
+                    key={btn.value}
+                    onClick={() => setAssetClassFilter(btn.value)}
+                    className={`px-3 py-2 rounded-lg text-sm font-medium border flex items-center gap-2 transition-all ${
+                      isActive ? `${activeClasses[btn.color]} shadow-lg` : 'bg-slate-900/60 text-slate-300 border-slate-700 hover:bg-slate-800'
+                    }`}
+                  >
+                    <btn.icon className="w-4 h-4" />
+                    <span>{btn.label}</span>
+                    <span className={`px-1.5 py-0.5 rounded text-xs ${isActive ? 'bg-white/20' : 'bg-slate-700 text-slate-400'}`}>
+                      {count.toLocaleString()}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+
+            {/* Row 4: Price Range */}
+            <div className="flex flex-wrap gap-2">
+              {PRICE_RANGES.map((pr) => {
+                const isActive = priceFilter === pr.value
+                return (
+                  <button
+                    key={pr.value}
+                    onClick={() => setPriceFilter(pr.value)}
+                    className={`px-3 py-1.5 rounded-lg text-sm font-medium border transition-all ${
+                      isActive 
+                        ? 'bg-indigo-600 text-white border-indigo-500' 
+                        : 'bg-slate-900/60 text-slate-300 border-slate-700 hover:bg-slate-800'
+                    }`}
+                  >
+                    {pr.label}
+                  </button>
+                )
+              })}
+            </div>
           </div>
-          <div className="flex-1">
-            <h3 className="font-semibold text-text-primary">Automation Status</h3>
-            <p className="text-sm text-text-secondary">
-              Last run: {automationStatus.lastRun} • Next run: {automationStatus.nextRun}
+
+          {/* Results Count */}
+          <div className="flex items-center justify-between">
+            <p className="text-slate-400 text-sm">
+              Showing <span className="text-white font-semibold">{filteredOpportunities.length}</span> opportunities
             </p>
           </div>
-          <div className="flex gap-4 text-center">
-            <div>
-              <p className="text-2xl font-bold text-accent-blue">{automationStatus.totalFound}</p>
-              <p className="text-xs text-text-muted">Total Found</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-accent-green">{automationStatus.newToday}</p>
-              <p className="text-xs text-text-muted">New Today</p>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="card p-4">
-          <p className="text-text-muted text-xs">Total</p>
-          <p className="text-2xl font-bold text-text-primary">{stats.total}</p>
-        </div>
-        <div className="card p-4">
-          <p className="text-text-muted text-xs">Opportunities</p>
-          <p className="text-2xl font-bold text-accent-yellow">{stats.opportunities}</p>
-        </div>
-        <div className="card p-4">
-          <p className="text-text-muted text-xs">Sold (DB Check)</p>
-          <p className="text-2xl font-bold text-accent-green">{stats.sold}</p>
-        </div>
-        <div className="card p-4">
-          <p className="text-text-muted text-xs">New Today</p>
-          <p className="text-2xl font-bold text-accent-purple">{stats.newToday}</p>
-        </div>
-      </div>
-
-      {/* Search Configuration */}
-      <div className="card p-6 space-y-6">
-        <div className="flex items-center gap-2 mb-4">
-          <Search className="w-5 h-5 text-accent-blue" />
-          <h2 className="text-lg font-semibold">Search Configuration</h2>
-        </div>
-
-        {/* Asset Class Grid */}
-        <div>
-          <label className="text-sm font-medium text-text-secondary mb-3 block">Asset Class</label>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
-            {ASSET_CLASSES.map((asset) => {
-              const Icon = asset.icon
-              const isSelected = selectedAsset.id === asset.id
-              
-              return (
-                <button
-                  key={asset.id}
-                  onClick={() => setSelectedAsset(asset)}
-                  className={`p-3 rounded-xl border-2 transition-all text-left ${
-                    isSelected 
-                      ? `${asset.color} border-current text-white` 
-                      : 'bg-bg-input border-border-subtle text-text-secondary hover:border-text-muted'
-                  }`}
-                >
-                  <Icon className="w-5 h-5 mb-2" />
-                  <span className="text-xs font-medium block leading-tight">{asset.label}</span>
-                </button>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Province & Actions */}
-        <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-border-subtle">
-          <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-text-muted" />
-            <select 
-              value={selectedProvince}
-              onChange={(e) => setSelectedProvince(e.target.value)}
-              className="bg-bg-input border border-border-subtle rounded-lg px-3 py-2 text-sm"
-            >
-              {PROVINCES.map(p => <option key={p.code} value={p.code}>{p.name}</option>)}
-            </select>
-          </div>
-
-          <div className="flex-1" />
-
-          <button onClick={() => window.open('https://www.loopnet.ca', '_blank')} className="btn-secondary flex items-center gap-2">
-            <ExternalLink className="w-4 h-4" />
-            LoopNet
-          </button>
-          
-          <button onClick={openGoogleSearch} className="btn-primary flex items-center gap-2">
-            <Search className="w-4 h-4" />
-            Google Search
-          </button>
-        </div>
-
-        {/* Search Query Preview */}
-        <div className="p-4 rounded-lg bg-bg-input">
-          <p className="text-xs text-text-muted mb-1">Google Search Query:</p>
-          <code className="text-sm text-accent-blue break-all">
-            "THIS {selectedAsset.searchTerm} PROPERTY IS NO LONGER ADVERTISED ON LOOPNET.CA"
-          </code>
-        </div>
-      </div>
-
-      {/* View Toggle & Filters */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="flex bg-bg-input rounded-lg p-1">
-            <button 
-              onClick={() => setViewMode('list')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-all ${
-                viewMode === 'list' ? 'bg-accent-blue text-white' : 'text-text-secondary'
-              }`}
-            >
-              <List className="w-4 h-4" />
-              List
-            </button>
-            <button 
-              onClick={() => setViewMode('map')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-all ${
-                viewMode === 'map' ? 'bg-accent-blue text-white' : 'text-text-secondary'
-              }`}
-            >
-              <MapIcon className="w-4 h-4" />
-              Map
-            </button>
-          </div>
-
-          <select 
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            className="bg-bg-input border border-border-subtle rounded-lg px-3 py-2 text-sm"
-          >
-            <option value="all">All Status</option>
-            <option value="opportunity">🎯 Opportunities Only</option>
-            <option value="sold">✓ Sold (DB Check)</option>
-            <option value="off_market">📋 Off Market</option>
-          </select>
-        </div>
-
-        <div className="relative">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" />
-          <input
-            type="text"
-            placeholder="Search opportunities..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 pr-4 py-2 bg-bg-input border border-border-subtle rounded-lg text-sm w-64"
-          />
-        </div>
-      </div>
-
-      {/* Content: List or Map View */}
-      {viewMode === 'list' ? (
-        <div className="grid gap-4">
-          {filteredOpportunities.map((opp) => (
-            <OpportunityCard 
-              key={opp.id} 
-              opportunity={opp}
-              onCapture={() => captureOpportunity(opp)}
-              onShowBrokers={() => {
-                setSelectedOpportunity(opp)
-                setShowBrokerModal(true)
-              }}
-            />
-          ))}
-          
-          {filteredOpportunities.length === 0 && (
-            <div className="card p-12 text-center">
-              <Sparkles className="w-12 h-12 text-text-muted mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-text-primary">No opportunities found</h3>
-              <p className="text-text-secondary">Run the scanner to find new opportunities</p>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className="card overflow-hidden" style={{ height: '600px' }}>
-          <MapView opportunities={filteredOpportunities} />
-        </div>
-      )}
-
-      {/* Broker Modal */}
-      {showBrokerModal && selectedOpportunity && (
-        <BrokerModal 
-          opportunity={selectedOpportunity}
-          onClose={() => setShowBrokerModal(false)}
-        />
-      )}
-    </div>
-  )
-}
-
-// Opportunity Card Component
-const OpportunityCard = ({ opportunity, onCapture, onShowBrokers }) => {
-  const AssetIcon = ASSET_CLASSES.find(a => a.id === opportunity.propertyType)?.icon || Building2
-  const isOpportunity = !opportunity.inDatabase
-  
-  return (
-    <div className={`card p-5 border-l-4 ${isOpportunity ? 'border-accent-yellow' : 'border-accent-green'}`}>
-      <div className="flex items-start gap-4">
-        {/* Icon */}
-        <div className={`p-3 rounded-xl ${isOpportunity ? 'bg-accent-yellow/20' : 'bg-accent-green/20'}`}>
-          <AssetIcon className={`w-6 h-6 ${isOpportunity ? 'text-accent-yellow' : 'text-accent-green'}`} />
-        </div>
-
-        {/* Content */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-text-primary">{opportunity.title}</h3>
-                {isOpportunity ? (
-                  <span className="px-2 py-0.5 rounded-full bg-accent-yellow/20 text-accent-yellow text-xs font-medium">
-                    🎯 OPPORTUNITY
-                  </span>
-                ) : (
-                  <span className="px-2 py-0.5 rounded-full bg-accent-green/20 text-accent-green text-xs font-medium">
-                    ✓ IN DATABASE
-                  </span>
-                )}
+          {/* Opportunity Cards */}
+          <div className="space-y-4">
+            {loading && opportunities.length === 0 ? (
+              <div className="p-12 text-center text-slate-400">
+                <div className="w-10 h-10 border-2 border-accent-yellow border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                <p>Scanning database for distressed deals...</p>
               </div>
-              <p className="text-sm text-text-secondary">{opportunity.address}</p>
-              <div className="flex items-center gap-4 mt-1 text-xs text-text-muted">
-                <span className="flex items-center gap-1">
-                  <DollarSign className="w-3 h-3" />
-                  {opportunity.previousPrice}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Calendar className="w-3 h-3" />
-                  {opportunity.dateFound}
-                </span>
-                <span className={`px-2 py-0.5 rounded ${
-                  opportunity.status === 'sold' ? 'bg-accent-green/20 text-accent-green' : 'bg-accent-yellow/20 text-accent-yellow'
-                }`}>
-                  {opportunity.status.replace('_', ' ').toUpperCase()}
-                </span>
+            ) : error ? (
+              <div className="p-12 text-center text-red-400">
+                <p>{error}</p>
+                <button onClick={fetchOpportunities} className="mt-4 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-white text-sm">Try Again</button>
               </div>
-            </div>
-          </div>
-
-          {/* Database Match Info */}
-          {opportunity.inDatabase && opportunity.matchedProperties.length > 0 && (
-            <div className="mt-3 p-3 rounded-lg bg-accent-green/10">
-              <p className="text-sm font-medium text-accent-green flex items-center gap-2">
-                <Database className="w-4 h-4" />
-                Match Found in Database
-              </p>
-              <p className="text-xs text-text-secondary mt-1">
-                Buyer: {opportunity.matchedProperties[0].buyer}
-              </p>
-            </div>
-          )}
-
-          {/* Suggested Brokers */}
-          <div className="mt-3">
-            <p className="text-xs text-text-muted mb-2">Suggested Brokers ({opportunity.suggestedBrokers.length}):</p>
-            <div className="flex flex-wrap gap-2">
-              {opportunity.suggestedBrokers.slice(0, 2).map((broker, i) => (
-                <span key={i} className="text-xs px-2 py-1 rounded bg-bg-input text-text-secondary">
-                  {broker.name} ({broker.brokerage})
-                </span>
-              ))}
-              {opportunity.suggestedBrokers.length > 2 && (
+            ) : filteredOpportunities.length === 0 ? (
+              <div className="p-12 text-center text-slate-400">
+                <Target className="w-12 h-12 mx-auto mb-3 opacity-30" />
+                <p>No opportunities match your filters.</p>
                 <button 
-                  onClick={onShowBrokers}
-                  className="text-xs px-2 py-1 rounded bg-accent-blue/10 text-accent-blue"
+                  onClick={() => { setUrgencyFilter('all'); setPriceFilter('all'); setSearchQuery(''); }}
+                  className="mt-3 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-white text-sm"
                 >
-                  +{opportunity.suggestedBrokers.length - 2} more
+                  Clear Filters
                 </button>
-              )}
-            </div>
+              </div>
+            ) : (
+              filteredOpportunities.map((opp) => (
+                <OpportunityCard key={opp.id} opportunity={opp} />
+              ))
+            )}
+          </div>
+        </>
+      )}
+
+      {activeTab === 'distressed' && (
+        <div className="space-y-6">
+          <div>
+            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+              <AlertCircle className="w-6 h-6 text-red-500" />
+              Distressed & Flagged Deals
+            </h2>
+            <p className="text-slate-400 mt-1 max-w-3xl">
+              High-stress properties identified through Ontario land-registry intelligence — mortgage renewals, high leverage, on-demand loans, and negative equity signals.
+            </p>
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center gap-2 mt-4 pt-4 border-t border-border-subtle">
-            <button 
-              onClick={onCapture}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                opportunity.captured 
-                  ? 'bg-accent-green/20 text-accent-green' 
-                  : 'bg-accent-blue/10 text-accent-blue hover:bg-accent-blue/20'
-              }`}
-            >
-              {opportunity.captured ? <><CheckCircle className="w-4 h-4" /> Saved</> : <><Save className="w-4 h-4" /> Save to Obsidian</>}
-            </button>
-            
-            <button 
-              onClick={onShowBrokers}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium bg-bg-input text-text-secondary hover:bg-bg-hover transition-colors"
-            >
-              <User className="w-4 h-4" />
-              All Brokers
-            </button>
-            
-            <button 
-              onClick={() => window.open(generateSearchUrl(ASSET_CLASSES.find(a => a.id === opportunity.propertyType)), '_blank')}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium bg-bg-input text-text-secondary hover:bg-bg-hover transition-colors"
-            >
-              <ExternalLink className="w-4 h-4" />
-              Google
-            </button>
+          <div className="bg-slate-800/40 rounded-xl border border-slate-700/50 p-8 text-center">
+            {distressedLoading ? (
+              <>
+                <Loader2 className="w-10 h-10 text-accent-yellow animate-spin mx-auto mb-4" />
+                <p className="text-slate-300 font-medium">Loading flagged opportunity reports...</p>
+                <p className="text-slate-500 text-sm mt-1">Contacting the BigDataClaw scanner</p>
+              </>
+            ) : distressedError ? (
+              <>
+                <AlertCircle className="w-10 h-10 text-orange-500 mx-auto mb-4" />
+                <p className="text-slate-300 font-medium">Scanner connection not yet live</p>
+                <p className="text-slate-500 text-sm mt-1">{distressedError}</p>
+                <button
+                  onClick={fetchFlaggedReports}
+                  className="mt-4 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-white text-sm"
+                >
+                  Retry
+                </button>
+              </>
+            ) : flaggedReports.length === 0 ? (
+              <>
+                <Loader2 className="w-10 h-10 text-accent-yellow animate-spin mx-auto mb-4" />
+                <p className="text-slate-300 font-medium">Loading flagged opportunity reports...</p>
+                <p className="text-slate-500 text-sm mt-2 max-w-lg mx-auto">
+                  These reports are generated from the BigDataClaw flagged-opportunity scanner. Check back shortly for live data.
+                </p>
+              </>
+            ) : (
+              <div className="text-left space-y-3">
+                {flaggedReports.map((report, idx) => (
+                  <div key={idx} className="bg-slate-900/50 rounded-lg p-4 border border-slate-700/50">
+                    <p className="text-white font-medium">{report.title || report.filename || 'Flagged Report'}</p>
+                    {report.summary && <p className="text-slate-400 text-sm mt-1">{report.summary}</p>}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
 
-// Map View Component
-const MapView = ({ opportunities }) => {
-  // Center on first opportunity or default to Toronto
-  const center = opportunities[0]?.location || { lat: 43.6532, lng: -79.3832 }
+const OpportunityCard = ({ opportunity }) => {
+  const asset = ASSET_CLASSES.find(a => a.value === opportunity.asset_class) || ASSET_CLASSES[0]
+  const AssetIcon = asset.icon
   
   return (
-    <MapContainer 
-      center={[center.lat, center.lng]} 
-      zoom={10} 
-      style={{ height: '100%', width: '100%' }}
-    >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; OpenStreetMap'
-      />
-      {opportunities.map(opp => opp.location && (
-        <Marker key={opp.id} position={[opp.location.lat, opp.location.lng]}>
-          <Popup>
-            <div className="p-2">
-              <h4 className="font-semibold">{opp.title}</h4>
-              <p className="text-sm">{opp.address}</p>
-              <p className="text-sm font-medium">{opp.previousPrice}</p>
-              {!opp.inDatabase && (
-                <span className="text-xs text-accent-yellow">🎯 Opportunity</span>
-              )}
-            </div>
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
-  )
-}
-
-// Broker Modal
-const BrokerModal = ({ opportunity, onClose }) => {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={onClose}>
-      <div className="card w-full max-w-lg max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-        <div className="p-5 border-b border-border-subtle flex items-center justify-between">
-          <div>
-            <h3 className="text-lg font-semibold text-text-primary">Suggested Brokers</h3>
-            <p className="text-sm text-text-secondary">{opportunity.title}</p>
+    <div className={`bg-slate-800/40 rounded-xl border-l-4 p-5 transition-all hover:bg-slate-800/60 ${
+      opportunity.urgency_label === 'CRITICAL' ? 'border-red-500' :
+      opportunity.urgency_label === 'HIGH' ? 'border-orange-500' :
+      opportunity.urgency_label === 'MEDIUM' ? 'border-yellow-500' :
+      'border-blue-500'
+    }`}>
+      <div className="flex flex-col lg:flex-row gap-4">
+        {/* Left: Icon + Urgency */}
+        <div className="flex flex-row lg:flex-col items-center lg:items-center gap-3 lg:gap-2 lg:w-24 flex-shrink-0">
+          <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+            opportunity.urgency_label === 'CRITICAL' ? 'bg-red-500/20 text-red-400' :
+            opportunity.urgency_label === 'HIGH' ? 'bg-orange-500/20 text-orange-400' :
+            opportunity.urgency_label === 'MEDIUM' ? 'bg-yellow-500/20 text-yellow-400' :
+            'bg-blue-500/20 text-blue-400'
+          }`}>
+            <AssetIcon className="w-6 h-6" />
           </div>
-          <button onClick={onClose} className="p-2 hover:bg-bg-input rounded-lg">
-            <XCircle className="w-5 h-5 text-text-muted" />
-          </button>
+          <UrgencyBadge label={opportunity.urgency_label} />
         </div>
         
-        <div className="p-5">
-          <div className="space-y-4">
-            {opportunity.suggestedBrokers.map((broker, i) => (
-              <div key={i} className="p-4 rounded-lg bg-bg-input">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h4 className="font-medium text-text-primary">{broker.name}</h4>
-                    <p className="text-sm text-text-secondary">{broker.brokerage}</p>
+        {/* Right: Content */}
+        <div className="flex-1 min-w-0">
+          {/* Title Row */}
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+            <div className="min-w-0">
+              <h3 className="text-lg font-bold text-white truncate">{opportunity.entity}</h3>
+              <p className="text-slate-400 text-sm flex items-center gap-2 flex-wrap">
+                <span className="text-slate-300">{opportunity.asset_class}</span>
+                <span className="text-slate-600">•</span>
+                <span>{opportunity.location}</span>
+                <span className="text-slate-600">•</span>
+                <span className="text-emerald-400 font-medium">{opportunity.price_range}</span>
+              </p>
+              {opportunity.address && opportunity.address !== opportunity.property && (
+                <p className="text-slate-500 text-xs mt-0.5">{opportunity.address}</p>
+              )}
+            </div>
+            <div className="text-right flex-shrink-0">
+              <p className="text-2xl font-bold text-emerald-400">{formatCash(opportunity.cash_amount)}</p>
+              <p className="text-xs text-slate-500">Transaction Value</p>
+            </div>
+          </div>
+          
+          {/* Urgency Bar */}
+          <div className="mt-3">
+            <div className="flex items-center justify-between text-xs mb-1">
+              <span className="text-slate-400">Urgency Score</span>
+              <span className="text-white font-bold">{opportunity.urgency_score}%</span>
+            </div>
+            <UrgencyBar score={opportunity.urgency_score} />
+          </div>
+          
+          {/* Signals */}
+          <div className="mt-4">
+            <p className="text-xs text-slate-500 uppercase tracking-wide mb-2">Why it's flagged</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              {opportunity.signals.map((sig, idx) => {
+                const Icon = SIGNAL_ICONS[sig.type] || AlertCircle
+                return (
+                  <div key={idx} className="flex items-start gap-2 bg-slate-900/50 rounded-lg p-2 border border-slate-700/50">
+                    <Icon className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
+                    <div className="min-w-0">
+                      <p className="text-sm text-slate-200 font-medium">{sig.label} <span className="text-slate-500">(+{sig.weight}%)</span></p>
+                      <p className="text-xs text-slate-500">{sig.reason}</p>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {broker.email && (
-                    <a 
-                      href={`mailto:${broker.email}`}
-                      className="flex items-center gap-1 text-xs px-3 py-1.5 rounded bg-accent-blue/10 text-accent-blue"
-                    >
-                      <Mail className="w-3 h-3" />
-                      {broker.email}
-                    </a>
-                  )}
-                  {broker.phone && (
-                    <a 
-                      href={`tel:${broker.phone}`}
-                      className="flex items-center gap-1 text-xs px-3 py-1.5 rounded bg-accent-green/10 text-accent-green"
-                    >
-                      <Phone className="w-3 h-3" />
-                      {broker.phone}
-                    </a>
-                  )}
-                </div>
+                )
+              })}
+            </div>
+          </div>
+          
+          {/* Property Details */}
+          <div className="mt-4 flex flex-wrap gap-4 text-sm">
+            {opportunity.sale_date && (
+              <div className="flex items-center gap-1.5 text-slate-400">
+                <Calendar className="w-4 h-4" />
+                <span>Sale: {opportunity.sale_date}</span>
               </div>
-            ))}
+            )}
+            {opportunity.interest_rate > 0 && (
+              <div className="flex items-center gap-1.5 text-slate-400">
+                <DollarSign className="w-4 h-4" />
+                <span>Rate: {opportunity.interest_rate}%</span>
+              </div>
+            )}
+            {opportunity.loan_principal > 0 && (
+              <div className="flex items-center gap-1.5 text-slate-400">
+                <Landmark className="w-4 h-4" />
+                <span>Loan: {formatCash(opportunity.loan_principal)}</span>
+              </div>
+            )}
+            {opportunity.due_date && (
+              <div className="flex items-center gap-1.5 text-slate-400">
+                <Clock className="w-4 h-4" />
+                <span>Due: {opportunity.due_date}</span>
+              </div>
+            )}
+          </div>
+          
+          {/* Quick Links */}
+          <div className="mt-4 pt-4 border-t border-slate-700/50 flex flex-wrap gap-2">
+            <a 
+              href={opportunity.quick_links.google}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-sm transition-colors"
+            >
+              <Search className="w-3.5 h-3.5" />
+              Google
+            </a>
+            <a 
+              href={opportunity.quick_links.google_maps}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-sm transition-colors"
+            >
+              <MapPin className="w-3.5 h-3.5" />
+              Maps
+            </a>
+            <a 
+              href={opportunity.quick_links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-sm transition-colors"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              LinkedIn
+            </a>
+            <a 
+              href={opportunity.quick_links.exec_search}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-sm transition-colors"
+            >
+              <Briefcase className="w-3.5 h-3.5" />
+              Exec Search
+            </a>
+            <a 
+              href={`/hotmoney`}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 text-indigo-300 text-sm transition-colors"
+            >
+              <ChevronRight className="w-3.5 h-3.5" />
+              View in Hot Money
+            </a>
           </div>
         </div>
       </div>

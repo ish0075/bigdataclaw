@@ -94,30 +94,46 @@ const MyListings = () => {
       
       <div className="space-y-6 animate-fade-in">
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-text-primary flex items-center gap-2">
-              <Building2 className="w-6 h-6 text-accent-red" />
-              My Listings
-            </h1>
-            <p className="text-text-secondary mt-1">
-              Manage your property listings and find matching buyers
-            </p>
+        <div className="space-y-4">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+                <Building2 className="w-6 h-6 text-rose-500" />
+                My Listings
+              </h1>
+              <p className="text-slate-400 mt-1">Manage your active commercial listings and run intelligence reports on each property.</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <button 
+                onClick={() => setView(view === 'grid' ? 'list' : 'grid')}
+                className="btn-secondary"
+              >
+                {view === 'grid' ? 'List View' : 'Grid View'}
+              </button>
+              <button 
+                onClick={() => setShowAddModal(true)}
+                className="btn-primary flex items-center gap-2"
+              >
+                <Plus className="w-4 h-4" />
+                Add Listing
+              </button>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <button 
-              onClick={() => setView(view === 'grid' ? 'list' : 'grid')}
-              className="btn-secondary"
-            >
-              {view === 'grid' ? 'List View' : 'Grid View'}
-            </button>
-            <button 
-              onClick={() => setShowAddModal(true)}
-              className="btn-primary flex items-center gap-2"
-            >
-              <Plus className="w-4 h-4" />
-              Add Listing
-            </button>
+          <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+            <ul className="space-y-2 text-sm text-slate-300">
+              <li className="flex items-start gap-2">
+                <span className="text-rose-500 mt-0.5">•</span>
+                <span>Add, edit, and track your portfolio of listings</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-rose-500 mt-0.5">•</span>
+                <span>Run buyer, agent, and lender matches per property</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-rose-500 mt-0.5">•</span>
+                <span>Generate Property Match reports for marketing</span>
+              </li>
+            </ul>
           </div>
         </div>
         

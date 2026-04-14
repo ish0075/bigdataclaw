@@ -526,20 +526,36 @@ const BuilderDirectory = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-text-primary flex items-center gap-2">
-            <HardHat className="w-6 h-6 text-accent-orange" />
-            Ontario Builder Directory
-          </h1>
-          <p className="text-text-secondary mt-1">
-            {stats.total.toLocaleString()} builders across {stats.regions} regions, {stats.cities} cities
-          </p>
+      <div className="space-y-4">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+              <HardHat className="w-6 h-6 text-amber-500" />
+              Builder Directory
+            </h1>
+            <p className="text-slate-400 mt-1">Browse Ontario builders, developers, and construction firms by region and project type.</p>
+          </div>
+          <button onClick={handleExport} className="btn-secondary flex items-center gap-2">
+            <Download className="w-4 h-4" />
+            Export CSV
+          </button>
         </div>
-        <button onClick={handleExport} className="btn-secondary flex items-center gap-2">
-          <Download className="w-4 h-4" />
-          Export CSV
-        </button>
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <ul className="space-y-2 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <span className="text-amber-500 mt-0.5">•</span>
+              <span>Search builders by city and trade specialization</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-amber-500 mt-0.5">•</span>
+              <span>View project history and development capacity</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-amber-500 mt-0.5">•</span>
+              <span>Generate quick-links for OSINT and contact research</span>
+            </li>
+          </ul>
+        </div>
       </div>
 
       {/* Stats */}

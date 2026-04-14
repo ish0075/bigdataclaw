@@ -1301,85 +1301,74 @@ const EXAgentRecruiterEnhanced = ({ initialViewMode = 'agents' }) => {
 
   return (
     <div className="space-y-6">
-      {/* Header - Dynamic based on view mode */}
-      <div className="flex items-center justify-between">
-        <div>
-          {viewMode === 'agents' ? (
-            <div>
-              {/* Line 1: Full count */}
-              <h1 className="text-2xl font-bold text-white">
-                96,265 Realtors Ontario</h1>
-              
-              {/* Line 2: Enhanced badge */}
-              <div className="mt-1">
-                <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-medium">
-                  Enhanced
-                </span>
+      {/* Header */}
+      <div className="space-y-4">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+              <Users className="w-6 h-6 text-emerald-500" />
+              EXP Agent Recruiter
+            </h1>
+            <p className="text-slate-400 mt-1">Search and recruit top-performing Ontario agents from a database of 96,000+ registrants.</p>
+          </div>
+          <div className="flex items-center gap-2">
+            {!useApi && viewMode === 'agents' && (
+              <div className="flex items-center gap-2 mr-4">
+                <button
+                  onClick={handleLoadSampleJson}
+                  disabled={jsonMode === 'sample'}
+                  className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+                    jsonMode === 'sample' 
+                      ? 'bg-blue-500 text-white' 
+                      : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  }`}
+                >
+                  Sample (500)
+                </button>
+                <button
+                  onClick={handleLoadFullJson}
+                  disabled={jsonMode === 'full'}
+                  className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+                    jsonMode === 'full' 
+                      ? 'bg-blue-500 text-white' 
+                      : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  }`}
+                >
+                  96,265 Realtors Ontario</button>
               </div>
-              
-              {/* Line 3: Sample info */}
-              <p className="text-slate-400 text-sm mt-1">
-                Sample: 500 displayed • 
-                <span className="text-amber-400 ml-1">EXP agents sorted last</span>
-              </p>
-              
-              {/* Sample count - moved to results section */}
-            </div>
-          ) : (
-            <div>
-              <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-                <Building className="w-6 h-6 text-purple-400" />
-                Brokerages Directory
-              </h1>
-              <p className="text-slate-400 mt-1">
-                {brokerageStats?.total_brokerages?.toLocaleString() || '3,884'} brokerages • 
-                <span className="text-purple-400 ml-1">{brokerageStats?.total_agents?.toLocaleString() || '95,891'} total agents</span>
-              </p>
-            </div>
-          )}
+            )}
+            {/* Quick Add New Agents Button */}
+            <QuickAddAgent
+              onSaveToObsidian={(name, content) => {
+                console.log("Saving to Obsidian:", name);
+                fetch("/api/obsidian/quick-link", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    title: `Agents/New/${name}`,
+                    content: content,
+                    folder: "Agents/New"
+                  })
+                });
+              }}
+            />
+          </div>
         </div>
-        
-        <div className="flex items-center gap-2">
-          {!useApi && viewMode === 'agents' && (
-            <div className="flex items-center gap-2 mr-4">
-              <button
-                onClick={handleLoadSampleJson}
-                disabled={jsonMode === 'sample'}
-                className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
-                  jsonMode === 'sample' 
-                    ? 'bg-blue-500 text-white' 
-                    : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
-                }`}
-              >
-                Sample (500)
-              </button>
-              <button
-                onClick={handleLoadFullJson}
-                disabled={jsonMode === 'full'}
-                className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
-                  jsonMode === 'full' 
-                    ? 'bg-blue-500 text-white' 
-                    : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
-                }`}
-              >
-                96,265 Realtors Ontario</button>
-            </div>
-          )}
-          {/* Quick Add New Agents Button */}
-          <QuickAddAgent
-            onSaveToObsidian={(name, content) => {
-              console.log("Saving to Obsidian:", name);
-              fetch("/api/obsidian/quick-link", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  title: `Agents/New/${name}`,
-                  content: content,
-                  folder: "Agents/New"
-                })
-              });
-            }}
-          />
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <ul className="space-y-2 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <span className="text-emerald-500 mt-0.5">•</span>
+              <span>Search by name, brokerage, city, or board</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-emerald-500 mt-0.5">•</span>
+              <span>View agent stats, contact info, and LinkedIn quick-links</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-emerald-500 mt-0.5">•</span>
+              <span>Track recruitment pipeline and outreach history</span>
+            </li>
+          </ul>
         </div>
       </div>
 

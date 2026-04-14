@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Bell, Settings, Wifi, WifiOff, Database } from 'lucide-react'
 import VoiceControl from '../System/VoiceControl'
 import UsageMeter from '../System/UsageMeter'
@@ -34,6 +34,7 @@ const routeToPageName = {
 
 const TopBar = ({ connected, globalSearch }) => {
   const location = useLocation()
+  const navigate = useNavigate()
   const currentPage = routeToPageName[location.pathname] || null
   
   const handleVoiceTranscript = (transcript) => {
@@ -43,17 +44,17 @@ const TopBar = ({ connected, globalSearch }) => {
     // Simple command routing
     const lower = transcript.toLowerCase()
     if (lower.includes('hot money')) {
-      window.location.href = '/hotmoney'
+      navigate('/hotmoney')
     } else if (lower.includes('research') || lower.includes('property')) {
-      window.location.href = '/research'
+      navigate('/research')
     } else if (lower.includes('deal') || lower.includes('pipeline')) {
-      window.location.href = '/pipeline'
+      navigate('/pipeline')
     } else if (lower.includes('agent')) {
-      window.location.href = '/agents'
+      navigate('/agents')
     } else if (lower.includes('builder')) {
-      window.location.href = '/builders'
+      navigate('/builders')
     } else if (lower.includes('lender')) {
-      window.location.href = '/lenders'
+      navigate('/lenders')
     }
   }
   

@@ -1,15 +1,41 @@
-import React from 'react'
-import { Play, Square, Pause, ScrollText, Settings } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import { Play, Square, Pause, ScrollText, Settings, ExternalLink } from 'lucide-react'
+import { useAgentStore } from '../../stores/agentStore'
 import AgentVisualTask from './AgentVisualTask'
 
-const AgentFleet = ({ agents }) => {
+const AgentFleet = ({ agents: propAgents }) => {
+  const { agents: storeAgents, loadStarOfficeAgents } = useAgentStore()
+  const [starOfficeUrl, setStarOfficeUrl] = useState('http://localhost:19000')
+  
+  // Use live agents if available, otherwise fall back to props
+  const agents = storeAgents.length > 0 ? storeAgents : (propAgents || [])
+  
+  useEffect(() => {
+    loadStarOfficeAgents()
+    const interval = setInterval(() => loadStarOfficeAgents(), 5000)
+    return () => clearInterval(interval)
+  }, [])
+  
+  useEffect(() => {
+    if (storeAgents[0]?.starOfficeUrl) {
+      setStarOfficeUrl(storeAgents[0].starOfficeUrl)
+    }
+  }, [storeAgents])
+
   return (
     <div className="card p-5">
       <div className="flex items-center justify-between mb-5">
-        <h3 className="text-lg font-semibold flex items-center gap-2">
-          <span>🤖</span>
-          Agent Fleet Status
-        </h3>
+        <div className="flex items-center gap-3">
+          <h3 className="text-lg font-semibold flex items-center gap-2">
+            <span>🤖</span>
+            Agent Fleet Status
+          </h3>
+          {storeAgents.length > 0 && (
+            <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs border border-emerald-500/20">
+              Live
+            </span>
+          )}
+        </div>
         <div className="flex items-center gap-4 text-sm text-text-muted">
           <span className="flex items-center gap-1.5">
             <div className="w-2 h-2 rounded-full bg-accent-green" />
@@ -23,6 +49,15 @@ const AgentFleet = ({ agents }) => {
             <div className="w-2 h-2 rounded-full bg-text-muted" />
             {agents.filter(a => a.status === 'idle').length} Idle
           </span>
+          <a
+            href={starOfficeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-xs px-2 py-1 rounded-lg bg-bg-card hover:bg-bg-input text-text-secondary hover:text-text-primary transition-colors"
+          >
+            <ExternalLink className="w-3 h-3" />
+            Star Office
+          </a>
         </div>
       </div>
       
@@ -107,34 +142,25 @@ const AgentCard = ({ agent }) => {
       {/* Stats */}
       <div className="mt-4 pt-3 border-t border-border-subtle">
         <div className="flex items-center justify-between text-xs text-text-muted">
-          {agent.status === 'active' && (
+          {agent.area ? (
+            <>
+              <span className="capitalize">Area: {agent.area.replace('_', ' ')}</span>
+              <span>{agent.status === 'active' ? 'Working' : 'Standby'}</span>
+            </>
+          ) : agent.status === 'active' ? (
             <>
               <span>Running: {agent.activeMissions} missions</span>
               <span>Completed: {agent.completedMissions}</span>
             </>
-          )}
-          {agent.status === 'idle' && (
+          ) : agent.status === 'idle' ? (
             <>
               <span>Ready to run</span>
               <span>Last: 2h ago</span>
             </>
-          )}
-          {agent.watchingCount && (
+          ) : (
             <>
-              <span>Watching: {agent.watchingCount} entities</span>
-              <span className="text-accent-red">{agent.alertCount} alerts</span>
-            </>
-          )}
-          {agent.pendingCount !== undefined && (
-            <>
-              <span>Pending: {agent.pendingCount} tasks</span>
-              <span>Avg: {agent.avgTime}</span>
-            </>
-          )}
-          {agent.lastSync && (
-            <>
-              <span>Synced: {agent.lastSync}</span>
-              <span>{agent.fileCount} files</span>
+              <span>Standby</span>
+              <span>—</span>
             </>
           )}
         </div>

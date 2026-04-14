@@ -2,6 +2,8 @@ import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, Network, Loader2 } from 'lucide-react'
 
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+
 export default function PaperclipOrgChart() {
   const { companyId } = useParams()
   const [svgUrl, setSvgUrl] = React.useState('')
@@ -12,7 +14,7 @@ export default function PaperclipOrgChart() {
     async function fetchSvg() {
       try {
         setLoading(true)
-        const res = await fetch(`/api/paperclip/companies/${companyId}/org-chart.svg`)
+        const res = await fetch(`${API_BASE}/api/paperclip/companies/${companyId}/org-chart.svg`)
         if (!res.ok) throw new Error('Failed to load org chart')
         const blob = await res.blob()
         setSvgUrl(URL.createObjectURL(blob))

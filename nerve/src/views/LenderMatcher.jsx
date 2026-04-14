@@ -177,20 +177,36 @@ const LenderMatcher = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-text-primary flex items-center gap-2">
-            <Building2 className="w-6 h-6 text-accent-green" />
-            Lender Matcher
-          </h1>
-          <p className="text-text-secondary mt-1">
-            {stats ? `${stats.total.toLocaleString()} lenders` : 'Loading...'} available for financing
-          </p>
+      <div className="space-y-4">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+              <Building2 className="w-6 h-6 text-emerald-500" />
+              Lender Matcher
+            </h1>
+            <p className="text-slate-400 mt-1">Connect properties and buyers with specialized commercial lenders across Ontario.</p>
+          </div>
+          <button className="btn-secondary flex items-center gap-2">
+            <Download className="w-4 h-4" />
+            Export CSV
+          </button>
         </div>
-        <button className="btn-secondary flex items-center gap-2">
-          <Download className="w-4 h-4" />
-          Export CSV
-        </button>
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <ul className="space-y-2 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <span className="text-emerald-500 mt-0.5">•</span>
+              <span>Filter 5,000+ lenders by asset-class specialization</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-emerald-500 mt-0.5">•</span>
+              <span>View lender notes, contact info, and territory coverage</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-emerald-500 mt-0.5">•</span>
+              <span>Match financing sources to distressed or high-value deals</span>
+            </li>
+          </ul>
+        </div>
       </div>
       
       {/* Stats Panel */}

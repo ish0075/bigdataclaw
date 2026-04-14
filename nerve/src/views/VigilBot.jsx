@@ -385,6 +385,30 @@ const VigilBot = () => {
 
   return (
     <div className="p-6 space-y-6">
+      {/* Descriptive Header */}
+      <div className="space-y-4">
+        <div>
+          <h1 className="text-3xl font-bold text-white">Virgil Monitor</h1>
+          <p className="text-slate-400 mt-1">24/7 automated surveillance of listings, transactions, and market anomalies.</p>
+        </div>
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-400 mt-0.5">•</span>
+              <span>Monitor new transactions and price changes in real time</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-400 mt-0.5">•</span>
+              <span>Get alerted to distressed signals and opportunistic deals</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-400 mt-0.5">•</span>
+              <span>Review flagged properties before they hit the open market</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
       {/* Vigil Bot Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">

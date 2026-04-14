@@ -1,42 +1,48 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Phone, ExternalLink, Flame, DollarSign } from 'lucide-react'
 
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+
 const HotMoneyRadar = ({ leads }) => {
-  const sampleLeads = [
-    {
-      id: '1',
-      entity: '2650687 Ontario Ltd',
-      cashAmount: 15000000,
-      saleDate: 'May 2025',
-      location: 'West Lincoln',
-      property: 'Thirty Rd',
-    },
-    {
-      id: '2',
-      entity: 'Turnberry Holdings Inc',
-      cashAmount: 9840000,
-      saleDate: 'Jan 2025',
-      location: 'Lincoln',
-      property: 'Multiple Properties',
-    },
-    {
-      id: '3',
-      entity: '1863570 Ontario Inc',
-      cashAmount: 7000000,
-      saleDate: 'Jan 2025',
-      location: 'Pelham',
-      property: '981 Pelham St',
-    },
-  ]
-  
-  const displayLeads = leads.length > 0 ? leads.slice(0, 3) : sampleLeads
-  
+  const [apiLeads, setApiLeads] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchLeads = async () => {
+      try {
+        const response = await fetch(`${API_BASE}/api/hotmoney?limit=5&days=90`)
+        if (!response.ok) throw new Error('Failed to fetch')
+        const data = await response.json()
+        const leadsArray = Array.isArray(data) ? data : (data.leads || [])
+        setApiLeads(leadsArray.map(lead => ({
+          id: String(lead.id),
+          entity: lead.entity,
+          cashAmount: lead.cash_amount,
+          saleDate: lead.sale_date,
+          location: lead.location,
+          property: lead.property,
+          daysAgo: lead.days_ago
+        })))
+      } catch (err) {
+        console.error('Error fetching hot money leads:', err)
+        setApiLeads([])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchLeads()
+  }, [])
+
+  const displayLeads = leads.length > 0 ? leads.slice(0, 3) : apiLeads.slice(0, 3)
+
   const formatCash = (amount) => {
     if (amount >= 1e6) return `$${(amount / 1e6).toFixed(1)}M`
     if (amount >= 1e3) return `$${(amount / 1e3).toFixed(0)}K`
     return `$${amount}`
   }
-  
+
   return (
     <div className="card p-5">
       <div className="flex items-center justify-between mb-5">
@@ -48,16 +54,26 @@ const HotMoneyRadar = ({ leads }) => {
           {displayLeads.length} new alerts
         </span>
       </div>
-      
+
       <div className="space-y-3">
-        {displayLeads.map((lead) => (
-          <HotMoneyCard key={lead.id} lead={lead} formatCash={formatCash} />
-        ))}
+        {loading ? (
+          <div className="p-4 text-center text-text-muted text-sm">
+            Loading hot money leads...
+          </div>
+        ) : displayLeads.length === 0 ? (
+          <div className="p-4 text-center text-text-muted text-sm">
+            No hot money leads in the last 90 days.
+          </div>
+        ) : (
+          displayLeads.map((lead) => (
+            <HotMoneyCard key={lead.id} lead={lead} formatCash={formatCash} />
+          ))
+        )}
       </div>
-      
-      <button className="w-full mt-4 py-2.5 text-sm text-accent-red hover:bg-accent-red/10 rounded-lg transition-colors font-medium">
+
+      <Link to="/hotmoney" className="block w-full mt-4 py-2.5 text-sm text-accent-red hover:bg-accent-red/10 rounded-lg transition-colors font-medium text-center">
         View All Hot Money Leads →
-      </button>
+      </Link>
     </div>
   )
 }
@@ -73,7 +89,7 @@ const HotMoneyCard = ({ lead, formatCash }) => (
           </div>
           <h4 className="font-medium text-text-primary">{lead.entity}</h4>
         </div>
-        
+
         <div className="flex items-center gap-4 mt-2">
           <div className="flex items-center gap-1.5 text-accent-red font-semibold">
             <DollarSign className="w-4 h-4" />
@@ -82,12 +98,12 @@ const HotMoneyCard = ({ lead, formatCash }) => (
           <span className="text-text-muted text-sm">•</span>
           <span className="text-text-secondary text-sm">{lead.saleDate}</span>
         </div>
-        
+
         <p className="text-xs text-text-muted mt-1">
           {lead.property} • {lead.location}
         </p>
       </div>
-      
+
       <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
         <button className="p-2 rounded-lg bg-accent-red text-white hover:bg-accent-red/90 transition-colors" title="Contact">
           <Phone className="w-4 h-4" />

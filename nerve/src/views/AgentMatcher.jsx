@@ -848,23 +848,41 @@ agent_count: ${agents.length}
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-text-primary flex items-center gap-2">
-            <UserCircle className="w-6 h-6 text-accent-blue" />
-            Agent Matcher
-          </h1>
-          <p className="text-text-secondary mt-1">Connect with top commercial real estate agents across Ontario</p>
+      <div className="space-y-4">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+              <UserCircle className="w-6 h-6 text-purple-500" />
+              Agent Matcher
+            </h1>
+            <p className="text-slate-400 mt-1">Find the right local agents to co-list, refer, or partner with on any property.</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <button onClick={handleExport} className="btn-secondary flex items-center gap-2">
+              <Download className="w-4 h-4" />
+              Export CSV
+            </button>
+            <button onClick={() => setShowObsidianExport(true)} className="btn-primary flex items-center gap-2">
+              <Database className="w-4 h-4" />
+              Export to Obsidian
+            </button>
+          </div>
         </div>
-        <div className="flex items-center gap-3">
-          <button onClick={handleExport} className="btn-secondary flex items-center gap-2">
-            <Download className="w-4 h-4" />
-            Export CSV
-          </button>
-          <button onClick={() => setShowObsidianExport(true)} className="btn-primary flex items-center gap-2">
-            <Database className="w-4 h-4" />
-            Export to Obsidian
-          </button>
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <ul className="space-y-2 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <span className="text-purple-500 mt-0.5">•</span>
+              <span>Search 96,000+ Ontario agents and recruiters</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-purple-500 mt-0.5">•</span>
+              <span>Filter by brokerage, city, and specialization</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-purple-500 mt-0.5">•</span>
+              <span>Export agent contact cards for partnership outreach</span>
+            </li>
+          </ul>
         </div>
       </div>
       

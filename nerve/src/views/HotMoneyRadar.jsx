@@ -6,38 +6,43 @@ import {
   Edit3, Save, Plus, Search, Mic, ClipboardPaste, Sparkles, UserCircle, FileText
 } from 'lucide-react'
 import VoiceInput from '../components/Common/VoiceInput'
+import OpenClawChatFloating from '../components/OpenClaw/OpenClawChatFloating'
 
-// Helper function to generate quick links for seller (hot money) and buyer
-const generateQuickLinks = (entityName, contactName = null, buyerEntity = null) => {
+// Helper to build a single entity's quick links
+const buildEntityLinks = (name) => {
+  if (!name) return null
+  const encoded = encodeURIComponent(name)
+  return {
+    google: `https://www.google.com/search?q=${encoded}`,
+    linkedin: `https://www.google.com/search?q=${encoded}+linkedin`,
+    linkedinCompany: `https://www.google.com/search?q=${encoded}+linkedin`,
+    linkedinPerson: `https://www.google.com/search?q=${encoded}+linkedin`,
+    facebook: `https://www.google.com/search?q=${encoded}+facebook`,
+    corporation: `https://www.google.com/search?q=${encoded}+corporation+canada`,
+    openCorporate: `https://opencorporates.com/companies?q=${encoded}`,
+    googleExec: `https://www.google.com/search?q=${encoded}+President+CEO`,
+  }
+}
+
+// Helper function to generate quick links for seller, buyer, broker, lender and contact
+const generateQuickLinks = (entityName, contactName = null, buyerEntity = null, brokerName = null, lenderName = null) => {
   if (!entityName) return null
   const encoded = encodeURIComponent(entityName)
   const encodedContact = contactName ? encodeURIComponent(contactName) : encoded
-  const encodedBuyer = buyerEntity ? encodeURIComponent(buyerEntity) : null
   
   return {
     // SELLER (Hot Money - Has the cash!)
-    seller: {
-      google: `https://www.google.com/search?q=${encoded}`,
-      linkedin: `https://www.google.com/search?q=${encoded}+linkedin`,
-      linkedinCompany: `https://www.linkedin.com/search/results/companies/?keywords=${encoded}`,
-      linkedinPerson: contactName ? `https://www.linkedin.com/search/results/people/?keywords=${encodedContact}` : null,
-      facebook: `https://www.facebook.com/search/pages?q=${encoded}`,
-      corporation: `https://www.google.com/search?q=${encoded}+corporation+canada`,
-      openCorporate: `https://opencorporates.com/companies?q=${encoded}`,
-    },
+    seller: buildEntityLinks(entityName),
     // BUYER (Purchased the property)
-    buyer: encodedBuyer ? {
-      google: `https://www.google.com/search?q=${encodedBuyer}`,
-      linkedin: `https://www.google.com/search?q=${encodedBuyer}+linkedin`,
-      linkedinCompany: `https://www.linkedin.com/search/results/companies/?keywords=${encodedBuyer}`,
-      facebook: `https://www.facebook.com/search/pages?q=${encodedBuyer}`,
-      corporation: `https://www.google.com/search?q=${encodedBuyer}+corporation+canada`,
-      openCorporate: `https://opencorporates.com/companies?q=${encodedBuyer}`,
-    } : null,
+    buyer: buildEntityLinks(buyerEntity),
+    // BROKER
+    broker: buildEntityLinks(brokerName),
+    // LENDER
+    lender: buildEntityLinks(lenderName),
     // Individual contact (if available)
     person: contactName ? {
       google: `https://www.google.com/search?q=${encodedContact}`,
-      linkedin: `https://www.linkedin.com/search/results/people/?keywords=${encodedContact}`,
+      linkedin: `https://www.google.com/search?q=${encodedContact}+linkedin`,
     } : null,
   }
 }
@@ -65,7 +70,68 @@ const parseNotesForContacts = (notes = '') => {
   return { contactName, buyerEntity }
 }
 
-const API_BASE = '/api'
+const API_BASE_CANDIDATES = Array.from(new Set([
+  import.meta.env.VITE_API_URL,
+  '/api',
+  'http://127.0.0.1:3090/api',
+  'http://localhost:3090/api',
+  'http://127.0.0.1:8000/api',
+  'http://localhost:8000/api',
+].filter(Boolean).map((value) => value.replace(/\/$/, ''))))
+
+let resolvedApiBase = null
+
+const shouldRetryWithNextApiBase = (message) => {
+  const normalized = message.toLowerCase()
+  return (
+    normalized.includes('failed to fetch') ||
+    normalized.includes('networkerror') ||
+    normalized.includes('file not found') ||
+    normalized.includes('cannot get') ||
+    normalized.includes('http 404') ||
+    normalized.includes('http 502') ||
+    normalized.includes('http 503')
+  )
+}
+
+const createHttpError = async (response) => {
+  let detail = ''
+  try {
+    const contentType = response.headers.get('content-type') || ''
+    if (contentType.includes('application/json')) {
+      const body = await response.json()
+      detail = body?.detail || body?.error || ''
+    } else {
+      detail = (await response.text()).trim()
+    }
+  } catch {
+    detail = ''
+  }
+
+  return new Error(detail ? `HTTP ${response.status}: ${detail}` : `HTTP ${response.status}: ${response.statusText}`)
+}
+
+const fetchApi = async (path, init) => {
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`
+  const candidates = resolvedApiBase ? [resolvedApiBase] : API_BASE_CANDIDATES
+  let lastError = null
+
+  for (const base of candidates) {
+    try {
+      const response = await fetch(`${base}${normalizedPath}`, init)
+      if (!response.ok) throw await createHttpError(response)
+      resolvedApiBase = base
+      return response
+    } catch (err) {
+      lastError = err
+      if (!shouldRetryWithNextApiBase(err instanceof Error ? err.message : String(err))) {
+        throw err
+      }
+    }
+  }
+
+  throw lastError || new Error('API unavailable')
+}
 
 // Helper to convert API snake_case to frontend camelCase
 const apiToFrontend = (lead) => {
@@ -86,12 +152,25 @@ const apiToFrontend = (lead) => {
     notes: notes,
     contacts: lead.contacts || [],
     contactName: contactName,
-    buyerEntity: buyerEntity,
-    quickLinks: generateQuickLinks(lead.entity, contactName, buyerEntity),
+    buyerEntity: buyerEntity || lead.buyer_name || null,
+    brokerName: lead.broker_name || null,
+    lenderName: lead.lender_name || null,
+    listingUrl: lead.listing_url || null,
+    matchedTransaction: lead.matched_transaction || null,
+    quickLinks: generateQuickLinks(lead.entity, contactName, buyerEntity || lead.buyer_name, lead.broker_name, lead.lender_name),
     enrichedData: lead.enriched_data || null,
     enrichmentStatus: lead.enrichment_status || '',
     enrichmentTimestamp: lead.enrichment_timestamp || '',
-    obsidianPath: lead.obsidian_path || ''
+    obsidianPath: lead.obsidian_path || '',
+    transactionId: lead.transaction_id || null,
+    legalDescription: lead.legal_description || '',
+    pin: lead.pin || '',
+    siteDescription: lead.site_description || '',
+    acreage: lead.acreage || null,
+    consideration: lead.consideration || '',
+    loanPrincipal: lead.loan_principal || null,
+    interestRate: lead.interest_rate || null,
+    dueDate: lead.due_date || ''
   }
 }
 
@@ -109,7 +188,19 @@ const frontendToApi = (lead) => ({
   address: lead.address,
   days_ago: lead.daysAgo,
   notes: lead.notes,
-  contacts: lead.contacts
+  contacts: lead.contacts,
+  buyer_name: lead.buyerEntity || lead.buyer_name || null,
+  broker_name: lead.brokerName || lead.broker_name || null,
+  lender_name: lead.lenderName || lead.lender_name || null,
+  listing_url: lead.listingUrl || null,
+  legal_description: lead.legalDescription || null,
+  pin: lead.pin || null,
+  site_description: lead.siteDescription || null,
+  acreage: lead.acreage || null,
+  consideration: lead.consideration || null,
+  loan_principal: lead.loanPrincipal || null,
+  interest_rate: lead.interestRate || null,
+  due_date: lead.dueDate || null
 })
 
 const HotMoneyRadar = () => {
@@ -130,6 +221,7 @@ const HotMoneyRadar = () => {
     location: '',
     daysAgo: 90
   })
+  const [sortBy, setSortBy] = useState('cashDesc')
   
   // Load leads from API
   useEffect(() => {
@@ -140,10 +232,9 @@ const HotMoneyRadar = () => {
     try {
       setLoading(true)
       setError(null)
-      const days = filters.daysAgo || 90
+      const daysParam = filters.daysAgo && filters.daysAgo !== 'all' ? `&days=${filters.daysAgo}` : ''
       console.log('Fetching hot money leads...')
-      const response = await fetch(`${API_BASE}/hotmoney?limit=200&days=${days}`)
-      if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      const response = await fetchApi(`/hotmoney?limit=500${daysParam}`)
       const data = await response.json()
       console.log('Received data:', data)
       // API returns array directly or {leads: []} - handle both
@@ -163,14 +254,13 @@ const HotMoneyRadar = () => {
   
   const allLeads = hotMoneyLeads.length > 0 ? hotMoneyLeads : leads
   
-  // Apply filters
+  // Apply filters and sorting
   const displayLeads = useMemo(() => {
-    return allLeads.filter(lead => {
+    const filtered = allLeads.filter(lead => {
       if (filters.propertyType !== 'all') {
         const pt = lead.propertyType || ''
         const ac = lead.assetClass || ''
         const filterVal = filters.propertyType
-        // Match either propertyType or assetClass (partial match supported)
         const matchesType = pt === filterVal || ac === filterVal || pt.includes(filterVal) || ac.includes(filterVal)
         if (!matchesType) return false
       }
@@ -179,7 +269,39 @@ const HotMoneyRadar = () => {
       if (filters.location && !lead.location.toLowerCase().includes(filters.location.toLowerCase())) return false
       return true
     })
-  }, [allLeads, filters])
+    
+    // Sort
+    const sorted = [...filtered]
+    switch (sortBy) {
+      case 'cashDesc':
+        sorted.sort((a, b) => (b.cashAmount || 0) - (a.cashAmount || 0))
+        break
+      case 'cashAsc':
+        sorted.sort((a, b) => (a.cashAmount || 0) - (b.cashAmount || 0))
+        break
+      case 'dateNewest':
+        sorted.sort((a, b) => (b.daysAgo || 0) - (a.daysAgo || 0))
+        break
+      case 'dateOldest':
+        sorted.sort((a, b) => (a.daysAgo || 0) - (b.daysAgo || 0))
+        break
+      case 'matchScore':
+        sorted.sort((a, b) => (b.matchScore || 0) - (a.matchScore || 0))
+        break
+      case 'assetClass':
+        sorted.sort((a, b) => {
+          const aClass = (a.assetClass || a.propertyType || '').toLowerCase()
+          const bClass = (b.assetClass || b.propertyType || '').toLowerCase()
+          if (aClass < bClass) return -1
+          if (aClass > bClass) return 1
+          return (b.cashAmount || 0) - (a.cashAmount || 0)
+        })
+        break
+      default:
+        break
+    }
+    return sorted
+  }, [allLeads, filters, sortBy])
   
   const formatCash = (amount) => {
     if (amount >= 1e6) return `$${(amount / 1e6).toFixed(1)}M`
@@ -201,16 +323,14 @@ const HotMoneyRadar = () => {
   const handleSaveEdit = async (updatedLead) => {
     try {
       const apiLead = frontendToApi(updatedLead)
-      const response = await fetch(`${API_BASE}/hotmoney/${updatedLead.id}`, {
+      const response = await fetchApi(`/hotmoney/${updatedLead.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(apiLead)
       })
-      
-      if (!response.ok) throw new Error('Failed to save lead')
-      
+
       // Refresh leads from API and update selected lead
-      const refreshed = await fetch(`${API_BASE}/hotmoney/${updatedLead.id}`)
+      const refreshed = await fetchApi(`/hotmoney/${updatedLead.id}`)
       const savedData = await refreshed.json()
       const savedLead = apiToFrontend(savedData)
       
@@ -226,11 +346,10 @@ const HotMoneyRadar = () => {
 
   const handleEnrich = async (leadId) => {
     try {
-      const response = await fetch(`${API_BASE}/hotmoney/${leadId}/enrich`, {
+      await fetchApi(`/hotmoney/${leadId}/enrich`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       })
-      if (!response.ok) throw new Error('Failed to start enrichment')
       
       // Optimistically update status
       setLeads(prev => prev.map(l => l.id === String(leadId) ? {...l, enrichmentStatus: 'running'} : l))
@@ -249,12 +368,11 @@ const HotMoneyRadar = () => {
     e?.stopPropagation()
     e?.preventDefault()
     try {
-      const response = await fetch(`${API_BASE}/paperclip/hot-money-missions`, {
+      const response = await fetchApi(`/paperclip/hot-money-missions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ lead: frontendToApi(lead) })
       })
-      if (!response.ok) throw new Error('Failed to create Paperclip mission')
       const data = await response.json()
       alert(`Paperclip company created: ${data.name}`)
       // Open the company in a new tab
@@ -266,6 +384,16 @@ const HotMoneyRadar = () => {
   }
   
   const totalCapital = displayLeads.reduce((sum, l) => sum + (l.cashAmount || 0), 0)
+  
+  // Asset class counts based on current fetched leads (respects days filter)
+  const assetClassCounts = useMemo(() => {
+    const counts = {}
+    allLeads.forEach(lead => {
+      const ac = lead.assetClass || lead.propertyType || 'Unknown'
+      counts[ac] = (counts[ac] || 0) + 1
+    })
+    return counts
+  }, [allLeads])
   
   return (
     <>
@@ -294,7 +422,7 @@ const HotMoneyRadar = () => {
           }}
           onEnrich={handleEnrich}
           onRefreshLead={async (leadId) => {
-            const refreshed = await fetch(`${API_BASE}/hotmoney/${leadId}`)
+            const refreshed = await fetchApi(`/hotmoney/${leadId}`)
             const savedData = await refreshed.json()
             const savedLead = apiToFrontend(savedData)
             setLeads(prev => prev.map(l => l.id === leadId ? savedLead : l))
@@ -319,46 +447,62 @@ const HotMoneyRadar = () => {
       
       <div className="space-y-6 animate-fade-in">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Flame className="w-6 h-6 text-red-500" />
-            Who's got the money? Hot money radar
-          </h1>
-          <p className="text-slate-400 mt-1">
-            {displayLeads.length} leads with {formatCash(totalCapital)} in fresh capital • Recently sold
-          </p>
+      <div className="space-y-4">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+              <Flame className="w-6 h-6 text-red-500" />
+              Hot Money Radar
+            </h1>
+            <p className="text-slate-400 mt-1">Track active capital, cash-rich buyers, and incoming investment flows in real time.</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setShowPasteModal(true)}
+              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-white text-sm font-medium flex items-center gap-2 transition-colors"
+            >
+              <ClipboardPaste className="w-4 h-4" />
+              Paste Deal
+            </button>
+            <button 
+              onClick={fetchLeads}
+              disabled={loading}
+              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 rounded-lg text-slate-300 text-sm font-medium flex items-center gap-2 transition-colors"
+              title="Refresh from database"
+            >
+              <svg className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Refresh
+            </button>
+            <button 
+              onClick={() => setShowFilterModal(true)}
+              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 text-sm font-medium flex items-center gap-2 transition-colors"
+            >
+              <Filter className="w-4 h-4" />
+              Filter
+              {Object.values(filters).some(v => v && v !== 'all') && (
+                <span className="w-2 h-2 rounded-full bg-red-500"></span>
+              )}
+            </button>
+            <ExportButton leads={displayLeads} />
+          </div>
         </div>
-        <div className="flex items-center gap-3">
-          <button 
-            onClick={() => setShowPasteModal(true)}
-            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-white text-sm font-medium flex items-center gap-2 transition-colors"
-          >
-            <ClipboardPaste className="w-4 h-4" />
-            Paste Deal
-          </button>
-          <button 
-            onClick={fetchLeads}
-            disabled={loading}
-            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 rounded-lg text-slate-300 text-sm font-medium flex items-center gap-2 transition-colors"
-            title="Refresh from database"
-          >
-            <svg className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
-            Refresh
-          </button>
-          <button 
-            onClick={() => setShowFilterModal(true)}
-            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 text-sm font-medium flex items-center gap-2 transition-colors"
-          >
-            <Filter className="w-4 h-4" />
-            Filter
-            {Object.values(filters).some(v => v && v !== 'all') && (
-              <span className="w-2 h-2 rounded-full bg-red-500"></span>
-            )}
-          </button>
-          <ExportButton leads={displayLeads} />
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <ul className="space-y-2 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <span className="text-red-500 mt-0.5">•</span>
+              <span>Monitor high-value transactions and capital movements</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-red-500 mt-0.5">•</span>
+              <span>Identify cash buyers and recent large acquisitions</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-red-500 mt-0.5">•</span>
+              <span>Export Hot Money leads for immediate outreach</span>
+            </li>
+          </ul>
         </div>
       </div>
       
@@ -441,35 +585,58 @@ const HotMoneyRadar = () => {
           <div className="flex flex-wrap gap-2">
             {/* Time Range Toggles */}
             <div className="flex items-center bg-slate-900/50 rounded-lg border border-slate-700 overflow-hidden">
-              {[30, 60, 90].map((days) => (
+              {[['30', '30D'], ['60', '60D'], ['90', '90D'], ['all', 'All']].map(([value, label]) => (
                 <button
-                  key={days}
-                  onClick={() => setFilters({...filters, daysAgo: days})}
+                  key={value}
+                  onClick={() => setFilters({...filters, daysAgo: value})}
                   className={`px-3 py-2 text-sm font-medium transition-colors ${
-                    filters.daysAgo === days
+                    filters.daysAgo === value
                       ? 'bg-red-600 text-white'
                       : 'text-slate-300 hover:bg-slate-800'
                   }`}
                 >
-                  {days}D
+                  {label}
                 </button>
               ))}
             </div>
             
-            <select
-              value={filters.propertyType}
-              onChange={(e) => setFilters({...filters, propertyType: e.target.value})}
-              className="px-4 py-2 bg-slate-900/50 border border-slate-700 rounded-lg text-slate-200 focus:outline-none focus:border-red-500"
-            >
-              <option value="all">All Asset Classes</option>
-              <option value="Industrial">Industrial</option>
-              <option value="Retail">Retail</option>
-              <option value="Office">Office</option>
-              <option value="Multi-Family">Multi-Family</option>
-              <option value="Agricultural">Agricultural</option>
-              <option value="Land">Land</option>
-              <option value="Mixed-Use">Mixed-Use</option>
-            </select>
+            {/* Asset Class Filter Buttons */}
+            <div className="flex flex-wrap gap-1.5">
+              {[
+                { value: 'all', label: 'All', color: 'slate' },
+                { value: 'Agricultural', label: '🌾 Agricultural', color: 'green' },
+                { value: 'Commercial', label: '🏛️ Commercial', color: 'indigo' },
+                { value: 'Development Land', label: '🚜 Dev Land', color: 'lime' },
+                { value: 'Healthcare', label: '🏥 Healthcare', color: 'teal' },
+                { value: 'Hotel', label: '🏨 Hotel', color: 'rose' },
+                { value: 'Industrial', label: '🏭 Industrial', color: 'blue' },
+                { value: 'Land', label: '🌲 Land', color: 'orange' },
+                { value: 'Multifamily', label: '🏠 Multifamily', color: 'amber' },
+                { value: 'Office', label: '🏢 Office', color: 'purple' },
+                { value: 'Retail', label: '🏪 Retail', color: 'emerald' },
+                { value: 'Senior Living', label: '👴 Senior Living', color: 'cyan' },
+                { value: 'Unknown', label: '❓ Unknown', color: 'gray' },
+              ].map((btn) => {
+                const isActive = filters.propertyType === btn.value || (filters.propertyType === '' && btn.value === 'all')
+                const count = btn.value === 'all' ? allLeads.length : (assetClassCounts[btn.value] || 0)
+                return (
+                  <button
+                    key={btn.value}
+                    onClick={() => setFilters({...filters, propertyType: btn.value})}
+                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-all border flex items-center gap-2 ${
+                      isActive
+                        ? `bg-${btn.color}-600 text-white border-${btn.color}-500 shadow-lg shadow-${btn.color}-500/20`
+                        : 'bg-slate-900/50 text-slate-300 border-slate-700 hover:bg-slate-800'
+                    }`}
+                  >
+                    <span>{btn.label}</span>
+                    <span className={`px-1.5 py-0.5 rounded text-xs ${isActive ? 'bg-white/20' : 'bg-slate-700 text-slate-400'}`}>
+                      {count}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
           </div>
         </div>
       </div>
@@ -481,10 +648,17 @@ const HotMoneyRadar = () => {
             <h3 className="font-semibold text-white">Hot Money Leads</h3>
             <div className="flex items-center gap-2 text-sm text-slate-400">
               <span>Sorted by:</span>
-              <select className="bg-slate-900/50 border border-slate-700 rounded px-2 py-1 text-slate-200">
-                <option>Cash Amount (High → Low)</option>
-                <option>Date (Newest)</option>
-                <option>Match Score</option>
+              <select 
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="bg-slate-900/50 border border-slate-700 rounded px-2 py-1 text-slate-200"
+              >
+                <option value="cashDesc">Cash Amount (High → Low)</option>
+                <option value="cashAsc">Cash Amount (Low → High)</option>
+                <option value="dateNewest">Date (Newest)</option>
+                <option value="dateOldest">Date (Oldest)</option>
+                <option value="matchScore">Match Score</option>
+                <option value="assetClass">Asset Class (A → Z)</option>
               </select>
             </div>
           </div>
@@ -525,6 +699,7 @@ const HotMoneyRadar = () => {
         </div>
       </div>
     </div>
+    <OpenClawChatFloating dealContext={selectedLead} />
     </>
   )
 }
@@ -549,7 +724,7 @@ const LeadDetailModal = ({ lead, onClose, onEdit, editingLead, onSave, formatCas
   const loadMatches = async () => {
     setLoadingMatches(true)
     try {
-      const response = await fetch(`${API_BASE}/hotmoney/${lead.id}/matches`)
+      const response = await fetchApi(`/hotmoney/${lead.id}/matches`)
       if (response.ok) {
         const data = await response.json()
         setMatches(data.matches || [])
@@ -572,19 +747,13 @@ const LeadDetailModal = ({ lead, onClose, onEdit, editingLead, onSave, formatCas
     console.log('Pulling profile for:', lead.entity)
     setPullingProfile(true)
     try {
-      const response = await fetch(`${API_BASE}/llm/pull-profile`, {
+      const response = await fetchApi('/llm/pull-profile', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ entity: lead.entity })
       })
-      
+
       console.log('Response status:', response.status)
-      
-      if (!response.ok) {
-        const errorText = await response.text()
-        console.error('Error response:', errorText)
-        throw new Error('Failed to pull profile: ' + errorText)
-      }
       
       const data = await response.json()
       console.log('Profile data received:', data)
@@ -602,7 +771,7 @@ const LeadDetailModal = ({ lead, onClose, onEdit, editingLead, onSave, formatCas
     if (!profileData) return
     
     try {
-      await fetch(`${API_BASE}/obsidian/quick-link`, {
+      await fetchApi('/obsidian/quick-link', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -716,7 +885,7 @@ ${lead.notes || 'No notes yet.'}
           <div className="flex items-center gap-2">
             {!isEditing && (
               <button
-                onClick={() => setEditingLead({...lead})}
+                onClick={onEdit}
                 className="px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium flex items-center gap-2 transition-colors"
               >
                 <Edit3 className="w-4 h-4" />
@@ -762,24 +931,36 @@ ${lead.notes || 'No notes yet.'}
             )}
           </div>
           
-          {/* Property Sold Section */}
+          {/* Property / Deal Section */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-white flex items-center gap-2">
               <Building className="w-5 h-5 text-blue-400" />
-              Property Sold
+              Property & Deal
             </h3>
             
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-slate-800/50 rounded-lg p-4">
                 <p className="text-slate-400 text-sm mb-1">Asset Class</p>
                 {isEditing ? (
-                  <input
-                    type="text"
-                    value={data.assetClass || ''}
+                  <select
+                    value={data.assetClass || data.propertyType || ''}
                     onChange={(e) => handleChange('assetClass', e.target.value)}
                     className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-full"
-                    placeholder="e.g. Industrial Warehouse"
-                  />
+                  >
+                    <option value="">Select asset class...</option>
+                    <option value="Industrial">Industrial</option>
+                    <option value="Industrial Warehouse">Industrial Warehouse</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Office">Office</option>
+                    <option value="Multi-Family">Multi-Family</option>
+                    <option value="Agricultural">Agricultural</option>
+                    <option value="Land">Land</option>
+                    <option value="Mixed-Use">Mixed-Use</option>
+                    <option value="Hotel">Hotel</option>
+                    <option value="Senior Living">Senior Living</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Self-Storage">Self-Storage</option>
+                  </select>
                 ) : (
                   <p className="text-white font-medium">
                     {onFilterByAssetClass && (data.assetClass || data.propertyType) ? (
@@ -792,7 +973,7 @@ ${lead.notes || 'No notes yet.'}
                         {data.assetClass || data.propertyType}
                       </button>
                     ) : (
-                      <span>{data.assetClass || data.propertyType}</span>
+                      <span className="text-slate-500">Not classified</span>
                     )}
                   </p>
                 )}
@@ -802,7 +983,7 @@ ${lead.notes || 'No notes yet.'}
                 <p className="text-slate-400 text-sm mb-1">Property Type</p>
                 {isEditing ? (
                   <select
-                    value={data.propertyType}
+                    value={data.propertyType || ''}
                     onChange={(e) => handleChange('propertyType', e.target.value)}
                     className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-full"
                   >
@@ -831,7 +1012,31 @@ ${lead.notes || 'No notes yet.'}
                   placeholder="Full property address"
                 />
               ) : (
-                <p className="text-white font-medium">{data.address || data.property}</p>
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <p className="text-white font-medium">{data.address || data.property}</p>
+                  {(data.address || data.property) && (
+                    <div className="flex items-center gap-2">
+                      <a
+                        href={`https://www.google.com/search?q=${encodeURIComponent((data.address || data.property || '') + ' loopnet')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-300 border border-slate-600 rounded-lg text-sm flex items-center gap-1.5 transition-colors"
+                      >
+                        <Search className="w-4 h-4" />
+                        Search
+                      </a>
+                      <a
+                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.address || data.property)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-600/30 rounded-lg text-sm flex items-center gap-1.5 transition-colors"
+                      >
+                        <MapPin className="w-4 h-4" />
+                        Maps
+                      </a>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
             
@@ -864,7 +1069,260 @@ ${lead.notes || 'No notes yet.'}
                 )}
               </div>
             </div>
+            
+            {/* Matched Transaction from DB */}
+            {data.matchedTransaction && (
+              <div className="bg-emerald-900/20 border border-emerald-700/30 rounded-lg p-4">
+                <p className="text-emerald-400 text-sm font-medium mb-2 flex items-center gap-2">
+                  <FileText className="w-4 h-4" />
+                  Matched Transaction in Database
+                </p>
+                <div className="grid grid-cols-2 gap-3 text-sm">
+                  <div>
+                    <span className="text-slate-500">Sale Price:</span>
+                    <span className="text-slate-200 ml-1">${data.matchedTransaction.sale_price?.toLocaleString()}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-500">Date:</span>
+                    <span className="text-slate-200 ml-1">{data.matchedTransaction.sale_date}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-500">Buyer:</span>
+                    <span className="text-slate-200 ml-1">{data.matchedTransaction.buyer_name || 'Unknown'}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-500">Seller:</span>
+                    <span className="text-slate-200 ml-1">{data.matchedTransaction.seller_name || 'Unknown'}</span>
+                  </div>
+                  {data.matchedTransaction.chargee && (
+                    <div className="col-span-2">
+                      <span className="text-slate-500">Lender:</span>
+                      <span className="text-slate-200 ml-1">{data.matchedTransaction.chargee}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
+          
+          {/* Property Details Section */}
+          {!isEditing && (data.legalDescription || data.pin || data.siteDescription || data.acreage || data.listingUrl) && (
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                <FileText className="w-5 h-5 text-cyan-400" />
+                Property Details
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {data.legalDescription && (
+                  <div className="bg-slate-800/50 rounded-lg p-4 md:col-span-2">
+                    <p className="text-slate-400 text-sm mb-1">Legal Description</p>
+                    <p className="text-white font-medium whitespace-pre-line">{data.legalDescription}</p>
+                  </div>
+                )}
+                {data.pin && (
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="text-slate-400 text-sm mb-1">PIN</p>
+                    <p className="text-white font-medium font-mono">{data.pin}</p>
+                  </div>
+                )}
+                {data.siteDescription && (
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="text-slate-400 text-sm mb-1">Site Description</p>
+                    <p className="text-white font-medium">{data.siteDescription}</p>
+                  </div>
+                )}
+                {data.acreage > 0 && (
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="text-slate-400 text-sm mb-1">Acreage</p>
+                    <p className="text-white font-medium">{data.acreage.toFixed(2)} acres</p>
+                  </div>
+                )}
+                {(data.listingUrl || isEditing) && (
+                  <div className={`rounded-lg p-4 md:col-span-2 ${data.listingUrl ? 'bg-emerald-900/20 border border-emerald-700/30' : 'bg-slate-800/50'}`}>
+                    <p className={`text-sm mb-1 flex items-center gap-2 ${data.listingUrl ? 'text-emerald-400' : 'text-slate-400'}`}>
+                      <ExternalLink className="w-4 h-4" />
+                      Listing URL
+                    </p>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        value={data.listingUrl || ''}
+                        onChange={(e) => handleChange('listingUrl', e.target.value)}
+                        className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-full"
+                        placeholder="https://www.loopnet.com/..."
+                      />
+                    ) : (
+                      <a
+                        href={data.listingUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white font-medium hover:text-emerald-300 underline underline-offset-4 break-all"
+                      >
+                        {data.listingUrl}
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+          
+          {/* Deal Parties Section */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+              <UserCircle className="w-5 h-5 text-emerald-400" />
+              Deal Parties
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* SELLER CARD */}
+              <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-xs text-amber-400 uppercase tracking-wider font-semibold flex items-center gap-1">
+                    <span className="text-lg">💰</span> Seller (Hot Money)
+                  </p>
+                </div>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    value={data.entity || ''}
+                    onChange={(e) => handleChange('entity', e.target.value)}
+                    className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-full"
+                  />
+                ) : (
+                  <p className="text-white font-medium">{data.entity}</p>
+                )}
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent(data.entity)}`} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300">Google</a>
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent(data.entity)}+linkedin`} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-blue-900/30 hover:bg-blue-900/50 rounded text-xs text-blue-300">LinkedIn</a>
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent(data.entity)}+President+CEO`} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-amber-900/30 hover:bg-amber-900/50 rounded text-xs text-amber-300">Exec Search</a>
+                </div>
+              </div>
+              
+              {/* BUYER CARD */}
+              <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-xs text-blue-400 uppercase tracking-wider font-semibold flex items-center gap-1">
+                    <span className="text-lg">🏢</span> Buyer
+                  </p>
+                </div>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    value={data.buyerEntity || ''}
+                    onChange={(e) => handleChange('buyerEntity', e.target.value)}
+                    className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-full"
+                    placeholder="e.g. 1234567 Ontario Inc"
+                  />
+                ) : (
+                  <p className="text-white font-medium">{data.buyerEntity || <span className="text-slate-500 italic">No buyer recorded</span>}</p>
+                )}
+                {data.buyerEntity && !isEditing && (
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    <a href={`https://www.google.com/search?q=${encodeURIComponent(data.buyerEntity)}`} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300">Google</a>
+                    <a href={`https://www.google.com/search?q=${encodeURIComponent(data.buyerEntity)}+linkedin`} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-blue-900/30 hover:bg-blue-900/50 rounded text-xs text-blue-300">LinkedIn</a>
+                    <a href={`https://www.google.com/search?q=${encodeURIComponent(data.buyerEntity)}+President+CEO`} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-amber-900/30 hover:bg-amber-900/50 rounded text-xs text-amber-300">Exec Search</a>
+                  </div>
+                )}
+              </div>
+              
+              {/* BROKER CARD */}
+              <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-xs text-purple-400 uppercase tracking-wider font-semibold flex items-center gap-1">
+                    <span className="text-lg">🤝</span> Broker
+                  </p>
+                </div>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    value={data.brokerName || ''}
+                    onChange={(e) => handleChange('brokerName', e.target.value)}
+                    className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-full"
+                    placeholder="e.g. Colliers International"
+                  />
+                ) : (
+                  <p className="text-white font-medium">{data.brokerName || <span className="text-slate-500 italic">No broker recorded</span>}</p>
+                )}
+                {data.brokerName && !isEditing && data.quickLinks?.broker && (
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    <a href={data.quickLinks.broker.google} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300">Google</a>
+                    <a href={data.quickLinks.broker.linkedinCompany} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-blue-900/30 hover:bg-blue-900/50 rounded text-xs text-blue-300">LinkedIn</a>
+                    <a href={data.quickLinks.broker.googleExec} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-amber-900/30 hover:bg-amber-900/50 rounded text-xs text-amber-300">Exec Search</a>
+                    <a href={data.quickLinks.broker.facebook} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-indigo-900/30 hover:bg-indigo-900/50 rounded text-xs text-indigo-300">Facebook</a>
+                    <a href={data.quickLinks.broker.openCorporate} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-emerald-900/30 hover:bg-emerald-900/50 rounded text-xs text-emerald-300">Corp Registry</a>
+                  </div>
+                )}
+              </div>
+              
+              {/* LENDER CARD */}
+              <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-xs text-emerald-400 uppercase tracking-wider font-semibold flex items-center gap-1">
+                    <span className="text-lg">🏦</span> Lender
+                  </p>
+                </div>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    value={data.lenderName || ''}
+                    onChange={(e) => handleChange('lenderName', e.target.value)}
+                    className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-full"
+                    placeholder="e.g. RBC Commercial Banking"
+                  />
+                ) : (
+                  <p className="text-white font-medium">{data.lenderName || <span className="text-slate-500 italic">No lender recorded</span>}</p>
+                )}
+                {data.lenderName && !isEditing && data.quickLinks?.lender && (
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    <a href={data.quickLinks.lender.google} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300">Google</a>
+                    <a href={data.quickLinks.lender.linkedinCompany} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-blue-900/30 hover:bg-blue-900/50 rounded text-xs text-blue-300">LinkedIn</a>
+                    <a href={data.quickLinks.lender.googleExec} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-amber-900/30 hover:bg-amber-900/50 rounded text-xs text-amber-300">Exec Search</a>
+                    <a href={data.quickLinks.lender.facebook} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-indigo-900/30 hover:bg-indigo-900/50 rounded text-xs text-indigo-300">Facebook</a>
+                    <a href={data.quickLinks.lender.openCorporate} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-emerald-900/30 hover:bg-emerald-900/50 rounded text-xs text-emerald-300">Corp Registry</a>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          
+          {/* Lender Terms Section */}
+          {!isEditing && (data.consideration || data.loanPrincipal || data.interestRate || data.dueDate) && (
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                <DollarSign className="w-5 h-5 text-emerald-400" />
+                Lender Terms
+              </h3>
+              <div className="bg-emerald-900/10 border border-emerald-700/20 rounded-xl p-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {data.consideration && (
+                    <div className="md:col-span-2">
+                      <p className="text-slate-400 text-sm mb-1">Consideration</p>
+                      <p className="text-white font-medium whitespace-pre-line">{data.consideration}</p>
+                    </div>
+                  )}
+                  {data.loanPrincipal > 0 && (
+                    <div className="bg-slate-900/30 rounded-lg p-3">
+                      <p className="text-slate-400 text-sm mb-1">Loan Principal</p>
+                      <p className="text-emerald-400 font-medium">${data.loanPrincipal.toLocaleString()}</p>
+                    </div>
+                  )}
+                  {data.interestRate > 0 && (
+                    <div className="bg-slate-900/30 rounded-lg p-3">
+                      <p className="text-slate-400 text-sm mb-1">Interest Rate</p>
+                      <p className="text-emerald-400 font-medium">{data.interestRate}%</p>
+                    </div>
+                  )}
+                  {data.dueDate && (
+                    <div className="bg-slate-900/30 rounded-lg p-3">
+                      <p className="text-slate-400 text-sm mb-1">Due Date</p>
+                      <p className="text-white font-medium">{data.dueDate}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
           
           {/* Property Enrichment Section */}
           {!isEditing && (
@@ -997,19 +1455,9 @@ ${lead.notes || 'No notes yet.'}
                     <div>
                       <h4 className="text-sm font-medium text-slate-400 mb-2">Research Links</h4>
                       <div className="flex flex-wrap gap-2">
-                        {data.enrichedData.listing_research.google_search && (
-                          <a href={data.enrichedData.listing_research.google_search} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded text-xs text-slate-300 flex items-center gap-1.5">
-                            <Search className="w-3.5 h-3.5" /> Google
-                          </a>
-                        )}
-                        {data.enrichedData.listing_research.loopnet_search && (
-                          <a href={data.enrichedData.listing_research.loopnet_search} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-blue-900/20 hover:bg-blue-900/40 border border-blue-700/30 rounded text-xs text-blue-300 flex items-center gap-1.5">
-                            <Building className="w-3.5 h-3.5" /> LoopNet
-                          </a>
-                        )}
-                        {data.enrichedData.listing_research.realtor_ca_search && (
-                          <a href={data.enrichedData.listing_research.realtor_ca_search} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-emerald-900/20 hover:bg-emerald-900/40 border border-emerald-700/30 rounded text-xs text-emerald-300 flex items-center gap-1.5">
-                            <Home className="w-3.5 h-3.5" /> Realtor.ca
+                        {(data.address || data.property) && (
+                          <a href={`https://www.google.com/search?q=${encodeURIComponent((data.address || data.property || '') + ' loopnet')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded text-xs text-slate-300 flex items-center gap-1.5">
+                            <Search className="w-3.5 h-3.5" /> Google + LoopNet
                           </a>
                         )}
                         {data.enrichedData.listing_research.mpac_search && (
@@ -1210,16 +1658,25 @@ ${lead.notes || 'No notes yet.'}
                     Google
                   </a>
                   <a
-                    href={`https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(data.entity)}`}
+                    href={`https://www.google.com/search?q=${encodeURIComponent(data.entity)}+linkedin`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-3 py-2 bg-amber-900/30 hover:bg-amber-900/50 text-amber-300 border border-amber-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
                   >
                     <Building className="w-4 h-4" />
-                    LinkedIn Co
+                    LinkedIn
                   </a>
                   <a
-                    href={`https://www.facebook.com/search/pages?q=${encodeURIComponent(data.entity)}`}
+                    href={`https://www.google.com/search?q=${encodeURIComponent(data.entity)}+President+CEO`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-2 bg-amber-900/30 hover:bg-amber-900/50 text-amber-300 border border-amber-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                  >
+                    <Search className="w-4 h-4" />
+                    Exec Search
+                  </a>
+                  <a
+                    href={`https://www.google.com/search?q=${encodeURIComponent(data.entity)}+facebook`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-3 py-2 bg-indigo-900/30 hover:bg-indigo-900/50 text-indigo-300 border border-indigo-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
@@ -1266,13 +1723,154 @@ ${lead.notes || 'No notes yet.'}
                       Google
                     </a>
                     <a
-                      href={`https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(data.buyerEntity || data.contacts.find(c => c.type === 'company').value)}`}
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.buyerEntity || data.contacts.find(c => c.type === 'company').value)}+linkedin`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-3 py-2 bg-blue-900/30 hover:bg-blue-900/50 text-blue-300 border border-blue-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
                     >
                       <Building className="w-4 h-4" />
                       LinkedIn
+                    </a>
+                    <a
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.buyerEntity || data.contacts.find(c => c.type === 'company').value)}+President+CEO`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-blue-900/30 hover:bg-blue-900/50 text-blue-300 border border-blue-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <Search className="w-4 h-4" />
+                      Exec Search
+                    </a>
+                    <a
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.buyerEntity || data.contacts.find(c => c.type === 'company').value)}+facebook`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-indigo-900/30 hover:bg-indigo-900/50 text-indigo-300 border border-indigo-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Facebook
+                    </a>
+                    <a
+                      href={`https://opencorporates.com/companies?q=${encodeURIComponent(data.buyerEntity || data.contacts.find(c => c.type === 'company').value)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-emerald-900/30 hover:bg-emerald-900/50 text-emerald-300 border border-emerald-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <Building className="w-4 h-4" />
+                      Corp Registry
+                    </a>
+                  </div>
+                </div>
+              )}
+              
+              {/* BROKER */}
+              {data.brokerName && (
+                <div className="space-y-2 p-3 bg-purple-500/10 border border-purple-500/20 rounded-xl">
+                  <p className="text-xs text-purple-400 uppercase tracking-wider font-semibold flex items-center gap-1">
+                    <span className="text-lg">🤝</span> Broker
+                  </p>
+                  <p className="text-sm text-slate-300">{data.brokerName}</p>
+                  <div className="flex flex-wrap gap-2">
+                    <a
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.brokerName)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-purple-900/30 hover:bg-purple-900/50 text-purple-300 border border-purple-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <Search className="w-4 h-4" />
+                      Google
+                    </a>
+                    <a
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.brokerName)}+linkedin`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-purple-900/30 hover:bg-purple-900/50 text-purple-300 border border-purple-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <Building className="w-4 h-4" />
+                      LinkedIn
+                    </a>
+                    <a
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.brokerName)}+President+CEO`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-purple-900/30 hover:bg-purple-900/50 text-purple-300 border border-purple-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <Search className="w-4 h-4" />
+                      Exec Search
+                    </a>
+                    <a
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.brokerName)}+facebook`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-indigo-900/30 hover:bg-indigo-900/50 text-indigo-300 border border-indigo-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Facebook
+                    </a>
+                    <a
+                      href={`https://opencorporates.com/companies?q=${encodeURIComponent(data.brokerName)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-emerald-900/30 hover:bg-emerald-900/50 text-emerald-300 border border-emerald-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <Building className="w-4 h-4" />
+                      Corp Registry
+                    </a>
+                  </div>
+                </div>
+              )}
+              
+              {/* LENDER */}
+              {data.lenderName && (
+                <div className="space-y-2 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                  <p className="text-xs text-emerald-400 uppercase tracking-wider font-semibold flex items-center gap-1">
+                    <span className="text-lg">🏦</span> Lender
+                  </p>
+                  <p className="text-sm text-slate-300">{data.lenderName}</p>
+                  <div className="flex flex-wrap gap-2">
+                    <a
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.lenderName)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-emerald-900/30 hover:bg-emerald-900/50 text-emerald-300 border border-emerald-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <Search className="w-4 h-4" />
+                      Google
+                    </a>
+                    <a
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.lenderName)}+linkedin`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-emerald-900/30 hover:bg-emerald-900/50 text-emerald-300 border border-emerald-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <Building className="w-4 h-4" />
+                      LinkedIn
+                    </a>
+                    <a
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.lenderName)}+President+CEO`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-emerald-900/30 hover:bg-emerald-900/50 text-emerald-300 border border-emerald-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <Search className="w-4 h-4" />
+                      Exec Search
+                    </a>
+                    <a
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.lenderName)}+facebook`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-indigo-900/30 hover:bg-indigo-900/50 text-indigo-300 border border-indigo-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Facebook
+                    </a>
+                    <a
+                      href={`https://opencorporates.com/companies?q=${encodeURIComponent(data.lenderName)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-emerald-900/30 hover:bg-emerald-900/50 text-emerald-300 border border-emerald-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <Building className="w-4 h-4" />
+                      Corp Registry
                     </a>
                   </div>
                 </div>
@@ -1296,13 +1894,13 @@ ${lead.notes || 'No notes yet.'}
                       Google
                     </a>
                     <a
-                      href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(data.contactName || data.contacts.find(c => c.type === 'person').value)}`}
+                      href={`https://www.google.com/search?q=${encodeURIComponent(data.contactName || data.contacts.find(c => c.type === 'person').value)}+linkedin`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-3 py-2 bg-purple-900/30 hover:bg-purple-900/50 text-purple-300 border border-purple-700/30 rounded-lg text-sm flex items-center gap-2 transition-colors"
                     >
                       <ExternalLink className="w-4 h-4" />
-                      LinkedIn Person
+                      LinkedIn
                     </a>
                   </div>
                 </div>
@@ -1497,7 +2095,7 @@ ${lead.notes || 'No notes yet.'}
 
 const ExportButton = ({ leads }) => {
   const handleExport = () => {
-    const headers = ['Entity', 'Cash Amount', 'Sale Date', 'Location', 'Property', 'Asset Class', 'Address', 'Property Type', 'Match Score', 'Days Ago', 'Notes']
+    const headers = ['Entity', 'Cash Amount', 'Sale Date', 'Location', 'Property', 'Asset Class', 'Address', 'Property Type', 'Match Score', 'Days Ago', 'Buyer', 'Broker', 'Lender', 'Notes']
     const rows = leads.map(lead => [
       lead.entity,
       lead.cashAmount,
@@ -1509,6 +2107,9 @@ const ExportButton = ({ leads }) => {
       lead.propertyType,
       lead.matchScore,
       lead.daysAgo,
+      lead.buyerEntity || '',
+      lead.brokerName || '',
+      lead.lenderName || '',
       lead.notes || ''
     ])
     
@@ -1741,7 +2342,27 @@ const HotMoneyListItem = ({ lead, formatCash, onViewProfile, onSpawnPaperclip, o
                   <span className="text-slate-400">{assetClassLabel}</span>
                 )}
                 <span className="mx-1">•</span>
-                <span>{lead.address || lead.property}</span>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lead.address || lead.property || '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-slate-400 hover:text-blue-400 hover:underline transition-colors"
+                  title="Open in Google Maps"
+                >
+                  {lead.address || lead.property}
+                </a>
+                <a
+                  href={`https://www.google.com/search?q=${encodeURIComponent((lead.address || lead.property || '') + ' loopnet')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 transition-colors"
+                  title="Google Search Address"
+                >
+                  <Search className="w-3 h-3" />
+                  Search
+                </a>
               </p>
               
               {/* Quick Links Bar */}
@@ -1776,10 +2397,25 @@ const HotMoneyListItem = ({ lead, formatCash, onViewProfile, onSpawnPaperclip, o
                   </a>
                 )}
                 
-                {/* LinkedIn Person */}
-                {ql.seller?.linkedinPerson && (
+                {/* Google Exec Search */}
+                {ql.seller?.googleExec && (
                   <a
-                    href={ql.seller.linkedinPerson}
+                    href={ql.seller.googleExec}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-amber-900/20 hover:bg-amber-900/40 border border-amber-700/30 text-xs text-amber-300 transition-colors"
+                    title="Search President / CEO"
+                  >
+                    <Search className="w-3 h-3" />
+                    Exec Search
+                  </a>
+                )}
+                
+                {/* LinkedIn Person */}
+                {ql.person?.linkedin && (
+                  <a
+                    href={ql.person.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
@@ -1859,6 +2495,66 @@ const HotMoneyListItem = ({ lead, formatCash, onViewProfile, onSpawnPaperclip, o
                       onClick={(e) => e.stopPropagation()}
                       className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-blue-900/20 hover:bg-blue-900/40 border border-blue-700/30 text-xs text-blue-300 transition-colors"
                       title="LinkedIn Buyer"
+                    >
+                      <Building className="w-3 h-3" />
+                      LI
+                    </a>
+                  </>
+                )}
+                
+                {/* BROKER Quick Links */}
+                {lead.brokerName && ql.broker && (
+                  <>
+                    <span className="text-slate-600 mx-1">|</span>
+                    <span className="text-xs text-slate-500">Broker:</span>
+                    <a
+                      href={ql.broker.google}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-purple-900/20 hover:bg-purple-900/40 border border-purple-700/30 text-xs text-purple-300 transition-colors"
+                      title={`Google: ${lead.brokerName}`}
+                    >
+                      <Search className="w-3 h-3" />
+                      {lead.brokerName.length > 18 ? lead.brokerName.slice(0, 16) + '...' : lead.brokerName}
+                    </a>
+                    <a
+                      href={ql.broker.linkedinCompany}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-purple-900/20 hover:bg-purple-900/40 border border-purple-700/30 text-xs text-purple-300 transition-colors"
+                      title="LinkedIn Broker"
+                    >
+                      <Building className="w-3 h-3" />
+                      LI
+                    </a>
+                  </>
+                )}
+                
+                {/* LENDER Quick Links */}
+                {lead.lenderName && ql.lender && (
+                  <>
+                    <span className="text-slate-600 mx-1">|</span>
+                    <span className="text-xs text-slate-500">Lender:</span>
+                    <a
+                      href={ql.lender.google}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-900/20 hover:bg-emerald-900/40 border border-emerald-700/30 text-xs text-emerald-300 transition-colors"
+                      title={`Google: ${lead.lenderName}`}
+                    >
+                      <Search className="w-3 h-3" />
+                      {lead.lenderName.length > 18 ? lead.lenderName.slice(0, 16) + '...' : lead.lenderName}
+                    </a>
+                    <a
+                      href={ql.lender.linkedinCompany}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-900/20 hover:bg-emerald-900/40 border border-emerald-700/30 text-xs text-emerald-300 transition-colors"
+                      title="LinkedIn Lender"
                     >
                       <Building className="w-3 h-3" />
                       LI
@@ -2064,18 +2760,16 @@ const PasteDealModal = ({ onClose, onSuccess, formatCash }) => {
         contacts: []
       }
       
-      const response = await fetch(`${API_BASE}/hotmoney`, {
+      const response = await fetchApi('/hotmoney', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(apiLead)
       })
       
-      if (!response.ok) throw new Error('Failed to create lead')
-      
       const result = await response.json()
       
       // Get the full lead data
-      const leadResponse = await fetch(`${API_BASE}/hotmoney/${result.id}`)
+      const leadResponse = await fetchApi(`/hotmoney/${result.id}`)
       const leadData = await leadResponse.json()
       const newLead = apiToFrontend(leadData)
       
@@ -2094,7 +2788,7 @@ const PasteDealModal = ({ onClose, onSuccess, formatCash }) => {
   const sendToObsidian = async (lead) => {
     try {
       // Use the obsidian_integration endpoint if available
-      await fetch(`${API_BASE}/obsidian/quick-link`, {
+      await fetchApi('/obsidian/quick-link', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2126,7 +2820,7 @@ const PasteDealModal = ({ onClose, onSuccess, formatCash }) => {
 
 ## Quick Links
 - [Google Search](${quickLinks?.google || ''})
-- [LinkedIn Search](${quickLinks?.linkedin || ''})
+- [LinkedIn Company Search](${quickLinks?.linkedinCompany || ''})
 - [Corporation Search](${quickLinks?.corporation || ''})
 
 ## Notes

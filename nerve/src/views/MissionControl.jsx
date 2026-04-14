@@ -5,7 +5,7 @@ import { useDealStore } from '../stores/dealStore'
 import StatCard from '../components/Common/StatCard'
 import OpenClawChat from '../components/Mission/OpenClawChat'
 import HotMoneyRadar from '../components/Mission/HotMoneyRadar'
-import { Rocket, Activity, DollarSign, Target, TrendingUp, TrendingDown } from 'lucide-react'
+import { Rocket, Activity, DollarSign, Target, TrendingUp, TrendingDown, Info, CheckCircle2 } from 'lucide-react'
 
 const MissionControl = () => {
   const navigate = useNavigate()
@@ -20,17 +20,43 @@ const MissionControl = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-text-primary">Mission Control</h1>
-          <p className="text-text-secondary mt-1">
-            Real-time CRE intelligence & agent orchestration
+          <p className="text-text-secondary mt-1 max-w-2xl">
+            Your central command for commercial real estate intelligence. Track capital, spot opportunities, and manage agent missions in real time.
           </p>
         </div>
         <button 
-          onClick={() => navigate('/research')}
+          onClick={() => navigate('/opportunities')}
           className="btn-primary flex items-center gap-2"
         >
           <Rocket className="w-4 h-4" />
           <span>New Mission</span>
         </button>
+      </div>
+
+      {/* What You Can Do Here */}
+      <div className="card p-5 bg-gradient-to-r from-indigo-600/10 to-blue-600/10 border border-indigo-500/20">
+        <div className="flex items-start gap-3">
+          <div className="p-2 bg-indigo-500/20 rounded-lg">
+            <Info className="w-5 h-5 text-indigo-400" />
+          </div>
+          <div>
+            <h3 className="text-sm font-semibold text-text-primary uppercase tracking-wide">What You Can Do Here</h3>
+            <ul className="mt-2 space-y-1.5">
+              <li className="flex items-center gap-2 text-sm text-text-secondary">
+                <CheckCircle2 className="w-4 h-4 text-accent-green flex-shrink-0" />
+                Monitor Hot Money alerts and distressed property signals
+              </li>
+              <li className="flex items-center gap-2 text-sm text-text-secondary">
+                <CheckCircle2 className="w-4 h-4 text-accent-green flex-shrink-0" />
+                Match buyers, sellers, agents, and lenders to active listings
+              </li>
+              <li className="flex items-center gap-2 text-sm text-text-secondary">
+                <CheckCircle2 className="w-4 h-4 text-accent-green flex-shrink-0" />
+                Generate referral agreements and outreach materials from intelligence reports
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       
       {/* Stats Row */}

@@ -2,20 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom'
 import Layout from './components/Common/Layout'
 import MissionControl from './views/MissionControl'
-import PropertyResearch from './views/PropertyResearch'
-import DealPipeline from './views/DealPipeline'
-import AgentWorkspace from './views/AgentWorkspace'
 import HotMoneyRadar from './views/HotMoneyRadar'
-import ObsidianVault from './views/ObsidianVault'
 import MyListings from './views/MyListings'
 import BuyerMatcher from './views/BuyerMatcher'
 import AgentMatcher from './views/AgentMatcher'
 import LenderMatcher from './views/LenderMatcher'
 import BuilderDirectory from './views/BuilderDirectory'
-import PropertyUpload from './views/PropertyUpload'
-import SkillsAndAgents from './views/SkillsAndAgents'
-import BotBoardroom from './views/BotBoardroom'
-import MapView from './views/MapView'
 import Settings from './views/Settings'
 import BuyerBot from './views/BuyerBot'
 import SellerBot from './views/SellerBot'
@@ -25,21 +17,12 @@ import EXAgentRecruiterEnhanced from './views/EXAgentRecruiterEnhanced'
 import CommercialAgentRecruiter from './views/CommercialAgentRecruiter'
 import BrokeragesView from './views/BrokeragesView'
 import AgentWorkspaces from './views/AgentWorkspaces'
-import CommanderDashboard from './views/CommanderDashboard'
-import BotBuilder from './views/BotBuilder'
-import BotSwarmDemo from './views/BotSwarmDemo'
-import AIBuilder from './views/AIBuilder'
-import AgentMissionControl from './views/AgentMissionControl'
-import DataManager from './views/DataManager'
 import Opportunities from './views/Opportunities'
-import OlenaFeatureSheet from './views/OlenaFeatureSheet'
-import CanvaEditor from './components/OlenaFeatureSheet/CanvaEditor'
 import GlobalSearch from './components/GlobalSearch'
 import PaperclipCompanies from './views/PaperclipCompanies'
 import PaperclipCompanyDetail from './views/PaperclipCompanyDetail'
 import PaperclipOrgChart from './views/PaperclipOrgChart'
 import PaperclipDashboard from './views/PaperclipDashboard'
-import PixelAgentsOriginal from './views/PixelAgentsOriginal'
 import MissionControlV3 from './views/MissionControlV3'
 import { useWebSocket } from './hooks/useWebSocket'
 
@@ -91,45 +74,27 @@ function AppRoutes() {
     <Layout>
       <Routes>
         <Route path="/" element={<MissionControl />} />
-        <Route path="/research" element={<PropertyResearch />} />
-        <Route path="/pipeline" element={<DealPipeline />} />
-        <Route path="/agents" element={<AgentWorkspace />} />
         <Route path="/hotmoney" element={<HotMoneyRadar />} />
-        <Route path="/vault" element={<ObsidianVault />} />
+        <Route path="/opportunities" element={<Opportunities />} />
+        <Route path="/paperclip-dashboard" element={<PaperclipDashboard />} />
+        <Route path="/paperclip-companies" element={<PaperclipCompanies />} />
+        <Route path="/paperclip-companies/:companyId" element={<PaperclipCompanyDetail />} />
+        <Route path="/paperclip-companies/:companyId/org" element={<PaperclipOrgChart />} />
+        <Route path="/exp-agent-recruiter" element={<EXAgentRecruiterEnhanced />} />
+        <Route path="/commercial-agent-recruiter" element={<CommercialAgentRecruiter />} />
+        <Route path="/brokerages" element={<BrokeragesView />} />
+        <Route path="/buyer-bot" element={<BuyerBot />} />
+        <Route path="/seller-outreach-bot" element={<SellerBot />} />
+        <Route path="/property-valuation-bot" element={<PropertyBot />} />
+        <Route path="/vigil" element={<VigilBot />} />
         <Route path="/listings" element={<MyListings />} />
         <Route path="/buyers" element={<BuyerMatcher />} />
         <Route path="/agents-matcher" element={<AgentMatcher />} />
         <Route path="/lenders" element={<LenderMatcher />} />
         <Route path="/builders" element={<BuilderDirectory />} />
-        <Route path="/upload" element={<PropertyUpload />} />
-        <Route path="/skills" element={<SkillsAndAgents />} />
-        <Route path="/bot-boardroom" element={<BotBoardroom />} />
-        <Route path="/map" element={<MapView />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/buyer-bot" element={<BuyerBot />} />
-        <Route path="/seller-outreach-bot" element={<SellerBot />} />
-        <Route path="/property-valuation-bot" element={<PropertyBot />} />
-        <Route path="/vigil" element={<VigilBot />} />
-        <Route path="/exp-agent-recruiter" element={<EXAgentRecruiterEnhanced />} />
-        <Route path="/commercial-agent-recruiter" element={<CommercialAgentRecruiter />} />
-        <Route path="/brokerages" element={<BrokeragesView />} />
-        <Route path="/data-manager" element={<DataManager />} />
-        <Route path="/opportunities" element={<Opportunities />} />
-        <Route path="/olena-feature-sheet" element={<OlenaFeatureSheet />} />
-        <Route path="/canva-editor" element={<CanvaEditor />} />
-        <Route path="/marketing/*" element={<Navigate to="/" replace />} />
         <Route path="/agent-workspaces" element={<AgentWorkspaces />} />
-        <Route path="/agent-workspace/:agentId" element={<AgentWorkspace />} />
-        <Route path="/commander-dashboard/:commanderId" element={<CommanderDashboard />} />
-        <Route path="/bot-builder" element={<BotBuilder />} />
-        <Route path="/bot-swarm" element={<BotSwarmDemo />} />
-        <Route path="/ai-builder" element={<AIBuilder />} />
-        <Route path="/mission-control" element={<AgentMissionControl />} />
-        <Route path="/paperclip-companies" element={<PaperclipCompanies />} />
-        <Route path="/paperclip-companies/:companyId" element={<PaperclipCompanyDetail />} />
-        <Route path="/paperclip-companies/:companyId/org" element={<PaperclipOrgChart />} />
-        <Route path="/paperclip-dashboard" element={<PaperclipDashboard />} />
-        <Route path="/pixel-agents-original" element={<PixelAgentsOriginal />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/marketing/*" element={<Navigate to="/" replace />} />
         <Route path="/v2" element={<MissionControl />} />
         <Route path="/simple" element={<MissionControl />} />
       </Routes>

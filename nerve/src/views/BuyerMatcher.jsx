@@ -341,18 +341,36 @@ const BuyerMatcher = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-text-primary flex items-center gap-2">
-            <Users className="w-6 h-6 text-accent-red" />
-            Buyer Matcher
-          </h1>
-          <p className="text-text-secondary mt-1">Find qualified buyers for your properties</p>
+      <div className="space-y-4">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+              <Users className="w-6 h-6 text-blue-500" />
+              Buyer Matcher
+            </h1>
+            <p className="text-slate-400 mt-1">Match your listings to verified commercial buyers based on price, asset class, and location.</p>
+          </div>
+          <button className="btn-secondary flex items-center gap-2">
+            <Download className="w-4 h-4" />
+            Export List
+          </button>
         </div>
-        <button className="btn-secondary flex items-center gap-2">
-          <Download className="w-4 h-4" />
-          Export List
-        </button>
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <ul className="space-y-2 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <span className="text-blue-500 mt-0.5">•</span>
+              <span>Upload or select a listing to find compatible buyers</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-blue-500 mt-0.5">•</span>
+              <span>Filter by price range, city, and property type</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-blue-500 mt-0.5">•</span>
+              <span>Generate referral-ready reports with one click</span>
+            </li>
+          </ul>
+        </div>
       </div>
       
       {/* Property Matching Chat Interface */}

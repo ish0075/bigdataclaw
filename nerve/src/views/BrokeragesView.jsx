@@ -943,25 +943,42 @@ const BrokeragesView = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div className="space-y-4">
         <div>
-          <h1 className="text-2xl font-bold text-white">Real Estate Brokerages</h1>
-          <p className="text-slate-400 mt-1">
-            {filteredBrokerages.length} brokerages • Ontario Inc. excluded
-          </p>
+          <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+            <Building2 className="w-6 h-6 text-indigo-500" />
+            Brokerages
+          </h1>
+          <p className="text-slate-400 mt-1">Analyze Ontario brokerages by size, market coverage, and agent concentration.</p>
         </div>
-        
-        {/* Search */}
-        <div className="relative w-full lg:w-96">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-          <input
-            type="text"
-            placeholder="Search brokerages, cities, brokers..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
-          />
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <ul className="space-y-2 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <span className="text-indigo-500 mt-0.5">•</span>
+              <span>Search brokerages by name and city</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-indigo-500 mt-0.5">•</span>
+              <span>View agent counts, boards, and geographic coverage</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-indigo-500 mt-0.5">•</span>
+              <span>Identify boutique vs. national players for partnership</span>
+            </li>
+          </ul>
         </div>
+      </div>
+
+      {/* Search */}
+      <div className="relative w-full lg:w-96">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+        <input
+          type="text"
+          placeholder="Search brokerages, cities, brokers..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+        />
       </div>
 
       {/* Brokerage Grid */}

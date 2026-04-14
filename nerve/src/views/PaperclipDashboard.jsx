@@ -24,6 +24,8 @@ import {
  * Real-time tracking of companies, agents, goals, and issues
  */
 
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+
 const PaperclipDashboard = () => {
   const [companies, setCompanies] = useState([])
   const [selectedCompany, setSelectedCompany] = useState(null)
@@ -42,7 +44,7 @@ const PaperclipDashboard = () => {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch('/api/paperclip/companies')
+      const res = await fetch(`${API_BASE}/api/paperclip/companies`)
       if (!res.ok) throw new Error('Failed to fetch companies')
       const data = await res.json()
       setCompanies(data || [])
@@ -63,10 +65,10 @@ const PaperclipDashboard = () => {
     try {
       // Fetch agents, goals, and issues in parallel
       const [agentsRes, goalsRes, issuesRes, dashboardRes] = await Promise.all([
-        fetch(`/api/paperclip/companies/${companyId}/agents`),
-        fetch(`/api/paperclip/companies/${companyId}/goals`),
-        fetch(`/api/paperclip/companies/${companyId}/issues`),
-        fetch(`/api/paperclip/companies/${companyId}/dashboard`).catch(() => null)
+        fetch(`${API_BASE}/api/paperclip/companies/${companyId}/agents`),
+        fetch(`${API_BASE}/api/paperclip/companies/${companyId}/goals`),
+        fetch(`${API_BASE}/api/paperclip/companies/${companyId}/issues`),
+        fetch(`${API_BASE}/api/paperclip/companies/${companyId}/dashboard`).catch(() => null)
       ])
 
       const agents = agentsRes.ok ? await agentsRes.json() : []
@@ -183,32 +185,48 @@ const PaperclipDashboard = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-text-primary flex items-center gap-2">
-            <Paperclip className="w-6 h-6 text-accent-blue" />
-            Paperclip Dashboard
-          </h1>
-          <p className="text-text-secondary mt-1">
-            Real-time tracking of AI companies, agents, and missions
-          </p>
+      <div className="space-y-4">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+              <Paperclip className="w-6 h-6 text-sky-500" />
+              Paperclip Dashboard
+            </h1>
+            <p className="text-slate-400 mt-1">Manage your Paperclip agent companies, issues, and organizational charts.</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={refreshAll}
+              className="btn-secondary flex items-center gap-2"
+              disabled={refreshing}
+            >
+              <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+              Refresh
+            </button>
+            <a 
+              href="/paperclip-companies"
+              className="btn-primary flex items-center gap-2"
+            >
+              <Plus className="w-4 h-4" />
+              New Company
+            </a>
+          </div>
         </div>
-        <div className="flex items-center gap-3">
-          <button 
-            onClick={refreshAll}
-            className="btn-secondary flex items-center gap-2"
-            disabled={refreshing}
-          >
-            <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
-            Refresh
-          </button>
-          <a 
-            href="/paperclip-companies"
-            className="btn-primary flex items-center gap-2"
-          >
-            <Plus className="w-4 h-4" />
-            New Company
-          </a>
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <ul className="space-y-2 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <span className="text-sky-500 mt-0.5">•</span>
+              <span>Browse companies and their assigned Paperclip agents</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-sky-500 mt-0.5">•</span>
+              <span>Track open issues and task assignments</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-sky-500 mt-0.5">•</span>
+              <span>View org charts and team hierarchies</span>
+            </li>
+          </ul>
         </div>
       </div>
 

@@ -102,10 +102,13 @@ const AgentWorkspaces = () => {
     <div className="p-6 max-w-[1600px] mx-auto">
       {/* Header */}
       <div className="mb-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-text-primary mb-2">Agent Workspaces</h1>
-            <p className="text-text-secondary">Manage your AI agent fleet across all divisions</p>
+            <h1 className="text-3xl font-bold text-white mb-2 flex items-center gap-2">
+              <Bot className="w-6 h-6 text-cyan-500" />
+              Agent Visualizer
+            </h1>
+            <p className="text-slate-400">Visualize your agent fleet, active missions, and real-time task orchestration.</p>
           </div>
           <div className="flex items-center gap-3">
             <button 
@@ -115,6 +118,22 @@ const AgentWorkspaces = () => {
               {viewMode === 'grid' ? <List className="w-5 h-5" /> : <LayoutGrid className="w-5 h-5" />}
             </button>
           </div>
+        </div>
+        <div className="mt-4 bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <ul className="space-y-2 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-500 mt-0.5">•</span>
+              <span>View all active agents and their current missions</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-500 mt-0.5">•</span>
+              <span>Track task progress and system health</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-500 mt-0.5">•</span>
+              <span>Launch new agent missions directly from the dashboard</span>
+            </li>
+          </ul>
         </div>
         
         {/* Division Stats */}

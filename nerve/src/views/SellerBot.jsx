@@ -338,7 +338,31 @@ const SellerBot = () => {
 
   return (
     <div className="p-6 space-y-6">
-      {/* Header */}
+      {/* Descriptive Header */}
+      <div className="space-y-4">
+        <div>
+          <h1 className="text-3xl font-bold text-white">Seller Outreach</h1>
+          <p className="text-slate-400 mt-1">Find and engage property owners with compelling, data-driven outreach scripts.</p>
+        </div>
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <span className="text-rose-400 mt-0.5">•</span>
+              <span>Generate personalized seller scripts from property intelligence</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-rose-400 mt-0.5">•</span>
+              <span>Access contact quick-links and ownership history</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-rose-400 mt-0.5">•</span>
+              <span>Track outreach status and follow-up reminders</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Header -->
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-xl bg-rose-600 flex items-center justify-center text-3xl">
