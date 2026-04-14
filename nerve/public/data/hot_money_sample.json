@@ -1,0 +1,182 @@
+[
+  {
+    "id": 50605,
+    "entity": "Greater Toronto Airports Authority",
+    "cash_amount": 1600000000,
+    "sale_date": "1996-11-29",
+    "location": "Mississauga",
+    "property": "AIRPORT RD",
+    "days_ago": 10723
+  },
+  {
+    "id": 42474,
+    "entity": "Ontario Power Generation Inc",
+    "cash_amount": 1542077286,
+    "sale_date": "2020-04-29",
+    "location": "Bath",
+    "property": "7143 LOYALIST PKWY",
+    "days_ago": 2171
+  },
+  {
+    "id": 48962,
+    "entity": "Dundee REIT and H&amp;R REIT",
+    "cash_amount": 1266000000,
+    "sale_date": "2012-06-15",
+    "location": "Toronto",
+    "property": "40 KING ST W\\n104 - 106 YONGE ST\\n44 KING ST W\\n11 ADELAIDE ST W",
+    "days_ago": 5046
+  },
+  {
+    "id": 37713,
+    "entity": "Pontegadea Canada Inc",
+    "cash_amount": 1163000000,
+    "sale_date": "2022-02-01",
+    "location": "Toronto",
+    "property": "200 BAY ST",
+    "days_ago": 1528
+  },
+  {
+    "id": 30795,
+    "entity": "KDDI Canada, Inc",
+    "cash_amount": 890000000,
+    "sale_date": "2023-08-16",
+    "location": "Toronto",
+    "property": "151 FRONT ST W",
+    "days_ago": 967
+  },
+  {
+    "id": 44949,
+    "entity": "VPMA Bay Adealide Property Ltd",
+    "cash_amount": 850000000,
+    "sale_date": "2018-03-06",
+    "location": "Toronto",
+    "property": "333 BAY ST\\n22 ADELAIDE ST W",
+    "days_ago": 2956
+  },
+  {
+    "id": 44669,
+    "entity": "PSPIB Downsview Investments Inc",
+    "cash_amount": 825000000,
+    "sale_date": "2018-06-07",
+    "location": "N. York",
+    "property": "124 GARRATT BLVD",
+    "days_ago": 2863
+  },
+  {
+    "id": 42475,
+    "entity": "Ontario Power Generation Inc",
+    "cash_amount": 750023813,
+    "sale_date": "2020-04-29",
+    "location": "Halton Hills",
+    "property": "12144 STEELES AVE",
+    "days_ago": 2171
+  },
+  {
+    "id": 50596,
+    "entity": "Greater Toronto Airports Authority Associate Inc",
+    "cash_amount": 717973761,
+    "sale_date": "1997-05-05",
+    "location": "Mississauga",
+    "property": "AIRPORT RD",
+    "days_ago": 10566
+  },
+  {
+    "id": 29539,
+    "entity": "Brampton PropCo GP Corp",
+    "cash_amount": 702900000,
+    "sale_date": "2023-12-14",
+    "location": "Brampton",
+    "property": "9200 AIRPORT RD\\n9250 AIRPORT RD\\n255 CHRYSLER DR",
+    "days_ago": 847
+  },
+  {
+    "id": 45567,
+    "entity": "KingSett Capital",
+    "cash_amount": 681542962,
+    "sale_date": "2017-08-23",
+    "location": "Toronto",
+    "property": "104 - 106 YONGE ST\\n40 &amp; 44 KING ST W\\n11 ADELAIDE ST W",
+    "days_ago": 3151
+  },
+  {
+    "id": 46452,
+    "entity": "9486798 Canada Inc",
+    "cash_amount": 666210771,
+    "sale_date": "2016-09-01",
+    "location": "Toronto",
+    "property": "100, 120 &amp; 130 ADELAIDE ST W\\n85 &amp; 111 RICHMOND ST W\\n165 YORK ST",
+    "days_ago": 3507
+  },
+  {
+    "id": 43455,
+    "entity": "KingSett Capital",
+    "cash_amount": 640000000,
+    "sale_date": "2019-06-06",
+    "location": "Toronto",
+    "property": "595 BAY ST\\n20 - 40 DUNDAS ST W\\n306 YONGE ST",
+    "days_ago": 2499
+  },
+  {
+    "id": 50527,
+    "entity": "3170497 Canada Inc",
+    "cash_amount": 617922000,
+    "sale_date": "2000-04-06",
+    "location": "Toronto",
+    "property": "199 BAY ST\\n25 KING ST W\\n21 MELINDA ST\\n30 WELLINGTON ST W",
+    "days_ago": 9499
+  },
+  {
+    "id": 46573,
+    "entity": "KingSett Capital",
+    "cash_amount": 594267961,
+    "sale_date": "2016-06-30",
+    "location": "Toronto",
+    "property": "40 KING ST W\\n104 - 106 YONGE ST\\n44 KING ST W\\n11 ADELAIDE ST W",
+    "days_ago": 3570
+  },
+  {
+    "id": 35554,
+    "entity": "Slate HWD Inc",
+    "cash_amount": 518000000,
+    "sale_date": "2022-06-01",
+    "location": "Hamilton",
+    "property": "386 WILCOX ST",
+    "days_ago": 1408
+  },
+  {
+    "id": 50492,
+    "entity": "Onb Inc",
+    "cash_amount": 510999000,
+    "sale_date": "2001-02-28",
+    "location": "Toronto",
+    "property": "77 KING ST\\n79 WELLINGTON ST\\n100 WELLINGTON ST",
+    "days_ago": 9171
+  },
+  {
+    "id": 37940,
+    "entity": "Crestpoint Real Estate",
+    "cash_amount": 494000000,
+    "sale_date": "2022-01-21",
+    "location": "Ottawa",
+    "property": "222 CITIGATE DR",
+    "days_ago": 1539
+  },
+  {
+    "id": 45478,
+    "entity": "Greystone Managed Investments, Canderel and Canstone Realty Advisors",
+    "cash_amount": 480600000,
+    "sale_date": "2017-09-11",
+    "location": "Ottawa",
+    "property": "340 ALBERT ST\\n350 ALBERT ST\\n360 ALBERT ST\\n150 KENT ST",
+    "days_ago": 3132
+  },
+  {
+    "id": 35427,
+    "entity": "Prologis Canada Holdings 3 GP ULC",
+    "cash_amount": 479621728,
+    "sale_date": "2022-06-09",
+    "location": "Caledon",
+    "property": "12519 HUMBER STATION RD\\n12713 HUMBER STATION RD",
+    "days_ago": 1400
+  }
+]

@@ -15,17 +15,42 @@ const HotMoneyRadar = ({ leads }) => {
         if (!response.ok) throw new Error('Failed to fetch')
         const data = await response.json()
         const leadsArray = Array.isArray(data) ? data : (data.leads || [])
-        setApiLeads(leadsArray.map(lead => ({
-          id: String(lead.id),
-          entity: lead.entity,
-          cashAmount: lead.cash_amount,
-          saleDate: lead.sale_date,
-          location: lead.location,
-          property: lead.property,
-          daysAgo: lead.days_ago
-        })))
+        if (leadsArray.length > 0) {
+          setApiLeads(leadsArray.map(lead => ({
+            id: String(lead.id),
+            entity: lead.entity,
+            cashAmount: lead.cash_amount,
+            saleDate: lead.sale_date,
+            location: lead.location,
+            property: lead.property,
+            daysAgo: lead.days_ago
+          })))
+          setLoading(false)
+          return
+        }
       } catch (err) {
-        console.error('Error fetching hot money leads:', err)
+        console.error('API hot money fetch failed, falling back to sample data:', err)
+      }
+      
+      // Fallback to static sample data when API is unavailable or empty
+      try {
+        const fallback = await fetch('/data/hot_money_sample.json')
+        if (fallback.ok) {
+          const data = await fallback.json()
+          setApiLeads(data.slice(0, 5).map(lead => ({
+            id: String(lead.id),
+            entity: lead.entity,
+            cashAmount: lead.cash_amount,
+            saleDate: lead.sale_date,
+            location: lead.location,
+            property: lead.property,
+            daysAgo: lead.days_ago
+          })))
+        } else {
+          setApiLeads([])
+        }
+      } catch (fallbackErr) {
+        console.error('Fallback hot money fetch also failed:', fallbackErr)
         setApiLeads([])
       } finally {
         setLoading(false)
