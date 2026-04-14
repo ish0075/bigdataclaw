@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Phone, ExternalLink, Flame, DollarSign } from 'lucide-react'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
@@ -103,42 +103,56 @@ const HotMoneyRadar = ({ leads }) => {
   )
 }
 
-const HotMoneyCard = ({ lead, formatCash }) => (
-  <div className="p-4 rounded-xl bg-bg-input border border-border-subtle hover:border-accent-red/30 transition-colors group">
-    <div className="flex items-start justify-between">
-      <div className="flex-1">
-        <div className="flex items-center gap-2">
-          <div className="hot-money-badge text-xs">
-            <Flame className="w-3 h-3" />
-            <span>HOT</span>
+const HotMoneyCard = ({ lead, formatCash }) => {
+  const navigate = useNavigate()
+  return (
+    <div 
+      onClick={() => navigate('/hotmoney')}
+      className="p-4 rounded-xl bg-bg-input border border-border-subtle hover:border-accent-red/30 transition-colors group cursor-pointer"
+    >
+      <div className="flex items-start justify-between">
+        <div className="flex-1">
+          <div className="flex items-center gap-2">
+            <div className="hot-money-badge text-xs">
+              <Flame className="w-3 h-3" />
+              <span>HOT</span>
+            </div>
+            <h4 className="font-medium text-text-primary">{lead.entity}</h4>
           </div>
-          <h4 className="font-medium text-text-primary">{lead.entity}</h4>
+
+          <div className="flex items-center gap-4 mt-2">
+            <div className="flex items-center gap-1.5 text-accent-red font-semibold">
+              <DollarSign className="w-4 h-4" />
+              <span>{formatCash(lead.cashAmount)} cash</span>
+            </div>
+            <span className="text-text-muted text-sm">•</span>
+            <span className="text-text-secondary text-sm">{lead.saleDate}</span>
+          </div>
+
+          <p className="text-xs text-text-muted mt-1">
+            {lead.property} • {lead.location}
+          </p>
         </div>
 
-        <div className="flex items-center gap-4 mt-2">
-          <div className="flex items-center gap-1.5 text-accent-red font-semibold">
-            <DollarSign className="w-4 h-4" />
-            <span>{formatCash(lead.cashAmount)} cash</span>
-          </div>
-          <span className="text-text-muted text-sm">•</span>
-          <span className="text-text-secondary text-sm">{lead.saleDate}</span>
+        <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <button 
+            onClick={(e) => { e.stopPropagation(); navigate('/hotmoney') }}
+            className="p-2 rounded-lg bg-accent-red text-white hover:bg-accent-red/90 transition-colors" 
+            title="Contact"
+          >
+            <Phone className="w-4 h-4" />
+          </button>
+          <button 
+            onClick={(e) => { e.stopPropagation(); navigate('/hotmoney') }}
+            className="p-2 rounded-lg bg-bg-card text-text-secondary hover:text-text-primary transition-colors" 
+            title="View Profile"
+          >
+            <ExternalLink className="w-4 h-4" />
+          </button>
         </div>
-
-        <p className="text-xs text-text-muted mt-1">
-          {lead.property} • {lead.location}
-        </p>
-      </div>
-
-      <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-        <button className="p-2 rounded-lg bg-accent-red text-white hover:bg-accent-red/90 transition-colors" title="Contact">
-          <Phone className="w-4 h-4" />
-        </button>
-        <button className="p-2 rounded-lg bg-bg-card text-text-secondary hover:text-text-primary transition-colors" title="View Profile">
-          <ExternalLink className="w-4 h-4" />
-        </button>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 export default HotMoneyRadar

@@ -239,13 +239,35 @@ const HotMoneyRadar = () => {
       console.log('Received data:', data)
       // API returns array directly or {leads: []} - handle both
       const leadsArray = Array.isArray(data) ? data : (data.leads || [])
-      const mappedLeads = leadsArray.map(apiToFrontend)
-      console.log('Mapped leads:', mappedLeads)
-      setLeads(mappedLeads)
+      if (leadsArray.length > 0) {
+        const mappedLeads = leadsArray.map(apiToFrontend)
+        console.log('Mapped leads:', mappedLeads)
+        setLeads(mappedLeads)
+        setLoading(false)
+        return
+      }
     } catch (err) {
-      console.error('Error fetching leads:', err)
-      setError(`Failed to load leads: ${err.message}`)
-      // Fallback to empty array
+      console.error('API hot money fetch failed, trying fallback:', err)
+    }
+    
+    // Fallback to static sample data when API is unavailable or empty
+    try {
+      const fallback = await fetch('/data/hot_money_sample.json')
+      if (fallback.ok) {
+        const data = await fallback.json()
+        const mappedLeads = data.map(apiToFrontend)
+        // Apply days filter on client side for fallback data
+        const daysFilter = filters.daysAgo && filters.daysAgo !== 'all' ? parseInt(filters.daysAgo) : null
+        const filtered = daysFilter ? mappedLeads.filter(l => l.daysAgo <= daysFilter) : mappedLeads
+        setLeads(filtered)
+        setError(null)
+      } else {
+        setError('Failed to load leads: API unavailable and fallback data missing')
+        setLeads([])
+      }
+    } catch (fallbackErr) {
+      console.error('Fallback hot money fetch also failed:', fallbackErr)
+      setError(`Failed to load leads: ${fallbackErr.message}`)
       setLeads([])
     } finally {
       setLoading(false)
