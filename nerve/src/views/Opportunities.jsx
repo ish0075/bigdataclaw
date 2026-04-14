@@ -168,11 +168,36 @@ const Opportunities = () => {
       params.append('limit', '500')
       const response = await fetchApi(`/opportunities/gold?${params.toString()}`)
       const data = await response.json()
-      setOpportunities(data.opportunities || [])
-      setStats(data.stats || null)
+      if (data.opportunities && data.opportunities.length > 0) {
+        setOpportunities(data.opportunities)
+        setStats(data.stats || null)
+        setLoading(false)
+        return
+      }
     } catch (err) {
-      console.error('Error fetching opportunities:', err)
-      setError(err.message)
+      console.error('API opportunities fetch failed, trying fallback:', err)
+    }
+    
+    // Fallback to static sample data when API is unavailable or empty
+    try {
+      const fallback = await fetch('/data/opportunities_gold_sample.json')
+      if (fallback.ok) {
+        const data = await fallback.json()
+        let ops = data.opportunities || []
+        if (assetClassFilter && assetClassFilter !== 'all') {
+          ops = ops.filter(o => (o.asset_class || '').toLowerCase() === assetClassFilter.toLowerCase())
+        }
+        setOpportunities(ops)
+        setStats(data.stats || null)
+        setError(null)
+      } else {
+        setError('API unavailable and fallback data missing')
+        setOpportunities([])
+      }
+    } catch (fallbackErr) {
+      console.error('Fallback opportunities fetch also failed:', fallbackErr)
+      setError(`Failed to load opportunities: ${fallbackErr.message}`)
+      setOpportunities([])
     } finally {
       setLoading(false)
     }
@@ -185,10 +210,30 @@ const Opportunities = () => {
       // Try the flagged-opportunities endpoint if it exists; otherwise fall back gracefully
       const response = await fetchApi('/opportunities/flagged')
       const data = await response.json()
-      setFlaggedReports(data.reports || [])
+      if (data.reports && data.reports.length > 0) {
+        setFlaggedReports(data.reports)
+        setDistressedLoading(false)
+        return
+      }
     } catch (err) {
-      console.error('Error fetching flagged reports:', err)
-      setDistressedError(err.message)
+      console.error('API flagged reports fetch failed, trying fallback:', err)
+    }
+    
+    // Fallback to static sample data
+    try {
+      const fallback = await fetch('/data/opportunities_flagged_sample.json')
+      if (fallback.ok) {
+        const data = await fallback.json()
+        setFlaggedReports(data.reports || [])
+        setDistressedError(null)
+      } else {
+        setDistressedError('API unavailable and fallback data missing')
+        setFlaggedReports([])
+      }
+    } catch (fallbackErr) {
+      console.error('Fallback flagged reports fetch also failed:', fallbackErr)
+      setDistressedError(`Failed to load flagged reports: ${fallbackErr.message}`)
+      setFlaggedReports([])
     } finally {
       setDistressedLoading(false)
     }
@@ -266,6 +311,43 @@ const Opportunities = () => {
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
             Refresh
           </button>
+        </div>
+      </div>
+
+      {/* Page Explanation */}
+      <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+        <div className="flex flex-col md:flex-row md:items-start gap-4">
+          <div className="flex-1">
+            <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-accent-yellow" />
+              What is this page?
+            </h3>
+            <p className="text-slate-300 text-sm leading-relaxed">
+              This is your <strong>Opportunity Command Center</strong>. It scans Ontario commercial real estate transactions and land-registry data to surface two things: 
+              <span className="text-accent-yellow font-medium">high-value capital movements</span> (Goldmine) and 
+              <span className="text-red-400 font-medium">distressed property signals</span> (Distressed).
+            </p>
+          </div>
+          <div className="flex-1">
+            <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+              <Target className="w-4 h-4 text-blue-400" />
+              How to use it
+            </h3>
+            <ul className="text-slate-300 text-sm space-y-1">
+              <li className="flex items-start gap-2">
+                <span className="text-accent-yellow">1.</span>
+                <span><strong>Goldmine tab:</strong> Browse cash-rich buyers and recent large transactions by asset class, urgency, and price range.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-400">2.</span>
+                <span><strong>Distressed tab:</strong> Review flagged properties with stress indicators like high leverage, punitive interest rates, or mortgage renewal risk.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-400">3.</span>
+                <span>Click any card to view details, then generate a referral agreement or outreach script.</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 

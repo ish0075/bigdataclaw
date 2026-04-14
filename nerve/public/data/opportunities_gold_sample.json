@@ -1,0 +1,371 @@
+{
+  "opportunities": [
+    {
+      "id": 25519,
+      "entity": "Lime Ridge Holdings Inc",
+      "cash_amount": 416000000,
+      "sale_date": "2025-06-17",
+      "location": "Hamilton",
+      "address": "LIME RIDGE MALL\\n508 &amp; 520 LIMERIDGE RD E\\n883 &amp; 999 UPPER WENTWORTH ST",
+      "asset_class": "Retail",
+      "property_type": "Retail",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 296,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25418,
+      "entity": "RZ JV Nominee Ltd",
+      "cash_amount": 247654000,
+      "sale_date": "2025-07-24",
+      "location": "Toronto",
+      "address": "181 WELLINGTON ST W",
+      "asset_class": "Multifamily",
+      "property_type": "Multifamily",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 259,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25308,
+      "entity": "Amica Credit Mills GP Inc",
+      "cash_amount": 191043421,
+      "sale_date": "2026-04-01",
+      "location": "Mississauga",
+      "address": "2465 EGLINTON AVE W",
+      "asset_class": "Senior Living",
+      "property_type": "Senior Living",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 8,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25403,
+      "entity": "Lazica Investments (BT) Ltd",
+      "cash_amount": 181894700,
+      "sale_date": "2025-07-28",
+      "location": "Richmond Hill",
+      "address": "ART LEECH DR, HAMSUN RD\\nCRAKE ST, LYMBUMER ST\\nBIG WILLOW CRES, ARROW CT",
+      "asset_class": "Land",
+      "property_type": "Land",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 255,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25401,
+      "entity": "Lazica Investments (BT) Ltd",
+      "cash_amount": 181894700,
+      "sale_date": "2025-07-28",
+      "location": "Richmond Hill",
+      "address": "19TH AVE, LESLIE ST\\nART LEECH DR, HAMSUN RD,\\nCRAKE ST, BIG WILLOW CRES\\nCONC 2, PART LOT 31",
+      "asset_class": "Land",
+      "property_type": "Land",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 255,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25309,
+      "entity": "Amica Swan Lake Inc",
+      "cash_amount": 173060821,
+      "sale_date": "2026-04-01",
+      "location": "Markham",
+      "address": "6360 & 6380 SIXTEENTH AVE",
+      "asset_class": "Senior Living",
+      "property_type": "Senior Living",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 8,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25553,
+      "entity": "Crestpoint Real Estate Investments Ltd",
+      "cash_amount": 159400000,
+      "sale_date": "2025-05-23",
+      "location": "Mississauga",
+      "address": "3150 DERRY RD E\\n3160 DERRY RD E",
+      "asset_class": "Industrial",
+      "property_type": "Industrial",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 321,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25503,
+      "entity": "9538-2677 Quebec Inc  Leyad",
+      "cash_amount": 140000000,
+      "sale_date": "2025-07-16",
+      "location": "St. Catharines",
+      "address": "221 GLENDALE AVE",
+      "asset_class": "Land",
+      "property_type": "Land",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 267,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25341,
+      "entity": "Amica The Glebe Inc",
+      "cash_amount": 138888714,
+      "sale_date": "2026-04-01",
+      "location": "Ottawa",
+      "address": "890 \\- 900 BANK ST",
+      "asset_class": "Retail",
+      "property_type": "Retail",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 8,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25310,
+      "entity": "Amica The Glebe Inc",
+      "cash_amount": 138888714,
+      "sale_date": "2026-04-01",
+      "location": "Ottawa",
+      "address": "890 - 900 BANK ST",
+      "asset_class": "Retail",
+      "property_type": "Retail",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 8,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25376,
+      "entity": "PIRET",
+      "cash_amount": 134500000,
+      "sale_date": "2025-09-04",
+      "location": "N. York",
+      "address": "700 CLAYSON RD",
+      "asset_class": "Land",
+      "property_type": "Land",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 217,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25562,
+      "entity": "Lankin Investments",
+      "cash_amount": 132000000,
+      "sale_date": "2025-05-07",
+      "location": "Brampton",
+      "address": "2 SILVER MAPLE CT\\n4 SILVER MAPLE CT",
+      "asset_class": "Land",
+      "property_type": "Land",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 337,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 50672,
+      "entity": "Sifton Properties Ltd     519-434-1000",
+      "cash_amount": 130000000,
+      "sale_date": "2026-04-02",
+      "location": "1951 & 1961 SHORE RD",
+      "address": "2052 LUMEN DR",
+      "asset_class": "Land",
+      "property_type": "Land",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 11,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 50668,
+      "entity": "Sifton Properties Ltd     519-434-1000",
+      "cash_amount": 130000000,
+      "sale_date": "2026-04-02",
+      "location": "1951 & 1961 SHORE RD",
+      "address": "2052 LUMEN DR",
+      "asset_class": "Land",
+      "property_type": "Land",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 11,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25296,
+      "entity": "Sifton Properties Ltd",
+      "cash_amount": 130000000,
+      "sale_date": "2026-04-02",
+      "location": "London",
+      "address": "2052 LUMEN DR",
+      "asset_class": "Senior Living",
+      "property_type": "Senior Living",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 7,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25311,
+      "entity": "Amica (Taunton) Inc",
+      "cash_amount": 126745954,
+      "sale_date": "2026-04-01",
+      "location": "Whitby",
+      "address": "85 TAUNTON RD E",
+      "asset_class": "Senior Living",
+      "property_type": "Senior Living",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 8,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25312,
+      "entity": "Amica Aurora II GP Inc",
+      "cash_amount": 123653157,
+      "sale_date": "2026-04-01",
+      "location": "Aurora",
+      "address": "15190 YONGE ST",
+      "asset_class": "Retail",
+      "property_type": "Retail",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 8,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25558,
+      "entity": "Crestpoint Real Estate",
+      "cash_amount": 120000000,
+      "sale_date": "2025-05-14",
+      "location": "Mississauga",
+      "address": "7634 &amp; 7676 KIMBEL ST\\n7686 &amp; 7720 KIMBEL ST\\n2299 DREW RD",
+      "asset_class": "Industrial",
+      "property_type": "Industrial",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 330,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25575,
+      "entity": "801 Dixon GP Ltd",
+      "cash_amount": 115000000,
+      "sale_date": "2025-04-23",
+      "location": "Etobicoke",
+      "address": "801 DIXON RD",
+      "asset_class": "Land",
+      "property_type": "Land",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 351,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    },
+    {
+      "id": 25313,
+      "entity": "Amica Pickering Inc",
+      "cash_amount": 110352942,
+      "sale_date": "2026-04-01",
+      "location": "Pickering",
+      "address": "1450 PICKERING PKWY",
+      "asset_class": "Senior Living",
+      "property_type": "Senior Living",
+      "urgency_score": 80,
+      "urgency_label": "CRITICAL",
+      "price_range": "$50M+",
+      "days_ago": 8,
+      "signals": [
+        "High-Value Transaction",
+        "Active Capital"
+      ]
+    }
+  ],
+  "stats": {
+    "total_flagged": 20,
+    "critical": 20,
+    "high": 0,
+    "medium": 0,
+    "watch": 0
+  }
+}
