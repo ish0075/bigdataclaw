@@ -130,7 +130,7 @@ const HotMoneyCard = ({ lead, formatCash }) => {
           </div>
 
           <p className="text-xs text-text-muted mt-1">
-            {lead.property} • {lead.location}
+            {lead.property}{lead.location ? `, ${lead.location}` : ''}
           </p>
         </div>
 

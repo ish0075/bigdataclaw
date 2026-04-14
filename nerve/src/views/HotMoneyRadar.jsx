@@ -1035,11 +1035,11 @@ ${lead.notes || 'No notes yet.'}
                 />
               ) : (
                 <div className="flex items-center justify-between flex-wrap gap-2">
-                  <p className="text-white font-medium">{data.address || data.property}</p>
+                  <p className="text-white font-medium">{(data.address || data.property) + (data.location ? `, ${data.location}` : '')}</p>
                   {(data.address || data.property) && (
                     <div className="flex items-center gap-2">
                       <a
-                        href={`https://www.google.com/search?q=${encodeURIComponent((data.address || data.property || '') + ' loopnet')}`}
+                        href={`https://www.google.com/search?q=${encodeURIComponent((data.address || data.property || '') + (data.location ? ', ' + data.location : '') + ' loopnet')}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-300 border border-slate-600 rounded-lg text-sm flex items-center gap-1.5 transition-colors"
@@ -1048,7 +1048,7 @@ ${lead.notes || 'No notes yet.'}
                         Search
                       </a>
                       <a
-                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.address || data.property)}`}
+                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((data.address || data.property || '') + (data.location ? ', ' + data.location : ''))}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-3 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-600/30 rounded-lg text-sm flex items-center gap-1.5 transition-colors"
@@ -2365,17 +2365,17 @@ const HotMoneyListItem = ({ lead, formatCash, onViewProfile, onSpawnPaperclip, o
                 )}
                 <span className="mx-1">•</span>
                 <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lead.address || lead.property || '')}`}
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((lead.address || lead.property || '') + (lead.location ? ', ' + lead.location : ''))}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
                   className="text-slate-400 hover:text-blue-400 hover:underline transition-colors"
                   title="Open in Google Maps"
                 >
-                  {lead.address || lead.property}
+                  {(lead.address || lead.property) + (lead.location ? `, ${lead.location}` : '')}
                 </a>
                 <a
-                  href={`https://www.google.com/search?q=${encodeURIComponent((lead.address || lead.property || '') + ' loopnet')}`}
+                  href={`https://www.google.com/search?q=${encodeURIComponent((lead.address || lead.property || '') + (lead.location ? ', ' + lead.location : '') + ' loopnet')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
