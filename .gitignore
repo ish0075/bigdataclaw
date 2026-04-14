@@ -76,3 +76,7 @@ QUICK_LINKS_BUILDERS.csv
 QUICK_LINKS_LENDERS.csv
 QUICK_LINKS_LENDERS_V2.csv
 QUICK_LINKS_RECRUITER_DATABASE.csv
+
+# Explicit secret files (never commit)
+GITHUB_SECRETS.txt
+nerve/nerve_server/.env
