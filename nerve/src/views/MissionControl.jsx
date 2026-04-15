@@ -291,8 +291,13 @@ const MissionControl = () => {
 
     if (!synth) { resetSpeechState(); return }
     try {
+      try { synth.resume() } catch {}
       const u = new SpeechSynthesisUtterance(text)
       if (selectedVoice) u.voice = selectedVoice
+      else {
+        const fallback = synth.getVoices().find((v) => /en/i.test(v.lang))
+        if (fallback) u.voice = fallback
+      }
       u.lang = selectedVoice?.lang || 'en-US'
       u.pitch = 1; u.rate = 1
       u.onstart = () => { if (speakTokenRef.current === token) { setMode('speaking'); startSpeakingMotion() }}
@@ -340,6 +345,7 @@ const MissionControl = () => {
       addMessage('agent', 'Speech recognition is not supported in this browser. Try Chrome or Edge.')
       return
     }
+    try { window.speechSynthesis?.resume?.() } catch {}
     if (mode === 'listening') {
       recognitionRef.current.stop()
       setMode('idle')
@@ -498,7 +504,7 @@ const MissionControl = () => {
 
               {/* Center text */}
               <div
-                onClick={() => setChatOpen(true)}
+                onClick={toggleListening}
                 className="absolute inset-0 flex flex-col items-center justify-center text-center cursor-pointer group"
               >
                 <span className={`text-4xl lg:text-5xl font-light tracking-wide text-white/95 transition-all duration-300 group-hover:scale-110 ${mode !== 'idle' ? 'scale-110' : ''}`}>

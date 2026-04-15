@@ -330,8 +330,13 @@ export default function JarvisOrb() {
       return
     }
     try {
+      try { synth.resume() } catch {}
       const u = new SpeechSynthesisUtterance(text)
       if (selectedVoice) u.voice = selectedVoice
+      else {
+        const fallback = synth.getVoices().find((v) => /en/i.test(v.lang))
+        if (fallback) u.voice = fallback
+      }
       u.lang = selectedVoice?.lang || 'en-US'
       u.pitch = 1
       u.rate = 1
@@ -402,6 +407,7 @@ export default function JarvisOrb() {
       addMessage('agent', 'Speech recognition is not supported in this browser. Try Chrome or Edge.')
       return
     }
+    try { window.speechSynthesis?.resume?.() } catch {}
     if (mode === 'listening') {
       recognitionRef.current.stop()
       setMode('idle')
