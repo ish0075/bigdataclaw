@@ -6,7 +6,7 @@ import {
 } from 'lucide-react'
 
 // API Base URL
-const API_BASE = '/api'
+const API_BASE = import.meta.env.VITE_API_URL || 'https://bigdataclaw.srv1368913.hstgr.cloud'
 
 // Sample Brokerages Data (fallback if API fails)
 const SAMPLE_BROKERAGES = [
