@@ -111,7 +111,7 @@ const MissionControl = () => {
     try {
       const [hm, opp, pc] = await Promise.allSettled([
         fetch(`${API_BASE}/api/hotmoney?limit=1&days=90`),
-        fetch(`${API_BASE}/api/opportunities/gold?limit=1`),
+        fetch(`${API_BASE}/api/opportunities?limit=1`),
         fetch(`${API_BASE}/api/paperclip/companies`).catch(() => null),
       ])
       const m = { hotMoney: null, opportunities: null, distressed: null, companies: null }
@@ -121,7 +121,7 @@ const MissionControl = () => {
       }
       if (opp.status === 'fulfilled' && opp.value.ok) {
         const d = await opp.value.json()
-        m.opportunities = d.opportunities?.length || 0
+        m.opportunities = Array.isArray(d) ? d.length : (d.opportunities?.length || 0)
         m.distressed = d.stats?.total_flagged || 0
       }
       if (pc.status === 'fulfilled' && pc.value?.ok) {
@@ -512,7 +512,7 @@ const MissionControl = () => {
       {/* Stats Row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
         <StatCard title="Active Missions" value={stats.activeMissions} trend={{ value: 3, label: 'new', positive: true }} icon={Activity} color="blue" />
-        <StatCard title="Hot Money Alerts" value={stats.hotMoneyAlerts} trend={{ value: 8, label: 'new', positive: true }} icon={DollarSign} color="red" />
+        <StatCard title="Hot Money Alerts" value={metrics.hotMoney ?? stats.hotMoneyAlerts} trend={{ value: 8, label: 'new', positive: true }} icon={DollarSign} color="red" />
         <StatCard title="Tracked Capital" value={`$${(stats.trackedCapital / 1e9).toFixed(1)}B`} trend={{ value: 12, label: 'growth', positive: true }} icon={TrendingUp} color="green" />
         <StatCard title="Matches Today" value={stats.matchesToday} trend={{ value: 24, label: 'new', positive: true }} icon={Target} color="yellow" />
       </div>

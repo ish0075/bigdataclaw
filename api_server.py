@@ -889,6 +889,74 @@ async def get_opportunities(
         "total": len(opportunities)
     }
 
+class VoiceAgentRequest(BaseModel):
+    message: str
+    history: Optional[List[Dict[str, Any]]] = None
+
+@app.post("/api/voice/agent")
+async def voice_agent(request: VoiceAgentRequest):
+    """Simple text voice agent endpoint for Mission Control."""
+    text = request.message.strip().lower()
+    history = request.history or []
+
+    actions = []
+
+    # Simple rule-based responses (same logic as frontend rulesReply)
+    if not text:
+        reply = "I did not catch that. Try asking for hot money, opportunities, or navigating to a page."
+    elif any(greeting in text for greeting in ("hello", "hi", "hey", "good morning", "good evening")):
+        reply = "Hello. I am Kimi, your Mission Control Voice Agent. I can help you query deals, check hot money leads, and navigate the dashboard."
+    elif any(phrase in text for phrase in ("introduce yourself", "who are you", "what are you")):
+        reply = "I am Kimi, the Mission Control Voice Agent. I can speak, listen, query your real estate database, and navigate the dashboard on command."
+    elif any(phrase in text for phrase in ("what can you do", "help", "commands")):
+        reply = "You can ask me about hot money leads, distressed deals, navigate to any page, or search for a specific property or buyer."
+    elif "time" in text:
+        reply = "It is " + datetime.now().strftime("%I:%M %p") + "."
+    elif any(phrase in text for phrase in ("date", "day today", "today")):
+        reply = "Today is " + datetime.now().strftime("%A, %B %d, %Y") + "."
+    elif any(phrase in text for phrase in ("stop talking", "be quiet", "mute")):
+        reply = "Stopping speech output."
+    else:
+        # Try Gemma 4 if available
+        engine = get_gemma4_engine()
+        if engine:
+            try:
+                prompt = [
+                    "You are Mission Control, a concise voice assistant for a real estate intelligence dashboard.",
+                    "Answer in 2-4 sentences max. Prefer direct spoken-style phrasing.",
+                    "User request: " + request.message
+                ]
+                if history:
+                    prompt.append("Conversation history: " + json.dumps(history))
+                result = engine.chat("\n".join(prompt))
+                reply = result.get("response", "I'm not sure how to respond to that.")
+            except Exception as e:
+                reply = f"I heard: {request.message}. Let me look into that for you."
+        else:
+            reply = f"I heard: {request.message}. The backend agent is running in simple mode. Try asking me to navigate to a page or ask a simple question."
+
+    # Navigation actions
+    nav_keywords = ["navigate to", "go to", "open", "take me to", "show me"]
+    for kw in nav_keywords:
+        if kw in text:
+            dest = text.split(kw, 1)[1].strip()
+            route_map = {
+                "mission control": "/", "home": "/", "dashboard": "/",
+                "hot money": "/hotmoney", "opportunities": "/opportunities",
+                "paperclip": "/paperclip-dashboard", "listings": "/listings",
+                "buyers": "/buyers", "agents": "/agents-matcher", "builders": "/builders",
+            }
+            for key, route in route_map.items():
+                if key in dest:
+                    actions.append({"type": "navigate", "route": route})
+                    break
+            break
+
+    return {
+        "response": reply,
+        "actions": actions
+    }
+
 # ============================================================================
 # HEALTH & INFO
 # ============================================================================
