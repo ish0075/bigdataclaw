@@ -346,16 +346,28 @@ export default function JarvisOrb() {
       u.lang = selectedVoice?.lang || 'en-US'
       u.pitch = 1
       u.rate = 1
+      let started = false
+      const safetyTimeout = setTimeout(() => {
+        if (!started && speakTokenRef.current === token) {
+          console.warn('TTS blocked or failed to start; resetting.')
+          resetSpeechState()
+        }
+      }, 2500)
       u.onstart = () => {
+        started = true
+        clearTimeout(safetyTimeout)
         if (speakTokenRef.current !== token) return
         setMode('speaking')
         startSpeakingMotion()
       }
       u.onend = () => {
+        clearTimeout(safetyTimeout)
         if (speakTokenRef.current !== token) return
         resetSpeechState()
       }
-      u.onerror = () => {
+      u.onerror = (e) => {
+        clearTimeout(safetyTimeout)
+        console.warn('TTS error:', e.error)
         if (speakTokenRef.current !== token) return
         resetSpeechState()
       }
@@ -413,7 +425,12 @@ export default function JarvisOrb() {
       addMessage('agent', 'Speech recognition is not supported in this browser. Try Chrome or Edge.')
       return
     }
-    try { window.speechSynthesis?.resume?.() } catch {}
+    try {
+      window.speechSynthesis?.resume?.()
+      const dummy = new SpeechSynthesisUtterance('')
+      window.speechSynthesis?.speak?.(dummy)
+      window.speechSynthesis?.cancel?.()
+    } catch {}
     if (mode === 'listening') {
       recognitionRef.current.stop()
       setMode('idle')
