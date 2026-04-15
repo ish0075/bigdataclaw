@@ -169,18 +169,24 @@ const MissionControl = () => {
 
     if (backendAvailable) {
       try {
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), 12000)
         const res = await fetch(`${API_BASE}/api/voice/agent`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: text, history: messages.slice(-10) }),
+          signal: controller.signal,
         })
+        clearTimeout(timeoutId)
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         const data = await res.json()
         reply = data.response || "I'm not sure how to respond to that."
         actions = data.actions || []
       } catch (e) {
         console.error('Backend voice agent error:', e)
-        // Don't permanently disable backend; it may be a transient network/CORS hiccup
+        if (e.name === 'AbortError') {
+          reply = "The backend took too long to respond. Try a simpler question like 'Show hot money' or 'Hello'."
+        }
       }
     }
 

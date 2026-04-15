@@ -2,6 +2,7 @@
 Agent Router for Mission Control Voice Agent
 Handles intent detection, database queries, web search, and LLM synthesis.
 """
+import asyncio
 import json
 import os
 import re
@@ -77,7 +78,7 @@ def get_db():
     return conn
 
 
-async def ollama_chat(prompt: str, model: Optional[str] = None, temperature: float = 0.7, max_tokens: int = 1024) -> str:
+async def ollama_chat(prompt: str, model: Optional[str] = None, temperature: float = 0.7, max_tokens: int = 1024, timeout_seconds: float = 8.0) -> str:
     model = model or OLLAMA_MODEL
     try:
         async with httpx.AsyncClient() as client:
@@ -89,7 +90,7 @@ async def ollama_chat(prompt: str, model: Optional[str] = None, temperature: flo
                     "stream": False,
                     "options": {"temperature": temperature, "num_predict": max_tokens}
                 },
-                timeout=60.0
+                timeout=timeout_seconds
             )
             if response.status_code == 200:
                 return response.json().get("response", "").strip()
@@ -106,17 +107,22 @@ async def search_web(query: str, max_results: int = 3) -> str:
     if DDGS is None:
         return "Web search is currently unavailable."
     try:
-        with DDGS() as ddgs:
-            results = []
-            for r in ddgs.text(query, region="wt-wt", safesearch="moderate", max_results=max_results):
-                title = r.get("title", "")
-                body = r.get("body", "")
-                href = r.get("href", "")
-                if title and body:
-                    results.append(f"{title}\n{body}\n{href}")
-            if not results:
-                return "No web results found."
-            return "\n\n".join(results)
+        async def _search():
+            with DDGS() as ddgs:
+                results = []
+                for r in ddgs.text(query, region="wt-wt", safesearch="moderate", max_results=max_results):
+                    title = r.get("title", "")
+                    body = r.get("body", "")
+                    href = r.get("href", "")
+                    if title and body:
+                        results.append(f"{title}\n{body}\n{href}")
+                return results
+        results = await asyncio.wait_for(_search(), timeout=8.0)
+        if not results:
+            return "No web results found."
+        return "\n\n".join(results)
+    except asyncio.TimeoutError:
+        return "Web search timed out."
     except Exception as e:
         print(f"Web search error: {e}")
         return "Web search is temporarily unavailable."
