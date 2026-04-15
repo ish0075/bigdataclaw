@@ -76,6 +76,16 @@ QUICK_LINKS_BUILDERS.csv
 QUICK_LINKS_LENDERS.csv
 QUICK_LINKS_LENDERS_V2.csv
 QUICK_LINKS_RECRUITER_DATABASE.csv
+nerve/public/data/recruiters_full.json
+nerve/.vercel/output/static/data/recruiters_full.json
+
+# Playwright console log accumulation
+.playwright-mcp/
+
+# Member media assets
+members/*/video.mp4
+members/*/character.webm
+mmb-deploy/members/*/character.webm
 
 # Explicit secret files (never commit)
 GITHUB_SECRETS.txt
