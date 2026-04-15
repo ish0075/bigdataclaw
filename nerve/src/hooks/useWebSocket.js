@@ -12,16 +12,23 @@ export const useWebSocket = () => {
   
   const connect = useCallback(() => {
     const wsUrl = import.meta.env.VITE_WS_URL || 'ws://localhost:3090/ws'
-    
+
+    // Don't try to connect to localhost WebSocket when running on a remote domain
+    const isRemote = typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
+    if (isRemote && wsUrl.includes('localhost')) {
+      console.log('Skipping localhost WebSocket in production')
+      return
+    }
+
     ws.current = new WebSocket(wsUrl)
-    
+
     ws.current.onopen = () => {
       console.log('WebSocket connected')
       setConnected(true)
       // Subscribe to channels
       ws.current.send(JSON.stringify({ type: 'subscribe', channels: ['missions', 'agents', 'hotmoney'] }))
     }
-    
+
     ws.current.onmessage = (event) => {
       try {
         const message = JSON.parse(event.data)
@@ -30,14 +37,14 @@ export const useWebSocket = () => {
         console.error('WebSocket message error:', err)
       }
     }
-    
+
     ws.current.onclose = () => {
       console.log('WebSocket disconnected')
       setConnected(false)
       // Reconnect after 3 seconds
       reconnectTimeout.current = setTimeout(connect, 3000)
     }
-    
+
     ws.current.onerror = (error) => {
       console.error('WebSocket error:', error)
     }
