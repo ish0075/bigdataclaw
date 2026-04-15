@@ -1043,19 +1043,22 @@ async def get_lenders(
     params = []
     
     if search:
-        # Use FTS for search
-        escaped_search = search.replace('"', '""')
-        fts_query = f'"{escaped_search}"'
-        cursor.execute('''
-            SELECT rowid FROM lenders_fts 
-            WHERE lenders_fts MATCH ?
-        ''', (fts_query,))
-        ids = [row[0] for row in cursor.fetchall()]
-        if ids:
-            conditions.append(f"id IN ({','.join('?' * len(ids))})")
-            params.extend(ids)
-        else:
-            # Fallback to LIKE
+        # Try FTS for search; fallback to LIKE if FTS table is missing
+        try:
+            escaped_search = search.replace('"', '""')
+            fts_query = f'"{escaped_search}"'
+            cursor.execute('''
+                SELECT rowid FROM lenders_fts 
+                WHERE lenders_fts MATCH ?
+            ''', (fts_query,))
+            ids = [row[0] for row in cursor.fetchall()]
+            if ids:
+                conditions.append(f"id IN ({','.join('?' * len(ids))})")
+                params.extend(ids)
+            else:
+                conditions.append("(name LIKE ? OR lender_type LIKE ?)")
+                params.extend([f'%{search}%', f'%{search}%'])
+        except Exception:
             conditions.append("(name LIKE ? OR lender_type LIKE ?)")
             params.extend([f'%{search}%', f'%{search}%'])
     
@@ -1087,7 +1090,10 @@ async def get_lenders(
     for row in rows:
         lender = dict(row)
         if lender.get('quick_links'):
-            lender['quick_links'] = json.loads(lender['quick_links'])
+            try:
+                lender['quick_links'] = json.loads(lender['quick_links'])
+            except Exception:
+                lender['quick_links'] = {}
         lenders.append(lender)
     
     conn.close()
