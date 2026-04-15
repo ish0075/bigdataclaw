@@ -9,7 +9,7 @@ import {
 import UniversalEditModal from '../components/Common/UniversalEditModal';
 
 // API Base URL
-const API_BASE = import.meta.env.VITE_API_URL || 'https://bigdataclaw.srv1368913.hstgr.cloud';
+const API_BASE = (import.meta.env.VITE_API_URL || 'https://bigdataclaw.srv1368913.hstgr.cloud') + '/api';
 
 // Custom WeChat Icon
 const WeChatIcon = () => (
