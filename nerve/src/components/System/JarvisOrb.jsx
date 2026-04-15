@@ -308,6 +308,11 @@ export default function JarvisOrb() {
     try { synth?.cancel?.() } catch {}
     stopOrbMotion()
 
+    const onSpeakFail = () => {
+      resetSpeechState()
+      setIsOpen(true)
+    }
+
     // Try local bridge first
     if (bridgeAvailable) {
       try {
@@ -332,7 +337,7 @@ export default function JarvisOrb() {
 
     // Browser fallback
     if (!synth) {
-      resetSpeechState()
+      onSpeakFail()
       return
     }
     try {
@@ -349,8 +354,8 @@ export default function JarvisOrb() {
       let started = false
       const safetyTimeout = setTimeout(() => {
         if (!started && speakTokenRef.current === token) {
-          console.warn('TTS blocked or failed to start; resetting.')
-          resetSpeechState()
+          console.warn('TTS blocked or failed to start; opening chat fallback.')
+          onSpeakFail()
         }
       }, 2500)
       u.onstart = () => {
@@ -369,11 +374,11 @@ export default function JarvisOrb() {
         clearTimeout(safetyTimeout)
         console.warn('TTS error:', e.error)
         if (speakTokenRef.current !== token) return
-        resetSpeechState()
+        onSpeakFail()
       }
       synth.speak(u)
     } catch {
-      resetSpeechState()
+      onSpeakFail()
     }
   }
 

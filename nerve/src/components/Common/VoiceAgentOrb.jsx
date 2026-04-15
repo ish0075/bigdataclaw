@@ -236,6 +236,12 @@ const VoiceAgentOrb = ({ className = '' }) => {
     try { synth?.cancel?.() } catch {}
     stopOrbMotion()
 
+    // Helper: if TTS fails, show the reply in chat so the user isn't left hanging
+    const onSpeakFail = () => {
+      resetSpeechState()
+      setChatOpen(true)
+    }
+
     if (bridgeAvailable) {
       try {
         setMode('speaking')
@@ -254,7 +260,7 @@ const VoiceAgentOrb = ({ className = '' }) => {
       }
     }
 
-    if (!synth) { resetSpeechState(); return }
+    if (!synth) { onSpeakFail(); return }
     try {
       try { synth.resume() } catch {}
       const u = new SpeechSynthesisUtterance(text)
@@ -268,8 +274,8 @@ const VoiceAgentOrb = ({ className = '' }) => {
       let started = false
       const safetyTimeout = setTimeout(() => {
         if (!started && speakTokenRef.current === token) {
-          console.warn('TTS blocked or failed to start; resetting.')
-          resetSpeechState()
+          console.warn('TTS blocked or failed to start; opening chat fallback.')
+          onSpeakFail()
         }
       }, 2500)
       u.onstart = () => {
@@ -284,10 +290,10 @@ const VoiceAgentOrb = ({ className = '' }) => {
       u.onerror = (e) => {
         clearTimeout(safetyTimeout)
         console.warn('TTS error:', e.error)
-        if (speakTokenRef.current === token) resetSpeechState()
+        if (speakTokenRef.current === token) onSpeakFail()
       }
       synth.speak(u)
-    } catch { resetSpeechState() }
+    } catch { onSpeakFail() }
   }
 
   const stopCurrentSpeech = () => {
