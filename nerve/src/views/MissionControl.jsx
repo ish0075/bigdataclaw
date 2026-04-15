@@ -6,7 +6,7 @@ import StatCard from '../components/Common/StatCard'
 import { 
   Mic, MicOff, Square, MessageSquare, X, Send, 
   Rocket, Activity, DollarSign, Target, TrendingUp, 
-  Flame, Building2, Users, Zap, ChevronRight
+  Flame, Building2, Users, Zap, ChevronRight, Paperclip
 } from 'lucide-react'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://bigdataclaw.srv1368913.hstgr.cloud'
@@ -42,6 +42,8 @@ const MissionControl = () => {
   const transcriptEndRef = useRef(null)
   const speakTokenRef = useRef(0)
   const orbTimerRef = useRef(null)
+  const fileInputRef = useRef(null)
+  const [uploading, setUploading] = useState(false)
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
@@ -134,11 +136,11 @@ const MissionControl = () => {
     }
   }
 
-  const addMessage = (role, text) => {
+  const addMessage = (role, text, meta = null) => {
     setMessages((prev) => {
       const last = prev[prev.length - 1]
       if (last && last.role === role && last.text === text) return prev
-      return [...prev, { role, text, time: new Date().toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' }) }]
+      return [...prev, { role, text, time: new Date().toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' }), meta }]
     })
   }
 
@@ -197,6 +199,11 @@ const MissionControl = () => {
 
     for (const action of actions) {
       if (action.type === 'navigate' && action.route) navigate(action.route)
+      if (action.type === 'open_deal' && action.route) navigate(action.route)
+      if (action.type === 'show_satellite' && action.address) {
+        const q = encodeURIComponent(action.address)
+        window.open(`https://www.google.com/maps/search/?api=1&query=${q}`, '_blank', 'noopener,noreferrer')
+      }
     }
 
     await speak(reply)
@@ -334,6 +341,37 @@ const MissionControl = () => {
     if (!text) return
     setChatInput('')
     handleUserInput(text)
+  }
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setUploading(true)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      const res = await fetch(`${API_BASE}/api/agent/upload`, {
+        method: 'POST',
+        body: formData,
+      })
+      const data = await res.json()
+      let msg = `Uploaded **${data.filename}**.`
+      if (data.summary) msg += `\n\nSummary:\n${data.summary}`
+      else if (data.note) msg += `\n\nNote: ${data.note}`
+      else if (data.error) msg += `\n\nError: ${data.error}`
+      if (data.image_url) {
+        addMessage('user', `[Image: ${data.filename}]`)
+        addMessage('agent', msg, { image_url: data.image_url })
+      } else {
+        addMessage('user', `[File: ${data.filename}]`)
+        addMessage('agent', msg)
+      }
+    } catch (err) {
+      addMessage('agent', `Upload failed: ${err.message}`)
+    } finally {
+      setUploading(false)
+      if (fileInputRef.current) fileInputRef.current.value = ''
+    }
   }
 
   const orbLabel = mode === 'listening' ? 'Listening…' : mode === 'thinking' ? 'Thinking…' : mode === 'speaking' ? 'Speaking…' : 'Kimi'
@@ -591,7 +629,7 @@ const MissionControl = () => {
                 <div className="text-center text-slate-500 text-sm py-10">
                   <p className="mb-3">Say or type a command to get started.</p>
                   <div className="flex flex-wrap justify-center gap-2">
-                    {['Show hot money', 'Distressed deals', 'Navigate to Opportunities', 'Who bought Lime Ridge Mall?', 'Draft referral for 123 Main St'].map((p) => (
+                    {['Show hot money', 'How many opportunities?', 'Daily briefing', 'Satellite view of 100 Senior Living Blvd', 'Analyze property at 123 Main St'].map((p) => (
                       <button
                         key={p}
                         onClick={() => handleUserInput(p)}
@@ -611,6 +649,13 @@ const MissionControl = () => {
                       : 'bg-slate-800 border border-slate-700 text-slate-100 rounded-bl-md'
                   }`}>
                     <p className="leading-relaxed whitespace-pre-wrap">{m.text}</p>
+                    {m.meta?.image_url && (
+                      <img
+                        src={`${API_BASE}${m.meta.image_url}`}
+                        alt="Uploaded"
+                        className="mt-2 rounded-lg max-w-full border border-slate-600"
+                      />
+                    )}
                     <div className={`text-[10px] mt-1 ${m.role === 'user' ? 'text-cyan-200' : 'text-slate-500'}`}>{m.time}</div>
                   </div>
                 </div>
@@ -640,15 +685,31 @@ const MissionControl = () => {
             <div className="p-4 border-t border-slate-700/50 bg-slate-900/60">
               <div className="flex items-center gap-2">
                 <input
+                  ref={fileInputRef}
+                  type="file"
+                  className="hidden"
+                  onChange={handleFileChange}
+                  accept=".txt,.md,.csv,.json,.png,.jpg,.jpeg,.pdf"
+                />
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading || mode === 'thinking'}
+                  className="px-3 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-slate-300 text-sm transition-colors"
+                  title="Upload file"
+                >
+                  <Paperclip className="w-4 h-4" />
+                </button>
+                <input
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && sendChat()}
-                  placeholder="Type a command..."
-                  className="flex-1 px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-cyan-500/50"
+                  placeholder={uploading ? 'Uploading file…' : 'Type a command...'}
+                  disabled={uploading}
+                  className="flex-1 px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 disabled:opacity-50"
                 />
                 <button
                   onClick={sendChat}
-                  disabled={!chatInput.trim() || mode === 'thinking'}
+                  disabled={!chatInput.trim() || mode === 'thinking' || uploading}
                   className="px-4 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-semibold transition-colors"
                 >
                   <Send className="w-4 h-4" />

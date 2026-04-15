@@ -14,6 +14,7 @@ from datetime import datetime
 from fastapi import FastAPI, Query, HTTPException, UploadFile, File, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from qdrant_client import QdrantClient
 import uvicorn
@@ -26,6 +27,7 @@ from bot_builder_api import router as bot_builder_router
 from realtor_bot_api import router as realtor_bot_router
 from ai_builder_api import router as ai_builder_router
 from nerve.server.paperclip_bridge import router as paperclip_router
+import agent_router
 
 # Initialize FastAPI
 app = FastAPI(
@@ -51,6 +53,11 @@ app.include_router(bot_builder_router)
 app.include_router(realtor_bot_router)
 app.include_router(ai_builder_router)
 app.include_router(paperclip_router)
+
+# Static uploads for agent file analysis
+uploads_dir = Path('uploads')
+uploads_dir.mkdir(exist_ok=True)
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 # Database paths
 DB_PATH = Path('bigdataclaw.db')
@@ -895,67 +902,40 @@ class VoiceAgentRequest(BaseModel):
 
 @app.post("/api/voice/agent")
 async def voice_agent(request: VoiceAgentRequest):
-    """Simple text voice agent endpoint for Mission Control."""
-    text = request.message.strip().lower()
-    history = request.history or []
+    """Multimodal voice agent endpoint for Mission Control."""
+    result = await agent_router.handle_request(request.message, request.history)
+    return result
 
-    actions = []
+@app.post("/api/agent/upload")
+async def agent_upload(file: UploadFile = File(...)):
+    """Upload a file for the Mission Control agent to analyze."""
+    content = await file.read()
+    filename = file.filename or "upload"
+    ext = Path(filename).suffix.lower()
+    result = {"filename": filename, "type": ext, "size": len(content)}
 
-    # Simple rule-based responses (same logic as frontend rulesReply)
-    if not text:
-        reply = "I did not catch that. Try asking for hot money, opportunities, or navigating to a page."
-    elif any(greeting in text for greeting in ("hello", "hi", "hey", "good morning", "good evening")):
-        reply = "Hello. I am Kimi, your Mission Control Voice Agent. I can help you query deals, check hot money leads, and navigate the dashboard."
-    elif any(phrase in text for phrase in ("introduce yourself", "who are you", "what are you")):
-        reply = "I am Kimi, the Mission Control Voice Agent. I can speak, listen, query your real estate database, and navigate the dashboard on command."
-    elif any(phrase in text for phrase in ("what can you do", "help", "commands")):
-        reply = "You can ask me about hot money leads, distressed deals, navigate to any page, or search for a specific property or buyer."
-    elif "time" in text:
-        reply = "It is " + datetime.now().strftime("%I:%M %p") + "."
-    elif any(phrase in text for phrase in ("date", "day today", "today")):
-        reply = "Today is " + datetime.now().strftime("%A, %B %d, %Y") + "."
-    elif any(phrase in text for phrase in ("stop talking", "be quiet", "mute")):
-        reply = "Stopping speech output."
+    if ext in [".txt", ".md", ".csv", ".json"]:
+        try:
+            text = content.decode("utf-8")
+            result["text_preview"] = text[:2000]
+            summary_prompt = f"Summarize the following {ext} file content in 3-5 bullet points. Be concise:\n\n{text[:8000]}"
+            summary = await agent_router.ollama_chat(summary_prompt, temperature=0.5, max_tokens=512)
+            result["summary"] = summary or "Summary unavailable."
+        except Exception as e:
+            result["error"] = f"Text decode error: {str(e)}"
+    elif ext in [".png", ".jpg", ".jpeg", ".gif", ".webp"]:
+        upload_dir = Path("uploads/agent")
+        upload_dir.mkdir(parents=True, exist_ok=True)
+        safe_name = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{filename}"
+        file_path = upload_dir / safe_name
+        with open(file_path, "wb") as f:
+            f.write(content)
+        result["image_url"] = f"/uploads/agent/{safe_name}"
+        result["note"] = "Image stored. Visual analysis requires a vision model (not yet configured)."
     else:
-        # Try Gemma 4 if available
-        engine = get_gemma4_engine()
-        if engine:
-            try:
-                prompt = [
-                    "You are Mission Control, a concise voice assistant for a real estate intelligence dashboard.",
-                    "Answer in 2-4 sentences max. Prefer direct spoken-style phrasing.",
-                    "User request: " + request.message
-                ]
-                if history:
-                    prompt.append("Conversation history: " + json.dumps(history))
-                result = engine.chat("\n".join(prompt))
-                reply = result.get("response", "I'm not sure how to respond to that.")
-            except Exception as e:
-                reply = f"I heard: {request.message}. Let me look into that for you."
-        else:
-            reply = f"I heard: {request.message}. The backend agent is running in simple mode. Try asking me to navigate to a page or ask a simple question."
+        result["note"] = "File uploaded but analysis is only supported for text and image files right now."
 
-    # Navigation actions
-    nav_keywords = ["navigate to", "go to", "open", "take me to", "show me"]
-    for kw in nav_keywords:
-        if kw in text:
-            dest = text.split(kw, 1)[1].strip()
-            route_map = {
-                "mission control": "/", "home": "/", "dashboard": "/",
-                "hot money": "/hotmoney", "opportunities": "/opportunities",
-                "paperclip": "/paperclip-dashboard", "listings": "/listings",
-                "buyers": "/buyers", "agents": "/agents-matcher", "builders": "/builders",
-            }
-            for key, route in route_map.items():
-                if key in dest:
-                    actions.append({"type": "navigate", "route": route})
-                    break
-            break
-
-    return {
-        "response": reply,
-        "actions": actions
-    }
+    return result
 
 # ============================================================================
 # HEALTH & INFO
