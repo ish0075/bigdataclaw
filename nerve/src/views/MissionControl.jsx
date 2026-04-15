@@ -30,10 +30,10 @@ const MissionControl = () => {
   const [selectedVoice, setSelectedVoice] = useState(null)
   const [backendAvailable, setBackendAvailable] = useState(true)
   const [metrics, setMetrics] = useState({
-    hotMoney: 0,
-    opportunities: 0,
-    distressed: 0,
-    companies: 0,
+    hotMoney: null,
+    opportunities: null,
+    distressed: null,
+    companies: null,
   })
   const isLocalhost = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
 
@@ -114,7 +114,7 @@ const MissionControl = () => {
         fetch(`${API_BASE}/api/opportunities/gold?limit=1`),
         fetch(`${API_BASE}/api/paperclip/companies`).catch(() => null),
       ])
-      const m = { hotMoney: 0, opportunities: 0, distressed: 0, companies: 0 }
+      const m = { hotMoney: null, opportunities: null, distressed: null, companies: null }
       if (hm.status === 'fulfilled' && hm.value.ok) {
         const d = await hm.value.json()
         m.hotMoney = Array.isArray(d) ? d.length : (d.leads?.length || 0)
@@ -162,8 +162,9 @@ const MissionControl = () => {
         const data = await res.json()
         reply = data.response || "I'm not sure how to respond to that."
         actions = data.actions || []
-      } catch {
-        setBackendAvailable(false)
+      } catch (e) {
+        console.error('Backend voice agent error:', e)
+        // Don't permanently disable backend; it may be a transient network/CORS hiccup
       }
     }
 
@@ -246,7 +247,8 @@ const MissionControl = () => {
   const speak = async (text) => {
     if (!text) return
     const token = ++speakTokenRef.current
-    stopCurrentSpeech()
+    try { synth?.cancel?.() } catch {}
+    stopOrbMotion()
 
     if (bridgeAvailable) {
       try {
@@ -268,7 +270,6 @@ const MissionControl = () => {
 
     if (!synth) { resetSpeechState(); return }
     try {
-      synth.cancel()
       const u = new SpeechSynthesisUtterance(text)
       if (selectedVoice) u.voice = selectedVoice
       u.lang = selectedVoice?.lang || 'en-US'
@@ -444,8 +445,11 @@ const MissionControl = () => {
               />
 
               {/* Center text */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                <span className={`text-4xl lg:text-5xl font-light tracking-wide text-white/95 transition-all duration-300 ${mode !== 'idle' ? 'scale-110' : ''}`}>
+              <div
+                onClick={() => setChatOpen(true)}
+                className="absolute inset-0 flex flex-col items-center justify-center text-center cursor-pointer group"
+              >
+                <span className={`text-4xl lg:text-5xl font-light tracking-wide text-white/95 transition-all duration-300 group-hover:scale-110 ${mode !== 'idle' ? 'scale-110' : ''}`}>
                   {orbLabel}
                 </span>
                 <span className="mt-2 text-xs lg:text-sm text-cyan-300/80 font-medium tracking-wider uppercase">
@@ -671,7 +675,7 @@ const FeatureCard = ({ icon: Icon, label, value, description, color, bg, border,
     </div>
     <div className="mt-4">
       <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{label}</div>
-      <div className="text-2xl font-bold text-white mt-1">{value}</div>
+      <div className={`text-2xl font-bold mt-1 ${value === null ? 'text-slate-500' : 'text-white'}`}>{value === null ? '—' : value}</div>
       <div className="text-xs text-slate-500 mt-1">{description}</div>
     </div>
   </button>

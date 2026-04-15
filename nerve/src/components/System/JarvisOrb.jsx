@@ -173,8 +173,9 @@ export default function JarvisOrb() {
         reply = data.response || "I'm not sure how to respond to that."
         actions = data.actions || []
         _modelUsed = data.model_used || 'backend'
-      } catch {
-        setBackendAvailable(false)
+      } catch (e) {
+        console.error('Backend voice agent error:', e)
+        // Don't permanently disable backend; it may be a transient network/CORS hiccup
       }
     }
 
@@ -288,7 +289,8 @@ export default function JarvisOrb() {
   const speak = async (text) => {
     if (!text) return
     const token = ++speakTokenRef.current
-    stopCurrentSpeech()
+    try { synth?.cancel?.() } catch {}
+    stopOrbMotion()
 
     // Try local bridge first
     if (bridgeAvailable) {
@@ -318,7 +320,6 @@ export default function JarvisOrb() {
       return
     }
     try {
-      synth.cancel()
       const u = new SpeechSynthesisUtterance(text)
       if (selectedVoice) u.voice = selectedVoice
       u.lang = selectedVoice?.lang || 'en-US'
