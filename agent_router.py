@@ -4,6 +4,7 @@ Handles intent detection, database queries, and LLM synthesis.
 """
 import json
 import os
+import re
 import sqlite3
 from pathlib import Path
 from typing import List, Optional, Dict, Any
@@ -12,7 +13,7 @@ import httpx
 
 DB_PATH = Path('bigdataclaw.db')
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen2.5:14b")
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen3:4b")
 
 def get_db():
     conn = sqlite3.connect(DB_PATH)
@@ -53,8 +54,6 @@ async def detect_intent(message: str) -> str:
         return "date"
     if any(s in text for s in ["stop talking", "be quiet", "mute"]):
         return "stop"
-    if any(n in text for n in ["navigate to", "go to ", "open ", "take me to", "show me"]):
-        return "navigate"
     if any(b in text for b in ["briefing", "daily report", "today's summary", "what's new today"]):
         return "briefing"
     if any(h in text for h in ["hot money", "cash buyers", "recent leads", "hot leads"]):
@@ -63,6 +62,8 @@ async def detect_intent(message: str) -> str:
         return "opportunities"
     if any(r in text for r in ["recruiter", "broker", "agent count"]):
         return "recruiters"
+    if any(m in text for m in ["match buyer", "find buyer", "who would buy"]):
+        return "buyer_match"
     if any(b in text for b in ["buyer", "capital source", "who is buying"]):
         return "buyers"
     if any(p in text for p in ["satellite", "aerial view", "map of", "image of property"]):
@@ -70,10 +71,10 @@ async def detect_intent(message: str) -> str:
     if any(p in text for p in ["analyze property", "property details", "research property", "tell me about", "what do you know about"]) \
        and (any(c.isdigit() for c in text) or "street" in text or "avenue" in text or "drive" in text or "road" in text or "blvd" in text):
         return "property_research"
-    if any(m in text for m in ["match buyer", "find buyer", "who would buy"]):
-        return "buyer_match"
     if any(s in text for s in ["stats", "dashboard numbers", "how many", "total "]):
         return "data_stats"
+    if any(n in text for n in ["navigate to", "go to ", "open ", "take me to", "show me"]):
+        return "navigate"
 
     # LLM fallback for ambiguous cases
     prompt = f"""Classify the user intent into exactly one of these categories:
@@ -154,7 +155,7 @@ async def query_buyers(limit: int = 5):
     cursor.execute("SELECT COUNT(*) FROM buyers")
     total = cursor.fetchone()[0]
     cursor.execute(
-        "SELECT name, city, province, buyer_type FROM buyers ORDER BY name LIMIT ?",
+        "SELECT company_name, contact_name, asset_class FROM buyers ORDER BY company_name LIMIT ?",
         [limit]
     )
     rows = [dict(r) for r in cursor.fetchall()]
@@ -175,6 +176,28 @@ async def query_data_stats():
     return stats
 
 async def extract_property_address(message: str) -> Optional[Dict[str, Any]]:
+    text = message.strip()
+    # Try standard street address first
+    addr_match = re.search(
+        r"(\d+\s+[A-Za-z0-9\s]+(?:Street|St|Avenue|Ave|Boulevard|Blvd|Road|Rd|Drive|Dr|Court|Ct|Lane|Ln|Way|Trail|Trl|Place|Pl|Terrace|Ter|Circle|Cir))",
+        text, re.IGNORECASE
+    )
+    address = addr_match.group(1).strip() if addr_match else None
+    # If no street address, try building/landmark name
+    if not address:
+        landmark_match = re.search(
+            r"(?:of|for|at|about|view of|image of|map of)\s+([A-Z][A-Za-z0-9\s]+(?:Mall|Plaza|Centre|Center|Tower|Park|Gardens|Square|Station|Airport|Hotel|Resort|Building|Complex))",
+            text, re.IGNORECASE
+        )
+        address = landmark_match.group(1).strip() if landmark_match else None
+    city_match = re.search(
+        r"(?:in\s+|,\s*)([A-Za-z\s]+?)(?=\s+(?:Ontario|ON|Canada|QC|Quebec|\d|$))",
+        text, re.IGNORECASE
+    )
+    city = city_match.group(1).strip() if city_match else None
+    if address:
+        return {"address": address, "city": city}
+    # Fallback to Ollama
     prompt = f"""Extract property information from this text and return ONLY valid JSON:
 {{
   "address": "street address or null",
@@ -212,7 +235,51 @@ async def synthesize_response(intent: str, data: Any, user_message: str) -> str:
         return "Today is " + datetime.now().strftime("%A, %B %d, %Y") + "."
     if intent == "stop":
         return "Stopping speech output."
+    if intent == "hot_money":
+        total = data.get('total', 0)
+        leads = data.get('leads', [])
+        if leads:
+            top = leads[0]
+            return f"We have {total:,} hot money leads on file. The top lead is {top.get('entity', 'an investor')} in {top.get('location', 'an unknown location')} with {top.get('cash_amount', 'significant')} cash looking for {top.get('asset_class', 'various assets')}."
+        return f"We have {total:,} hot money leads on file."
+    if intent == "opportunities":
+        total = data.get('total', 0)
+        opps = data.get('opportunities', [])
+        if opps:
+            top = opps[0]
+            return f"There are {total} opportunities in the pipeline. The latest is {top.get('address', 'a property')} in {top.get('city', '')} listed at {top.get('price', 'an undisclosed price')}."
+        return f"There are {total} opportunities in the pipeline right now."
+    if intent == "recruiters":
+        return f"There are {data.get('total', 0):,} recruiters in the database."
+    if intent == "buyers":
+        return f"There are {data.get('total', 0):,} tracked buyers."
+    if intent == "data_stats":
+        parts = []
+        for k, v in data.items():
+            label = k.replace('_', ' ').title()
+            parts.append(f"{label}: {v:,}")
+        return "Database snapshot. " + ". ".join(parts) + "."
+    if intent == "briefing":
+        stats = data.get("stats", {})
+        hm = data.get("recent_hot_money", {}).get("total", 0)
+        opp = data.get("recent_opportunities", {}).get("total", 0)
+        return f"Here is your daily briefing. The database has {stats.get('properties', 0):,} properties, {stats.get('opportunities', 0):,} opportunities, and {hm:,} hot money leads. There are {stats.get('recruiters', 0):,} recruiters and {stats.get('buyers', 0):,} buyers on file."
+    if intent == "property_research":
+        prop = data.get("property")
+        addr = data.get("extracted", {}).get("address", "that location")
+        if prop:
+            return f"I found a property at {prop.get('address', addr)} in {prop.get('city', 'the database')}. It is listed at {prop.get('price', 'an undisclosed price')} and is currently {prop.get('status', 'active')}."
+        else:
+            return f"I do not have a property record for {addr} in the database yet. Would you like me to research it or add it to the pipeline?"
+    if intent == "satellite":
+        addr = data.get("address", "that location")
+        return f"Opening satellite view for {addr}."
+    if intent == "buyer_match":
+        return "Opening the buyer matcher with those details."
+    if intent == "navigate":
+        return "Navigating now."
 
+    # LLM fallback only for open-ended chat
     prompt = f"""You are Kimi, a concise voice assistant for a commercial real estate dashboard.
 User asked: {user_message}
 Intent: {intent}
@@ -221,22 +288,6 @@ Respond in 2-4 sentences max, directly and conversationally. Do not use markdown
     response = await ollama_chat(prompt, temperature=0.6, max_tokens=512)
     if response:
         return response
-
-    # Hard fallbacks
-    if intent == "hot_money":
-        return f"We have {data.get('total', 0)} hot money leads on file."
-    if intent == "opportunities":
-        return f"There are {data.get('total', 0)} opportunities in the pipeline right now."
-    if intent == "recruiters":
-        return f"There are {data.get('total', 0)} recruiters in the database."
-    if intent == "buyers":
-        return f"There are {data.get('total', 0)} tracked buyers."
-    if intent == "data_stats":
-        return "Database snapshot: " + ", ".join([f"{k.replace('_', ' ')}: {v}" for k, v in data.items()])
-    if intent == "briefing":
-        return "Your daily briefing is ready. Stats look strong today."
-    if intent == "property_research":
-        return f"Property research complete. Here is what I found: {json.dumps(data)}."
     return "I'm not sure how to respond to that."
 
 async def handle_request(message: str, history: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
@@ -301,10 +352,16 @@ async def handle_request(message: str, history: Optional[List[Dict[str, Any]]] =
         extracted = await extract_property_address(message)
         if extracted:
             q = extracted.get("address") or extracted.get("city") or ""
-            response = "Opening the buyer matcher with those details."
+            response = f"Opening the buyer matcher for {q}."
             actions.append({"type": "navigate", "route": f"/buyers?search={q}"})
         else:
-            response = "Tell me the property address or city and I'll find matching buyers."
+            city_match = re.search(r"in\s+([A-Za-z\s]+?)(?=\s*$|\s+(?:for|with|and))", message, re.IGNORECASE)
+            if city_match:
+                q = city_match.group(1).strip()
+                response = f"Opening the buyer matcher for {q}."
+                actions.append({"type": "navigate", "route": f"/buyers?search={q}"})
+            else:
+                response = "Tell me the property address or city and I'll find matching buyers."
     else:
         prompt = f"""You are Mission Control, a concise voice assistant for a real estate intelligence dashboard.
 Answer in 2-4 sentences max. Prefer direct spoken-style phrasing.
