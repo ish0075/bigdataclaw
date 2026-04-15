@@ -18,7 +18,7 @@ services:
     networks:
       - bigdataclaw-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
+      test: ["CMD", "bash", "-c", "cat < /dev/null > /dev/tcp/localhost/6333"]
       interval: 30s
       timeout: 10s
       retries: 3

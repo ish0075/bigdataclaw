@@ -22,7 +22,8 @@ RUN pip install --no-cache-dir \
     pydantic \
     httpx \
     websockets \
-    aiohttp
+    aiohttp \
+    python-multipart
 
 # Copy application code
 COPY . .

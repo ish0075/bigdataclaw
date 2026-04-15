@@ -61,8 +61,8 @@ app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 # Database paths
 DB_PATH = Path('bigdataclaw.db')
-QDRANT_HOST = "localhost"
-QDRANT_PORT = 6333
+QDRANT_HOST = os.environ.get("QDRANT_HOST", "localhost")
+QDRANT_PORT = int(os.environ.get("QDRANT_PORT", "6333"))
 
 # Models
 class Recruiter(BaseModel):
