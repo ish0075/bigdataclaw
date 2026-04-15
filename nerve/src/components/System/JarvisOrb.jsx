@@ -34,9 +34,11 @@ export default function JarvisOrb() {
   })
   const [backendAvailable, setBackendAvailable] = useState(true)
   const isLocalhost = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  const isSpeechSupported = typeof window !== 'undefined' && !!(window.SpeechRecognition || window.webkitSpeechRecognition)
+  const isIOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
   const recognitionRef = useRef(null)
-  const synth = window.speechSynthesis
+  const synth = typeof window !== 'undefined' ? window.speechSynthesis : null
   const transcriptEndRef = useRef(null)
   const speakTokenRef = useRef(0)
   const orbTimerRef = useRef(null)
@@ -426,8 +428,12 @@ export default function JarvisOrb() {
   }
 
   const toggleListening = () => {
-    if (!recognitionRef.current) {
-      addMessage('agent', 'Speech recognition is not supported in this browser. Try Chrome or Edge.')
+    if (!isSpeechSupported) {
+      const msg = isIOS
+        ? "Voice input isn't supported on iPhone. I've opened chat so you can type your question."
+        : 'Speech recognition is not supported in this browser. Try Chrome or Edge on desktop, or use the chat below.'
+      addMessage('agent', msg)
+      setIsOpen(true)
       return
     }
     try {

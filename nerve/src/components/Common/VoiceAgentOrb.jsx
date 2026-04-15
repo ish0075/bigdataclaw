@@ -24,9 +24,11 @@ const VoiceAgentOrb = ({ className = '' }) => {
   const [backendAvailable] = useState(true)
   const [uploading, setUploading] = useState(false)
   const isLocalhost = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  const isSpeechSupported = typeof window !== 'undefined' && !!(window.SpeechRecognition || window.webkitSpeechRecognition)
+  const isIOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
   const recognitionRef = useRef(null)
-  const synth = window.speechSynthesis
+  const synth = typeof window !== 'undefined' ? window.speechSynthesis : null
   const transcriptEndRef = useRef(null)
   const speakTokenRef = useRef(0)
   const orbTimerRef = useRef(null)
@@ -330,8 +332,12 @@ const VoiceAgentOrb = ({ className = '' }) => {
   }
 
   const toggleListening = () => {
-    if (!recognitionRef.current) {
-      addMessage('agent', 'Speech recognition is not supported in this browser. Try Chrome or Edge.')
+    if (!isSpeechSupported) {
+      const msg = isIOS
+        ? "Voice input isn't supported on iPhone. I've opened chat so you can type your question."
+        : 'Speech recognition is not supported in this browser. Try Chrome or Edge on desktop, or use the chat below.'
+      addMessage('agent', msg)
+      setChatOpen(true)
       return
     }
     try {
@@ -389,7 +395,15 @@ const VoiceAgentOrb = ({ className = '' }) => {
   }
 
   const orbLabel = mode === 'listening' ? 'Listening…' : mode === 'thinking' ? 'Thinking…' : mode === 'speaking' ? 'Speaking…' : 'Kimi'
-  const orbSubLabel = mode === 'idle' ? 'Tap Speak to start' : mode === 'listening' ? 'Say something like "Show hot money"' : mode === 'thinking' ? 'Consulting the intelligence layer' : 'Responding'
+  const orbSubLabel = !isSpeechSupported
+    ? (isIOS ? "Voice input unavailable on iPhone — tap Chat" : "Voice input unavailable — tap Chat")
+    : mode === 'idle'
+    ? 'Tap Speak to start'
+    : mode === 'listening'
+    ? 'Say something like "Show hot money"'
+    : mode === 'thinking'
+    ? 'Consulting the intelligence layer'
+    : 'Responding'
 
   return (
     <div className={className}>
