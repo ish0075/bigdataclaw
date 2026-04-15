@@ -7,6 +7,7 @@ import { Mic } from 'lucide-react'
 const Layout = ({ children, connected, globalSearch }) => {
   const [showSettings, setShowSettings] = useState(false)
   const [notificationGranted, setNotificationGranted] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   // Handle voice dictation result
   const handleDictationResult = (text, targetElement) => {
@@ -40,14 +41,22 @@ const Layout = ({ children, connected, globalSearch }) => {
 
   return (
     <div className="min-h-screen bg-bg-primary flex">
+      {/* Mobile Sidebar Backdrop */}
+      {mobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-black/60 z-40 md:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar mobileOpen={mobileMenuOpen} onCloseMobile={() => setMobileMenuOpen(false)} />
       
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
-        <TopBar connected={connected} globalSearch={globalSearch} />
+        <TopBar connected={connected} globalSearch={globalSearch} onMenuClick={() => setMobileMenuOpen(true)} />
         
-        <main className="flex-1 overflow-auto p-6 scrollbar-thin">
+        <main className="flex-1 overflow-auto p-4 md:p-6 scrollbar-thin">
           <div className="max-w-7xl mx-auto">
             {children}
           </div>

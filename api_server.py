@@ -666,10 +666,7 @@ async def get_lenders(
     
     offset = (page - 1) * limit
     cursor.execute(f'''
-        SELECT id, name, domain, lender_type, asset_specializations,
-               is_land_lender, is_construction_lender, is_commercial_lender,
-               phone, email, city, province, quick_links
-        FROM lenders 
+        SELECT * FROM lenders 
         {where_clause}
         ORDER BY name
         LIMIT ? OFFSET ?
@@ -1125,19 +1122,27 @@ async def get_lender_stats():
     by_type = {row[0] or 'Other': row[1] for row in cursor.fetchall()}
     
     # By specialization
-    cursor.execute('''
-        SELECT 
-            SUM(is_commercial_lender) as commercial,
-            SUM(is_land_lender) as land,
-            SUM(is_construction_lender) as construction
-        FROM lenders
-    ''')
-    row = cursor.fetchone()
-    by_specialization = {
-        'commercial': row[0],
-        'land': row[1],
-        'construction': row[2]
-    }
+    try:
+        cursor.execute('''
+            SELECT 
+                SUM(is_commercial_lender) as commercial,
+                SUM(is_land_lender) as land,
+                SUM(is_construction_lender) as construction
+            FROM lenders
+        ''')
+        row = cursor.fetchone()
+        by_specialization = {
+            'commercial': row[0] or 0,
+            'land': row[1] or 0,
+            'construction': row[2] or 0
+        }
+    except sqlite3.OperationalError:
+        # Fallback if boolean columns don't exist in schema
+        by_specialization = {
+            'commercial': 0,
+            'land': 0,
+            'construction': 0
+        }
     
     conn.close()
     

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Bell, Settings, Wifi, WifiOff, Database } from 'lucide-react'
+import { Bell, Settings, Wifi, WifiOff, Database, Menu } from 'lucide-react'
 import VoiceControl from '../System/VoiceControl'
 import UsageMeter from '../System/UsageMeter'
 import PageHelp from './PageHelp'
@@ -32,7 +32,7 @@ const routeToPageName = {
   '/canva-editor': 'OlenaFeatureSheet'
 }
 
-const TopBar = ({ connected, globalSearch }) => {
+const TopBar = ({ connected, globalSearch, onMenuClick }) => {
   const location = useLocation()
   const navigate = useNavigate()
   const currentPage = routeToPageName[location.pathname] || null
@@ -59,10 +59,18 @@ const TopBar = ({ connected, globalSearch }) => {
   }
   
   return (
-    <header className="h-16 bg-bg-card border-b border-border-subtle flex items-center justify-between px-6">
-      {/* Left: MacOS Traffic Lights + Connection */}
-      <div className="flex items-center gap-4 w-1/4">
-        <div className="flex items-center gap-2">
+    <header className="h-16 bg-bg-card border-b border-border-subtle flex items-center justify-between px-4 md:px-6">
+      {/* Left: Mobile Menu + MacOS Traffic Lights + Connection */}
+      <div className="flex items-center gap-3 md:gap-4 w-1/4">
+        <button
+          onClick={onMenuClick}
+          className="p-2 rounded-lg hover:bg-bg-input transition-colors text-text-secondary hover:text-text-primary md:hidden"
+          aria-label="Open menu"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+        
+        <div className="hidden md:flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
           <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
           <div className="w-3 h-3 rounded-full bg-[#28C840]" />
@@ -73,24 +81,24 @@ const TopBar = ({ connected, globalSearch }) => {
           {connected ? (
             <>
               <Wifi className="w-4 h-4 text-accent-green" />
-              <span className="text-accent-green hidden md:inline">Connected</span>
+              <span className="text-accent-green hidden lg:inline">Connected</span>
             </>
           ) : (
             <>
               <WifiOff className="w-4 h-4 text-accent-red" />
-              <span className="text-accent-red hidden md:inline">Reconnecting...</span>
+              <span className="text-accent-red hidden lg:inline">Reconnecting...</span>
             </>
           )}
         </div>
       </div>
       
       {/* Center: Global Search */}
-      <div className="flex-1 max-w-2xl mx-4">
+      <div className="flex-1 max-w-2xl mx-2 md:mx-4 min-w-0">
         {globalSearch}
       </div>
       
       {/* Right: Actions */}
-      <div className="flex items-center gap-2 w-1/4 justify-end">
+      <div className="flex items-center gap-1 md:gap-2 w-1/4 justify-end">
         {/* Page Help Button - Shows for documented pages */}
         {currentPage && <PageHelp pageName={currentPage} />}
         

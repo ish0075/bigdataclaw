@@ -20,7 +20,8 @@ import {
   ChevronRight,
   PanelLeftClose,
   PanelLeftOpen,
-  Paperclip
+  Paperclip,
+  X
 } from 'lucide-react'
 
 const EXTERNAL_LINKS = []
@@ -73,7 +74,7 @@ const SECTIONS = [
 
 const STORAGE_KEY = 'nerve-sidebar-state'
 
-const Sidebar = () => {
+const Sidebar = ({ mobileOpen = false, onCloseMobile }) => {
   const [compact, setCompact] = useState(false)
   const [collapsedSections, setCollapsedSections] = useState({})
   const [mounted, setMounted] = useState(false)
@@ -109,7 +110,14 @@ const Sidebar = () => {
   }
 
   return (
-    <aside className={`bg-bg-card border-r border-border-subtle flex flex-col transition-all duration-300 ${compact ? 'w-[72px]' : 'w-64'}`}>
+    <aside 
+      className={`
+        bg-bg-card border-r border-border-subtle flex flex-col transition-all duration-300
+        fixed md:relative inset-y-0 left-0 z-50
+        ${mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+        ${compact ? 'w-[72px]' : 'w-64'}
+      `}
+    >
       {/* Logo / Compact Toggle */}
       <div className={`border-b border-border-subtle flex items-center justify-between ${compact ? 'p-3 flex-col gap-3' : 'p-4'}`}>
         <div className="flex items-center gap-3 overflow-hidden">
@@ -123,13 +131,22 @@ const Sidebar = () => {
             </div>
           )}
         </div>
-        <button
-          onClick={() => setCompact(!compact)}
-          className="p-1.5 rounded-lg hover:bg-bg-input text-text-muted hover:text-text-primary transition-colors flex-shrink-0"
-          title={compact ? 'Expand sidebar' : 'Collapse sidebar'}
-        >
-          {compact ? <PanelLeftOpen className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
-        </button>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={() => setCompact(!compact)}
+            className="hidden md:block p-1.5 rounded-lg hover:bg-bg-input text-text-muted hover:text-text-primary transition-colors flex-shrink-0"
+            title={compact ? 'Expand sidebar' : 'Collapse sidebar'}
+          >
+            {compact ? <PanelLeftOpen className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
+          </button>
+          <button
+            onClick={onCloseMobile}
+            className="md:hidden p-1.5 rounded-lg hover:bg-bg-input text-text-muted hover:text-text-primary transition-colors flex-shrink-0"
+            aria-label="Close menu"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
       </div>
       
       {/* Main Navigation */}
@@ -177,6 +194,7 @@ const Sidebar = () => {
                         <NavLink
                           key={item.path}
                           to={item.path}
+                          onClick={onCloseMobile}
                           className={({ isActive }) => 
                             `nav-item ${isActive ? 'active' : ''}`
                           }
@@ -204,6 +222,7 @@ const Sidebar = () => {
                     <NavLink
                       key={item.path}
                       to={item.path}
+                      onClick={onCloseMobile}
                       title={`${section.label} › ${item.label}${item.badge ? ` (${item.badge})` : ''}`}
                       className={({ isActive }) => 
                         `group relative flex items-center justify-center p-2.5 rounded-xl transition-all ${
@@ -241,6 +260,7 @@ const Sidebar = () => {
                 <NavLink
                   key={item.path}
                   to={item.path}
+                  onClick={onCloseMobile}
                   className={({ isActive }) => 
                     `nav-item ${isActive ? 'active' : ''}`
                   }
@@ -265,6 +285,7 @@ const Sidebar = () => {
               <NavLink
                 key={item.path}
                 to={item.path}
+                onClick={onCloseMobile}
                 title={`${item.label} (${item.badge})`}
                 className={({ isActive }) => 
                   `group relative flex items-center justify-center p-2.5 rounded-xl transition-all ${
