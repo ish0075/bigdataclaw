@@ -40,6 +40,7 @@ export default function JarvisOrb() {
   const transcriptEndRef = useRef(null)
   const speakTokenRef = useRef(0)
   const orbTimerRef = useRef(null)
+  const currentTranscriptRef = useRef('')
 
   // Initialize speech recognition
   useEffect(() => {
@@ -53,7 +54,13 @@ export default function JarvisOrb() {
 
       rec.onstart = () => setMode('listening')
       rec.onend = () => {
-        setMode((m) => (m === 'listening' ? 'idle' : m))
+        const pending = currentTranscriptRef.current.trim()
+        if (pending) {
+          currentTranscriptRef.current = ''
+          handleUserInput(pending)
+        } else {
+          setMode((m) => (m === 'listening' ? 'idle' : m))
+        }
       }
       rec.onerror = (e) => {
         console.error('STT error:', e.error)
@@ -70,7 +77,9 @@ export default function JarvisOrb() {
         }
         const current = final || interim
         setTranscript(current)
+        currentTranscriptRef.current = current
         if (final) {
+          currentTranscriptRef.current = ''
           handleUserInput(final.trim())
         }
       }
@@ -152,6 +161,7 @@ export default function JarvisOrb() {
 
   const handleUserInput = async (text) => {
     if (!text) return
+    currentTranscriptRef.current = ''
     addMessage('user', text)
     setTranscript('')
     setMode('thinking')

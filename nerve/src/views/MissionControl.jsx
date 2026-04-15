@@ -43,6 +43,7 @@ const MissionControl = () => {
   const speakTokenRef = useRef(0)
   const orbTimerRef = useRef(null)
   const fileInputRef = useRef(null)
+  const currentTranscriptRef = useRef('')
   const [uploading, setUploading] = useState(false)
 
   useEffect(() => {
@@ -55,7 +56,15 @@ const MissionControl = () => {
       rec.maxAlternatives = 1
 
       rec.onstart = () => setMode('listening')
-      rec.onend = () => setMode((m) => (m === 'listening' ? 'idle' : m))
+      rec.onend = () => {
+        const pending = currentTranscriptRef.current.trim()
+        if (pending) {
+          currentTranscriptRef.current = ''
+          handleUserInput(pending)
+        } else {
+          setMode((m) => (m === 'listening' ? 'idle' : m))
+        }
+      }
       rec.onerror = (e) => {
         console.error('STT error:', e.error)
         setMode('idle')
@@ -71,7 +80,11 @@ const MissionControl = () => {
         }
         const current = final || interim
         setTranscript(current)
-        if (final) handleUserInput(final.trim())
+        currentTranscriptRef.current = current
+        if (final) {
+          currentTranscriptRef.current = ''
+          handleUserInput(final.trim())
+        }
       }
       recognitionRef.current = rec
     }
@@ -146,6 +159,7 @@ const MissionControl = () => {
 
   const handleUserInput = async (text) => {
     if (!text) return
+    currentTranscriptRef.current = ''
     addMessage('user', text)
     setTranscript('')
     setMode('thinking')
