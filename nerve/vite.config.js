@@ -69,6 +69,14 @@ export default defineConfig({
         target: 'http://localhost:10000',
         changeOrigin: true,
       },
+      '/api/voice/agent': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+      '/api/agent/upload': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
       // NERVE Server (WebSocket, missions)
       '/api': {
         target: 'http://localhost:3090',

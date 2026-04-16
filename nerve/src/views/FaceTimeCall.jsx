@@ -7,7 +7,7 @@ import {
 } from 'lucide-react'
 import AvatarPlayer from '../components/Avatar/AvatarPlayer'
 
-const API_BASE = import.meta.env.VITE_API_URL || '/api'
+const API_BASE = import.meta.env.VITE_API_URL || ''
 
 const AGENTS = {
   'openclaw': {
