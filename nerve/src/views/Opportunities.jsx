@@ -55,6 +55,10 @@ const fetchApi = async (path, init) => {
     try {
       const response = await fetch(`${base}${normalizedPath}`, init)
       if (!response.ok) throw await createHttpError(response)
+      const contentType = response.headers.get('content-type') || ''
+      if (!contentType.includes('application/json')) {
+        throw new Error(`HTTP 200: unexpected content-type ${contentType}`)
+      }
       resolvedApiBase = base
       return response
     } catch (err) {
