@@ -77,6 +77,10 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
       },
+      '/api/tts': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
       // NERVE Server (WebSocket, missions)
       '/api': {
         target: 'http://localhost:3090',

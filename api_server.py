@@ -18,6 +18,13 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from qdrant_client import QdrantClient
 import uvicorn
+import os
+import httpx
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DEEPGRAM_API_KEY = os.getenv("DEEPGRAM_API_KEY", "")
 
 # Import Agent Workspace API
 from agent_workspace_api import router as agent_workspace_router
@@ -902,6 +909,34 @@ async def voice_agent(request: VoiceAgentRequest):
     """Multimodal voice agent endpoint for Mission Control."""
     result = await agent_router.handle_request(request.message, request.history)
     return result
+
+@app.post("/api/tts")
+async def text_to_speech(request: Dict[str, Any]):
+    """Proxy TTS requests to Deepgram Aura. Keeps API key server-side."""
+    if not DEEPGRAM_API_KEY:
+        raise HTTPException(status_code=503, detail="TTS service not configured")
+    text = request.get("text", "")
+    if not text:
+        raise HTTPException(status_code=400, detail="text is required")
+    voice = request.get("voice", "aura-asteria-en")
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                f"https://api.deepgram.com/v1/speak?model={voice}",
+                headers={
+                    "Authorization": f"Token {DEEPGRAM_API_KEY}",
+                    "Content-Type": "application/json",
+                },
+                json={"text": text},
+                timeout=15.0,
+            )
+            if response.status_code == 200:
+                from fastapi.responses import Response
+                return Response(content=response.content, media_type="audio/mp3")
+            raise HTTPException(status_code=response.status_code, detail=response.text)
+    except httpx.RequestError as e:
+        raise HTTPException(status_code=502, detail=str(e))
+
 
 @app.websocket("/ws/voice")
 async def voice_websocket(websocket: WebSocket):

@@ -137,14 +137,8 @@ export default function FaceTimeCall() {
     addMessage('agent', agent.greeting, { agentId })
   }, [agentId, agent.greeting, addMessage])
 
-  const speak = async (text) => {
-    if (!text) return
-    const token = ++speakTokenRef.current
-    try { synth?.cancel?.() } catch {}
-
-    const onSpeakFail = () => setMode('idle')
-
-    if (!synth) { onSpeakFail(); return }
+  const speakBrowserTTS = (text, token) => {
+    if (!synth) return false
     try {
       try { synth.resume() } catch {}
       const u = new SpeechSynthesisUtterance(text)
@@ -163,7 +157,7 @@ export default function FaceTimeCall() {
       u.pitch = 1; u.rate = 1.05
       let started = false
       const safetyTimeout = setTimeout(() => {
-        if (!started && speakTokenRef.current === token) onSpeakFail()
+        if (!started && speakTokenRef.current === token) setMode('idle')
       }, 2500)
       u.onstart = () => {
         started = true
@@ -176,19 +170,79 @@ export default function FaceTimeCall() {
       }
       u.onerror = () => {
         clearTimeout(safetyTimeout)
-        if (speakTokenRef.current === token) onSpeakFail()
-      }
-      // word boundaries for more lively avatar (optional hook)
-      u.onboundary = () => {
-        // could trigger micro-bounce here
+        if (speakTokenRef.current === token) setMode('idle')
       }
       synth.speak(u)
-    } catch { onSpeakFail() }
+      return true
+    } catch { return false }
+  }
+
+  const speak = async (text) => {
+    if (!text) return
+    const token = ++speakTokenRef.current
+    try {
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current = null
+      }
+    } catch {}
+
+    // Try Deepgram TTS first
+    try {
+      const res = await fetch(`${API_BASE}/api/tts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, voice: agent.voicePreference === 'female' ? 'aura-asteria-en' : 'aura-orion-en' }),
+      })
+      if (res.ok && speakTokenRef.current === token) {
+        const blob = await res.blob()
+        const url = URL.createObjectURL(blob)
+        const audio = new Audio(url)
+        audioRef.current = audio
+        let started = false
+        const safetyTimeout = setTimeout(() => {
+          if (!started && speakTokenRef.current === token) {
+            setMode('idle')
+            URL.revokeObjectURL(url)
+          }
+        }, 3000)
+        audio.onplay = () => {
+          started = true
+          clearTimeout(safetyTimeout)
+          if (speakTokenRef.current === token) setMode('speaking')
+        }
+        audio.onended = () => {
+          clearTimeout(safetyTimeout)
+          if (speakTokenRef.current === token) setMode('idle')
+          URL.revokeObjectURL(url)
+        }
+        audio.onerror = () => {
+          clearTimeout(safetyTimeout)
+          if (speakTokenRef.current === token) setMode('idle')
+          URL.revokeObjectURL(url)
+        }
+        await audio.play()
+        return
+      }
+    } catch (e) {
+      console.warn('Deepgram TTS failed, falling back to browser TTS:', e)
+    }
+
+    // Fallback to browser TTS
+    if (speakTokenRef.current === token) {
+      speakBrowserTTS(text, token)
+    }
   }
 
   const stopSpeech = () => {
     speakTokenRef.current++
     try { synth?.cancel?.() } catch {}
+    try {
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current = null
+      }
+    } catch {}
     setMode('idle')
   }
 
