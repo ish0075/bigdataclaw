@@ -45,7 +45,14 @@ const PaperclipDashboard = () => {
     setError(null)
     try {
       const res = await fetch(`${API_BASE}/api/paperclip/companies`)
-      if (!res.ok) throw new Error('Failed to fetch companies')
+      if (!res.ok) {
+        let msg = 'Failed to fetch companies'
+        try {
+          const errBody = await res.json()
+          msg = errBody.detail || errBody.message || msg
+        } catch {}
+        throw new Error(msg)
+      }
       const data = await res.json()
       setCompanies(data || [])
       

@@ -11,7 +11,14 @@ export function usePaperclipCompanies() {
     try {
       setLoading(true)
       const res = await fetch(`${API_BASE}/companies`)
-      if (!res.ok) throw new Error('Failed to fetch companies')
+      if (!res.ok) {
+        let msg = 'Failed to fetch companies'
+        try {
+          const errBody = await res.json()
+          msg = errBody.detail || errBody.message || msg
+        } catch {}
+        throw new Error(msg)
+      }
       const data = await res.json()
       setCompanies(Array.isArray(data) ? data : [])
     } catch (err) {
