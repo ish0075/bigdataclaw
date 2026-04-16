@@ -24,6 +24,7 @@ import PaperclipCompanyDetail from './views/PaperclipCompanyDetail'
 import PaperclipOrgChart from './views/PaperclipOrgChart'
 import PaperclipDashboard from './views/PaperclipDashboard'
 import MissionControlV3 from './views/MissionControlV3'
+import FaceTimeCall from './views/FaceTimeCall'
 import { useWebSocket } from './hooks/useWebSocket'
 
 // Hook to detect if we're on V3 route (for hash-based routing)
@@ -37,7 +38,8 @@ function useIsV3Route() {
       const hash = window.location.hash
       const pathname = window.location.pathname
       const isV3Route = pathname === '/v3' || hash === '#/v3' || hash.startsWith('#/v3')
-      setIsV3(isV3Route)
+      const isFaceTime = pathname === '/facetime' || hash === '#/facetime' || hash.startsWith('#/facetime')
+      setIsV3(isV3Route || isFaceTime)
     }
     
     checkV3()
@@ -54,6 +56,10 @@ function useIsV3Route() {
 
 // Full page routes that don't use the default layout
 function FullPageRoutes() {
+  const location = useLocation()
+  if (location.pathname === '/facetime') {
+    return <FaceTimeCall />
+  }
   return <MissionControlV3 />
 }
 
@@ -97,6 +103,7 @@ function AppRoutes() {
         <Route path="/marketing/*" element={<Navigate to="/" replace />} />
         <Route path="/v2" element={<MissionControl />} />
         <Route path="/simple" element={<MissionControl />} />
+        <Route path="/facetime" element={<FaceTimeCall />} />
       </Routes>
     </Layout>
   )

@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 
-from fastapi import FastAPI, Query, HTTPException, UploadFile, File, BackgroundTasks
+from fastapi import FastAPI, Query, HTTPException, UploadFile, File, BackgroundTasks, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -902,6 +902,46 @@ async def voice_agent(request: VoiceAgentRequest):
     """Multimodal voice agent endpoint for Mission Control."""
     result = await agent_router.handle_request(request.message, request.history)
     return result
+
+@app.websocket("/ws/voice")
+async def voice_websocket(websocket: WebSocket):
+    """WebSocket endpoint for real-time voice avatar calls.
+    Proxies events between the FaceTime UI and backend agents.
+    Can be extended to proxy to OpenAI Realtime API or ElevenLabs Conversational AI.
+    """
+    await websocket.accept()
+    try:
+        while True:
+            data = await websocket.receive_json()
+            msg_type = data.get("type", "echo")
+            if msg_type == "ping":
+                await websocket.send_json({"type": "pong", "ts": data.get("ts")})
+            elif msg_type == "chat":
+                # Process through agent_router and stream back
+                result = await agent_router.handle_request(data.get("message", ""), data.get("history"))
+                await websocket.send_json({
+                    "type": "agent_response",
+                    "response": result.get("response"),
+                    "actions": result.get("actions"),
+                    "intent": result.get("intent"),
+                })
+            elif msg_type == "media_request":
+                # Placeholder for OpenClaw media generation hook
+                await websocket.send_json({
+                    "type": "media_ready",
+                    "media_type": data.get("media_type", "image"),
+                    "url": data.get("placeholder_url", ""),
+                    "prompt": data.get("prompt", ""),
+                })
+            else:
+                await websocket.send_json({"type": "echo", "received": data})
+    except WebSocketDisconnect:
+        pass
+    except Exception as e:
+        try:
+            await websocket.send_json({"type": "error", "message": str(e)})
+        except Exception:
+            pass
 
 @app.post("/api/agent/upload")
 async def agent_upload(file: UploadFile = File(...)):

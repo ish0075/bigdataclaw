@@ -21,6 +21,9 @@ except Exception:
 DB_PATH = Path('bigdataclaw.db')
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen3:4b")
+KIMI_API_KEY = os.getenv("KIMI_API_KEY", "")
+KIMI_MODEL = os.getenv("KIMI_MODEL", "kimi-k2-6-code-preview")
+KIMI_BASE_URL = os.getenv("KIMI_BASE_URL", "https://api.moonshot.cn/v1")
 
 # =============================================================================
 # SYSTEM PERSONA
@@ -97,6 +100,90 @@ async def ollama_chat(prompt: str, model: Optional[str] = None, temperature: flo
     except Exception as e:
         print(f"Ollama error: {e}")
     return ""
+
+
+async def kimi_chat(prompt: str, model: Optional[str] = None, temperature: float = 0.7, max_tokens: int = 1024, timeout_seconds: float = 8.0) -> str:
+    """Call Moonshot Kimi API (K2.6-code-preview or other Kimi models)."""
+    if not KIMI_API_KEY:
+        return ""
+    model = model or KIMI_MODEL
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                f"{KIMI_BASE_URL}/chat/completions",
+                headers={"Authorization": f"Bearer {KIMI_API_KEY}", "Content-Type": "application/json"},
+                json={
+                    "model": model,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "temperature": temperature,
+                    "max_tokens": max_tokens,
+                },
+                timeout=timeout_seconds,
+            )
+            if response.status_code == 200:
+                data = response.json()
+                return data.get("choices", [{}])[0].get("message", {}).get("content", "").strip()
+            else:
+                print(f"Kimi API error {response.status_code}: {response.text}")
+    except Exception as e:
+        print(f"Kimi error: {e}")
+    return ""
+
+
+KIMI_OAUTH_PATH = Path.home() / ".kimi" / "credentials" / "kimi-code.json"
+
+
+async def kimi_cli_chat(prompt: str, model: str = "kimi-code/kimi-k2-6-code-preview", max_tokens: int = 1024, timeout_seconds: float = 20.0) -> str:
+    """Call Kimi K2.6 through the authenticated kimi-cli subprocess.
+    Note: each invocation has ~10-12s cold-start overhead."""
+    if not KIMI_OAUTH_PATH.exists():
+        return ""
+    try:
+        proc = await asyncio.create_subprocess_exec(
+            "kimi-cli", "--quiet", "--max-steps-per-turn", "3", "--model", model,
+            stdin=asyncio.subprocess.PIPE,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        stdout, stderr = await asyncio.wait_for(
+            proc.communicate(prompt.encode("utf-8")),
+            timeout=timeout_seconds,
+        )
+        text = stdout.decode("utf-8", errors="replace")
+        # Strip the session resume footer
+        lines = []
+        for line in text.split("\n"):
+            if line.startswith("To resume this session:"):
+                break
+            lines.append(line)
+        result = "\n".join(lines).strip()
+        # If step limit reached with no text, return empty so fallback can trigger
+        if result and not result.startswith("Max number of steps reached"):
+            return result
+    except asyncio.TimeoutError:
+        try:
+            proc.kill()
+        except Exception:
+            pass
+        print("Kimi CLI timeout")
+    except Exception as e:
+        print(f"Kimi CLI error: {e}")
+    return ""
+
+
+async def llm_chat(prompt: str, model: Optional[str] = None, temperature: float = 0.7, max_tokens: int = 1024, timeout_seconds: float = 8.0) -> str:
+    """Unified LLM call: prefer Kimi K2.6 via CLI, then HTTP API, then Ollama local model."""
+    # 1) Try authenticated kimi-cli (OAuth) for K2.6
+    reply = await kimi_cli_chat(prompt, model="kimi-code/kimi-k2-6-code-preview", max_tokens=max_tokens, timeout_seconds=20.0)
+    if reply:
+        return reply
+    # 2) Try Kimi HTTP API if a direct API key is configured
+    if KIMI_API_KEY:
+        reply = await kimi_chat(prompt, model=model, temperature=temperature, max_tokens=max_tokens, timeout_seconds=timeout_seconds)
+        if reply:
+            return reply
+    # 3) Fallback to Ollama
+    return await ollama_chat(prompt, model=None, temperature=temperature, max_tokens=max_tokens, timeout_seconds=timeout_seconds)
 
 
 # =============================================================================
@@ -183,7 +270,7 @@ greeting, help, navigate, briefing, hot_money, opportunities, recruiters, lender
 Respond with only the category name, nothing else.
 User message: {message}
 Category:"""
-    llm_intent = await ollama_chat(prompt, temperature=0.1, max_tokens=32)
+    llm_intent = await llm_chat(prompt, temperature=0.1, max_tokens=32)
     allowed = {
         "greeting","help","navigate","briefing","hot_money","opportunities",
         "recruiters","lenders","sellers","companies","transactions",
@@ -386,7 +473,7 @@ Rules:
 
 Question: {question}
 SQL:"""
-    sql = await ollama_chat(prompt, temperature=0.1, max_tokens=512)
+    sql = await llm_chat(prompt, temperature=0.1, max_tokens=512)
     # Strip markdown fences if any
     sql = sql.strip()
     if sql.startswith("```sql"):
@@ -482,7 +569,7 @@ async def extract_property_address(message: str) -> Optional[Dict[str, Any]]:
 }}
 Text: {message}
 JSON:"""
-    response = await ollama_chat(prompt, temperature=0.1, max_tokens=256)
+    response = await llm_chat(prompt, temperature=0.1, max_tokens=256)
     try:
         json_str = response.strip()
         if json_str.startswith("```json"): json_str = json_str[7:]
@@ -588,7 +675,7 @@ The user asked: {user_message}
 Here are web search results:
 {results}
 Summarize the most relevant points in 2-4 spoken sentences. Be concise."""
-        summary = await ollama_chat(prompt, temperature=0.6, max_tokens=512)
+        summary = await llm_chat(prompt, temperature=0.6, max_tokens=512)
         return summary or "I found some web results but could not summarize them."
     if intent == "general_query":
         db_result = data.get("db_result", {})
@@ -602,7 +689,7 @@ The user asked: {user_message}
 Here are the database results (JSON):
 {json.dumps(rows[:10])}
 Answer directly in 2-4 spoken sentences using the data. Do not mention SQL."""
-            summary = await ollama_chat(prompt, temperature=0.5, max_tokens=512)
+            summary = await llm_chat(prompt, temperature=0.5, max_tokens=512)
             return summary or "I found matching records but could not summarize them."
         return "I checked the database but didn't find any records matching that request."
 
@@ -612,7 +699,7 @@ User asked: {user_message}
 Intent: {intent}
 Data: {json.dumps(data)}
 Respond in 2-4 sentences max, directly and conversationally. Do not use markdown formatting like **bold** or tables; keep it plain text suitable for text-to-speech."""
-    response = await ollama_chat(prompt, temperature=0.6, max_tokens=512)
+    response = await llm_chat(prompt, temperature=0.6, max_tokens=512)
     if response:
         return response
     return "I'm not sure how to respond to that."
@@ -741,7 +828,7 @@ Answer in 2-4 sentences max. Prefer direct spoken-style phrasing.
 User request: {message}"""
                 if history:
                     prompt += f"\nConversation history: {json.dumps(history)}"
-                response = await ollama_chat(prompt, temperature=0.7, max_tokens=512)
+                response = await llm_chat(prompt, temperature=0.7, max_tokens=512)
                 if not response:
                     response = f"I heard: {message}. The backend agent is running in simple mode. Try asking me to navigate to a page or ask about hot money."
 

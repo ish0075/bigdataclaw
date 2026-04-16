@@ -332,7 +332,7 @@ const VoiceAgentOrb = ({ className = '' }) => {
   }
 
   const toggleListening = () => {
-    if (!isSpeechSupported) {
+    if (!isSpeechSupported || !recognitionRef.current) {
       const msg = isIOS
         ? "Voice input isn't supported on iPhone. I've opened chat so you can type your question."
         : 'Speech recognition is not supported in this browser. Try Chrome or Edge on desktop, or use the chat below.'
@@ -541,8 +541,8 @@ const VoiceAgentOrb = ({ className = '' }) => {
                 {mode === 'listening' ? <MicOff className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
               </div>
               <div className="text-left">
-                <div className="font-semibold">{mode === 'listening' ? 'Stop' : 'Speak'}</div>
-                <div className="text-[11px] text-slate-400">{mode === 'listening' ? 'Listening…' : 'Voice input'}</div>
+                <div className="font-semibold">{mode === 'listening' ? 'Stop' : (!isSpeechSupported || !recognitionRef.current ? 'Chat' : 'Speak')}</div>
+                <div className="text-[11px] text-slate-400">{mode === 'listening' ? 'Listening…' : (!isSpeechSupported || !recognitionRef.current ? 'Text input' : 'Voice input')}</div>
               </div>
             </button>
 

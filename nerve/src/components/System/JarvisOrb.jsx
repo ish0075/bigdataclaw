@@ -428,7 +428,7 @@ export default function JarvisOrb() {
   }
 
   const toggleListening = () => {
-    if (!isSpeechSupported) {
+    if (!isSpeechSupported || !recognitionRef.current) {
       const msg = isIOS
         ? "Voice input isn't supported on iPhone. I've opened chat so you can type your question."
         : 'Speech recognition is not supported in this browser. Try Chrome or Edge on desktop, or use the chat below.'
@@ -630,8 +630,8 @@ export default function JarvisOrb() {
                         : 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white'
                     }`}
                   >
-                    {mode === 'listening' ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
-                    {mode === 'listening' ? 'Stop Listening' : 'Start Listening'}
+                    {mode === 'listening' ? <MicOff className="w-5 h-5" /> : (!isSpeechSupported || !recognitionRef.current ? <MessageSquare className="w-5 h-5" /> : <Mic className="w-5 h-5" />)}
+                    {mode === 'listening' ? 'Stop Listening' : (!isSpeechSupported || !recognitionRef.current ? 'Open Chat' : 'Start Listening')}
                   </button>
                   <button
                     onClick={() => { stopCurrentSpeech() }}
