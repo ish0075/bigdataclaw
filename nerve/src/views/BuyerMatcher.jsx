@@ -6,6 +6,8 @@ import {
 } from 'lucide-react'
 import UniversalEditModal from '../components/Common/UniversalEditModal'
 
+const API_BASE = (import.meta.env.VITE_API_URL || 'https://bigdataclaw.srv1368913.hstgr.cloud') + '/api'
+
 // Google "G" Icon
 const GoogleIcon = () => (
   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -215,7 +217,7 @@ const BuyerMatcher = () => {
   const fetchBuyersFromDatabase = async () => {
     try {
       setLoading(true)
-      const response = await fetch(`/api/buyer-matcher/all-sources?limit=100&search=${encodeURIComponent(searchQuery)}`)
+      const response = await fetch(`${API_BASE}/buyer-matcher/all-sources?limit=100&search=${encodeURIComponent(searchQuery)}`)
       if (!response.ok) throw new Error('Failed to fetch buyers')
       
       const data = await response.json()
@@ -264,7 +266,7 @@ const BuyerMatcher = () => {
     setIsAnalyzing(true)
     
     try {
-      const response = await fetch('/api/buyer-matcher/match', {
+      const response = await fetch(`${API_BASE}/buyer-matcher/match`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ description: propertyDescription })
