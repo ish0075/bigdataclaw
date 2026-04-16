@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { 
   Users, Search, Filter, Phone, Mail, ExternalLink, Target, MapPin, DollarSign, 
   Building2, ChevronRight, Star, Download, Facebook, Linkedin, Instagram,
