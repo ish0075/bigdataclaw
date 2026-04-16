@@ -676,6 +676,39 @@ const EXAgentRecruiterUpdated = () => {
           );
         })}
       </div>
+
+      {/* Bottom Pagination */}
+      <div className="flex items-center justify-end pt-2">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setPage(p => Math.max(1, p - 1))}
+            disabled={page === 1}
+            className="px-3 py-1 bg-slate-700 rounded disabled:opacity-50 text-slate-300"
+          >
+            Previous
+          </button>
+          <span className="text-slate-400 px-2">
+            Page {page} of {totalPages || 1}
+          </span>
+          <button
+            onClick={() => setPage(p => Math.min(totalPages || 1, p + 1))}
+            disabled={page >= totalPages}
+            className="px-3 py-1 bg-slate-700 rounded disabled:opacity-50 text-slate-300"
+          >
+            Next
+          </button>
+          <select
+            value={pageSize}
+            onChange={(e) => setPageSize(Number(e.target.value))}
+            className="px-2 py-1 bg-slate-700 rounded text-slate-300 text-sm"
+          >
+            <option value={50}>50/page</option>
+            <option value={100}>100/page</option>
+            <option value={200}>200/page</option>
+            <option value={500}>500/page</option>
+          </select>
+        </div>
+      </div>
     </div>
   );
 };
