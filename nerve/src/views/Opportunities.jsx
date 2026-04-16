@@ -181,7 +181,7 @@ const Opportunities = () => {
     
     // Fallback to static sample data when API is unavailable or empty
     try {
-      const fallback = await fetch('/data/opportunities_gold_sample.json')
+      const fallback = await fetch('/data/opportunities_gold_sample.json', { cache: 'no-store' })
       if (fallback.ok) {
         const data = await fallback.json()
         let ops = data.opportunities || []
@@ -222,7 +222,7 @@ const Opportunities = () => {
     
     // Fallback to static sample data
     try {
-      const fallback = await fetch('/data/opportunities_flagged_sample.json')
+      const fallback = await fetch('/data/opportunities_flagged_sample.json', { cache: 'no-store' })
       if (fallback.ok) {
         const data = await fallback.json()
         setFlaggedReports(data.reports || [])
