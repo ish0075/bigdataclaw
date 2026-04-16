@@ -8,8 +8,9 @@ import {
   Landmark, HardHat, ShoppingBag, Loader2
 } from 'lucide-react'
 
+const rawViteUrl = import.meta.env.VITE_API_URL
 const API_BASE_CANDIDATES = Array.from(new Set([
-  import.meta.env.VITE_API_URL,
+  rawViteUrl ? (rawViteUrl.replace(/\/$/, '') + '/api') : null,
   '/api',
   'http://127.0.0.1:3090/api',
   'http://localhost:3090/api',
@@ -711,7 +712,7 @@ const OpportunityCard = ({ opportunity }) => {
           {/* Quick Links */}
           <div className="mt-4 pt-4 border-t border-slate-700/50 flex flex-wrap gap-2">
             <a 
-              href={opportunity.quick_links.google}
+              href={opportunity.quick_links?.google}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-sm transition-colors"
@@ -720,7 +721,7 @@ const OpportunityCard = ({ opportunity }) => {
               Google
             </a>
             <a 
-              href={opportunity.quick_links.google_maps}
+              href={opportunity.quick_links?.google_maps}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-sm transition-colors"
@@ -729,7 +730,7 @@ const OpportunityCard = ({ opportunity }) => {
               Maps
             </a>
             <a 
-              href={opportunity.quick_links.linkedin}
+              href={opportunity.quick_links?.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-sm transition-colors"
@@ -738,7 +739,7 @@ const OpportunityCard = ({ opportunity }) => {
               LinkedIn
             </a>
             <a 
-              href={opportunity.quick_links.exec_search}
+              href={opportunity.quick_links?.exec_search}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-sm transition-colors"
