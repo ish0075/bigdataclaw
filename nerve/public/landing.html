@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigDataClaw - AI Agents for Commercial Real Estate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Hero -->
+    <div class="min-h-screen flex items-center justify-center p-8">
+        <div class="max-w-4xl text-center">
+            <!-- Live Deal Badge -->
+            <div class="inline-flex items-center px-4 py-2 rounded-full bg-green-900/30 border border-green-700/50 mb-8">
+                <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                <span class="text-green-400 text-sm font-medium">$360K Commission Closed Today</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                AI Agents That Find
+                <span class="gradient-text">Deals Before</span>
+                They Hit MLS
+            </h1>
+            
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+                32 AI agents working 24/7 to identify off-market commercial real estate opportunities. 
+                Research that takes 6 hours now takes 4 minutes.
+            </p>
+            
+            <!-- Email Capture -->
+            <form class="max-w-md mx-auto mb-12" onsubmit="event.preventDefault(); alert('Thanks! We\'ll be in touch.');">
+                <div class="flex gap-3">
+                    <input 
+                        type="email" 
+                        placeholder="Enter your email" 
+                        required
+                        class="flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
+                    >
+                    <button 
+                        type="submit"
+                        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition"
+                    >
+                        Get Access
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+                <div class="p-4">
+                    <p class="text-4xl font-bold text-blue-400">96,000</p>
+                    <p class="text-gray-400 mt-1">Agent Database</p>
+                </div>
+                <div class="p-4">
+                    <p class="text-4xl font-bold text-purple-400">32</p>
+                    <p class="text-gray-400 mt-1">AI Agents</p>
+                </div>
+                <div class="p-4">
+                    <p class="text-4xl font-bold text-green-400">36x</p>
+                    <p class="text-gray-400 mt-1">Faster Research</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Deal Section -->
+    <div class="bg-gray-800/50 border-y border-gray-800 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Live Deal: Stayner Development Site</h2>
+                <p class="text-gray-400">See how our agents processed this $18M opportunity</p>
+            </div>
+            
+            <div class="bg-gray-900 rounded-2xl p-8 max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3">🏞️</span>
+                            <div>
+                                <p class="font-semibold">112 Acres</p>
+                                <p class="text-gray-400 text-sm">Stayner, Ontario</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3">🏗️</span>
+                            <div>
+                                <p class="font-semibold">708 Units</p>
+                                <p class="text-gray-400 text-sm">Development Potential</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">💰</span>
+                            <div>
+                                <p class="font-semibold text-green-400">$18,000,000</p>
+                                <p class="text-gray-400 text-sm">28% Below Original Ask</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between py-2 border-b border-gray-800">
+                            <span class="text-gray-400">Transaction Scout</span>
+                            <span class="text-green-400">✓ Research Complete</span>
+                        </div>
+                        <div class="flex items-center justify-between py-2 border-b border-gray-800">
+                            <span class="text-gray-400">Hot Money Tracker</span>
+                            <span class="text-green-400">✓ Alert Generated</span>
+                        </div>
+                        <div class="flex items-center justify-between py-2 border-b border-gray-800">
+                            <span class="text-gray-400">Portfolio Analyzer</span>
+                            <span class="text-green-400">✓ 19 Buyers Matched</span>
+                        </div>
+                        <div class="flex items-center justify-between py-2 border-b border-gray-800">
+                            <span class="text-gray-400">Marketing Division</span>
+                            <span class="text-green-400">✓ Campaign Live</span>
+                        </div>
+                        <div class="flex items-center justify-between py-2">
+                            <span class="text-gray-400">Commission</span>
+                            <span class="text-2xl font-bold text-green-400">$360,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-500">
+            <p>&copy; 2026 BigDataClaw. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

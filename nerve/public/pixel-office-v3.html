@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigDataClaw AI Office - Pablo Edition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #0a0a0f;
+            font-family: 'Press Start 2P', monospace;
+            overflow: hidden;
+            color: #fff;
+        }
+        
+        #container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #header {
+            background: linear-gradient(180deg, #1a1a2e 0%, transparent 100%);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        #logo { font-size: 16px; color: #00d4ff; text-shadow: 0 0 20px #00d4ff; }
+        
+        #stage {
+            flex: 1;
+            position: relative;
+            background: #0f0f1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #canvas {
+            image-rendering: pixelated;
+            box-shadow: 0 0 60px rgba(0, 212, 255, 0.3);
+        }
+        
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        /* Speech Bubbles - Pablo Style */
+        .speech-bubble {
+            position: absolute;
+            background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+            color: #1a1a2e;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 10px;
+            font-family: 'Press Start 2P', monospace;
+            line-height: 1.6;
+            max-width: 240px;
+            min-width: 120px;
+            word-wrap: break-word;
+            pointer-events: none;
+            animation: bubblePop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 4px 20px rgba(0,0,0,0.4),
+                inset 0 -2px 0 rgba(0,0,0,0.1);
+            border: 3px solid #333;
+            z-index: 100;
+        }
+        
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 12px solid #333;
+        }
+        
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #f0f0f0;
+            z-index: 1;
+        }
+        
+        .speech-bubble.alert {
+            background: linear-gradient(180deg, #ff4444 0%, #cc2222 100%);
+            color: #fff;
+            border-color: #aa0000;
+            animation: alertPulse 0.6s ease-in-out infinite, bubblePop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .speech-bubble.alert::after { border-top-color: #aa0000; }
+        .speech-bubble.alert::before { border-top-color: #cc2222; }
+        
+        .speech-bubble.success {
+            background: linear-gradient(180deg, #44ff44 0%, #22cc22 100%);
+            color: #003300;
+            border-color: #118811;
+        }
+        
+        .speech-bubble.success::after { border-top-color: #118811; }
+        .speech-bubble.success::before { border-top-color: #22cc22; }
+        
+        .speech-bubble.working {
+            background: linear-gradient(180deg, #00d4ff 0%, #0088aa 100%);
+            color: #fff;
+            border-color: #006688;
+        }
+        
+        .speech-bubble.working::after { border-top-color: #006688; }
+        .speech-bubble.working::before { border-top-color: #0088aa; }
+        
+        @keyframes bubblePop {
+            0% { transform: scale(0) translateX(-50%); opacity: 0; }
+            70% { transform: scale(1.1) translateX(-50%); }
+            100% { transform: scale(1) translateX(-50%); opacity: 1; }
+        }
+        
+        @keyframes alertPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 68, 68, 0.8); }
+            50% { box-shadow: 0 0 30px rgba(255, 68, 68, 1), 0 0 50px rgba(255, 136, 68, 0.6); }
+        }
+        
+        /* Matrix Rain Effect */
+        .matrix-rain {
+            position: absolute;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        /* Stats Panel */
+        #stats-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(15, 15, 26, 0.95);
+            border: 2px solid #00d4ff;
+            padding: 15px;
+            font-size: 10px;
+            pointer-events: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2);
+        }
+        
+        #stats-panel h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 10px;
+            text-shadow: 0 0 10px #00d4ff;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin: 8px 0;
+            padding: 4px 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        .stat-row:last-child { border-bottom: none; }
+        .stat-label { color: #888; }
+        .stat-value { color: #ffd700; text-shadow: 0 0 5px #ffd700; }
+        
+        /* Controls */
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            pointer-events: auto;
+        }
+        
+        .btn {
+            background: linear-gradient(180deg, #0f3460 0%, #0a2545 100%);
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+            padding: 12px 20px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 9px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+        }
+        
+        .btn:hover {
+            background: linear-gradient(180deg, #00d4ff 0%, #0088aa 100%);
+            color: #0a0a0f;
+            box-shadow: 0 0 25px #00d4ff;
+            transform: translateY(-2px);
+        }
+        
+        .btn:active { transform: translateY(0); }
+        
+        .btn-alert {
+            border-color: #ff4444;
+            color: #ff4444;
+            background: linear-gradient(180deg, #331111 0%, #220000 100%);
+        }
+        
+        .btn-alert:hover {
+            background: linear-gradient(180deg, #ff4444 0%, #cc2222 100%);
+            color: #fff;
+            box-shadow: 0 0 25px #ff4444;
+        }
+        
+        #scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <div id="logo">🏢 BIGDATACLAW AI OFFICE v3</div>
+        </div>
+        
+        <div id="stage">
+            <canvas id="canvas" width="1024" height="704"></canvas>
+            <div id="ui-layer">
+                <div id="bubble-container"></div>
+                
+                <div id="stats-panel">
+                    <h3>📊 SYSTEM STATUS</h3>
+                    <div class="stat-row">
+                        <span class="stat-label">AGENTS:</span>
+                        <span class="stat-value" id="stat-agents">10</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">ACTIVE:</span>
+                        <span class="stat-value" id="stat-active">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">DEALS:</span>
+                        <span class="stat-value" id="stat-deals">$0M</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">TASKS:</span>
+                        <span class="stat-value" id="stat-tasks">0</span>
+                    </div>
+                </div>
+                
+                <div id="controls">
+                    <button class="btn" onclick="office.spawnAgent()">➕ SPAWN AGENT</button>
+                    <button class="btn" onclick="office.assignTask()">🎯 NEW TASK</button>
+                    <button class="btn btn-alert" onclick="office.hotMoneyAlert()">🔥 HOT MONEY</button>
+                    <button class="btn btn-alert" onclick="office.staynerDeal()">🏗️ STAYNER</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="scanlines"></div>
+    </div>
+    
+    <script>
+        // ============================================
+        // BIGDATACLAW PIXEL OFFICE v3
+        // Pablo De Lucca Edition - Full Feature Match
+        // ============================================
+        
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+        
+        const TILE_SIZE = 32;
+        const COLS = 32;
+        const ROWS = 22;
+        
+        // ============================================
+        // ENHANCED PIXEL ART GENERATORS
+        // ============================================
+        
+        const PALETTES = {
+            scout: { body: '#00d4ff', dark: '#0088aa', hair: '#4a3728', skin: '#ffccaa', shirt: '#006688' },
+            hotmoney: { body: '#ff4444', dark: '#cc2222', hair: '#222222', skin: '#ffccaa', shirt: '#880000' },
+            portfolio: { body: '#44ff44', dark: '#22aa22', hair: '#4a3728', skin: '#ffccaa', shirt: '#006600' },
+            loopnet: { body: '#ffaa00', dark: '#cc8800', hair: '#4a3728', skin: '#ffccaa', shirt: '#884400' },
+            submit: { body: '#ff66cc', dark: '#cc4499', hair: '#4a3728', skin: '#ffccaa', shirt: '#880066' },
+            buyerdb: { body: '#9966ff', dark: '#6644cc', hair: '#4a3728', skin: '#ffccaa', shirt: '#440088' },
+            obsidian: { body: '#66ccff', dark: '#4499cc', hair: '#e8d4a0', skin: '#ffccaa', shirt: '#004488' },
+            builders: { body: '#ffcc00', dark: '#cc9900', hair: '#4a3728', skin: '#ffccaa', shirt: '#886600' },
+            collab: { body: '#66ff66', dark: '#44cc44', hair: '#4a3728', skin: '#ffccaa', shirt: '#008800' },
+            boss: { body: '#ffd700', dark: '#cc9900', hair: '#e8d4a0', skin: '#ffccaa', shirt: '#886600' }
+        };
+        
+        // Generate detailed character with sitting pose
+        function generateCharacterSprite(palette, direction, frame, isSitting = false) {
+            const c = document.createElement('canvas');
+            c.width = 28;
+            c.height = 36;
+            const x = c.getContext('2d');
+            const p = PALETTES[palette];
+            const bounce = frame === 1 && !isSitting ? 1 : 0;
+            
+            // Shadow
+            x.fillStyle = 'rgba(0,0,0,0.25)';
+            x.beginPath();
+            x.ellipse(14, 33, 11, 4, 0, 0, Math.PI*2);
+            x.fill();
+            
+            const y = 6 - bounce;
+            
+            if (isSitting) {
+                // Sitting pose - legs forward
+                // Chair (behind)
+                x.fillStyle = '#555';
+                x.fillRect(4, y + 16, 20, 8);
+                
+                // Body
+                x.fillStyle = p.shirt;
+                x.fillRect(7, y + 10, 14, 12);
+                x.fillStyle = p.body;
+                x.fillRect(7, y + 18, 14, 6);
+                
+                // Head
+                x.fillStyle = p.skin;
+                x.fillRect(9, y + 2, 10, 10);
+                
+                // Hair
+                x.fillStyle = p.hair;
+                if (direction === 'down') {
+                    x.fillRect(9, y + 2, 10, 4);
+                    x.fillRect(7, y + 4, 3, 3);
+                    x.fillRect(18, y + 4, 3, 3);
+                } else if (direction === 'up') {
+                    x.fillRect(9, y + 2, 10, 6);
+                } else {
+                    x.fillRect(9, y + 2, 10, 4);
+                    x.fillRect(direction === 'left' ? 7 : 18, y + 4, 3, 4);
+                }
+                
+                // Eyes
+                if (direction !== 'up') {
+                    x.fillStyle = '#000';
+                    if (direction === 'down') {
+                        x.fillRect(11, y + 6, 2, 2);
+                        x.fillRect(15, y + 6, 2, 2);
+                    } else if (direction === 'left') {
+                        x.fillRect(10, y + 6, 2, 2);
+                    } else if (direction === 'right') {
+                        x.fillRect(16, y + 6, 2, 2);
+                    }
+                }
+                
+                // Arms typing
+                const typeOffset = Math.sin(Date.now() / 100) * 2;
+                x.fillStyle = p.skin;
+                x.fillRect(4 + typeOffset, y + 14, 4, 8);
+                x.fillRect(20 - typeOffset, y + 14, 4, 8);
+                
+                // Legs (sitting)
+                x.fillStyle = '#334';
+                x.fillRect(8, y + 26, 4, 8);
+                x.fillRect(16, y + 26, 4, 8);
+            } else {
+                // Standing/walking pose
+                // Body
+                x.fillStyle = p.shirt;
+                x.fillRect(7, y + 10, 14, 10);
+                x.fillStyle = p.body;
+                x.fillRect(7, y + 18, 14, 6);
+                x.fillStyle = p.dark;
+                x.fillRect(7, y + 22, 14, 4);
+                
+                // Head
+                x.fillStyle = p.skin;
+                x.fillRect(9, y + 2, 10, 10);
+                
+                // Hair
+                x.fillStyle = p.hair;
+                if (direction === 'down') {
+                    x.fillRect(9, y + 2, 10, 4);
+                    x.fillRect(7, y + 4, 3, 3);
+                    x.fillRect(18, y + 4, 3, 3);
+                } else if (direction === 'up') {
+                    x.fillRect(9, y + 2, 10, 6);
+                } else {
+                    x.fillRect(9, y + 2, 10, 4);
+                    x.fillRect(direction === 'left' ? 7 : 18, y + 4, 3, 4);
+                }
+                
+                // Eyes
+                if (direction !== 'up') {
+                    x.fillStyle = '#000';
+                    if (direction === 'down') {
+                        x.fillRect(11, y + 6, 2, 2);
+                        x.fillRect(15, y + 6, 2, 2);
+                    } else if (direction === 'left') {
+                        x.fillRect(10, y + 6, 2, 2);
+                    } else if (direction === 'right') {
+                        x.fillRect(16, y + 6, 2, 2);
+                    }
+                }
+                
+                // Arms
+                x.fillStyle = p.skin;
+                if (frame === 1) {
+                    x.fillRect(direction === 'left' ? 3 : 21, y + 12, 4, 6);
+                    x.fillRect(direction === 'left' ? 21 : 3, y + 14, 4, 6);
+                } else {
+                    x.fillRect(4, y + 12, 4, 8);
+                    x.fillRect(20, y + 12, 4, 8);
+                }
+                
+                // Legs
+                x.fillStyle = '#334';
+                if (frame === 1) {
+                    x.fillRect(9, y + 26, 4, 8);
+                    x.fillRect(15, y + 26, 4, 8);
+                } else {
+                    x.fillRect(8, y + 26, 5, 8);
+                    x.fillRect(15, y + 26, 5, 8);
+                }
+            }
+            
+            return c;
+        }
+        
+        // Generate wall tiles
+        function generateWallTile() {
+            const c = document.createElement('canvas');
+            c.width = TILE_SIZE;
+            c.height = TILE_SIZE;
+            const x = c.getContext('2d');
+            
+            // Base wall color
+            x.fillStyle = '#4a4a5a';
+            x.fillRect(0, 0, TILE_SIZE, TILE_SIZE);
+            
+            // Wall panel details
+            x.fillStyle = '#3a3a4a';
+            x.fillRect(2, 2, TILE_SIZE - 4, TILE_SIZE - 4);
+            
+            // Highlight
+            x.fillStyle = '#5a5a6a';
+            x.fillRect(2, 2, TILE_SIZE - 4, 2);
+            x.fillRect(2, 2, 2, TILE_SIZE - 4);
+            
+            // Shadow
+            x.fillStyle = '#2a2a3a';
+            x.fillRect(2, TILE_SIZE - 4, TILE_SIZE - 4, 2);
+            x.fillRect(TILE_SIZE - 4, 2, 2, TILE_SIZE - 4);
+            
+            return c;
+        }
+        
+        // Generate floor tiles
+        function generateFloorTile(variant, zone) {
+            const c = document.createElement('canvas');
+            c.width = TILE_SIZE;
+            c.height = TILE_SIZE;
+            const x = c.getContext('2d');
+            
+            if (zone === 'office') {
+                // Brown office floor
+                const colors = ['#6b5a4a', '#5c4a3a', '#7a6a5a', '#4a3a2a'];
+                x.fillStyle = colors[variant % colors.length];
+            } else {
+                // Blue meeting area
+                const colors = ['#4a6a8a', '#3a5a7a', '#5a7a9a', '#2a4a6a'];
+                x.fillStyle = colors[variant % colors.length];
+            }
+            
+            x.fillRect(0, 0, TILE_SIZE, TILE_SIZE);
+            
+            // Tile border
+            x.fillStyle = 'rgba(0,0,0,0.1)';
+            x.fillRect(TILE_SIZE - 2, 0, 2, TILE_SIZE);
+            x.fillRect(0, TILE_SIZE - 2, TILE_SIZE, 2);
+            
+            return c;
+        }
+        
+        // Generate detailed desk
+        function generateDeskSprite() {
+            const c = document.createElement('canvas');
+            c.width = 40;
+            c.height = 32;
+            const x = c.getContext('2d');
+            
+            // Desk shadow
+            x.fillStyle = 'rgba(0,0,0,0.2)';
+            x.fillRect(4, 26, 32, 6);
+            
+            // Desk legs
+            x.fillStyle = '#5c4a3a';
+            x.fillRect(6, 16, 6, 14);
+            x.fillRect(28, 16, 6, 14);
+            
+            // Desk top
+            x.fillStyle = '#8b6f47';
+            x.fillRect(4, 12, 32, 8);
+            x.fillStyle = '#9b7f57';
+            x.fillRect(4, 12, 32, 2);
+            x.fillStyle = '#7b5f37';
+            x.fillRect(4, 18, 32, 2);
+            
+            // Monitor
+            x.fillStyle = '#333';
+            x.fillRect(14, 2, 12, 10);
+            x.fillStyle = '#222';
+            x.fillRect(15, 3, 10, 8);
+            x.fillStyle = '#0f0';
+            x.fillRect(16, 4, 8, 6);
+            
+            // Monitor stand
+            x.fillStyle = '#444';
+            x.fillRect(18, 12, 4, 4);
+            
+            return c;
+        }
+        
+        // Generate chair
+        function generateChairSprite() {
+            const c = document.createElement('canvas');
+            c.width = 20;
+            c.height = 24;
+            const x = c.getContext('2d');
+            
+            // Chair shadow
+            x.fillStyle = 'rgba(0,0,0,0.2)';
+            x.fillRect(2, 20, 16, 4);
+            
+            // Chair legs
+            x.fillStyle = '#444';
+            x.fillRect(4, 16, 3, 6);
+            x.fillRect(13, 16, 3, 6);
+            
+            // Seat
+            x.fillStyle = '#666';
+            x.fillRect(2, 12, 16, 6);
+            x.fillStyle = '#777';
+            x.fillRect(2, 12, 16, 2);
+            
+            // Backrest
+            x.fillStyle = '#555';
+            x.fillRect(4, 2, 12, 12);
+            x.fillStyle = '#666';
+            x.fillRect(6, 4, 8, 8);
+            
+            return c;
+        }
+        
+        // Generate plant
+        function generatePlantSprite() {
+            const c = document.createElement('canvas');
+            c.width = 28;
+            c.height = 36;
+            const x = c.getContext('2d');
+            
+            // Pot shadow
+            x.fillStyle = 'rgba(0,0,0,0.2)';
+            x.fillRect(6, 30, 16, 4);
+            
+            // Pot
+            x.fillStyle = '#8b4513';
+            x.fillRect(7, 22, 14, 12);
+            x.fillStyle = '#a05523';
+            x.fillRect(7, 22, 14, 3);
+            x.fillStyle = '#6b3503';
+            x.fillRect(7, 31, 14, 3);
+            
+            // Plant leaves
+            x.fillStyle = '#228b22';
+            // Center
+            x.fillRect(12, 8, 4, 16);
+            x.fillRect(10, 12, 8, 10);
+            // Left
+            x.fillRect(4, 10, 10, 8);
+            x.fillRect(2, 14, 8, 6);
+            // Right
+            x.fillRect(14, 8, 10, 8);
+            x.fillRect(18, 12, 8, 6);
+            // Top
+            x.fillRect(10, 2, 8, 10);
+            x.fillRect(12, 0, 4, 8);
+            
+            // Leaf highlights
+            x.fillStyle = '#32ab32';
+            x.fillRect(13, 4, 2, 6);
+            x.fillRect(6, 12, 4, 4);
+            x.fillRect(18, 10, 4, 4);
+            
+            return c;
+        }
+        
+        // Generate whiteboard
+        function generateWhiteboardSprite() {
+            const c = document.createElement('canvas');
+            c.width = 48;
+            c.height = 32;
+            const x = c.getContext('2d');
+            
+            // Frame
+            x.fillStyle = '#555';
+            x.fillRect(0, 0, 48, 32);
+            
+            // Board
+            x.fillStyle = '#f5f5f5';
+            x.fillRect(3, 3, 42, 26);
+            
+            // Some "writing"
+            x.fillStyle = '#00d4ff';
+            x.fillRect(8, 8, 20, 2);
+            x.fillRect(8, 14, 30, 2);
+            x.fillStyle = '#ff4444';
+            x.fillRect(8, 20, 15, 2);
+            
+            // Tray
+            x.fillStyle = '#444';
+            x.fillRect(2, 30, 44, 2);
+            
+            return c;
+        }
+        
+        // Generate bookshelf
+        function generateBookshelfSprite() {
+            const c = document.createElement('canvas');
+            c.width = 32;
+            c.height = 48;
+            const x = c.getContext('2d');
+            
+            // Frame
+            x.fillStyle = '#5c4a3a';
+            x.fillRect(0, 0, 32, 48);
+            
+            // Shelves
+            const shelfColors = ['#8b4444', '#448b44', '#44448b', '#8b8b44'];
+            for (let i = 0; i < 4; i++) {
+                x.fillStyle = '#6b5a4a';
+                x.fillRect(2, i * 12, 28, 10);
+                
+                // Books
+                for (let j = 0; j < 5; j++) {
+                    x.fillStyle = shelfColors[(i + j) % shelfColors.length];
+                    x.fillRect(4 + j * 5, i * 12 + 1, 4, 8);
+                }
+            }
+            
+            return c;
+        }
+        
+        // Matrix rain effect
+        class MatrixRain {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.chars = '01アイウエオカキクケコ';
+                this.drops = [];
+                this.active = true;
+                this.timer = 0;
+                
+                for (let i = 0; i < 8; i++) {
+                    this.drops.push({
+                        char: this.chars[Math.floor(Math.random() * this.chars.length)],
+                        y: -i * 12,
+                        speed: 3 + Math.random() * 2
+                    });
+                }
+            }
+            
+            update(dt) {
+                this.timer += dt;
+                
+                this.drops.forEach(drop => {
+                    drop.y += drop.speed;
+                    if (drop.y > 40) {
+                        drop.y = -12;
+                        drop.char = this.chars[Math.floor(Math.random() * this.chars.length)];
+                    }
+                });
+                
+                if (this.timer > 1.5) {
+                    this.active = false;
+                }
+            }
+            
+            draw(ctx) {
+                ctx.font = '10px monospace';
+                ctx.textAlign = 'center';
+                
+                this.drops.forEach((drop, i) => {
+                    const alpha = 1 - (this.timer / 1.5);
+                    const green = Math.floor(255 * (1 - i / this.drops.length));
+                    ctx.fillStyle = `rgba(0, ${green}, 0, ${alpha})`;
+                    ctx.fillText(drop.char, this.x, this.y + drop.y);
+                });
+            }
+        }
+        
+        // ============================================
+        // AGENT CLASS WITH SEATING
+        // ============================================
+        
+        class Agent {
+            constructor(config) {
+                this.id = config.id;
+                this.name = config.name;
+                this.role = config.role;
+                this.palette = config.palette;
+                this.emoji = config.emoji;
+                this.homeCol = config.col;
+                this.homeRow = config.row;
+                this.x = config.col * TILE_SIZE + TILE_SIZE/2;
+                this.y = config.row * TILE_SIZE + TILE_SIZE/2;
+                this.tx = this.x;
+                this.ty = this.y;
+                
+                this.direction = 'down';
+                this.state = 'idle'; // idle, walk, work, sitting
+                this.frame = 0;
+                this.frameTimer = 0;
+                
+                this.task = null;
+                this.taskProgress = 0;
+                this.completed = 0;
+                
+                this.sprites = this.generateSprites();
+                this.bubble = null;
+                this.matrixEffect = null;
+            }
+            
+            generateSprites() {
+                const sprites = {};
+                ['down', 'up', 'left', 'right'].forEach(dir => {
+                    sprites[dir] = {
+                        idle: generateCharacterSprite(this.palette, dir, 0, false),
+                        walk: generateCharacterSprite(this.palette, dir, 1, false),
+                        sit: generateCharacterSprite(this.palette, dir, 0, true)
+                    };
+                });
+                return sprites;
+            }
+            
+            spawn() {
+                this.matrixEffect = new MatrixRain(this.x, this.y - 40);
+            }
+            
+            update(dt) {
+                // Matrix effect
+                if (this.matrixEffect && this.matrixEffect.active) {
+                    this.matrixEffect.update(dt);
+                }
+                
+                this.frameTimer += dt;
+                
+                // Animation
+                if (this.frameTimer > 0.15) {
+                    this.frame = this.frame === 0 ? 1 : 0;
+                    this.frameTimer = 0;
+                }
+                
+                // Movement
+                const dx = this.tx - this.x;
+                const dy = this.ty - this.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                
+                if (dist > 2) {
+                    this.state = 'walk';
+                    const speed = 80 * dt;
+                    this.x += (dx/dist) * speed;
+                    this.y += (dy/dist) * speed;
+                    
+                    if (Math.abs(dx) > Math.abs(dy)) {
+                        this.direction = dx > 0 ? 'right' : 'left';
+                    } else {
+                        this.direction = dy > 0 ? 'down' : 'up';
+                    }
+                } else {
+                    if (this.state === 'walk') {
+                        // Check if at desk
+                        const homeDist = Math.sqrt(
+                            Math.pow(this.x - (this.homeCol * TILE_SIZE + TILE_SIZE/2), 2) +
+                            Math.pow(this.y - (this.homeRow * TILE_SIZE + TILE_SIZE/2), 2)
+                        );
+                        
+                        if (homeDist < 5 && this.task) {
+                            this.state = 'sitting';
+                            this.showBubble(this.task, 'working');
+                        } else {
+                            this.state = this.task ? 'work' : 'idle';
+                        }
+                    }
+                }
+                
+                // Task progress
+                if (this.task && (this.state === 'work' || this.state === 'sitting')) {
+                    this.taskProgress += dt * 12;
+                    if (this.taskProgress >= 100) {
+                        this.completeTask();
+                    }
+                }
+                
+                // Update bubble
+                if (this.bubble) {
+                    this.updateBubblePosition();
+                }
+            }
+            
+            draw(ctx) {
+                // Matrix effect
+                if (this.matrixEffect && this.matrixEffect.active) {
+                    this.matrixEffect.draw(ctx);
+                }
+                
+                const spriteType = this.state === 'sitting' ? 'sit' : 
+                                   this.state === 'walk' ? 'walk' : 'idle';
+                const sprite = this.sprites[this.direction][spriteType];
+                
+                ctx.drawImage(sprite, this.x - 14, this.y - 18);
+                
+                // Progress bar
+                if (this.task && (this.state === 'work' || this.state === 'sitting')) {
+                    const barW = 28;
+                    const barX = this.x - barW/2;
+                    const barY = this.y - 28;
+                    
+                    ctx.fillStyle = '#222';
+                    ctx.fillRect(barX, barY, barW, 4);
+                    
+                    ctx.fillStyle = PALETTES[this.palette].body;
+                    ctx.fillRect(barX, barY, barW * (this.taskProgress/100), 4);
+                }
+                
+                // Emoji
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(this.emoji, this.x, this.y - 24);
+            }
+            
+            showBubble(text, type = 'normal') {
+                if (this.bubble) {
+                    this.bubble.element.remove();
+                }
+                
+                const el = document.createElement('div');
+                el.className = `speech-bubble ${type}`;
+                el.textContent = text;
+                document.getElementById('bubble-container').appendChild(el);
+                
+                this.bubble = { element: el, text };
+                this.updateBubblePosition();
+                
+                setTimeout(() => {
+                    if (this.bubble && this.bubble.element === el) {
+                        el.style.animation = 'bubbleOut 0.2s ease forwards';
+                        setTimeout(() => el.remove(), 200);
+                        this.bubble = null;
+                    }
+                }, 3500);
+            }
+            
+            updateBubblePosition() {
+                if (!this.bubble) return;
+                
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = rect.width / canvas.width;
+                const scaleY = rect.height / canvas.height;
+                
+                const screenX = rect.left + (this.x * scaleX);
+                const screenY = rect.top + ((this.y - 35) * scaleY);
+                
+                this.bubble.element.style.left = screenX + 'px';
+                this.bubble.element.style.top = screenY + 'px';
+                this.bubble.element.style.transform = 'translateX(-50%)';
+            }
+            
+            giveTask(task, amount = 0) {
+                this.task = task;
+                this.taskAmount = amount;
+                this.taskProgress = 0;
+                this.tx = this.homeCol * TILE_SIZE + TILE_SIZE/2;
+                this.ty = this.homeRow * TILE_SIZE + TILE_SIZE/2;
+                office.activeTasks++;
+                office.updateStats();
+            }
+            
+            completeTask() {
+                this.completed++;
+                office.totalTasks++;
+                office.totalValue += this.taskAmount;
+                office.activeTasks--;
+                office.updateStats();
+                
+                this.showBubble('✓ Complete!', 'success');
+                this.task = null;
+                this.taskProgress = 0;
+                
+                setTimeout(() => this.wander(), 1000);
+            }
+            
+            wander() {
+                const spots = [
+                    {col: 22, row: 14}, {col: 25, row: 10}, {col: 3, row: 8}
+                ];
+                const spot = spots[Math.floor(Math.random() * spots.length)];
+                this.tx = spot.col * TILE_SIZE + TILE_SIZE/2;
+                this.ty = spot.row * TILE_SIZE + TILE_SIZE/2;
+                
+                setTimeout(() => {
+                    this.tx = this.homeCol * TILE_SIZE + TILE_SIZE/2;
+                    this.ty = this.homeRow * TILE_SIZE + TILE_SIZE/2;
+                }, 4000);
+            }
+        }
+        
+        // ============================================
+        // OFFICE SYSTEM
+        // ============================================
+        
+        const office = {
+            agents: [],
+            sprites: {},
+            floorTiles: [],
+            wallTile: null,
+            activeTasks: 0,
+            totalTasks: 0,
+            totalValue: 0,
+            
+            init() {
+                // Generate tile sprites
+                this.wallTile = generateWallTile();
+                this.floorTiles = [];
+                for (let i = 0; i < 4; i++) {
+                    this.floorTiles.push({
+                        office: generateFloorTile(i, 'office'),
+                        meeting: generateFloorTile(i, 'meeting')
+                    });
+                }
+                
+                // Generate furniture sprites
+                this.sprites = {
+                    desk: generateDeskSprite(),
+                    chair: generateChairSprite(),
+                    plant: generatePlantSprite(),
+                    whiteboard: generateWhiteboardSprite(),
+                    bookshelf: generateBookshelfSprite()
+                };
+                
+                // Create agents
+                const configs = [
+                    { id: 0, name: 'Transaction Scout', role: 'Deal Hunter', palette: 'scout', emoji: '🔍', col: 5, row: 5 },
+                    { id: 1, name: 'Hot Money Tracker', role: 'Capital Intel', palette: 'hotmoney', emoji: '💰', col: 10, row: 5 },
+                    { id: 2, name: 'Portfolio Analyzer', role: 'Buyer Match', palette: 'portfolio', emoji: '📊', col: 15, row: 5 },
+                    { id: 3, name: 'LoopNet Intel', role: 'Market Scout', palette: 'loopnet', emoji: '🌐', col: 5, row: 11 },
+                    { id: 4, name: 'Property Submit', role: 'Deal Pipeline', palette: 'submit', emoji: '📨', col: 10, row: 11 },
+                    { id: 5, name: 'Buyer Database', role: 'Data Master', palette: 'buyerdb', emoji: '👥', col: 15, row: 11 },
+                    { id: 6, name: 'Obsidian Sync', role: 'Knowledge Base', palette: 'obsidian', emoji: '📝', col: 5, row: 17 },
+                    { id: 7, name: 'Builders Agent', role: 'Dev Tracker', palette: 'builders', emoji: '🏗️', col: 10, row: 17 },
+                    { id: 8, name: 'Collab Agent', role: 'Team Link', palette: 'collab', emoji: '🤝', col: 15, row: 17 },
+                    { id: 9, name: 'Orchestrator', role: 'Command', palette: 'boss', emoji: '🎮', col: 27, row: 9 }
+                ];
+                
+                configs.forEach((config, i) => {
+                    setTimeout(() => {
+                        const agent = new Agent(config);
+                        agent.spawn();
+                        this.agents.push(agent);
+                    }, i * 300);
+                });
+                
+                this.loop(0);
+                setInterval(() => this.assignTask(), 5000);
+            },
+            
+            loop(timestamp) {
+                const dt = 1/60;
+                this.update(dt);
+                this.draw();
+                requestAnimationFrame((t) => this.loop(t));
+            },
+            
+            update(dt) {
+                this.agents.forEach(agent => agent.update(dt));
+            },
+            
+            draw() {
+                ctx.fillStyle = '#1a1a2e';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw floor and walls
+                for (let row = 0; row < ROWS; row++) {
+                    for (let col = 0; col < COLS; col++) {
+                        const x = col * TILE_SIZE;
+                        const y = row * TILE_SIZE;
+                        
+                        // Wall borders
+                        if (row === 0 || row === ROWS - 1 || col === 0 || col === COLS - 1 || 
+                            (col === 20 && row < 12)) {
+                            ctx.drawImage(this.wallTile, x, y);
+                        } else {
+                            // Floor
+                            const isMeeting = col >= 21;
+                            const variant = (col + row) % 4;
+                            ctx.drawImage(
+                                isMeeting ? this.floorTiles[variant].meeting : this.floorTiles[variant].office,
+                                x, y
+                            );
+                        }
+                    }
+                }
+                
+                // Draw furniture (desks for regular agents)
+                this.agents.forEach(agent => {
+                    if (agent.id < 9) {
+                        const dx = agent.homeCol * TILE_SIZE - 4;
+                        const dy = agent.homeRow * TILE_SIZE - 8;
+                        ctx.drawImage(this.sprites.desk, dx, dy);
+                        ctx.drawImage(this.sprites.chair, dx + 10, dy + 20);
+                    }
+                });
+                
+                // Meeting table for boss
+                ctx.drawImage(this.sprites.desk, 25 * TILE_SIZE - 4, 8 * TILE_SIZE - 8);
+                
+                // Plants
+                ctx.drawImage(this.sprites.plant, 2 * TILE_SIZE, 3 * TILE_SIZE);
+                ctx.drawImage(this.sprites.plant, 18 * TILE_SIZE, 3 * TILE_SIZE);
+                ctx.drawImage(this.sprites.plant, 2 * TILE_SIZE, 19 * TILE_SIZE);
+                
+                // Whiteboard
+                ctx.drawImage(this.sprites.whiteboard, 22 * TILE_SIZE, 3 * TILE_SIZE);
+                
+                // Bookshelf
+                ctx.drawImage(this.sprites.bookshelf, 28 * TILE_SIZE, 14 * TILE_SIZE);
+                
+                // Draw agents (depth sorted)
+                this.agents.sort((a, b) => a.y - b.y);
+                this.agents.forEach(agent => agent.draw(ctx));
+            },
+            
+            spawnAgent() {
+                // Spawn a sub-agent
+                const parent = this.agents[Math.floor(Math.random() * this.agents.length)];
+                const config = {
+                    id: this.agents.length,
+                    name: parent.name + ' Jr',
+                    role: 'Assistant',
+                    palette: parent.palette,
+                    emoji: parent.emoji,
+                    col: 22 + Math.floor(Math.random() * 6),
+                    row: 14 + Math.floor(Math.random() * 4)
+                };
+                const agent = new Agent(config);
+                agent.spawn();
+                this.agents.push(agent);
+            },
+            
+            assignTask() {
+                const available = this.agents.filter(a => !a.task);
+                if (available.length === 0) return;
+                
+                const agent = available[Math.floor(Math.random() * available.length)];
+                const tasks = [
+                    { text: 'Scanning LoopNet...', amount: 0 },
+                    { text: 'Analyzing market data...', amount: 0 },
+                    { text: 'Matching buyers...', amount: 5000000 },
+                    { text: 'Processing $18M deal...', amount: 18000000 },
+                    { text: 'Syncing database...', amount: 0 }
+                ];
+                const task = tasks[Math.floor(Math.random() * tasks.length)];
+                agent.giveTask(task.text, task.amount);
+            },
+            
+            hotMoneyAlert() {
+                const hm = this.agents.find(a => a.id === 1);
+                if (hm) {
+                    hm.giveTask('🔥 HOT MONEY ALERT!', 5000000);
+                    hm.showBubble('🔥 HOT MONEY DETECTED!', 'alert');
+                    canvas.style.boxShadow = '0 0 100px #ff4444';
+                    setTimeout(() => canvas.style.boxShadow = '0 0 60px rgba(0, 212, 255, 0.3)', 800);
+                }
+            },
+            
+            staynerDeal() {
+                this.agents.forEach((agent, i) => {
+                    const staynerTasks = [
+                        { text: 'Stayner: 112 acres', amount: 18000000 },
+                        { text: '$18M analysis', amount: 0 },
+                        { text: 'Matching Tier 1 buyers', amount: 0 },
+                        { text: 'Commission: $360K', amount: 360000 },
+                        { text: 'Processing LOI', amount: 0 }
+                    ];
+                    setTimeout(() => {
+                        const task = staynerTasks[i % staynerTasks.length];
+                        agent.giveTask(task.text, task.amount);
+                    }, i * 500);
+                });
+            },
+            
+            updateStats() {
+                document.getElementById('stat-active').textContent = this.activeTasks;
+                document.getElementById('stat-tasks').textContent = this.totalTasks;
+                document.getElementById('stat-deals').textContent = '$' + (this.totalValue / 1000000).toFixed(1) + 'M';
+            }
+        };
+        
+        window.office = office;
+        office.init();
+    </script>
+</body>
+</html>

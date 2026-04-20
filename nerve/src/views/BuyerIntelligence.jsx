@@ -1,0 +1,699 @@
+import React, { useState, useMemo } from 'react'
+import {
+  Search, Building2, DollarSign, MapPin, TrendingUp,
+  Phone, Mail, Globe, Linkedin, FileText, Download,
+  Target, Flame, Users, Landmark, Briefcase, Activity,
+  ChevronRight, Star, ArrowUpRight, Layers, Send,
+  BarChart3, Home, Warehouse, Store, LandPlot,
+  Calendar, CheckCircle, ExternalLink, X, Loader2, Copy
+} from 'lucide-react'
+
+const API_BASE = import.meta.env.VITE_API_URL || ''
+
+const ASSET_TYPES = [
+  { label: 'Office', icon: Building2 },
+  { label: 'Industrial', icon: Warehouse },
+  { label: 'Retail', icon: Store },
+  { label: 'Multifamily', icon: Home },
+  { label: 'Hotel', icon: LandPlot },
+  { label: 'Land', icon: LandPlot },
+  { label: 'Senior Living', icon: Home },
+  { label: 'Mixed-Use', icon: Building2 },
+]
+
+const QUICK_LINK_ICONS = {
+  google: { label: 'Google', color: 'bg-blue-500' },
+  linkedin: { label: 'LinkedIn', color: 'bg-sky-600' },
+  linkedin_president: { label: 'CEO Search', color: 'bg-sky-700' },
+  news: { label: 'News', color: 'bg-amber-500' },
+  key_people: { label: 'Key People', color: 'bg-purple-500' },
+  website: { label: 'Website', color: 'bg-emerald-500' },
+  loopnet: { label: 'LoopNet', color: 'bg-indigo-500' },
+  contact_page: { label: 'Contact', color: 'bg-rose-500' },
+}
+
+const TIER_COLORS = {
+  'Tier 1 (Call NOW)': 'bg-red-500/10 text-red-400 border-red-500/20',
+  'Tier 2 (Email + Feature Sheet)': 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+  'Tier 3 (Broker Network / Research)': 'bg-slate-500/10 text-slate-400 border-slate-500/20',
+}
+
+export default function BuyerIntelligence() {
+  const [form, setForm] = useState({
+    property_type: 'Office',
+    address: '',
+    city: 'Mississauga',
+    province: 'ON',
+    size_sqft: 100000,
+    price: 25000000,
+    net_income: 1400000,
+    cap_rate: 5.6,
+    occupancy: 'stabilized',
+    notes: 'Value-add potential near airport corridor',
+    target_count: 25,
+  })
+  const [report, setReport] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [activeTab, setActiveTab] = useState('buyers')
+  const [featureSheet, setFeatureSheet] = useState(null)
+  const [featureSheetLoading, setFeatureSheetLoading] = useState(false)
+  const [teaserEmail, setTeaserEmail] = useState(null)
+  const [teaserEmailLoading, setTeaserEmailLoading] = useState(false)
+
+  const handleGenerate = async () => {
+    setLoading(true)
+    setError(null)
+    setFeatureSheet(null)
+    try {
+      const res = await fetch(`${API_BASE}/api/buyer-intelligence`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const data = await res.json()
+      setReport(data)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const generateFeatureSheet = async () => {
+    setFeatureSheetLoading(true)
+    try {
+      const res = await fetch(`${API_BASE}/api/property-feature-sheet`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          property_type: form.property_type,
+          address: form.address,
+          city: form.city,
+          province: form.province,
+          size_sqft: form.size_sqft,
+          price: form.price,
+          net_income: form.net_income,
+          cap_rate: form.cap_rate,
+          occupancy: form.occupancy,
+          notes: form.notes,
+        }),
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const data = await res.json()
+      setFeatureSheet(data)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setFeatureSheetLoading(false)
+    }
+  }
+
+  const generateTeaserEmail = async (recipientType = 'buyer') => {
+    setTeaserEmailLoading(true)
+    try {
+      const res = await fetch(`${API_BASE}/api/buyer-intelligence/teaser`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          property_type: form.property_type,
+          address: form.address,
+          city: form.city,
+          province: form.province,
+          size_sqft: form.size_sqft,
+          price: form.price,
+          net_income: form.net_income,
+          cap_rate: form.cap_rate,
+          occupancy: form.occupancy,
+          notes: form.notes,
+          feature_sheet_url: featureSheet?.url || '',
+          recipient_type: recipientType,
+        }),
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const data = await res.json()
+      setTeaserEmail(data)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setTeaserEmailLoading(false)
+    }
+  }
+
+  const tabs = useMemo(() => {
+    if (!report) return []
+    return [
+      { key: 'buyers', label: `Ranked Buyers (${report.summary.hot_money_buyers_found + report.summary.registered_buyers_found})`, icon: Target },
+      { key: 'sellers', label: `Sellers With Capital (${report.summary.sellers_with_capital_found})`, icon: Flame },
+      { key: 'lenders', label: `Lenders (${report.summary.lenders_found})`, icon: Landmark },
+      { key: 'agents', label: `Agents (${report.summary.agents_found})`, icon: Briefcase },
+      { key: 'deals', label: `Comps (${report.summary.comparable_deals_found})`, icon: Activity },
+      { key: 'outreach', label: `Outreach List`, icon: Send },
+    ]
+  }, [report])
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold flex items-center gap-3">
+            <Target className="w-8 h-8 text-accent-purple" />
+            Buyer Intelligence & Outreach Pack
+          </h1>
+          <p className="text-text-muted mt-1">
+            Find who has the money, who just sold, and how to reach them — in 30 seconds.
+          </p>
+        </div>
+      </div>
+
+      {/* Input Form */}
+      <div className="bg-bg-card border border-border-subtle rounded-2xl p-6">
+        <h2 className="text-lg font-semibold text-text-primary mb-4 flex items-center gap-2">
+          <Building2 className="w-5 h-5 text-accent-primary" />
+          Subject Property
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Asset Type */}
+          <div>
+            <label className="text-xs text-text-muted mb-1.5 block">Asset Type</label>
+            <select
+              value={form.property_type}
+              onChange={(e) => setForm({ ...form, property_type: e.target.value })}
+              className="w-full px-3 py-2.5 bg-bg-input border border-border-subtle rounded-xl text-text-primary text-sm focus:outline-none focus:border-accent-primary"
+            >
+              {ASSET_TYPES.map((t) => (
+                <option key={t.label} value={t.label}>{t.label}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* City */}
+          <div>
+            <label className="text-xs text-text-muted mb-1.5 block">City</label>
+            <input
+              type="text"
+              value={form.city}
+              onChange={(e) => setForm({ ...form, city: e.target.value })}
+              className="w-full px-3 py-2.5 bg-bg-input border border-border-subtle rounded-xl text-text-primary text-sm focus:outline-none focus:border-accent-primary"
+              placeholder="Mississauga"
+            />
+          </div>
+
+          {/* Province */}
+          <div>
+            <label className="text-xs text-text-muted mb-1.5 block">Province</label>
+            <input
+              type="text"
+              value={form.province}
+              onChange={(e) => setForm({ ...form, province: e.target.value })}
+              className="w-full px-3 py-2.5 bg-bg-input border border-border-subtle rounded-xl text-text-primary text-sm focus:outline-none focus:border-accent-primary"
+              placeholder="ON"
+            />
+          </div>
+
+          {/* Size */}
+          <div>
+            <label className="text-xs text-text-muted mb-1.5 block">Size (SF)</label>
+            <input
+              type="number"
+              value={form.size_sqft}
+              onChange={(e) => setForm({ ...form, size_sqft: Number(e.target.value) })}
+              className="w-full px-3 py-2.5 bg-bg-input border border-border-subtle rounded-xl text-text-primary text-sm focus:outline-none focus:border-accent-primary"
+            />
+          </div>
+
+          {/* Price */}
+          <div>
+            <label className="text-xs text-text-muted mb-1.5 block">Price ($)</label>
+            <input
+              type="number"
+              value={form.price}
+              onChange={(e) => setForm({ ...form, price: Number(e.target.value) })}
+              className="w-full px-3 py-2.5 bg-bg-input border border-border-subtle rounded-xl text-text-primary text-sm focus:outline-none focus:border-accent-primary"
+            />
+          </div>
+
+          {/* NOI */}
+          <div>
+            <label className="text-xs text-text-muted mb-1.5 block">Net Operating Income ($)</label>
+            <input
+              type="number"
+              value={form.net_income}
+              onChange={(e) => setForm({ ...form, net_income: Number(e.target.value) })}
+              className="w-full px-3 py-2.5 bg-bg-input border border-border-subtle rounded-xl text-text-primary text-sm focus:outline-none focus:border-accent-primary"
+            />
+          </div>
+
+          {/* Cap Rate */}
+          <div>
+            <label className="text-xs text-text-muted mb-1.5 block">Cap Rate (%)</label>
+            <input
+              type="number"
+              step="0.1"
+              value={form.cap_rate}
+              onChange={(e) => setForm({ ...form, cap_rate: Number(e.target.value) })}
+              className="w-full px-3 py-2.5 bg-bg-input border border-border-subtle rounded-xl text-text-primary text-sm focus:outline-none focus:border-accent-primary"
+            />
+          </div>
+
+          {/* Target Count */}
+          <div>
+            <label className="text-xs text-text-muted mb-1.5 block">Target Results</label>
+            <input
+              type="number"
+              value={form.target_count}
+              onChange={(e) => setForm({ ...form, target_count: Number(e.target.value) })}
+              className="w-full px-3 py-2.5 bg-bg-input border border-border-subtle rounded-xl text-text-primary text-sm focus:outline-none focus:border-accent-primary"
+            />
+          </div>
+        </div>
+
+        {/* Notes */}
+        <div className="mt-4">
+          <label className="text-xs text-text-muted mb-1.5 block">Notes / Investment Thesis</label>
+          <textarea
+            value={form.notes}
+            onChange={(e) => setForm({ ...form, notes: e.target.value })}
+            rows={2}
+            className="w-full px-3 py-2.5 bg-bg-input border border-border-subtle rounded-xl text-text-primary text-sm focus:outline-none focus:border-accent-primary resize-none"
+            placeholder="Value-add potential, airport corridor, etc."
+          />
+        </div>
+
+        {/* Actions */}
+        <div className="mt-4 flex items-center gap-3">
+          <button
+            onClick={handleGenerate}
+            disabled={loading}
+            className="px-6 py-2.5 bg-accent-primary hover:bg-accent-primary/90 text-white rounded-xl font-medium text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          >
+            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
+            {loading ? 'Generating Intelligence...' : 'Generate Buyer Intelligence'}
+          </button>
+          {report && (
+            <button
+              onClick={() => setReport(null)}
+              className="px-4 py-2.5 bg-bg-input hover:bg-bg-card border border-border-subtle rounded-xl text-text-secondary text-sm transition-colors flex items-center gap-2"
+            >
+              <X className="w-4 h-4" />
+              Clear
+            </button>
+          )}
+        </div>
+
+        {error && (
+          <div className="mt-3 text-sm text-accent-red bg-accent-red/5 border border-accent-red/20 rounded-lg px-3 py-2">
+            Error: {error}
+          </div>
+        )}
+      </div>
+
+      {/* Report */}
+      {report && (
+        <div className="space-y-6">
+          {/* Property Card */}
+          <div className="bg-gradient-to-r from-accent-purple/10 to-accent-blue/10 border border-accent-purple/20 rounded-2xl p-6">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-xl font-bold text-text-primary">
+                  {report.subject_property.property_type} — {report.subject_property.city}
+                </h3>
+                <p className="text-text-muted text-sm mt-1">{report.subject_property.notes}</p>
+              </div>
+              <div className="text-right">
+                <p className="text-2xl font-bold text-accent-primary">
+                  ${(report.subject_property.price / 1_000_000).toFixed(1)}M
+                </p>
+                <p className="text-xs text-text-muted">
+                  {report.subject_property.size_sqft?.toLocaleString()} SF · {report.subject_property.cap_rate}% cap
+                </p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 pt-4 border-t border-border-subtle/50">
+              <div>
+                <p className="text-xs text-text-muted">Total Buyer Capacity</p>
+                <p className="text-lg font-semibold text-text-primary">
+                  ${(report.summary.estimated_total_buyer_capacity / 1_000_000_000).toFixed(1)}B
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-text-muted">Buyers Found</p>
+                <p className="text-lg font-semibold text-text-primary">
+                  {report.summary.hot_money_buyers_found + report.summary.registered_buyers_found}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-text-muted">Sellers With Capital</p>
+                <p className="text-lg font-semibold text-text-primary">
+                  {report.summary.sellers_with_capital_found}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-text-muted">Lenders + Agents</p>
+                <p className="text-lg font-semibold text-text-primary">
+                  {report.summary.lenders_found + report.summary.agents_found}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* One-Click Actions */}
+          <div className="flex flex-wrap gap-3">
+            {Object.entries(report.upsells).map(([key, upsell]) => (
+              <button
+                key={key}
+                onClick={() => {
+                  if (key === 'feature_sheet') generateFeatureSheet()
+                if (key === 'teaser_email') generateTeaserEmail('buyer')
+                }}
+                disabled={featureSheetLoading && key === 'feature_sheet'}
+                className="px-4 py-2 bg-bg-card border border-border-subtle hover:border-accent-primary/30 rounded-xl text-sm text-text-secondary hover:text-text-primary transition-colors flex items-center gap-2 disabled:opacity-50"
+              >
+                {key === 'feature_sheet' && (featureSheetLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileText className="w-4 h-4" />)}
+                {key === 'teaser_email' && <Send className="w-4 h-4" />}
+                {key === 'outreach_package' && <Download className="w-4 h-4" />}
+                {upsell.description}
+              </button>
+            ))}
+          </div>
+
+          {/* Feature Sheet Result */}
+          {featureSheet && (
+            <div className="bg-accent-primary/5 border border-accent-primary/20 rounded-xl p-4 flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-text-primary">Feature Sheet Ready</p>
+                <p className="text-xs text-text-muted">ID: {featureSheet.id}</p>
+              </div>
+              <a
+                href={featureSheet.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-accent-primary hover:bg-accent-primary/90 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Open Feature Sheet
+              </a>
+            </div>
+          )}
+
+          {/* Teaser Email Result */}
+          {teaserEmail && (
+            <div className="bg-bg-card border border-border-subtle rounded-xl overflow-hidden">
+              <div className="px-4 py-3 border-b border-border-subtle flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-text-primary">Teaser Email Ready</p>
+                  <p className="text-xs text-text-muted">{teaserEmail.subject}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => navigator.clipboard.writeText(teaserEmail.text_body)}
+                    className="px-3 py-1.5 bg-bg-input hover:bg-border-subtle rounded-lg text-xs text-text-secondary transition-colors flex items-center gap-1.5"
+                  >
+                    <Copy className="w-3 h-3" />
+                    Copy Text
+                  </button>
+                  <button
+                    onClick={() => navigator.clipboard.writeText(teaserEmail.html_body)}
+                    className="px-3 py-1.5 bg-bg-input hover:bg-border-subtle rounded-lg text-xs text-text-secondary transition-colors flex items-center gap-1.5"
+                  >
+                    <Copy className="w-3 h-3" />
+                    Copy HTML
+                  </button>
+                </div>
+              </div>
+              <div className="p-4">
+                <p className="text-xs text-text-muted mb-2">Preview:</p>
+                <iframe
+                  srcDoc={teaserEmail.html_body}
+                  className="w-full h-64 rounded-lg border border-border-subtle bg-white"
+                  title="Teaser Preview"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Tabs */}
+          <div className="flex overflow-x-auto gap-2 pb-2 scrollbar-thin">
+            {tabs.map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-colors ${
+                  activeTab === tab.key
+                    ? 'bg-accent-primary/10 text-accent-primary border border-accent-primary/20'
+                    : 'bg-bg-card border border-border-subtle text-text-muted hover:text-text-secondary'
+                }`}
+              >
+                <tab.icon className="w-4 h-4" />
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Tab Content */}
+          <div className="space-y-4">
+            {activeTab === 'buyers' && <RankedBuyers buyers={report.ranked_buyers} />}
+            {activeTab === 'sellers' && <SellersWithCapital sellers={report.sellers_with_capital} />}
+            {activeTab === 'lenders' && <LendersList lenders={report.capable_lenders} />}
+            {activeTab === 'agents' && <AgentsList agents={report.active_agents} />}
+            {activeTab === 'deals' && <ComparableDeals deals={report.comparable_deals} />}
+            {activeTab === 'outreach' && <OutreachList items={report.priority_outreach_list} />}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ---------- SUB-COMPONENTS ----------
+
+function ScoreBadge({ score }) {
+  let color = 'bg-slate-500/10 text-slate-400'
+  if (score >= 75) color = 'bg-red-500/10 text-red-400'
+  else if (score >= 55) color = 'bg-amber-500/10 text-amber-400'
+  else if (score >= 40) color = 'bg-emerald-500/10 text-emerald-400'
+  return (
+    <span className={`px-2 py-0.5 rounded-md text-xs font-semibold ${color}`}>
+      {score}/100
+    </span>
+  )
+}
+
+function QuickLinks({ links }) {
+  if (!links) return null
+  return (
+    <div className="flex flex-wrap gap-1.5 mt-2">
+      {Object.entries(links).map(([key, url]) => {
+        if (!url) return null
+        const meta = QUICK_LINK_ICONS[key]
+        if (!meta) return null
+        return (
+          <a
+            key={key}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`px-2 py-0.5 rounded text-[10px] text-white hover:opacity-80 transition-opacity ${meta.color}`}
+          >
+            {meta.label}
+          </a>
+        )
+      })}
+    </div>
+  )
+}
+
+function RankedBuyers({ buyers }) {
+  if (!buyers?.length) return <EmptyState message="No ranked buyers found. Try adjusting your criteria." />
+  return (
+    <div className="grid gap-3">
+      {buyers.map((buyer, idx) => (
+        <div key={idx} className="bg-bg-card border border-border-subtle rounded-xl p-4 hover:border-accent-primary/20 transition-colors">
+          <div className="flex items-start justify-between">
+            <div className="flex-1">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-text-muted w-6">#{idx + 1}</span>
+                <h4 className="font-semibold text-text-primary">{buyer.name}</h4>
+                <ScoreBadge score={buyer.score} />
+                {buyer.cash_amount > 0 && (
+                  <span className="text-xs text-accent-primary bg-accent-primary/5 px-2 py-0.5 rounded">
+                    ${(buyer.cash_amount / 1_000_000).toFixed(1)}M capacity
+                  </span>
+                )}
+              </div>
+              <div className="mt-1 flex items-center gap-3 text-xs text-text-muted">
+                {buyer.asset_class && <span>{buyer.asset_class}</span>}
+                {buyer.location && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{buyer.location}</span>}
+                {buyer.sale_date && <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{buyer.sale_date}</span>}
+                {buyer.days_ago !== null && <span>{buyer.days_ago}d ago</span>}
+              </div>
+              {buyer.score_breakdown && (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {Object.entries(buyer.score_breakdown).map(([k, v]) => (
+                    <span key={k} className="text-[10px] px-1.5 py-0.5 bg-bg-input rounded text-text-muted">
+                      {k.replace(/_/g, ' ')}: {v}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          <QuickLinks links={buyer.quick_links} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function SellersWithCapital({ sellers }) {
+  if (!sellers?.length) return <EmptyState message="No sellers with capital found." />
+  return (
+    <div className="grid gap-3">
+      {sellers.map((seller, idx) => (
+        <div key={idx} className="bg-bg-card border border-border-subtle rounded-xl p-4 hover:border-red-500/20 transition-colors">
+          <div className="flex items-start justify-between">
+            <div className="flex-1">
+              <div className="flex items-center gap-2">
+                <Flame className="w-4 h-4 text-red-400" />
+                <h4 className="font-semibold text-text-primary">{seller.name}</h4>
+                <ScoreBadge score={seller.score} />
+                <span className={`text-xs px-2 py-0.5 rounded border ${TIER_COLORS[seller.tier] || TIER_COLORS['Tier 3 (Broker Network / Research)']}`}>
+                  {seller.redeploy_probability} redeploy
+                </span>
+              </div>
+              <p className="text-xs text-text-muted mt-1">{seller.notes}</p>
+              <div className="mt-1 flex items-center gap-3 text-xs text-text-muted">
+                {seller.city && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{seller.city}</span>}
+                {seller.email && <span className="flex items-center gap-1"><Mail className="w-3 h-3" />{seller.email}</span>}
+                {seller.phone && <span className="flex items-center gap-1"><Phone className="w-3 h-3" />{seller.phone}</span>}
+              </div>
+            </div>
+          </div>
+          <QuickLinks links={seller.quick_links} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function LendersList({ lenders }) {
+  if (!lenders?.length) return <EmptyState message="No lenders found." />
+  return (
+    <div className="grid gap-3">
+      {lenders.map((lender, idx) => (
+        <div key={idx} className="bg-bg-card border border-border-subtle rounded-xl p-4 hover:border-accent-primary/20 transition-colors">
+          <div className="flex items-center gap-2">
+            <Landmark className="w-4 h-4 text-accent-primary" />
+            <h4 className="font-semibold text-text-primary">{lender.name}</h4>
+            <ScoreBadge score={lender.score} />
+            {lender.lender_type && (
+              <span className="text-xs text-text-muted bg-bg-input px-2 py-0.5 rounded">{lender.lender_type}</span>
+            )}
+          </div>
+          {lender.asset_specializations && (
+            <p className="text-xs text-text-muted mt-1">{lender.asset_specializations}</p>
+          )}
+          <QuickLinks links={lender.quick_links} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function AgentsList({ agents }) {
+  if (!agents?.length) return <EmptyState message="No agents found." />
+  return (
+    <div className="grid gap-3">
+      {agents.map((agent, idx) => (
+        <div key={idx} className="bg-bg-card border border-border-subtle rounded-xl p-4 hover:border-accent-primary/20 transition-colors">
+          <div className="flex items-center gap-2">
+            <Briefcase className="w-4 h-4 text-accent-primary" />
+            <h4 className="font-semibold text-text-primary">{agent.name}</h4>
+            <ScoreBadge score={agent.score} />
+            {agent.brokerage && (
+              <span className="text-xs text-text-muted bg-bg-input px-2 py-0.5 rounded">{agent.brokerage}</span>
+            )}
+          </div>
+          <div className="mt-1 flex items-center gap-3 text-xs text-text-muted">
+            {agent.role && <span>{agent.role}</span>}
+            {agent.city && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{agent.city}</span>}
+            {agent.email && <span className="flex items-center gap-1"><Mail className="w-3 h-3" />{agent.email}</span>}
+          </div>
+          <QuickLinks links={agent.quick_links} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ComparableDeals({ deals }) {
+  if (!deals?.length) return <EmptyState message="No comparable deals found." />
+  return (
+    <div className="grid gap-3">
+      {deals.map((deal, idx) => (
+        <div key={idx} className="bg-bg-card border border-border-subtle rounded-xl p-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h4 className="font-semibold text-text-primary text-sm">{deal.address || 'Unknown address'}</h4>
+              <p className="text-xs text-text-muted">{deal.city} · {deal.asset_class}</p>
+            </div>
+            <div className="text-right">
+              <p className="text-sm font-semibold text-text-primary">
+                ${deal.sale_price ? (deal.sale_price / 1_000_000).toFixed(1) + 'M' : 'N/A'}
+              </p>
+              <p className="text-xs text-text-muted">{deal.sale_date}</p>
+            </div>
+          </div>
+          {deal.description && (
+            <p className="text-xs text-text-muted mt-1">{deal.description}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function OutreachList({ items }) {
+  if (!items?.length) return <EmptyState message="No outreach items found." />
+  const byTier = items.reduce((acc, item) => {
+    acc[item.tier] = acc[item.tier] || []
+    acc[item.tier].push(item)
+    return acc
+  }, {})
+
+  return (
+    <div className="space-y-4">
+      {Object.entries(byTier).map(([tier, tierItems]) => (
+        <div key={tier}>
+          <h3 className={`text-sm font-semibold mb-2 px-3 py-1 rounded-lg inline-block ${TIER_COLORS[tier] || ''}`}>
+            {tier} — {tierItems.length}
+          </h3>
+          <div className="grid gap-2">
+            {tierItems.map((item, idx) => (
+              <div key={idx} className="flex items-center justify-between bg-bg-card border border-border-subtle rounded-lg px-4 py-3">
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-4 h-4 text-text-muted" />
+                  <span className="text-sm text-text-primary font-medium">{item.name}</span>
+                  <span className="text-xs text-text-muted capitalize">{item.type.replace(/_/g, ' ')}</span>
+                </div>
+                <ScoreBadge score={item.score} />
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function EmptyState({ message }) {
+  return (
+    <div className="text-center py-12 text-text-muted">
+      <Target className="w-8 h-8 mx-auto mb-3 opacity-30" />
+      <p className="text-sm">{message}</p>
+    </div>
+  )
+}

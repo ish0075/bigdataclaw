@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Agents - Pablo De Lucca | BigDataClaw</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+        }
+        .pixel-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        /* Pixel Agent Sprite Styles */
+        .pixel-agent {
+            width: 128px;
+            height: 128px;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            transition: all 0.3s ease;
+        }
+        
+        .agent-idle {
+            animation: idle 2s infinite;
+        }
+        
+        .agent-working {
+            animation: working 0.5s infinite;
+        }
+        
+        .agent-busy {
+            animation: busy 0.3s infinite;
+            filter: brightness(1.2);
+        }
+        
+        @keyframes idle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+        
+        @keyframes working {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes busy {
+            0%, 100% { transform: translateX(0); filter: brightness(1); }
+            25% { transform: translateX(-2px); filter: brightness(1.3); }
+            75% { transform: translateX(2px); filter: brightness(1.3); }
+        }
+        
+        .agent-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid #0f3460;
+            transition: all 0.3s ease;
+        }
+        
+        .agent-card:hover {
+            border-color: #e94560;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-idle { background: #10b981; }
+        .status-working { background: #3b82f6; animation: pulse 1s infinite; }
+        .status-busy { background: #f59e0b; animation: pulse 0.5s infinite; }
+        .status-hot { background: #ef4444; animation: pulse 0.3s infinite; }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .scanline {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+    <!-- Scanline Overlay -->
+    <div class="scanline fixed inset-0 z-50 opacity-20"></div>
+    
+    <!-- Header -->
+    <header class="border-b border-gray-800 p-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="pixel-font text-2xl text-yellow-400 mb-2">PIXEL AGENTS</h1>
+                <p class="text-gray-400 text-sm">Original Concept by Pablo De Lucca | BigDataClaw Mission Control</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="text-right">
+                    <p class="text-xs text-gray-500">SYSTEM STATUS</p>
+                    <p class="text-green-400 font-bold">ONLINE</p>
+                </div>
+                <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto p-6">
+        
+        <!-- Hero Stats -->
+        <div class="grid grid-cols-4 gap-4 mb-8">
+            <div class="bg-gray-900 border border-gray-800 p-4 rounded">
+                <p class="text-gray-500 text-xs">TOTAL AGENTS</p>
+                <p class="pixel-font text-2xl text-blue-400">32</p>
+            </div>
+            <div class="bg-gray-900 border border-gray-800 p-4 rounded">
+                <p class="text-gray-500 text-xs">ACTIVE NOW</p>
+                <p class="pixel-font text-2xl text-green-400">10</p>
+            </div>
+            <div class="bg-gray-900 border border-gray-800 p-4 rounded">
+                <p class="text-gray-500 text-xs">HOT MONEY</p>
+                <p class="pixel-font text-2xl text-red-400">$24.8M</p>
+            </div>
+            <div class="bg-gray-900 border border-gray-800 p-4 rounded">
+                <p class="text-gray-500 text-xs">COMMISSION</p>
+                <p class="pixel-font text-2xl text-yellow-400">$360K</p>
+            </div>
+        </div>
+
+        <!-- Agent Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4" id="agentGrid">
+            <!-- Agents will be generated here -->
+        </div>
+
+        <!-- Status Legend -->
+        <div class="mt-8 p-4 bg-gray-900 border border-gray-800 rounded">
+            <h3 class="pixel-font text-sm text-gray-400 mb-3">AGENT STATUS LEGEND</h3>
+            <div class="grid grid-cols-4 gap-4 text-sm">
+                <div class="flex items-center gap-2">
+                    <span class="status-dot status-idle"></span>
+                    <span class="text-green-400">IDLE</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="status-dot status-working"></span>
+                    <span class="text-blue-400">WORKING</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="status-dot status-busy"></span>
+                    <span class="text-yellow-400">BUSY</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="status-dot status-hot"></span>
+                    <span class="text-red-400">HOT MONEY</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="mt-8 p-6 bg-gray-900 border border-gray-800 rounded">
+            <h3 class="pixel-font text-lg text-blue-400 mb-4">MISSION CONTROL</h3>
+            <div class="flex flex-wrap gap-4">
+                <button onclick="activateAll()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded pixel-font text-xs transition">
+                    ACTIVATE ALL
+                </button>
+                <button onclick="showHotMoney()" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded pixel-font text-xs transition">
+                    HOT MONEY RADAR
+                </button>
+                <button onclick="focusStayner()" class="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 rounded pixel-font text-xs transition">
+                    FOCUS: STAYNER
+                </button>
+                <button onclick="randomizeStatus()" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded pixel-font text-xs transition">
+                    SIMULATE ACTIVITY
+                </button>
+            </div>
+        </div>
+
+        <!-- Info Panel -->
+        <div class="mt-8 grid grid-cols-2 gap-4">
+            <div class="p-4 bg-gray-900 border border-gray-800 rounded">
+                <h4 class="pixel-font text-sm text-yellow-400 mb-2">SELECTED AGENT</h4>
+                <div id="selectedAgent">
+                    <p class="text-gray-500">Click an agent to view details</p>
+                </div>
+            </div>
+            <div class="p-4 bg-gray-900 border border-gray-800 rounded">
+                <h4 class="pixel-font text-sm text-green-400 mb-2">ACTIVITY LOG</h4>
+                <div id="activityLog" class="text-xs font-mono space-y-1">
+                    <p class="text-gray-500">[00:00:00] System initialized...</p>
+                    <p class="text-gray-500">[00:00:01] 32 agents loaded</p>
+                    <p class="text-gray-500">[00:00:02] Hot Money Radar active</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Agent Data - 32 BigDataClaw Agents
+        const agents = [
+            { id: 1, name: "CEO Strategy", icon: "👔", role: "Executive", status: "idle", color: "#FFD700" },
+            { id: 2, name: "Transaction Scout", icon: "🔍", role: "Research", status: "working", color: "#3B82F6" },
+            { id: 3, name: "Hot Money Tracker", icon: "💰", role: "Analysis", status: "hot", color: "#EF4444" },
+            { id: 4, name: "Portfolio Analyzer", icon: "📊", role: "Analysis", status: "working", color: "#8B5CF6" },
+            { id: 5, name: "Agent Finder", icon: "🤝", role: "Recruitment", status: "idle", color: "#10B981" },
+            { id: 6, name: "Lender Matcher", icon: "🏦", role: "Finance", status: "idle", color: "#F59E0B" },
+            { id: 7, name: "Obsidian Sync", icon: "📝", role: "Knowledge", status: "working", color: "#6366F1" },
+            { id: 8, name: "Video Director", icon: "🎬", role: "Creative", status: "busy", color: "#EC4899" },
+            { id: 9, name: "Remotion Dev", icon: "⚛️", role: "Technical", status: "working", color: "#06B6D4" },
+            { id: 10, name: "Screen Recorder", icon: "📹", role: "Media", status: "idle", color: "#84CC16" },
+            { id: 11, name: "Localhost Bridge", icon: "🌐", role: "Network", status: "working", color: "#14B8A6" },
+            { id: 12, name: "File Manager", icon: "📁", role: "Storage", status: "idle", color: "#8B5CF6" },
+            { id: 13, name: "LinkedIn Bot", icon: "💼", role: "Social", status: "working", color: "#0077B5" },
+            { id: 14, name: "Content Generator", icon: "✍️", role: "Creative", status: "idle", color: "#F97316" },
+            { id: 15, name: "SEO Optimizer", icon: "📈", role: "Marketing", status: "working", color: "#22C55E" },
+            { id: 16, name: "Campaign Manager", icon: "📢", role: "Marketing", status: "idle", color: "#EAB308" },
+            { id: 17, name: "Data Validator", icon: "✓", role: "Quality", status: "idle", color: "#10B981" },
+            { id: 18, name: "API Connector", icon: "🔌", role: "Integration", status: "working", color: "#6366F1" },
+            { id: 19, name: "Report Compiler", icon: "📄", role: "Output", status: "idle", color: "#64748B" },
+            { id: 20, name: "Alert Monitor", icon: "🔔", role: "Monitoring", status: "working", color: "#EF4444" },
+            { id: 21, name: "Backup Manager", icon: "💾", role: "Reliability", status: "idle", color: "#3B82F6" },
+            { id: 22, name: "Performance Tracker", icon: "📊", role: "Metrics", status: "working", color: "#8B5CF6" },
+            { id: 23, name: "Buyer Matcher", icon: "🎯", role: "Matching", status: "working", color: "#F59E0B" },
+            { id: 24, name: "LoopNet Intel", icon: "🏢", role: "Research", status: "idle", color: "#06B6D4" },
+            { id: 25, name: "Property Submit", icon: "🏠", role: "Intake", status: "idle", color: "#EC4899" },
+            { id: 26, name: "Builder Scout", icon: "🏗️", role: "Development", status: "working", color: "#84CC16" },
+            { id: 27, name: "Collaboration", icon: "🤝", role: "Teamwork", status: "idle", color: "#14B8A6" },
+            { id: 28, name: "Orchestrator", icon: "🎼", role: "Coordination", status: "working", color: "#8B5CF6" },
+            { id: 29, name: "Email Automation", icon: "📧", role: "Outreach", status: "idle", color: "#F97316" },
+            { id: 30, name: "Social Media", icon: "📱", role: "Distribution", status: "working", color: "#22C55E" },
+            { id: 31, name: "Market Reporter", icon: "📰", role: "Content", status: "idle", color: "#EAB308" },
+            { id: 32, name: "Video Producer", icon: "🎥", role: "Creative", status: "busy", color: "#EC4899" }
+        ];
+
+        // Generate Agent Cards
+        function renderAgents() {
+            const grid = document.getElementById('agentGrid');
+            grid.innerHTML = agents.map(agent => `
+                <div class="agent-card rounded-lg p-4 cursor-pointer" onclick="selectAgent(${agent.id})">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs text-gray-500">#${String(agent.id).padStart(2, '0')}</span>
+                        <span class="status-dot status-${agent.status}"></span>
+                    </div>
+                    <div class="text-6xl mb-2 text-center">${agent.icon}</div>
+                    <h3 class="pixel-font text-xs text-center mb-1" style="color: ${agent.color}">${agent.name}</h3>
+                    <p class="text-xs text-gray-500 text-center uppercase">${agent.role}</p>
+                    <p class="text-xs text-center mt-2 capitalize ${getStatusColor(agent.status)}">${agent.status}</p>
+                </div>
+            `).join('');
+        }
+
+        function getStatusColor(status) {
+            const colors = {
+                idle: 'text-green-400',
+                working: 'text-blue-400',
+                busy: 'text-yellow-400',
+                hot: 'text-red-400'
+            };
+            return colors[status] || 'text-gray-400';
+        }
+
+        function selectAgent(id) {
+            const agent = agents.find(a => a.id === id);
+            const details = document.getElementById('selectedAgent');
+            details.innerHTML = `
+                <div class="space-y-2">
+                    <div class="text-4xl">${agent.icon}</div>
+                    <h3 class="font-bold text-lg" style="color: ${agent.color}">${agent.name}</h3>
+                    <p class="text-sm text-gray-400">Role: ${agent.role}</p>
+                    <p class="text-sm text-gray-400">Status: <span class="${getStatusColor(agent.status)}">${agent.status.toUpperCase()}</span></p>
+                    <p class="text-xs text-gray-500 mt-2">ID: AGENT-${String(agent.id).padStart(3, '0')}</p>
+                    <p class="text-xs text-gray-500">Uptime: 99.9%</p>
+                </div>
+            `;
+            logActivity(`Selected agent: ${agent.name}`);
+        }
+
+        function logActivity(message) {
+            const log = document.getElementById('activityLog');
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false });
+            const entry = document.createElement('p');
+            entry.className = 'text-gray-400';
+            entry.innerHTML = `[${time}] ${message}`;
+            log.insertBefore(entry, log.firstChild);
+            if (log.children.length > 10) {
+                log.removeChild(log.lastChild);
+            }
+        }
+
+        function activateAll() {
+            agents.forEach(agent => agent.status = 'working');
+            renderAgents();
+            logActivity('ACTIVATED: All 32 agents');
+        }
+
+        function showHotMoney() {
+            agents.forEach(agent => {
+                if (['Hot Money Tracker', 'Transaction Scout', 'Portfolio Analyzer'].includes(agent.name)) {
+                    agent.status = 'hot';
+                }
+            });
+            renderAgents();
+            logActivity('ALERT: Hot Money Radar activated');
+        }
+
+        function focusStayner() {
+            agents.forEach(agent => agent.status = 'busy');
+            renderAgents();
+            logActivity('MISSION: Stayner property focus');
+        }
+
+        function randomizeStatus() {
+            const statuses = ['idle', 'working', 'busy'];
+            agents.forEach(agent => {
+                agent.status = statuses[Math.floor(Math.random() * statuses.length)];
+            });
+            renderAgents();
+            logActivity('SIMULATION: Random activity patterns');
+        }
+
+        // Initial render
+        renderAgents();
+
+        // Auto-refresh every 5 seconds
+        setInterval(() => {
+            const hotAgents = agents.filter(a => a.status === 'hot').length;
+            if (hotAgents > 0) {
+                logActivity(`Tracking ${hotAgents} hot money opportunities`);
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

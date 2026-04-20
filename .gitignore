@@ -22,3 +22,18 @@ Thumbs.db
 
 # Playwright MCP snapshots
 .playwright-mcp/
+
+# Raw data exports
+dbeaver_final_exports/
+*.db
+
+# Private data - NEVER push to public repo
+*.csv
+COMPANIES_BY_CATEGORY/
+QUICK_LINKS_*.csv
+numbered_entity_mappings.json
+*.db
+*.sqlite
+*.sqlite3
+uploads/
+logs/

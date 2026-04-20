@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigDataClaw AI Agents - Marketing Demo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #000;
+            font-family: 'Press Start 2P', monospace;
+            overflow: hidden;
+        }
+        
+        #container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Cinematic Header */
+        #header {
+            background: linear-gradient(180deg, #0a0a1a 0%, transparent 100%);
+            padding: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        #logo {
+            font-size: 18px;
+            color: #00d4ff;
+            text-shadow: 0 0 20px #00d4ff;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00d4ff; }
+            to { text-shadow: 0 0 40px #00d4ff, 0 0 60px #00d4ff; }
+        }
+        
+        #tagline {
+            font-size: 8px;
+            color: #fff;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+        
+        #rec-badge {
+            background: #ff0000;
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 4px;
+        }
+        
+        #rec-badge::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        /* Main Stage */
+        #stage {
+            flex: 1;
+            position: relative;
+            background: #0a0a1a;
+        }
+        
+        #canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            image-rendering: pixelated;
+        }
+        
+        /* Task Notifications */
+        #notifications {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 250px;
+        }
+        
+        .notification {
+            background: rgba(0, 212, 255, 0.9);
+            color: #000;
+            padding: 12px 15px;
+            font-size: 8px;
+            border-left: 4px solid #fff;
+            animation: slideIn 0.5s ease, slideOut 0.5s ease 4s forwards;
+            transform-origin: left;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOut {
+            to { transform: translateX(-100%); opacity: 0; }
+        }
+        
+        /* Bottom Stats Bar */
+        #stats-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%);
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            color: #ffd700;
+            text-shadow: 0 0 20px #ffd700;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 8px;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        /* Vignette & Effects */
+        #vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.8) 100%);
+            z-index: 50;
+        }
+        
+        #scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            z-index: 1000;
+        }
+        
+        /* Intro Overlay */
+        #intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            animation: fadeOut 1s ease 4s forwards;
+        }
+        
+        #intro h1 {
+            font-size: 48px;
+            color: #00d4ff;
+            text-shadow: 0 0 40px #00d4ff;
+            animation: zoomIn 1s ease, glitch 0.3s ease 1.5s;
+        }
+        
+        #intro p {
+            font-size: 12px;
+            color: #fff;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease 2s forwards;
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-5px, 5px); }
+            40% { transform: translate(5px, -5px); }
+            60% { transform: translate(-5px, -5px); }
+            80% { transform: translate(5px, 5px); }
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            to { opacity: 0; pointer-events: none; }
+        }
+        
+        /* Hot Money Alert */
+        .hot-money-alert {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, #ff0000, #ff6600);
+            color: #fff;
+            padding: 15px 40px;
+            font-size: 14px;
+            border: 2px solid #ffff00;
+            box-shadow: 0 0 30px #ff0000;
+            animation: alertPulse 0.5s infinite;
+            z-index: 100;
+        }
+        
+        @keyframes alertPulse {
+            0%, 100% { box-shadow: 0 0 30px #ff0000; }
+            50% { box-shadow: 0 0 60px #ff0000, 0 0 80px #ff6600; }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- Intro Animation -->
+        <div id="intro">
+            <h1>BIGDATACLAW</h1>
+            <p>AI AGENT WORKFORCE // NOW ONLINE</p>
+        </div>
+        
+        <div id="stage">
+            <canvas id="canvas" width="1400" height="900"></canvas>
+            
+            <div id="header">
+                <div>
+                    <div id="logo">🏢 BIGDATACLAW</div>
+                    <div id="tagline">AUTONOMOUS REAL ESTATE INTELLIGENCE</div>
+                </div>
+                <div id="rec-badge">REC</div>
+            </div>
+            
+            <div id="notifications"></div>
+            
+            <div id="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-value" id="stat-agents">10</span>
+                    <span class="stat-label">AI AGENTS</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="stat-deals">$18M</span>
+                    <span class="stat-label">ACTIVE DEAL</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="stat-commission">$360K</span>
+                    <span class="stat-label">COMMISSION</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="stat-tasks">0</span>
+                    <span class="stat-label">TASKS DONE</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="vignette"></div>
+        <div id="scanlines"></div>
+    </div>
+    
+    <script>
+        // ============================================
+        // CINEMATIC PIXEL OFFICE - MARKETING VERSION
+        // Optimized for screen recording & promo videos
+        // ============================================
+        
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+        
+        const TILE = 40;
+        let totalTasks = 0;
+        
+        // Agent definitions with more personality
+        const AGENTS = [
+            { name: 'Transaction Scout', emoji: '🔍', color: '#00d4ff', 
+              role: 'Deal Hunter', x: 3, y: 3 },
+            { name: 'Hot Money Tracker', emoji: '💰', color: '#ff3333',
+              role: 'Capital Intel', x: 8, y: 3 },
+            { name: 'Portfolio Analyzer', emoji: '📊', color: '#00ff88',
+              role: 'Buyer Match', x: 13, y: 3 },
+            { name: 'LoopNet Intel', emoji: '🌐', color: '#ffaa00',
+              role: 'Market Scout', x: 18, y: 3 },
+            { name: 'Property Submit', emoji: '📨', color: '#ff66cc',
+              role: 'Deal Pipeline', x: 23, y: 3 },
+            { name: 'Buyer Database', emoji: '👥', color: '#9966ff',
+              role: 'Data Master', x: 3, y: 10 },
+            { name: 'Obsidian Sync', emoji: '📝', color: '#66ccff',
+              role: 'Knowledge Base', x: 8, y: 10 },
+            { name: 'Builders Agent', emoji: '🏗️', color: '#ffcc00',
+              role: 'Dev Tracker', x: 13, y: 10 },
+            { name: 'Collab Agent', emoji: '🤝', color: '#66ff66',
+              role: 'Team Link', x: 18, y: 10 },
+            { name: 'Orchestrator', emoji: '🎮', color: '#ffd700',
+              role: 'Command', x: 28, y: 6, isBoss: true }
+        ];
+        
+        // Animated Agent Class
+        class Agent {
+            constructor(data, index) {
+                this.data = data;
+                this.index = index;
+                this.x = data.x * TILE + TILE/2;
+                this.y = data.y * TILE + TILE/2;
+                this.homeX = this.x;
+                this.homeY = this.y;
+                this.tx = this.x;
+                this.ty = this.y;
+                this.state = 'idle';
+                this.anim = 0;
+                this.task = null;
+                this.taskProgress = 0;
+                this.dir = 0;
+                this.walkCycle = 0;
+                this.emote = null;
+                this.emoteTimer = 0;
+            }
+            
+            update(dt) {
+                this.anim += dt;
+                
+                // Movement
+                const dx = this.tx - this.x;
+                const dy = this.ty - this.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                
+                if (dist > 2) {
+                    this.state = 'walk';
+                    const speed = 3 * dt;
+                    this.x += (dx/dist) * speed;
+                    this.y += (dy/dist) * speed;
+                    this.walkCycle += dt * 15;
+                    this.dir = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 3 : 2) : (dy > 0 ? 0 : 1);
+                } else {
+                    this.state = this.task ? 'work' : 'idle';
+                    this.walkCycle = 0;
+                }
+                
+                // Task progress
+                if (this.task && this.state === 'work') {
+                    this.taskProgress += dt * 15;
+                    if (this.taskProgress >= 100) {
+                        this.completeTask();
+                    }
+                }
+                
+                // Emote timer
+                if (this.emoteTimer > 0) {
+                    this.emoteTimer -= dt;
+                    if (this.emoteTimer <= 0) this.emote = null;
+                }
+            }
+            
+            draw(ctx) {
+                const bounce = this.state === 'walk' ? Math.sin(this.walkCycle) * 4 : 
+                              this.state === 'work' ? Math.sin(this.anim * 8) * 2 : 0;
+                
+                const x = Math.floor(this.x);
+                const y = Math.floor(this.y);
+                
+                // Shadow
+                ctx.fillStyle = 'rgba(0,0,0,0.4)';
+                ctx.beginPath();
+                ctx.ellipse(x, y + 15, 14, 6, 0, 0, Math.PI*2);
+                ctx.fill();
+                
+                const py = y - 20 + bounce;
+                
+                // Body (pixel art style)
+                ctx.fillStyle = this.data.color;
+                
+                // Boss is bigger
+                const scale = this.data.isBoss ? 1.3 : 1;
+                const w = 24 * scale;
+                const h = 20 * scale;
+                
+                ctx.fillRect(x - w/2, py + 12, w, h);
+                
+                // Head
+                ctx.fillStyle = '#ffccaa';
+                ctx.fillRect(x - 10*scale, py, 20*scale, 14*scale);
+                
+                // Hair
+                ctx.fillStyle = this.data.isBoss ? '#e0c090' : '#4a3728';
+                ctx.fillRect(x - 10*scale, py, 20*scale, 5*scale);
+                
+                // Eyes (blink)
+                if (Math.sin(this.anim * 3) > -0.9) {
+                    ctx.fillStyle = '#000';
+                    const eyeY = py + 7*scale;
+                    if (this.dir === 2) {
+                        ctx.fillRect(x - 6*scale, eyeY, 3*scale, 3*scale);
+                    } else if (this.dir === 3) {
+                        ctx.fillRect(x + 3*scale, eyeY, 3*scale, 3*scale);
+                    } else {
+                        ctx.fillRect(x - 5*scale, eyeY, 3*scale, 3*scale);
+                        ctx.fillRect(x + 2*scale, eyeY, 3*scale, 3*scale);
+                    }
+                }
+                
+                // Working animation
+                if (this.state === 'work') {
+                    // Arms typing
+                    const armOffset = Math.sin(this.anim * 15) * 3;
+                    ctx.fillStyle = '#ffccaa';
+                    ctx.fillRect(x - 16, py + 15 + armOffset, 5, 8);
+                    ctx.fillRect(x + 11, py + 15 - armOffset, 5, 8);
+                    
+                    // Screen glow
+                    ctx.fillStyle = this.data.color + '40';
+                    ctx.fillRect(x - 25, py - 5, 50, 45);
+                }
+                
+                // Emoji
+                ctx.font = `${16*scale}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.fillText(this.data.emoji, x, py - 8);
+                
+                // Progress bar for tasks
+                if (this.task) {
+                    const barW = 40;
+                    ctx.fillStyle = '#333';
+                    ctx.fillRect(x - barW/2, py - 18, barW, 4);
+                    ctx.fillStyle = this.data.color;
+                    ctx.fillRect(x - barW/2, py - 18, barW * (this.taskProgress/100), 4);
+                }
+                
+                // Emote
+                if (this.emote) {
+                    ctx.font = '20px Arial';
+                    ctx.fillText(this.emote, x + 20, py - 25);
+                }
+                
+                // Name tag
+                ctx.font = '7px "Press Start 2P"';
+                ctx.fillStyle = '#fff';
+                ctx.fillText(this.data.name.split(' ')[0], x, y + 25);
+            }
+            
+            giveTask(name) {
+                this.task = name;
+                this.taskProgress = 0;
+                this.tx = this.homeX;
+                this.ty = this.homeY;
+                this.showEmote('⚡');
+            }
+            
+            completeTask() {
+                this.showEmote('✅');
+                this.task = null;
+                this.taskProgress = 0;
+                totalTasks++;
+                document.getElementById('stat-tasks').textContent = totalTasks;
+                
+                setTimeout(() => this.wander(), 1000);
+            }
+            
+            wander() {
+                const spots = [
+                    {x: 26*TILE, y: 14*TILE}, // meeting
+                    {x: 20*TILE, y: 9*TILE},  // coffee
+                    {x: 2*TILE, y: 7*TILE},   // water
+                    {x: 25*TILE, y: 4*TILE},  // whiteboard
+                ];
+                const spot = spots[Math.floor(Math.random() * spots.length)];
+                this.tx = spot.x;
+                this.ty = spot.y;
+                
+                setTimeout(() => {
+                    this.tx = this.homeX;
+                    this.ty = this.homeY;
+                }, 3000);
+            }
+            
+            showEmote(emoji) {
+                this.emote = emoji;
+                this.emoteTimer = 2;
+            }
+        }
+        
+        // Office System
+        class Office {
+            constructor() {
+                this.agents = AGENTS.map((d, i) => new Agent(d, i));
+                this.notifications = [];
+                this.time = 0;
+                this.setup();
+                this.loop(0);
+            }
+            
+            setup() {
+                // Random tasks
+                setInterval(() => this.randomTask(), 3000);
+                
+                // Stayner event at 10 seconds
+                setTimeout(() => this.staynerEvent(), 10000);
+                
+                // Hot money event at 20 seconds
+                setTimeout(() => this.hotMoneyEvent(), 20000);
+            }
+            
+            randomTask() {
+                const agent = this.agents[Math.floor(Math.random() * this.agents.length)];
+                if (!agent.task) {
+                    const tasks = [
+                        'Scanning listings...',
+                        'Analyzing market...',
+                        'Database query...',
+                        'Updating records...',
+                        'Matching buyers...',
+                        'Processing deal...',
+                        'Syncing data...'
+                    ];
+                    const task = tasks[Math.floor(Math.random() * tasks.length)];
+                    agent.giveTask(task);
+                    this.notify(`${agent.data.name}: ${task}`);
+                }
+            }
+            
+            staynerEvent() {
+                this.notify('🏗️ STAYNER DEAL: 112 acres, $18M');
+                this.notify('📊 Portfolio Analyzer: Matching buyers...');
+                this.notify('💰 Commission: $360K projected');
+                
+                // All agents focus on Stayner
+                this.agents.forEach((agent, i) => {
+                    setTimeout(() => {
+                        const staynerTasks = [
+                            'Analyzing Stayner comps',
+                            'Contacting Tier 1 buyers',
+                            'Processing LOI template',
+                            'Valuation assessment',
+                            'Buyer qualification'
+                        ];
+                        agent.giveTask(staynerTasks[i % staynerTasks.length]);
+                    }, i * 500);
+                });
+                
+                // Hot money alert visual
+                const alert = document.createElement('div');
+                alert.className = 'hot-money-alert';
+                alert.textContent = '🔥 MAJOR DEAL ALERT: STAYNER 112 ACRES';
+                document.getElementById('stage').appendChild(alert);
+                
+                setTimeout(() => alert.remove(), 8000);
+            }
+            
+            hotMoneyEvent() {
+                this.notify('💰 HOT MONEY: Fresh capital detected!');
+                this.notify('🎯 High motivation seller identified');
+                
+                const hmAgent = this.agents.find(a => a.data.name === 'Hot Money Tracker');
+                if (hmAgent) {
+                    hmAgent.showEmote('🔥');
+                    hmAgent.giveTask('ALERT: Hot money opportunity!');
+                }
+            }
+            
+            notify(text) {
+                const notif = document.createElement('div');
+                notif.className = 'notification';
+                notif.textContent = text;
+                document.getElementById('notifications').appendChild(notif);
+                
+                setTimeout(() => notif.remove(), 5000);
+            }
+            
+            drawOffice() {
+                // Floor
+                ctx.fillStyle = '#1a1a2e';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Grid
+                ctx.strokeStyle = '#252538';
+                ctx.lineWidth = 1;
+                for (let x = 0; x < canvas.width; x += TILE) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, canvas.height);
+                    ctx.stroke();
+                }
+                for (let y = 0; y < canvas.height; y += TILE) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(canvas.width, y);
+                    ctx.stroke();
+                }
+                
+                // Carpet areas
+                ctx.fillStyle = '#222236';
+                ctx.fillRect(TILE, TILE, 24*TILE, 12*TILE);
+                ctx.fillRect(27*TILE, 12*TILE, 8*TILE, 8*TILE);
+                
+                // Desks
+                this.agents.forEach(agent => {
+                    const x = agent.homeX - TILE/2;
+                    const y = agent.homeY - TILE;
+                    
+                    // Desk
+                    ctx.fillStyle = agent.data.isBoss ? '#5c3d2e' : '#3a3a4a';
+                    ctx.fillRect(x, y, TILE, TILE/2);
+                    
+                    // Computer glow
+                    if (agent.state === 'work') {
+                        ctx.fillStyle = agent.data.color + '60';
+                        ctx.fillRect(x + 5, y - 10, 30, 35);
+                    }
+                    
+                    // Monitor
+                    ctx.fillStyle = '#111';
+                    ctx.fillRect(x + 10, y - 8, 20, 15);
+                    ctx.fillStyle = agent.state === 'work' ? agent.data.color : '#0f0';
+                    ctx.fillRect(x + 12, y - 6, 16, 10);
+                });
+                
+                // Meeting table
+                ctx.fillStyle = '#5c3d2e';
+                ctx.fillRect(28*TILE, 13*TILE, 6*TILE, 4*TILE);
+                
+                // Plants
+                [[2, 2], [26, 2], [2, 13], [35, 14]].forEach(([x, y]) => {
+                    ctx.fillStyle = '#8b4513';
+                    ctx.fillRect(x*TILE + 12, y*TILE + 20, 16, 16);
+                    ctx.fillStyle = '#228b22';
+                    ctx.fillRect(x*TILE + 8, y*TILE + 4, 24, 20);
+                });
+            }
+            
+            loop(timestamp) {
+                const dt = 1/60;
+                this.time += dt;
+                
+                // Update
+                this.agents.forEach(a => a.update(dt));
+                
+                // Draw
+                this.drawOffice();
+                
+                // Sort by Y for depth
+                this.agents.sort((a, b) => a.y - b.y);
+                this.agents.forEach(a => a.draw(ctx));
+                
+                requestAnimationFrame((t) => this.loop(t));
+            }
+        }
+        
+        // Start
+        const office = new Office();
+    </script>
+</body>
+</html>

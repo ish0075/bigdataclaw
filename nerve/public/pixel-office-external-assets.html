@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigDataClaw AI Office - External Assets</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #0a0a0f;
+            font-family: 'Press Start 2P', monospace;
+            overflow: hidden;
+            color: #fff;
+        }
+        
+        #container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #header {
+            background: linear-gradient(180deg, #1a1a2e 0%, transparent 100%);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        #logo { font-size: 16px; color: #00d4ff; text-shadow: 0 0 20px #00d4ff; }
+        
+        #asset-status {
+            font-size: 9px;
+            color: #888;
+        }
+        
+        #asset-status.loaded { color: #0f0; }
+        #asset-status.loading { color: #ff0; }
+        #asset-status.error { color: #f44; }
+        
+        #stage {
+            flex: 1;
+            position: relative;
+            background: #0f0f1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #canvas {
+            image-rendering: pixelated;
+            box-shadow: 0 0 60px rgba(0, 212, 255, 0.3);
+        }
+        
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .speech-bubble {
+            position: absolute;
+            background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+            color: #1a1a2e;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 10px;
+            font-family: 'Press Start 2P', monospace;
+            line-height: 1.6;
+            max-width: 240px;
+            min-width: 120px;
+            word-wrap: break-word;
+            pointer-events: none;
+            animation: bubblePop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 -2px 0 rgba(0,0,0,0.1);
+            border: 3px solid #333;
+            z-index: 100;
+        }
+        
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 12px solid #333;
+        }
+        
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #f0f0f0;
+            z-index: 1;
+        }
+        
+        .speech-bubble.alert {
+            background: linear-gradient(180deg, #ff4444 0%, #cc2222 100%);
+            color: #fff;
+            border-color: #aa0000;
+            animation: alertPulse 0.6s ease-in-out infinite, bubblePop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .speech-bubble.alert::after { border-top-color: #aa0000; }
+        .speech-bubble.alert::before { border-top-color: #cc2222; }
+        
+        .speech-bubble.success {
+            background: linear-gradient(180deg, #44ff44 0%, #22cc22 100%);
+            color: #003300;
+            border-color: #118811;
+        }
+        
+        .speech-bubble.success::after { border-top-color: #118811; }
+        .speech-bubble.success::before { border-top-color: #22cc22; }
+        
+        .speech-bubble.working {
+            background: linear-gradient(180deg, #00d4ff 0%, #0088aa 100%);
+            color: #fff;
+            border-color: #006688;
+        }
+        
+        .speech-bubble.working::after { border-top-color: #006688; }
+        .speech-bubble.working::before { border-top-color: #0088aa; }
+        
+        @keyframes bubblePop {
+            0% { transform: scale(0) translateX(-50%); opacity: 0; }
+            70% { transform: scale(1.1) translateX(-50%); }
+            100% { transform: scale(1) translateX(-50%); opacity: 1; }
+        }
+        
+        @keyframes alertPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 68, 68, 0.8); }
+            50% { box-shadow: 0 0 30px rgba(255, 68, 68, 1), 0 0 50px rgba(255, 136, 68, 0.6); }
+        }
+        
+        #stats-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(15, 15, 26, 0.95);
+            border: 2px solid #00d4ff;
+            padding: 15px;
+            font-size: 10px;
+            pointer-events: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2);
+            max-width: 300px;
+        }
+        
+        #stats-panel h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 10px;
+            text-shadow: 0 0 10px #00d4ff;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin: 8px 0;
+            padding: 4px 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        .stat-row:last-child { border-bottom: none; }
+        .stat-label { color: #888; }
+        .stat-value { color: #ffd700; text-shadow: 0 0 5px #ffd700; }
+        
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            pointer-events: auto;
+            flex-wrap: wrap;
+            max-width: 600px;
+        }
+        
+        .btn {
+            background: linear-gradient(180deg, #0f3460 0%, #0a2545 100%);
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+            padding: 12px 20px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 9px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+        }
+        
+        .btn:hover {
+            background: linear-gradient(180deg, #00d4ff 0%, #0088aa 100%);
+            color: #0a0a0f;
+            box-shadow: 0 0 25px #00d4ff;
+            transform: translateY(-2px);
+        }
+        
+        .btn:active { transform: translateY(0); }
+        
+        .btn-alert {
+            border-color: #ff4444;
+            color: #ff4444;
+            background: linear-gradient(180deg, #331111 0%, #220000 100%);
+        }
+        
+        .btn-alert:hover {
+            background: linear-gradient(180deg, #ff4444 0%, #cc2222 100%);
+            color: #fff;
+            box-shadow: 0 0 25px #ff4444;
+        }
+        
+        #asset-loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #00d4ff;
+            padding: 30px;
+            text-align: center;
+            z-index: 200;
+        }
+        
+        #asset-loader h3 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+        
+        #asset-loader input {
+            background: #1a1a2e;
+            border: 1px solid #00d4ff;
+            color: #fff;
+            padding: 10px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            width: 400px;
+            margin: 10px 0;
+        }
+        
+        #asset-loader .hint {
+            font-size: 7px;
+            color: #888;
+            margin-top: 10px;
+        }
+        
+        #scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <div id="logo">🏢 BIGDATACLAW AI OFFICE - External Assets</div>
+            <div id="asset-status" class="loading">Loading assets...</div>
+        </div>
+        
+        <div id="stage">
+            <canvas id="canvas" width="1024" height="704"></canvas>
+            <div id="ui-layer">
+                <div id="bubble-container"></div>
+                
+                <div id="stats-panel">
+                    <h3>📊 SYSTEM STATUS</h3>
+                    <div class="stat-row">
+                        <span class="stat-label">AGENTS:</span>
+                        <span class="stat-value" id="stat-agents">10</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">ACTIVE:</span>
+                        <span class="stat-value" id="stat-active">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">DEALS:</span>
+                        <span class="stat-value" id="stat-deals">$0M</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">ASSETS:</span>
+                        <span class="stat-value" id="stat-assets">0/10</span>
+                    </div>
+                </div>
+                
+                <div id="controls">
+                    <button class="btn" onclick="office.spawnAgent()">➕ SPAWN</button>
+                    <button class="btn" onclick="office.assignTask()">🎯 TASK</button>
+                    <button class="btn btn-alert" onclick="office.hotMoneyAlert()">🔥 HOT</button>
+                    <button class="btn btn-alert" onclick="office.staynerDeal()">🏗️ STAYNER</button>
+                    <button class="btn" onclick="office.switchAssetMode()">🔄 SWITCH MODE</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="scanlines"></div>
+    </div>
+    
+    <script>
+        // ============================================
+        // BIGDATACLAW PIXEL OFFICE - EXTERNAL ASSETS
+        // Load and use external PNG assets (Metrocity, etc)
+        // ============================================
+        
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+        
+        const TILE_SIZE = 32;
+        const COLS = 32;
+        const ROWS = 22;
+        
+        // ============================================
+        // EXTERNAL ASSET LOADER
+        // ============================================
+        
+        class ExternalAssetLoader {
+            constructor() {
+                this.assets = {
+                    characters: {},
+                    furniture: {}
+                };
+                this.loaded = 0;
+                this.total = 0;
+                this.useExternal = false;
+            }
+            
+            // Load a single image
+            loadImage(src, name, category) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        if (!this.assets[category]) this.assets[category] = {};
+                        this.assets[category][name] = img;
+                        this.loaded++;
+                        this.updateStatus();
+                        resolve(img);
+                    };
+                    img.onerror = () => {
+                        console.warn(`Failed to load: ${src}`);
+                        reject(new Error(`Failed to load ${src}`));
+                    };
+                    img.src = src;
+                    this.total++;
+                });
+            }
+            
+            // Load Metrocity-style character sprites
+            // Metrocity typically has: idle, walk, run animations
+            async loadMetrocityCharacter(name, basePath) {
+                const directions = ['down', 'left', 'right', 'up'];
+                const animations = ['idle', 'walk'];
+                
+                for (const dir of directions) {
+                    for (const anim of animations) {
+                        const src = `${basePath}/${name}_${dir}_${anim}.png`;
+                        try {
+                            await this.loadImage(src, `${name}_${dir}_${anim}`, 'characters');
+                        } catch (e) {
+                            // Try alternative naming
+                            const altSrc = `${basePath}/${name}_${anim}_${dir}.png`;
+                            try {
+                                await this.loadImage(altSrc, `${name}_${dir}_${anim}`, 'characters');
+                            } catch (e2) {
+                                // Will use fallback
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Load furniture assets
+            async loadFurniture(name, basePath) {
+                const views = ['front', 'side', 'back'];
+                for (const view of views) {
+                    const src = `${basePath}/${name}_${view}.png`;
+                    try {
+                        await this.loadImage(src, `${name}_${view}`, 'furniture');
+                    } catch (e) {
+                        // Try without suffix
+                        if (view === 'front') {
+                            try {
+                                await this.loadImage(`${basePath}/${name}.png`, name, 'furniture');
+                            } catch (e2) {}
+                        }
+                    }
+                }
+            }
+            
+            updateStatus() {
+                const status = document.getElementById('asset-status');
+                const statAssets = document.getElementById('stat-assets');
+                
+                statAssets.textContent = `${this.loaded}/${this.total}`;
+                
+                if (this.loaded === this.total && this.total > 0) {
+                    status.textContent = `✓ ${this.loaded} assets loaded`;
+                    status.className = 'loaded';
+                    this.useExternal = true;
+                } else if (this.total > 0) {
+                    status.textContent = `Loading ${this.loaded}/${this.total}...`;
+                    status.className = 'loading';
+                }
+            }
+            
+            getCharacter(name, direction, animation) {
+                const key = `${name}_${direction}_${animation}`;
+                return this.assets.characters[key] || null;
+            }
+            
+            getFurniture(name, view = 'front') {
+                return this.assets.furniture[`${name}_${view}`] || 
+                       this.assets.furniture[name] || null;
+            }
+        }
+        
+        const assetLoader = new ExternalAssetLoader();
+        
+        // ============================================
+        // FALLBACK GENERATORS (when external assets fail)
+        // ============================================
+        
+        const FallbackAssets = {
+            generateCharacter(palette) {
+                const c = document.createElement('canvas');
+                c.width = 16; c.height = 16;
+                const x = c.getContext('2d');
+                
+                // Simple 16x16 character
+                x.fillStyle = palette.body;
+                x.fillRect(4, 6, 8, 6);
+                x.fillStyle = palette.skin;
+                x.fillRect(5, 2, 6, 5);
+                x.fillStyle = palette.hair;
+                x.fillRect(5, 2, 6, 2);
+                x.fillStyle = '#000';
+                x.fillRect(6, 4, 1, 1);
+                x.fillRect(9, 4, 1, 1);
+                
+                return c;
+            },
+            
+            generateDesk() {
+                const c = document.createElement('canvas');
+                c.width = 32; c.height = 24;
+                const x = c.getContext('2d');
+                x.fillStyle = '#6b5a4a';
+                x.fillRect(2, 8, 28, 10);
+                x.fillStyle = '#4a3a2a';
+                x.fillRect(4, 18, 4, 6);
+                x.fillRect(24, 18, 4, 6);
+                return c;
+            },
+            
+            generateChair() {
+                const c = document.createElement('canvas');
+                c.width = 16; c.height = 16;
+                const x = c.getContext('2d');
+                x.fillStyle = '#555';
+                x.fillRect(4, 8, 8, 4);
+                x.fillStyle = '#444';
+                x.fillRect(5, 2, 6, 6);
+                return c;
+            },
+            
+            generatePlant() {
+                const c = document.createElement('canvas');
+                c.width = 16; c.height = 20;
+                const x = c.getContext('2d');
+                x.fillStyle = '#8b4513';
+                x.fillRect(5, 12, 6, 8);
+                x.fillStyle = '#228b22';
+                x.fillRect(4, 6, 8, 8);
+                x.fillRect(7, 2, 2, 6);
+                return c;
+            }
+        };
+        
+        // ============================================
+        // AGENT CLASS (uses external or fallback assets)
+        // ============================================
+        
+        class Agent {
+            constructor(config) {
+                this.id = config.id;
+                this.name = config.name;
+                this.role = config.role;
+                this.palette = config.palette;
+                this.emoji = config.emoji;
+                this.homeCol = config.col;
+                this.homeRow = config.row;
+                this.x = config.col * TILE_SIZE + TILE_SIZE/2;
+                this.y = config.row * TILE_SIZE + TILE_SIZE/2;
+                this.tx = this.x;
+                this.ty = this.y;
+                
+                this.direction = 'down';
+                this.state = 'idle';
+                this.frame = 0;
+                this.frameTimer = 0;
+                
+                this.task = null;
+                this.taskProgress = 0;
+                this.completed = 0;
+                
+                this.bubble = null;
+                this.matrixEffect = null;
+                
+                // Generate fallback sprite
+                this.fallbackSprite = FallbackAssets.generateCharacter(this.palette);
+            }
+            
+            spawn() {
+                this.matrixEffect = new MatrixRain(this.x, this.y - 30);
+            }
+            
+            update(dt) {
+                if (this.matrixEffect?.active) {
+                    this.matrixEffect.update(dt);
+                }
+                
+                this.frameTimer += dt;
+                if (this.frameTimer > 0.15) {
+                    this.frame = (this.frame + 1) % 2;
+                    this.frameTimer = 0;
+                }
+                
+                const dx = this.tx - this.x;
+                const dy = this.ty - this.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                
+                if (dist > 2) {
+                    this.state = 'walk';
+                    const speed = 80 * dt;
+                    this.x += (dx/dist) * speed;
+                    this.y += (dy/dist) * speed;
+                    
+                    if (Math.abs(dx) > Math.abs(dy)) {
+                        this.direction = dx > 0 ? 'right' : 'left';
+                    } else {
+                        this.direction = dy > 0 ? 'down' : 'up';
+                    }
+                } else {
+                    if (this.state === 'walk') {
+                        const homeDist = Math.sqrt(
+                            Math.pow(this.x - (this.homeCol * TILE_SIZE + TILE_SIZE/2), 2) +
+                            Math.pow(this.y - (this.homeRow * TILE_SIZE + TILE_SIZE/2), 2)
+                        );
+                        if (homeDist < 5 && this.task) {
+                            this.state = 'sit';
+                            this.showBubble(this.task, 'working');
+                        } else {
+                            this.state = 'idle';
+                        }
+                    }
+                }
+                
+                if (this.task && this.state === 'sit') {
+                    this.taskProgress += dt * 10;
+                    if (this.taskProgress >= 100) {
+                        this.completeTask();
+                    }
+                }
+                
+                if (this.bubble) this.updateBubblePosition();
+            }
+            
+            draw(ctx) {
+                if (this.matrixEffect?.active) {
+                    this.matrixEffect.draw(ctx);
+                }
+                
+                // Try external asset first, fallback to generated
+                let sprite = null;
+                if (assetLoader.useExternal) {
+                    sprite = assetLoader.getCharacter(
+                        this.palette.name || 'character',
+                        this.direction,
+                        this.state === 'walk' ? 'walk' : 'idle'
+                    );
+                }
+                
+                if (sprite) {
+                    ctx.drawImage(sprite, this.x - 8, this.y - 8);
+                } else {
+                    // Use fallback with direction flip
+                    ctx.save();
+                    if (this.direction === 'left') {
+                        ctx.scale(-1, 1);
+                        ctx.drawImage(this.fallbackSprite, -this.x - 8, this.y - 8);
+                    } else {
+                        ctx.drawImage(this.fallbackSprite, this.x - 8, this.y - 8);
+                    }
+                    ctx.restore();
+                }
+                
+                // Progress bar
+                if (this.task && this.state === 'sit') {
+                    const barW = 20;
+                    ctx.fillStyle = '#222';
+                    ctx.fillRect(this.x - barW/2, this.y - 16, barW, 3);
+                    ctx.fillStyle = this.palette.body;
+                    ctx.fillRect(this.x - barW/2, this.y - 16, barW * (this.taskProgress/100), 3);
+                }
+                
+                // Emoji
+                ctx.font = '10px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(this.emoji, this.x, this.y - 12);
+            }
+            
+            showBubble(text, type = 'normal') {
+                if (this.bubble) this.bubble.element.remove();
+                
+                const el = document.createElement('div');
+                el.className = `speech-bubble ${type}`;
+                el.textContent = text;
+                document.getElementById('bubble-container').appendChild(el);
+                
+                this.bubble = { element: el };
+                this.updateBubblePosition();
+                
+                setTimeout(() => {
+                    if (this.bubble?.element === el) {
+                        el.remove();
+                        this.bubble = null;
+                    }
+                }, 3500);
+            }
+            
+            updateBubblePosition() {
+                if (!this.bubble) return;
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = rect.width / canvas.width;
+                const scaleY = rect.height / canvas.height;
+                const screenX = rect.left + (this.x * scaleX);
+                const screenY = rect.top + ((this.y - 25) * scaleY);
+                this.bubble.element.style.left = screenX + 'px';
+                this.bubble.element.style.top = screenY + 'px';
+                this.bubble.element.style.transform = 'translateX(-50%)';
+            }
+            
+            giveTask(task, amount = 0) {
+                this.task = task;
+                this.taskAmount = amount;
+                this.taskProgress = 0;
+                this.tx = this.homeCol * TILE_SIZE + TILE_SIZE/2;
+                this.ty = this.homeRow * TILE_SIZE + TILE_SIZE/2;
+                office.activeTasks++;
+                office.updateStats();
+            }
+            
+            completeTask() {
+                this.completed++;
+                office.totalTasks++;
+                office.totalValue += this.taskAmount;
+                office.activeTasks--;
+                office.updateStats();
+                this.showBubble('✓ Complete!', 'success');
+                this.task = null;
+                setTimeout(() => this.wander(), 1000);
+            }
+            
+            wander() {
+                const spots = [{col: 22, row: 14}, {col: 25, row: 10}, {col: 3, row: 8}];
+                const spot = spots[Math.floor(Math.random() * spots.length)];
+                this.tx = spot.col * TILE_SIZE + TILE_SIZE/2;
+                this.ty = spot.row * TILE_SIZE + TILE_SIZE/2;
+                setTimeout(() => {
+                    this.tx = this.homeCol * TILE_SIZE + TILE_SIZE/2;
+                    this.ty = this.homeRow * TILE_SIZE + TILE_SIZE/2;
+                }, 3000);
+            }
+        }
+        
+        // ============================================
+        // MATRIX RAIN
+        // ============================================
+        
+        class MatrixRain {
+            constructor(x, y) {
+                this.x = x; this.y = y;
+                this.chars = '01アイウエオカキクケコ';
+                this.drops = [];
+                this.active = true;
+                this.timer = 0;
+                
+                for (let i = 0; i < 10; i++) {
+                    this.drops.push({
+                        char: this.chars[Math.floor(Math.random() * this.chars.length)],
+                        y: -i * 10,
+                        speed: 4 + Math.random() * 3
+                    });
+                }
+            }
+            
+            update(dt) {
+                this.timer += dt;
+                this.drops.forEach(drop => {
+                    drop.y += drop.speed;
+                    if (drop.y > 50) {
+                        drop.y = -10;
+                        drop.char = this.chars[Math.floor(Math.random() * this.chars.length)];
+                    }
+                });
+                if (this.timer > 1.2) this.active = false;
+            }
+            
+            draw(ctx) {
+                ctx.font = '8px monospace';
+                ctx.textAlign = 'center';
+                this.drops.forEach((drop, i) => {
+                    const alpha = Math.max(0, 1 - this.timer / 1.2);
+                    const green = Math.floor(255 * (1 - i / this.drops.length));
+                    ctx.fillStyle = `rgba(0, ${green}, 0, ${alpha})`;
+                    ctx.fillText(drop.char, this.x, this.y + drop.y);
+                });
+            }
+        }
+        
+        // ============================================
+        // OFFICE
+        // ============================================
+        
+        const PALETTES = [
+            { name: 'scout', body: '#00d4ff', hair: '#4a3728', skin: '#ffccaa' },
+            { name: 'hotmoney', body: '#ff4444', hair: '#222', skin: '#ffccaa' },
+            { name: 'portfolio', body: '#44ff44', hair: '#4a3728', skin: '#ffccaa' },
+            { name: 'loopnet', body: '#ffaa00', hair: '#4a3728', skin: '#ffccaa' },
+            { name: 'submit', body: '#ff66cc', hair: '#4a3728', skin: '#ffccaa' },
+            { name: 'buyerdb', body: '#9966ff', hair: '#4a3728', skin: '#ffccaa' },
+            { name: 'obsidian', body: '#66ccff', hair: '#e8d4a0', skin: '#ffccaa' },
+            { name: 'builders', body: '#ffcc00', hair: '#4a3728', skin: '#ffccaa' },
+            { name: 'collab', body: '#66ff66', hair: '#4a3728', skin: '#ffccaa' },
+            { name: 'boss', body: '#ffd700', hair: '#e8d4a0', skin: '#ffccaa' }
+        ];
+        
+        const office = {
+            agents: [],
+            furniture: {},
+            activeTasks: 0,
+            totalTasks: 0,
+            totalValue: 0,
+            
+            async init() {
+                // Try to load external assets
+                await this.loadExternalAssets();
+                
+                // Create agents
+                const configs = [
+                    { id: 0, name: 'Transaction Scout', role: 'Deal Hunter', palette: PALETTES[0], emoji: '🔍', col: 5, row: 5 },
+                    { id: 1, name: 'Hot Money Tracker', role: 'Capital Intel', palette: PALETTES[1], emoji: '💰', col: 10, row: 5 },
+                    { id: 2, name: 'Portfolio Analyzer', role: 'Buyer Match', palette: PALETTES[2], emoji: '📊', col: 15, row: 5 },
+                    { id: 3, name: 'LoopNet Intel', role: 'Market Scout', palette: PALETTES[3], emoji: '🌐', col: 5, row: 11 },
+                    { id: 4, name: 'Property Submit', role: 'Deal Pipeline', palette: PALETTES[4], emoji: '📨', col: 10, row: 11 },
+                    { id: 5, name: 'Buyer Database', role: 'Data Master', palette: PALETTES[5], emoji: '👥', col: 15, row: 11 },
+                    { id: 6, name: 'Obsidian Sync', role: 'Knowledge Base', palette: PALETTES[6], emoji: '📝', col: 5, row: 17 },
+                    { id: 7, name: 'Builders Agent', role: 'Dev Tracker', palette: PALETTES[7], emoji: '🏗️', col: 10, row: 17 },
+                    { id: 8, name: 'Collab Agent', role: 'Team Link', palette: PALETTES[8], emoji: '🤝', col: 15, row: 17 },
+                    { id: 9, name: 'Orchestrator', role: 'Command', palette: PALETTES[9], emoji: '🎮', col: 27, row: 9 }
+                ];
+                
+                configs.forEach((config, i) => {
+                    setTimeout(() => {
+                        const agent = new Agent(config);
+                        agent.spawn();
+                        this.agents.push(agent);
+                    }, i * 250);
+                });
+                
+                this.loop(0);
+                setInterval(() => this.assignTask(), 5000);
+            },
+            
+            async loadExternalAssets() {
+                // Example: Load from Metrocity pack structure
+                // Update these paths to your actual asset locations
+                const assetPaths = {
+                    // Metrocity characters typically named: character_name_direction_animation.png
+                    // Example: player_down_idle.png, player_down_walk.png
+                };
+                
+                // Try to load any assets from common locations
+                const tryPaths = [
+                    './assets/characters',
+                    './assets/metrocity',
+                    './external-assets',
+                    '../assets'
+                ];
+                
+                for (const basePath of tryPaths) {
+                    try {
+                        // Try loading a test asset
+                        await assetLoader.loadImage(`${basePath}/test.png`, 'test', 'test');
+                    } catch (e) {
+                        // Path doesn't exist, continue
+                    }
+                }
+                
+                // Generate fallback furniture
+                this.furniture = {
+                    desk: FallbackAssets.generateDesk(),
+                    chair: FallbackAssets.generateChair(),
+                    plant: FallbackAssets.generatePlant()
+                };
+            },
+            
+            loop(timestamp) {
+                const dt = 1/60;
+                this.update(dt);
+                this.draw();
+                requestAnimationFrame((t) => this.loop(t));
+            },
+            
+            update(dt) {
+                this.agents.forEach(agent => agent.update(dt));
+            },
+            
+            draw() {
+                // Clear
+                ctx.fillStyle = '#1a1a2e';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Floor
+                for (let row = 0; row < ROWS; row++) {
+                    for (let col = 0; col < COLS; col++) {
+                        const x = col * TILE_SIZE;
+                        const y = row * TILE_SIZE;
+                        const isMeeting = col >= 21;
+                        const variant = (col + row) % 4;
+                        
+                        if (row === 0 || row === ROWS - 1 || col === 0 || col === COLS - 1 || (col === 20 && row < 12)) {
+                            ctx.fillStyle = '#3a3a4a';
+                            ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+                            ctx.fillStyle = '#4a4a5a';
+                            ctx.fillRect(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
+                        } else {
+                            const colors = isMeeting ? 
+                                ['#4a6a8a', '#3a5a7a', '#5a7a9a', '#2a4a6a'] :
+                                ['#6b5a4a', '#5c4a3a', '#7a6a5a', '#4a3a2a'];
+                            ctx.fillStyle = colors[variant];
+                            ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+                        }
+                    }
+                }
+                
+                // Furniture with external asset support
+                this.agents.forEach(agent => {
+                    if (agent.id < 9) {
+                        // Try external desk first
+                        const desk = assetLoader.getFurniture('desk') || this.furniture.desk;
+                        const chair = assetLoader.getFurniture('chair') || this.furniture.chair;
+                        
+                        ctx.drawImage(desk, agent.homeCol * TILE_SIZE - 8, agent.homeRow * TILE_SIZE - 12);
+                        ctx.drawImage(chair, agent.homeCol * TILE_SIZE + 8, agent.homeRow * TILE_SIZE + 4);
+                    }
+                });
+                
+                // Decor
+                const plant = assetLoader.getFurniture('plant') || this.furniture.plant;
+                ctx.drawImage(plant, 2 * TILE_SIZE, 3 * TILE_SIZE);
+                ctx.drawImage(plant, 18 * TILE_SIZE, 3 * TILE_SIZE);
+                ctx.drawImage(plant, 2 * TILE_SIZE, 19 * TILE_SIZE);
+                
+                // Agents
+                this.agents.sort((a, b) => a.y - b.y);
+                this.agents.forEach(agent => agent.draw(ctx));
+            },
+            
+            spawnAgent() {
+                const parent = this.agents[Math.floor(Math.random() * this.agents.length)];
+                const config = {
+                    id: this.agents.length,
+                    name: parent.name + ' Jr',
+                    role: 'Assistant',
+                    palette: parent.palette,
+                    emoji: parent.emoji,
+                    col: 22 + Math.floor(Math.random() * 6),
+                    row: 14 + Math.floor(Math.random() * 4)
+                };
+                const agent = new Agent(config);
+                agent.spawn();
+                this.agents.push(agent);
+            },
+            
+            assignTask() {
+                const available = this.agents.filter(a => !a.task);
+                if (available.length === 0) return;
+                const agent = available[Math.floor(Math.random() * available.length)];
+                const tasks = [
+                    { text: 'Scanning LoopNet...', amount: 0 },
+                    { text: 'Analyzing market...', amount: 0 },
+                    { text: 'Matching buyers...', amount: 5000000 },
+                    { text: 'Processing $18M deal...', amount: 18000000 },
+                    { text: 'Syncing database...', amount: 0 }
+                ];
+                const task = tasks[Math.floor(Math.random() * tasks.length)];
+                agent.giveTask(task.text, task.amount);
+            },
+            
+            hotMoneyAlert() {
+                const hm = this.agents.find(a => a.id === 1);
+                if (hm) {
+                    hm.giveTask('🔥 HOT MONEY ALERT!', 5000000);
+                    hm.showBubble('🔥 HOT MONEY DETECTED!', 'alert');
+                    canvas.style.boxShadow = '0 0 100px #ff4444';
+                    setTimeout(() => canvas.style.boxShadow = '0 0 60px rgba(0, 212, 255, 0.3)', 800);
+                }
+            },
+            
+            staynerDeal() {
+                this.agents.forEach((agent, i) => {
+                    const tasks = [
+                        { text: 'Stayner: 112 acres', amount: 18000000 },
+                        { text: '$18M analysis', amount: 0 },
+                        { text: 'Matching Tier 1 buyers', amount: 0 },
+                        { text: 'Commission: $360K', amount: 360000 },
+                        { text: 'Processing LOI', amount: 0 }
+                    ];
+                    setTimeout(() => {
+                        const task = tasks[i % tasks.length];
+                        agent.giveTask(task.text, task.amount);
+                    }, i * 500);
+                });
+            },
+            
+            switchAssetMode() {
+                assetLoader.useExternal = !assetLoader.useExternal;
+                const status = document.getElementById('asset-status');
+                status.textContent = assetLoader.useExternal ? 'External assets ON' : 'Fallback assets ON';
+                status.className = assetLoader.useExternal ? 'loaded' : 'loading';
+            },
+            
+            updateStats() {
+                document.getElementById('stat-active').textContent = this.activeTasks;
+                document.getElementById('stat-tasks').textContent = this.totalTasks;
+                document.getElementById('stat-deals').textContent = '$' + (this.totalValue / 1000000).toFixed(1) + 'M';
+            }
+        };
+        
+        window.office = office;
+        office.init();
+    </script>
+</body>
+</html>
