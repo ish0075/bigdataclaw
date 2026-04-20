@@ -8,6 +8,8 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import sys
 import os
+import httpx
+import json
 
 # Add project directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -18,10 +20,12 @@ from datetime import datetime
 
 app = Flask(__name__)
 CORS(app, origins=[
-    "http://localhost:5173",  # Vite dev server
-    "http://localhost:3000",  # React dev server
-    "http://localhost:8081",  # Mission Control
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://localhost:8081",
     "http://127.0.0.1:8081",
+    "https://mission-control-commissions.vercel.app",
+    "https://*.vercel.app",
 ])
 
 # Initialize both engines
@@ -287,10 +291,14 @@ def obsidian_status():
         import urllib3
         http = urllib3.PoolManager(cert_reqs='CERT_NONE')
         
+        obsidian_api_key = os.getenv('OBSIDIAN_API_KEY')
+        if not obsidian_api_key:
+            return jsonify({"connected": False, "status": "OBSIDIAN_API_KEY environment variable not set."})
+        
         response = http.request(
             'GET',
             'https://127.0.0.1:27124/vault/',
-            headers={'Authorization': 'Bearer REDACTED_OBSIDIAN_API_KEY'},
+            headers={'Authorization': f'Bearer {obsidian_api_key}'},
             timeout=2
         )
         
@@ -312,173 +320,329 @@ def obsidian_status():
             "status": f"Not connected: {str(e)}"
         })
 
-# OpenClaw Chat with Kimi LLM
-OPENCLAW_SYSTEM_PROMPT = """You are OpenClaw, the Commercial Real Estate (CRE) intelligence assistant for BigDataClaw NERVE.
-You help real estate professionals find buyers, sellers, lenders, and market intelligence.
-
-Your capabilities include:
-- Finding qualified buyers for properties (institutional, REITs, private equity, family offices)
-- Identifying active sellers and off-market opportunities
-- Matching deals with appropriate lenders (construction, bridge, permanent, mezzanine)
-- Providing market research and transaction data
-- Connecting users with specialized agents and brokers
-
-When responding:
-1. Be professional but conversational
-2. Provide specific, actionable information when possible
-3. Suggest relevant tools or pages the user can navigate to
-4. Format responses with markdown for readability (bold, bullet points)
-
-If the user asks about:
-- Buyers: Mention you can search the buyer database and match properties
-- Sellers/Listings: Reference the property database and seller outreach tools
-- Lenders: Mention the 750+ lender database with matching capabilities
-- Market data: Reference research tools and transaction databases
-- General help: List the main capabilities
-
-Keep responses concise but informative (2-4 paragraphs max).
-"""
+# ============================================================================
+# CHAT PROVIDER + PERSONA + TOOL SYSTEM (Pass 2)
+# ============================================================================
 
 KIMI_API_KEY = os.getenv("KIMI_API_KEY")
 KIMI_API_URL = "https://api.moonshot.cn/v1/chat/completions"
 KIMI_MODEL = "moonshot-v1-8k"
 
+OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434").rstrip("/")
+OLLAMA_MODEL = os.getenv("OPENCLAW_LOCAL_MODEL", os.getenv("OLLAMA_MODEL", "gemma4:26b"))
 
-def format_openclaw_response(kimi_response, query):
-    """Format Kimi response with suggested actions based on query"""
-    lower_query = query.lower()
-    actions = []
-    
-    # Determine relevant actions based on query
-    if any(word in lower_query for word in ['buyer', 'buy', 'purchase', 'acquire']):
-        actions = [
-            {"label": "Find Buyers", "to": "/buyers", "primary": True},
-            {"label": "Match Property", "to": "/buyer-matcher", "primary": False}
-        ]
-    elif any(word in lower_query for word in ['seller', 'sell', 'listing', 'list']):
-        actions = [
-            {"label": "View Listings", "to": "/my-listings", "primary": True},
-            {"label": "Seller Outreach", "to": "/agents/seller-outreach", "primary": False}
-        ]
-    elif any(word in lower_query for word in ['lender', 'loan', 'finance', 'financing', 'mortgage']):
-        actions = [
-            {"label": "Match Lenders", "to": "/lender-matcher", "primary": True},
-            {"label": "Browse Lenders", "to": "/lenders", "primary": False}
-        ]
-    elif any(word in lower_query for word in ['market', 'data', 'research', 'analytics']):
-        actions = [
-            {"label": "Property Research", "to": "/research", "primary": True},
-            {"label": "View Map", "to": "/map", "primary": False}
-        ]
-    elif any(word in lower_query for word in ['agent', 'broker', 'realtor']):
-        actions = [
-            {"label": "Find Agents", "to": "/agents/residential-recruiter", "primary": True},
-            {"label": "Agent Network", "to": "/agents", "primary": False}
-        ]
-    else:
-        actions = [
-            {"label": "Property Research", "to": "/research", "primary": True},
-            {"label": "Buyer Matcher", "to": "/buyers", "primary": False}
-        ]
-    
-    return {
-        "response": kimi_response,
-        "actions": actions
-    }
+# Import tool executor (sync)
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "nerve", "server"))
+from tool_executor import execute_tool, get_tool_schemas_json
+
+PERSONA_PROMPTS = {
+    "concierge": """You are Gemma 4, the friendly Website Concierge for Mission Control — a commercial real estate intelligence platform.
+
+Your job:
+• Greet visitors and explain what Mission Control does
+• Answer general questions about CRE, the platform, and pricing
+• Guide users to the right tools (Buyer Matcher, Lender Matcher, Hot Money, etc.)
+• Capture interest — suggest signing up or booking a demo
+
+Rules:
+• NEVER expose internal database details or raw record counts beyond what's public
+• Keep responses friendly and conversational
+• Suggest next steps ("Try the Buyer Matcher", "View our Hot Money radar")
+• If asked for deep data analysis, offer to connect them with a specialist
+""",
+    "analyst": """You are Gemma 4, the Mission Control Analyst — a deep CRE intelligence agent with direct access to live data.
+
+You have access to TOOLS. When you need data, respond with:
+TOOL_CALL: {"tool": "tool_name", "args": {...}}
+
+Available tools:
+{tool_schemas}
+
+After receiving tool results, synthesize them into a clear, actionable answer.
+Always cite specific numbers and entities from the data.
+
+Rules:
+• Use tools when the user asks for specific data (buyers, lenders, deals, stats)
+• Do not hallucinate data — always use tools or say you don't have it
+• Format results with markdown (bold, bullet points)
+• Suggest next actions based on findings
+""",
+}
+
+MODE_SUFFIX = {
+    "fast": "\nMode: FAST — Keep answers to 2-3 sentences. Prioritize speed and clarity.",
+    "deep": "\nMode: DEEP — Provide thorough analysis with specific data points, numbers, and reasoning. Include actionable next steps.",
+    "report": "\nMode: REPORT — Generate a structured report with sections: Summary, Key Findings, Data Points, Recommendations, Next Steps.",
+}
 
 
-@app.route('/api/openclaw/chat', methods=['POST'])
-def openclaw_chat():
-    """
-    OpenClaw Chat endpoint - Kimi LLM integration
-    """
+def _build_system_prompt(persona, mode):
+    base = PERSONA_PROMPTS.get(persona, PERSONA_PROMPTS["concierge"])
+    if persona == "analyst":
+        base = base.replace("{tool_schemas}", get_tool_schemas_json())
+    return base + MODE_SUFFIX.get(mode, "")
+
+
+def _call_ollama_chat(messages, temperature=0.7, max_tokens=800):
+    """Call Ollama /api/chat endpoint (OpenAI-compatible format)."""
     try:
-        data = request.get_json()
-        user_message = data.get('message', '')
-        conversation_history = data.get('conversation_history', [])
-        
-        if not user_message:
-            return jsonify({"error": "Message is required"}), 400
-        
-        # Check if Kimi API key is available
-        if not KIMI_API_KEY:
-            # Fallback response when API key not available
-            return jsonify({
-                "response": "I'm OpenClaw, your CRE intelligence assistant. I can help you find buyers, sellers, lenders, and market data. However, my AI brain (Kimi) is currently offline. Please try again later or contact support.",
-                "actions": [
-                    {"label": "Property Research", "to": "/research", "primary": True},
-                    {"label": "Buyer Matcher", "to": "/buyers", "primary": False}
-                ]
-            })
-        
-        # Build messages for Kimi
-        messages = [{"role": "system", "content": OPENCLAW_SYSTEM_PROMPT}]
-        
-        # Add conversation history
-        for msg in conversation_history:
-            messages.append({
-                "role": msg.get('role', 'user'),
-                "content": msg.get('content', '')
-            })
-        
-        # Add current message
-        messages.append({"role": "user", "content": user_message})
-        
-        # Call Kimi API
+        import requests
+        response = requests.post(
+            f"{OLLAMA_HOST}/api/chat",
+            json={
+                "model": OLLAMA_MODEL,
+                "messages": messages,
+                "stream": False,
+                "options": {
+                    "temperature": temperature,
+                    "num_predict": max_tokens,
+                    "num_ctx": 8192,
+                }
+            },
+            timeout=120.0
+        )
+        if response.status_code != 200:
+            raise Exception(f"Ollama error: {response.status_code}")
+        return response.json().get("message", {}).get("content", "")
+    except Exception as e:
+        print(f"Ollama chat error: {e}")
+        return None
+
+
+def _call_ollama_chat_stream(messages, temperature=0.7, max_tokens=800):
+    """Generator that yields token chunks from Ollama streaming."""
+    try:
+        import requests
+        with requests.post(
+            f"{OLLAMA_HOST}/api/chat",
+            json={
+                "model": OLLAMA_MODEL,
+                "messages": messages,
+                "stream": True,
+                "options": {
+                    "temperature": temperature,
+                    "num_predict": max_tokens,
+                    "num_ctx": 8192,
+                }
+            },
+            stream=True,
+            timeout=120.0
+        ) as resp:
+            for line in resp.iter_lines():
+                if line:
+                    try:
+                        data = json.loads(line)
+                        chunk = data.get("message", {}).get("content", "")
+                        if chunk:
+                            yield chunk
+                    except json.JSONDecodeError:
+                        continue
+    except Exception as e:
+        print(f"Ollama stream error: {e}")
+        yield f"[Error: {e}]"
+
+
+def _call_kimi(messages, temperature=0.7, max_tokens=800):
+    """Call Kimi/Moonshot API."""
+    if not KIMI_API_KEY:
+        return None
+    try:
         import urllib3
-        import json
-        
         http = urllib3.PoolManager()
-        
         payload = {
             "model": KIMI_MODEL,
             "messages": messages,
-            "temperature": 0.7,
-            "max_tokens": 800
+            "temperature": temperature,
+            "max_tokens": max_tokens
         }
-        
         headers = {
             "Authorization": f"Bearer {KIMI_API_KEY}",
             "Content-Type": "application/json"
         }
-        
         response = http.request(
-            'POST',
-            KIMI_API_URL,
+            'POST', KIMI_API_URL,
             body=json.dumps(payload),
             headers=headers,
             timeout=30.0
         )
-        
-        if response.status != 200:
-            print(f"Kimi API error: {response.status} - {response.data}")
-            return jsonify({
-                "response": "I apologize, but I'm having trouble connecting to my AI backend. Please try again in a moment.",
-                "actions": [
-                    {"label": "Property Research", "to": "/research", "primary": True},
-                    {"label": "Contact Support", "to": "/support", "primary": False}
-                ]
-            }), 500
-        
-        # Parse response
-        result = json.loads(response.data.decode('utf-8'))
-        ai_content = result["choices"][0]["message"]["content"]
-        
-        # Format response with actions
-        formatted_response = format_openclaw_response(ai_content, user_message)
-        
-        return jsonify(formatted_response)
-        
+        if response.status == 200:
+            result = json.loads(response.data.decode('utf-8'))
+            return result["choices"][0]["message"]["content"]
+        else:
+            print(f"Kimi error: {response.status}")
+            return None
+    except Exception as e:
+        print(f"Kimi call error: {e}")
+        return None
+
+
+def _extract_tool_calls(text):
+    """Extract TOOL_CALL JSON blocks using brace counting."""
+    calls = []
+    idx = 0
+    while True:
+        marker = text.find("TOOL_CALL:", idx)
+        if marker == -1:
+            break
+        start = marker + len("TOOL_CALL:")
+        while start < len(text) and text[start] in " \t\n":
+            start += 1
+        if start >= len(text) or text[start] != "{":
+            idx = start
+            continue
+        brace_count = 0
+        end = start
+        for i in range(start, len(text)):
+            if text[i] == "{":
+                brace_count += 1
+            elif text[i] == "}":
+                brace_count -= 1
+                if brace_count == 0:
+                    end = i + 1
+                    break
+        json_str = text[start:end]
+        try:
+            calls.append(json.loads(json_str))
+        except json.JSONDecodeError:
+            pass
+        idx = end if end > start else start + 1
+    return calls
+
+
+def _run_tool_loop(messages, mode, persona, max_iterations=3):
+    """Run LLM with tool execution loop for analyst persona."""
+    for _ in range(max_iterations):
+        content = _call_ollama_chat(messages) or ""
+        if not content:
+            break
+        tool_calls = _extract_tool_calls(content)
+        if not tool_calls:
+            return content
+
+        clean_content = content
+        for tc in tool_calls:
+            clean_content = clean_content.replace(f"TOOL_CALL: {json.dumps(tc)}", "")
+        clean_content = clean_content.strip()
+
+        for tc in tool_calls:
+            result = execute_tool(tc.get("tool"), tc.get("args", {}))
+            result_text = json.dumps(result, indent=2, default=str)
+            messages.append({"role": "assistant", "content": clean_content or "I'll look that up."})
+            messages.append({
+                "role": "system",
+                "content": f"Tool '{tc.get('tool')}' result:\n{result_text}\n\nAnswer the user's question based on this data."
+            })
+    return content
+
+
+def format_openclaw_response(ai_response, query):
+    lower_query = query.lower()
+    actions = []
+    if any(word in lower_query for word in ['buyer', 'buy', 'purchase', 'acquire']):
+        actions = [{"label": "Find Buyers", "to": "/buyers", "primary": True}, {"label": "Match Property", "to": "/buyer-matcher", "primary": False}]
+    elif any(word in lower_query for word in ['seller', 'sell', 'listing', 'list']):
+        actions = [{"label": "View Listings", "to": "/my-listings", "primary": True}, {"label": "Seller Outreach", "to": "/agents/seller-outreach", "primary": False}]
+    elif any(word in lower_query for word in ['lender', 'loan', 'finance', 'financing', 'mortgage']):
+        actions = [{"label": "Match Lenders", "to": "/lender-matcher", "primary": True}, {"label": "Browse Lenders", "to": "/lenders", "primary": False}]
+    elif any(word in lower_query for word in ['market', 'data', 'research', 'analytics']):
+        actions = [{"label": "Property Research", "to": "/research", "primary": True}, {"label": "View Map", "to": "/map", "primary": False}]
+    elif any(word in lower_query for word in ['agent', 'broker', 'realtor']):
+        actions = [{"label": "Find Agents", "to": "/agents/residential-recruiter", "primary": True}, {"label": "Agent Network", "to": "/agents", "primary": False}]
+    else:
+        actions = [{"label": "Property Research", "to": "/research", "primary": True}, {"label": "Buyer Matcher", "to": "/buyers", "primary": False}]
+    return {"response": ai_response, "actions": actions}
+
+
+@app.route('/api/openclaw/chat', methods=['POST'])
+def openclaw_chat():
+    """Non-streaming chat with persona + tool support."""
+    try:
+        data = request.get_json()
+        user_message = data.get('message', '')
+        conversation_history = data.get('conversation_history', [])
+        mode = data.get('mode', 'fast')
+        persona = data.get('persona', 'concierge')
+
+        if not user_message:
+            return jsonify({"error": "Message is required"}), 400
+
+        system_prompt = _build_system_prompt(persona, mode)
+        messages = [{"role": "system", "content": system_prompt}]
+        for msg in conversation_history[-6:]:
+            messages.append({"role": msg.get('role', 'user'), "content": msg.get('content', '')})
+        messages.append({"role": "user", "content": user_message})
+
+        if persona == "analyst":
+            ai_content = _run_tool_loop(messages, mode, persona)
+        else:
+            ai_content = _call_ollama_chat(messages) or ""
+            if not ai_content and KIMI_API_KEY:
+                ai_content = _call_kimi(messages) or "I'm having trouble connecting right now."
+
+        formatted = format_openclaw_response(ai_content, user_message)
+        formatted["metadata"] = {"mode": mode, "persona": persona, "provider": "ollama"}
+        return jsonify(formatted)
+
     except Exception as e:
         print(f"Error in openclaw_chat: {e}")
         import traceback
         traceback.print_exc()
-        return jsonify({
-            "response": f"I encountered an error: {str(e)}. Please try again.",
-            "actions": [
-                {"label": "Property Research", "to": "/research", "primary": True}
-            ]
-        }), 500
+        return jsonify({"response": "I'm having trouble right now. Please try again.", "actions": [{"label": "Retry", "to": "#", "primary": True}]}), 500
+
+
+@app.route('/api/openclaw/chat/stream', methods=['POST'])
+def openclaw_chat_stream():
+    """SSE streaming chat endpoint."""
+    def event_generator():
+        try:
+            data = request.get_json()
+            user_message = data.get('message', '')
+            conversation_history = data.get('conversation_history', [])
+            mode = data.get('mode', 'fast')
+            persona = data.get('persona', 'concierge')
+
+            if not user_message:
+                yield f"data: {json.dumps({'error': 'Message required'})}\n\n"
+                yield "data: [DONE]\n\n"
+                return
+
+            system_prompt = _build_system_prompt(persona, mode)
+            messages = [{"role": "system", "content": system_prompt}]
+            for msg in conversation_history[-6:]:
+                messages.append({"role": msg.get('role', 'user'), "content": msg.get('content', '')})
+            messages.append({"role": "user", "content": user_message})
+
+            if persona == "analyst":
+                # Buffer full response to detect tool calls
+                full_response = ""
+                for chunk in _call_ollama_chat_stream(messages):
+                    full_response += chunk
+
+                tool_calls = _extract_tool_calls(full_response)
+                if tool_calls:
+                    yield f"data: {json.dumps({'token': '🔍 Searching database...\n\n'})}\n\n"
+                    import time
+                    time.sleep(0.1)
+
+                    final = _run_tool_loop(messages, mode, persona)
+                    for word in final.split():
+                        yield f"data: {json.dumps({'token': word + ' '})}\n\n"
+                        time.sleep(0.02)
+                else:
+                    for chunk in full_response:
+                        yield f"data: {json.dumps({'token': chunk})}\n\n"
+            else:
+                for chunk in _call_ollama_chat_stream(messages):
+                    yield f"data: {json.dumps({'token': chunk})}\n\n"
+
+            yield "data: [DONE]\n\n"
+        except Exception as e:
+            print(f"Stream error: {e}")
+            yield f"data: {json.dumps({'error': str(e)})}\n\n"
+            yield "data: [DONE]\n\n"
+
+    from flask import Response
+    return Response(event_generator(), mimetype="text/event-stream")
 
 
 if __name__ == '__main__':
