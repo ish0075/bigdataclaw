@@ -1,0 +1,24 @@
+# Dependencies
+nerve/node_modules/
+__pycache__/
+*.pyc
+.venv/
+
+# Build outputs
+nerve/dist/
+
+# Data & uploads
+bigdataclaw.db
+uploads/
+logs/*.log
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Playwright MCP snapshots
+.playwright-mcp/
