@@ -8,8 +8,8 @@ import sqlite3
 from typing import List, Dict, Any, Optional
 from pathlib import Path
 
-# Database path
-DB_PATH = Path("/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db")
+# Database path — supports Docker and local development
+DB_PATH = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
 
 # ---------------------------------------------------------------------------
 # Tool schemas (described to the LLM)

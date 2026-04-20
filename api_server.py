@@ -7,6 +7,8 @@ FastAPI backend with SQLite + Qdrant
 import json
 import os
 import sqlite3
+import asyncio
+import threading
 from pathlib import Path
 from typing import List, Optional, Dict, Any
 from datetime import datetime
@@ -25,6 +27,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 DEEPGRAM_API_KEY = os.getenv("DEEPGRAM_API_KEY", "")
+ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "")
+ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "bbGtsRRKUfYO634UxSjz")
 
 # Import Agent Workspace API
 from agent_workspace_api import router as agent_workspace_router
@@ -34,7 +38,10 @@ from bot_builder_api import router as bot_builder_router
 from realtor_bot_api import router as realtor_bot_router
 from ai_builder_api import router as ai_builder_router
 from nerve.server.paperclip_bridge import router as paperclip_router
+from nerve.server.tool_executor import execute_tool, get_tool_schemas_json
+from voice_agent_api import router as voice_agent_router, prewarm_voice_pipeline
 import agent_router
+from local_tts import synthesize_local_tts, ENABLE_REMOTE_TTS_FALLBACK, local_tts_status
 
 # Initialize FastAPI
 app = FastAPI(
@@ -60,6 +67,13 @@ app.include_router(bot_builder_router)
 app.include_router(realtor_bot_router)
 app.include_router(ai_builder_router)
 app.include_router(paperclip_router)
+app.include_router(voice_agent_router)
+
+
+@app.on_event("startup")
+async def warm_voice_services():
+    """Warm local voice services after API startup without blocking readiness."""
+    threading.Thread(target=prewarm_voice_pipeline, daemon=True).start()
 
 # Static uploads for agent file analysis
 uploads_dir = Path('uploads')
@@ -900,24 +914,26 @@ async def get_opportunities(
         "total": len(opportunities)
     }
 
-class VoiceAgentRequest(BaseModel):
-    message: str
-    history: Optional[List[Dict[str, Any]]] = None
-
-@app.post("/api/voice/agent")
-async def voice_agent(request: VoiceAgentRequest):
-    """Multimodal voice agent endpoint for Mission Control."""
-    result = await agent_router.handle_request(request.message, request.history)
-    return result
+# Voice agent endpoint is provided by voice_agent_api router (includes STT + TTS + search)
 
 @app.post("/api/tts")
 async def text_to_speech(request: Dict[str, Any]):
-    """Proxy TTS requests to Deepgram Aura. Keeps API key server-side."""
-    if not DEEPGRAM_API_KEY:
-        raise HTTPException(status_code=503, detail="TTS service not configured")
+    """Local-first TTS endpoint backed by Piper."""
     text = request.get("text", "")
     if not text:
         raise HTTPException(status_code=400, detail="text is required")
+
+    try:
+        audio_bytes, media_type, _ = await asyncio.to_thread(synthesize_local_tts, text)
+        from fastapi.responses import Response
+        return Response(content=audio_bytes, media_type=media_type)
+    except Exception as local_error:
+        if not ENABLE_REMOTE_TTS_FALLBACK:
+            raise HTTPException(status_code=503, detail=f"Local TTS unavailable: {local_error}")
+
+    if not DEEPGRAM_API_KEY:
+        raise HTTPException(status_code=503, detail="Local TTS failed and remote fallback is unavailable")
+
     voice = request.get("voice", "aura-asteria-en")
     try:
         async with httpx.AsyncClient() as client:
@@ -932,11 +948,51 @@ async def text_to_speech(request: Dict[str, Any]):
             )
             if response.status_code == 200:
                 from fastapi.responses import Response
-                return Response(content=response.content, media_type="audio/mp3")
+                return Response(content=response.content, media_type="audio/mpeg")
             raise HTTPException(status_code=response.status_code, detail=response.text)
     except httpx.RequestError as e:
         raise HTTPException(status_code=502, detail=str(e))
 
+
+@app.get("/api/tts/status")
+async def tts_status():
+    """Expose local TTS readiness for operators."""
+    return local_tts_status()
+
+@app.post("/api/tts/elevenlabs")
+async def text_to_speech_elevenlabs(request: Dict[str, Any]):
+    """Proxy TTS requests to ElevenLabs. Keeps API key server-side."""
+    if not ELEVENLABS_API_KEY:
+        raise HTTPException(status_code=503, detail="ElevenLabs TTS service not configured")
+    text = request.get("text", "")
+    if not text:
+        raise HTTPException(status_code=400, detail="text is required")
+    voice_id = request.get("voice_id", ELEVENLABS_VOICE_ID)
+    model_id = request.get("model_id", "eleven_multilingual_v2")
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}",
+                headers={
+                    "xi-api-key": ELEVENLABS_API_KEY,
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "text": text,
+                    "model_id": model_id,
+                    "voice_settings": {
+                        "stability": 0.5,
+                        "similarity_boost": 0.75
+                    }
+                },
+                timeout=30.0,
+            )
+            if response.status_code == 200:
+                from fastapi.responses import Response
+                return Response(content=response.content, media_type="audio/mp3")
+            raise HTTPException(status_code=response.status_code, detail=response.text)
+    except httpx.RequestError as e:
+        raise HTTPException(status_code=502, detail=str(e))
 
 @app.websocket("/ws/voice")
 async def voice_websocket(websocket: WebSocket):
@@ -1609,14 +1665,16 @@ async def get_mission_control_settings():
                 "mode": "read-write",
                 "connected": True,
                 "folders": [
-                    "Companies/Brokerages",
-                    "Companies/Lenders",
-                    "Companies/Firms",
-                    "People/Brokers",
-                    "People/Salespersons",
+                    "Session_Logs",
+                    "Agent_Workspaces",
+                    "Daily_Notes",
                     "Deals/Transactions",
                     "Buyers/Prospects",
-                    "Session_Logs"
+                    "Properties/Enriched",
+                    "Companies/Brokerages",
+                    "Companies/Lenders",
+                    "People/Brokers",
+                    "People/Salespersons"
                 ]
             },
             "bdaiv2": {
@@ -2676,15 +2734,15 @@ async def match_property_to_buyers(request: PropertyMatchRequest):
 import httpx
 
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.1:8b")  # Faster default
-QWEN_MODEL = "qwen2.5:14b"  # Available for advanced tasks
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "gemma4")  # Use Gemma 4 by default when available
+# QWEN_MODEL removed — using gemma4 as unified default when available
 
 class LLMRequest(BaseModel):
     prompt: str
     system_prompt: Optional[str] = None
     temperature: float = 0.7
     max_tokens: int = 1024
-    model: Optional[str] = None  # "llama3.1:8b" or "qwen2.5:14b"
+    model: Optional[str] = None  # e.g. "gemma4" or "gemma3:4b"
 
 class LLMChatRequest(BaseModel):
     message: str
@@ -2722,7 +2780,14 @@ async def llm_generate(request: LLMRequest):
     """Generate text using local LLM (Llama 3.1 8B or Qwen 2.5 14B)"""
     try:
         model = request.model or OLLAMA_MODEL
-        system = request.system_prompt or "You are a helpful assistant."
+        system = request.system_prompt or (
+            "You are Kimi, a multi-modal commercial real estate intelligence specialist for BigDataClaw. "
+            "Your skills include: reading databases, searching the web, analyzing documents, creating proformas, "
+            "analyzing property details, writing reports, researching market trends, tracking buyers and sellers, "
+            "and calculating NOI. Operate with honesty and integrity. Never fabricate data. If you don't know, say so plainly. "
+            "Speak like a competent colleague — no 'Sure!', no 'That's a great question!', no emoji, no fluff. "
+            "Give sharp, direct answers."
+        )
         
         async with httpx.AsyncClient() as client:
             response = await client.post(
@@ -2759,8 +2824,12 @@ async def chat(request: LLMChatRequest):
     """Main chat endpoint for property research"""
     try:
         messages = []
-        system_prompt = """You are Kimi, a commercial real estate research assistant for BigDataClaw NERVE. 
-Help users research properties by extracting key details and providing helpful responses.
+        system_prompt = """You are Kimi, a multi-modal commercial real estate research assistant for BigDataClaw NERVE. 
+Your skills include: reading databases, searching the web, analyzing documents, creating proformas, 
+analyzing property details, writing reports, researching market trends, tracking buyers and sellers, 
+and calculating NOI. You operate with honesty and integrity. Never fabricate data. If you don't know, say so plainly.
+Help users research properties by extracting key details and providing direct, useful responses.
+Speak like a competent colleague — no 'Sure!', no 'That's a great question!', no emoji, no fluff.
 
 When a user mentions a property, try to extract:
 - Address
@@ -2770,7 +2839,7 @@ When a user mentions a property, try to extract:
 - Size (square footage)
 - Number of beds/baths (for residential)
 
-Be conversational and helpful."""
+You have access to web search and a large CRE database when needed."""
         
         messages.append({"role": "system", "content": system_prompt})
         if request.conversation_history:
@@ -3006,8 +3075,11 @@ async def llm_extract_deal(request: LLMChatRequest):
     """Extract deal information from text using local LLM"""
     try:
         model = request.model or OLLAMA_MODEL  # Default to faster model
-        system_prompt = """You are a commercial real estate deal extraction AI. 
-Extract the following from the user's deal text and respond ONLY with valid JSON:
+        system_prompt = """You are Kimi, a multi-modal commercial real estate intelligence specialist.
+Your skills include reading databases, searching the web, analyzing documents, creating proformas, 
+analyzing property details, writing reports, researching market trends, tracking buyers and sellers, 
+and calculating NOI. Extract the following from the user's deal text and respond ONLY with valid JSON.
+Do not invent values. If a field is not found, use null or empty string.
 {
   "entity": "company or person name",
   "cash_amount": 15000000,
@@ -3017,8 +3089,7 @@ Extract the following from the user's deal text and respond ONLY with valid JSON
   "address": "full address if available",
   "sale_date": "date or month year",
   "notes": "any additional details"
-}
-If a field is not found, use null or empty string."""
+}"""
 
         async with httpx.AsyncClient() as client:
             response = await client.post(
@@ -3074,8 +3145,11 @@ async def pull_profile(request: ProfileRequest):
     try:
         model = OLLAMA_MODEL  # Use faster model for this
         
-        system_prompt = """You are a commercial real estate intelligence researcher. 
-Given an entity name, create a comprehensive profile summary.
+        system_prompt = """You are Kimi, a multi-modal commercial real estate intelligence researcher.
+Your skills include reading databases, searching the web, analyzing documents, creating proformas, 
+analyzing property details, writing reports, researching market trends, tracking buyers and sellers, 
+and calculating NOI. Given an entity name, create a comprehensive profile summary based only on factual information.
+Do not invent deals, relationships, or preferences.
 
 Analyze what you know about this entity and provide:
 1. A brief summary of who they are
@@ -3914,6 +3988,284 @@ if __name__ == "__main__":
     print("   POST /api/gemma4/briefing/schedule   - Schedule automated briefings")
     print("\n   ⚠️  WRITE OPERATIONS DISABLED")
     print("   Use separate BDAIV2 Writer project for vault modifications")
+# ============================================================================
+# OPENCLAW CHAT — Persona + Tool System (Pass 2)
+# ============================================================================
+
+PERSONA_PROMPTS = {
+    "concierge": """You are Gemma 4, the friendly Website Concierge for Mission Control — a commercial real estate intelligence platform.
+
+Your job:
+• Greet visitors and explain what Mission Control does
+• Answer general questions about CRE, the platform, and pricing
+• Guide users to the right tools (Buyer Matcher, Lender Matcher, Hot Money, etc.)
+• Capture interest — suggest signing up or booking a demo
+
+Rules:
+• NEVER expose internal database details or raw record counts beyond what's public
+• Keep responses friendly and conversational
+• Suggest next steps ("Try the Buyer Matcher", "View our Hot Money radar")
+• If asked for deep data analysis, offer to connect them with a specialist
+""",
+    "analyst": """You are Gemma 4, the Mission Control Analyst — a deep CRE intelligence agent with direct access to live data.
+
+You have access to TOOLS. When you need data, respond with:
+TOOL_CALL: {"tool": "tool_name", "args": {...}}
+
+Available tools:
+{tool_schemas}
+
+After receiving tool results, synthesize them into a clear, actionable answer.
+Always cite specific numbers and entities from the data.
+
+Rules:
+• Use tools when the user asks for specific data (buyers, lenders, deals, stats)
+• Do not hallucinate data — always use tools or say you don't have it
+• Format results with markdown (bold, bullet points)
+• Suggest next actions based on findings
+""",
+}
+
+MODE_SUFFIX = {
+    "fast": "\nMode: FAST — Keep answers to 2-3 sentences. Prioritize speed and clarity.",
+    "deep": "\nMode: DEEP — Provide thorough analysis with specific data points, numbers, and reasoning. Include actionable next steps.",
+    "report": "\nMode: REPORT — Generate a structured report with sections: Summary, Key Findings, Data Points, Recommendations, Next Steps.",
+}
+
+
+def _build_system_prompt(persona, mode):
+    base = PERSONA_PROMPTS.get(persona, PERSONA_PROMPTS["concierge"])
+    if persona == "analyst":
+        base = base.replace("{tool_schemas}", get_tool_schemas_json())
+    return base + MODE_SUFFIX.get(mode, "")
+
+
+def _extract_tool_calls(text):
+    calls = []
+    idx = 0
+    while True:
+        marker = text.find("TOOL_CALL:", idx)
+        if marker == -1:
+            break
+        start = marker + len("TOOL_CALL:")
+        while start < len(text) and text[start] in " \t\n":
+            start += 1
+        if start >= len(text) or text[start] != "{":
+            idx = start
+            continue
+        brace_count = 0
+        end = start
+        for i in range(start, len(text)):
+            if text[i] == "{":
+                brace_count += 1
+            elif text[i] == "}":
+                brace_count -= 1
+                if brace_count == 0:
+                    end = i + 1
+                    break
+        json_str = text[start:end]
+        try:
+            calls.append(json.loads(json_str))
+        except json.JSONDecodeError:
+            pass
+        idx = end if end > start else start + 1
+    return calls
+
+
+async def _run_tool_loop(messages, mode, persona, max_iterations=3):
+    for _ in range(max_iterations):
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                f"{OLLAMA_HOST}/api/chat",
+                json={
+                    "model": OLLAMA_MODEL,
+                    "messages": messages,
+                    "stream": False,
+                    "options": {"temperature": 0.7, "num_predict": 1024, "num_ctx": 8192},
+                },
+                timeout=120.0
+            )
+        if response.status_code != 200:
+            break
+        content = response.json().get("message", {}).get("content", "")
+        tool_calls = _extract_tool_calls(content)
+        if not tool_calls:
+            return content
+
+        clean_content = content
+        for tc in tool_calls:
+            clean_content = clean_content.replace(f"TOOL_CALL: {json.dumps(tc)}", "")
+        clean_content = clean_content.strip()
+
+        for tc in tool_calls:
+            result = execute_tool(tc.get("tool"), tc.get("args", {}))
+            result_text = json.dumps(result, indent=2, default=str)
+            messages.append({"role": "assistant", "content": clean_content or "I'll look that up."})
+            messages.append({
+                "role": "system",
+                "content": f"Tool '{tc.get('tool')}' result:\n{result_text}\n\nAnswer the user's question based on this data."
+            })
+    return content
+
+
+class OpenClawChatRequest(BaseModel):
+    message: str
+    conversation_history: List[Dict[str, str]] = []
+    mode: str = "fast"
+    persona: str = "concierge"
+
+
+@app.post("/api/openclaw/chat")
+async def openclaw_chat(request: OpenClawChatRequest):
+    """Non-streaming chat with persona + tool support."""
+    try:
+        user_message = request.message.strip()
+        mode = request.mode if request.mode in ("fast", "deep", "report") else "fast"
+        persona = request.persona if request.persona in ("concierge", "analyst") else "concierge"
+
+        if not user_message:
+            return JSONResponse({"error": "Message is required"}, status_code=400)
+
+        system_prompt = _build_system_prompt(persona, mode)
+        messages = [{"role": "system", "content": system_prompt}]
+        for msg in request.conversation_history[-6:]:
+            messages.append({"role": msg.get("role", "user"), "content": msg.get("content", "")})
+        messages.append({"role": "user", "content": user_message})
+
+        if persona == "analyst":
+            ai_content = await _run_tool_loop(messages, mode, persona)
+        else:
+            async with httpx.AsyncClient() as client:
+                response = await client.post(
+                    f"{OLLAMA_HOST}/api/chat",
+                    json={
+                        "model": OLLAMA_MODEL,
+                        "messages": messages,
+                        "stream": False,
+                        "options": {"temperature": 0.7, "num_predict": 1024, "num_ctx": 8192},
+                    },
+                    timeout=120.0
+                )
+            if response.status_code == 200:
+                ai_content = response.json().get("message", {}).get("content", "")
+            else:
+                ai_content = "I'm having trouble connecting right now."
+
+        # Extract actions
+        actions = []
+        lower = ai_content.lower()
+        if "hot money" in lower or "buyer" in lower:
+            actions.append({"label": "View Hot Money", "to": "/hotmoney", "primary": False})
+        if "buyer" in lower:
+            actions.append({"label": "Find Buyers", "to": "/buyers", "primary": True})
+        if "lender" in lower:
+            actions.append({"label": "Find Lenders", "to": "/lenders", "primary": False})
+
+        return {
+            "response": ai_content,
+            "actions": actions,
+            "metadata": {"mode": mode, "persona": persona, "provider": "ollama"}
+        }
+    except Exception as e:
+        print(f"Chat error: {e}")
+        import traceback
+        traceback.print_exc()
+        return JSONResponse({
+            "response": "I'm having trouble right now. Please try again.",
+            "actions": [{"label": "Retry", "to": "#", "primary": True}]
+        }, status_code=500)
+
+
+@app.post("/api/openclaw/chat/stream")
+async def openclaw_chat_stream(request: OpenClawChatRequest):
+    """SSE streaming chat endpoint."""
+    async def event_generator():
+        try:
+            user_message = request.message.strip()
+            mode = request.mode if request.mode in ("fast", "deep", "report") else "fast"
+            persona = request.persona if request.persona in ("concierge", "analyst") else "concierge"
+
+            if not user_message:
+                yield f"data: {json.dumps({'error': 'Message required'})}\n\n"
+                yield "data: [DONE]\n\n"
+                return
+
+            system_prompt = _build_system_prompt(persona, mode)
+            messages = [{"role": "system", "content": system_prompt}]
+            for msg in request.conversation_history[-6:]:
+                messages.append({"role": msg.get("role", "user"), "content": msg.get("content", "")})
+            messages.append({"role": "user", "content": user_message})
+
+            if persona == "analyst":
+                # Buffer full response to detect tool calls
+                full_response = ""
+                async with httpx.AsyncClient() as client:
+                    async with client.stream(
+                        "POST",
+                        f"{OLLAMA_HOST}/api/chat",
+                        json={
+                            "model": OLLAMA_MODEL,
+                            "messages": messages,
+                            "stream": True,
+                            "options": {"temperature": 0.7, "num_predict": 1024, "num_ctx": 8192},
+                        },
+                        timeout=120.0
+                    ) as resp:
+                        async for line in resp.aiter_lines():
+                            if line:
+                                try:
+                                    data = json.loads(line)
+                                    chunk = data.get("message", {}).get("content", "")
+                                    if chunk:
+                                        full_response += chunk
+                                except json.JSONDecodeError:
+                                    continue
+
+                tool_calls = _extract_tool_calls(full_response)
+                if tool_calls:
+                    yield f"data: {json.dumps({'token': '🔍 Searching database...\n\n'})}\n\n"
+                    await asyncio.sleep(0.1)
+
+                    final = await _run_tool_loop(messages, mode, persona)
+                    for word in final.split():
+                        yield f"data: {json.dumps({'token': word + ' '})}\n\n"
+                        await asyncio.sleep(0.02)
+                else:
+                    for chunk in full_response:
+                        yield f"data: {json.dumps({'token': chunk})}\n\n"
+            else:
+                async with httpx.AsyncClient() as client:
+                    async with client.stream(
+                        "POST",
+                        f"{OLLAMA_HOST}/api/chat",
+                        json={
+                            "model": OLLAMA_MODEL,
+                            "messages": messages,
+                            "stream": True,
+                            "options": {"temperature": 0.7, "num_predict": 1024, "num_ctx": 8192},
+                        },
+                        timeout=120.0
+                    ) as resp:
+                        async for line in resp.aiter_lines():
+                            if line:
+                                try:
+                                    data = json.loads(line)
+                                    chunk = data.get("message", {}).get("content", "")
+                                    if chunk:
+                                        yield f"data: {json.dumps({'token': chunk})}\n\n"
+                                except json.JSONDecodeError:
+                                    continue
+
+            yield "data: [DONE]\n\n"
+        except Exception as e:
+            print(f"Stream error: {e}")
+            yield f"data: {json.dumps({'error': str(e)})}\n\n"
+            yield "data: [DONE]\n\n"
+
+    from fastapi.responses import StreamingResponse
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+
     print("\n🌐 Starting server on http://0.0.0.0:8000")
     print("=" * 60)
     
