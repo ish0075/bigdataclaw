@@ -17,6 +17,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException, BackgroundTasks, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 import uvicorn
 
@@ -25,6 +26,7 @@ from data_connector import get_connector, BigDataClawDataConnector
 from obsidian_connector import get_vault_connector, ObsidianVaultConnector
 from ai_research import research_property_with_fallback, generate_obsidian_markdown
 from paperclip_bridge import spawn_paperclip_company_for_mission, mission_company_map
+from chat_providers import get_provider, KimiProvider, OpenAIProvider, Gemma4OllamaProvider
 
 # Import hot money enrichment
 import sys
@@ -370,9 +372,20 @@ app = FastAPI(
 )
 
 # CORS
+_cors_origins_env = os.getenv("CORS_ORIGINS", "")
+_default_origins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:5173",
+    "http://localhost:8083",
+    "http://127.0.0.1:8083",
+    "https://mission-control-commissions.vercel.app",
+    "https://*.vercel.app",
+]
+CORS_ORIGINS = [o.strip() for o in _cors_origins_env.split(",") if o.strip()] or _default_origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173", "http://localhost:8083", "http://127.0.0.1:8083"],
+    allow_origins=CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -1928,6 +1941,235 @@ async def get_transaction_stats():
     except Exception as e:
         print(f"Error getting transaction stats: {e}")
         return {"total": 0, "total_volume": 0, "avg_price": 0, "by_type": [], "recent_count": 0}
+
+
+# ============================================================================
+# CHAT ENDPOINTS
+# ============================================================================
+
+class ChatMessage(BaseModel):
+    role: str
+    content: str
+
+class ChatRequest(BaseModel):
+    message: str
+    conversation_history: List[ChatMessage] = []
+    mode: str = "fast"  # fast | deep | report
+    persona: str = "concierge"  # concierge | analyst
+    context: Optional[dict] = None
+
+class ChatResponse(BaseModel):
+    response: str
+    actions: List[dict] = []
+    metadata: dict = {}
+
+# LLM provider — defaults to Kimi (branded Gemma4), falls back to OpenAI / Ollama
+async def _get_provider():
+    """Get the best available chat provider."""
+    return get_provider()  # discovers Kimi → OpenAI → Ollama automatically
+
+def _get_db_context(query: str, mode: str) -> str:
+    """Fetch relevant database snippets for deep/report modes."""
+    if mode == "fast":
+        return ""
+    
+    snippets = []
+    try:
+        connector = get_connector()
+        # Hot money context
+        if any(k in query.lower() for k in ["money", "cash", "capital", "investor", "buyer"]):
+            leads = connector.get_hot_money_leads(limit=5)
+            if leads:
+                snippets.append("Recent hot money leads:")
+                for lead in leads[:3]:
+                    snippets.append(f"- {lead.get('entity','Unknown')}: {lead.get('cashAmount',0):,.0f} in {lead.get('location','')}")
+        
+        # Stats context
+        if any(k in query.lower() for k in ["stats", "market", "volume", "trends"]):
+            stats = connector.get_stats()
+            snippets.append(f"Platform stats: {stats.get('total_records',0)} records, ${stats.get('total_volume',0):,.0f} volume.")
+    except Exception as e:
+        print(f"DB context error: {e}")
+    
+    return "\n".join(snippets) if snippets else ""
+
+def _extract_tool_calls(text: str) -> List[Dict]:
+    """Extract TOOL_CALL JSON blocks from LLM response.
+    Uses brace counting to handle nested JSON objects."""
+    calls = []
+    idx = 0
+    while True:
+        marker = text.find("TOOL_CALL:", idx)
+        if marker == -1:
+            break
+        start = marker + len("TOOL_CALL:")
+        # Skip whitespace
+        while start < len(text) and text[start] in " \t\n":
+            start += 1
+        if start >= len(text) or text[start] != "{":
+            idx = start
+            continue
+        # Brace counting
+        brace_count = 0
+        end = start
+        for i in range(start, len(text)):
+            if text[i] == "{":
+                brace_count += 1
+            elif text[i] == "}":
+                brace_count -= 1
+                if brace_count == 0:
+                    end = i + 1
+                    break
+        json_str = text[start:end]
+        try:
+            calls.append(json.loads(json_str))
+        except json.JSONDecodeError:
+            pass
+        idx = end if end > start else start + 1
+    return calls
+
+async def _run_tool_loop(provider, messages: List[Dict], mode: str, persona: str, max_iterations: int = 3):
+    """Run provider with tool execution loop for analyst persona."""
+    from tool_executor import execute_tool
+
+    for _ in range(max_iterations):
+        content = await provider.complete(messages, mode=mode, persona=persona)
+        tool_calls = _extract_tool_calls(content)
+
+        if not tool_calls:
+            # No tools requested — return final answer
+            return content
+
+        # Remove the TOOL_CALL block from visible response and append tool results
+        clean_content = content
+        for tc in tool_calls:
+            clean_content = clean_content.replace(f"TOOL_CALL: {json.dumps(tc)}", "")
+        clean_content = clean_content.strip()
+
+        # Execute each tool and add results to conversation
+        for tc in tool_calls:
+            result = execute_tool(tc.get("tool"), tc.get("args", {}))
+            result_text = json.dumps(result, indent=2, default=str)
+            messages.append({"role": "assistant", "content": clean_content or "I'll look that up for you."})
+            messages.append({
+                "role": "system",
+                "content": f"Tool '{tc.get('tool')}' result:\n{result_text}\n\nNow answer the user's original question based on this data."
+            })
+
+    # Max iterations reached — return last response
+    return content
+
+@app.post("/api/openclaw/chat")
+async def openclaw_chat(request: ChatRequest):
+    """
+    Main chat endpoint — non-streaming JSON response.
+    Uses provider chain: Gemma4 → Kimi → OpenAI.
+    Supports tool calling for analyst persona.
+    """
+    user_message = request.message.strip()
+    mode = request.mode if request.mode in ("fast", "deep", "report") else "fast"
+    persona = request.persona if request.persona in ("concierge", "analyst") else "concierge"
+
+    messages = []
+    for msg in request.conversation_history[-6:]:
+        messages.append({"role": msg.role, "content": msg.content})
+    messages.append({"role": "user", "content": user_message})
+
+    try:
+        provider = await _get_provider()
+
+        if persona == "analyst":
+            content = await _run_tool_loop(provider, messages, mode, persona)
+        else:
+            content = await provider.complete(messages, mode=mode, persona=persona)
+
+        # Extract actions from response
+        actions = []
+        if "hot money" in content.lower() or "buyer" in content.lower():
+            actions.append({"label": "View Hot Money", "to": "/hotmoney", "primary": False})
+        if "buyer" in content.lower():
+            actions.append({"label": "Find Buyers", "to": "/buyers", "primary": True})
+        if "lender" in content.lower():
+            actions.append({"label": "Find Lenders", "to": "/lenders", "primary": False})
+
+        return ChatResponse(
+            response=content,
+            actions=actions,
+            metadata={"mode": mode, "persona": persona, "provider": provider.name, "context_tokens": len(str(messages))}
+        )
+    except Exception as e:
+        print(f"Chat error: {e}")
+        import traceback
+        traceback.print_exc()
+        return ChatResponse(
+            response="I'm having trouble processing that right now. Please try again.",
+            actions=[{"label": "Retry", "to": "#", "primary": True}],
+            metadata={"error": str(e), "provider": "none"}
+        )
+
+@app.post("/api/openclaw/chat/stream")
+async def openclaw_chat_stream(request: ChatRequest):
+    """
+    SSE streaming chat endpoint.
+    For concierge: direct streaming.
+    For analyst: buffers response, checks for tool calls, executes if found, then streams final.
+    """
+    import asyncio
+
+    user_message = request.message.strip()
+    mode = request.mode if request.mode in ("fast", "deep", "report") else "fast"
+    persona = request.persona if request.persona in ("concierge", "analyst") else "concierge"
+
+    messages = []
+    for msg in request.conversation_history[-6:]:
+        messages.append({"role": msg.role, "content": msg.content})
+    messages.append({"role": "user", "content": user_message})
+
+    try:
+        provider = await _get_provider()
+    except Exception as e:
+        async def error_stream():
+            yield f"data: {json.dumps({'error': str(e)})}\n\n"
+            yield "data: [DONE]\n\n"
+        return StreamingResponse(error_stream(), media_type="text/event-stream")
+
+    async def event_generator():
+        try:
+            if persona == "analyst":
+                # Buffer the full response to check for tool calls
+                full_response = ""
+                async for token in provider.stream(messages, mode=mode, persona=persona):
+                    full_response += token
+
+                tool_calls = _extract_tool_calls(full_response)
+                if tool_calls:
+                    # Yield a status token
+                    yield f"data: {json.dumps({'token': '🔍 Searching database...\n\n'})}\n\n"
+                    await asyncio.sleep(0.1)
+
+                    # Run tool loop (non-streaming for follow-up)
+                    final = await _run_tool_loop(provider, messages, mode, persona)
+                    # Stream the final response word-by-word
+                    for word in final.split():
+                        yield f"data: {json.dumps({'token': word + ' '})}\n\n"
+                        await asyncio.sleep(0.02)
+                else:
+                    # No tools — stream the buffered response
+                    for chunk in full_response:
+                        yield f"data: {json.dumps({'token': chunk})}\n\n"
+            else:
+                # Concierge — direct streaming
+                async for token in provider.stream(messages, mode=mode, persona=persona):
+                    if token:
+                        yield f"data: {json.dumps({'token': token})}\n\n"
+
+            yield "data: [DONE]\n\n"
+        except Exception as e:
+            print(f"Stream error: {e}")
+            yield f"data: {json.dumps({'error': str(e)})}\n\n"
+            yield "data: [DONE]\n\n"
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
 
 
 # ============================================================================

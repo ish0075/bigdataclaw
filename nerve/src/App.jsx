@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom'
 import Layout from './components/Common/Layout'
 import MissionControl from './views/MissionControl'
+import VoiceAgentView from './views/VoiceAgentView'
 import HotMoneyRadar from './views/HotMoneyRadar'
 import MyListings from './views/MyListings'
 import BuyerMatcher from './views/BuyerMatcher'
@@ -39,7 +40,8 @@ function useIsV3Route() {
       const pathname = window.location.pathname
       const isV3Route = pathname === '/v3' || hash === '#/v3' || hash.startsWith('#/v3')
       const isFaceTime = pathname === '/facetime' || hash === '#/facetime' || hash.startsWith('#/facetime')
-      setIsV3(isV3Route || isFaceTime)
+      const isVoiceAgent = pathname === '/voice-agent' || hash === '#/voice-agent' || hash.startsWith('#/voice-agent')
+      setIsV3(isV3Route || isFaceTime || isVoiceAgent)
     }
     
     checkV3()
@@ -60,12 +62,15 @@ function FullPageRoutes() {
   if (location.pathname === '/facetime') {
     return <FaceTimeCall />
   }
+  if (location.pathname === '/voice-agent') {
+    return <VoiceAgentView />
+  }
   return <MissionControlV3 />
 }
 
 function AppRoutes() {
   // Initialize WebSocket connection
-  const { connected } = useWebSocket()
+  const { connected, connecting, reconnectCount } = useWebSocket()
   const navigate = useNavigate()
   
   const handleSearchResult = (result) => {
@@ -77,7 +82,7 @@ function AppRoutes() {
   }
   
   return (
-    <Layout>
+    <Layout connected={connected} connecting={connecting} reconnectCount={reconnectCount}>
       <Routes>
         <Route path="/" element={<MissionControl />} />
         <Route path="/hotmoney" element={<HotMoneyRadar />} />
@@ -101,6 +106,7 @@ function AppRoutes() {
         <Route path="/agent-workspaces" element={<AgentWorkspaces />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/marketing/*" element={<Navigate to="/" replace />} />
+        <Route path="/voice-agent" element={<VoiceAgentView />} />
         <Route path="/v2" element={<MissionControl />} />
         <Route path="/simple" element={<MissionControl />} />
         <Route path="/facetime" element={<FaceTimeCall />} />

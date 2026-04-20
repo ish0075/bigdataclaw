@@ -4,7 +4,7 @@ import TopBar from './TopBar'
 import { VoiceDictationPanel, VoiceDictationSettings, useVoiceDictation, requestNotificationPermission } from './VoiceDictation'
 import { Mic } from 'lucide-react'
 
-const Layout = ({ children, connected, globalSearch }) => {
+const Layout = ({ children, connected, connecting, reconnectCount, globalSearch }) => {
   const [showSettings, setShowSettings] = useState(false)
   const [notificationGranted, setNotificationGranted] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -54,7 +54,7 @@ const Layout = ({ children, connected, globalSearch }) => {
       
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
-        <TopBar connected={connected} globalSearch={globalSearch} onMenuClick={() => setMobileMenuOpen(true)} />
+        <TopBar connected={connected} connecting={connecting} reconnectCount={reconnectCount} globalSearch={globalSearch} onMenuClick={() => setMobileMenuOpen(true)} />
         
         <main className="flex-1 overflow-auto p-4 md:p-6 scrollbar-thin">
           <div className="max-w-7xl mx-auto">

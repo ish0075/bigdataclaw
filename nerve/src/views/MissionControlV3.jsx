@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Gemma4Widget from '../components/Gemma4/Gemma4Widget';
+import { useChatStream } from '../hooks/useChatStream';
 import { 
   MessageSquare, 
   Bot, 
@@ -92,6 +93,17 @@ const NAV_SECTIONS = [
         helpText: 'Your AI workforce. Deploy agents for research, matching, outreach, and analysis. Each agent works 24/7 and reports back with findings.',
         actions: ['Deploy agents', 'View status', 'Configure tasks', 'Review reports'],
         route: '/agents'
+      },
+      { 
+        id: 'voice-agent', 
+        icon: Mic, 
+        label: 'Voice Agent',
+        badge: 'NEW',
+        badgeColor: 'cyan',
+        description: 'Talk to your Obsidian vault',
+        helpText: 'Use voice to query your knowledge base. Semantic search across your vault with AI-generated spoken answers.',
+        actions: ['Voice search', 'Semantic query', 'Graph view', 'Index vault'],
+        route: '/voice-agent'
       },
       { 
         id: 'properties', 
@@ -497,6 +509,10 @@ const OpenClawAssistant = ({
   messages, 
   onSendMessage, 
   isLoading,
+  status,
+  onCancel,
+  persona,
+  onPersonaChange,
   isMinimized,
   onToggleMinimize,
   contextualHelp
@@ -569,10 +585,23 @@ const OpenClawAssistant = ({
           </div>
           <div>
             <h3 className="font-semibold text-text-primary">Mission Control Center</h3>
-            <p className="text-xs text-text-muted">Find who has money to buy RIGHT NOW</p>
+            <p className="text-xs text-text-muted">
+              {persona === 'analyst' ? '🔍 Deep Intelligence Mode' : 'Find who has money to buy RIGHT NOW'}
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-1">
+          <button
+            onClick={() => onPersonaChange(persona === 'concierge' ? 'analyst' : 'concierge')}
+            className={`px-2 py-1 text-xs rounded-lg transition-colors ${
+              persona === 'analyst'
+                ? 'bg-accent-primary/20 text-accent-primary'
+                : 'bg-bg-input text-text-muted hover:bg-bg-card'
+            }`}
+            title="Toggle between Concierge and Analyst"
+          >
+            {persona === 'analyst' ? 'Analyst' : 'Concierge'}
+          </button>
           <button 
             onClick={() => onSendMessage("Help me with this page")}
             className="p-2 hover:bg-bg-input rounded-lg transition-colors"
@@ -637,11 +666,21 @@ const OpenClawAssistant = ({
           </div>
         ))}
         {isLoading && (
-          <div className="flex items-center gap-2 text-text-muted">
-            <div className="w-2 h-2 bg-accent-primary rounded-full animate-bounce" />
-            <div className="w-2 h-2 bg-accent-primary rounded-full animate-bounce delay-100" />
-            <div className="w-2 h-2 bg-accent-primary rounded-full animate-bounce delay-200" />
-            <span className="text-xs ml-2">Thinking...</span>
+          <div className="flex items-center gap-3 text-text-muted">
+            <div className="flex items-center gap-1">
+              <div className="w-2 h-2 bg-accent-primary rounded-full animate-bounce" />
+              <div className="w-2 h-2 bg-accent-primary rounded-full animate-bounce delay-100" />
+              <div className="w-2 h-2 bg-accent-primary rounded-full animate-bounce delay-200" />
+            </div>
+            <span className="text-xs">{status === 'streaming' ? 'Streaming...' : 'Thinking...'}</span>
+            {status === 'streaming' && onCancel && (
+              <button
+                onClick={onCancel}
+                className="text-xs px-2 py-0.5 bg-accent-red/10 text-accent-red rounded hover:bg-accent-red/20 transition-colors"
+              >
+                Stop
+              </button>
+            )}
           </div>
         )}
         <div ref={messagesEndRef} />
@@ -714,14 +753,25 @@ const MissionControlV3 = () => {
   const [chatMinimized, setChatMinimized] = useState(false);
 
   // Chat state
-  const [messages, setMessages] = useState([
-    {
-      role: 'assistant',
-      content: '🎯 **Mission Control Center**\n\nFind who has money to buy RIGHT NOW.\n\nI\'m monitoring $458M in tracked capital from recent sellers. Ask me to:\n• Find hot money (recent sellers with cash)\n• Match buyers to your properties\n• Evaluate deals\n• Search 193K records',
-      timestamp: new Date()
-    }
-  ]);
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    messages,
+    status,
+    isLoading,
+    persona,
+    setPersona,
+    sendMessage,
+    cancel,
+  } = useChatStream({
+    apiPath: '/api/openclaw/chat/stream',
+    onError: (err) => console.error('Chat error:', err),
+    initialMessages: [
+      {
+        role: 'assistant',
+        content: '🎯 **Mission Control Center**\n\nFind who has money to buy RIGHT NOW.\n\nI\'m monitoring $458M in tracked capital from recent sellers. Ask me to:\n• Find hot money (recent sellers with cash)\n• Match buyers to your properties\n• Evaluate deals\n• Search 193K records',
+        timestamp: new Date()
+      }
+    ]
+  });
   const [gemma4Open, setGemma4Open] = useState(true);
 
   // Panel widths
@@ -770,39 +820,13 @@ const MissionControlV3 = () => {
     }
   };
 
-  const handleSendMessage = async (content) => {
-    const userMessage = { role: 'user', content, timestamp: new Date() };
-    setMessages(prev => [...prev, userMessage]);
-    setIsLoading(true);
-
-    // Simulate AI response
-    setTimeout(() => {
-      let response = "";
-      let actions = [];
-
-      if (content.toLowerCase().includes('help')) {
-        response = `I can help you with ${currentPageData?.label}! Here are some things you can do:`;
-        actions = currentPageData?.actions || [];
-      } else if (content.toLowerCase().includes('buyer')) {
-        response = "I found 12 land buyers in Hamilton with $5M+ capacity. 3 are actively looking right now.";
-        actions = ["View matches", "Export list", "Contact top 3"];
-      } else if (content.toLowerCase().includes('agent')) {
-        response = "I've deployed the Buyer Matcher agent. It's analyzing 18,496 buyers and will report back in ~2 minutes.";
-        actions = ["Check status", "View all agents", "Configure"];
-      } else {
-        response = "I can help you with that! Would you like me to search our database, deploy an agent, or find external resources?";
-        actions = ["Search database", "Deploy agent", "Web search"];
-      }
-
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: response,
-        actions,
-        timestamp: new Date()
-      }]);
-      setIsLoading(false);
-    }, 1500);
-  };
+  const handleSendMessage = useCallback(async (content) => {
+    await sendMessage(content, {
+      mode: persona === 'analyst' ? 'deep' : 'fast',
+      conversationHistory: messages,
+      context: currentPageData ? { page: currentPageData.id, label: currentPageData.label } : null
+    });
+  }, [sendMessage, messages, currentPageData]);
 
   return (
     <div className="flex h-screen bg-bg-primary overflow-hidden">
@@ -1062,6 +1086,10 @@ const MissionControlV3 = () => {
         messages={messages}
         onSendMessage={handleSendMessage}
         isLoading={isLoading}
+        status={status}
+        onCancel={cancel}
+        persona={persona}
+        onPersonaChange={setPersona}
         isMinimized={chatMinimized}
         onToggleMinimize={() => setChatMinimized(!chatMinimized)}
         contextualHelp={currentPageData?.description}

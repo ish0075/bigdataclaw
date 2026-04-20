@@ -1,61 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { MessageSquare, X, Send, Loader2, Bot } from 'lucide-react'
-
-const API_BASE_CANDIDATES = Array.from(new Set([
-  import.meta.env.VITE_API_URL,
-  '/api',
-  'http://127.0.0.1:3090/api',
-  'http://localhost:3090/api',
-  'http://127.0.0.1:8000/api',
-  'http://localhost:8000/api',
-].filter(Boolean).map((value) => value.replace(/\/$/, ''))))
-
-let resolvedApiBase = null
-
-const shouldRetryWithNextApiBase = (message) => {
-  const normalized = message.toLowerCase()
-  return (
-    normalized.includes('failed to fetch') ||
-    normalized.includes('networkerror') ||
-    normalized.includes('file not found') ||
-    normalized.includes('cannot get') ||
-    normalized.includes('http 404') ||
-    normalized.includes('http 502') ||
-    normalized.includes('http 503')
-  )
-}
-
-const createHttpError = async (response) => {
-  let detail = ''
-  try {
-    const contentType = response.headers.get('content-type') || ''
-    if (contentType.includes('application/json')) {
-      const body = await response.json()
-      detail = body?.detail || body?.error || ''
-    } else {
-      detail = (await response.text()).trim()
-    }
-  } catch { detail = '' }
-  return new Error(detail ? `HTTP ${response.status}: ${detail}` : `HTTP ${response.status}: ${response.statusText}`)
-}
-
-const fetchApi = async (path, init) => {
-  const normalizedPath = path.startsWith('/') ? path : `/${path}`
-  const candidates = resolvedApiBase ? [resolvedApiBase] : API_BASE_CANDIDATES
-  let lastError = null
-  for (const base of candidates) {
-    try {
-      const response = await fetch(`${base}${normalizedPath}`, init)
-      if (!response.ok) throw await createHttpError(response)
-      resolvedApiBase = base
-      return response
-    } catch (err) {
-      lastError = err
-      if (!shouldRetryWithNextApiBase(err instanceof Error ? err.message : String(err))) throw err
-    }
-  }
-  throw lastError || new Error('API unavailable')
-}
+import { MessageSquare, X, Send, Loader2, Bot, Square } from 'lucide-react'
+import { useChatStream } from '../../hooks/useChatStream'
 
 const formatCash = (amount) => {
   if (!amount) return '$0'
@@ -66,19 +11,47 @@ const formatCash = (amount) => {
 
 const OpenClawChatFloating = ({ dealContext }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hello! I\'m OpenClaw. Ask me anything about this deal or how to take the next step.' }
-  ])
   const [input, setInput] = useState('')
-  const [loading, setLoading] = useState(false)
   const scrollRef = useRef(null)
   const inputRef = useRef(null)
+
+  const buildContext = () => {
+    if (!dealContext) return null
+    return {
+      entity: dealContext.entity,
+      cash_amount: dealContext.cashAmount,
+      location: dealContext.location,
+      asset_class: dealContext.assetClass || dealContext.propertyType,
+      address: dealContext.address || dealContext.property,
+      buyer_name: dealContext.buyerEntity || dealContext.buyerName,
+      broker_name: dealContext.brokerName,
+      lender_name: dealContext.lenderName,
+      sale_date: dealContext.saleDate,
+      days_ago: dealContext.daysAgo,
+      notes: dealContext.notes,
+    }
+  }
+
+  const {
+    messages,
+    setMessages,
+    status,
+    isLoading,
+    sendMessage,
+    cancel,
+  } = useChatStream({
+    apiPath: '/api/openclaw/chat/stream',
+    onError: (err) => console.error('Floating chat error:', err),
+    initialMessages: [
+      { role: 'assistant', content: 'Hello! I\'m OpenClaw. Ask me anything about this deal or how to take the next step.' }
+    ]
+  })
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
-  }, [messages, loading])
+  }, [messages, isLoading])
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -89,9 +62,9 @@ const OpenClawChatFloating = ({ dealContext }) => {
   const dealId = dealContext?.id
   useEffect(() => {
     if (!dealContext) return
+    const contextLine = `Current deal: ${dealContext.entity} • ${formatCash(dealContext.cashAmount)} • ${dealContext.location} • ${dealContext.assetClass || dealContext.propertyType || ''}`
     setMessages(prev => {
       const systemIdx = prev.findIndex(m => m.role === 'system')
-      const contextLine = `Current deal: ${dealContext.entity} • ${formatCash(dealContext.cashAmount)} • ${dealContext.location} • ${dealContext.assetClass || dealContext.propertyType || ''}`
       if (systemIdx >= 0) {
         const next = [...prev]
         next[systemIdx] = { role: 'system', content: contextLine }
@@ -99,44 +72,17 @@ const OpenClawChatFloating = ({ dealContext }) => {
       }
       return [{ role: 'system', content: contextLine }, ...prev]
     })
-  }, [dealId, dealContext])
+  }, [dealId, dealContext, setMessages])
 
   const handleSend = async () => {
-    if (!input.trim() || loading) return
-    const userMsg = input.trim()
+    if (!input.trim() || isLoading) return
+    const text = input.trim()
     setInput('')
-    setMessages(prev => [...prev, { role: 'user', content: userMsg }])
-    setLoading(true)
-
-    try {
-      const payload = {
-        message: userMsg,
-        context: dealContext ? {
-          entity: dealContext.entity,
-          cash_amount: dealContext.cashAmount,
-          location: dealContext.location,
-          asset_class: dealContext.assetClass || dealContext.propertyType,
-          address: dealContext.address || dealContext.property,
-          buyer_name: dealContext.buyerEntity || dealContext.buyerName,
-          broker_name: dealContext.brokerName,
-          lender_name: dealContext.lenderName,
-          sale_date: dealContext.saleDate,
-          days_ago: dealContext.daysAgo,
-          notes: dealContext.notes,
-        } : null
-      }
-      const response = await fetchApi('/openclaw/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-      const data = await response.json()
-      setMessages(prev => [...prev, { role: 'assistant', content: data.response || data.message || 'No response.' }])
-    } catch (err) {
-      setMessages(prev => [...prev, { role: 'assistant', content: `Sorry, I ran into an error: ${err.message}` }])
-    } finally {
-      setLoading(false)
-    }
+    await sendMessage(text, {
+      mode: 'fast',
+      conversationHistory: messages,
+      context: buildContext()
+    })
   }
 
   const handleKeyDown = (e) => {
@@ -145,6 +91,8 @@ const OpenClawChatFloating = ({ dealContext }) => {
       handleSend()
     }
   }
+
+  const statusLabel = status === 'streaming' ? 'Streaming...' : status === 'connecting' ? 'Connecting...' : 'Thinking...'
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
@@ -174,20 +122,35 @@ const OpenClawChatFloating = ({ dealContext }) => {
           <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[200px]">
             {messages.filter(m => m.role !== 'system').map((m, idx) => (
               <div key={idx} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] px-3 py-2 rounded-xl text-sm ${
-                  m.role === 'user' 
-                    ? 'bg-indigo-600 text-white rounded-br-sm' 
+                <div className={`max-w-[85%] px-3 py-2 rounded-xl text-sm whitespace-pre-wrap ${
+                  m.role === 'user'
+                    ? 'bg-indigo-600 text-white rounded-br-sm'
                     : 'bg-slate-800 text-slate-200 border border-slate-700 rounded-bl-sm'
                 }`}>
                   {m.content}
                 </div>
               </div>
             ))}
-            {loading && (
+            {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-slate-800 text-slate-200 border border-slate-700 rounded-xl rounded-bl-sm px-3 py-2 flex items-center gap-2">
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span className="text-sm">Thinking...</span>
+                  {status === 'streaming' ? (
+                    <>
+                      <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" />
+                      <span className="text-sm">{statusLabel}</span>
+                      <button
+                        onClick={cancel}
+                        className="ml-1 p-0.5 hover:bg-slate-700 rounded transition-colors"
+                      >
+                        <Square className="w-3 h-3 text-slate-400" />
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span className="text-sm">{statusLabel}</span>
+                    </>
+                  )}
                 </div>
               </div>
             )}
@@ -203,15 +166,25 @@ const OpenClawChatFloating = ({ dealContext }) => {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Ask OpenClaw..."
-                className="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                disabled={isLoading && status !== 'streaming'}
+                className="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 disabled:opacity-50"
               />
-              <button
-                onClick={handleSend}
-                disabled={!input.trim() || loading}
-                className="p-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:hover:bg-indigo-600 rounded-lg text-white transition-colors"
-              >
-                <Send className="w-4 h-4" />
-              </button>
+              {isLoading && status === 'streaming' ? (
+                <button
+                  onClick={cancel}
+                  className="p-2 bg-accent-red hover:bg-accent-red/90 rounded-lg text-white transition-colors"
+                >
+                  <Square className="w-4 h-4" />
+                </button>
+              ) : (
+                <button
+                  onClick={handleSend}
+                  disabled={!input.trim() || isLoading}
+                  className="p-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:hover:bg-indigo-600 rounded-lg text-white transition-colors"
+                >
+                  <Send className="w-4 h-4" />
+                </button>
+              )}
             </div>
           </div>
         </div>
