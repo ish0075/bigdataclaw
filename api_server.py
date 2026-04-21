@@ -2154,6 +2154,43 @@ def _bucket_priority(score: float, signal_strength: str, contactability: dict, i
     return {"bucket": "Hold", "recommended_channel": "none", "outreach_priority": score - 10}
 
 
+def _build_bucket_reason(score: float, signal_strength: str, contactability: dict, identity_confidence: str, bucket: str) -> str:
+    """Generate a human-readable explanation for why a buyer was placed in a given bucket."""
+    parts = []
+    if identity_confidence == "HIGH":
+        parts.append("High confidence identity")
+    elif identity_confidence == "MEDIUM":
+        parts.append("Medium confidence identity")
+
+    if signal_strength == "strong":
+        parts.append("strong signal")
+    elif signal_strength == "medium":
+        parts.append("moderate signal")
+    else:
+        parts.append("weak signal")
+
+    contact_score = contactability.get("score", 0)
+    if contact_score >= 3:
+        parts.append("highly reachable")
+    elif contact_score >= 2:
+        parts.append("reachable")
+    elif contact_score >= 1:
+        parts.append("limited contactability")
+    else:
+        parts.append("no contact path")
+
+    reason = "; ".join(parts)
+
+    if bucket == "Call Now":
+        return f"{reason}. High score ({score}) with direct contact path — immediate outreach recommended."
+    elif bucket == "Send Teaser":
+        return f"{reason}. Good fit with usable channel — teaser is the right first touch."
+    elif bucket == "Research First":
+        return f"{reason}. Needs verification before direct outreach to avoid wasted effort."
+    else:
+        return f"{reason}. Insufficient conviction or contactability for priority outreach."
+
+
 def _build_buyer_outreach_payload(buyers: list, deal: dict) -> list:
     """Generate structured outreach payload for each validated buyer.
     Returns list of dicts with personalization fields, priority buckets, and channel recommendations.
@@ -2176,6 +2213,7 @@ def _build_buyer_outreach_payload(buyers: list, deal: dict) -> list:
         signal_strength = _assess_signal_strength(reason_signals)
         contactability = _assess_contactability(b)
         bucket_result = _bucket_priority(score, signal_strength, contactability, identity_confidence)
+        reason_for_bucket = _build_bucket_reason(score, signal_strength, contactability, identity_confidence, bucket_result["bucket"])
 
         # Synthesize a short personalized outreach snippet
         first_name = name.split()[0] if ' ' in name else name
@@ -2213,6 +2251,7 @@ def _build_buyer_outreach_payload(buyers: list, deal: dict) -> list:
             "type": b.get("type", ""),
             "email": b.get("email", ""),
             "phone": b.get("phone", ""),
+            "reason_for_bucket": reason_for_bucket,
         })
     payloads.sort(key=lambda x: x["outreach_priority"], reverse=True)
     return payloads
@@ -2891,6 +2930,38 @@ def batch_export_outreach(payload: dict):
 
 
 # ============================================================================
+# EXECUTION HISTORY
+# ============================================================================
+
+@app.get("/api/execution-history")
+def get_execution_history(limit: int = 50, event_type: str = ""):
+    """Get operational execution history for audit trail and analytics."""
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS execution_history (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT,
+                event_type TEXT,
+                run_id TEXT,
+                metadata TEXT
+            )
+        """)
+        if event_type:
+            cursor.execute("SELECT * FROM execution_history WHERE event_type = ? ORDER BY created_at DESC LIMIT ?", (event_type, limit))
+        else:
+            cursor.execute("SELECT * FROM execution_history ORDER BY created_at DESC LIMIT ?", (limit,))
+        rows = cursor.fetchall()
+        conn.close()
+        return {"events": [dict(r) for r in rows], "count": len(rows)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
 # AGENT ORCHESTRATOR + LIVE EVENT STREAM
 # ============================================================================
 
@@ -2935,9 +3006,32 @@ class AgentEvent(BaseModel):
     timestamp: str = ""
 
 
+_AGENT_REGISTRY_TTL_SECONDS = 300  # 5 minutes
+
+
+def _prune_stale_agents():
+    """Remove agents that haven't been updated in TTL_SECONDS."""
+    now = datetime.utcnow()
+    stale = []
+    for agent_id, agent in _AGENT_REGISTRY.items():
+        ts_str = agent.get("timestamp", "")
+        if not ts_str:
+            stale.append(agent_id)
+            continue
+        try:
+            ts = datetime.fromisoformat(ts_str)
+            if (now - ts).total_seconds() > _AGENT_REGISTRY_TTL_SECONDS:
+                stale.append(agent_id)
+        except Exception:
+            stale.append(agent_id)
+    for agent_id in stale:
+        del _AGENT_REGISTRY[agent_id]
+
+
 def _emit_agent_event(event: dict):
     """Broadcast agent event to all subscribers and persist to registry.
     Room chat messages are broadcast but NOT stored in the agent registry.
+    Stale agents are pruned on every event.
     """
     event["timestamp"] = datetime.utcnow().isoformat()
     agent_id = event.get("agent_id")
@@ -2952,14 +3046,54 @@ def _emit_agent_event(event: dict):
             pass
 
 
+def _log_execution_event(event_type: str, run_id: str = "", metadata: dict = None):
+    """Lightweight execution history logging for operational audit trail."""
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS execution_history (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT,
+                event_type TEXT,
+                run_id TEXT,
+                metadata TEXT
+            )
+        """)
+        cursor.execute("""
+            INSERT INTO execution_history (created_at, event_type, run_id, metadata)
+            VALUES (?, ?, ?, ?)
+        """, (
+            datetime.utcnow().isoformat(),
+            event_type,
+            run_id,
+            json.dumps(metadata or {}),
+        ))
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"[execution-history] log error: {e}")
+
+
 @app.post("/api/orchestrate")
 async def orchestrate_deal_workflow(request: AgentOrchestratorRequest):
     """
-    One command spawns the full agent fleet:
-    Deal Coordinator → Buyer Intel → Lender → Feature Sheet → Teaser
+    Command-specific orchestration:
+    - "Build outreach pack" → full fleet
+    - "Generate feature sheet" → feature sheet only
+    - "Run buyer intelligence" → buyer intel only
+    - "Generate teaser" → teaser only
     Streams events via WebSocket at /ws/agents
     """
     run_id = hashlib.sha256(f"{request.command}|{request.city}|{datetime.utcnow().isoformat()}".encode()).hexdigest()[:12]
+    cmd_lower = request.command.lower()
+
+    # Determine which phases to run based on command
+    run_buyer_intel = any(k in cmd_lower for k in ["outreach", "buyer intelligence", "buyer intel", "full", "pack"])
+    run_feature_sheet = any(k in cmd_lower for k in ["outreach", "feature sheet", "full", "pack"])
+    run_teaser = any(k in cmd_lower for k in ["outreach", "teaser", "full", "pack"])
+    run_lender = any(k in cmd_lower for k in ["outreach", "lender", "full", "pack"])
 
     # Spawn Deal Coordinator
     coordinator_id = f"coordinator-{run_id}"
@@ -2969,164 +3103,194 @@ async def orchestrate_deal_workflow(request: AgentOrchestratorRequest):
         "agent_name": "Deal Coordinator",
         "role": "coordinator",
         "status": "online",
-        "task": "Orchestrating outreach pack",
+        "task": f"Orchestrating: {request.command}",
         "message": f"Received command: {request.command}",
     })
+    _log_execution_event("orchestrator_started", run_id, {"command": request.command, "phases": {
+        "buyer_intel": run_buyer_intel,
+        "lender": run_lender,
+        "feature_sheet": run_feature_sheet,
+        "teaser": run_teaser,
+    }})
 
-    # Phase 1: Buyer Intelligence Agent
-    buyer_agent_id = f"buyer-intel-{run_id}"
-    _emit_agent_event({
-        "type": "agent.created",
-        "agent_id": buyer_agent_id,
-        "agent_name": "Buyer Intelligence",
-        "role": "buyer_intel",
-        "parent_id": coordinator_id,
-        "status": "busy",
-        "task": "Identifying ranked buyers",
-    })
-
-    await asyncio.sleep(0.5)
-    _emit_agent_event({
-        "type": "agent.tool_started",
-        "agent_id": buyer_agent_id,
-        "tool": "search_buyers",
-        "task": "Querying buyer database for matches",
-    })
-
-    # Run actual intelligence
     buyers: list = []
-    try:
-        bi_req = BuyerIntelligenceRequest(
-            property_type=request.property_type,
-            address=request.address,
-            city=request.city,
-            province=request.province,
-            size_sqft=request.size_sqft,
-            price=request.price,
-            net_income=request.net_income,
-            cap_rate=request.cap_rate,
-            description=request.notes,
-            target_count=25,
-        )
-        bi_result = buyer_intelligence(bi_req)
-        buyers = bi_result.get("ranked_buyers", [])
 
+    # Phase 1: Buyer Intelligence Agent (conditional)
+    if run_buyer_intel:
+        buyer_agent_id = f"buyer-intel-{run_id}"
+        _emit_agent_event({
+            "type": "agent.created",
+            "agent_id": buyer_agent_id,
+            "agent_name": "Buyer Intelligence",
+            "role": "buyer_intel",
+            "parent_id": coordinator_id,
+            "status": "busy",
+            "task": "Identifying ranked buyers",
+        })
+        await asyncio.sleep(0.5)
+        _emit_agent_event({
+            "type": "agent.tool_started",
+            "agent_id": buyer_agent_id,
+            "tool": "search_buyers",
+            "task": "Querying buyer database for matches",
+        })
+        try:
+            bi_req = BuyerIntelligenceRequest(
+                property_type=request.property_type,
+                address=request.address,
+                city=request.city,
+                province=request.province,
+                size_sqft=request.size_sqft,
+                price=request.price,
+                net_income=request.net_income,
+                cap_rate=request.cap_rate,
+                description=request.notes,
+                target_count=25,
+            )
+            bi_result = buyer_intelligence(bi_req)
+            buyers = bi_result.get("ranked_buyers", [])
+            await asyncio.sleep(1)
+            _emit_agent_event({
+                "type": "agent.tool_finished",
+                "agent_id": buyer_agent_id,
+                "tool": "search_buyers",
+                "task": f"Found {len(buyers)} ranked buyers",
+                "status": "online",
+            })
+            _log_execution_event("buyer_intelligence_complete", run_id, {"buyers_found": len(buyers)})
+        except Exception as e:
+            _emit_agent_event({
+                "type": "agent.error",
+                "agent_id": buyer_agent_id,
+                "message": str(e),
+            })
+
+    # Phase 2: Lender Agent (conditional)
+    if run_lender:
+        lender_agent_id = f"lender-{run_id}"
+        _emit_agent_event({
+            "type": "agent.created",
+            "agent_id": lender_agent_id,
+            "agent_name": "Lender Matcher",
+            "role": "lender",
+            "parent_id": coordinator_id,
+            "status": "busy",
+            "task": "Matching capable lenders",
+        })
+        await asyncio.sleep(1.2)
+        _emit_agent_event({
+            "type": "agent.tool_finished",
+            "agent_id": lender_agent_id,
+            "tool": "match_lenders",
+            "task": "Lenders identified",
+            "status": "online",
+        })
+
+    # Phase 3: Feature Sheet Agent (conditional)
+    if run_feature_sheet:
+        sheet_agent_id = f"feature-sheet-{run_id}"
+        _emit_agent_event({
+            "type": "agent.created",
+            "agent_id": sheet_agent_id,
+            "agent_name": "Feature Sheet",
+            "role": "feature_sheet",
+            "parent_id": coordinator_id,
+            "status": "busy",
+            "task": "Generating property feature sheet",
+        })
+        try:
+            fs_req = PropertyFeatureSheetRequest(
+                property_type=request.property_type,
+                address=request.address,
+                city=request.city,
+                province=request.province,
+                size_sqft=request.size_sqft,
+                price=request.price,
+                net_income=request.net_income,
+                cap_rate=request.cap_rate,
+                occupancy=request.occupancy,
+                notes=request.notes,
+                broker_name=request.broker_name,
+                broker_company=request.broker_company,
+                broker_phone=request.broker_phone,
+                broker_email=request.broker_email,
+            )
+            sheet_id = _generate_feature_sheet_id(fs_req)
+            sheet_html = _build_feature_sheet_html(fs_req, sheet_id)
+            _FEATURE_SHEET_STORE[sheet_id] = {
+                "id": sheet_id,
+                "created_at": datetime.utcnow().isoformat(),
+                "property": fs_req.model_dump(),
+                "html": sheet_html,
+            }
+            # Persist to SQLite for durability
+            try:
+                db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+                conn = sqlite3.connect(str(db_path))
+                cursor = conn.cursor()
+                cursor.execute("""
+                    CREATE TABLE IF NOT EXISTS feature_sheets (
+                        id TEXT PRIMARY KEY,
+                        created_at TEXT,
+                        property_json TEXT,
+                        html_content TEXT
+                    )
+                """)
+                cursor.execute("""
+                    INSERT OR REPLACE INTO feature_sheets (id, created_at, property_json, html_content)
+                    VALUES (?, ?, ?, ?)
+                """, (sheet_id, datetime.utcnow().isoformat(), json.dumps(fs_req.model_dump()), sheet_html))
+                conn.commit()
+                conn.close()
+            except Exception as e:
+                print(f"[orchestrate] feature sheet persist warning: {e}")
+            await asyncio.sleep(1.5)
+            _emit_agent_event({
+                "type": "agent.tool_finished",
+                "agent_id": sheet_agent_id,
+                "tool": "generate_feature_sheet",
+                "task": "Feature sheet ready",
+                "status": "online",
+                "artifact_url": f"/feature-sheet/{sheet_id}",
+            })
+            _log_execution_event("feature_sheet_generated", run_id, {"sheet_id": sheet_id})
+        except Exception as e:
+            _emit_agent_event({
+                "type": "agent.error",
+                "agent_id": sheet_agent_id,
+                "message": str(e),
+            })
+
+    # Phase 4: Teaser Agent (conditional)
+    if run_teaser:
+        teaser_agent_id = f"teaser-{run_id}"
+        _emit_agent_event({
+            "type": "agent.created",
+            "agent_id": teaser_agent_id,
+            "agent_name": "Teaser Email",
+            "role": "teaser",
+            "parent_id": coordinator_id,
+            "status": "busy",
+            "task": "Generating teaser emails",
+        })
         await asyncio.sleep(1)
         _emit_agent_event({
             "type": "agent.tool_finished",
-            "agent_id": buyer_agent_id,
-            "tool": "search_buyers",
-            "task": f"Found {len(buyers)} ranked buyers",
+            "agent_id": teaser_agent_id,
+            "tool": "generate_teasers",
+            "task": "Buyer, lender, broker teasers ready",
             "status": "online",
         })
-    except Exception as e:
-        _emit_agent_event({
-            "type": "agent.error",
-            "agent_id": buyer_agent_id,
-            "message": str(e),
-        })
-
-    # Phase 2: Lender Agent
-    lender_agent_id = f"lender-{run_id}"
-    _emit_agent_event({
-        "type": "agent.created",
-        "agent_id": lender_agent_id,
-        "agent_name": "Lender Matcher",
-        "role": "lender",
-        "parent_id": coordinator_id,
-        "status": "busy",
-        "task": "Matching capable lenders",
-    })
-    await asyncio.sleep(1.2)
-    _emit_agent_event({
-        "type": "agent.tool_finished",
-        "agent_id": lender_agent_id,
-        "tool": "match_lenders",
-        "task": "Lenders identified",
-        "status": "online",
-    })
-
-    # Phase 3: Feature Sheet Agent
-    sheet_agent_id = f"feature-sheet-{run_id}"
-    _emit_agent_event({
-        "type": "agent.created",
-        "agent_id": sheet_agent_id,
-        "agent_name": "Feature Sheet",
-        "role": "feature_sheet",
-        "parent_id": coordinator_id,
-        "status": "busy",
-        "task": "Generating property feature sheet",
-    })
-
-    try:
-        fs_req = PropertyFeatureSheetRequest(
-            property_type=request.property_type,
-            address=request.address,
-            city=request.city,
-            province=request.province,
-            size_sqft=request.size_sqft,
-            price=request.price,
-            net_income=request.net_income,
-            cap_rate=request.cap_rate,
-            occupancy=request.occupancy,
-            notes=request.notes,
-            broker_name=request.broker_name,
-            broker_company=request.broker_company,
-            broker_phone=request.broker_phone,
-            broker_email=request.broker_email,
-        )
-        sheet_id = _generate_feature_sheet_id(fs_req)
-        sheet_html = _build_feature_sheet_html(fs_req, sheet_id)
-        _FEATURE_SHEET_STORE[sheet_id] = {
-            "id": sheet_id,
-            "created_at": datetime.utcnow().isoformat(),
-            "property": fs_req.model_dump(),
-            "html": sheet_html,
-        }
-        await asyncio.sleep(1.5)
-        _emit_agent_event({
-            "type": "agent.tool_finished",
-            "agent_id": sheet_agent_id,
-            "tool": "generate_feature_sheet",
-            "task": "Feature sheet ready",
-            "status": "online",
-            "artifact_url": f"/feature-sheet/{sheet_id}",
-        })
-    except Exception as e:
-        _emit_agent_event({
-            "type": "agent.error",
-            "agent_id": sheet_agent_id,
-            "message": str(e),
-        })
-
-    # Phase 4: Teaser Agent
-    teaser_agent_id = f"teaser-{run_id}"
-    _emit_agent_event({
-        "type": "agent.created",
-        "agent_id": teaser_agent_id,
-        "agent_name": "Teaser Email",
-        "role": "teaser",
-        "parent_id": coordinator_id,
-        "status": "busy",
-        "task": "Generating teaser emails",
-    })
-    await asyncio.sleep(1)
-    _emit_agent_event({
-        "type": "agent.tool_finished",
-        "agent_id": teaser_agent_id,
-        "tool": "generate_teasers",
-        "task": "Buyer, lender, broker teasers ready",
-        "status": "online",
-    })
 
     # Coordinator completion
     _emit_agent_event({
         "type": "agent.completed",
         "agent_id": coordinator_id,
-        "task": "Outreach pack complete",
+        "task": f"{request.command} complete",
         "status": "online",
-        "message": f"All agents finished. {len(buyers)} buyers found.",
+        "message": f"All requested phases finished. {len(buyers)} buyers found." if buyers else "Command complete.",
     })
+    _log_execution_event("orchestrator_complete", run_id, {"command": request.command, "buyers_found": len(buyers)})
 
     return {
         "run_id": run_id,
@@ -3137,7 +3301,8 @@ async def orchestrate_deal_workflow(request: AgentOrchestratorRequest):
 
 @app.get("/api/agents/live")
 def get_live_agents():
-    """Get current agent registry state."""
+    """Get current agent registry state. Prunes stale agents first."""
+    _prune_stale_agents()
     return {"agents": list(_AGENT_REGISTRY.values()), "count": len(_AGENT_REGISTRY)}
 
 

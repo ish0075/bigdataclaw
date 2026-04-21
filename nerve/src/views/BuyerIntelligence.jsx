@@ -212,15 +212,25 @@ export default function BuyerIntelligence() {
     await navigator.clipboard.writeText(combined)
     setBatchCopied(true)
     setTimeout(() => setBatchCopied(false), 2000)
-    // Log batch export
     fetch(`${API_BASE}/api/outreach-action/batch-export`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        pack_id: outreachPack.pack_id,
-        bucket_filter: 'Call Now',
-        format: 'text',
-      }),
+      body: JSON.stringify({ pack_id: outreachPack.pack_id, bucket_filter: 'Call Now', format: 'text' }),
+    }).catch(() => {})
+  }
+
+  const copyAllSendTeaser = async () => {
+    if (!outreachPack?.assets?.buyer_outreach_payloads) return
+    const teasers = outreachPack.assets.buyer_outreach_payloads.filter(p => p.bucket === 'Send Teaser')
+    if (!teasers.length) return
+    const combined = teasers.map(p => `--- ${p.buyer_name} (${p.recommended_channel}) ---\n${p.personalized_snippet}`).join('\n\n')
+    await navigator.clipboard.writeText(combined)
+    setBatchCopied(true)
+    setTimeout(() => setBatchCopied(false), 2000)
+    fetch(`${API_BASE}/api/outreach-action/batch-export`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pack_id: outreachPack.pack_id, bucket_filter: 'Send Teaser', format: 'text' }),
     }).catch(() => {})
   }
 
@@ -624,6 +634,13 @@ export default function BuyerIntelligence() {
                         Copy All Call Now
                       </button>
                       <button
+                        onClick={copyAllSendTeaser}
+                        className="px-3 py-1.5 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-400 rounded-lg text-[10px] font-medium transition-colors flex items-center gap-1.5"
+                      >
+                        {batchCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                        Copy All Send Teaser
+                      </button>
+                      <button
                         onClick={() => exportOutreachBatch(bucketFilter)}
                         className="px-3 py-1.5 bg-accent-primary/10 hover:bg-accent-primary/20 text-accent-primary rounded-lg text-[10px] font-medium transition-colors flex items-center gap-1.5"
                       >
@@ -667,6 +684,12 @@ export default function BuyerIntelligence() {
                               <p className="mt-2 text-xs text-text-primary leading-relaxed">
                                 {payload.buyer_reason_signal}
                               </p>
+                              {/* Reason for Bucket */}
+                              {payload.reason_for_bucket && (
+                                <p className="mt-1.5 text-[10px] text-text-muted leading-relaxed italic">
+                                  {payload.reason_for_bucket}
+                                </p>
+                              )}
                               {/* Quick Actions */}
                               <div className="mt-2 flex items-center gap-2">
                                 <button
