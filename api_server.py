@@ -2058,10 +2058,94 @@ class TeaserEmailRequest(BaseModel):
     broker_company: str = "Mission Control Realty"
     broker_phone: str = ""
     broker_email: str = ""
+    # Optional: buyer-aware personalization
+    buyers: list = []  # ranked buyer objects with buyer_reason_signal
+    include_buyer_matches: bool = False  # if True, inject Top Buyer Matches section
+
+
+def _build_buyer_match_section(buyers: list) -> tuple:
+    """Build a concise Top Buyer Matches HTML + text section from ranked buyers.
+    Returns (html_block, text_block). Only includes validated buyers with buyer_reason_signal.
+    """
+    validated = [b for b in buyers if b.get("buyer_reason_signal") and b.get("score", 0) >= 25]
+    if not validated:
+        return "", ""
+
+    top = validated[:5]
+    html_rows = []
+    text_lines = ["TOP BUYER MATCHES", ""]
+    for b in top:
+        tier = "Tier 1" if b.get("score", 0) >= 75 else "Tier 2" if b.get("score", 0) >= 55 else "Tier 3"
+        name = b.get("name", "Unknown")
+        signal = b.get("buyer_reason_signal", "")
+        cash = b.get("cash_amount", 0)
+        cash_str = f" | ${cash/1_000_000:.1f}M capacity" if cash else ""
+        html_rows.append(
+            f'<tr><td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">'
+            f'<p style="margin:0;font-size:14px;font-weight:700;color:#0f172a;">{name} '
+            f'<span style="font-size:11px;font-weight:600;color:#0ea5e9;text-transform:uppercase;">{tier}{cash_str}</span></p>'
+            f'<p style="margin:4px 0 0;font-size:13px;color:#334155;line-height:1.5;">{signal}</p>'
+            f'</td></tr>'
+        )
+        text_lines.append(f"• {name} ({tier}{cash_str}) — {signal}")
+
+    html_block = (
+        '<tr><td style="padding:24px 32px;background:#f8fafc;border-top:1px solid #e2e8f0;">'
+        '<h2 style="margin:0 0 12px;font-size:16px;font-weight:700;color:#0f172a;">Top Buyer Matches</h2>'
+        '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">'
+        + "".join(html_rows)
+        + '</table></td></tr>'
+    )
+    text_block = "\n".join(text_lines)
+    return html_block, text_block
+
+
+def _build_buyer_outreach_payload(buyers: list, deal: dict) -> list:
+    """Generate structured outreach payload for each validated buyer.
+    Returns list of dicts with personalization fields.
+    """
+    validated = [b for b in buyers if b.get("buyer_reason_signal") and b.get("score", 0) >= 25]
+    payloads = []
+    for b in validated:
+        score = b.get("score", 0)
+        tier = "Tier 1 (Call NOW)" if score >= 75 else "Tier 2 (Email + Feature Sheet)" if score >= 55 else "Tier 3 (Broker Network / Research)"
+        channel = "phone" if score >= 75 else "email" if score >= 55 else "broker"
+        priority = score
+        name = b.get("name", "Unknown")
+        signal = b.get("buyer_reason_signal", "")
+        quick_links = b.get("quick_links", [])
+
+        # Synthesize a short personalized outreach snippet
+        snippet = f"Hi {name.split()[0] if ' ' in name else name},\n\n"
+        snippet += f"We identified a {deal.get('property_type', 'commercial')} opportunity in {deal.get('city', 'your market')} that aligns with your profile.\n\n"
+        snippet += f"Why you: {signal}\n\n"
+        snippet += f"Headline: {deal.get('property_type', 'Commercial')} — {deal.get('city')} | ${_fmt_currency(deal.get('price', 0))} | {deal.get('cap_rate', 0)}% Cap\n"
+        snippet += f"I'd value 5 minutes to share the full feature sheet."
+
+        payloads.append({
+            "buyer_name": name,
+            "tier": tier,
+            "score": score,
+            "identity_confidence": "HIGH" if b.get("type") == "hot_money_buyer" else "MEDIUM",
+            "buyer_reason_signal": signal,
+            "reason_signals": b.get("reason_signals", {}),
+            "quick_links": quick_links,
+            "recommended_channel": channel,
+            "outreach_priority": priority,
+            "personalized_snippet": snippet,
+            "cash_amount": b.get("cash_amount", 0),
+            "asset_class": b.get("asset_class", ""),
+            "location": b.get("location", ""),
+            "type": b.get("type", ""),
+        })
+    payloads.sort(key=lambda x: x["outreach_priority"], reverse=True)
+    return payloads
 
 
 def _build_teaser_email_html(req: TeaserEmailRequest) -> dict:
-    """Build an HTML email + plain text teaser for commercial property outreach."""
+    """Build an HTML email + plain text teaser for commercial property outreach.
+    If buyers are provided and include_buyer_matches is True, injects a Top Buyer Matches section.
+    """
     price_psf = req.price / req.size_sqft if req.size_sqft else 0
     headline = f"{req.property_type or 'Commercial'} Investment — {req.city or 'Ontario'}"
     subhead = req.address or f"{req.city}, {req.province}"
@@ -2090,6 +2174,12 @@ def _build_teaser_email_html(req: TeaserEmailRequest) -> dict:
 
     highlights_html = "\n".join(f'<tr><td style="padding:6px 0;color:#334155;font-size:15px;line-height:1.5;"><span style="color:#0ea5e9;font-weight:700;margin-right:8px;">✓</span>{h}</td></tr>' for h in highlights[:5])
     highlights_text = "\n".join(f"• {h.replace('<strong>', '').replace('</strong>', '')}" for h in highlights[:5])
+
+    # Buyer matches section (internal-only, controlled by flag)
+    buyer_matches_html = ""
+    buyer_matches_text = ""
+    if req.include_buyer_matches and req.buyers:
+        buyer_matches_html, buyer_matches_text = _build_buyer_match_section(req.buyers)
 
     # Recipient-specific copy
     if req.recipient_type == "broker":
@@ -2192,6 +2282,8 @@ def _build_teaser_email_html(req: TeaserEmailRequest) -> dict:
             {"<a href='" + req.feature_sheet_url + "' style='display:inline-block;padding:14px 32px;background:#0ea5e9;color:#ffffff;text-decoration:none;border-radius:10px;font-size:15px;font-weight:600;'>" + cta_label + "</a>" if req.feature_sheet_url else ""}
           </td></tr>
 
+          {buyer_matches_html}
+
           <!-- Broker -->
           {broker_sig}
 
@@ -2226,6 +2318,8 @@ Occupancy: {req.occupancy or 'N/A'}
 INVESTMENT HIGHLIGHTS
 {highlights_text}
 
+{buyer_matches_text}
+
 {cta_label + ': ' + req.feature_sheet_url if req.feature_sheet_url else ''}
 
 —
@@ -2238,24 +2332,31 @@ Generated {created} · Mission Control
 This communication is for informational purposes only and does not constitute an offer.
 """
 
-    return {"html": html, "text": text, "subject": subject}
+    result = {"html": html, "text": text, "subject": subject}
+    if req.include_buyer_matches and req.buyers:
+        result["buyer_matches_count"] = len([b for b in req.buyers if b.get("buyer_reason_signal")])
+    return result
 
 
 @app.post("/api/buyer-intelligence/teaser")
 def create_teaser_email(request: TeaserEmailRequest):
     """
     Generate a teaser email (HTML + plain text) for buyer / broker / lender outreach.
+    Optionally buyer-aware if buyers array is provided.
     Returns subject, html_body, text_body, and a preview_url placeholder.
     """
     result = _build_teaser_email_html(request)
-    return {
+    resp = {
         "status": "ready",
         "recipient_type": request.recipient_type,
         "subject": result["subject"],
         "html_body": result["html"],
         "text_body": result["text"],
-        "preview_url": "/teaser-preview",  # Could be wired to a dedicated preview route later
+        "preview_url": "/teaser-preview",
     }
+    if result.get("buyer_matches_count") is not None:
+        resp["buyer_matches_count"] = result["buyer_matches_count"]
+    return resp
 
 
 # ============================================================================
@@ -2378,10 +2479,29 @@ def create_outreach_pack(request: OutreachPackRequest):
     except Exception as e:
         results["phases"].append({"phase": "feature_sheet", "status": "error", "message": str(e)})
 
-    # Phase 3: Teaser Emails
+    # Phase 3a: Buyer Outreach Payloads (internal, buyer-centric)
+    try:
+        deal_context = {
+            "property_type": request.property_type,
+            "address": request.address,
+            "city": request.city,
+            "price": request.price,
+            "cap_rate": request.cap_rate,
+            "net_income": request.net_income,
+            "size_sqft": request.size_sqft,
+        }
+        buyer_payloads = _build_buyer_outreach_payload(buyers, deal_context)
+        results["assets"]["buyer_outreach_payloads"] = buyer_payloads
+        results["assets"]["top_buyer_matches"] = _build_buyer_match_section(buyers)[1] if buyers else ""
+        results["phases"].append({"phase": "buyer_payloads", "status": "complete", "message": f"{len(buyer_payloads)} buyer outreach payloads generated"})
+    except Exception as e:
+        results["phases"].append({"phase": "buyer_payloads", "status": "error", "message": str(e)})
+
+    # Phase 3b: Teaser Emails (external, property-centric + optional buyer-aware internal layer)
     try:
         sheet_url = results["assets"].get("feature_sheet", {}).get("url", "")
         for recipient_type in ["buyer", "lender", "broker"]:
+            # External teaser — property-centric, polished
             teaser_req = TeaserEmailRequest(
                 property_type=request.property_type,
                 address=request.address,
@@ -2406,7 +2526,36 @@ def create_outreach_pack(request: OutreachPackRequest):
                 "html_preview": teaser["html"][:500] + "..." if len(teaser["html"]) > 500 else teaser["html"],
                 "text_body": teaser["text"],
             }
-        results["phases"].append({"phase": "teaser_emails", "status": "complete", "message": "Buyer, lender, and broker teasers generated"})
+
+            # Internal buyer-aware variant — same property teaser + top buyer matches
+            internal_teaser_req = TeaserEmailRequest(
+                property_type=request.property_type,
+                address=request.address,
+                city=request.city,
+                province=request.province,
+                size_sqft=request.size_sqft,
+                price=request.price,
+                net_income=request.net_income,
+                cap_rate=request.cap_rate,
+                occupancy=request.occupancy,
+                notes=request.notes,
+                feature_sheet_url=sheet_url,
+                recipient_type=recipient_type,
+                broker_name=request.broker_name,
+                broker_company=request.broker_company,
+                broker_phone=request.broker_phone,
+                broker_email=request.broker_email,
+                buyers=buyers,
+                include_buyer_matches=True,
+            )
+            internal_teaser = _build_teaser_email_html(internal_teaser_req)
+            results["assets"][f"teaser_{recipient_type}_internal"] = {
+                "subject": internal_teaser["subject"],
+                "html_preview": internal_teaser["html"][:800] + "..." if len(internal_teaser["html"]) > 800 else internal_teaser["html"],
+                "text_body": internal_teaser["text"],
+                "buyer_matches_count": internal_teaser.get("buyer_matches_count", 0),
+            }
+        results["phases"].append({"phase": "teaser_emails", "status": "complete", "message": "Buyer, lender, and broker teasers generated (external + internal buyer-aware)"})
     except Exception as e:
         results["phases"].append({"phase": "teaser_emails", "status": "error", "message": str(e)})
 
