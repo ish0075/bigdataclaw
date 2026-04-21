@@ -5584,6 +5584,204 @@ async def openclaw_chat_stream(request: OpenClawChatRequest):
     return StreamingResponse(event_generator(), media_type="text/event-stream")
 
 
+# ============================================================================
+# BOARDROOM CHAT — Shared room chat with command routing
+# ============================================================================
+
+# In-memory room chat store (room_id -> list of messages)
+_ROOM_CHATS: Dict[str, List[dict]] = {}
+_ROOM_CHAT_MAX = 200
+
+
+class RoomChatMessage(BaseModel):
+    role: str = "user"  # user | agent | system
+    content: str = ""
+    agent_id: str = ""  # which agent sent this (if agent role)
+    agent_name: str = ""  # display name
+    timestamp: str = ""
+    metadata: dict = {}
+
+
+class SendRoomChatRequest(BaseModel):
+    message: str = ""
+    user_name: str = "Operator"
+    property_context: dict = {}  # optional deal context
+
+
+def _route_boardroom_command(message: str, room_id: str, context: dict) -> dict:
+    """
+    Parse boardroom commands and route to appropriate backend actions.
+    Returns a response message dict.
+    """
+    lower = message.lower().strip()
+    cmd = lower.rstrip(".!?")
+
+    # --- Buyer Intelligence ---
+    if any(k in cmd for k in ["buyer intelligence", "find buyers", "rank buyers", "who are the buyers", "buyer matches"]):
+        try:
+            city = context.get("city", "Mississauga")
+            prop_type = context.get("property_type", "Office")
+            bi_req = BuyerIntelligenceRequest(
+                property_type=prop_type,
+                city=city,
+                target_count=10,
+            )
+            result = buyer_intelligence(bi_req)
+            top = result.get("ranked_buyers", [])[:5]
+            lines = [f"Found {len(result.get('ranked_buyers', []))} ranked buyers. Top matches:"]
+            for b in top:
+                lines.append(f"• {b['name']} — Score {b['score']}. {b.get('buyer_reason_signal', '')[:100]}...")
+            return {
+                "role": "agent",
+                "agent_id": "buyer_intel",
+                "agent_name": "Buyer Intelligence",
+                "content": "\n".join(lines),
+            }
+        except Exception as e:
+            return {"role": "agent", "agent_id": "buyer_intel", "agent_name": "Buyer Intelligence", "content": f"Error running buyer intelligence: {e}"}
+
+    # --- Feature Sheet ---
+    if any(k in cmd for k in ["feature sheet", "generate sheet", "property sheet", "create feature sheet"]):
+        try:
+            fs_req = PropertyFeatureSheetRequest(
+                property_type=context.get("property_type", "Office"),
+                address=context.get("address", ""),
+                city=context.get("city", "Mississauga"),
+                price=context.get("price", 0),
+                cap_rate=context.get("cap_rate", 0),
+                net_income=context.get("net_income", 0),
+                size_sqft=context.get("size_sqft", 0),
+            )
+            sheet_id = _generate_feature_sheet_id(fs_req)
+            _build_feature_sheet_html(fs_req, sheet_id)
+            return {
+                "role": "agent",
+                "agent_id": "feature_sheet",
+                "agent_name": "Feature Sheet Agent",
+                "content": f"Feature sheet generated. ID: {sheet_id}. You can view it at /feature-sheet/{sheet_id}",
+                "metadata": {"sheet_id": sheet_id, "action": "feature_sheet_generated"},
+            }
+        except Exception as e:
+            return {"role": "agent", "agent_id": "feature_sheet", "agent_name": "Feature Sheet Agent", "content": f"Error generating feature sheet: {e}"}
+
+    # --- Outreach Pack ---
+    if any(k in cmd for k in ["outreach pack", "build outreach", "generate outreach", "run outreach"]):
+        try:
+            op_req = OutreachPackRequest(
+                property_type=context.get("property_type", "Office"),
+                address=context.get("address", ""),
+                city=context.get("city", "Mississauga"),
+                price=context.get("price", 0),
+                cap_rate=context.get("cap_rate", 0),
+                net_income=context.get("net_income", 0),
+                size_sqft=context.get("size_sqft", 0),
+            )
+            # We can't call create_outreach_pack directly because it's a FastAPI endpoint handler.
+            # Instead, replicate the core logic quickly.
+            bi_req = BuyerIntelligenceRequest(
+                property_type=op_req.property_type,
+                city=op_req.city,
+                target_count=10,
+            )
+            bi_result = buyer_intelligence(bi_req)
+            buyers = bi_result.get("ranked_buyers", [])
+            deal_context = {
+                "property_type": op_req.property_type,
+                "city": op_req.city,
+                "price": op_req.price,
+                "cap_rate": op_req.cap_rate,
+            }
+            payloads = _build_buyer_outreach_payload(buyers, deal_context)
+            bucket_counts = {}
+            for p in payloads:
+                bucket_counts[p["bucket"]] = bucket_counts.get(p["bucket"], 0) + 1
+            return {
+                "role": "agent",
+                "agent_id": "outreach_orchestrator",
+                "agent_name": "Deal Coordinator",
+                "content": f"Outreach pack ready. {len(payloads)} buyer payloads: {bucket_counts.get('Call Now', 0)} call now, {bucket_counts.get('Send Teaser', 0)} send teaser, {bucket_counts.get('Research First', 0)} research, {bucket_counts.get('Hold', 0)} hold.",
+                "metadata": {"payload_count": len(payloads), "bucket_counts": bucket_counts, "action": "outreach_pack_generated"},
+            }
+        except Exception as e:
+            return {"role": "agent", "agent_id": "outreach_orchestrator", "agent_name": "Deal Coordinator", "content": f"Error building outreach pack: {e}"}
+
+    # --- Agent Status ---
+    if any(k in cmd for k in ["agent status", "who is online", "agent list", "active agents", "what are you working on"]):
+        agents = list(_AGENT_REGISTRY.values())
+        if not agents:
+            return {"role": "agent", "agent_id": "coordinator", "agent_name": "Deal Coordinator", "content": "No active agents right now. The floor is clear."}
+        lines = [f"{len(agents)} agent(s) on the board:"]
+        for a in agents:
+            lines.append(f"• {a.get('agent_name', a.get('agent_id', 'Unknown'))} — {a.get('status', 'online')} — {a.get('task', 'Idle')}")
+        return {"role": "agent", "agent_id": "coordinator", "agent_name": "Deal Coordinator", "content": "\n".join(lines)}
+
+    # --- Help / Fallback ---
+    help_text = """I'm the Deal Coordinator. Here are commands I understand:
+
+• "Run buyer intelligence" — Rank buyers for this deal
+• "Generate feature sheet" — Create a property feature sheet
+• "Build outreach pack" — Full outreach pack with buyer payloads
+• "Agent status" — Who's online and what they're doing
+• "Why is [buyer] flagged?" — Explain a buyer's reason signal
+
+You can also chat with individual agents by clicking them in the agent grid."""
+
+    return {"role": "agent", "agent_id": "coordinator", "agent_name": "Deal Coordinator", "content": help_text}
+
+
+@app.get("/api/room-chat/{room_id}")
+def get_room_chat(room_id: str):
+    """Get chat history for a room."""
+    messages = _ROOM_CHATS.get(room_id, [])
+    return {"room_id": room_id, "messages": messages, "count": len(messages)}
+
+
+@app.post("/api/room-chat/{room_id}")
+async def send_room_chat(room_id: str, request: SendRoomChatRequest):
+    """Send a message to the boardroom chat. Routes commands to agents."""
+    if room_id not in _ROOM_CHATS:
+        _ROOM_CHATS[room_id] = []
+
+    # Add user message
+    user_msg = {
+        "role": "user",
+        "content": request.message,
+        "agent_id": "",
+        "agent_name": request.user_name,
+        "timestamp": datetime.utcnow().isoformat(),
+        "metadata": {},
+    }
+    _ROOM_CHATS[room_id].append(user_msg)
+
+    # Route command
+    response = _route_boardroom_command(request.message, room_id, request.property_context)
+    response["timestamp"] = datetime.utcnow().isoformat()
+    _ROOM_CHATS[room_id].append(response)
+
+    # Trim history
+    if len(_ROOM_CHATS[room_id]) > _ROOM_CHAT_MAX:
+        _ROOM_CHATS[room_id] = _ROOM_CHATS[room_id][-_ROOM_CHAT_MAX:]
+
+    # Emit agent event for real-time listeners
+    _emit_agent_event({
+        "type": "room.chat_message",
+        "room_id": room_id,
+        "agent_id": response.get("agent_id", ""),
+        "agent_name": response.get("agent_name", ""),
+        "content": response["content"],
+        "timestamp": response["timestamp"],
+    })
+
+    return {"room_id": room_id, "user_message": user_msg, "response": response}
+
+
+@app.delete("/api/room-chat/{room_id}")
+def clear_room_chat(room_id: str):
+    """Clear chat history for a room."""
+    _ROOM_CHATS[room_id] = []
+    return {"room_id": room_id, "status": "cleared"}
+
+
 # ─────────────────────────────────────────────────────────────
 # Pixel Agents Endpoints
 # ─────────────────────────────────────────────────────────────

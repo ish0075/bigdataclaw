@@ -19,6 +19,8 @@ import {
   PanelRight,
   Play,
   User,
+  Terminal,
+  Trash2,
 } from 'lucide-react'
 import { DEFAULT_PIXEL_AGENTS } from '../types/pixelAgents'
 
@@ -80,15 +82,68 @@ function useOrchestrator() {
   return { run, running, runId }
 }
 
+// Boardroom Chat hook
+function useRoomChat(roomId) {
+  const [messages, setMessages] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/room-chat/${roomId}`)
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const data = await res.json()
+        if (data.messages) setMessages(data.messages)
+      } catch {
+        // silent
+      }
+    }
+    load()
+  }, [roomId])
+
+  const send = useCallback(async (message, propertyContext = {}) => {
+    setLoading(true)
+    try {
+      const res = await fetch(`${API_BASE}/api/room-chat/${roomId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, property_context: propertyContext }),
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const data = await res.json()
+      setMessages((prev) => [...prev, data.user_message, data.response])
+      return data.response
+    } catch (err) {
+      throw err
+    } finally {
+      setLoading(false)
+    }
+  }, [roomId])
+
+  const clear = useCallback(async () => {
+    try {
+      await fetch(`${API_BASE}/api/room-chat/${roomId}`, { method: 'DELETE' })
+      setMessages([])
+    } catch {
+      // silent
+    }
+  }, [roomId])
+
+  return { messages, loading, send, clear }
+}
+
 export default function PixelAgents() {
   const { agents: liveAgents, loading: liveLoading } = useLiveAgents()
   const { run: runOrchestrator, running: orchestratorRunning, runId } = useOrchestrator()
+  const { messages: roomMessages, loading: roomLoading, send: sendRoomMessage, clear: clearRoomChat } = useRoomChat('deal_command')
 
   const [selectedAgent, setSelectedAgent] = useState(null)
   const [inspectorOpen, setInspectorOpen] = useState(false)
   const [chatMessage, setChatMessage] = useState('')
   const [chatHistory, setChatHistory] = useState([])
   const [viewMode, setViewMode] = useState('grid')
+  const [boardroomOpen, setBoardroomOpen] = useState(false)
+  const [boardroomInput, setBoardroomInput] = useState('')
   const [orchestratorForm, setOrchestratorForm] = useState({
     command: 'Build outreach pack',
     property_type: 'Office',
@@ -169,6 +224,25 @@ export default function PixelAgents() {
     }
   }
 
+  const handleSendBoardroomMessage = async () => {
+    if (!boardroomInput.trim()) return
+    const input = boardroomInput
+    setBoardroomInput('')
+    try {
+      await sendRoomMessage(input, {
+        property_type: orchestratorForm.property_type,
+        city: orchestratorForm.city,
+        address: orchestratorForm.address || '',
+        price: orchestratorForm.price,
+        cap_rate: orchestratorForm.cap_rate,
+        net_income: orchestratorForm.net_income,
+        size_sqft: orchestratorForm.size_sqft,
+      })
+    } catch (err) {
+      console.error('Boardroom chat error:', err)
+    }
+  }
+
   const onlineCount = displayAgents.filter((a) => a.status === 'online').length
   const busyCount = displayAgents.filter((a) => a.status === 'busy').length
 
@@ -206,8 +280,119 @@ export default function PixelAgents() {
               <List className="w-4 h-4" />
             </button>
           </div>
+          <button
+            onClick={() => setBoardroomOpen((p) => !p)}
+            className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
+              boardroomOpen ? 'bg-accent-purple text-white' : 'bg-bg-card border border-border-subtle text-text-secondary hover:text-text-primary'
+            }`}
+          >
+            <Terminal className="w-4 h-4" />
+            Boardroom
+          </button>
         </div>
       </div>
+
+      {/* Boardroom Chat Panel */}
+      {boardroomOpen && (
+        <div className="bg-bg-card border border-border-subtle rounded-2xl overflow-hidden flex flex-col" style={{ height: '420px' }}>
+          {/* Panel Header */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-border-subtle bg-bg-input/30">
+            <div className="flex items-center gap-2">
+              <Terminal className="w-4 h-4 text-accent-purple" />
+              <h3 className="text-sm font-semibold text-text-primary">Boardroom Chat — Deal Command</h3>
+              {roomMessages.length > 0 && (
+                <span className="text-[10px] px-1.5 py-0.5 bg-bg-input text-text-muted rounded-full">
+                  {roomMessages.length}
+                </span>
+              )}
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={clearRoomChat}
+                className="p-1.5 hover:bg-bg-input rounded text-text-muted hover:text-text-secondary transition-colors"
+                title="Clear chat"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={() => setBoardroomOpen(false)}
+                className="p-1.5 hover:bg-bg-input rounded text-text-muted hover:text-text-secondary transition-colors"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Messages */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-3">
+            {roomMessages.length === 0 && (
+              <div className="text-center py-8">
+                <Terminal className="w-8 h-8 text-text-muted mx-auto mb-2 opacity-50" />
+                <p className="text-xs text-text-muted">
+                  Type a command to run the system.
+                </p>
+                <p className="text-[10px] text-text-muted mt-1">
+                  Try: "Run buyer intelligence" · "Generate feature sheet" · "Build outreach pack" · "Agent status"
+                </p>
+              </div>
+            )}
+            {roomMessages.map((msg, idx) => {
+              const isUser = msg.role === 'user'
+              const isSystem = msg.role === 'system'
+              return (
+                <div key={idx} className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`max-w-[85%] px-3 py-2 rounded-xl text-xs ${
+                    isUser
+                      ? 'bg-accent-primary text-white'
+                      : isSystem
+                      ? 'bg-accent-red/10 text-accent-red border border-accent-red/20'
+                      : 'bg-bg-input text-text-primary border border-border-subtle'
+                  }`}>
+                    {!isUser && msg.agent_name && (
+                      <p className="text-[10px] font-semibold mb-0.5 text-accent-purple">
+                        {msg.agent_name}
+                      </p>
+                    )}
+                    <pre className="whitespace-pre-wrap font-sans leading-relaxed">{msg.content}</pre>
+                    {msg.timestamp && (
+                      <span className={`text-[10px] mt-1 block ${isUser ? 'text-white/70' : 'text-text-muted'}`}>
+                        {new Date(msg.timestamp).toLocaleTimeString()}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+            {roomLoading && (
+              <div className="flex items-center gap-2 text-xs text-text-muted">
+                <Loader2 className="w-3 h-3 animate-spin" />
+                <span>Processing command...</span>
+              </div>
+            )}
+          </div>
+
+          {/* Input */}
+          <div className="p-3 border-t border-border-subtle">
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={boardroomInput}
+                onChange={(e) => setBoardroomInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSendBoardroomMessage()}
+                placeholder="Type a command..."
+                className="flex-1 px-3 py-2 bg-bg-input border border-border-subtle rounded-xl text-sm focus:outline-none focus:border-accent-purple"
+              />
+              <button
+                onClick={handleSendBoardroomMessage}
+                disabled={roomLoading || !boardroomInput.trim()}
+                className="p-2 bg-accent-purple hover:bg-accent-purple/90 text-white rounded-xl transition-colors disabled:opacity-50"
+              >
+                {roomLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Orchestrator Panel */}
       <div className="bg-gradient-to-r from-accent-purple/10 to-accent-blue/10 border border-accent-purple/20 rounded-2xl p-6">
