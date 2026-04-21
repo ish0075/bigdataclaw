@@ -5,7 +5,7 @@ import {
   Target, Flame, Users, Landmark, Briefcase, Activity,
   ChevronRight, Star, ArrowUpRight, Layers, Send,
   BarChart3, Home, Warehouse, Store, LandPlot,
-  Calendar, CheckCircle, ExternalLink, X, Loader2, Copy, Zap, AlertCircle, MessageSquare, User
+  Calendar, CheckCircle, Check, ExternalLink, X, Loader2, Copy, Zap, AlertCircle, MessageSquare, User
 } from 'lucide-react'
 
 const API_BASE = import.meta.env.VITE_API_URL || ''

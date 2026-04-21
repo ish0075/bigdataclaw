@@ -2936,10 +2936,14 @@ class AgentEvent(BaseModel):
 
 
 def _emit_agent_event(event: dict):
-    """Broadcast agent event to all subscribers and persist to registry."""
+    """Broadcast agent event to all subscribers and persist to registry.
+    Room chat messages are broadcast but NOT stored in the agent registry.
+    """
     event["timestamp"] = datetime.utcnow().isoformat()
     agent_id = event.get("agent_id")
-    if agent_id:
+    # Only persist true agent lifecycle events to registry, not room chat
+    is_room_chat = event.get("type", "").startswith("room.")
+    if agent_id and not is_room_chat:
         _AGENT_REGISTRY[agent_id] = {**_AGENT_REGISTRY.get(agent_id, {}), **event}
     for q in _AGENT_SUBSCRIBERS.get("all", []):
         try:
