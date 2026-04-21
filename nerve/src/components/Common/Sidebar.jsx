@@ -23,10 +23,25 @@ import {
   Paperclip,
   Scan,
   Database,
+  ExternalLink,
   X
 } from 'lucide-react'
 
-const EXTERNAL_LINKS = []
+const EXTERNAL_LINKS = [
+  {
+    id: 'external',
+    label: 'External',
+    items: [
+      {
+        url: '/pixel-agents-office/index.html',
+        label: 'Pixel Agent Office',
+        icon: ExternalLink,
+        description: 'Pablo Pixel Agents interactive office',
+        badge: 'NEW'
+      }
+    ]
+  }
+]
 
 const INTERNAL_LINKS = []
 

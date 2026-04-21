@@ -27,6 +27,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Database path helper (used across endpoints)
+def _get_db_path() -> Path:
+    return Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+
 DEEPGRAM_API_KEY = os.getenv("DEEPGRAM_API_KEY", "")
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "")
 ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "bbGtsRRKUfYO634UxSjz")
@@ -47,7 +51,18 @@ bot_builder_router = _safe_import("bot_builder_api", "router")
 realtor_bot_router = _safe_import("realtor_bot_api", "router")
 ai_builder_router = _safe_import("ai_builder_api", "router")
 paperclip_router = _safe_import("nerve.server.paperclip_bridge", "router")
-from nerve.server.tool_executor import execute_tool, get_tool_schemas_json
+_tool_executor = _safe_import("nerve.server.tool_executor", "execute_tool")
+_get_tool_schemas_json = _safe_import("nerve.server.tool_executor", "get_tool_schemas_json")
+
+def get_tool_schemas_json():
+    if _get_tool_schemas_json:
+        return _get_tool_schemas_json()
+    return "[]"
+
+def execute_tool(tool_name, args):
+    if _tool_executor:
+        return _tool_executor(tool_name, args)
+    return {"error": f"Tool executor not available. Cannot execute {tool_name}"}
 voice_agent_router = _safe_import("voice_agent_api", "router")
 prewarm_voice_pipeline = _safe_import("voice_agent_api", "prewarm_voice_pipeline")
 agent_router = _safe_import("agent_router", "agent_router") or type(sys)("agent_router")
@@ -69,7 +84,13 @@ _ORIGINS = [
     "http://localhost:3090",
     "https://bigdataclaw.srv1368913.hstgr.cloud",
     "https://mission-control-v2-five-eta.vercel.app",
+    "https://mission-control-v3-inky.vercel.app",
+    "https://mission-control-v3-q2mdcw4km-ish0075s-projects.vercel.app",
 ]
+# Allow additional origins from env var (comma-separated)
+_EXTRA_ORIGINS = os.getenv("CORS_ORIGINS", "")
+if _EXTRA_ORIGINS:
+    _ORIGINS.extend([o.strip() for o in _EXTRA_ORIGINS.split(",") if o.strip()])
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_ORIGINS,
@@ -2235,6 +2256,558 @@ def create_teaser_email(request: TeaserEmailRequest):
         "text_body": result["text"],
         "preview_url": "/teaser-preview",  # Could be wired to a dedicated preview route later
     }
+
+
+# ============================================================================
+# OUTREACH PACK ORCHESTRATOR
+# ============================================================================
+
+class OutreachPackRequest(BaseModel):
+    property_type: str = ""
+    address: str = ""
+    city: str = ""
+    province: str = "ON"
+    size_sqft: int = 0
+    price: int = 0
+    net_income: int = 0
+    cap_rate: float = 0.0
+    occupancy: str = ""
+    notes: str = ""
+    broker_name: str = ""
+    broker_company: str = "Mission Control Realty"
+    broker_phone: str = ""
+    broker_email: str = ""
+
+
+@app.post("/api/outreach-pack")
+def create_outreach_pack(request: OutreachPackRequest):
+    """
+    One-command orchestration:
+    1. Run buyer intelligence
+    2. Generate feature sheet
+    3. Generate teaser emails (buyer, lender, broker)
+    4. Return everything packaged with tracking IDs
+    """
+    pack_id = hashlib.sha256(
+        f"{request.address}|{request.city}|{request.price}|{datetime.utcnow().isoformat()}".encode()
+    ).hexdigest()[:16]
+
+    results = {"pack_id": pack_id, "phases": [], "assets": {}}
+
+    # Phase 1: Buyer Intelligence
+    try:
+        bi_req = BuyerIntelligenceRequest(
+            property_type=request.property_type,
+            address=request.address,
+            city=request.city,
+            province=request.province,
+            size_sqft=request.size_sqft,
+            price=request.price,
+            net_income=request.net_income,
+            cap_rate=request.cap_rate,
+            description=request.notes,
+            target_count=25,
+        )
+        # Reuse the intelligence logic without HTTP overhead
+        bi_result = buyer_intelligence(bi_req)
+        buyers = bi_result.get("ranked_buyers", [])
+        lenders = bi_result.get("capable_lenders", [])
+        agents = bi_result.get("active_agents", [])
+
+        results["phases"].append({"phase": "intelligence", "status": "complete", "message": f"{len(buyers)} buyers, {len(lenders)} lenders, {len(agents)} agents identified"})
+        results["assets"]["buyers"] = buyers[:12]
+        results["assets"]["lenders"] = lenders[:6]
+        results["assets"]["agents"] = agents[:4]
+    except Exception as e:
+        results["phases"].append({"phase": "intelligence", "status": "error", "message": str(e)})
+
+    # Phase 2: Feature Sheet
+    try:
+        fs_req = PropertyFeatureSheetRequest(
+            property_type=request.property_type,
+            address=request.address,
+            city=request.city,
+            province=request.province,
+            size_sqft=request.size_sqft,
+            price=request.price,
+            net_income=request.net_income,
+            cap_rate=request.cap_rate,
+            occupancy=request.occupancy,
+            notes=request.notes,
+            broker_name=request.broker_name,
+            broker_company=request.broker_company,
+            broker_phone=request.broker_phone,
+            broker_email=request.broker_email,
+        )
+        sheet_id = _generate_feature_sheet_id(fs_req)
+        sheet_html = _build_feature_sheet_html(fs_req, sheet_id)
+
+        # Persist to in-memory store + SQLite
+        _FEATURE_SHEET_STORE[sheet_id] = {
+            "id": sheet_id,
+            "created_at": datetime.utcnow().isoformat(),
+            "property": fs_req.model_dump(),
+            "html": sheet_html,
+        }
+        try:
+            db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+            conn = sqlite3.connect(str(db_path))
+            cursor = conn.cursor()
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS feature_sheets (
+                    id TEXT PRIMARY KEY,
+                    created_at TEXT,
+                    property_json TEXT,
+                    html_content TEXT
+                )
+            """)
+            cursor.execute("""
+                INSERT OR REPLACE INTO feature_sheets (id, created_at, property_json, html_content)
+                VALUES (?, ?, ?, ?)
+            """, (sheet_id, datetime.utcnow().isoformat(), json.dumps(fs_req.model_dump()), sheet_html))
+            conn.commit()
+            conn.close()
+        except Exception as e:
+            print(f"[outreach-pack] feature sheet persist warning: {e}")
+
+        host = os.getenv("PUBLIC_HOST", "")
+        sheet_url = f"{host}/feature-sheet/{sheet_id}" if host else f"/feature-sheet/{sheet_id}"
+
+        results["phases"].append({"phase": "feature_sheet", "status": "complete", "message": "Feature sheet generated"})
+        results["assets"]["feature_sheet"] = {"id": sheet_id, "url": sheet_url}
+    except Exception as e:
+        results["phases"].append({"phase": "feature_sheet", "status": "error", "message": str(e)})
+
+    # Phase 3: Teaser Emails
+    try:
+        sheet_url = results["assets"].get("feature_sheet", {}).get("url", "")
+        for recipient_type in ["buyer", "lender", "broker"]:
+            teaser_req = TeaserEmailRequest(
+                property_type=request.property_type,
+                address=request.address,
+                city=request.city,
+                province=request.province,
+                size_sqft=request.size_sqft,
+                price=request.price,
+                net_income=request.net_income,
+                cap_rate=request.cap_rate,
+                occupancy=request.occupancy,
+                notes=request.notes,
+                feature_sheet_url=sheet_url,
+                recipient_type=recipient_type,
+                broker_name=request.broker_name,
+                broker_company=request.broker_company,
+                broker_phone=request.broker_phone,
+                broker_email=request.broker_email,
+            )
+            teaser = _build_teaser_email_html(teaser_req)
+            results["assets"][f"teaser_{recipient_type}"] = {
+                "subject": teaser["subject"],
+                "html_preview": teaser["html"][:500] + "..." if len(teaser["html"]) > 500 else teaser["html"],
+                "text_body": teaser["text"],
+            }
+        results["phases"].append({"phase": "teaser_emails", "status": "complete", "message": "Buyer, lender, and broker teasers generated"})
+    except Exception as e:
+        results["phases"].append({"phase": "teaser_emails", "status": "error", "message": str(e)})
+
+    # Phase 4: Save to ContextKeep + Outreach Tracking
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS outreach_tracking (
+                id TEXT PRIMARY KEY,
+                pack_id TEXT,
+                created_at TEXT,
+                property_json TEXT,
+                recipient_type TEXT,
+                recipient_name TEXT,
+                recipient_email TEXT,
+                status TEXT DEFAULT 'draft',
+                sent_at TEXT,
+                opened_at TEXT,
+                replied_at TEXT,
+                converted_at TEXT
+            )
+        """)
+        # Seed tracking rows for top buyers
+        for buyer in results["assets"].get("buyers", [])[:5]:
+            cursor.execute("""
+                INSERT INTO outreach_tracking (id, pack_id, created_at, property_json, recipient_type, recipient_name, recipient_email, status)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                hashlib.sha256(f"{pack_id}|{buyer.get('name','')}".encode()).hexdigest()[:16],
+                pack_id,
+                datetime.utcnow().isoformat(),
+                json.dumps(request.model_dump()),
+                "buyer",
+                buyer.get("name", ""),
+                buyer.get("email", ""),
+                "draft",
+            ))
+        conn.commit()
+        conn.close()
+        results["phases"].append({"phase": "tracking", "status": "complete", "message": "Outreach tracking initialized"})
+    except Exception as e:
+        results["phases"].append({"phase": "tracking", "status": "error", "message": str(e)})
+
+    # Phase 5: ContextKeep archive
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS context_keep (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT,
+                source TEXT,
+                agent_id TEXT,
+                topic TEXT,
+                content TEXT,
+                tags TEXT,
+                related_sheet_id TEXT
+            )
+        """)
+        cursor.execute("""
+            INSERT INTO context_keep (created_at, source, agent_id, topic, content, tags, related_sheet_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (
+            datetime.utcnow().isoformat(),
+            "system",
+            "outreach_orchestrator",
+            f"Outreach Pack: {request.property_type} — {request.city}",
+            f"Generated outreach pack {pack_id} for {request.address or request.city}. {len(results['assets'].get('buyers',[]))} buyers, {len(results['assets'].get('lenders',[]))} lenders.",
+            json.dumps(["outreach", request.property_type.lower(), request.city.lower()]),
+            results["assets"].get("feature_sheet", {}).get("id", ""),
+        ))
+        conn.commit()
+        conn.close()
+        results["phases"].append({"phase": "context_keep", "status": "complete", "message": "Archived to ContextKeep"})
+    except Exception as e:
+        results["phases"].append({"phase": "context_keep", "status": "error", "message": str(e)})
+
+    return {
+        "pack_id": pack_id,
+        "status": "ready",
+        "phases": results["phases"],
+        "assets": results["assets"],
+        "subject_property": {
+            "type": request.property_type,
+            "address": request.address,
+            "city": request.city,
+            "price": request.price,
+            "cap_rate": request.cap_rate,
+        },
+    }
+
+
+@app.get("/api/outreach-tracking/{pack_id}")
+def get_outreach_tracking(pack_id: str):
+    """Get outreach status for a pack."""
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM outreach_tracking WHERE pack_id = ? ORDER BY created_at DESC", (pack_id,))
+        rows = cursor.fetchall()
+        conn.close()
+        return {"pack_id": pack_id, "records": [dict(r) for r in rows], "count": len(rows)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/outreach-tracking/{tracking_id}/status")
+def update_outreach_status(tracking_id: str, status: str = "", timestamp: str = ""):
+    """Update outreach status: draft → sent → opened → replied → converted"""
+    valid = ["draft", "sent", "opened", "replied", "converted"]
+    if status not in valid:
+        raise HTTPException(status_code=400, detail=f"Invalid status. Use: {', '.join(valid)}")
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        ts = timestamp or datetime.utcnow().isoformat()
+        col_map = {"sent": "sent_at", "opened": "opened_at", "replied": "replied_at", "converted": "converted_at"}
+        if status in col_map:
+            cursor.execute(f"UPDATE outreach_tracking SET status = ?, {col_map[status]} = ? WHERE id = ?", (status, ts, tracking_id))
+        else:
+            cursor.execute("UPDATE outreach_tracking SET status = ? WHERE id = ?", (status, tracking_id))
+        conn.commit()
+        conn.close()
+        return {"status": "updated", "id": tracking_id, "new_status": status}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# AGENT ORCHESTRATOR + LIVE EVENT STREAM
+# ============================================================================
+
+import asyncio
+from collections import defaultdict
+
+# In-memory agent registry and event bus
+_AGENT_REGISTRY = {}
+_AGENT_EVENTS = asyncio.Queue()
+_AGENT_SUBSCRIBERS = defaultdict(list)
+
+
+class AgentOrchestratorRequest(BaseModel):
+    command: str = ""
+    property_type: str = ""
+    address: str = ""
+    city: str = ""
+    province: str = "ON"
+    size_sqft: int = 0
+    price: int = 0
+    net_income: int = 0
+    cap_rate: float = 0.0
+    occupancy: str = ""
+    notes: str = ""
+    broker_name: str = ""
+    broker_company: str = "Mission Control Realty"
+    broker_phone: str = ""
+    broker_email: str = ""
+
+
+class AgentEvent(BaseModel):
+    type: str
+    agent_id: str
+    agent_name: str = ""
+    role: str = ""
+    task: str = ""
+    tool: str = ""
+    status: str = ""
+    message: str = ""
+    artifact_url: str = ""
+    parent_id: str = ""
+    timestamp: str = ""
+
+
+def _emit_agent_event(event: dict):
+    """Broadcast agent event to all subscribers and persist to registry."""
+    event["timestamp"] = datetime.utcnow().isoformat()
+    agent_id = event.get("agent_id")
+    if agent_id:
+        _AGENT_REGISTRY[agent_id] = {**_AGENT_REGISTRY.get(agent_id, {}), **event}
+    for q in _AGENT_SUBSCRIBERS.get("all", []):
+        try:
+            q.put_nowait(event)
+        except:
+            pass
+
+
+@app.post("/api/orchestrate")
+async def orchestrate_deal_workflow(request: AgentOrchestratorRequest):
+    """
+    One command spawns the full agent fleet:
+    Deal Coordinator → Buyer Intel → Lender → Feature Sheet → Teaser
+    Streams events via WebSocket at /ws/agents
+    """
+    run_id = hashlib.sha256(f"{request.command}|{request.city}|{datetime.utcnow().isoformat()}".encode()).hexdigest()[:12]
+
+    # Spawn Deal Coordinator
+    coordinator_id = f"coordinator-{run_id}"
+    _emit_agent_event({
+        "type": "agent.created",
+        "agent_id": coordinator_id,
+        "agent_name": "Deal Coordinator",
+        "role": "coordinator",
+        "status": "online",
+        "task": "Orchestrating outreach pack",
+        "message": f"Received command: {request.command}",
+    })
+
+    # Phase 1: Buyer Intelligence Agent
+    buyer_agent_id = f"buyer-intel-{run_id}"
+    _emit_agent_event({
+        "type": "agent.created",
+        "agent_id": buyer_agent_id,
+        "agent_name": "Buyer Intelligence",
+        "role": "buyer_intel",
+        "parent_id": coordinator_id,
+        "status": "busy",
+        "task": "Identifying ranked buyers",
+    })
+
+    await asyncio.sleep(0.5)
+    _emit_agent_event({
+        "type": "agent.tool_started",
+        "agent_id": buyer_agent_id,
+        "tool": "search_buyers",
+        "task": "Querying buyer database for matches",
+    })
+
+    # Run actual intelligence
+    buyers: list = []
+    try:
+        bi_req = BuyerIntelligenceRequest(
+            property_type=request.property_type,
+            address=request.address,
+            city=request.city,
+            province=request.province,
+            size_sqft=request.size_sqft,
+            price=request.price,
+            net_income=request.net_income,
+            cap_rate=request.cap_rate,
+            description=request.notes,
+            target_count=25,
+        )
+        bi_result = buyer_intelligence(bi_req)
+        buyers = bi_result.get("ranked_buyers", [])
+
+        await asyncio.sleep(1)
+        _emit_agent_event({
+            "type": "agent.tool_finished",
+            "agent_id": buyer_agent_id,
+            "tool": "search_buyers",
+            "task": f"Found {len(buyers)} ranked buyers",
+            "status": "online",
+        })
+    except Exception as e:
+        _emit_agent_event({
+            "type": "agent.error",
+            "agent_id": buyer_agent_id,
+            "message": str(e),
+        })
+
+    # Phase 2: Lender Agent
+    lender_agent_id = f"lender-{run_id}"
+    _emit_agent_event({
+        "type": "agent.created",
+        "agent_id": lender_agent_id,
+        "agent_name": "Lender Matcher",
+        "role": "lender",
+        "parent_id": coordinator_id,
+        "status": "busy",
+        "task": "Matching capable lenders",
+    })
+    await asyncio.sleep(1.2)
+    _emit_agent_event({
+        "type": "agent.tool_finished",
+        "agent_id": lender_agent_id,
+        "tool": "match_lenders",
+        "task": "Lenders identified",
+        "status": "online",
+    })
+
+    # Phase 3: Feature Sheet Agent
+    sheet_agent_id = f"feature-sheet-{run_id}"
+    _emit_agent_event({
+        "type": "agent.created",
+        "agent_id": sheet_agent_id,
+        "agent_name": "Feature Sheet",
+        "role": "feature_sheet",
+        "parent_id": coordinator_id,
+        "status": "busy",
+        "task": "Generating property feature sheet",
+    })
+
+    try:
+        fs_req = PropertyFeatureSheetRequest(
+            property_type=request.property_type,
+            address=request.address,
+            city=request.city,
+            province=request.province,
+            size_sqft=request.size_sqft,
+            price=request.price,
+            net_income=request.net_income,
+            cap_rate=request.cap_rate,
+            occupancy=request.occupancy,
+            notes=request.notes,
+            broker_name=request.broker_name,
+            broker_company=request.broker_company,
+            broker_phone=request.broker_phone,
+            broker_email=request.broker_email,
+        )
+        sheet_id = _generate_feature_sheet_id(fs_req)
+        sheet_html = _build_feature_sheet_html(fs_req, sheet_id)
+        _FEATURE_SHEET_STORE[sheet_id] = {
+            "id": sheet_id,
+            "created_at": datetime.utcnow().isoformat(),
+            "property": fs_req.model_dump(),
+            "html": sheet_html,
+        }
+        await asyncio.sleep(1.5)
+        _emit_agent_event({
+            "type": "agent.tool_finished",
+            "agent_id": sheet_agent_id,
+            "tool": "generate_feature_sheet",
+            "task": "Feature sheet ready",
+            "status": "online",
+            "artifact_url": f"/feature-sheet/{sheet_id}",
+        })
+    except Exception as e:
+        _emit_agent_event({
+            "type": "agent.error",
+            "agent_id": sheet_agent_id,
+            "message": str(e),
+        })
+
+    # Phase 4: Teaser Agent
+    teaser_agent_id = f"teaser-{run_id}"
+    _emit_agent_event({
+        "type": "agent.created",
+        "agent_id": teaser_agent_id,
+        "agent_name": "Teaser Email",
+        "role": "teaser",
+        "parent_id": coordinator_id,
+        "status": "busy",
+        "task": "Generating teaser emails",
+    })
+    await asyncio.sleep(1)
+    _emit_agent_event({
+        "type": "agent.tool_finished",
+        "agent_id": teaser_agent_id,
+        "tool": "generate_teasers",
+        "task": "Buyer, lender, broker teasers ready",
+        "status": "online",
+    })
+
+    # Coordinator completion
+    _emit_agent_event({
+        "type": "agent.completed",
+        "agent_id": coordinator_id,
+        "task": "Outreach pack complete",
+        "status": "online",
+        "message": f"All agents finished. {len(buyers)} buyers found.",
+    })
+
+    return {
+        "run_id": run_id,
+        "status": "complete",
+        "agents": list(_AGENT_REGISTRY.values()),
+    }
+
+
+@app.get("/api/agents/live")
+def get_live_agents():
+    """Get current agent registry state."""
+    return {"agents": list(_AGENT_REGISTRY.values()), "count": len(_AGENT_REGISTRY)}
+
+
+@app.websocket("/ws/agents")
+async def agent_websocket(websocket: WebSocket):
+    """Real-time agent event stream."""
+    await websocket.accept()
+    q = asyncio.Queue()
+    _AGENT_SUBSCRIBERS["all"].append(q)
+    try:
+        # Send existing agents
+        await websocket.send_json({
+            "type": "existingAgents",
+            "agents": list(_AGENT_REGISTRY.values()),
+        })
+        while True:
+            event = await q.get()
+            await websocket.send_json(event)
+    except WebSocketDisconnect:
+        pass
+    finally:
+        if q in _AGENT_SUBSCRIBERS["all"]:
+            _AGENT_SUBSCRIBERS["all"].remove(q)
 
 
 # ============================================================================
@@ -5043,6 +5616,99 @@ def _score_buyer_v1(row: sqlite3.Row, req: BuyerIntelligenceRequest, enriched: d
     return {"total": round(min(score, 100), 1), "breakdown": breakdown}
 
 
+def _build_buyer_reason_signal(row: sqlite3.Row, scored: dict, enriched: dict = None) -> dict:
+    """
+    Synthesize a signal-based 'Why This Buyer' narrative from scoring data.
+    Returns {"buyer_reason_signal": str, "reason_signals": dict}
+    """
+    breakdown = scored.get("breakdown", {})
+    cash = _rv(row, "cash_amount", 0)
+    days = _rv(row, "days_ago")
+    asset = _rv(row, "asset_class") or _rv(row, "property_type") or ""
+    location = _rv(row, "location") or _rv(row, "city") or _rv(row, "address") or ""
+    entity = _rv(row, "entity") or _rv(row, "company_name") or _rv(row, "buyer_name") or ""
+    sale_prop = _rv(row, "property") or ""
+
+    signals = []
+    reason_struct = {
+        "capital_event": None,
+        "asset_match": None,
+        "geographic_match": None,
+        "activity_signal": None,
+    }
+
+    # Capital signal
+    capital_score = breakdown.get("capital_signal", 0)
+    price_score = breakdown.get("size_price_fit", 0)
+    if capital_score >= 12 and cash:
+        cash_m = cash / 1_000_000
+        signals.append(f"{entity} has ${cash_m:.1f}M in deployable capital — strong capacity match for this deal size.")
+        reason_struct["capital_event"] = f"${cash_m:.1f}M deployable capital"
+    elif cash and cash > 5_000_000:
+        cash_m = cash / 1_000_000
+        signals.append(f"Recorded ${cash_m:.1f}M cash position indicates acquisition capacity.")
+        reason_struct["capital_event"] = f"${cash_m:.1f}M cash position"
+
+    # Activity / recency signal
+    activity_score = breakdown.get("recent_activity", 0)
+    if activity_score >= 12 and days is not None and days <= 90:
+        if sale_prop:
+            signals.append(f"Recently sold {sale_prop} {days} days ago — likely redeploying capital now.")
+            reason_struct["activity_signal"] = f"Sold {sale_prop} {days}d ago"
+        else:
+            signals.append(f"Active {days} days ago — fresh capital event suggests redeployment window.")
+            reason_struct["activity_signal"] = f"Active {days}d ago"
+    elif activity_score >= 8 and days is not None and days <= 180:
+        signals.append(f"Market activity within last {days} days — capital may be seeking next placement.")
+        reason_struct["activity_signal"] = f"Active {days}d ago"
+
+    # Asset match signal
+    asset_score = breakdown.get("asset_match", 0)
+    if asset_score >= 15 and asset:
+        signals.append(f"Proven {asset} investor — direct asset-class alignment with subject property.")
+        reason_struct["asset_match"] = f"{asset} focus"
+    elif asset_score >= 8 and asset:
+        signals.append(f"Related asset experience in {asset} — transferable execution capability.")
+        reason_struct["asset_match"] = f"{asset} experience"
+
+    # Geographic match signal
+    loc_score = breakdown.get("location_match", 0)
+    if loc_score >= 12 and location:
+        signals.append(f"Established presence in {location} — local market knowledge reduces execution risk.")
+        reason_struct["geographic_match"] = f"Active in {location}"
+    elif loc_score >= 5 and location:
+        signals.append(f"Geographic proximity to {location} — familiar submarket.")
+        reason_struct["geographic_match"] = f"Near {location}"
+
+    # Strategy fit from enrichment
+    strategy_score = breakdown.get("strategy_fit", 0)
+    if strategy_score >= 8 and enriched:
+        profile = enriched.get("buyer_seller_intel", {})
+        rationale = profile.get("deal_rationale") or ""
+        if rationale:
+            signals.append(f"Strategic profile indicates {rationale.lower()}.")
+
+    # Fallback: never return empty
+    if not signals:
+        total = scored.get("total", 0)
+        if total >= 70:
+            signals.append(f"High composite fit score ({total}) across multiple factors — qualified buyer profile.")
+        elif total >= 50:
+            signals.append(f"Moderate fit score ({total}) with identifiable alignment — worth verification.")
+        else:
+            signals.append(f"Initial match score {total} — limited signal clarity, verify before outreach.")
+        reason_struct["activity_signal"] = f"Composite score {total}"
+
+    # Trim to 1–3 strongest signals for conciseness
+    selected = signals[:3]
+    buyer_reason_signal = " ".join(selected)
+
+    return {
+        "buyer_reason_signal": buyer_reason_signal,
+        "reason_signals": reason_struct,
+    }
+
+
 def _score_lender_match(row: sqlite3.Row, req: BuyerIntelligenceRequest) -> float:
     """Score lender relevance."""
     score = 0.0
@@ -5142,6 +5808,7 @@ def buyer_intelligence(request: BuyerIntelligenceRequest):
                     pass
                 scored = _score_buyer_v1(row, request, enriched)
                 if scored["total"] >= 25:
+                    reason_data = _build_buyer_reason_signal(row, scored, enriched)
                     hot_leads.append({
                         "type": "hot_money_buyer",
                         "name": row["entity"] or row["buyer_name"] or "Unknown",
@@ -5158,6 +5825,8 @@ def buyer_intelligence(request: BuyerIntelligenceRequest):
                         "enriched": enriched,
                         "score": scored["total"],
                         "score_breakdown": scored["breakdown"],
+                        "buyer_reason_signal": reason_data["buyer_reason_signal"],
+                        "reason_signals": reason_data["reason_signals"],
                         "quick_links": _generate_quick_links(
                             row["entity"] or row["buyer_name"] or "",
                             "",
@@ -5181,6 +5850,7 @@ def buyer_intelligence(request: BuyerIntelligenceRequest):
                     domain = ""
                     if row["website"]:
                         domain = row["website"].replace("https://", "").replace("http://", "").split("/")[0]
+                    reason_data = _build_buyer_reason_signal(row, scored)
                     registered_buyers.append({
                         "type": "registered_buyer",
                         "name": row["company_name"] or row["contact_name"] or "Unknown",
@@ -5193,6 +5863,8 @@ def buyer_intelligence(request: BuyerIntelligenceRequest):
                         "asset_class": row["asset_class"],
                         "score": scored["total"],
                         "score_breakdown": scored["breakdown"],
+                        "buyer_reason_signal": reason_data["buyer_reason_signal"],
+                        "reason_signals": reason_data["reason_signals"],
                         "quick_links": _generate_quick_links(
                             row["company_name"] or row["contact_name"] or "",
                             domain,

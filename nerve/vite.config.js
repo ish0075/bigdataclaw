@@ -49,6 +49,39 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
       },
+      // Mission Control V3 Backend (port 18002) — MUST be before generic /api/agents
+      '/api/buyer-intelligence': {
+        target: 'http://localhost:18002',
+        changeOrigin: true,
+      },
+      '/api/property-feature-sheet': {
+        target: 'http://localhost:18002',
+        changeOrigin: true,
+      },
+      '/api/outreach-pack': {
+        target: 'http://localhost:18002',
+        changeOrigin: true,
+      },
+      '/api/outreach-tracking': {
+        target: 'http://localhost:18002',
+        changeOrigin: true,
+      },
+      '/api/contextkeep': {
+        target: 'http://localhost:18002',
+        changeOrigin: true,
+      },
+      '/api/agents/live': {
+        target: 'http://localhost:18002',
+        changeOrigin: true,
+      },
+      '/api/orchestrate': {
+        target: 'http://localhost:18002',
+        changeOrigin: true,
+      },
+      '/feature-sheet': {
+        target: 'http://localhost:18002',
+        changeOrigin: true,
+      },
       '/api/agents': {
         target: 'http://localhost:8000',
         changeOrigin: true,

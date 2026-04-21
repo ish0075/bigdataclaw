@@ -5,7 +5,7 @@ import {
   Target, Flame, Users, Landmark, Briefcase, Activity,
   ChevronRight, Star, ArrowUpRight, Layers, Send,
   BarChart3, Home, Warehouse, Store, LandPlot,
-  Calendar, CheckCircle, ExternalLink, X, Loader2, Copy
+  Calendar, CheckCircle, ExternalLink, X, Loader2, Copy, Zap, AlertCircle
 } from 'lucide-react'
 
 const API_BASE = import.meta.env.VITE_API_URL || ''
@@ -60,6 +60,9 @@ export default function BuyerIntelligence() {
   const [featureSheetLoading, setFeatureSheetLoading] = useState(false)
   const [teaserEmail, setTeaserEmail] = useState(null)
   const [teaserEmailLoading, setTeaserEmailLoading] = useState(false)
+  const [outreachPack, setOutreachPack] = useState(null)
+  const [outreachPackLoading, setOutreachPackLoading] = useState(false)
+  const [copiedTeaser, setCopiedTeaser] = useState(null)
 
   const handleGenerate = async () => {
     setLoading(true)
@@ -139,6 +142,42 @@ export default function BuyerIntelligence() {
     } finally {
       setTeaserEmailLoading(false)
     }
+  }
+
+  const generateOutreachPack = async () => {
+    setOutreachPackLoading(true)
+    setOutreachPack(null)
+    try {
+      const res = await fetch(`${API_BASE}/api/outreach-pack`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          property_type: form.property_type,
+          address: form.address,
+          city: form.city,
+          province: form.province,
+          size_sqft: form.size_sqft,
+          price: form.price,
+          net_income: form.net_income,
+          cap_rate: form.cap_rate,
+          occupancy: form.occupancy,
+          notes: form.notes,
+        }),
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const data = await res.json()
+      setOutreachPack(data)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setOutreachPackLoading(false)
+    }
+  }
+
+  const copyTeaser = (text, label) => {
+    navigator.clipboard.writeText(text)
+    setCopiedTeaser(label)
+    setTimeout(() => setCopiedTeaser(null), 1500)
   }
 
   const tabs = useMemo(() => {
@@ -360,14 +399,156 @@ export default function BuyerIntelligence() {
             </div>
           </div>
 
-          {/* One-Click Actions */}
+          {/* BUILD OUTREACH PACK — Primary Action */}
+          <div className="bg-gradient-to-r from-accent-purple/10 to-accent-blue/10 border border-accent-purple/20 rounded-2xl p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-bold text-text-primary flex items-center gap-2">
+                  <Zap className="w-5 h-5 text-accent-purple" />
+                  Build Outreach Pack
+                </h3>
+                <p className="text-sm text-text-muted mt-1">
+                  One command: intelligence → feature sheet → teaser emails → tracking
+                </p>
+              </div>
+              <button
+                onClick={generateOutreachPack}
+                disabled={outreachPackLoading}
+                className="px-6 py-3 bg-accent-purple hover:bg-accent-purple/90 text-white rounded-xl font-medium text-sm transition-colors disabled:opacity-50 flex items-center gap-2"
+              >
+                {outreachPackLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4" />}
+                {outreachPackLoading ? 'Building Pack...' : 'Build Outreach Pack'}
+              </button>
+            </div>
+
+            {/* Phased Progress */}
+            {outreachPackLoading && (
+              <div className="mt-4 space-y-2">
+                <div className="flex items-center gap-2 text-sm text-text-muted">
+                  <Loader2 className="w-4 h-4 animate-spin text-accent-purple" />
+                  <span>Analyzing buyers, lenders, and agents...</span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Outreach Pack Result */}
+          {outreachPack && (
+            <div className="space-y-4">
+              {/* Phase Status */}
+              <div className="flex flex-wrap gap-2">
+                {outreachPack.phases.map((phase, idx) => (
+                  <span
+                    key={idx}
+                    className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1.5 ${
+                      phase.status === 'complete'
+                        ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+                        : phase.status === 'error'
+                        ? 'bg-red-500/10 text-red-400 border border-red-500/20'
+                        : 'bg-bg-input text-text-muted border border-border-subtle'
+                    }`}
+                  >
+                    {phase.status === 'complete' ? <CheckCircle className="w-3 h-3" /> : phase.status === 'error' ? <AlertCircle className="w-3 h-3" /> : <Loader2 className="w-3 h-3 animate-spin" />}
+                    {phase.phase.replace('_', ' ')}
+                  </span>
+                ))}
+              </div>
+
+              {/* Assets Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Feature Sheet */}
+                {outreachPack.assets.feature_sheet && (
+                  <div className="bg-bg-card border border-border-subtle rounded-xl p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <FileText className="w-4 h-4 text-accent-primary" />
+                      <span className="text-sm font-medium text-text-primary">Feature Sheet</span>
+                    </div>
+                    <a
+                      href={outreachPack.assets.feature_sheet.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-accent-primary hover:bg-accent-primary/90 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2 w-full justify-center"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Open Feature Sheet
+                    </a>
+                  </div>
+                )}
+
+                {/* Buyers */}
+                {outreachPack.assets.buyers && (
+                  <div className="bg-bg-card border border-border-subtle rounded-xl p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Target className="w-4 h-4 text-accent-purple" />
+                      <span className="text-sm font-medium text-text-primary">Top Buyers ({outreachPack.assets.buyers.length})</span>
+                    </div>
+                    <div className="space-y-2 max-h-48 overflow-y-auto">
+                      {outreachPack.assets.buyers.slice(0, 5).map((buyer, idx) => (
+                        <div key={idx} className="flex items-center justify-between text-xs">
+                          <span className="text-text-primary">{buyer.name}</span>
+                          <span className="text-text-muted">{buyer.score}/100</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Teaser Emails */}
+              {outreachPack.assets.teaser_buyer && (
+                <div className="bg-bg-card border border-border-subtle rounded-xl overflow-hidden">
+                  <div className="px-4 py-3 border-b border-border-subtle">
+                    <h4 className="text-sm font-medium text-text-primary">Teaser Emails</h4>
+                  </div>
+                  <div className="p-4 space-y-3">
+                    {['buyer', 'lender', 'broker'].map((type) => {
+                      const teaser = outreachPack.assets[`teaser_${type}`]
+                      if (!teaser) return null
+                      return (
+                        <div key={type} className="flex items-center justify-between p-3 bg-bg-input rounded-lg">
+                          <div>
+                            <p className="text-sm font-medium text-text-primary capitalize">{type} Teaser</p>
+                            <p className="text-xs text-text-muted truncate max-w-[300px]">{teaser.subject}</p>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => copyTeaser(teaser.text_body, `${type}-text`)}
+                              className="px-3 py-1.5 bg-bg-card hover:bg-border-subtle rounded-lg text-xs text-text-secondary transition-colors flex items-center gap-1.5"
+                            >
+                              {copiedTeaser === `${type}-text` ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+                              {copiedTeaser === `${type}-text` ? 'Copied' : 'Copy Text'}
+                            </button>
+                            <button
+                              onClick={() => copyTeaser(teaser.html_preview, `${type}-html`)}
+                              className="px-3 py-1.5 bg-bg-card hover:bg-border-subtle rounded-lg text-xs text-text-secondary transition-colors flex items-center gap-1.5"
+                            >
+                              {copiedTeaser === `${type}-html` ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+                              {copiedTeaser === `${type}-html` ? 'Copied' : 'Copy HTML'}
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Pack ID Footer */}
+              <div className="flex items-center justify-between text-xs text-text-muted px-2">
+                <span>Pack ID: {outreachPack.pack_id}</span>
+                <span>{outreachPack.assets.buyers?.length || 0} buyers · {outreachPack.assets.lenders?.length || 0} lenders · {outreachPack.assets.agents?.length || 0} agents</span>
+              </div>
+            </div>
+          )}
+
+          {/* One-Click Actions (legacy) */}
           <div className="flex flex-wrap gap-3">
             {Object.entries(report.upsells).map(([key, upsell]) => (
               <button
                 key={key}
                 onClick={() => {
                   if (key === 'feature_sheet') generateFeatureSheet()
-                if (key === 'teaser_email') generateTeaserEmail('buyer')
+                  if (key === 'teaser_email') generateTeaserEmail('buyer')
                 }}
                 disabled={featureSheetLoading && key === 'feature_sheet'}
                 className="px-4 py-2 bg-bg-card border border-border-subtle hover:border-accent-primary/30 rounded-xl text-sm text-text-secondary hover:text-text-primary transition-colors flex items-center gap-2 disabled:opacity-50"
@@ -507,43 +688,108 @@ function QuickLinks({ links }) {
 }
 
 function RankedBuyers({ buyers }) {
+  const [expandedBuyer, setExpandedBuyer] = useState(null)
   if (!buyers?.length) return <EmptyState message="No ranked buyers found. Try adjusting your criteria." />
   return (
     <div className="grid gap-3">
-      {buyers.map((buyer, idx) => (
-        <div key={idx} className="bg-bg-card border border-border-subtle rounded-xl p-4 hover:border-accent-primary/20 transition-colors">
-          <div className="flex items-start justify-between">
-            <div className="flex-1">
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-text-muted w-6">#{idx + 1}</span>
-                <h4 className="font-semibold text-text-primary">{buyer.name}</h4>
-                <ScoreBadge score={buyer.score} />
-                {buyer.cash_amount > 0 && (
-                  <span className="text-xs text-accent-primary bg-accent-primary/5 px-2 py-0.5 rounded">
-                    ${(buyer.cash_amount / 1_000_000).toFixed(1)}M capacity
-                  </span>
+      {buyers.map((buyer, idx) => {
+        const isExpanded = expandedBuyer === idx
+        const hasReasonSignal = Boolean(buyer.buyer_reason_signal)
+        const missingValidation = !hasReasonSignal || !buyer.quick_links || buyer.score === undefined
+        return (
+          <div key={idx} className={`bg-bg-card border rounded-xl p-4 hover:border-accent-primary/20 transition-colors ${missingValidation ? 'border-accent-red/30' : 'border-border-subtle'}`}>
+            {/* Header: rank, name, score, capacity */}
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-xs text-text-muted w-6">#{idx + 1}</span>
+                  <h4 className="font-semibold text-text-primary">{buyer.name}</h4>
+                  <ScoreBadge score={buyer.score} />
+                  {buyer.cash_amount > 0 && (
+                    <span className="text-xs text-accent-primary bg-accent-primary/5 px-2 py-0.5 rounded">
+                      ${(buyer.cash_amount / 1_000_000).toFixed(1)}M capacity
+                    </span>
+                  )}
+                  {missingValidation && (
+                    <span className="text-[10px] text-accent-red bg-accent-red/10 px-2 py-0.5 rounded border border-accent-red/20">
+                      Needs review
+                    </span>
+                  )}
+                </div>
+                <div className="mt-1 flex items-center gap-3 text-xs text-text-muted">
+                  {buyer.asset_class && <span>{buyer.asset_class}</span>}
+                  {buyer.location && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{buyer.location}</span>}
+                  {buyer.sale_date && <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{buyer.sale_date}</span>}
+                  {buyer.days_ago !== null && <span>{buyer.days_ago}d ago</span>}
+                </div>
+              </div>
+            </div>
+
+            {/* Why This Buyer — REQUIRED, prominent */}
+            {hasReasonSignal ? (
+              <div className="mt-3 p-3 bg-accent-purple/5 border border-accent-purple/10 rounded-lg">
+                <p className="text-[10px] uppercase tracking-wider text-accent-purple font-semibold mb-1">
+                  Why This Buyer — Right Now
+                </p>
+                <p className="text-sm text-text-primary leading-relaxed">
+                  {buyer.buyer_reason_signal}
+                </p>
+                {buyer.reason_signals && (
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {Object.entries(buyer.reason_signals).map(([k, v]) => {
+                      if (!v) return null
+                      return (
+                        <span key={k} className="text-[10px] px-2 py-0.5 bg-bg-input rounded-full text-text-muted border border-border-subtle">
+                          {k.replace(/_/g, ' ')}: {v}
+                        </span>
+                      )
+                    })}
+                  </div>
                 )}
               </div>
-              <div className="mt-1 flex items-center gap-3 text-xs text-text-muted">
-                {buyer.asset_class && <span>{buyer.asset_class}</span>}
-                {buyer.location && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{buyer.location}</span>}
-                {buyer.sale_date && <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{buyer.sale_date}</span>}
-                {buyer.days_ago !== null && <span>{buyer.days_ago}d ago</span>}
+            ) : (
+              <div className="mt-3 p-3 bg-accent-red/5 border border-accent-red/10 rounded-lg">
+                <p className="text-[10px] uppercase tracking-wider text-accent-red font-semibold mb-1">
+                  Validation Gate Failed
+                </p>
+                <p className="text-sm text-text-secondary">
+                  Missing buyer reason signal. Cannot generate personalized outreach. Run intelligence again or flag for manual review.
+                </p>
               </div>
-              {buyer.score_breakdown && (
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {Object.entries(buyer.score_breakdown).map(([k, v]) => (
-                    <span key={k} className="text-[10px] px-1.5 py-0.5 bg-bg-input rounded text-text-muted">
-                      {k.replace(/_/g, ' ')}: {v}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
+            )}
+
+            {/* Expand toggle for supporting evidence */}
+            <button
+              onClick={() => setExpandedBuyer(isExpanded ? null : idx)}
+              className="mt-2 text-xs text-text-muted hover:text-text-secondary flex items-center gap-1 transition-colors"
+            >
+              {isExpanded ? '▲ Hide details' : '▼ Show supporting evidence'}
+            </button>
+
+            {/* Expanded: score breakdown + raw signals */}
+            {isExpanded && (
+              <div className="mt-2 pt-2 border-t border-border-subtle/50 space-y-2">
+                {buyer.score_breakdown && (
+                  <div className="flex flex-wrap gap-2">
+                    {Object.entries(buyer.score_breakdown).map(([k, v]) => (
+                      <span key={k} className="text-[10px] px-1.5 py-0.5 bg-bg-input rounded text-text-muted">
+                        {k.replace(/_/g, ' ')}: {v}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {buyer.enriched && (
+                  <pre className="text-[10px] text-text-muted bg-bg-input p-2 rounded overflow-x-auto">
+                    {JSON.stringify(buyer.enriched, null, 2)}
+                  </pre>
+                )}
+              </div>
+            )}
+
+            <QuickLinks links={buyer.quick_links} />
           </div>
-          <QuickLinks links={buyer.quick_links} />
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }

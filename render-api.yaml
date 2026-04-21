@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: mission-control-backend
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements-api.txt
+    startCommand: uvicorn api_server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: BIGDATACLAW_DB
+        value: /data/bigdataclaw.db
+      - key: QDRANT_HOST
+        value: localhost
+      - key: QDRANT_PORT
+        value: "6333"
+      - key: PUBLIC_HOST
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: "https://mission-control-v3-inky.vercel.app,https://mission-control-v3-q2mdcw4km-ish0075s-projects.vercel.app"
+    disk:
+      name: bigdataclaw-data
+      mountPath: /data
+      sizeGB: 2
