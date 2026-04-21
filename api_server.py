@@ -2100,43 +2100,119 @@ def _build_buyer_match_section(buyers: list) -> tuple:
     return html_block, text_block
 
 
+def _assess_signal_strength(reason_signals: dict) -> str:
+    """Assess buyer_reason_signal strength based on populated signal dimensions."""
+    if not reason_signals:
+        return "weak"
+    count = sum(1 for v in reason_signals.values() if v)
+    if count >= 3:
+        return "strong"
+    elif count >= 2:
+        return "medium"
+    return "weak"
+
+
+def _assess_contactability(buyer: dict) -> dict:
+    """Assess how reachable a buyer is. Returns {has_email, has_phone, has_linkedin, has_website, score}."""
+    quick_links = buyer.get("quick_links", {})
+    # quick_links may be a dict like {"google": "...", "linkedin": "..."}
+    link_keys = set(quick_links.keys()) if isinstance(quick_links, dict) else set()
+    has_email = bool(buyer.get("email"))
+    has_phone = bool(buyer.get("phone"))
+    has_linkedin = "linkedin" in link_keys or "linkedin_president" in link_keys
+    has_website = "website" in link_keys
+    score = sum([has_email, has_phone, has_linkedin, has_website])
+    return {
+        "has_email": has_email,
+        "has_phone": has_phone,
+        "has_linkedin": has_linkedin,
+        "has_website": has_website,
+        "score": score,
+    }
+
+
+def _bucket_priority(score: float, signal_strength: str, contactability: dict, identity_confidence: str) -> dict:
+    """Bucket buyer into actionable priority with recommended channel.
+    Returns {"bucket": str, "recommended_channel": str, "outreach_priority": float}
+    """
+    contact_score = contactability.get("score", 0)
+
+    # Call Now: High score + strong signal + direct contactability + high confidence
+    if score >= 75 and signal_strength == "strong" and contact_score >= 2 and identity_confidence == "HIGH":
+        return {"bucket": "Call Now", "recommended_channel": "phone", "outreach_priority": score + 20}
+
+    # Send Teaser: Good score + decent signal + some contactability
+    if score >= 55 and signal_strength in ("strong", "medium") and contact_score >= 1:
+        channel = "email" if contactability.get("has_email") else "linkedin" if contactability.get("has_linkedin") else "broker"
+        return {"bucket": "Send Teaser", "recommended_channel": channel, "outreach_priority": score + 10}
+
+    # Research First: Moderate score or weak contactability — needs more work
+    if score >= 40 and signal_strength in ("medium", "weak"):
+        return {"bucket": "Research First", "recommended_channel": "broker", "outreach_priority": score}
+
+    # Hold: Low conviction or insufficient signals
+    return {"bucket": "Hold", "recommended_channel": "none", "outreach_priority": score - 10}
+
+
 def _build_buyer_outreach_payload(buyers: list, deal: dict) -> list:
     """Generate structured outreach payload for each validated buyer.
-    Returns list of dicts with personalization fields.
+    Returns list of dicts with personalization fields, priority buckets, and channel recommendations.
     """
     validated = [b for b in buyers if b.get("buyer_reason_signal") and b.get("score", 0) >= 25]
     payloads = []
     for b in validated:
         score = b.get("score", 0)
-        tier = "Tier 1 (Call NOW)" if score >= 75 else "Tier 2 (Email + Feature Sheet)" if score >= 55 else "Tier 3 (Broker Network / Research)"
-        channel = "phone" if score >= 75 else "email" if score >= 55 else "broker"
-        priority = score
         name = b.get("name", "Unknown")
         signal = b.get("buyer_reason_signal", "")
-        quick_links = b.get("quick_links", [])
+        raw_quick_links = b.get("quick_links", {})
+        # Normalize quick_links to list format for frontend
+        if isinstance(raw_quick_links, dict):
+            quick_links = [{"type": k, "url": v, "label": k.replace('_', ' ').title()} for k, v in raw_quick_links.items() if v]
+        else:
+            quick_links = raw_quick_links
+        reason_signals = b.get("reason_signals", {})
+        identity_confidence = "HIGH" if b.get("type") == "hot_money_buyer" else "MEDIUM"
+
+        signal_strength = _assess_signal_strength(reason_signals)
+        contactability = _assess_contactability(b)
+        bucket_result = _bucket_priority(score, signal_strength, contactability, identity_confidence)
 
         # Synthesize a short personalized outreach snippet
-        snippet = f"Hi {name.split()[0] if ' ' in name else name},\n\n"
+        first_name = name.split()[0] if ' ' in name else name
+        snippet = f"Hi {first_name},\n\n"
         snippet += f"We identified a {deal.get('property_type', 'commercial')} opportunity in {deal.get('city', 'your market')} that aligns with your profile.\n\n"
         snippet += f"Why you: {signal}\n\n"
         snippet += f"Headline: {deal.get('property_type', 'Commercial')} — {deal.get('city')} | ${_fmt_currency(deal.get('price', 0))} | {deal.get('cap_rate', 0)}% Cap\n"
         snippet += f"I'd value 5 minutes to share the full feature sheet."
 
+        # Snippet variant per bucket
+        if bucket_result["bucket"] == "Call Now":
+            snippet += f"\n\nGiven your recent activity, I wanted to reach you directly before this circulates widely."
+        elif bucket_result["bucket"] == "Send Teaser":
+            snippet += f"\n\nI've attached a teaser with the headline numbers — happy to send the full feature sheet on request."
+        elif bucket_result["bucket"] == "Research First":
+            snippet = f"Research note on {name}:\n\n{signal}\n\nAction needed: verify contact info and warm intro path before outreach."
+
         payloads.append({
             "buyer_name": name,
-            "tier": tier,
+            "tier": bucket_result["bucket"],
             "score": score,
-            "identity_confidence": "HIGH" if b.get("type") == "hot_money_buyer" else "MEDIUM",
+            "identity_confidence": identity_confidence,
             "buyer_reason_signal": signal,
-            "reason_signals": b.get("reason_signals", {}),
+            "reason_signals": reason_signals,
+            "signal_strength": signal_strength,
+            "contactability": contactability,
             "quick_links": quick_links,
-            "recommended_channel": channel,
-            "outreach_priority": priority,
+            "recommended_channel": bucket_result["recommended_channel"],
+            "outreach_priority": bucket_result["outreach_priority"],
+            "bucket": bucket_result["bucket"],
             "personalized_snippet": snippet,
             "cash_amount": b.get("cash_amount", 0),
             "asset_class": b.get("asset_class", ""),
             "location": b.get("location", ""),
             "type": b.get("type", ""),
+            "email": b.get("email", ""),
+            "phone": b.get("phone", ""),
         })
     payloads.sort(key=lambda x: x["outreach_priority"], reverse=True)
     return payloads
@@ -2493,7 +2569,12 @@ def create_outreach_pack(request: OutreachPackRequest):
         buyer_payloads = _build_buyer_outreach_payload(buyers, deal_context)
         results["assets"]["buyer_outreach_payloads"] = buyer_payloads
         results["assets"]["top_buyer_matches"] = _build_buyer_match_section(buyers)[1] if buyers else ""
-        results["phases"].append({"phase": "buyer_payloads", "status": "complete", "message": f"{len(buyer_payloads)} buyer outreach payloads generated"})
+        # Bucket summary for quick operator scanning
+        bucket_counts = {}
+        for p in buyer_payloads:
+            bucket_counts[p["bucket"]] = bucket_counts.get(p["bucket"], 0) + 1
+        results["assets"]["bucket_summary"] = bucket_counts
+        results["phases"].append({"phase": "buyer_payloads", "status": "complete", "message": f"{len(buyer_payloads)} buyer outreach payloads generated — {bucket_counts.get('Call Now', 0)} call now, {bucket_counts.get('Send Teaser', 0)} send teaser, {bucket_counts.get('Research First', 0)} research, {bucket_counts.get('Hold', 0)} hold"})
     except Exception as e:
         results["phases"].append({"phase": "buyer_payloads", "status": "error", "message": str(e)})
 
@@ -2688,6 +2769,125 @@ def update_outreach_status(tracking_id: str, status: str = "", timestamp: str = 
         return {"status": "updated", "id": tracking_id, "new_status": status}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# OUTREACH ACTION LOGGING
+# ============================================================================
+
+class OutreachActionLog(BaseModel):
+    pack_id: str = ""
+    buyer_name: str = ""
+    action: str = ""  # snippet_copied, outreach_exported, channel_selected, email_sent, call_made
+    channel: str = ""  # phone, email, linkedin, broker, none
+    metadata: dict = {}
+
+
+@app.post("/api/outreach-action/log")
+def log_outreach_action(entry: OutreachActionLog):
+    """Log a lightweight outreach action for feedback loop analytics."""
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS outreach_action_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT,
+                pack_id TEXT,
+                buyer_name TEXT,
+                action TEXT,
+                channel TEXT,
+                metadata TEXT
+            )
+        """)
+        cursor.execute("""
+            INSERT INTO outreach_action_log (created_at, pack_id, buyer_name, action, channel, metadata)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (
+            datetime.utcnow().isoformat(),
+            entry.pack_id,
+            entry.buyer_name,
+            entry.action,
+            entry.channel,
+            json.dumps(entry.metadata),
+        ))
+        conn.commit()
+        conn.close()
+        return {"status": "logged", "action": entry.action, "buyer": entry.buyer_name}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/outreach-action/log/{pack_id}")
+def get_outreach_actions(pack_id: str):
+    """Get all logged outreach actions for a pack."""
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS outreach_action_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT,
+                pack_id TEXT,
+                buyer_name TEXT,
+                action TEXT,
+                channel TEXT,
+                metadata TEXT
+            )
+        """)
+        cursor.execute("SELECT * FROM outreach_action_log WHERE pack_id = ? ORDER BY created_at DESC", (pack_id,))
+        rows = cursor.fetchall()
+        conn.close()
+        return {"pack_id": pack_id, "actions": [dict(r) for r in rows], "count": len(rows)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/outreach-action/batch-export")
+def batch_export_outreach(payload: dict):
+    """Export outreach payloads for a given pack_id filtered by bucket.
+    Body: {pack_id, bucket_filter, format}
+    """
+    pack_id = payload.get("pack_id", "")
+    bucket_filter = payload.get("bucket_filter", "")
+    fmt = payload.get("format", "json")
+    if not pack_id:
+        raise HTTPException(status_code=400, detail="pack_id required")
+    # Log the export action
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS outreach_action_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT,
+                pack_id TEXT,
+                buyer_name TEXT,
+                action TEXT,
+                channel TEXT,
+                metadata TEXT
+            )
+        """)
+        cursor.execute("""
+            INSERT INTO outreach_action_log (created_at, pack_id, buyer_name, action, channel, metadata)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (
+            datetime.utcnow().isoformat(),
+            pack_id,
+            "",
+            "outreach_exported",
+            "",
+            json.dumps({"bucket_filter": bucket_filter, "format": fmt}),
+        ))
+        conn.commit()
+        conn.close()
+    except Exception:
+        pass
+    return {"status": "exported", "pack_id": pack_id, "bucket_filter": bucket_filter, "format": fmt}
 
 
 # ============================================================================

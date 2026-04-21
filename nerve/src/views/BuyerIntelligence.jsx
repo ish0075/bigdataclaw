@@ -65,6 +65,8 @@ export default function BuyerIntelligence() {
   const [copiedTeaser, setCopiedTeaser] = useState(null)
   const [expandedPayload, setExpandedPayload] = useState(null)
   const [showInternalTeasers, setShowInternalTeasers] = useState(false)
+  const [bucketFilter, setBucketFilter] = useState('All')
+  const [batchCopied, setBatchCopied] = useState(false)
 
   const handleGenerate = async () => {
     setLoading(true)
@@ -182,10 +184,78 @@ export default function BuyerIntelligence() {
     setTimeout(() => setCopiedTeaser(null), 1500)
   }
 
-  const copyPayload = (text) => {
+  const copyPayload = (text, buyerName = '') => {
     navigator.clipboard.writeText(text)
     setCopiedTeaser('payload')
     setTimeout(() => setCopiedTeaser(null), 1500)
+    // Log action
+    if (outreachPack?.pack_id && buyerName) {
+      fetch(`${API_BASE}/api/outreach-action/log`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pack_id: outreachPack.pack_id,
+          buyer_name: buyerName,
+          action: 'snippet_copied',
+          channel: '',
+          metadata: { source: 'buyer_intelligence_panel' },
+        }),
+      }).catch(() => {})
+    }
+  }
+
+  const copyAllCallNow = async () => {
+    if (!outreachPack?.assets?.buyer_outreach_payloads) return
+    const callNow = outreachPack.assets.buyer_outreach_payloads.filter(p => p.bucket === 'Call Now')
+    if (!callNow.length) return
+    const combined = callNow.map(p => `--- ${p.buyer_name} (${p.recommended_channel}) ---\n${p.personalized_snippet}`).join('\n\n')
+    await navigator.clipboard.writeText(combined)
+    setBatchCopied(true)
+    setTimeout(() => setBatchCopied(false), 2000)
+    // Log batch export
+    fetch(`${API_BASE}/api/outreach-action/batch-export`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        pack_id: outreachPack.pack_id,
+        bucket_filter: 'Call Now',
+        format: 'text',
+      }),
+    }).catch(() => {})
+  }
+
+  const exportOutreachBatch = async (bucket) => {
+    if (!outreachPack?.assets?.buyer_outreach_payloads) return
+    const filtered = bucket === 'All'
+      ? outreachPack.assets.buyer_outreach_payloads
+      : outreachPack.assets.buyer_outreach_payloads.filter(p => p.bucket === bucket)
+    const exportData = {
+      pack_id: outreachPack.pack_id,
+      generated_at: new Date().toISOString(),
+      bucket_filter: bucket,
+      count: filtered.length,
+      payloads: filtered.map(p => ({
+        buyer_name: p.buyer_name,
+        bucket: p.bucket,
+        score: p.score,
+        channel: p.recommended_channel,
+        signal: p.buyer_reason_signal,
+        snippet: p.personalized_snippet,
+        quick_links: p.quick_links,
+      })),
+    }
+    await navigator.clipboard.writeText(JSON.stringify(exportData, null, 2))
+    setBatchCopied(true)
+    setTimeout(() => setBatchCopied(false), 2000)
+    fetch(`${API_BASE}/api/outreach-action/batch-export`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        pack_id: outreachPack.pack_id,
+        bucket_filter: bucket,
+        format: 'json',
+      }),
+    }).catch(() => {})
   }
 
   const tabs = useMemo(() => {
@@ -515,93 +585,150 @@ export default function BuyerIntelligence() {
                     </div>
                     <span className="text-[10px] text-text-muted uppercase tracking-wider">Internal Use</span>
                   </div>
+
+                  {/* Bucket Summary + Batch Actions */}
+                  <div className="px-4 py-3 border-b border-border-subtle bg-bg-input/30 space-y-3">
+                    {/* Bucket counts */}
+                    <div className="flex flex-wrap gap-2">
+                      {Object.entries(outreachPack.assets.bucket_summary || {}).map(([bucket, count]) => {
+                        const color = bucket === 'Call Now' ? 'bg-green-500/10 text-green-400 border-green-500/20' : bucket === 'Send Teaser' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' : bucket === 'Research First' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-bg-input text-text-muted border-border-subtle'
+                        return (
+                          <span key={bucket} className={`px-2 py-1 rounded-full text-[10px] font-medium border ${color}`}>
+                            {bucket}: {count}
+                          </span>
+                        )
+                      })}
+                    </div>
+                    {/* Filter + Batch actions */}
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-[10px] text-text-muted uppercase">Filter:</span>
+                      {['All', 'Call Now', 'Send Teaser', 'Research First', 'Hold'].map(b => (
+                        <button
+                          key={b}
+                          onClick={() => setBucketFilter(b)}
+                          className={`px-2 py-1 rounded-lg text-[10px] font-medium transition-colors ${
+                            bucketFilter === b
+                              ? 'bg-accent-purple text-white'
+                              : 'bg-bg-card hover:bg-border-subtle text-text-secondary'
+                          }`}
+                        >
+                          {b}
+                        </button>
+                      ))}
+                      <div className="flex-1" />
+                      <button
+                        onClick={copyAllCallNow}
+                        className="px-3 py-1.5 bg-green-500/10 hover:bg-green-500/20 text-green-400 rounded-lg text-[10px] font-medium transition-colors flex items-center gap-1.5"
+                      >
+                        {batchCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                        Copy All Call Now
+                      </button>
+                      <button
+                        onClick={() => exportOutreachBatch(bucketFilter)}
+                        className="px-3 py-1.5 bg-accent-primary/10 hover:bg-accent-primary/20 text-accent-primary rounded-lg text-[10px] font-medium transition-colors flex items-center gap-1.5"
+                      >
+                        {batchCopied ? <Check className="w-3 h-3" /> : <Download className="w-3 h-3" />}
+                        Export {bucketFilter !== 'All' ? bucketFilter : 'All'}
+                      </button>
+                    </div>
+                  </div>
+
                   <div className="p-4 space-y-3">
-                    {outreachPack.assets.buyer_outreach_payloads.slice(0, 8).map((payload, idx) => {
-                      const isExpanded = expandedPayload === idx
-                      const tierColor = payload.tier.includes('Tier 1') ? 'text-green-400 bg-green-500/10 border-green-500/20' : payload.tier.includes('Tier 2') ? 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20' : 'bg-bg-input text-text-muted border-border-subtle'
-                      const channelIcon = payload.recommended_channel === 'phone' ? <Phone className="w-3 h-3" /> : payload.recommended_channel === 'email' ? <Mail className="w-3 h-3" /> : <MessageSquare className="w-3 h-3" />
-                      return (
-                        <div key={idx} className="border border-border-subtle rounded-xl overflow-hidden">
-                          {/* Header */}
-                          <div className="p-3 bg-bg-input/50">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-2">
-                                <User className="w-4 h-4 text-text-muted" />
-                                <span className="text-sm font-semibold text-text-primary">{payload.buyer_name}</span>
-                                <span className={`text-[10px] px-2 py-0.5 rounded-full border ${tierColor}`}>
-                                  {payload.tier.replace('Tier 1 (Call NOW)', 'T1 · Call').replace('Tier 2 (Email + Feature Sheet)', 'T2 · Email').replace('Tier 3 (Broker Network / Research)', 'T3 · Broker')}
-                                </span>
+                    {outreachPack.assets.buyer_outreach_payloads
+                      .filter(p => bucketFilter === 'All' || p.bucket === bucketFilter)
+                      .slice(0, 12)
+                      .map((payload, idx) => {
+                        const isExpanded = expandedPayload === idx
+                        const bucketColor = payload.bucket === 'Call Now' ? 'text-green-400 bg-green-500/10 border-green-500/20' : payload.bucket === 'Send Teaser' ? 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20' : payload.bucket === 'Research First' ? 'text-blue-400 bg-blue-500/10 border-blue-500/20' : 'bg-bg-input text-text-muted border-border-subtle'
+                        const channelIcon = payload.recommended_channel === 'phone' ? <Phone className="w-3 h-3" /> : payload.recommended_channel === 'email' ? <Mail className="w-3 h-3" /> : <MessageSquare className="w-3 h-3" />
+                        return (
+                          <div key={idx} className="border border-border-subtle rounded-xl overflow-hidden">
+                            {/* Header */}
+                            <div className="p-3 bg-bg-input/50">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                  <User className="w-4 h-4 text-text-muted" />
+                                  <span className="text-sm font-semibold text-text-primary">{payload.buyer_name}</span>
+                                  <span className={`text-[10px] px-2 py-0.5 rounded-full border ${bucketColor}`}>
+                                    {payload.bucket}
+                                  </span>
+                                  {payload.signal_strength && (
+                                    <span className={`text-[10px] px-1.5 py-0.5 rounded ${payload.signal_strength === 'strong' ? 'bg-accent-purple/10 text-accent-purple' : payload.signal_strength === 'medium' ? 'bg-accent-blue/10 text-accent-blue' : 'bg-bg-input text-text-muted'}`}>
+                                      {payload.signal_strength}
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs text-text-muted">{payload.score}</span>
+                                  {channelIcon}
+                                </div>
                               </div>
-                              <div className="flex items-center gap-2">
-                                <span className="text-xs text-text-muted">{payload.score}</span>
-                                {channelIcon}
+                              {/* Why This Buyer — Right Now */}
+                              <p className="mt-2 text-xs text-text-primary leading-relaxed">
+                                {payload.buyer_reason_signal}
+                              </p>
+                              {/* Quick Actions */}
+                              <div className="mt-2 flex items-center gap-2">
+                                <button
+                                  onClick={() => copyPayload(payload.personalized_snippet, payload.buyer_name)}
+                                  className="px-2 py-1 bg-bg-card hover:bg-border-subtle rounded text-[10px] text-text-secondary transition-colors flex items-center gap-1"
+                                >
+                                  {copiedTeaser === 'payload' ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+                                  Copy Snippet
+                                </button>
+                                <button
+                                  onClick={() => setExpandedPayload(isExpanded ? null : idx)}
+                                  className="px-2 py-1 bg-bg-card hover:bg-border-subtle rounded text-[10px] text-text-secondary transition-colors"
+                                >
+                                  {isExpanded ? 'Hide Details' : 'Show Details'}
+                                </button>
                               </div>
                             </div>
-                            {/* Why This Buyer — Right Now */}
-                            <p className="mt-2 text-xs text-text-primary leading-relaxed">
-                              {payload.buyer_reason_signal}
-                            </p>
-                            {/* Quick Actions */}
-                            <div className="mt-2 flex items-center gap-2">
-                              <button
-                                onClick={() => copyPayload(payload.personalized_snippet)}
-                                className="px-2 py-1 bg-bg-card hover:bg-border-subtle rounded text-[10px] text-text-secondary transition-colors flex items-center gap-1"
-                              >
-                                {copiedTeaser === 'payload' ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
-                                Copy Snippet
-                              </button>
-                              <button
-                                onClick={() => setExpandedPayload(isExpanded ? null : idx)}
-                                className="px-2 py-1 bg-bg-card hover:bg-border-subtle rounded text-[10px] text-text-secondary transition-colors"
-                              >
-                                {isExpanded ? 'Hide Details' : 'Show Details'}
-                              </button>
-                            </div>
+                            {/* Expanded Details */}
+                            {isExpanded && (
+                              <div className="p-3 border-t border-border-subtle space-y-2">
+                                {payload.reason_signals && (
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {Object.entries(payload.reason_signals).map(([k, v]) => {
+                                      if (!v) return null
+                                      return (
+                                        <span key={k} className="text-[10px] px-2 py-0.5 bg-bg-input rounded-full text-text-muted border border-border-subtle">
+                                          {k.replace(/_/g, ' ')}: {v}
+                                        </span>
+                                      )
+                                    })}
+                                  </div>
+                                )}
+                                <div className="text-[10px] text-text-muted grid grid-cols-2 gap-2">
+                                  <span>Confidence: {payload.identity_confidence}</span>
+                                  <span>Channel: {payload.recommended_channel}</span>
+                                  {payload.cash_amount > 0 && <span>Capacity: ${(payload.cash_amount / 1_000_000).toFixed(1)}M</span>}
+                                  <span>Type: {payload.type}</span>
+                                  {payload.contactability && <span>Contactable: {payload.contactability.score}/4</span>}
+                                </div>
+                                {payload.quick_links && payload.quick_links.length > 0 && (
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {payload.quick_links.map((link, li) => (
+                                      <a
+                                        key={li}
+                                        href={link.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-[10px] px-2 py-0.5 bg-accent-primary/10 text-accent-primary rounded-full hover:underline"
+                                      >
+                                        {link.label || link.type}
+                                      </a>
+                                    ))}
+                                  </div>
+                                )}
+                                <div className="bg-bg-input p-2 rounded text-[11px] text-text-primary whitespace-pre-wrap">
+                                  {payload.personalized_snippet}
+                                </div>
+                              </div>
+                            )}
                           </div>
-                          {/* Expanded Details */}
-                          {isExpanded && (
-                            <div className="p-3 border-t border-border-subtle space-y-2">
-                              {payload.reason_signals && (
-                                <div className="flex flex-wrap gap-1.5">
-                                  {Object.entries(payload.reason_signals).map(([k, v]) => {
-                                    if (!v) return null
-                                    return (
-                                      <span key={k} className="text-[10px] px-2 py-0.5 bg-bg-input rounded-full text-text-muted border border-border-subtle">
-                                        {k.replace(/_/g, ' ')}: {v}
-                                      </span>
-                                    )
-                                  })}
-                                </div>
-                              )}
-                              <div className="text-[10px] text-text-muted grid grid-cols-2 gap-2">
-                                <span>Confidence: {payload.identity_confidence}</span>
-                                <span>Channel: {payload.recommended_channel}</span>
-                                {payload.cash_amount > 0 && <span>Capacity: ${(payload.cash_amount / 1_000_000).toFixed(1)}M</span>}
-                                <span>Type: {payload.type}</span>
-                              </div>
-                              {payload.quick_links && payload.quick_links.length > 0 && (
-                                <div className="flex flex-wrap gap-1.5">
-                                  {payload.quick_links.map((link, li) => (
-                                    <a
-                                      key={li}
-                                      href={link.url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="text-[10px] px-2 py-0.5 bg-accent-primary/10 text-accent-primary rounded-full hover:underline"
-                                    >
-                                      {link.label || link.type}
-                                    </a>
-                                  ))}
-                                </div>
-                              )}
-                              <div className="bg-bg-input p-2 rounded text-[11px] text-text-primary whitespace-pre-wrap">
-                                {payload.personalized_snippet}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      )
-                    })}
+                        )
+                      })}
                   </div>
                 </div>
               )}
