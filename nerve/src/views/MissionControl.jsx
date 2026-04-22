@@ -13,6 +13,24 @@ const API_BASE = import.meta.env.VITE_API_URL || 'https://bigdataclaw.srv1368913
 const TTS_BRIDGE_URL = 'http://127.0.0.1:8766'
 const OLLAMA_URL = 'http://127.0.0.1:11434'
 
+const SUGGESTED_PROMPTS = [
+  // Core
+  { label: 'Find active buyers', text: 'Find active buyers for this deal', style: 'bg-cyan-500/10 border-cyan-500/25 text-cyan-300 hover:bg-cyan-500/20' },
+  { label: 'Show hot money', text: 'Show me hot money in Toronto', style: 'bg-cyan-500/10 border-cyan-500/25 text-cyan-300 hover:bg-cyan-500/20' },
+  { label: "What's next?", text: 'What should I do next on this deal?', style: 'bg-cyan-500/10 border-cyan-500/25 text-cyan-300 hover:bg-cyan-500/20' },
+  { label: 'Who closes fastest?', text: 'Who is most likely to close quickly?', style: 'bg-cyan-500/10 border-cyan-500/25 text-cyan-300 hover:bg-cyan-500/20' },
+  // Execution
+  { label: 'Generate outreach', text: 'Generate outreach for top buyers', style: 'bg-violet-500/10 border-violet-500/25 text-violet-300 hover:bg-violet-500/20' },
+  { label: 'Build outreach pack', text: 'Build an outreach pack', style: 'bg-violet-500/10 border-violet-500/25 text-violet-300 hover:bg-violet-500/20' },
+  { label: 'Overdue follow-ups', text: 'Show overdue follow-ups', style: 'bg-violet-500/10 border-violet-500/25 text-violet-300 hover:bg-violet-500/20' },
+  // Signal
+  { label: 'Strongest signals', text: 'What signals are strongest right now?', style: 'bg-amber-500/10 border-amber-500/25 text-amber-300 hover:bg-amber-500/20' },
+  { label: 'Deal sources', text: 'Where are deals coming from?', style: 'bg-amber-500/10 border-amber-500/25 text-amber-300 hover:bg-amber-500/20' },
+  // Facebook
+  { label: 'New HOT leads', text: 'Show me new HOT leads', style: 'bg-rose-500/10 border-rose-500/25 text-rose-300 hover:bg-rose-500/20' },
+  { label: 'Classify Facebook post', text: 'Classify this Facebook post', style: 'bg-rose-500/10 border-rose-500/25 text-rose-300 hover:bg-rose-500/20' },
+]
+
 const MissionControl = () => {
   const navigate = useNavigate()
   const { stats, hotMoneyLeads, setStats } = useMissionStore()
@@ -610,6 +628,33 @@ const MissionControl = () => {
               </div>
             </button>
           </div>
+        </div>
+      </section>
+
+      {/* Suggested Prompts — AI Operator Chips */}
+      <section className="mt-5">
+        <div className="flex items-center gap-2 mb-3">
+          <Zap className="w-4 h-4 text-cyan-400" />
+          <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Try asking Kimi</span>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {SUGGESTED_PROMPTS.map((p) => (
+            <button
+              key={p.label}
+              onClick={() => {
+                setChatInput(p.text)
+                setChatOpen(true)
+                setTimeout(() => {
+                  setChatInput('')
+                  handleUserInput(p.text)
+                }, 150)
+              }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all hover:scale-[1.02] ${p.style}`}
+              title={p.text}
+            >
+              {p.label}
+            </button>
+          ))}
         </div>
       </section>
 
