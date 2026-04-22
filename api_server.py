@@ -90,6 +90,8 @@ _ORIGINS = [
     "https://mission-control-v2-five-eta.vercel.app",
     "https://mission-control-v3-inky.vercel.app",
     "https://mission-control-v3-q2mdcw4km-ish0075s-projects.vercel.app",
+    "https://nerve-theta.vercel.app",
+    "https://nerve-5vsu248jo-ish0075s-projects.vercel.app",
 ]
 # Allow additional origins from env var (comma-separated)
 _EXTRA_ORIGINS = os.getenv("CORS_ORIGINS", "")
