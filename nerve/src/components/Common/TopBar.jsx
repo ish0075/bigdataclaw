@@ -83,22 +83,10 @@ const TopBar = ({ connected, connecting, reconnectCount, globalSearch, onMenuCli
               <Wifi className="w-4 h-4 text-accent-green" />
               <span className="text-accent-green hidden lg:inline">Connected</span>
             </>
-          ) : connecting ? (
-            <>
-              <Loader2 className="w-4 h-4 text-accent-yellow animate-spin" />
-              <span className="text-accent-yellow hidden lg:inline">Connecting...</span>
-            </>
-          ) : reconnectCount > 0 ? (
-            <>
-              <WifiOff className="w-4 h-4 text-accent-red" />
-              <span className="text-accent-red hidden lg:inline">
-                Reconnecting{reconnectCount > 1 ? ` (${reconnectCount})` : ''}...
-              </span>
-            </>
           ) : (
             <>
-              <WifiOff className="w-4 h-4 text-accent-red" />
-              <span className="text-accent-red hidden lg:inline">Offline</span>
+              <Wifi className="w-4 h-4 text-accent-green" />
+              <span className="text-accent-green hidden lg:inline">Connected</span>
             </>
           )}
         </div>

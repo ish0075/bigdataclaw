@@ -29,6 +29,8 @@ import FaceTimeCall from './views/FaceTimeCall'
 import PixelAgents from './views/PixelAgents'
 import BuyerIntelligence from './views/BuyerIntelligence'
 import ContextKeepView from './views/ContextKeepView'
+import ExecutionHistory from './views/ExecutionHistory'
+import FacebookIntelligence from './views/FacebookIntelligence'
 import { useWebSocket } from './hooks/useWebSocket'
 
 // Hook to detect if we're on V3 route (for hash-based routing)
@@ -116,6 +118,8 @@ function AppRoutes() {
         <Route path="/pixel-agents" element={<PixelAgents />} />
         <Route path="/buyer-intelligence" element={<BuyerIntelligence />} />
         <Route path="/contextkeep" element={<ContextKeepView />} />
+        <Route path="/execution-history" element={<ExecutionHistory />} />
+        <Route path="/facebook-intelligence" element={<FacebookIntelligence />} />
       </Routes>
     </Layout>
   )

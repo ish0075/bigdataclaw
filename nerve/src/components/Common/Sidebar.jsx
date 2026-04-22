@@ -23,8 +23,10 @@ import {
   Paperclip,
   Scan,
   Database,
+  Clock,
   ExternalLink,
-  X
+  X,
+  Facebook
 } from 'lucide-react'
 
 const EXTERNAL_LINKS = [
@@ -51,43 +53,10 @@ const SECTIONS = [
     label: 'Main',
     items: [
       { path: '/', label: 'Mission Control', icon: LayoutDashboard },
+      { path: '/buyer-intelligence', label: 'Buyer Intelligence', icon: Target, badge: 'AI' },
+      { path: '/facebook-intelligence', label: 'Facebook Intel', icon: Facebook, badge: 'NEW' },
       { path: '/hotmoney', label: 'Hot Money Radar', icon: Flame },
-      { path: '/opportunities', label: 'Opportunities', icon: Target, badge: 'AI' },
-      { path: '/paperclip-dashboard', label: 'Paperclip Dashboard', icon: Paperclip, badge: 'NEW' },
-    ]
-  },
-  {
-    id: 'recruitment',
-    label: 'Recruitment',
-    items: [
-      { path: '/exp-agent-recruiter', label: 'EXP Agent Recruiter', icon: UserPlus, badge: '96K' },
-      { path: '/commercial-agent-recruiter', label: 'Commercial Agents', icon: Briefcase, badge: '6.7K' },
-      { path: '/brokerages', label: 'Brokerages', icon: Building },
-    ]
-  },
-  {
-    id: 'intelligence',
-    label: 'Intelligence',
-    items: [
-      { path: '/buyer-bot', label: 'Buyer Intelligence', icon: Target, badge: 'AI' },
-      { path: '/seller-outreach-bot', label: 'Seller Outreach', icon: Handshake, badge: 'AI' },
-      { path: '/property-valuation-bot', label: 'Property Valuation', icon: Calculator, badge: 'AI' },
-      { path: '/vigil', label: 'Virgil Monitor', icon: Shield, badge: '24/7' },
-    ]
-  },
-  {
-    id: 'matchers',
-    label: 'Matchers',
-    items: [
-      { path: '/listings', label: 'My Listings', icon: Building2 },
-      { path: '/buyers', label: 'Buyer Matcher', icon: Users },
-      { path: '/agents-matcher', label: 'Agent Matcher', icon: UserCircle },
-      { path: '/lenders', label: 'Lender Matcher', icon: Landmark },
-      { path: '/builders', label: 'Builder Directory', icon: Hammer },
-      { path: '/agent-workspaces', label: 'Agent Workspaces', icon: Activity, badge: 'NEW' },
-      { path: '/pixel-agents', label: 'Pixel Agents', icon: Scan, badge: 'NEW' },
-      { path: '/buyer-intelligence', label: 'Buyer Intelligence', icon: Target, badge: 'NEW' },
-      { path: '/contextkeep', label: 'ContextKeep', icon: Database, badge: 'NEW' },
+      { path: '/execution-history', label: 'Execution History', icon: Clock },
     ]
   }
 ]

@@ -177,10 +177,10 @@ export default function JarvisOrb() {
       try {
         const controller = new AbortController()
         const timeoutId = setTimeout(() => controller.abort(), 12000)
-        const res = await fetch(`${API_BASE}/api/voice/agent`, {
+        const res = await fetch(`${API_BASE}/api/gemma4/chat`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text, history: messages.slice(-10) }),
+          body: JSON.stringify({ message: text, context: JSON.stringify(messages.slice(-10)) }),
           signal: controller.signal,
         })
         clearTimeout(timeoutId)
@@ -188,7 +188,7 @@ export default function JarvisOrb() {
         const data = await res.json()
         reply = data.response || "I'm not sure how to respond to that."
         actions = data.actions || []
-        _modelUsed = data.model_used || 'backend'
+        _modelUsed = data.model || 'gemma4'
       } catch (e) {
         console.error('Backend voice agent error:', e)
         if (e.name === 'AbortError') {
@@ -281,15 +281,15 @@ export default function JarvisOrb() {
   function rulesReply(rawInput) {
     const input = rawInput.trim()
     const text = input.toLowerCase()
-    if (!input) return 'I did not catch that. Try asking for hot money, opportunities, or navigating to a page.'
+    if (!input) return 'Say that again. Ask me about hot money leads, buyer intelligence, or tell me to navigate anywhere.'
     if (/(hello|hi|hey|good morning|good evening)/.test(text)) {
-      return 'Hello. I am your Mission Control Voice Agent. I can help you query deals, check hot money leads, and navigate the dashboard.'
+      return 'Mission Control online. I can surface hot buyers, run deal intelligence, or navigate the system for you.'
     }
     if (/(introduce yourself|who are you|what are you)/.test(text)) {
-      return 'I am the Mission Control Voice Agent. I can speak, listen, query your real estate database, and navigate the dashboard on command.'
+      return 'I am your Mission Control operator. I read buyer signals, track deal flow, and move you to action fast.'
     }
     if (/(what can you do|help|commands)/.test(text)) {
-      return 'You can ask me about hot money leads, distressed deals, navigate to any page, or search for a specific property or buyer.'
+      return 'Ask me to find hot buyers, check deal status, run buyer intelligence, or navigate to any module.'
     }
     if (/(time)/.test(text)) {
       return 'It is ' + new Date().toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' }) + '.'
@@ -301,7 +301,7 @@ export default function JarvisOrb() {
       stopCurrentSpeech()
       return 'Stopping speech output.'
     }
-    return 'I heard: ' + input + '. The backend is currently offline, so I am running in browser mode. Try asking me to navigate to a page or ask a simple question.'
+    return 'Got it. I can navigate the system, surface buyers, or guide your next move. What do you need?'
   }
 
   const speak = async (text) => {
