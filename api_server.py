@@ -30,7 +30,7 @@ load_dotenv()
 
 # Database path helper (used across endpoints)
 def _get_db_path() -> Path:
-    return Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+    return Path(os.getenv("BIGDATACLAW_DB", "bigdataclaw.db"))
 
 DEEPGRAM_API_KEY = os.getenv("DEEPGRAM_API_KEY", "")
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "")
