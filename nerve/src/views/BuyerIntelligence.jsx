@@ -1,14 +1,16 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
   Search, Building2, DollarSign, MapPin, TrendingUp,
   Phone, Mail, Globe, Linkedin, FileText, Download,
   Target, Flame, Users, Landmark, Briefcase, Activity,
   ChevronRight, Star, ArrowUpRight, Layers, Send,
   BarChart3, Home, Warehouse, Store, LandPlot,
-  Calendar, CheckCircle, Check, ExternalLink, X, Loader2, Copy, Zap, AlertCircle, MessageSquare, User
+  Calendar, CheckCircle, Check, ExternalLink, X, Loader2, Copy, Zap, AlertCircle, MessageSquare, User, Clock, Timer
 } from 'lucide-react'
 
-const API_BASE = import.meta.env.VITE_API_URL || ''
+const API_BASE = (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app'))
+  ? 'https://bigdataclaw.srv1368913.hstgr.cloud'
+  : (import.meta.env.VITE_API_URL || 'http://localhost:18002')
 
 const ASSET_TYPES = [
   { label: 'Office', icon: Building2 },
@@ -28,7 +30,7 @@ const QUICK_LINK_ICONS = {
   news: { label: 'News', color: 'bg-amber-500' },
   key_people: { label: 'Key People', color: 'bg-purple-500' },
   website: { label: 'Website', color: 'bg-emerald-500' },
-  loopnet: { label: 'LoopNet', color: 'bg-indigo-500' },
+  recent_deal: { label: 'Recent Deal', color: 'bg-indigo-500' },
   contact_page: { label: 'Contact', color: 'bg-rose-500' },
 }
 
@@ -67,6 +69,73 @@ export default function BuyerIntelligence() {
   const [showInternalTeasers, setShowInternalTeasers] = useState(false)
   const [bucketFilter, setBucketFilter] = useState('All')
   const [batchCopied, setBatchCopied] = useState(false)
+  const [outreachFeedback, setOutreachFeedback] = useState({})
+  const [feedbackLoading, setFeedbackLoading] = useState(null)
+  const [conversionEngine, setConversionEngine] = useState(null)
+  const [conversionLoading, setConversionLoading] = useState(false)
+  const [dealTimeline, setDealTimeline] = useState(null)
+  const [autopilot, setAutopilot] = useState(null)
+  const [autopilotLoading, setAutopilotLoading] = useState(false)
+  const [draftCopied, setDraftCopied] = useState(null)
+
+  // Load outreach feedback + conversion engine + timeline + autopilot when pack is generated
+  useEffect(() => {
+    if (!outreachPack?.pack_id) return
+    const loadFeedback = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/outreach-feedback/${outreachPack.pack_id}`)
+        if (!res.ok) return
+        const data = await res.json()
+        const map = {}
+        data.feedback.forEach((f) => {
+          map[f.buyer_name] = f
+        })
+        setOutreachFeedback(map)
+      } catch {
+        // silent
+      }
+    }
+    const loadConversion = async () => {
+      setConversionLoading(true)
+      try {
+        const res = await fetch(`${API_BASE}/api/conversion-engine/${outreachPack.pack_id}`)
+        if (!res.ok) return
+        const data = await res.json()
+        setConversionEngine(data)
+      } catch {
+        // silent
+      } finally {
+        setConversionLoading(false)
+      }
+    }
+    const loadTimeline = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/deal-timeline/${outreachPack.pack_id}`)
+        if (!res.ok) return
+        const data = await res.json()
+        setDealTimeline(data)
+      } catch {
+        // silent
+      }
+    }
+    const loadAutopilot = async () => {
+      setAutopilotLoading(true)
+      try {
+        const res = await fetch(`${API_BASE}/api/autopilot/${outreachPack.pack_id}`)
+        if (!res.ok) return
+        const data = await res.json()
+        setAutopilot(data)
+      } catch {
+        // silent
+      } finally {
+        setAutopilotLoading(false)
+      }
+    }
+    loadFeedback()
+    loadConversion()
+    loadTimeline()
+    loadAutopilot()
+  }, [outreachPack?.pack_id])
 
   const handleGenerate = async () => {
     setLoading(true)
@@ -204,6 +273,14 @@ export default function BuyerIntelligence() {
     }
   }
 
+  const copyDraft = (buyerName) => {
+    const draft = autopilot?.follow_up_drafts?.find(d => d.buyer_name === buyerName)?.draft
+    if (!draft) return
+    navigator.clipboard.writeText(draft)
+    setDraftCopied(buyerName)
+    setTimeout(() => setDraftCopied(null), 1500)
+  }
+
   const copyAllCallNow = async () => {
     if (!outreachPack?.assets?.buyer_outreach_payloads) return
     const callNow = outreachPack.assets.buyer_outreach_payloads.filter(p => p.bucket === 'Call Now')
@@ -266,6 +343,51 @@ export default function BuyerIntelligence() {
         format: 'json',
       }),
     }).catch(() => {})
+  }
+
+  const submitFeedback = async (buyerName, status) => {
+    if (!outreachPack?.pack_id) return
+    setFeedbackLoading(buyerName)
+    try {
+      const res = await fetch(`${API_BASE}/api/outreach-feedback`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pack_id: outreachPack.pack_id,
+          buyer_name: buyerName,
+          status,
+          channel: '',
+          notes: '',
+        }),
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      setOutreachFeedback((prev) => ({
+        ...prev,
+        [buyerName]: { buyer_name: buyerName, status, updated_at: new Date().toISOString() },
+      }))
+      // Refresh conversion engine to update scores, hot buyers, next actions
+      const ceRes = await fetch(`${API_BASE}/api/conversion-engine/${outreachPack.pack_id}`)
+      if (ceRes.ok) {
+        const ceData = await ceRes.json()
+        setConversionEngine(ceData)
+      }
+      // Refresh timeline
+      const tlRes = await fetch(`${API_BASE}/api/deal-timeline/${outreachPack.pack_id}`)
+      if (tlRes.ok) {
+        const tlData = await tlRes.json()
+        setDealTimeline(tlData)
+      }
+      // Refresh autopilot
+      const apRes = await fetch(`${API_BASE}/api/autopilot/${outreachPack.pack_id}`)
+      if (apRes.ok) {
+        const apData = await apRes.json()
+        setAutopilot(apData)
+      }
+    } catch (err) {
+      console.error('Feedback error:', err)
+    } finally {
+      setFeedbackLoading(null)
+    }
   }
 
   const tabs = useMemo(() => {
@@ -542,6 +664,43 @@ export default function BuyerIntelligence() {
                 ))}
               </div>
 
+              {/* Autopilot Assist: Deal Health + Close Probability + Insights */}
+              {autopilot && (
+                <div className="bg-bg-card border border-accent-purple/20 rounded-xl p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <Zap className="w-4 h-4 text-accent-purple" />
+                      <h4 className="text-sm font-medium text-text-primary">Autopilot Assist</h4>
+                    </div>
+                    {autopilotLoading && <Loader2 className="w-3 h-3 animate-spin text-text-muted" />}
+                  </div>
+                  <div className="grid grid-cols-3 gap-3 mb-3">
+                    <div className="text-center p-2 bg-bg-input rounded-lg">
+                      <div className="text-lg font-bold text-accent-purple">{autopilot.deal_health?.label || '—'}</div>
+                      <div className="text-[10px] text-text-muted">Deal Health</div>
+                    </div>
+                    <div className="text-center p-2 bg-bg-input rounded-lg">
+                      <div className="text-lg font-bold text-green-400">{autopilot.close_probability ?? 0}%</div>
+                      <div className="text-[10px] text-text-muted">Close Probability</div>
+                    </div>
+                    <div className="text-center p-2 bg-bg-input rounded-lg">
+                      <div className="text-lg font-bold text-accent-blue">{autopilot.follow_up_drafts?.length || 0}</div>
+                      <div className="text-[10px] text-text-muted">Drafts Ready</div>
+                    </div>
+                  </div>
+                  {autopilot.insights && autopilot.insights.length > 0 && (
+                    <div className="space-y-1.5">
+                      {autopilot.insights.map((insight, idx) => (
+                        <div key={idx} className="text-[11px] text-text-secondary flex items-start gap-1.5">
+                          <span className="mt-0.5">•</span>
+                          {insight}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
               {/* Assets Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Feature Sheet */}
@@ -582,15 +741,152 @@ export default function BuyerIntelligence() {
                 )}
               </div>
 
+              {/* Conversion Engine: Hot Buyers */}
+              {conversionEngine?.hot_buyers && conversionEngine.hot_buyers.length > 0 && (
+                <div className="bg-bg-card border border-green-500/30 rounded-xl overflow-hidden shadow-lg shadow-green-500/5">
+                  <div className="px-4 py-3 border-b border-green-500/20 bg-green-500/5 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Flame className="w-4 h-4 text-green-400" />
+                      <h4 className="text-sm font-medium text-green-400">🔥 Hot Buyers</h4>
+                      <span className="text-[10px] px-1.5 py-0.5 bg-green-500/20 text-green-400 rounded-full">
+                        {conversionEngine.hot_buyers.length}
+                      </span>
+                    </div>
+                    <span className="text-[10px] text-green-400/70 uppercase tracking-wider">Active Pipeline</span>
+                  </div>
+                  <div className="p-4 space-y-2">
+                    {conversionEngine.hot_buyers.map((hb, idx) => {
+                      const statusColor = hb.status === 'interested' ? 'bg-green-500/20 text-green-400'
+                        : hb.status === 'replied' ? 'bg-accent-blue/20 text-accent-blue'
+                        : hb.status === 'meeting_scheduled' ? 'bg-purple-500/20 text-purple-400'
+                        : hb.status === 'offer' ? 'bg-pink-500/20 text-pink-400'
+                        : hb.status === 'closed' ? 'bg-emerald-500/20 text-emerald-400'
+                        : 'bg-yellow-500/20 text-yellow-400'
+                      const statusLabel = hb.status === 'meeting_scheduled' ? 'Meeting' : hb.status.charAt(0).toUpperCase() + hb.status.slice(1)
+                      return (
+                        <div key={idx} className={`flex items-center justify-between p-2 rounded-lg ${hb.is_overdue ? 'bg-accent-red/5 border border-accent-red/20' : 'bg-green-500/5 border border-green-500/10'}`}>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-medium text-text-primary">{hb.buyer_name}</span>
+                            <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${statusColor}`}>
+                              {statusLabel}
+                            </span>
+                            {hb.is_overdue && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent-red/20 text-accent-red animate-pulse">⏰ Overdue</span>}
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <span className="text-[10px] text-text-muted">Score: {hb.dynamic_score}</span>
+                            <span className={`text-[10px] font-medium ${hb.is_overdue ? 'text-accent-red' : 'text-green-400'}`}>{hb.next_action}</span>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Conversion Engine: Pipeline Metrics */}
+              {conversionEngine?.pipeline && (
+                <div className="bg-bg-card border border-border-subtle rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <BarChart3 className="w-4 h-4 text-accent-primary" />
+                    <h4 className="text-sm font-medium text-text-primary">Pipeline Momentum</h4>
+                  </div>
+                  <div className="grid grid-cols-4 gap-3 mb-3">
+                    <div className="text-center p-2 bg-bg-input rounded-lg">
+                      <div className="text-lg font-semibold text-text-primary">{conversionEngine.pipeline.targeted}</div>
+                      <div className="text-[10px] text-text-muted">Targeted</div>
+                    </div>
+                    <div className="text-center p-2 bg-bg-input rounded-lg">
+                      <div className="text-lg font-semibold text-yellow-400">{conversionEngine.pipeline.contacted}</div>
+                      <div className="text-[10px] text-text-muted">Contacted</div>
+                    </div>
+                    <div className="text-center p-2 bg-bg-input rounded-lg">
+                      <div className="text-lg font-semibold text-accent-blue">{conversionEngine.pipeline.replied}</div>
+                      <div className="text-[10px] text-text-muted">Replied</div>
+                    </div>
+                    <div className="text-center p-2 bg-bg-input rounded-lg">
+                      <div className="text-lg font-semibold text-green-400">{conversionEngine.pipeline.interested}</div>
+                      <div className="text-[10px] text-text-muted">Interested</div>
+                    </div>
+                  </div>
+                  {conversionEngine.conversion_rates && (
+                    <div className="flex flex-wrap gap-2 text-[10px]">
+                      <span className="px-2 py-1 bg-bg-input rounded text-text-muted">
+                        Contacted: {conversionEngine.conversion_rates.contacted_rate}%
+                      </span>
+                      <span className="px-2 py-1 bg-bg-input rounded text-text-muted">
+                        Replied: {conversionEngine.conversion_rates.replied_rate}%
+                      </span>
+                      <span className="px-2 py-1 bg-bg-input rounded text-text-muted">
+                        Interested: {conversionEngine.conversion_rates.interested_rate}%
+                      </span>
+                      <span className="px-2 py-1 bg-bg-input rounded text-text-muted">
+                        Reply → Interest: {conversionEngine.conversion_rates.replied_to_interested}%
+                      </span>
+                    </div>
+                  )}
+                  {conversionEngine.bottleneck && (
+                    <div className="mt-2 flex items-center gap-1.5 text-[10px] text-accent-red">
+                      <AlertCircle className="w-3 h-3" />
+                      {conversionEngine.bottleneck}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Deal Timeline */}
+              {dealTimeline?.events && dealTimeline.events.length > 0 && (
+                <div className="bg-bg-card border border-border-subtle rounded-xl overflow-hidden">
+                  <div className="px-4 py-3 border-b border-border-subtle flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4 text-accent-primary" />
+                      <h4 className="text-sm font-medium text-text-primary">Deal Timeline</h4>
+                      <span className="text-[10px] px-1.5 py-0.5 bg-accent-primary/10 text-accent-primary rounded-full">
+                        {dealTimeline.events.length} events
+                      </span>
+                    </div>
+                    <span className="text-[10px] text-text-muted uppercase tracking-wider">Deal Heartbeat</span>
+                  </div>
+                  <div className="p-4 space-y-2 max-h-64 overflow-y-auto">
+                    {dealTimeline.events.slice(-20).map((ev, idx) => {
+                      const typeColors = {
+                        milestone: 'bg-accent-primary/10 text-accent-primary border-accent-primary/20',
+                        execution: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+                        action: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
+                        feedback: 'bg-green-500/10 text-green-400 border-green-500/20',
+                        timeline: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+                      }
+                      const color = typeColors[ev.type] || typeColors.timeline
+                      const time = ev.timestamp ? new Date(ev.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''
+                      const date = ev.timestamp ? new Date(ev.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric' }) : ''
+                      let title = ev.event_type || ev.action || ev.type
+                      if (title === 'feedback' && ev.status) title = ev.status
+                      if (title === 'timeline' && ev.event_type) title = ev.event_type
+                      return (
+                        <div key={idx} className={`flex items-center gap-3 p-2 rounded-lg border ${color}`}>
+                          <div className="flex flex-col items-center min-w-[48px]">
+                            <span className="text-[10px] font-medium">{time}</span>
+                            <span className="text-[9px] text-text-muted">{date}</span>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-medium capitalize">{title.replace(/_/g, ' ')}</p>
+                            {ev.buyer_name && <p className="text-[10px] text-text-muted">{ev.buyer_name}</p>}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
               {/* Buyer Outreach Payloads — Internal, Buyer-Centric */}
-              {outreachPack.assets.buyer_outreach_payloads && outreachPack.assets.buyer_outreach_payloads.length > 0 && (
+              {((conversionEngine?.enriched_payloads?.length > 0) || (outreachPack.assets.buyer_outreach_payloads?.length > 0)) && (
                 <div className="bg-bg-card border border-border-subtle rounded-xl overflow-hidden">
                   <div className="px-4 py-3 border-b border-border-subtle flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Users className="w-4 h-4 text-accent-purple" />
                       <h4 className="text-sm font-medium text-text-primary">Buyer Outreach Payloads</h4>
                       <span className="text-[10px] px-1.5 py-0.5 bg-accent-purple/10 text-accent-purple rounded-full">
-                        {outreachPack.assets.buyer_outreach_payloads.length} ready
+                        {(conversionEngine?.enriched_payloads?.length || outreachPack.assets.buyer_outreach_payloads?.length || 0)} ready
                       </span>
                     </div>
                     <span className="text-[10px] text-text-muted uppercase tracking-wider">Internal Use</span>
@@ -651,21 +947,26 @@ export default function BuyerIntelligence() {
                   </div>
 
                   <div className="p-4 space-y-3">
-                    {outreachPack.assets.buyer_outreach_payloads
+                    {(conversionEngine?.enriched_payloads || outreachPack.assets.buyer_outreach_payloads)
                       .filter(p => bucketFilter === 'All' || p.bucket === bucketFilter)
                       .slice(0, 12)
                       .map((payload, idx) => {
                         const isExpanded = expandedPayload === idx
+                        const isHot = payload.is_hot
                         const bucketColor = payload.bucket === 'Call Now' ? 'text-green-400 bg-green-500/10 border-green-500/20' : payload.bucket === 'Send Teaser' ? 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20' : payload.bucket === 'Research First' ? 'text-blue-400 bg-blue-500/10 border-blue-500/20' : 'bg-bg-input text-text-muted border-border-subtle'
                         const channelIcon = payload.recommended_channel === 'phone' ? <Phone className="w-3 h-3" /> : payload.recommended_channel === 'email' ? <Mail className="w-3 h-3" /> : <MessageSquare className="w-3 h-3" />
+                        const dynamicScore = payload.dynamic_score ?? payload.score
+                        const nextAction = payload.next_action
+                        const feedbackStatus = payload.feedback_status
                         return (
-                          <div key={idx} className="border border-border-subtle rounded-xl overflow-hidden">
+                          <div key={idx} className={`border rounded-xl overflow-hidden transition-shadow ${isHot ? 'border-green-500/40 shadow-md shadow-green-500/10' : 'border-border-subtle'}`}>
                             {/* Header */}
-                            <div className="p-3 bg-bg-input/50">
+                            <div className={`p-3 ${isHot ? 'bg-green-500/5' : 'bg-bg-input/50'}`}>
                               <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 flex-wrap">
                                   <User className="w-4 h-4 text-text-muted" />
                                   <span className="text-sm font-semibold text-text-primary">{payload.buyer_name}</span>
+                                  {isHot && <Flame className="w-3 h-3 text-green-400" />}
                                   <span className={`text-[10px] px-2 py-0.5 rounded-full border ${bucketColor}`}>
                                     {payload.bucket}
                                   </span>
@@ -674,12 +975,52 @@ export default function BuyerIntelligence() {
                                       {payload.signal_strength}
                                     </span>
                                   )}
+                                  {feedbackStatus && (
+                                    <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${
+                                      feedbackStatus === 'interested' ? 'bg-green-500/20 text-green-400'
+                                      : feedbackStatus === 'replied' ? 'bg-accent-blue/20 text-accent-blue'
+                                      : feedbackStatus === 'contacted' ? 'bg-yellow-500/20 text-yellow-400'
+                                      : feedbackStatus === 'meeting_scheduled' ? 'bg-purple-500/20 text-purple-400'
+                                      : feedbackStatus === 'offer' ? 'bg-pink-500/20 text-pink-400'
+                                      : feedbackStatus === 'closed' ? 'bg-emerald-500/20 text-emerald-400'
+                                      : 'bg-accent-red/20 text-accent-red'
+                                    }`}>
+                                      {feedbackStatus === 'not_interested' ? 'No' : feedbackStatus === 'meeting_scheduled' ? 'Meeting' : feedbackStatus.charAt(0).toUpperCase() + feedbackStatus.slice(1)}
+                                    </span>
+                                  )}
+                                  {payload.is_overdue && (
+                                    <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium bg-accent-red/20 text-accent-red animate-pulse">
+                                      ⏰ Overdue
+                                    </span>
+                                  )}
                                 </div>
                                 <div className="flex items-center gap-2">
-                                  <span className="text-xs text-text-muted">{payload.score}</span>
+                                  <div className="flex flex-col items-end">
+                                    <span className={`text-xs font-medium ${isHot ? 'text-green-400' : 'text-text-muted'}`}>{dynamicScore}</span>
+                                    {payload.dynamic_score !== undefined && payload.dynamic_score !== payload.score && (
+                                      <span className="text-[9px] text-text-muted">base: {payload.score}</span>
+                                    )}
+                                  </div>
                                   {channelIcon}
                                 </div>
                               </div>
+                              {/* Next Action Badge + Timer */}
+                              {nextAction && nextAction !== 'Use bucket recommendation' && (
+                                <div className="mt-1.5 flex items-center gap-2 flex-wrap">
+                                  <div className="flex items-center gap-1.5">
+                                    <Zap className={`w-3 h-3 ${payload.is_overdue ? 'text-accent-red' : 'text-accent-primary'}`} />
+                                    <span className={`text-[10px] font-medium ${payload.is_overdue ? 'text-accent-red' : 'text-accent-primary'}`}>
+                                      {nextAction}
+                                    </span>
+                                  </div>
+                                  {payload.next_action_due_at && (
+                                    <span className={`text-[10px] flex items-center gap-1 ${payload.is_overdue ? 'text-accent-red' : 'text-text-muted'}`}>
+                                      <Clock className="w-3 h-3" />
+                                      {payload.is_overdue ? 'Overdue' : `Due ${new Date(payload.next_action_due_at).toLocaleDateString([], { month: 'short', day: 'numeric' })}`}
+                                    </span>
+                                  )}
+                                </div>
+                              )}
                               {/* Why This Buyer — Right Now */}
                               <p className="mt-2 text-xs text-text-primary leading-relaxed">
                                 {payload.buyer_reason_signal}
@@ -691,7 +1032,7 @@ export default function BuyerIntelligence() {
                                 </p>
                               )}
                               {/* Quick Actions */}
-                              <div className="mt-2 flex items-center gap-2">
+                              <div className="mt-2 flex items-center gap-2 flex-wrap">
                                 <button
                                   onClick={() => copyPayload(payload.personalized_snippet, payload.buyer_name)}
                                   className="px-2 py-1 bg-bg-card hover:bg-border-subtle rounded text-[10px] text-text-secondary transition-colors flex items-center gap-1"
@@ -705,6 +1046,53 @@ export default function BuyerIntelligence() {
                                 >
                                   {isExpanded ? 'Hide Details' : 'Show Details'}
                                 </button>
+                                {/* Outreach Feedback */}
+                                {(() => {
+                                  const fb = outreachFeedback[payload.buyer_name]
+                                  const currentStatus = fb?.status
+                                  const statusConfig = [
+                                    { key: 'contacted', label: 'Contacted', activeColor: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' },
+                                    { key: 'replied', label: 'Replied', activeColor: 'bg-accent-blue/20 text-accent-blue border-accent-blue/30' },
+                                    { key: 'interested', label: 'Interested', activeColor: 'bg-green-500/20 text-green-400 border-green-500/30' },
+                                    { key: 'meeting_scheduled', label: 'Meeting', activeColor: 'bg-purple-500/20 text-purple-400 border-purple-500/30' },
+                                    { key: 'offer', label: 'Offer', activeColor: 'bg-pink-500/20 text-pink-400 border-pink-500/30' },
+                                    { key: 'closed', label: 'Closed', activeColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' },
+                                    { key: 'not_interested', label: 'No', activeColor: 'bg-accent-red/20 text-accent-red border-accent-red/30' },
+                                  ]
+                                  const hasDraft = autopilot?.follow_up_drafts?.some(d => d.buyer_name === payload.buyer_name)
+                                  return (
+                                    <div className="flex items-center gap-1 flex-wrap">
+                                      {feedbackLoading === payload.buyer_name ? (
+                                        <Loader2 className="w-3 h-3 animate-spin text-text-muted" />
+                                      ) : (
+                                        <>
+                                          {statusConfig.map((cfg) => {
+                                            const isActive = currentStatus === cfg.key
+                                            const color = isActive ? cfg.activeColor : 'bg-bg-card text-text-muted border-border-subtle hover:bg-border-subtle'
+                                            return (
+                                              <button
+                                                key={cfg.key}
+                                                onClick={() => submitFeedback(payload.buyer_name, cfg.key)}
+                                                className={`px-1.5 py-0.5 rounded text-[10px] font-medium border transition-colors ${color}`}
+                                              >
+                                                {cfg.label}
+                                              </button>
+                                            )
+                                          })}
+                                          {hasDraft && (
+                                            <button
+                                              onClick={() => copyDraft(payload.buyer_name)}
+                                              className="px-2 py-0.5 rounded text-[10px] font-medium border bg-accent-purple/10 text-accent-purple border-accent-purple/20 hover:bg-accent-purple/20 transition-colors flex items-center gap-1"
+                                            >
+                                              {draftCopied === payload.buyer_name ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                                              Draft Follow-Up
+                                            </button>
+                                          )}
+                                        </>
+                                      )}
+                                    </div>
+                                  )
+                                })()}
                               </div>
                             </div>
                             {/* Expanded Details */}

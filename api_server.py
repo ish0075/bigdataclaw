@@ -7,12 +7,13 @@ FastAPI backend with SQLite + Qdrant
 import json
 import os
 import sys
+import re
 import sqlite3
 import asyncio
 import threading
 from pathlib import Path
 from typing import List, Optional, Dict, Any
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from fastapi import FastAPI, Query, HTTPException, UploadFile, File, BackgroundTasks, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
@@ -80,6 +81,9 @@ app = FastAPI(
 # CORS
 _ORIGINS = [
     "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:5175",
+    "http://localhost:5176",
     "http://localhost:8000",
     "http://localhost:3090",
     "https://bigdataclaw.srv1368913.hstgr.cloud",
@@ -2721,6 +2725,32 @@ def create_outreach_pack(request: OutreachPackRequest):
     except Exception as e:
         results["phases"].append({"phase": "tracking", "status": "error", "message": str(e)})
 
+    # Phase 4b: Persist pack assets for conversion engine
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS outreach_pack_assets (
+                pack_id TEXT PRIMARY KEY,
+                created_at TEXT,
+                assets_json TEXT
+            )
+        """)
+        cursor.execute("""
+            INSERT OR REPLACE INTO outreach_pack_assets (pack_id, created_at, assets_json)
+            VALUES (?, ?, ?)
+        """, (
+            pack_id,
+            datetime.utcnow().isoformat(),
+            json.dumps(results["assets"]),
+        ))
+        conn.commit()
+        conn.close()
+        results["phases"].append({"phase": "pack_assets", "status": "complete", "message": "Pack assets persisted"})
+    except Exception as e:
+        results["phases"].append({"phase": "pack_assets", "status": "error", "message": str(e)})
+
     # Phase 5: ContextKeep archive
     try:
         db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
@@ -2927,6 +2957,911 @@ def batch_export_outreach(payload: dict):
     except Exception:
         pass
     return {"status": "exported", "pack_id": pack_id, "bucket_filter": bucket_filter, "format": fmt}
+
+
+# ============================================================================
+# OUTREACH FEEDBACK LOOP
+# ============================================================================
+
+class OutreachFeedbackRequest(BaseModel):
+    pack_id: str = ""
+    buyer_name: str = ""
+    status: str = ""  # contacted, replied, interested, not_interested, meeting_scheduled, closed
+    channel: str = ""  # phone, email, linkedin, in_person
+    notes: str = ""
+    user_id: str = ""
+
+
+@app.post("/api/outreach-feedback")
+def update_outreach_feedback(request: OutreachFeedbackRequest):
+    """Update outreach feedback for a buyer. Creates or updates the tracking record."""
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS outreach_feedback (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT,
+                updated_at TEXT,
+                pack_id TEXT,
+                buyer_name TEXT,
+                status TEXT,
+                channel TEXT,
+                notes TEXT,
+                user_id TEXT
+            )
+        """)
+        # Upsert: update if exists, insert if not
+        cursor.execute("""
+            SELECT id FROM outreach_feedback WHERE pack_id = ? AND buyer_name = ?
+        """, (request.pack_id, request.buyer_name))
+        row = cursor.fetchone()
+        now = datetime.utcnow().isoformat()
+        if row:
+            cursor.execute("""
+                UPDATE outreach_feedback
+                SET updated_at = ?, status = ?, channel = ?, notes = ?, user_id = ?
+                WHERE id = ?
+            """, (now, request.status, request.channel, request.notes, request.user_id, row[0]))
+        else:
+            cursor.execute("""
+                INSERT INTO outreach_feedback (created_at, updated_at, pack_id, buyer_name, status, channel, notes, user_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (now, now, request.pack_id, request.buyer_name, request.status, request.channel, request.notes, request.user_id))
+        # Log timeline event for deal progression tracking
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS deal_timeline_events (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT,
+                pack_id TEXT,
+                buyer_name TEXT,
+                event_type TEXT,
+                metadata TEXT
+            )
+        """)
+        cursor.execute("""
+            INSERT INTO deal_timeline_events (created_at, pack_id, buyer_name, event_type, metadata)
+            VALUES (?, ?, ?, ?, ?)
+        """, (
+            now,
+            request.pack_id,
+            request.buyer_name,
+            request.status,
+            json.dumps({"channel": request.channel, "notes": request.notes, "user_id": request.user_id}),
+        ))
+        conn.commit()
+        conn.close()
+        return {"status": "updated", "pack_id": request.pack_id, "buyer": request.buyer_name, "new_status": request.status}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/outreach-feedback/{pack_id}")
+def get_outreach_feedback(pack_id: str):
+    """Get all outreach feedback for a pack."""
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS outreach_feedback (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT,
+                updated_at TEXT,
+                pack_id TEXT,
+                buyer_name TEXT,
+                status TEXT,
+                channel TEXT,
+                notes TEXT,
+                user_id TEXT
+            )
+        """)
+        cursor.execute("SELECT * FROM outreach_feedback WHERE pack_id = ? ORDER BY updated_at DESC", (pack_id,))
+        rows = cursor.fetchall()
+        conn.close()
+        return {"pack_id": pack_id, "feedback": [dict(r) for r in rows], "count": len(rows)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# CONVERSION ENGINE
+# ============================================================================
+
+# Feedback impact weights for adaptive scoring
+_FEEDBACK_SCORE_WEIGHTS = {
+    "contacted": 1,
+    "replied": 5,
+    "interested": 10,
+    "not_interested": -5,
+    "meeting_scheduled": 15,
+    "offer": 18,
+    "closed": 20,
+}
+
+# Follow-up timer rules: (status) -> (due_days, urgency_label)
+_FOLLOW_UP_TIMERS = {
+    "contacted": (3, "Follow up"),
+    "replied": (1, "Respond"),
+    "interested": (2, "Escalate"),
+    "meeting_scheduled": (1, "Confirm / prep"),
+    "offer": (2, "Follow up on offer"),
+}
+
+# Next action rules: (current_status, days_since_action) -> suggested_action
+_NEXT_ACTION_RULES = [
+    # Interested buyers get highest priority follow-up
+    ("interested", 0, 1, "Call within 24h 🔥"),
+    ("interested", 2, 2, "Escalate within 48h ⚡"),
+    ("interested", 3, 7, "Follow up — maintain momentum"),
+    ("interested", 7, 999, "Re-engage with new info"),
+    # Replied buyers need quick response
+    ("replied", 0, 1, "Respond immediately"),
+    ("replied", 2, 3, "Follow up email"),
+    ("replied", 4, 7, "Call to close"),
+    ("replied", 7, 999, "Re-engage or drop"),
+    # Contacted but no reply — nurture
+    ("contacted", 0, 2, "Wait for response"),
+    ("contacted", 3, 5, "Follow up email"),
+    ("contacted", 6, 10, "Try different channel"),
+    ("contacted", 10, 999, "Drop or revisit later"),
+    # Meeting scheduled — confirm and prep
+    ("meeting_scheduled", 0, 1, "Confirm meeting details 📅"),
+    ("meeting_scheduled", 2, 3, "Send prep materials"),
+    ("meeting_scheduled", 4, 999, "Follow up post-meeting"),
+    # Offer submitted — close the deal
+    ("offer", 0, 1, "Confirm offer received 💰"),
+    ("offer", 2, 5, "Follow up on terms"),
+    ("offer", 6, 999, "Push for decision"),
+    # Closed — celebrate and archive
+    ("closed", 0, 999, "🎉 Deal closed — archive & celebrate"),
+    # Not interested — deprioritize
+    ("not_interested", 0, 999, "Deprioritize — revisit in 90 days"),
+    # No feedback yet — use bucket recommendation
+    (None, 0, 999, "Use bucket recommendation"),
+]
+
+
+def _compute_next_action(status: str | None, updated_at: str | None, bucket: str) -> str:
+    """Compute suggested next action based on feedback status and time since last action."""
+    if not status or status == "":
+        # No feedback yet — fall back to bucket recommendation
+        if bucket == "Call Now":
+            return "Call now ☎️"
+        elif bucket == "Send Teaser":
+            return "Send teaser email 📧"
+        elif bucket == "Research First":
+            return "Research contact path 🔍"
+        return "Hold ⏸️"
+
+    days = 0
+    if updated_at:
+        try:
+            days = (datetime.utcnow() - datetime.fromisoformat(updated_at.replace("Z", "+00:00").replace("+00:00", ""))).days
+        except Exception:
+            days = 0
+
+    for rule_status, min_days, max_days, action in _NEXT_ACTION_RULES:
+        if rule_status == status and min_days <= days <= max_days:
+            return action
+
+    # Fallback
+    if bucket == "Call Now":
+        return "Call now ☎️"
+    elif bucket == "Send Teaser":
+        return "Send teaser email 📧"
+    return "Review ⏸️"
+
+
+def _compute_next_action_due_at(status: str | None, updated_at: str | None) -> str | None:
+    """Compute ISO timestamp for when next action is due."""
+    if not status or status not in _FOLLOW_UP_TIMERS:
+        return None
+    due_days, _ = _FOLLOW_UP_TIMERS[status]
+    updated_dt = datetime.utcnow()
+    if updated_at:
+        try:
+            updated_dt = datetime.fromisoformat(updated_at.replace("Z", "+00:00").replace("+00:00", ""))
+        except Exception:
+            pass
+    due = updated_dt + timedelta(days=due_days)
+    return due.isoformat()
+
+
+def _is_action_overdue(due_at: str | None) -> bool:
+    if not due_at:
+        return False
+    try:
+        due = datetime.fromisoformat(due_at.replace("Z", "+00:00").replace("+00:00", ""))
+        return datetime.utcnow() > due
+    except Exception:
+        return False
+
+
+@app.get("/api/hot-money")
+def get_hot_money_radar():
+    """Aggregate all hot buyers across all packs for the Hot Money Radar."""
+    try:
+        db_path = _get_db_path()
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+
+        # Get all packs with assets
+        cursor.execute("SELECT pack_id, assets_json FROM outreach_pack_assets ORDER BY created_at DESC LIMIT 50")
+        pack_rows = cursor.fetchall()
+
+        all_hot_buyers = []
+
+        for pack_row in pack_rows:
+            pack_id = pack_row["pack_id"]
+            try:
+                assets = json.loads(pack_row["assets_json"] or "{}")
+                buyers = assets.get("buyers", [])
+            except:
+                buyers = []
+
+            # Get feedback for this pack
+            cursor.execute("SELECT buyer_name, status, updated_at FROM outreach_feedback WHERE pack_id = ?", (pack_id,))
+            feedback_rows = cursor.fetchall()
+            feedback_map = {r["buyer_name"]: {"status": r["status"], "updated_at": r["updated_at"]} for r in feedback_rows}
+
+            for buyer in buyers:
+                name = buyer.get("name", "")
+                fb = feedback_map.get(name, {})
+                status = fb.get("status", "")
+
+                # Only include buyers with signal (replied, interested, meeting, offer, closed, contacted)
+                if status in ("replied", "interested", "meeting_scheduled", "offer", "closed", "contacted"):
+                    base_score = buyer.get("score", 0) or buyer.get("match_score", 0) or 50
+                    dynamic_score = base_score + _FEEDBACK_SCORE_WEIGHTS.get(status, 0)
+
+                    all_hot_buyers.append({
+                        "buyer_name": name,
+                        "status": status,
+                        "dynamic_score": min(dynamic_score, 100),
+                        "base_score": base_score,
+                        "bucket": buyer.get("bucket", buyer.get("tier", "Send Teaser")),
+                        "next_action": _compute_next_action(status, fb.get("updated_at", datetime.utcnow().isoformat()), buyer.get("bucket", "")),
+                        "buyer_reason_signal": buyer.get("buyer_reason_signal", buyer.get("reason", "")),
+                        "capital_event": buyer.get("cash_amount", ""),
+                        "asset_match": buyer.get("asset_class", buyer.get("property_type", "")),
+                        "geographic_match": buyer.get("location", buyer.get("city", "")),
+                        "activity_signal": buyer.get("sale_date", ""),
+                        "pack_id": pack_id,
+                        "updated_at": fb.get("updated_at", ""),
+                    })
+
+        conn.close()
+
+        # Sort by score desc
+        all_hot_buyers.sort(key=lambda b: b["dynamic_score"], reverse=True)
+
+        return {
+            "hot_buyers": all_hot_buyers,
+            "total": len(all_hot_buyers),
+            "stats": {
+                "replied": len([b for b in all_hot_buyers if b["status"] == "replied"]),
+                "interested": len([b for b in all_hot_buyers if b["status"] == "interested"]),
+                "meeting": len([b for b in all_hot_buyers if b["status"] == "meeting_scheduled"]),
+                "offer": len([b for b in all_hot_buyers if b["status"] == "offer"]),
+                "closed": len([b for b in all_hot_buyers if b["status"] == "closed"]),
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/conversion-engine/{pack_id}")
+def get_conversion_engine(pack_id: str):
+    """
+    Deal Conversion Engine: transforms outreach tracking into actionable intelligence.
+    Returns hot buyers, pipeline metrics, adaptive scores, and next actions.
+    """
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+
+        # 1. Load pack assets (buyer outreach payloads)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS outreach_pack_assets (
+                pack_id TEXT PRIMARY KEY,
+                created_at TEXT,
+                assets_json TEXT
+            )
+        """)
+        cursor.execute("SELECT assets_json FROM outreach_pack_assets WHERE pack_id = ?", (pack_id,))
+        row = cursor.fetchone()
+        if not row:
+            conn.close()
+            raise HTTPException(status_code=404, detail=f"Pack {pack_id} not found")
+        assets = json.loads(row["assets_json"] or "{}")
+        payloads = assets.get("buyer_outreach_payloads", [])
+
+        # 2. Load all feedback for this pack
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS outreach_feedback (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT,
+                updated_at TEXT,
+                pack_id TEXT,
+                buyer_name TEXT,
+                status TEXT,
+                channel TEXT,
+                notes TEXT,
+                user_id TEXT
+            )
+        """)
+        cursor.execute("SELECT * FROM outreach_feedback WHERE pack_id = ?", (pack_id,))
+        feedback_rows = cursor.fetchall()
+        feedback_map = {}
+        for r in feedback_rows:
+            feedback_map[r["buyer_name"]] = dict(r)
+
+        # 3. Load deal timeline events
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS deal_timeline_events (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT,
+                pack_id TEXT,
+                buyer_name TEXT,
+                event_type TEXT,
+                metadata TEXT
+            )
+        """)
+        cursor.execute("SELECT * FROM deal_timeline_events WHERE pack_id = ? ORDER BY created_at", (pack_id,))
+        timeline_rows = cursor.fetchall()
+        timeline_events = [dict(r) for r in timeline_rows]
+
+        # 4. Outcome feedback loop — compute buyer reputation across ALL deals
+        buyer_names = [p.get("buyer_name", "") for p in payloads if p.get("buyer_name")]
+        reputation_map = {}
+        if buyer_names:
+            cursor.execute("""
+                SELECT buyer_name, status, COUNT(*) as cnt
+                FROM outreach_feedback
+                WHERE buyer_name IN ({placeholders})
+                GROUP BY buyer_name, status
+            """.format(placeholders=",".join(["?"] * len(buyer_names))),
+            buyer_names)
+            buyer_reputation_rows = cursor.fetchall()
+            for r in buyer_reputation_rows:
+                name = r["buyer_name"]
+                status = r["status"]
+                cnt = r["cnt"]
+                if name not in reputation_map:
+                    reputation_map[name] = {"total": 0, "positive": 0, "negative": 0, "counts": {}}
+                reputation_map[name]["total"] += cnt
+                reputation_map[name]["counts"][status] = cnt
+                if status in ("replied", "interested", "meeting_scheduled", "offer", "closed"):
+                    reputation_map[name]["positive"] += cnt
+                if status in ("not_interested",):
+                    reputation_map[name]["negative"] += cnt
+
+        conn.close()
+
+        # 5. Compute conversion engine data per buyer
+        hot_buyers = []
+        enriched_payloads = []
+        pipeline = {
+            "targeted": len(payloads),
+            "contacted": 0,
+            "replied": 0,
+            "interested": 0,
+            "not_interested": 0,
+            "meeting_scheduled": 0,
+            "offer": 0,
+            "closed": 0,
+        }
+
+        for p in payloads:
+            name = p.get("buyer_name", "")
+            fb = feedback_map.get(name)
+            status = fb["status"] if fb else None
+            updated_at = fb["updated_at"] if fb else None
+
+            # Pipeline counting
+            if status:
+                pipeline[status] = pipeline.get(status, 0) + 1
+
+            # Dynamic score = base score + feedback modifier + reputation boost
+            base_score = p.get("score", 0)
+            modifier = _FEEDBACK_SCORE_WEIGHTS.get(status, 0) if status else 0
+            reputation = reputation_map.get(name, {"positive": 0, "negative": 0, "total": 0})
+            reputation_boost = 0
+            if reputation["total"] > 0:
+                ratio = reputation["positive"] / reputation["total"]
+                # Frequent positive responders get up to +5 boost
+                if ratio >= 0.7 and reputation["total"] >= 2:
+                    reputation_boost = 5
+                elif ratio <= 0.2 and reputation["total"] >= 2:
+                    reputation_boost = -3
+            dynamic_score = min(base_score + modifier + reputation_boost, 100)
+
+            # Next action + due date + overdue check
+            next_action = _compute_next_action(status, updated_at, p.get("bucket", ""))
+            next_action_due_at = _compute_next_action_due_at(status, updated_at)
+            is_overdue = _is_action_overdue(next_action_due_at)
+
+            enriched = {
+                **p,
+                "dynamic_score": round(dynamic_score, 1),
+                "feedback_status": status,
+                "feedback_updated_at": updated_at,
+                "next_action": next_action,
+                "next_action_due_at": next_action_due_at,
+                "is_overdue": is_overdue,
+                "is_hot": status in ("replied", "interested", "meeting_scheduled", "offer", "closed"),
+                "reputation": {
+                    "total_interactions": reputation["total"],
+                    "positive_count": reputation["positive"],
+                    "negative_count": reputation["negative"],
+                    "boost": reputation_boost,
+                },
+            }
+            enriched_payloads.append(enriched)
+
+            if enriched["is_hot"]:
+                hot_buyers.append({
+                    "buyer_name": name,
+                    "status": status,
+                    "dynamic_score": enriched["dynamic_score"],
+                    "bucket": p.get("bucket", ""),
+                    "next_action": next_action,
+                    "next_action_due_at": next_action_due_at,
+                    "is_overdue": is_overdue,
+                    "buyer_reason_signal": p.get("buyer_reason_signal", ""),
+                })
+
+        # Sort enriched payloads by dynamic score desc, then by overdue first
+        enriched_payloads.sort(key=lambda x: (x["is_overdue"], x["dynamic_score"]), reverse=True)
+        hot_buyers.sort(key=lambda x: (x["is_overdue"], x["dynamic_score"]), reverse=True)
+
+        # Compute conversion rates
+        targeted = pipeline["targeted"] or 1
+        contacted = pipeline["contacted"]
+        replied = pipeline["replied"]
+        interested = pipeline["interested"]
+        meeting_scheduled = pipeline["meeting_scheduled"]
+        offer = pipeline["offer"]
+        closed = pipeline["closed"]
+
+        conversion_rates = {
+            "contacted_rate": round(contacted / targeted * 100, 1),
+            "replied_rate": round(replied / targeted * 100, 1),
+            "interested_rate": round(interested / targeted * 100, 1),
+            "meeting_rate": round(meeting_scheduled / targeted * 100, 1),
+            "offer_rate": round(offer / targeted * 100, 1),
+            "close_rate": round(closed / targeted * 100, 1),
+            "contacted_to_replied": round(replied / contacted * 100, 1) if contacted else 0,
+            "replied_to_interested": round(interested / replied * 100, 1) if replied else 0,
+            "interested_to_meeting": round(meeting_scheduled / interested * 100, 1) if interested else 0,
+            "meeting_to_offer": round(offer / meeting_scheduled * 100, 1) if meeting_scheduled else 0,
+            "offer_to_close": round(closed / offer * 100, 1) if offer else 0,
+        }
+
+        # Pipeline stage counts for funnel visualization
+        funnel = {
+            "targeted": targeted,
+            "contacted": contacted,
+            "replied": replied,
+            "interested": interested,
+            "meeting_scheduled": meeting_scheduled,
+            "offer": offer,
+            "closed": closed,
+            "not_interested": pipeline["not_interested"],
+        }
+
+        # Bottleneck detection
+        bottleneck = None
+        if contacted / targeted > 0.5 and replied / (contacted or 1) < 0.2:
+            bottleneck = "High contact rate, low reply rate → messaging issue"
+        elif replied / (contacted or 1) > 0.3 and interested / (replied or 1) < 0.2:
+            bottleneck = "Good replies, low interest → qualification issue"
+        elif interested > 0 and meeting_scheduled / interested < 0.3:
+            bottleneck = "High interest, low meetings → scheduling friction"
+        elif meeting_scheduled > 0 and offer / meeting_scheduled < 0.3:
+            bottleneck = "Meetings happening, low offers → pricing or terms issue"
+        elif contacted / targeted < 0.2:
+            bottleneck = "Low contact rate → outreach execution issue"
+
+        return {
+            "pack_id": pack_id,
+            "hot_buyers": hot_buyers,
+            "hot_buyer_count": len(hot_buyers),
+            "enriched_payloads": enriched_payloads,
+            "pipeline": funnel,
+            "conversion_rates": conversion_rates,
+            "bottleneck": bottleneck,
+            "feedback_count": len(feedback_rows),
+            "timeline_events": timeline_events,
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/deal-timeline/{pack_id}")
+def get_deal_timeline(pack_id: str):
+    """Get the full deal timeline: execution history, outreach actions, feedback, and timeline events."""
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+
+        events = []
+
+        # Pack creation event from pack assets
+        cursor.execute("SELECT created_at FROM outreach_pack_assets WHERE pack_id = ?", (pack_id,))
+        pack_row = cursor.fetchone()
+        if pack_row:
+            events.append({
+                "timestamp": pack_row["created_at"],
+                "type": "milestone",
+                "event_type": "deal_created",
+                "title": "Deal Created",
+                "description": "Outreach pack generated",
+            })
+
+        # Execution history events
+        cursor.execute("SELECT created_at, event_type, run_id, metadata FROM execution_history WHERE run_id = ? ORDER BY created_at", (pack_id,))
+        for row in cursor.fetchall():
+            events.append({
+                "timestamp": row["created_at"],
+                "type": "execution",
+                "event_type": row["event_type"],
+                "run_id": row["run_id"],
+                "metadata": json.loads(row["metadata"] or "{}"),
+            })
+
+        # Outreach actions
+        cursor.execute("SELECT created_at, buyer_name, action, channel, metadata FROM outreach_action_log WHERE pack_id = ? ORDER BY created_at", (pack_id,))
+        for row in cursor.fetchall():
+            events.append({
+                "timestamp": row["created_at"],
+                "type": "action",
+                "buyer_name": row["buyer_name"],
+                "action": row["action"],
+                "channel": row["channel"],
+                "metadata": json.loads(row["metadata"] or "{}"),
+            })
+
+        # Outreach feedback
+        cursor.execute("SELECT updated_at, buyer_name, status, channel, notes FROM outreach_feedback WHERE pack_id = ? ORDER BY updated_at", (pack_id,))
+        for row in cursor.fetchall():
+            events.append({
+                "timestamp": row["updated_at"],
+                "type": "feedback",
+                "buyer_name": row["buyer_name"],
+                "status": row["status"],
+                "channel": row["channel"],
+                "notes": row["notes"],
+            })
+
+        # Timeline events
+        cursor.execute("SELECT created_at, buyer_name, event_type, metadata FROM deal_timeline_events WHERE pack_id = ? ORDER BY created_at", (pack_id,))
+        for row in cursor.fetchall():
+            events.append({
+                "timestamp": row["created_at"],
+                "type": "timeline",
+                "buyer_name": row["buyer_name"],
+                "event_type": row["event_type"],
+                "metadata": json.loads(row["metadata"] or "{}"),
+            })
+
+        conn.close()
+        events.sort(key=lambda x: x["timestamp"])
+        return {"pack_id": pack_id, "events": events, "count": len(events)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# AUTOPILOT ASSIST
+# ============================================================================
+
+_FOLLOW_UP_TEMPLATES = {
+    "replied": """Hi {first_name},
+
+Great connecting — based on your recent activity in similar {asset_class} product, this {property_type} opportunity in {city} could be a strong fit at {price} with a {cap_rate}% cap.
+
+Are you available this week to review the details?""",
+    "interested": """Hi {first_name},
+
+Glad this caught your interest. Based on your profile and the numbers on this {property_type} in {city}, I think there's real alignment.
+
+Happy to walk through the details and structure — does tomorrow or Thursday work for a brief call?""",
+    "contacted": """Hi {first_name},
+
+Following up on the {property_type} opportunity in {city} I shared recently. At {price} with a {cap_rate}% cap, it's getting attention quickly.
+
+Wanted to make sure it landed — happy to send additional details or set up a quick conversation.""",
+    "meeting_scheduled": """Hi {first_name},
+
+Looking forward to our conversation about the {property_type} in {city}. I've prepared the full feature sheet and recent comparables.
+
+Let me know if there's anything specific you'd like me to have ready.""",
+    "offer": """Hi {first_name},
+
+Wanted to follow up on the offer terms we discussed for the {property_type} in {city}. The seller is motivated and we're looking to move quickly.
+
+Are there any questions or adjustments I can help clarify?""",
+}
+
+
+def _generate_follow_up_draft(buyer_name: str, status: str | None, buyer_reason_signal: str, deal_context: dict) -> str:
+    """Generate a contextual follow-up draft based on deal stage and buyer profile."""
+    if not status or status not in _FOLLOW_UP_TEMPLATES:
+        return ""
+    first_name = buyer_name.split()[0] if ' ' in buyer_name else buyer_name
+    template = _FOLLOW_UP_TEMPLATES[status]
+    try:
+        return template.format(
+            first_name=first_name,
+            asset_class=deal_context.get("property_type", "commercial"),
+            property_type=deal_context.get("property_type", "commercial"),
+            city=deal_context.get("city", "your market"),
+            price=f"${_fmt_currency(deal_context.get('price', 0))}",
+            cap_rate=deal_context.get("cap_rate", 0),
+        )
+    except Exception:
+        return template.replace("{first_name}", first_name).replace("{property_type}", deal_context.get("property_type", "commercial")).replace("{city}", deal_context.get("city", "your market"))
+
+
+def _compute_deal_health(pipeline: dict, conversion_rates: dict, hot_buyer_count: int) -> dict:
+    """Classify deal health: cold → warming → active → hot → closing."""
+    targeted = pipeline.get("targeted", 0)
+    contacted = pipeline.get("contacted", 0)
+    replied = pipeline.get("replied", 0)
+    interested = pipeline.get("interested", 0)
+    meeting_scheduled = pipeline.get("meeting_scheduled", 0)
+    offer = pipeline.get("offer", 0)
+    closed = pipeline.get("closed", 0)
+
+    # Engagement velocity score (0-100)
+    engagement_score = 0
+    if targeted > 0:
+        engagement_score += (contacted / targeted) * 15
+        engagement_score += (replied / targeted) * 25
+        engagement_score += (interested / targeted) * 30
+        engagement_score += (meeting_scheduled / targeted) * 15
+        engagement_score += (offer / targeted) * 10
+        engagement_score += (closed / targeted) * 5
+
+    # Stage progression bonus
+    stage_bonus = 0
+    if closed > 0:
+        stage_bonus = 40
+    elif offer > 0:
+        stage_bonus = 30
+    elif meeting_scheduled > 0:
+        stage_bonus = 20
+    elif interested > 0:
+        stage_bonus = 10
+
+    total_score = min(engagement_score + stage_bonus, 100)
+
+    # Health classification
+    if closed > 0 or total_score >= 80:
+        health = "closing"
+        label = "🔥 Closing"
+    elif offer > 0 or total_score >= 60:
+        health = "hot"
+        label = "🌡️ Hot"
+    elif interested > 0 or meeting_scheduled > 0 or total_score >= 40:
+        health = "active"
+        label = "⚡ Active"
+    elif replied > 0 or contacted > 0 or total_score >= 20:
+        health = "warming"
+        label = "🌤️ Warming"
+    else:
+        health = "cold"
+        label = "❄️ Cold"
+
+    # Risk assessment
+    risk = "low"
+    if contacted > 0 and replied == 0 and interested == 0:
+        risk = "high"
+    elif interested > 0 and meeting_scheduled == 0:
+        risk = "medium"
+    elif offer > 0 and closed == 0:
+        risk = "medium"
+
+    return {
+        "health": health,
+        "label": label,
+        "score": round(total_score, 1),
+        "risk": risk,
+        "momentum": "strong" if total_score >= 50 else "weak",
+    }
+
+
+def _compute_close_probability(pipeline: dict, hot_buyer_count: int, avg_dynamic_score: float) -> float:
+    """Estimate close probability based on pipeline composition and buyer quality."""
+    targeted = pipeline.get("targeted", 1)
+    interested = pipeline.get("interested", 0)
+    meeting_scheduled = pipeline.get("meeting_scheduled", 0)
+    offer = pipeline.get("offer", 0)
+    closed = pipeline.get("closed", 0)
+
+    # Base probability from stage
+    prob = 0
+    if closed > 0:
+        prob = max(prob, 95)
+    if offer > 0:
+        prob = max(prob, 75)
+    if meeting_scheduled > 0:
+        prob = max(prob, 55)
+    if interested > 0:
+        prob = max(prob, 35)
+
+    # Engagement density boost
+    engagement_ratio = (interested + meeting_scheduled + offer + closed) / targeted
+    prob += engagement_ratio * 20
+
+    # Buyer quality boost
+    if avg_dynamic_score >= 80:
+        prob += 10
+    elif avg_dynamic_score >= 60:
+        prob += 5
+
+    return min(round(prob, 1), 100)
+
+
+def _generate_insights(pack_id: str, pipeline: dict, conversion_rates: dict, conn) -> list:
+    """Generate pattern learning insights from execution history."""
+    insights = []
+
+    # Insight 1: Stage progression efficiency
+    interested = pipeline.get("interested", 0)
+    meeting_scheduled = pipeline.get("meeting_scheduled", 0)
+    offer = pipeline.get("offer", 0)
+    contacted = pipeline.get("contacted", 0)
+    replied = pipeline.get("replied", 0)
+
+    if contacted > 0 and replied > 0:
+        reply_rate = replied / contacted
+        if reply_rate >= 0.5:
+            insights.append(f"✅ Strong reply rate ({round(reply_rate*100)}%) — messaging is resonating")
+        elif reply_rate < 0.2:
+            insights.append(f"⚠️ Low reply rate ({round(reply_rate*100)}%) — consider refining outreach angle")
+
+    if interested > 0 and meeting_scheduled > 0:
+        meeting_rate = meeting_scheduled / interested
+        if meeting_rate >= 0.5:
+            insights.append(f"🎯 High meeting conversion ({round(meeting_rate*100)}%) — buyers are qualified")
+
+    if meeting_scheduled > 0 and offer > 0:
+        offer_rate = offer / meeting_scheduled
+        if offer_rate >= 0.5:
+            insights.append(f"💰 Strong offer rate ({round(offer_rate*100)}%) — pricing/terms are competitive")
+
+    # Insight 2: Cross-deal pattern (requires historical data)
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT status, COUNT(*) as cnt FROM outreach_feedback GROUP BY status
+        """)
+        all_feedback = {row["status"]: row["cnt"] for row in cursor.fetchall()}
+        total = sum(all_feedback.values())
+        if total > 10:
+            positive = sum(all_feedback.get(s, 0) for s in ("replied", "interested", "meeting_scheduled", "offer", "closed"))
+            negative = all_feedback.get("not_interested", 0)
+            if positive > 0:
+                insights.append(f"📊 System-wide: {round(positive/total*100)}% positive response rate across all deals")
+    except Exception:
+        pass
+
+    # Insight 3: Timing / urgency
+    if interested > 0 and meeting_scheduled == 0:
+        insights.append("⏰ Interested buyers not yet scheduled — prioritize meeting outreach")
+    if offer > 0 and pipeline.get("closed", 0) == 0:
+        insights.append("🚀 Offers on the table — focus on closing discipline")
+
+    if not insights:
+        insights.append("📝 Submit feedback on buyers to generate personalized insights")
+
+    return insights
+
+
+@app.get("/api/autopilot/{pack_id}")
+def get_autopilot_assist(pack_id: str):
+    """
+    Autopilot Assist: execution acceleration with human control.
+    Returns follow-up drafts, deal health, insights, and close probability.
+    """
+    try:
+        db_path = Path(os.getenv("BIGDATACLAW_DB", "/home/jamie/Desktop/Jamie's Personal Vault/bigdataclaw/bigdataclaw.db"))
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+
+        # 1. Load pack assets
+        cursor.execute("SELECT assets_json FROM outreach_pack_assets WHERE pack_id = ?", (pack_id,))
+        row = cursor.fetchone()
+        if not row:
+            conn.close()
+            raise HTTPException(status_code=404, detail=f"Pack {pack_id} not found")
+        assets = json.loads(row["assets_json"] or "{}")
+        payloads = assets.get("buyer_outreach_payloads", [])
+        deal_context = assets.get("deal_context", {})
+        # Fallback deal context from subject_property if not stored
+        if not deal_context and assets.get("subject_property"):
+            deal_context = assets["subject_property"]
+
+        # 2. Load feedback
+        cursor.execute("SELECT * FROM outreach_feedback WHERE pack_id = ?", (pack_id,))
+        feedback_rows = cursor.fetchall()
+        feedback_map = {r["buyer_name"]: dict(r) for r in feedback_rows}
+
+        # 3. Build pipeline counts
+        pipeline = {
+            "targeted": len(payloads), "contacted": 0, "replied": 0,
+            "interested": 0, "not_interested": 0,
+            "meeting_scheduled": 0, "offer": 0, "closed": 0,
+        }
+        for p in payloads:
+            fb = feedback_map.get(p.get("buyer_name", ""))
+            if fb:
+                pipeline[fb["status"]] = pipeline.get(fb["status"], 0) + 1
+
+        # 4. Generate follow-up drafts for each engaged buyer
+        follow_up_drafts = []
+        total_dynamic_score = 0
+        hot_buyer_count = 0
+        for p in payloads:
+            name = p.get("buyer_name", "")
+            fb = feedback_map.get(name)
+            status = fb["status"] if fb else None
+            if status in _FOLLOW_UP_TEMPLATES:
+                draft = _generate_follow_up_draft(
+                    name, status,
+                    p.get("buyer_reason_signal", ""),
+                    deal_context,
+                )
+                follow_up_drafts.append({
+                    "buyer_name": name,
+                    "status": status,
+                    "draft": draft,
+                })
+            # Accumulate for close probability
+            base_score = p.get("score", 0)
+            modifier = _FEEDBACK_SCORE_WEIGHTS.get(status, 0) if status else 0
+            total_dynamic_score += min(base_score + modifier, 100)
+            if status in ("replied", "interested", "meeting_scheduled", "offer", "closed"):
+                hot_buyer_count += 1
+
+        avg_dynamic_score = total_dynamic_score / len(payloads) if payloads else 0
+
+        # 5. Compute deal health
+        deal_health = _compute_deal_health(pipeline, {}, hot_buyer_count)
+
+        # 6. Compute close probability
+        close_probability = _compute_close_probability(pipeline, hot_buyer_count, avg_dynamic_score)
+
+        # 7. Generate insights
+        insights = _generate_insights(pack_id, pipeline, {}, conn)
+
+        conn.close()
+
+        return {
+            "pack_id": pack_id,
+            "follow_up_drafts": follow_up_drafts,
+            "deal_health": deal_health,
+            "close_probability": close_probability,
+            "insights": insights,
+            "pipeline_summary": pipeline,
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ============================================================================
@@ -6162,10 +7097,16 @@ class BuyerIntelligenceRequest(BaseModel):
     target_count: int = 25            # not limited to 10
 
 
-def _generate_quick_links(name: str, domain: str = "", city: str = "") -> dict:
+def _generate_quick_links(name: str, domain: str = "", city: str = "", property: str = "") -> dict:
     """Generate outreach quick links for a company or person."""
     q = name.replace(" ", "+")
     city_q = city.replace(" ", "+") if city else ""
+    # Recent deal: exact property address search if available, else name + city
+    if property:
+        prop_q = property.replace(" ", "+").replace("\\n", " ")
+        recent_deal_url = f"https://www.google.com/search?q={prop_q}+{city_q}+real+estate" if city_q else f"https://www.google.com/search?q={prop_q}+real+estate"
+    else:
+        recent_deal_url = f"https://www.google.com/search?q={q}+{city_q}+recent+deal+property" if city_q else f"https://www.google.com/search?q={q}+recent+deal+property"
     return {
         "google": f"https://www.google.com/search?q={q}",
         "contact_page": f"https://www.google.com/search?q={q}+contact",
@@ -6177,8 +7118,7 @@ def _generate_quick_links(name: str, domain: str = "", city: str = "") -> dict:
         "news": f"https://www.google.com/search?q={q}+real+estate&tbm=nws",
         "key_people": f"https://www.google.com/search?q={q}+CEO+OR+President+real+estate",
         "website": f"https://{domain}" if domain else "",
-        "loopnet": f"https://www.loopnet.com/search?q={q}",
-        "loopnet_properties": f"https://www.google.com/search?q={q}+site%3Aloopnet.com",
+        "recent_deal": recent_deal_url,
         "cre_google": f"https://www.google.com/search?q={q}+commercial+real+estate",
         "cre_listings": f"https://www.google.com/search?q={q}+properties+for+sale+lease",
         "google_maps": f"https://www.google.com/maps/search/{q}+{city_q}" if city_q else "",
@@ -6546,7 +7486,8 @@ def buyer_intelligence(request: BuyerIntelligenceRequest):
                         "quick_links": _generate_quick_links(
                             row["entity"] or row["buyer_name"] or "",
                             "",
-                            row["location"] or ""
+                            row["location"] or "",
+                            row["property"] or row["address"] or ""
                         ),
                     })
         except Exception as e:
@@ -7361,6 +8302,781 @@ def get_feature_sheet(sheet_id: str):
             raise HTTPException(status_code=404, detail="Feature sheet not found")
 
     return HTMLResponse(content=data.get("html", "<h1>Feature Sheet Unavailable</h1>"), status_code=200)
+
+
+# ============================================================================
+# MAIN
+# ============================================================================
+
+
+# ============================================================================
+# FACEBOOK INTELLIGENCE + LEAD CAPTURE LAYER
+# ============================================================================
+
+class FacebookClassifyRequest(BaseModel):
+    post_text: str = ""
+    post_url: str = ""  # optional link to the post
+    group_name: str = ""  # which group it came from
+    source: str = "facebook"  # facebook, marketplace, etc.
+
+
+class FacebookLeadIngestRequest(BaseModel):
+    name: str = ""
+    company: str = ""
+    location: str = ""
+    asset_type: str = ""
+    intent: str = ""  # buyer | seller | broker | noise
+    urgency: str = ""  # high | medium | low
+    signal_tags: List[str] = []
+    post_text: str = ""
+    facebook_profile: str = ""
+    contact_available: bool = False
+    contact_method: str = ""  # dm, comment, messenger, phone
+    estimated_value: str = ""  # e.g. "$2M-$5M"
+    notes: str = ""
+    source: str = "facebook"
+    group_name: str = ""
+    post_url: str = ""
+    user_id: str = ""
+
+
+class FacebookLeadRouteRequest(BaseModel):
+    lead_id: int = 0
+    route_to: str = ""  # buyer_pipeline | deal_pipeline
+    notes: str = ""
+    user_id: str = ""
+
+
+class FacebookActionRequest(BaseModel):
+    lead_id: int = 0
+    action: str = ""  # dm_sent, dm_replied, connected, qualified, archived
+    channel: str = "facebook"
+    notes: str = ""
+    user_id: str = ""
+
+
+# --- Signal Classification Engine ---
+
+_FB_SELLER_SIGNALS = [
+    "motivated seller", "must sell", "urgent sale", "vacant", "fixer upper",
+    "portfolio sale", "fire sale", "distressed", "below market", "quick close",
+    "cash only", "as-is", "handyman special", "estate sale", "liquidation",
+    "offloading", "selling fast", "need gone", "price reduced", "reduced price",
+    "assigning", "assignment", "wholesale", "wholesaling", "flip", "flipping",
+    "tired landlord", "burnt out", "retiring", "moving", "relocating",
+]
+
+_FB_BUYER_SIGNALS = [
+    "cash buyer", "looking to buy", "seeking", "in search of", "iso",
+    "want to buy", "buying", "acquiring", "looking for", "interested in buying",
+    "cash ready", "pre-approved", "proof of funds", "pof", "quick close",
+    "can close fast", "closing quickly", "buying multifamily", "buying commercial",
+]
+
+_FB_BROKER_SIGNALS = [
+    "representing", "listing agent", "broker", "realtor", "have a client",
+    "buyer rep", "seller rep", "commercial broker", "investment sales",
+]
+
+_FB_URGENCY_SIGNALS = {
+    "high": ["must sell", "urgent", "fire sale", "asap", "this week", "need gone", "cash only", "quick close", "motivated", "distressed"],
+    "medium": ["selling", "looking to buy", "interested", "serious", "ready"],
+    "low": ["curious", "thinking about", "maybe", "considering", "someday"],
+}
+
+_FB_ASSET_TYPE_MAP = {
+    "multifamily": ["multifamily", "multi-family", "apartment", "rental", "plex", "triplex", "fourplex", "duplex"],
+    "office": ["office", "commercial office", "class a", "class b"],
+    "industrial": ["industrial", "warehouse", "distribution", "logistics", "manufacturing"],
+    "retail": ["retail", "strip mall", "plaza", "shopping center", "storefront"],
+    "hotel": ["hotel", "motel", "hospitality"],
+    "land": ["land", "development site", "acre", "vacant land"],
+    "mixed-use": ["mixed use", "mixed-use", "live work"],
+}
+
+_FB_LOCATION_HINTS = [
+    "toronto", "mississauga", "brampton", "vaughan", "markham", "richmond hill",
+    "oakville", "burlington", "hamilton", "kitchener", "waterloo", "london",
+    "ottawa", "calgary", "edmonton", "vancouver", "montreal", "winnipeg",
+    "ontario", "alberta", "bc", "british columbia", "gta", "greater toronto",
+]
+
+
+def _classify_facebook_post(text: str) -> dict:
+    """Classify a Facebook post into structured lead data."""
+    text_lower = text.lower()
+    words = set(re.findall(r'\b\w+\b', text_lower))
+
+    # Intent classification
+    seller_score = sum(1 for s in _FB_SELLER_SIGNALS if s in text_lower)
+    buyer_score = sum(1 for s in _FB_BUYER_SIGNALS if s in text_lower)
+    broker_score = sum(1 for s in _FB_BROKER_SIGNALS if s in text_lower)
+
+    if seller_score > buyer_score and seller_score > broker_score:
+        intent = "seller"
+    elif buyer_score > seller_score and buyer_score > broker_score:
+        intent = "buyer"
+    elif broker_score >= 1:
+        intent = "broker"
+    else:
+        intent = "noise"
+
+    # Urgency
+    urgency = "low"
+    for level, signals in _FB_URGENCY_SIGNALS.items():
+        if any(s in text_lower for s in signals):
+            urgency = level
+            break
+
+    # Signal tags
+    signal_tags = []
+    all_signals = _FB_SELLER_SIGNALS + _FB_BUYER_SIGNALS + _FB_BROKER_SIGNALS
+    for signal in all_signals:
+        if signal in text_lower:
+            signal_tags.append(signal)
+    signal_tags = list(dict.fromkeys(signal_tags))[:10]  # dedupe, max 10
+
+    # Asset type detection
+    asset_type = ""
+    for atype, keywords in _FB_ASSET_TYPE_MAP.items():
+        if any(kw in text_lower for kw in keywords):
+            asset_type = atype
+            break
+
+    # Location detection
+    location = ""
+    for loc in _FB_LOCATION_HINTS:
+        if loc in text_lower:
+            location = loc.title()
+            break
+
+    # Contact availability heuristic
+    contact_available = any(kw in text_lower for kw in ["dm me", "message me", "comment", "reach out", "contact", "call", "text", "email"])
+
+    # Extract name heuristic (first capitalized word sequence before common terms)
+    name = ""
+    name_match = re.search(r'^([A-Z][a-zA-Z\s]{2,30})(?:\s+-\s+|\s*[:|•]|\n)', text.strip())
+    if name_match:
+        name = name_match.group(1).strip()
+
+    # Estimated value heuristic
+    value_patterns = [
+        r'\$([\d,]+(?:\.\d+)?)\s*([mMkK]|million|thousand)\b',
+        r'\$([\d,]+(?:\.\d+)?)\b',
+        r'([\d,]+)\s*([mMkK]|million|thousand)\s*(?:dollars|usd)?\b',
+    ]
+    estimated_value = ""
+    for pattern in value_patterns:
+        m = re.search(pattern, text_lower)
+        if m:
+            num = m.group(1).replace(',', '')
+            suffix = m.group(2) if len(m.groups()) > 1 and m.group(2) else ''
+            if suffix.lower() in ['m', 'million']:
+                estimated_value = f"${num}M"
+            elif suffix.lower() in ['k', 'thousand']:
+                estimated_value = f"${int(float(num))}K"
+            else:
+                val = float(num)
+                if val >= 1_000_000:
+                    estimated_value = f"${val/1_000_000:.1f}M"
+                elif val >= 1000:
+                    estimated_value = f"${val/1000:.0f}K"
+                else:
+                    estimated_value = f"${num}"
+            break
+
+    return {
+        "intent": intent,
+        "urgency": urgency,
+        "signal_tags": signal_tags,
+        "asset_type": asset_type,
+        "location": location,
+        "contact_available": contact_available,
+        "name": name,
+        "estimated_value": estimated_value,
+        "confidence": max(seller_score, buyer_score, broker_score),
+    }
+
+
+def _score_facebook_lead(classification: dict) -> str:
+    """Score a classified Facebook lead as HOT / WARM / COLD."""
+    score = 0
+    # Intent clarity
+    if classification["intent"] in ("buyer", "seller"):
+        score += 30
+    elif classification["intent"] == "broker":
+        score += 20
+
+    # Urgency
+    urgency_scores = {"high": 35, "medium": 20, "low": 5}
+    score += urgency_scores.get(classification["urgency"], 0)
+
+    # Signal density
+    score += min(len(classification.get("signal_tags", [])), 5) * 5
+
+    # Contact available
+    if classification.get("contact_available"):
+        score += 10
+
+    # Asset type known
+    if classification.get("asset_type"):
+        score += 10
+
+    # Location known
+    if classification.get("location"):
+        score += 10
+
+    if score >= 70:
+        return "HOT"
+    elif score >= 40:
+        return "WARM"
+    return "COLD"
+
+
+def _generate_facebook_dm(lead: dict, template_type: str = "initial") -> str:
+    """Generate a Facebook DM personalized to the lead."""
+    name = lead.get("name", "there")
+    intent = lead.get("intent", "")
+    asset_type = lead.get("asset_type", "")
+    location = lead.get("location", "")
+    signal_tags = lead.get("signal_tags", [])
+    post_text = lead.get("post_text", "")
+
+    # Extract a snippet from their post (first 80 chars)
+    snippet = post_text[:80].strip() + "..." if len(post_text) > 80 else post_text
+
+    if template_type == "initial":
+        if intent == "seller":
+            if asset_type:
+                return f"Hey {name}, saw your post about the {asset_type} — looks like something we work with quite a bit. Happy to connect and share some insight if helpful."
+            else:
+                return f"Hey {name}, saw your post about your property — looks like something we work with quite a bit. Happy to connect and share some insight if helpful."
+        elif intent == "buyer":
+            if location:
+                return f"Hey {name}, saw you're looking in {location} — we come across off-market deals there pretty regularly. Happy to share what we're seeing if useful."
+            else:
+                return f"Hey {name}, saw your post — we come across off-market deals pretty regularly. Happy to share what we're seeing if useful."
+        else:
+            return f"Hey {name}, saw your post — looks like we're active in similar circles. Would love to connect."
+
+    elif template_type == "followup":
+        if intent == "seller":
+            return f"Hey {name}, just following up — still interested in learning more about your situation. No pressure, just here if helpful."
+        elif intent == "buyer":
+            return f"Hey {name}, wanted to follow up — any specific criteria you're targeting right now? We might have something coming up."
+        else:
+            return f"Hey {name}, just circling back. Would love to connect when you have a moment."
+
+    elif template_type == "qualify":
+        if intent == "seller":
+            return f"Hey {name}, thanks for connecting. Quick question — are you looking for a quick close or maximizing price? Helps me understand how to best help."
+        elif intent == "buyer":
+            return f"Hey {name}, thanks for connecting. What asset class and size range are you most active in? We see a lot across Ontario."
+        else:
+            return f"Hey {name}, thanks for connecting. What kind of deals are you seeing most of right now?"
+
+    return f"Hey {name}, saw your post — would love to connect."
+
+
+def _ensure_facebook_tables(cursor):
+    """Create Facebook leads and action log tables if they don't exist."""
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS facebook_leads (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at TEXT,
+            updated_at TEXT,
+            source TEXT DEFAULT 'facebook',
+            group_name TEXT,
+            post_url TEXT,
+            name TEXT,
+            company TEXT,
+            location TEXT,
+            asset_type TEXT,
+            intent TEXT,
+            urgency TEXT,
+            score_tier TEXT,
+            signal_tags TEXT,
+            post_text TEXT,
+            facebook_profile TEXT,
+            contact_available INTEGER DEFAULT 0,
+            contact_method TEXT,
+            estimated_value TEXT,
+            notes TEXT,
+            status TEXT DEFAULT 'new',
+            routed_to TEXT,
+            routed_at TEXT,
+            dm_sent INTEGER DEFAULT 0,
+            dm_sent_at TEXT,
+            dm_replied INTEGER DEFAULT 0,
+            dm_replied_at TEXT,
+            connected INTEGER DEFAULT 0,
+            connected_at TEXT,
+            qualified INTEGER DEFAULT 0,
+            qualified_at TEXT,
+            archived INTEGER DEFAULT 0,
+            archived_at TEXT,
+            user_id TEXT
+        )
+    """)
+    # Migrate: add timestamp columns if missing
+    cursor.execute("PRAGMA table_info(facebook_leads)")
+    existing_cols = [r[1] for r in cursor.fetchall()]
+    for col in ['dm_sent_at', 'dm_replied_at', 'connected_at', 'qualified_at', 'archived_at']:
+        if col not in existing_cols:
+            cursor.execute(f"ALTER TABLE facebook_leads ADD COLUMN {col} TEXT")
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS facebook_actions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at TEXT,
+            lead_id INTEGER,
+            action TEXT,
+            channel TEXT,
+            notes TEXT,
+            user_id TEXT
+        )
+    """)
+
+
+@app.post("/api/facebook/classify")
+def facebook_classify(request: FacebookClassifyRequest):
+    """Classify a raw Facebook post into structured lead data."""
+    try:
+        classification = _classify_facebook_post(request.post_text)
+        tier = _score_facebook_lead(classification)
+
+        # Extract profile URL heuristic
+        profile_url = ""
+        url_match = re.search(r'https?://(?:www\.)?facebook\.com/[^\s]+', request.post_text)
+        if url_match:
+            profile_url = url_match.group(0)
+
+        return {
+            "classification": classification,
+            "tier": tier,
+            "profile_url": profile_url,
+            "source": request.source,
+            "group_name": request.group_name,
+            "post_url": request.post_url,
+            "ready_to_ingest": classification["intent"] in ("buyer", "seller", "broker") and classification["confidence"] >= 1,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/facebook/lead")
+def facebook_ingest_lead(request: FacebookLeadIngestRequest):
+    """Ingest a classified Facebook lead into the database."""
+    try:
+        db_path = _get_db_path()
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        _ensure_facebook_tables(cursor)
+
+        # Auto-classify and score if not fully specified
+        classification = _classify_facebook_post(request.post_text)
+        intent = request.intent or classification["intent"]
+        urgency = request.urgency if request.urgency else classification["urgency"]
+        asset_type = request.asset_type or classification["asset_type"]
+        location = request.location or classification["location"]
+        contact_available = request.contact_available if request.contact_available else classification["contact_available"]
+        estimated_value = request.estimated_value or classification["estimated_value"]
+        name = request.name or classification["name"]
+
+        tags = request.signal_tags or classification["signal_tags"]
+        tier = _score_facebook_lead({
+            "intent": intent, "urgency": urgency, "signal_tags": tags,
+            "contact_available": contact_available, "asset_type": asset_type, "location": location
+        })
+
+        now = datetime.utcnow().isoformat()
+        cursor.execute("""
+            INSERT INTO facebook_leads (
+                created_at, updated_at, source, group_name, post_url,
+                name, company, location, asset_type, intent, urgency, score_tier,
+                signal_tags, post_text, facebook_profile, contact_available,
+                contact_method, estimated_value, notes, status, user_id
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            now, now, request.source, request.group_name, request.post_url,
+            name, request.company, location, asset_type, intent, urgency, tier,
+            json.dumps(tags), request.post_text, request.facebook_profile,
+            1 if contact_available else 0, request.contact_method,
+            estimated_value, request.notes, "new", request.user_id
+        ))
+        lead_id = cursor.lastrowid
+        conn.commit()
+        conn.close()
+
+        return {
+            "status": "ingested",
+            "lead_id": lead_id,
+            "tier": tier,
+            "intent": intent,
+            "urgency": urgency,
+            "asset_type": asset_type,
+            "location": location,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/facebook/leads")
+def facebook_list_leads(
+    intent: Optional[str] = Query(None),
+    tier: Optional[str] = Query(None),
+    status: Optional[str] = Query(None),
+    asset_type: Optional[str] = Query(None),
+    search: Optional[str] = Query(None),
+    limit: int = Query(100),
+    offset: int = Query(0),
+):
+    """List Facebook leads with optional filters."""
+    try:
+        db_path = _get_db_path()
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        _ensure_facebook_tables(cursor)
+
+        where_parts = ["1=1"]
+        params = []
+        if intent:
+            where_parts.append("intent = ?")
+            params.append(intent)
+        if tier:
+            where_parts.append("score_tier = ?")
+            params.append(tier)
+        if status:
+            where_parts.append("status = ?")
+            params.append(status)
+        if asset_type:
+            where_parts.append("asset_type = ?")
+            params.append(asset_type)
+        if search:
+            where_parts.append("(name LIKE ? OR post_text LIKE ? OR location LIKE ?)")
+            params.extend([f"%{search}%", f"%{search}%", f"%{search}%"])
+
+        where_sql = " AND ".join(where_parts)
+
+        cursor.execute(f"""
+            SELECT * FROM facebook_leads WHERE {where_sql}
+            ORDER BY 
+                CASE score_tier WHEN 'HOT' THEN 1 WHEN 'WARM' THEN 2 ELSE 3 END,
+                CASE urgency WHEN 'high' THEN 1 WHEN 'medium' THEN 2 ELSE 3 END,
+                created_at DESC
+            LIMIT ? OFFSET ?
+        """, params + [limit, offset])
+        rows = cursor.fetchall()
+
+        # Count total
+        cursor.execute(f"SELECT COUNT(*) FROM facebook_leads WHERE {where_sql}", params)
+        total = cursor.fetchone()[0]
+
+        conn.close()
+
+        leads = []
+        for r in rows:
+            d = dict(r)
+            try:
+                d["signal_tags"] = json.loads(d.get("signal_tags", "[]"))
+            except:
+                d["signal_tags"] = []
+            d["contact_available"] = bool(d.get("contact_available"))
+            leads.append(d)
+
+        # Summary stats
+        stats = {"total": total, "hot": 0, "warm": 0, "cold": 0, "buyer": 0, "seller": 0, "broker": 0, "new": 0, "contacted": 0, "qualified": 0}
+        for l in leads:
+            t = l.get("score_tier", "")
+            if t in stats:
+                stats[t.lower()] = stats.get(t.lower(), 0) + 1
+            i = l.get("intent", "")
+            if i in stats:
+                stats[i] = stats.get(i, 0) + 1
+            s = l.get("status", "")
+            if s in stats:
+                stats[s] = stats.get(s, 0) + 1
+
+        return {"leads": leads, "total": total, "stats": stats, "limit": limit, "offset": offset}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/facebook/lead/{lead_id}")
+def facebook_get_lead(lead_id: int):
+    """Get a single Facebook lead with its action history."""
+    try:
+        db_path = _get_db_path()
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        _ensure_facebook_tables(cursor)
+
+        cursor.execute("SELECT * FROM facebook_leads WHERE id = ?", (lead_id,))
+        row = cursor.fetchone()
+        if not row:
+            raise HTTPException(status_code=404, detail="Lead not found")
+
+        lead = dict(row)
+        try:
+            lead["signal_tags"] = json.loads(lead.get("signal_tags", "[]"))
+        except:
+            lead["signal_tags"] = []
+        lead["contact_available"] = bool(lead.get("contact_available"))
+
+        # Compute speed metrics
+        created_at = lead.get("created_at")
+        dm_sent_at = lead.get("dm_sent_at")
+        dm_replied_at = lead.get("dm_replied_at")
+        lead["speed_to_dm_minutes"] = None
+        lead["first_response_minutes"] = None
+        if created_at and dm_sent_at:
+            try:
+                created_dt = datetime.fromisoformat(created_at.replace('Z', '+00:00'))
+                sent_dt = datetime.fromisoformat(dm_sent_at.replace('Z', '+00:00'))
+                lead["speed_to_dm_minutes"] = round((sent_dt - created_dt).total_seconds() / 60, 1)
+            except Exception:
+                pass
+        if dm_sent_at and dm_replied_at:
+            try:
+                sent_dt = datetime.fromisoformat(dm_sent_at.replace('Z', '+00:00'))
+                replied_dt = datetime.fromisoformat(dm_replied_at.replace('Z', '+00:00'))
+                lead["first_response_minutes"] = round((replied_dt - sent_dt).total_seconds() / 60, 1)
+            except Exception:
+                pass
+
+        cursor.execute("SELECT * FROM facebook_actions WHERE lead_id = ? ORDER BY created_at DESC", (lead_id,))
+        actions = [dict(r) for r in cursor.fetchall()]
+        lead["actions"] = actions
+
+        conn.close()
+        return lead
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/facebook/lead/{lead_id}/route")
+def facebook_route_lead(lead_id: int, request: FacebookLeadRouteRequest):
+    """Route a Facebook lead into the buyer or deal pipeline."""
+    try:
+        db_path = _get_db_path()
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        _ensure_facebook_tables(cursor)
+
+        cursor.execute("SELECT * FROM facebook_leads WHERE id = ?", (lead_id,))
+        row = cursor.fetchone()
+        if not row:
+            raise HTTPException(status_code=404, detail="Lead not found")
+
+        now = datetime.utcnow().isoformat()
+        route_to = request.route_to
+
+        # Update lead status
+        cursor.execute("""
+            UPDATE facebook_leads
+            SET routed_to = ?, routed_at = ?, status = ?, updated_at = ?
+            WHERE id = ?
+        """, (route_to, now, "routed", now, lead_id))
+
+        # Log action
+        cursor.execute("""
+            INSERT INTO facebook_actions (created_at, lead_id, action, channel, notes, user_id)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (now, lead_id, f"routed_to_{route_to}", "system", request.notes, request.user_id))
+
+        conn.commit()
+        conn.close()
+
+        return {
+            "status": "routed",
+            "lead_id": lead_id,
+            "route_to": route_to,
+            "routed_at": now,
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/facebook/lead/{lead_id}/status")
+def facebook_update_lead_status(lead_id: int, request: FacebookActionRequest):
+    """Update a lead's status (dm_sent, dm_replied, connected, qualified, archived)."""
+    try:
+        db_path = _get_db_path()
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        _ensure_facebook_tables(cursor)
+
+        cursor.execute("SELECT * FROM facebook_leads WHERE id = ?", (lead_id,))
+        row = cursor.fetchone()
+        if not row:
+            raise HTTPException(status_code=404, detail="Lead not found")
+
+        now = datetime.utcnow().isoformat()
+
+        # Map action to column update + timestamp tracking
+        action_col_map = {
+            "dm_sent": ("dm_sent", "dm_sent_at"),
+            "dm_replied": ("dm_replied", "dm_replied_at"),
+            "connected": ("connected", "connected_at"),
+            "qualified": ("qualified", "qualified_at"),
+            "archived": ("archived", "archived_at"),
+        }
+
+        if request.action in action_col_map:
+            col, ts_col = action_col_map[request.action]
+            cursor.execute(f"UPDATE facebook_leads SET {col} = 1, {ts_col} = ?, updated_at = ?, status = ? WHERE id = ?",
+                           (now, now, request.action, lead_id))
+        else:
+            cursor.execute("UPDATE facebook_leads SET status = ?, updated_at = ? WHERE id = ?",
+                           (request.action, now, lead_id))
+
+        # Log action
+        cursor.execute("""
+            INSERT INTO facebook_actions (created_at, lead_id, action, channel, notes, user_id)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (now, lead_id, request.action, request.channel, request.notes, request.user_id))
+
+        conn.commit()
+        conn.close()
+
+        return {"status": "updated", "lead_id": lead_id, "action": request.action}
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/facebook/templates")
+def facebook_dm_templates(
+    lead_id: Optional[int] = Query(None),
+    template_type: Optional[str] = Query("initial"),
+):
+    """Get DM templates for a Facebook lead."""
+    try:
+        lead = {}
+        if lead_id:
+            db_path = _get_db_path()
+            conn = sqlite3.connect(str(db_path))
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            _ensure_facebook_tables(cursor)
+            cursor.execute("SELECT * FROM facebook_leads WHERE id = ?", (lead_id,))
+            row = cursor.fetchone()
+            if row:
+                lead = dict(row)
+                try:
+                    lead["signal_tags"] = json.loads(lead.get("signal_tags", "[]"))
+                except:
+                    lead["signal_tags"] = []
+                lead["contact_available"] = bool(lead.get("contact_available"))
+            conn.close()
+
+        types = ["initial", "followup", "qualify"] if template_type == "all" else [template_type]
+        templates = {}
+        for t in types:
+            templates[t] = _generate_facebook_dm(lead, t)
+
+        return {
+            "lead_id": lead_id,
+            "templates": templates,
+            "rules": [
+                "Every message must reference their post",
+                "No generic copy-paste",
+                "Respect platform limits (don't spam)",
+                "Soft and contextual — not salesy",
+            ]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/facebook/stats")
+def facebook_stats():
+    """Get high-level stats for the Facebook intelligence dashboard."""
+    try:
+        db_path = _get_db_path()
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        _ensure_facebook_tables(cursor)
+
+        cursor.execute("""
+            SELECT 
+                COUNT(*) as total,
+                SUM(CASE WHEN score_tier = 'HOT' THEN 1 ELSE 0 END) as hot,
+                SUM(CASE WHEN score_tier = 'WARM' THEN 1 ELSE 0 END) as warm,
+                SUM(CASE WHEN score_tier = 'COLD' THEN 1 ELSE 0 END) as cold,
+                SUM(CASE WHEN intent = 'buyer' THEN 1 ELSE 0 END) as buyers,
+                SUM(CASE WHEN intent = 'seller' THEN 1 ELSE 0 END) as sellers,
+                SUM(CASE WHEN intent = 'broker' THEN 1 ELSE 0 END) as brokers,
+                SUM(CASE WHEN status = 'new' THEN 1 ELSE 0 END) as new_count,
+                SUM(CASE WHEN dm_sent = 1 THEN 1 ELSE 0 END) as dms_sent,
+                SUM(CASE WHEN dm_replied = 1 THEN 1 ELSE 0 END) as dms_replied,
+                SUM(CASE WHEN connected = 1 THEN 1 ELSE 0 END) as connected_count,
+                SUM(CASE WHEN qualified = 1 THEN 1 ELSE 0 END) as qualified_count
+            FROM facebook_leads
+        """)
+        row = cursor.fetchone()
+        stats = dict(row) if row else {}
+
+        # Recent activity
+        cursor.execute("""
+            SELECT * FROM facebook_actions ORDER BY created_at DESC LIMIT 20
+        """)
+        recent_actions = [dict(r) for r in cursor.fetchall()]
+
+        # Speed metrics: average time from ingest to DM, and DM to reply
+        cursor.execute("""
+            SELECT AVG(
+                (julianday(dm_sent_at) - julianday(created_at)) * 24 * 60
+            ) as avg_speed_to_dm_minutes
+            FROM facebook_leads
+            WHERE dm_sent_at IS NOT NULL AND created_at IS NOT NULL
+        """)
+        speed_row = cursor.fetchone()
+        avg_speed_to_dm = round(speed_row[0], 1) if speed_row and speed_row[0] else None
+
+        cursor.execute("""
+            SELECT AVG(
+                (julianday(dm_replied_at) - julianday(dm_sent_at)) * 24 * 60
+            ) as avg_first_response_minutes
+            FROM facebook_leads
+            WHERE dm_replied_at IS NOT NULL AND dm_sent_at IS NOT NULL
+        """)
+        resp_row = cursor.fetchone()
+        avg_first_response = round(resp_row[0], 1) if resp_row and resp_row[0] else None
+
+        # Source breakdown
+        cursor.execute("""
+            SELECT source, COUNT(*) as count FROM facebook_leads GROUP BY source
+        """)
+        source_breakdown = {r[0]: r[1] for r in cursor.fetchall()}
+
+        conn.close()
+
+        return {
+            "stats": stats,
+            "recent_actions": recent_actions,
+            "speed_metrics": {
+                "avg_speed_to_dm_minutes": avg_speed_to_dm,
+                "avg_first_response_minutes": avg_first_response,
+            },
+            "source_breakdown": source_breakdown,
+            "conversion_funnel": {
+                "ingested": stats.get("total", 0),
+                "dm_sent": stats.get("dms_sent", 0),
+                "dm_replied": stats.get("dms_replied", 0),
+                "connected": stats.get("connected_count", 0),
+                "qualified": stats.get("qualified_count", 0),
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ============================================================================
