@@ -110,7 +110,10 @@ const MissionControl = () => {
     const loadVoices = () => {
       const v = synth?.getVoices?.() || []
       setVoices(v)
+      // Priority: American English female → American English → Any English female → Any English
       const preferred =
+        v.find((x) => /en.US/i.test(x.lang) && /female|aria|jenny|zira|samantha|serena/i.test(x.name)) ||
+        v.find((x) => /en.US/i.test(x.lang)) ||
         v.find((x) => /en/i.test(x.lang) && /female|aria|jenny|zira|samantha|serena/i.test(x.name)) ||
         v.find((x) => /en/i.test(x.lang)) || v[0]
       if (preferred) setSelectedVoice(preferred)
