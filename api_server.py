@@ -8376,7 +8376,7 @@ def voice_agent(request: VoiceAgentRequest):
         response = f"Today is {datetime.now().strftime('%A, %B %d, %Y')}."
 
     # Outreach / execution
-    elif any(k in text for k in ["generate outreach", "outreach for buyer", "build outreach"]):
+    elif any(k in text for k in ["generate outreach", "outreach for buyer", "build outreach", "build an outreach", "outreach pack"]):
         response = "I can help with outreach. Navigate to Buyer Intelligence to generate feature sheets, teaser emails, and full outreach packs."
         actions.append({"type": "navigate", "route": "/buyer-intelligence"})
     elif any(k in text for k in ["strongest signal", "what signals", "deal source"]):
