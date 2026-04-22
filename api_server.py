@@ -7080,6 +7080,7 @@ if __name__ == "__main__":
     print("   POST /api/gemma4/briefing/schedule   - Schedule automated briefings")
     print("\n   ⚠️  WRITE OPERATIONS DISABLED")
     print("   Use separate BDAIV2 Writer project for vault modifications")
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 # ============================================================================
 # BUYER INTELLIGENCE REPORT — Property-to-Buyer Matching Engine
 # ============================================================================
