@@ -31,6 +31,7 @@ import BuyerIntelligence from './views/BuyerIntelligence'
 import ContextKeepView from './views/ContextKeepView'
 import ExecutionHistory from './views/ExecutionHistory'
 import FacebookIntelligence from './views/FacebookIntelligence'
+import NetworkDirectory from './views/NetworkDirectory'
 import { useWebSocket } from './hooks/useWebSocket'
 
 // Hook to detect if we're on V3 route (for hash-based routing)
@@ -120,6 +121,7 @@ function AppRoutes() {
         <Route path="/contextkeep" element={<ContextKeepView />} />
         <Route path="/execution-history" element={<ExecutionHistory />} />
         <Route path="/facebook-intelligence" element={<FacebookIntelligence />} />
+        <Route path="/network/:type" element={<NetworkDirectory />} />
       </Routes>
     </Layout>
   )

@@ -58,6 +58,16 @@ const SECTIONS = [
       { path: '/hotmoney', label: 'Hot Money Radar', icon: Flame },
       { path: '/execution-history', label: 'Execution History', icon: Clock },
     ]
+  },
+  {
+    id: 'network',
+    label: 'Network',
+    items: [
+      { path: '/network/recruiters', label: 'Recruit Agents', icon: Users },
+      { path: '/network/commercial', label: 'Commercial Agents', icon: Building2 },
+      { path: '/network/lenders', label: 'Lenders', icon: Landmark },
+      { path: '/network/builders', label: 'Builders', icon: Hammer },
+    ]
   }
 ]
 
