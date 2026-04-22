@@ -334,26 +334,32 @@ const MissionControl = () => {
     try { synth?.cancel?.() } catch {}
     stopOrbMotion()
 
-    if (bridgeAvailable && isLocalhost) {
-      try {
-        setMode('speaking')
-        startSpeakingMotion()
-        const ttsController = new AbortController()
-        const ttsTimeoutId = setTimeout(() => ttsController.abort(), 3000)
-        const res = await fetch(`${TTS_BRIDGE_URL}/speak`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text, engine: 'piper', voice_name: 'Piper hfc_female (medium)', language: 'en-US', pitch: 0, rate: 0 }),
-          signal: ttsController.signal,
-        })
-        clearTimeout(ttsTimeoutId)
-        if (!res.ok) throw new Error('Bridge error')
-        const ms = Math.max(1800, Math.min(12000, text.length * 55))
-        setTimeout(() => { if (speakTokenRef.current === token) resetSpeechState() }, ms)
+    // Try ElevenLabs first (premium voice)
+    try {
+      setMode('speaking')
+      startSpeakingMotion()
+      const ttsController = new AbortController()
+      const ttsTimeoutId = setTimeout(() => ttsController.abort(), 15000)
+      const res = await fetch(`${API_BASE}/api/tts/elevenlabs`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, voice_id: 'bbGtsRRKUfYO634UxSjz' }),
+        signal: ttsController.signal,
+      })
+      clearTimeout(ttsTimeoutId)
+      if (res.ok) {
+        const audioBlob = await res.blob()
+        const audioUrl = URL.createObjectURL(audioBlob)
+        const audio = new Audio(audioUrl)
+        audio.onplay = () => { if (speakTokenRef.current === token) { setMode('speaking'); startSpeakingMotion() }}
+        audio.onended = () => { if (speakTokenRef.current === token) resetSpeechState() }
+        audio.onerror = () => { if (speakTokenRef.current === token) resetSpeechState() }
+        await audio.play()
         return
-      } catch {
-        // fallthrough to browser TTS
       }
+      throw new Error('ElevenLabs error')
+    } catch {
+      // fallthrough to browser TTS
     }
 
     if (!synth) { resetSpeechState(); return }
