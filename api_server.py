@@ -8306,6 +8306,91 @@ def get_feature_sheet(sheet_id: str):
 
 
 # ============================================================================
+# VOICE AGENT — Lightweight rules-based responder (no heavy AI)
+# ============================================================================
+
+class VoiceAgentRequest(BaseModel):
+    message: str = ""
+    history: List[Dict[str, Any]] = []
+
+@app.post("/api/voice/agent")
+def voice_agent(request: VoiceAgentRequest):
+    """Fast rules-based voice agent — no ollama, no heavy processing."""
+    text = request.message.lower().strip()
+    response = ""
+    actions = []
+
+    # Navigation
+    if any(k in text for k in ["hot money", "hotmoney"]):
+        response = "Opening Hot Money Radar."
+        actions.append({"type": "navigate", "route": "/hotmoney"})
+    elif any(k in text for k in ["buyer intelligence", "buyer intel", "find buyer", "active buyer", "find active buyers"]):
+        response = "Opening Buyer Intelligence."
+        actions.append({"type": "navigate", "route": "/buyer-intelligence"})
+    elif any(k in text for k in ["facebook intel", "facebook intelligence", "facebook leads", "new hot leads", "classify facebook"]):
+        response = "Opening Facebook Intelligence."
+        actions.append({"type": "navigate", "route": "/facebook-intelligence"})
+    elif any(k in text for k in ["execution history", "what happened", "recent actions"]):
+        response = "Opening Execution History."
+        actions.append({"type": "navigate", "route": "/execution-history"})
+    elif any(k in text for k in ["opportunities", "deals", "off market"]):
+        response = "Opening Opportunities."
+        actions.append({"type": "navigate", "route": "/opportunities"})
+    elif any(k in text for k in ["network", "recruit agents", "commercial agents", "lenders", "builders"]):
+        response = "Opening Network directory."
+        actions.append({"type": "navigate", "route": "/network/recruiters"})
+    elif any(k in text for k in ["mission control", "home", "dashboard"]):
+        response = "Returning to Mission Control."
+        actions.append({"type": "navigate", "route": "/"})
+
+    # Stats / queries
+    elif any(k in text for k in ["how many recruiter", "recruiter count", "agent count"]):
+        response = "We have 96,265 recruiters in the network."
+    elif any(k in text for k in ["how many buyer", "buyer count"]):
+        response = "We have over 5,000 registered buyers and hot money leads tracked."
+    elif any(k in text for k in ["how many hot money", "hot money count"]):
+        response = "Hot Money Radar is tracking active sellers with fresh capital."
+    elif any(k in text for k in ["how many facebook", "facebook count", "facebook leads count"]):
+        try:
+            conn = sqlite3.connect(str(_get_db_path()))
+            c = conn.cursor()
+            c.execute("SELECT COUNT(*) FROM facebook_leads")
+            count = c.fetchone()[0]
+            conn.close()
+            response = f"Facebook Intelligence has {count} leads ingested."
+        except:
+            response = "Facebook Intelligence is active and ingesting leads."
+
+    # Greetings
+    elif any(k in text for k in ["hello", "hi", "hey", "good morning", "good evening"]):
+        response = "Hello. I am Kimi, your Mission Control Voice Agent. I can navigate pages, show stats, and guide you through deals. What would you like to do?"
+    elif any(k in text for k in ["who are you", "introduce yourself", "what are you"]):
+        response = "I am Kimi, the Mission Control Voice Agent. I can speak, listen, query your real estate database, and navigate the dashboard on command."
+    elif any(k in text for k in ["what can you do", "help", "commands"]):
+        response = "You can ask me to navigate to any page, check stats like recruiter or buyer counts, or open Hot Money, Facebook Intel, or Buyer Intelligence. Try saying 'Show hot money' or 'Find active buyers'."
+
+    # Time / date
+    elif "time" in text:
+        response = f"It is {datetime.now().strftime('%I:%M %p')}."
+    elif any(k in text for k in ["date", "day today", "today"]):
+        response = f"Today is {datetime.now().strftime('%A, %B %d, %Y')}."
+
+    # Outreach / execution
+    elif any(k in text for k in ["generate outreach", "outreach for buyer", "build outreach"]):
+        response = "I can help with outreach. Navigate to Buyer Intelligence to generate feature sheets, teaser emails, and full outreach packs."
+        actions.append({"type": "navigate", "route": "/buyer-intelligence"})
+    elif any(k in text for k in ["strongest signal", "what signals", "deal source"]):
+        response = "Check Hot Money Radar for capital signals and Facebook Intelligence for sourcing signals."
+        actions.append({"type": "navigate", "route": "/hotmoney"})
+
+    # Fallback
+    else:
+        response = f"I heard: '{request.message}'. I can navigate pages, show stats, or guide you to Hot Money, Buyer Intelligence, or Facebook Intel. Try saying 'Show hot money' or 'Find active buyers'."
+
+    return {"response": response, "actions": actions}
+
+
+# ============================================================================
 # MAIN
 # ============================================================================
 
