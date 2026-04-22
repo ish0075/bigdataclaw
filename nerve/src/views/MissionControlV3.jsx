@@ -37,7 +37,8 @@ import {
   Database,
   LayoutGrid,
   Plus,
-  Code
+  Code,
+  Hammer
 } from 'lucide-react';
 
 // V3 is a command center dashboard - navigation goes to standard routes
@@ -150,6 +151,15 @@ const NAV_SECTIONS = [
         helpText: 'Browse real estate brokerages, view agent counts, territories, and market share data.',
         actions: ['Search brokerages', 'View rankings', 'Compare firms', 'Export data'],
         route: '/brokerages'
+      },
+      { 
+        id: 'builders', 
+        icon: Hammer, 
+        label: 'Builders',
+        description: '4,149 construction companies',
+        helpText: 'Search Ontario builders by city, region, and type. Production, custom, condo, and commercial developers.',
+        actions: ['Search builders', 'Filter by region', 'View projects', 'Export contacts'],
+        route: '/builders'
       },
     ]
   },
