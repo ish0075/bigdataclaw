@@ -5,9 +5,7 @@ import {
   ChevronRight, Calendar, Filter
 } from 'lucide-react'
 
-const API_BASE = (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app'))
-  ? 'https://bigdataclaw.srv1368913.hstgr.cloud'
-  : (import.meta.env.VITE_API_URL || 'http://localhost:18002')
+const API_BASE = import.meta.env.VITE_API_URL || 'https://13f0-142-189-188-192.ngrok-free.app'
 
 const EVENT_ICONS = {
   orchestrator_started: Zap,

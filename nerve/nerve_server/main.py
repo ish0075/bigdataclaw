@@ -7,6 +7,7 @@ import asyncio
 import json
 import logging
 import os
+import uuid
 from contextlib import asynccontextmanager
 from datetime import datetime
 from typing import Dict, List, Optional, Set
@@ -33,6 +34,16 @@ except ImportError as e:
     from services.openai_service import chat_with_openai_mock as chat_with_property_ai
     from services.openai_service import chat_with_openai_mock as process_property_document
     print("🎭 Using Mock AI (fallback)")
+
+# Import multi-agent communication layer
+try:
+    from services.agent_comm_bus import AgentCommunicationBus, AgentMessage, get_bus
+    from services.agent_orchestrator import AgentOrchestrator, get_orchestrator
+    print("🔗 Agent Communication Bus loaded")
+except ImportError as e:
+    print(f"⚠️ Agent communication bus not available: {e}")
+    get_bus = None
+    get_orchestrator = None
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("nerve-server")
@@ -350,6 +361,44 @@ mission_controller = MissionController(manager)
 hot_money_tracker = HotMoneyTracker(manager)
 agent_supervisor = AgentSupervisor(manager)
 
+# Multi-agent bus & orchestrator
+agent_bus = get_bus() if get_bus else None
+agent_orchestrator = get_orchestrator(agent_bus) if get_orchestrator else None
+
+# WebSocket bridge: push agent messages to frontend
+async def _ws_bridge(message: AgentMessage):
+    """Forward agent-bus messages to WebSocket clients on the 'agents' channel."""
+    await manager.broadcast_to_channel('agents', {
+        'type': 'agent:bus:message',
+        'message': message.to_dict()
+    })
+
+if agent_bus:
+    agent_bus.add_ws_bridge(_ws_bridge)
+    # Register trivial handlers for each pixel agent so they don't error
+    for _aid in ['kimi', 'concierge', 'scout', 'scribe', 'skeptic', 'spark', 'pablo']:
+        async def _make_handler(aid):
+            async def _handler(msg: AgentMessage):
+                print(f"[{aid}] received task: {msg.payload.get('task', 'N/A')}")
+                # Auto-acknowledge with a mock result so the orchestrator doesn't hang
+                if msg.message_type == 'task' and agent_orchestrator:
+                    run_id = msg.payload.get('run_id')
+                    step = msg.payload.get('step')
+                    await agent_orchestrator.submit_result(
+                        run_id, step, aid,
+                        {"status": "ack", "agent": aid, "note": "Mock result — implement real handler"}
+                    )
+                # Also echo back to bus as a chat message for visibility
+                await agent_bus.send_direct(
+                    from_agent=aid,
+                    to_agent=msg.from_agent,
+                    payload={"ack": True, "original_task": msg.payload.get("task")},
+                    message_type="result",
+                    correlation_id=msg.correlation_id,
+                )
+            return _handler
+        agent_bus.register_handler(_aid, _make_handler(_aid))
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -357,6 +406,10 @@ async def lifespan(app: FastAPI):
     # Startup
     await mission_controller.start()
     await hot_money_tracker.start()
+    if agent_orchestrator:
+        logger.info("Agent orchestrator ready")
+    if agent_bus:
+        logger.info(f"Agent bus ready — {len(agent_bus._handlers)} handlers registered")
     logger.info("NERVE server started")
     
     yield
@@ -364,6 +417,8 @@ async def lifespan(app: FastAPI):
     # Shutdown
     await mission_controller.stop()
     await hot_money_tracker.stop()
+    if agent_bus:
+        agent_bus.remove_ws_bridge(_ws_bridge)
     logger.info("NERVE server stopped")
 
 
@@ -407,6 +462,100 @@ async def health():
 @app.get("/api/agents")
 async def get_agents():
     return {"agents": agent_supervisor.get_agents()}
+
+
+@app.get("/api/agents/inbox/{agent_id}")
+async def get_agent_inbox(agent_id: str, unread_only: bool = False, status: Optional[str] = None, msg_type: Optional[str] = None):
+    """Get inbox messages for a pixel agent with optional filters."""
+    if not agent_bus:
+        return {"error": "Agent bus not available"}
+    filters = {}
+    if unread_only:
+        filters["unread_only"] = True
+    if status:
+        filters["status"] = status
+    if msg_type:
+        filters["type"] = msg_type
+    return {"agent_id": agent_id, "messages": agent_bus.get_inbox(agent_id, filters if filters else None)}
+
+
+@app.post("/api/agents/inbox/{agent_id}/read/{message_id}")
+async def mark_message_read(agent_id: str, message_id: str):
+    if not agent_bus:
+        return {"error": "Agent bus not available"}
+    agent_bus.mark_read(agent_id, message_id)
+    return {"status": "ok"}
+
+
+@app.post("/api/agents/send")
+async def send_agent_message(payload: dict):
+    """Send a structured direct message or broadcast between agents."""
+    if not agent_bus:
+        return {"error": "Agent bus not available"}
+    msg = AgentMessage(
+        payload=payload.get("payload", {}),
+        from_agent=payload["from"],
+        to_agent=payload.get("to"),
+        topic=payload.get("topic"),
+        message_type=payload.get("type", "chat"),
+        correlation_id=payload.get("correlationId"),
+        conversation_id=payload.get("conversationId"),
+        task_id=payload.get("taskId"),
+        priority=payload.get("priority", "normal"),
+        status=payload.get("status", "pending"),
+        artifact_ref=payload.get("artifactRef"),
+        requires_approval=payload.get("requiresApproval", False),
+        deal_id=payload.get("dealId"),
+    )
+    await agent_bus.publish(msg)
+    return {"status": "sent", "messageId": msg.id}
+
+
+@app.get("/api/agents/bus/stats")
+async def get_bus_stats():
+    if not agent_bus:
+        return {"error": "Agent bus not available"}
+    return agent_bus.get_stats()
+
+
+# ---------------------------------------------------------------------------
+# Orchestrator endpoints
+# ---------------------------------------------------------------------------
+
+class OrchestrateRequest(BaseModel):
+    goal: str
+    context: Optional[str] = None
+
+
+@app.post("/api/orchestrate/plan")
+async def orchestrate_plan(request: OrchestrateRequest):
+    """Generate a multi-agent execution plan for a goal (no execution)."""
+    if not agent_orchestrator:
+        raise HTTPException(status_code=503, detail="Orchestrator not available")
+    plan = await agent_orchestrator.plan(request.goal, request.context)
+    return plan
+
+
+@app.post("/api/orchestrate/run")
+async def orchestrate_run(request: OrchestrateRequest):
+    """Plan + execute a multi-agent workflow."""
+    if not agent_orchestrator:
+        raise HTTPException(status_code=503, detail="Orchestrator not available")
+    plan = await agent_orchestrator.plan(request.goal, request.context)
+    run_id = f"ORCH-{datetime.now().strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:6]}"
+    # Run in background so we don't block; return run_id immediately
+    asyncio.create_task(agent_orchestrator.execute(run_id, plan))
+    return {"runId": run_id, "status": "started", "summary": plan.get("summary", "")}
+
+
+@app.get("/api/orchestrate/run/{run_id}")
+async def get_run_status(run_id: str):
+    if not agent_orchestrator:
+        raise HTTPException(status_code=503, detail="Orchestrator not available")
+    status = agent_orchestrator.get_run_status(run_id)
+    if not status:
+        return {"error": "Run not found"}, 404
+    return status
 
 
 @app.post("/api/agents/{agent_id}/start")
@@ -538,6 +687,53 @@ async def websocket_endpoint(websocket: WebSocket):
                     'missionId': mission_id
                 })
             
+            elif msg_type == 'agent:send':
+                # Frontend wants to send a structured message on the agent bus
+                if agent_bus:
+                    bus_msg = AgentMessage(
+                        payload=message.get('payload', {}),
+                        from_agent=message.get('from', 'user'),
+                        to_agent=message.get('to'),
+                        topic=message.get('topic'),
+                        message_type=message.get('msgType', 'chat'),
+                        correlation_id=message.get('correlationId'),
+                        conversation_id=message.get('conversationId'),
+                        task_id=message.get('taskId'),
+                        priority=message.get('priority', 'normal'),
+                        status=message.get('status', 'pending'),
+                        artifact_ref=message.get('artifactRef'),
+                        requires_approval=message.get('requiresApproval', False),
+                        deal_id=message.get('dealId'),
+                    )
+                    await agent_bus.publish(bus_msg)
+                    await websocket.send_json({'type': 'agent:send:ack', 'messageId': bus_msg.id})
+
+            elif msg_type == 'agent:subscribe':
+                if agent_bus:
+                    agent_id = message.get('agentId', 'user')
+                    topic = message.get('topic', 'broadcast')
+                    await agent_bus.subscribe(agent_id, topic)
+                    await websocket.send_json({'type': 'agent:subscribed', 'topic': topic})
+
+            elif msg_type == 'agent:unsubscribe':
+                if agent_bus:
+                    agent_id = message.get('agentId', 'user')
+                    topic = message.get('topic', 'broadcast')
+                    await agent_bus.unsubscribe(agent_id, topic)
+                    await websocket.send_json({'type': 'agent:unsubscribed', 'topic': topic})
+
+            elif msg_type == 'orchestrate:plan':
+                if agent_orchestrator:
+                    plan = await agent_orchestrator.plan(message.get('goal', ''), message.get('context'))
+                    await websocket.send_json({'type': 'orchestrate:plan', 'plan': plan})
+
+            elif msg_type == 'orchestrate:run':
+                if agent_orchestrator:
+                    plan = await agent_orchestrator.plan(message.get('goal', ''), message.get('context'))
+                    run_id = f"ORCH-WS-{datetime.now().strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:6]}"
+                    asyncio.create_task(agent_orchestrator.execute(run_id, plan))
+                    await websocket.send_json({'type': 'orchestrate:run:started', 'runId': run_id, 'summary': plan.get('summary', '')})
+
             elif msg_type == 'ping':
                 await websocket.send_json({'type': 'pong'})
     

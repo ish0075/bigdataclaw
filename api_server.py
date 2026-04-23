@@ -19,10 +19,9 @@ from fastapi import FastAPI, Query, HTTPException, UploadFile, File, BackgroundT
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from qdrant_client import QdrantClient
 import uvicorn
-import os
 import httpx
 from dotenv import load_dotenv
 
@@ -34,7 +33,7 @@ def _get_db_path() -> Path:
 
 DEEPGRAM_API_KEY = os.getenv("DEEPGRAM_API_KEY", "")
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "")
-ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "bbGtsRRKUfYO634UxSjz")
+ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "sB7vwSCyX0tQmU24cW2C")
 
 # Import Agent Workspace API (graceful fallback if modules missing)
 def _safe_import(module_name, attr_name, default=None):
@@ -88,6 +87,7 @@ _ORIGINS = [
     "http://localhost:3090",
     "https://bigdataclaw.srv1368913.hstgr.cloud",
     "https://mission-control-v2-five-eta.vercel.app",
+    "https://mission-control-commissions.vercel.app",
     "https://mission-control-v3-inky.vercel.app",
     "https://mission-control-v3-q2mdcw4km-ish0075s-projects.vercel.app",
     "https://nerve-theta.vercel.app",
@@ -4466,7 +4466,8 @@ async def get_hotmoney_leads(
     property_type: Optional[str] = None,
     min_cash: Optional[int] = None,
     max_cash: Optional[int] = None,
-    location: Optional[str] = None
+    location: Optional[str] = None,
+    max_days: Optional[int] = None
 ):
     """Get hot money leads with pagination and filtering"""
     conn = get_db()
@@ -4496,6 +4497,10 @@ async def get_hotmoney_leads(
     if location:
         conditions.append("location LIKE ?")
         params.append(f'%{location}%')
+    
+    if max_days is not None:
+        conditions.append("days_ago <= ?")
+        params.append(max_days)
     
     where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
     
@@ -5148,8 +5153,6 @@ async def match_property_to_buyers(request: PropertyMatchRequest):
 # ============================================================================
 # LOCAL LLM (QWEN 2.5) INTEGRATION
 # ============================================================================
-
-import httpx
 
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "gemma4")  # Use Gemma 4 by default when available

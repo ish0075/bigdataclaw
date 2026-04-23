@@ -9,7 +9,7 @@ import {
   Flame, Building2, Users, Zap, ChevronRight, Paperclip
 } from 'lucide-react'
 
-const API_BASE = import.meta.env.VITE_API_URL || 'https://bigdataclaw.srv1368913.hstgr.cloud'
+const API_BASE = import.meta.env.VITE_API_URL || 'https://13f0-142-189-188-192.ngrok-free.app'
 const TTS_BRIDGE_URL = 'http://127.0.0.1:8766'
 const OLLAMA_URL = 'http://127.0.0.1:11434'
 
@@ -343,7 +343,7 @@ const MissionControl = () => {
       const res = await fetch(`${API_BASE}/api/tts/elevenlabs`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, voice_id: 'bbGtsRRKUfYO634UxSjz' }),
+        body: JSON.stringify({ text, voice_id: 'sB7vwSCyX0tQmU24cW2C' }),
         signal: ttsController.signal,
       })
       clearTimeout(ttsTimeoutId)
@@ -749,13 +749,14 @@ const MissionControl = () => {
                 <div className="text-center text-slate-500 text-sm py-10">
                   <p className="mb-3">Say or type a command to get started.</p>
                   <div className="flex flex-wrap justify-center gap-2">
-                    {['Show hot money', 'How many opportunities?', 'Daily briefing', 'Satellite view of 100 Senior Living Blvd', 'Analyze property at 123 Main St'].map((p) => (
+                    {SUGGESTED_PROMPTS.map((p) => (
                       <button
-                        key={p}
-                        onClick={() => handleUserInput(p)}
-                        className="px-3 py-1.5 rounded-full border border-slate-700 bg-slate-800/60 text-slate-300 text-xs hover:border-cyan-500/40 hover:text-cyan-300 transition-colors"
+                        key={p.label}
+                        onClick={() => handleUserInput(p.text)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all hover:scale-[1.02] ${p.style}`}
+                        title={p.text}
                       >
-                        {p}
+                        {p.label}
                       </button>
                     ))}
                   </div>

@@ -188,6 +188,25 @@ export const useWebSocket = () => {
       case 'hotmoney:update':
         // Handle bulk hot money updates
         break
+
+      case 'agent:bus:message':
+        // Dispatch structured bus messages for useAgentBus to consume
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('agent:bus:message', { detail: message.message }))
+        }
+        break
+
+      case 'orchestrate:plan':
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('orchestrate:plan', { detail: message.plan }))
+        }
+        break
+
+      case 'orchestrate:run:started':
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('orchestrate:run:started', { detail: { runId: message.runId, summary: message.summary } }))
+        }
+        break
         
       default:
         console.log('Unknown message type:', message.type)

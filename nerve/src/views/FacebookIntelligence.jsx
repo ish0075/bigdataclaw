@@ -9,9 +9,7 @@ import {
   Phone, Mail
 } from 'lucide-react'
 
-const API_BASE = (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app'))
-  ? 'https://bigdataclaw.srv1368913.hstgr.cloud'
-  : (import.meta.env.VITE_API_URL || 'http://localhost:18002')
+const API_BASE = import.meta.env.VITE_API_URL || 'https://13f0-142-189-188-192.ngrok-free.app'
 
 const TIER_STYLES = {
   HOT: { bg: 'bg-red-500/10', text: 'text-red-400', border: 'border-red-500/20', icon: Flame },
@@ -141,7 +139,7 @@ export default function FacebookIntelligence() {
       if (!res.ok) throw new Error('Failed to load leads')
       const data = await res.json()
       setLeads(data.leads || [])
-      setStats(data.stats || {})
+      // Leads endpoint doesn't return stats; don't overwrite them here
     } catch (e) {
       setError(e.message)
     } finally {
@@ -155,7 +153,7 @@ export default function FacebookIntelligence() {
       const res = await fetch(`${API_BASE}/api/facebook/stats`)
       if (!res.ok) throw new Error('Failed to load stats')
       const data = await res.json()
-      setStats(data)
+      setStats(data.stats || data)
     } catch (e) {
       console.error('Stats error:', e)
     }

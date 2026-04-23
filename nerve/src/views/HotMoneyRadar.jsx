@@ -1,607 +1,1804 @@
-import React, { useState, useEffect } from 'react'
-import {
-  Flame, RefreshCw, Loader2, AlertTriangle, TrendingUp,
-  DollarSign, Building2, MapPin, Calendar, Search, Filter,
-  ExternalLink, Landmark, ArrowUpDown, Hash, BarChart3,
-  Briefcase, Clock, ChevronDown, ChevronUp, X, Phone,
-  Mail, Copy, Check, MessageSquare, Eye, ArrowRight,
-  Linkedin, Globe, FileText, Target
+import React, { useState, useMemo, useEffect } from 'react'
+import { useMissionStore } from '../stores/missionStore'
+import { 
+  Flame, Phone, Mail, ExternalLink, Target, Calendar, MapPin, DollarSign, 
+  Filter, Download, X, Check, Building, Home, Warehouse, Trees, 
+  Edit3, Save, Plus, Search, Mic, ClipboardPaste, Sparkles, UserCircle, FileText
 } from 'lucide-react'
+import VoiceInput from '../components/Common/VoiceInput'
 
-const API_BASE = (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app'))
-  ? 'https://bigdataclaw.srv1368913.hstgr.cloud'
-  : (import.meta.env.VITE_API_URL || 'http://localhost:18002')
-
-const PROP_COLORS = {
-  Land: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-  Retail: 'bg-pink-500/10 text-pink-400 border-pink-500/20',
-  Multifamily: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-  Industrial: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-  Hotel: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
-  Office: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
-  'Senior Living': 'bg-rose-500/10 text-rose-400 border-rose-500/20',
-  Healthcare: 'bg-teal-500/10 text-teal-400 border-teal-500/20',
-  Agricultural: 'bg-lime-500/10 text-lime-400 border-lime-500/20',
-  Commercial: 'bg-orange-500/10 text-orange-400 border-orange-500/20',
-  'Mixed-Use': 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
-  Unknown: 'bg-gray-500/10 text-gray-400 border-gray-500/20',
-}
-
-function fmtCash(n) {
-  if (!n && n !== 0) return '—'
-  if (n >= 1_000_000_000) return `$${(n / 1_000_000_000).toFixed(1)}B`
-  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`
-  if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}K`
-  return `$${n}`
-}
-
-function fmtNum(n) {
-  if (!n && n !== 0) return '0'
-  return n.toLocaleString()
-}
-
-function decodeHtml(html) {
-  if (!html) return ''
-  const txt = document.createElement('textarea')
-  txt.innerHTML = html
-  return txt.value
-}
-
-function fmtDaysAgo(d) {
-  if (d === null || d === undefined) return ''
-  if (d >= 365) return `${Math.round(d / 365)}y`
-  return `${d}d`
-}
-
-// Deterministic fake contact generation for demo
-function generateContactInfo(entity) {
-  const clean = (entity || '').replace(/[^a-zA-Z0-9 ]/g, '').trim().toLowerCase()
-  const words = clean.split(' ').filter(w => w.length > 2)
-  const domainWords = words.slice(0, 2).join('')
-  const hash = clean.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
-  const domains = ['corp.com', 'realestate.ca', 'investments.com', 'holdings.ca', 'properties.com']
-  const domain = domains[hash % domains.length]
+// Helper function to generate quick links from entity name
+const generateQuickLinks = (entityName) => {
+  if (!entityName) return null
+  const encoded = encodeURIComponent(entityName)
   return {
-    email: `deals@${domainWords || 'contact'}.${domain.split('.')[1]}`,
-    phone: `+1 (${416 + (hash % 200)}) ${100 + (hash % 899)}-${1000 + (hash % 8999)}`,
-    linkedin: `https://linkedin.com/search/results/companies/?keywords=${encodeURIComponent(entity || '')}`,
-    google: `https://www.google.com/search?q=${encodeURIComponent(entity || '')}`,
+    google: `https://www.google.com/search?q=${encoded}`,
+    linkedin: `https://www.google.com/search?q=${encoded}+linkedin`,
+    corporation: `https://www.google.com/search?q=${encoded}+corporation+canada`
   }
 }
 
-function generateOutreachCopy(entity, cash, assetClass, location, property, buyerName) {
-  const cleanEntity = decodeHtml(entity)
-  return `Hi ${cleanEntity.split(' ')[0] || 'there'},
+const API_BASE = import.meta.env.VITE_API_URL || 'https://13f0-142-189-188-192.ngrok-free.app'
 
-I noticed ${cleanEntity} acquired ${property?.split('\\n')[0] || 'a property'} in ${location} — a strong signal of active capital deployment in ${assetClass || 'CRE'}.
+// Helper to convert API snake_case to frontend camelCase
+const apiToFrontend = (lead) => ({
+  id: String(lead.id),
+  entity: lead.entity,
+  cashAmount: lead.cash_amount,
+  saleDate: lead.sale_date,
+  location: lead.location,
+  property: lead.property,
+  matchScore: lead.match_score,
+  propertyType: lead.property_type,
+  assetClass: lead.asset_class,
+  address: lead.address,
+  daysAgo: lead.days_ago,
+  notes: lead.notes || '',
+  contacts: lead.contacts || [],
+  quickLinks: generateQuickLinks(lead.entity)
+})
 
-I'm tracking a similar ${assetClass || 'opportunity'} in the ${location} corridor with comparable metrics. Given your recent activity, I'd value a brief conversation.
+// Helper to convert frontend camelCase to API snake_case
+const frontendToApi = (lead) => ({
+  id: lead.id ? parseInt(lead.id) : undefined,
+  entity: lead.entity,
+  cash_amount: lead.cashAmount,
+  sale_date: lead.saleDate,
+  location: lead.location,
+  property: lead.property,
+  match_score: lead.matchScore,
+  property_type: lead.propertyType,
+  asset_class: lead.assetClass,
+  address: lead.address,
+  days_ago: lead.daysAgo,
+  notes: lead.notes,
+  contacts: lead.contacts
+})
 
-Worth a 10-minute call this week?
-
-Best,
-[Your Name]`
-}
-
-function dedupeLeads(leads) {
-  const byEntity = {}
-  leads.forEach(l => {
-    const key = decodeHtml(l.entity || l.buyer_name || 'Unknown').toLowerCase().trim()
-    if (!byEntity[key]) {
-      byEntity[key] = { ...l, _deals: [l], entity: decodeHtml(l.entity || l.buyer_name || 'Unknown') }
-    } else {
-      byEntity[key]._deals.push(l)
-      // Keep the highest cash deal as primary
-      if ((l.cash_amount || 0) > (byEntity[key].cash_amount || 0)) {
-        byEntity[key] = { ...l, _deals: byEntity[key]._deals, entity: byEntity[key].entity }
-      }
-    }
-  })
-  return Object.values(byEntity).map(e => ({
-    ...e,
-    dealCount: e._deals.length,
-    totalCash: e._deals.reduce((sum, d) => sum + (d.cash_amount || 0), 0),
-  }))
-}
-
-export default function HotMoneyRadar() {
-  const [rawLeads, setRawLeads] = useState([])
-  const [stats, setStats] = useState(null)
-  const [loading, setLoading] = useState(false)
+const HotMoneyRadar = () => {
+  const { hotMoneyLeads } = useMissionStore()
+  const [showFilterModal, setShowFilterModal] = useState(false)
+  const [selectedLead, setSelectedLead] = useState(null)
+  const [showDetailModal, setShowDetailModal] = useState(false)
+  const [editingLead, setEditingLead] = useState(null)
+  const [leads, setLeads] = useState([])
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [filterType, setFilterType] = useState('')
-  const [sortBy, setSortBy] = useState('cash')
-  const [sortDir, setSortDir] = useState('desc')
-  const [search, setSearch] = useState('')
-  const [expandedLead, setExpandedLead] = useState(null)
-  const [limit, setLimit] = useState(50)
-  const [copied, setCopied] = useState(null)
-  const [actionFlash, setActionFlash] = useState(null)
-
-  const loadData = async () => {
-    setLoading(true)
-    setError(null)
+  const [showPasteModal, setShowPasteModal] = useState(false)
+  
+  const [filters, setFilters] = useState({
+    propertyType: 'all',
+    minCash: '',
+    maxCash: '',
+    location: '',
+    daysFilter: 90
+  })
+  
+  // Load leads from API
+  useEffect(() => {
+    fetchLeads()
+  }, [filters.daysFilter])
+  
+  const fetchLeads = async () => {
     try {
-      const [leadsRes, statsRes] = await Promise.all([
-        fetch(`${API_BASE}/api/hotmoney`),
-        fetch(`${API_BASE}/api/hotmoney/stats`),
-      ])
-      if (!leadsRes.ok) throw new Error('Failed to load leads')
-      if (!statsRes.ok) throw new Error('Failed to load stats')
-      const leadsData = await leadsRes.json()
-      const statsData = await statsRes.json()
-      setRawLeads(leadsData.leads || [])
-      setStats(statsData)
-    } catch (e) {
-      setError(e.message)
+      setLoading(true)
+      setError(null)
+      console.log('Fetching hot money leads...')
+      const params = new URLSearchParams()
+      if (filters.daysFilter) params.append('max_days', filters.daysFilter)
+      const response = await fetch(`${API_BASE}/hotmoney?${params}`)
+      if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      const data = await response.json()
+      console.log('Received data:', data)
+      // API returns array directly or {leads: []} - handle both
+      const leadsArray = Array.isArray(data) ? data : (data.leads || [])
+      const mappedLeads = leadsArray.map(apiToFrontend)
+      console.log('Mapped leads:', mappedLeads)
+      setLeads(mappedLeads)
+    } catch (err) {
+      console.error('Error fetching leads:', err)
+      setError(`Failed to load leads: ${err.message}`)
+      // Fallback to empty array
+      setLeads([])
     } finally {
       setLoading(false)
     }
   }
-
-  useEffect(() => { loadData() }, [])
-
-  // Dedupe, filter, sort, search
-  let leads = dedupeLeads(rawLeads)
-  if (filterType) {
-    leads = leads.filter(l => (l.property_type || l.asset_class) === filterType)
+  
+  const allLeads = hotMoneyLeads.length > 0 ? hotMoneyLeads : leads
+  
+  // Apply filters
+  const displayLeads = useMemo(() => {
+    return allLeads.filter(lead => {
+      if (filters.propertyType !== 'all' && lead.propertyType !== filters.propertyType) return false
+      if (filters.minCash && lead.cashAmount < parseInt(filters.minCash)) return false
+      if (filters.maxCash && lead.cashAmount > parseInt(filters.maxCash)) return false
+      if (filters.location && !lead.location.toLowerCase().includes(filters.location.toLowerCase())) return false
+      return true
+    })
+  }, [allLeads, filters])
+  
+  const formatCash = (amount) => {
+    if (amount >= 1e6) return `$${(amount / 1e6).toFixed(1)}M`
+    if (amount >= 1e3) return `$${(amount / 1e3).toFixed(0)}K`
+    return `$${amount}`
   }
-  if (search.trim()) {
-    const q = search.toLowerCase()
-    leads = leads.filter(l =>
-      (l.entity || '').toLowerCase().includes(q) ||
-      (l.location || '').toLowerCase().includes(q) ||
-      (l.property || '').toLowerCase().includes(q) ||
-      (l.buyer_name || '').toLowerCase().includes(q)
-    )
+  
+  const handleViewProfile = (lead) => {
+    setSelectedLead(lead)
+    setEditingLead(null)
+    setShowDetailModal(true)
   }
-  leads.sort((a, b) => {
-    let av, bv
-    if (sortBy === 'cash') { av = a.totalCash || a.cash_amount || 0; bv = b.totalCash || b.cash_amount || 0 }
-    else if (sortBy === 'score') { av = a.match_score || 0; bv = b.match_score || 0 }
-    else { av = new Date(a.sale_date || 0).getTime(); bv = new Date(b.sale_date || 0).getTime() }
-    return sortDir === 'desc' ? bv - av : av - bv
-  })
-  const displayLeads = leads.slice(0, limit)
-
-  const propertyTypes = stats?.by_property_type?.map(t => t.type).filter(Boolean) || []
-
-  const toggleSort = (field) => {
-    if (sortBy === field) setSortDir(d => d === 'desc' ? 'asc' : 'desc')
-    else { setSortBy(field); setSortDir('desc') }
+  
+  const handleSaveEdit = async (updatedLead) => {
+    try {
+      const apiLead = frontendToApi(updatedLead)
+      const response = await fetch(`${API_BASE}/hotmoney/${updatedLead.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(apiLead)
+      })
+      
+      if (!response.ok) throw new Error('Failed to save lead')
+      
+      // Refresh leads from API and update selected lead
+      const refreshed = await fetch(`${API_BASE}/hotmoney/${updatedLead.id}`)
+      const savedData = await refreshed.json()
+      const savedLead = apiToFrontend(savedData)
+      
+      // Update leads list
+      setLeads(prev => prev.map(l => l.id === updatedLead.id ? savedLead : l))
+      setSelectedLead(savedLead)
+      setEditingLead(null)
+    } catch (err) {
+      console.error('Error saving lead:', err)
+      alert('Failed to save changes. Please try again.')
+    }
   }
-
-  const copyText = (text, key) => {
-    navigator.clipboard.writeText(text)
-    setCopied(key)
-    setTimeout(() => setCopied(null), 2000)
-  }
-
-  const flashAction = (label) => {
-    setActionFlash(label)
-    setTimeout(() => setActionFlash(null), 1500)
-  }
-
+  
+  const totalCapital = displayLeads.reduce((sum, l) => sum + (l.cashAmount || 0), 0)
+  
   return (
-    <div className="min-h-screen bg-bg-primary">
+    <>
+      <FilterModal 
+        show={showFilterModal} 
+        onClose={() => setShowFilterModal(false)}
+        filters={filters}
+        setFilters={setFilters}
+      />
+      
+      {showDetailModal && selectedLead && (
+        <LeadDetailModal
+          lead={selectedLead}
+          onClose={() => {
+            setShowDetailModal(false)
+            setSelectedLead(null)
+            setEditingLead(null)
+          }}
+          onEdit={() => setEditingLead({...selectedLead})}
+          editingLead={editingLead}
+          onSave={handleSaveEdit}
+          formatCash={formatCash}
+        />
+      )}
+      
+      {showPasteModal && (
+        <PasteDealModal
+          onClose={() => setShowPasteModal(false)}
+          onSuccess={(newLead) => {
+            setLeads(prev => [newLead, ...prev])
+            setShowPasteModal(false)
+            // Optionally open the new lead
+            setSelectedLead(newLead)
+            setShowDetailModal(true)
+          }}
+          formatCash={formatCash}
+        />
+      )}
+      
+      <div className="space-y-6 animate-fade-in">
       {/* Header */}
-      <div className="border-b border-border-subtle bg-bg-card">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between flex-wrap gap-3">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
-                <Flame className="w-5 h-5 text-red-400" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold">Hot Money Radar</h1>
-                <p className="text-sm text-text-muted">
-                  {stats ? `${fmtNum(stats.total_leads)} capital events tracked • ${fmtCash(stats.total_capital)} deployed` : 'Capital intelligence — who bought what, where, and for how much'}
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={loadData}
-              disabled={loading}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-bg-input hover:bg-bg-hover text-text-muted hover:text-text-primary transition-colors text-sm disabled:opacity-50"
-            >
-              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-              Refresh
-            </button>
-          </div>
-
-          {/* Stats Row */}
-          {stats && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
-              <div className="bg-bg-primary rounded-xl p-4 border border-border-subtle">
-                <div className="flex items-center gap-2 mb-1">
-                  <Hash className="w-4 h-4 text-accent-blue" />
-                  <span className="text-xs text-text-muted">Total Leads</span>
-                </div>
-                <span className="text-2xl font-bold">{fmtNum(stats.total_leads)}</span>
-              </div>
-              <div className="bg-bg-primary rounded-xl p-4 border border-border-subtle">
-                <div className="flex items-center gap-2 mb-1">
-                  <DollarSign className="w-4 h-4 text-emerald-400" />
-                  <span className="text-xs text-text-muted">Total Capital</span>
-                </div>
-                <span className="text-2xl font-bold">{fmtCash(stats.total_capital)}</span>
-              </div>
-              <div className="bg-bg-primary rounded-xl p-4 border border-border-subtle">
-                <div className="flex items-center gap-2 mb-1">
-                  <BarChart3 className="w-4 h-4 text-purple-400" />
-                  <span className="text-xs text-text-muted">Avg Deal</span>
-                </div>
-                <span className="text-2xl font-bold">{fmtCash(stats.avg_cash)}</span>
-              </div>
-              <div className="bg-bg-primary rounded-xl p-4 border border-border-subtle">
-                <div className="flex items-center gap-2 mb-1">
-                  <Landmark className="w-4 h-4 text-amber-400" />
-                  <span className="text-xs text-text-muted">Top Market</span>
-                </div>
-                <span className="text-lg font-bold truncate">{stats.by_location?.[0]?.location || '—'}</span>
-                <div className="text-xs text-text-muted">{fmtCash(stats.by_location?.[0]?.total_cash)} across {fmtNum(stats.by_location?.[0]?.count)} deals</div>
-              </div>
-            </div>
-          )}
-
-          {/* Filters & Search */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-5">
-            <div className="relative flex-1 max-w-md">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" />
-              <input
-                type="text"
-                placeholder="Search entity, location, property..."
-                value={search}
-                onChange={e => { setSearch(e.target.value); setLimit(50) }}
-                className="w-full pl-9 pr-8 py-2 rounded-lg bg-bg-input border border-border-subtle text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-blue"
-              />
-              {search && (
-                <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary">
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <Filter className="w-4 h-4 text-text-muted" />
-              <button
-                onClick={() => { setFilterType(''); setLimit(50) }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${!filterType ? 'bg-accent-blue text-white' : 'bg-bg-input text-text-muted hover:text-text-primary'}`}
-              >
-                All
-              </button>
-              {propertyTypes.slice(0, 8).map(type => (
-                <button
-                  key={type}
-                  onClick={() => { setFilterType(filterType === type ? '' : type); setLimit(50) }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors border ${filterType === type ? 'bg-accent-blue text-white border-accent-blue' : (PROP_COLORS[type] || PROP_COLORS.Unknown).replace('bg-', 'hover:bg-') + ' bg-bg-input border-border-subtle'}`}
-                >
-                  {type}
-                </button>
-              ))}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+            <Flame className="w-6 h-6 text-red-500" />
+            Hot Money Radar
+          </h1>
+          <p className="text-slate-400 mt-1">
+            {displayLeads.length} leads with {formatCash(totalCapital)} in fresh capital • Recently sold
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={() => setShowPasteModal(true)}
+            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-white text-sm font-medium flex items-center gap-2 transition-colors"
+          >
+            <ClipboardPaste className="w-4 h-4" />
+            Paste Deal
+          </button>
+          <button 
+            onClick={fetchLeads}
+            disabled={loading}
+            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 rounded-lg text-slate-300 text-sm font-medium flex items-center gap-2 transition-colors"
+            title="Refresh from database"
+          >
+            <svg className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Refresh
+          </button>
+          <button 
+            onClick={() => setShowFilterModal(true)}
+            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 text-sm font-medium flex items-center gap-2 transition-colors"
+          >
+            <Filter className="w-4 h-4" />
+            Filter
+            {Object.values(filters).some(v => v && v !== 'all') && (
+              <span className="w-2 h-2 rounded-full bg-red-500"></span>
+            )}
+          </button>
+          <ExportButton leads={displayLeads} />
+        </div>
+      </div>
+      
+      {/* Days Filter */}
+      <div className="flex items-center gap-2">
+        <span className="text-sm text-slate-400">Show deals from:</span>
+        {[30, 60, 90].map(days => (
+          <button
+            key={days}
+            onClick={() => setFilters(f => ({...f, daysFilter: days}))}
+            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+              filters.daysFilter === days
+                ? 'bg-red-600 text-white'
+                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+            }`}
+          >
+            {days} Days
+          </button>
+        ))}
+        <button
+          onClick={() => setFilters(f => ({...f, daysFilter: null}))}
+          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+            filters.daysFilter === null
+              ? 'bg-red-600 text-white'
+              : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+          }`}
+        >
+          All Time
+        </button>
+      </div>
+      
+      {/* Stats Row */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="bg-gradient-to-br from-red-600/20 to-orange-600/20 rounded-xl p-4 border border-red-500/20">
+          <div className="flex items-center gap-3">
+            <DollarSign className="w-8 h-8 text-red-400" />
+            <div>
+              <p className="text-2xl font-bold text-white">{formatCash(totalCapital)}</p>
+              <p className="text-slate-400 text-sm">Total Hot Money</p>
             </div>
           </div>
-
-          {/* Sort bar */}
-          <div className="flex items-center gap-2 mt-3 text-xs text-text-muted">
-            <span>Sort by:</span>
-            {[
-              { key: 'cash', label: 'Cash Amount' },
-              { key: 'score', label: 'Match Score' },
-              { key: 'date', label: 'Sale Date' },
-            ].map(({ key, label }) => (
-              <button
-                key={key}
-                onClick={() => toggleSort(key)}
-                className={`flex items-center gap-1 px-2 py-1 rounded transition-colors ${sortBy === key ? 'text-accent-blue font-medium' : 'hover:text-text-primary'}`}
-              >
-                {label}
-                {sortBy === key && (
-                  sortDir === 'desc' ? <ChevronDown className="w-3 h-3" /> : <ChevronUp className="w-3 h-3" />
-                )}
-              </button>
-            ))}
-            <span className="ml-auto">{fmtNum(leads.length)} unique entities</span>
+        </div>
+        <div className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 rounded-xl p-4 border border-blue-500/20">
+          <div className="flex items-center gap-3">
+            <Flame className="w-8 h-8 text-blue-400" />
+            <div>
+              <p className="text-2xl font-bold text-white">{displayLeads.length}</p>
+              <p className="text-slate-400 text-sm">Active Alerts</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-gradient-to-br from-emerald-600/20 to-green-600/20 rounded-xl p-4 border border-emerald-500/20">
+          <div className="flex items-center gap-3">
+            <Target className="w-8 h-8 text-emerald-400" />
+            <div>
+              <p className="text-2xl font-bold text-white">
+                {formatCash(totalCapital / (displayLeads.length || 1))}
+              </p>
+              <p className="text-slate-400 text-sm">Avg Cash Position</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-xl p-4 border border-purple-500/20">
+          <div className="flex items-center gap-3">
+            <Check className="w-8 h-8 text-purple-400" />
+            <div>
+              <p className="text-2xl font-bold text-white">
+                {Math.round(displayLeads.reduce((sum, l) => sum + (l.matchScore || 0), 0) / (displayLeads.length || 1))}
+              </p>
+              <p className="text-slate-400 text-sm">Avg Match Score</p>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Action Flash Toast */}
-      {actionFlash && (
-        <div className="fixed top-4 right-4 z-50 bg-emerald-500 text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium flex items-center gap-2 animate-in fade-in slide-in-from-top-2">
-          <Check className="w-4 h-4" />{actionFlash}
-        </div>
-      )}
-
-      {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 py-6">
-        {error && (
-          <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center gap-2">
-            <AlertTriangle className="w-4 h-4" />{error}
+      
+      {/* Search Bar */}
+      <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="flex flex-col lg:flex-row gap-4">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search by entity name, location, or asset class... (or use voice 🎤)"
+              value={filters.location}
+              onChange={(e) => setFilters({...filters, location: e.target.value})}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  // Trigger search
+                }
+              }}
+              className="w-full pl-10 pr-28 py-2 bg-slate-900/50 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-red-500 transition-colors"
+            />
+            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
+              <button
+                className="px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white text-sm font-medium rounded-md transition-colors flex items-center gap-1.5"
+              >
+                <Search className="w-3.5 h-3.5" />
+                Search
+              </button>
+              <VoiceInput
+                onResult={(text) => setFilters({...filters, location: text})}
+                size="sm"
+                placeholder="Say: Find industrial leads..."
+              />
+            </div>
           </div>
-        )}
+          
+          <div className="flex flex-wrap gap-2">
+            <select
+              value={filters.propertyType}
+              onChange={(e) => setFilters({...filters, propertyType: e.target.value})}
+              className="px-4 py-2 bg-slate-900/50 border border-slate-700 rounded-lg text-slate-200 focus:outline-none focus:border-red-500"
+            >
+              <option value="all">All Asset Classes</option>
+              <option value="Industrial">Industrial</option>
+              <option value="Retail">Retail</option>
+              <option value="Office">Office</option>
+              <option value="Multi-Family">Multi-Family</option>
+              <option value="Agricultural">Agricultural</option>
+              <option value="Land">Land</option>
+              <option value="Mixed-Use">Mixed-Use</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      {/* Hot Money List */}
+      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+        <div className="p-4 border-b border-slate-700">
+          <div className="flex items-center justify-between">
+            <h3 className="font-semibold text-white">Hot Money Leads</h3>
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <span>Sorted by:</span>
+              <select className="bg-slate-900/50 border border-slate-700 rounded px-2 py-1 text-slate-200">
+                <option>Cash Amount (High → Low)</option>
+                <option>Date (Newest)</option>
+                <option>Match Score</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div className="divide-y divide-slate-700/50">
+          {loading ? (
+            <div className="p-12 text-center">
+              <div className="inline-block w-8 h-8 border-2 border-red-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+              <p className="text-slate-400">Loading leads from database...</p>
+            </div>
+          ) : error ? (
+            <div className="p-12 text-center">
+              <p className="text-red-400 mb-2">{error}</p>
+              <button 
+                onClick={fetchLeads}
+                className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg text-sm"
+              >
+                Try Again
+              </button>
+            </div>
+          ) : displayLeads.length === 0 ? (
+            <div className="p-12 text-center text-slate-500">
+              No leads found. Adjust your filters or refresh.
+            </div>
+          ) : (
+            displayLeads.map((lead) => (
+              <HotMoneyListItem 
+                key={lead.id} 
+                lead={lead} 
+                formatCash={formatCash}
+                onViewProfile={() => handleViewProfile(lead)}
+              />
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+    </>
+  )
+}
 
-        {loading && leads.length === 0 ? (
-          <div className="flex items-center justify-center py-20"><Loader2 className="w-6 h-6 animate-spin text-accent-blue" /></div>
-        ) : displayLeads.length === 0 ? (
-          <div className="text-center py-20 text-text-muted">
-            <Landmark className="w-12 h-12 mx-auto mb-3 opacity-30" />
-            <p>No leads match your filters.</p>
-            {(filterType || search) && (
-              <button onClick={() => { setFilterType(''); setSearch('') }} className="mt-2 text-accent-blue text-sm hover:underline">Clear filters</button>
+// Lead Detail Modal Component
+const LeadDetailModal = ({ lead, onClose, onEdit, editingLead, onSave, formatCash }) => {
+  const [editedData, setEditedData] = useState(editingLead || lead)
+  const [pullingProfile, setPullingProfile] = useState(false)
+  const [profileData, setProfileData] = useState(null)
+  const [showProfile, setShowProfile] = useState(false)
+  const [matches, setMatches] = useState([])
+  const [loadingMatches, setLoadingMatches] = useState(false)
+  const [showMatches, setShowMatches] = useState(false)
+  
+  // Load matching opportunities when modal opens
+  useEffect(() => {
+    if (lead?.id) {
+      loadMatches()
+    }
+  }, [lead?.id])
+  
+  const loadMatches = async () => {
+    setLoadingMatches(true)
+    try {
+      const response = await fetch(`${API_BASE}/hotmoney/${lead.id}/matches`)
+      if (response.ok) {
+        const data = await response.json()
+        setMatches(data.matches || [])
+      }
+    } catch (err) {
+      console.error('Error loading matches:', err)
+    } finally {
+      setLoadingMatches(false)
+    }
+  }
+  
+  const isEditing = editingLead !== null
+  
+  const handlePullProfile = async () => {
+    if (!lead.entity) {
+      console.log('No entity to pull profile for')
+      return
+    }
+    
+    console.log('Pulling profile for:', lead.entity)
+    setPullingProfile(true)
+    try {
+      const response = await fetch(`${API_BASE}/llm/pull-profile`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entity: lead.entity })
+      })
+      
+      console.log('Response status:', response.status)
+      
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error('Error response:', errorText)
+        throw new Error('Failed to pull profile: ' + errorText)
+      }
+      
+      const data = await response.json()
+      console.log('Profile data received:', data)
+      setProfileData(data.profile)
+      setShowProfile(true)
+    } catch (err) {
+      console.error('Error pulling profile:', err)
+      alert('Failed to pull profile: ' + err.message)
+    } finally {
+      setPullingProfile(false)
+    }
+  }
+  
+  const handleSaveToObsidian = async () => {
+    if (!profileData) return
+    
+    try {
+      await fetch(`${API_BASE}/obsidian/quick-link`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: `Profile - ${lead.entity}`,
+          content: generateProfileMarkdown(lead, profileData),
+          folder: 'Deals/Profiles'
+        })
+      })
+      alert('Profile saved to Obsidian: Deals/Profiles/')
+    } catch (err) {
+      console.error('Error saving to Obsidian:', err)
+    }
+  }
+  
+  const generateProfileMarkdown = (lead, profile) => {
+    return `# Profile: ${lead.entity}
+
+## Overview
+${profile.summary || 'No summary available.'}
+
+## Company Information
+- **Entity:** ${lead.entity}
+- **Cash Available:** ${formatCash(lead.cashAmount)}
+- **Property Type:** ${lead.propertyType}
+- **Asset Class:** ${lead.assetClass || 'N/A'}
+- **Location:** ${lead.location}
+
+## Research Findings
+${profile.research || 'No research data available.'}
+
+## Potential Connections
+${profile.connections || 'No connection data available.'}
+
+## Investment Preferences
+${profile.preferences || 'No preference data available.'}
+
+## Quick Links
+- [Google Search](https://www.google.com/search?q=${encodeURIComponent(lead.entity)})
+- [LinkedIn Search](https://www.google.com/search?q=${encodeURIComponent(lead.entity)}+linkedin)
+- [Corporation Search](https://www.google.com/search?q=${encodeURIComponent(lead.entity)}+corporation+canada)
+
+## Related Properties
+${lead.address ? `- ${lead.address}` : 'No properties listed.'}
+
+## Notes
+${lead.notes || 'No notes yet.'}
+
+## Tags
+#hot-money #${lead.propertyType?.toLowerCase().replace(/\s+/g, '-')} #${lead.location?.toLowerCase().replace(/\s+/g, '-')} #profile
+
+---
+*Profile generated: ${new Date().toLocaleString()}*
+`
+  }
+  
+  const handleSave = () => {
+    onSave(editedData)
+  }
+  
+  const handleChange = (field, value) => {
+    setEditedData({...editedData, [field]: value})
+  }
+  
+  const addContact = () => {
+    const newContact = { type: 'phone', value: '', label: '' }
+    setEditedData({
+      ...editedData, 
+      contacts: [...(editedData.contacts || []), newContact]
+    })
+  }
+  
+  const updateContact = (index, field, value) => {
+    const updatedContacts = [...(editedData.contacts || [])]
+    updatedContacts[index] = {...updatedContacts[index], [field]: value}
+    setEditedData({...editedData, contacts: updatedContacts})
+  }
+  
+  const removeContact = (index) => {
+    const updatedContacts = (editedData.contacts || []).filter((_, i) => i !== index)
+    setEditedData({...editedData, contacts: updatedContacts})
+  }
+  
+  const data = isEditing ? editedData : lead
+  
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={onClose}>
+      <div 
+        className="bg-slate-900 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto rounded-2xl border border-slate-700 shadow-2xl" 
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-slate-700 bg-gradient-to-r from-red-600/10 to-orange-600/10">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-red-500/20 border border-red-500/30 flex items-center justify-center">
+              <Flame className="w-6 h-6 text-red-500" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white">
+                {isEditing ? (
+                  <input
+                    type="text"
+                    value={data.entity}
+                    onChange={(e) => handleChange('entity', e.target.value)}
+                    className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-64"
+                  />
+                ) : data.entity}
+              </h2>
+              <p className="text-slate-400 text-sm">Hot Money Lead • {data.daysAgo} days ago</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            {isEditing ? (
+              <button
+                onClick={handleSave}
+                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-sm font-medium flex items-center gap-2 transition-colors"
+              >
+                <Save className="w-4 h-4" />
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={onEdit}
+                className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm font-medium flex items-center gap-2 transition-colors"
+              >
+                <Edit3 className="w-4 h-4" />
+                Edit
+              </button>
+            )}
+            <button onClick={onClose} className="p-2 hover:bg-slate-800 rounded-lg transition-colors">
+              <X className="w-5 h-5 text-slate-400" />
+            </button>
+          </div>
+        </div>
+        
+        <div className="p-6 space-y-6">
+          {/* Cash Amount */}
+          <div className="bg-gradient-to-r from-red-600/10 to-orange-600/10 rounded-xl p-4 border border-red-500/20">
+            <p className="text-slate-400 text-sm mb-1">Cash Available</p>
+            {isEditing ? (
+              <input
+                type="number"
+                value={data.cashAmount}
+                onChange={(e) => handleChange('cashAmount', parseInt(e.target.value))}
+                className="bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white w-full"
+              />
+            ) : (
+              <p className="text-3xl font-bold text-red-400">{formatCash(data.cashAmount)}</p>
             )}
           </div>
-        ) : (
-          <>
-            <div className="space-y-3">
-              {displayLeads.map((lead, idx) => {
-                const type = lead.property_type || lead.asset_class || 'Unknown'
-                const typeStyle = PROP_COLORS[type] || PROP_COLORS.Unknown
-                const isExpanded = expandedLead === lead.id
-                const cash = lead.cash_amount || 0
-                const totalCash = lead.totalCash || cash
-                const score = lead.match_score || 0
-                const saleDate = lead.sale_date ? new Date(lead.sale_date).toLocaleDateString('en-CA') : '—'
-                const entityName = decodeHtml(lead.entity || lead.buyer_name || 'Unknown Entity')
-                const contact = generateContactInfo(entityName)
-                const outreach = generateOutreachCopy(entityName, totalCash, type, lead.location, lead.property, lead.buyer_name)
-                const mainProperty = lead.property ? lead.property.split('\\n')[0] : ''
-
-                return (
-                  <div
-                    key={lead.id || idx}
-                    className={`bg-bg-card rounded-xl border transition-all ${isExpanded ? 'border-accent-blue/40 shadow-lg shadow-accent-blue/5' : 'border-border-subtle hover:border-accent-blue/30'}`}
+          
+          {/* Property Sold Section */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+              <Building className="w-5 h-5 text-blue-400" />
+              Property Sold
+            </h3>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-slate-800/50 rounded-lg p-4">
+                <p className="text-slate-400 text-sm mb-1">Asset Class</p>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    value={data.assetClass || ''}
+                    onChange={(e) => handleChange('assetClass', e.target.value)}
+                    className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-full"
+                    placeholder="e.g. Industrial Warehouse"
+                  />
+                ) : (
+                  <p className="text-white font-medium">{data.assetClass || data.propertyType}</p>
+                )}
+              </div>
+              
+              <div className="bg-slate-800/50 rounded-lg p-4">
+                <p className="text-slate-400 text-sm mb-1">Property Type</p>
+                {isEditing ? (
+                  <select
+                    value={data.propertyType}
+                    onChange={(e) => handleChange('propertyType', e.target.value)}
+                    className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-full"
                   >
-                    {/* Top action bar — ALWAYS VISIBLE */}
-                    <div className="px-4 pt-3 flex items-center gap-2 flex-wrap">
-                      <button
-                        onClick={() => { window.open(`tel:${contact.phone.replace(/\D/g, '')}`); flashAction(`Calling ${entityName.split(' ')[0]}...`) }}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/15 text-emerald-400 text-xs font-medium hover:bg-emerald-500/25 transition-colors"
-                        title={contact.phone}
-                      >
-                        <Phone className="w-3.5 h-3.5" />Call Now
-                      </button>
-                      <button
-                        onClick={() => { window.open(`mailto:${contact.email}?subject=CRE%20Opportunity%20in%20${encodeURIComponent(lead.location || '')}&body=${encodeURIComponent(outreach)}`); flashAction('Email draft opened') }}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500/15 text-blue-400 text-xs font-medium hover:bg-blue-500/25 transition-colors"
-                      >
-                        <Mail className="w-3.5 h-3.5" />Email
-                      </button>
-                      <button
-                        onClick={() => copyText(outreach, `outreach-${lead.id}`)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/15 text-amber-400 text-xs font-medium hover:bg-amber-500/25 transition-colors"
-                      >
-                        {copied === `outreach-${lead.id}` ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                        {copied === `outreach-${lead.id}` ? 'Copied!' : 'Copy Outreach'}
-                      </button>
-                      <a
-                        href={contact.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => flashAction('Opening LinkedIn...')}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-500/15 text-purple-400 text-xs font-medium hover:bg-purple-500/25 transition-colors"
-                      >
-                        <Linkedin className="w-3.5 h-3.5" />LinkedIn
-                      </a>
-                      <div className="flex-1" />
-                      {lead.dealCount > 1 && (
-                        <span className="px-2 py-1 rounded-lg bg-bg-input text-text-muted text-xs font-medium">
-                          {lead.dealCount} deals
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Main card body */}
-                    <div className="p-4 pt-2" onClick={() => setExpandedLead(isExpanded ? null : lead.id)}>
-                      <div className="flex items-start gap-4 cursor-pointer">
-                        {/* Score badge */}
-                        <div className="flex flex-col items-center gap-1 pt-0.5">
-                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold ${score >= 80 ? 'bg-emerald-500/15 text-emerald-400' : score >= 60 ? 'bg-amber-500/15 text-amber-400' : 'bg-gray-500/15 text-gray-400'}`}>
-                            {score}
-                          </div>
-                          <span className="text-[10px] text-text-muted">Score</span>
-                        </div>
-
-                        {/* Main info */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <h3 className="font-semibold text-sm truncate">{entityName}</h3>
-                            <span className={`px-2 py-0.5 rounded-md text-[10px] font-medium border ${typeStyle}`}>{type}</span>
-                            {lead.days_ago !== null && lead.days_ago !== undefined && (
-                              <span className="flex items-center gap-1 text-[10px] text-text-muted">
-                                <Clock className="w-3 h-3" />{fmtDaysAgo(lead.days_ago)}
-                              </span>
-                            )}
-                          </div>
-
-                          <div className="flex items-center gap-4 mt-2 text-xs flex-wrap">
-                            <span className="flex items-center gap-1 text-emerald-400 font-semibold">
-                              <DollarSign className="w-3.5 h-3.5" />
-                              {lead.dealCount > 1 ? `${fmtCash(cash)} (${fmtCash(totalCash)} total)` : fmtCash(cash)}
-                            </span>
-                            <span className="flex items-center gap-1 text-text-muted">
-                              <MapPin className="w-3.5 h-3.5" />{lead.location || '—'}
-                            </span>
-                            <span className="flex items-center gap-1 text-text-muted">
-                              <Building2 className="w-3.5 h-3.5" />{mainProperty || '—'}
-                            </span>
-                            <span className="flex items-center gap-1 text-text-muted">
-                              <Calendar className="w-3.5 h-3.5" />{saleDate}
-                            </span>
-                            {lead.buyer_name && lead.buyer_name !== lead.entity && (
-                              <span className="flex items-center gap-1 text-text-muted">
-                                <Briefcase className="w-3.5 h-3.5" />Buyer: {decodeHtml(lead.buyer_name)}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Expand icon */}
-                        <div className="flex-shrink-0 pt-2">
-                          {isExpanded ? <ChevronUp className="w-4 h-4 text-text-muted" /> : <ChevronDown className="w-4 h-4 text-text-muted" />}
-                        </div>
-                      </div>
-
-                      {/* Expanded detail */}
-                      {isExpanded && (
-                        <div className="mt-4 pt-4 border-t border-border-subtle space-y-4">
-                          {/* Contact Info */}
-                          <div>
-                            <span className="text-xs font-medium text-text-muted uppercase tracking-wider">Contact Intelligence</span>
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-2">
-                              <div className="bg-bg-primary rounded-lg p-3 border border-border-subtle">
-                                <div className="flex items-center gap-2 text-text-muted text-xs mb-1">
-                                  <Phone className="w-3.5 h-3.5" />Phone
-                                </div>
-                                <div className="text-sm font-medium text-text-primary font-mono">{contact.phone}</div>
-                              </div>
-                              <div className="bg-bg-primary rounded-lg p-3 border border-border-subtle">
-                                <div className="flex items-center gap-2 text-text-muted text-xs mb-1">
-                                  <Mail className="w-3.5 h-3.5" />Email
-                                </div>
-                                <div className="text-sm font-medium text-text-primary font-mono">{contact.email}</div>
-                              </div>
-                              <div className="bg-bg-primary rounded-lg p-3 border border-border-subtle">
-                                <div className="flex items-center gap-2 text-text-muted text-xs mb-1">
-                                  <Globe className="w-3.5 h-3.5" />Web
-                                </div>
-                                <a href={contact.google} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-accent-blue hover:underline flex items-center gap-1">
-                                  <Search className="w-3 h-3" />Google Search
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Outreach Preview */}
-                          <div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-xs font-medium text-text-muted uppercase tracking-wider">Outreach Message</span>
-                              <button
-                                onClick={(e) => { e.stopPropagation(); copyText(outreach, `outreach-big-${lead.id}`) }}
-                                className="flex items-center gap-1 px-2 py-1 rounded bg-bg-input text-text-muted text-xs hover:text-text-primary transition-colors"
-                              >
-                                {copied === `outreach-big-${lead.id}` ? <Check className="w-3 h-3 text-green-400" /> : <Copy className="w-3 h-3" />}
-                                {copied === `outreach-big-${lead.id}` ? 'Copied' : 'Copy'}
-                              </button>
-                            </div>
-                            <div className="mt-2 bg-bg-primary rounded-lg p-3 border border-border-subtle">
-                              <pre className="text-xs text-text-primary whitespace-pre-wrap font-sans leading-relaxed">{outreach}</pre>
-                            </div>
-                          </div>
-
-                          {/* Properties */}
-                          {lead.property && lead.property.includes('\\n') && (
-                            <div>
-                              <span className="text-xs font-medium text-text-muted uppercase tracking-wider">Properties</span>
-                              <div className="mt-1 space-y-1">
-                                {lead.property.split('\\n').map((p, i) => (
-                                  <div key={i} className="text-sm text-text-primary flex items-center gap-2">
-                                    <Building2 className="w-3.5 h-3.5 text-text-muted" />{decodeHtml(p)}
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-
-                          {/* Consideration */}
-                          {lead.consideration && (
-                            <div>
-                              <span className="text-xs font-medium text-text-muted uppercase tracking-wider">Consideration</span>
-                              <p className="mt-1 text-sm text-text-primary" dangerouslySetInnerHTML={{ __html: lead.consideration }} />
-                            </div>
-                          )}
-
-                          {/* Legal */}
-                          {lead.legal_description && lead.legal_description !== 'N/A' && (
-                            <div>
-                              <span className="text-xs font-medium text-text-muted uppercase tracking-wider">Legal Description</span>
-                              <p className="mt-1 text-sm text-text-primary" dangerouslySetInnerHTML={{ __html: lead.legal_description }} />
-                            </div>
-                          )}
-
-                          {/* Detail grid */}
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-                            {lead.pin && lead.pin !== 'N/A' && (
-                              <div className="bg-bg-primary rounded-lg p-2 border border-border-subtle">
-                                <span className="text-text-muted">PIN</span>
-                                <div className="font-medium text-text-primary">{lead.pin}</div>
-                              </div>
-                            )}
-                            {lead.acreage > 0 && (
-                              <div className="bg-bg-primary rounded-lg p-2 border border-border-subtle">
-                                <span className="text-text-muted">Acreage</span>
-                                <div className="font-medium text-text-primary">{lead.acreage} ac</div>
-                              </div>
-                            )}
-                            {lead.loan_principal > 0 && (
-                              <div className="bg-bg-primary rounded-lg p-2 border border-border-subtle">
-                                <span className="text-text-muted">Loan</span>
-                                <div className="font-medium text-text-primary">{fmtCash(lead.loan_principal)}</div>
-                              </div>
-                            )}
-                            {lead.interest_rate > 0 && (
-                              <div className="bg-bg-primary rounded-lg p-2 border border-border-subtle">
-                                <span className="text-text-muted">Rate</span>
-                                <div className="font-medium text-text-primary">{lead.interest_rate}%</div>
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Multi-deal list */}
-                          {lead.dealCount > 1 && (
-                            <div>
-                              <span className="text-xs font-medium text-text-muted uppercase tracking-wider">All Deals ({lead.dealCount})</span>
-                              <div className="mt-1 space-y-1 max-h-40 overflow-y-auto">
-                                {lead._deals.slice(0, 10).map((d, i) => (
-                                  <div key={i} className="flex items-center gap-3 text-xs py-1 border-b border-border-subtle last:border-0">
-                                    <span className="text-emerald-400 font-medium w-16">{fmtCash(d.cash_amount)}</span>
-                                    <span className="text-text-muted w-24 truncate">{d.location}</span>
-                                    <span className="text-text-primary flex-1 truncate">{decodeHtml(d.property || '').split('\\n')[0]}</span>
-                                    <span className="text-text-muted">{d.sale_date}</span>
-                                  </div>
-                                ))}
-                                {lead._deals.length > 10 && (
-                                  <div className="text-xs text-text-muted py-1">+{lead._deals.length - 10} more deals</div>
-                                )}
-                              </div>
-                            </div>
-                          )}
-
-                          {/* Bottom actions */}
-                          <div className="flex items-center gap-2 pt-1">
-                            <a href={contact.google} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-bg-input text-text-muted text-xs hover:text-text-primary hover:bg-bg-hover transition-colors">
-                              <Search className="w-3 h-3" />Search
-                            </a>
-                            <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-bg-input text-text-muted text-xs hover:text-text-primary hover:bg-bg-hover transition-colors">
-                              <Linkedin className="w-3 h-3" />LinkedIn
-                            </a>
-                            {lead.listing_url && (
-                              <a href={lead.listing_url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-bg-input text-text-muted text-xs hover:text-text-primary hover:bg-bg-hover transition-colors">
-                                <ExternalLink className="w-3 h-3" />Listing
-                              </a>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )
-              })}
+                    <option value="Industrial">Industrial</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Office">Office</option>
+                    <option value="Multi-Family">Multi-Family</option>
+                    <option value="Agricultural">Agricultural</option>
+                    <option value="Land">Land</option>
+                    <option value="Mixed-Use">Mixed-Use</option>
+                  </select>
+                ) : (
+                  <p className="text-white font-medium">{data.propertyType}</p>
+                )}
+              </div>
             </div>
-
-            {/* Load more */}
-            {displayLeads.length < leads.length && (
-              <div className="text-center mt-6">
+            
+            <div className="bg-slate-800/50 rounded-lg p-4">
+              <p className="text-slate-400 text-sm mb-1">Address</p>
+              {isEditing ? (
+                <input
+                  type="text"
+                  value={data.address || ''}
+                  onChange={(e) => handleChange('address', e.target.value)}
+                  className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-full"
+                  placeholder="Full property address"
+                />
+              ) : (
+                <p className="text-white font-medium">{data.address || data.property}</p>
+              )}
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-slate-800/50 rounded-lg p-4">
+                <p className="text-slate-400 text-sm mb-1">Sale Date</p>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    value={data.saleDate}
+                    onChange={(e) => handleChange('saleDate', e.target.value)}
+                    className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-full"
+                  />
+                ) : (
+                  <p className="text-white font-medium">{data.saleDate}</p>
+                )}
+              </div>
+              
+              <div className="bg-slate-800/50 rounded-lg p-4">
+                <p className="text-slate-400 text-sm mb-1">Location</p>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    value={data.location}
+                    onChange={(e) => handleChange('location', e.target.value)}
+                    className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-full"
+                  />
+                ) : (
+                  <p className="text-white font-medium">{data.location}</p>
+                )}
+              </div>
+            </div>
+          </div>
+          
+          {/* Match Score */}
+          <div className="bg-slate-800/50 rounded-lg p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-slate-400 text-sm mb-1">Match Score</p>
+                <div className="flex items-center gap-2">
+                  {isEditing ? (
+                    <input
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={data.matchScore}
+                      onChange={(e) => handleChange('matchScore', parseInt(e.target.value))}
+                      className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white w-20"
+                    />
+                  ) : (
+                    <span className={`text-2xl font-bold ${data.matchScore >= 90 ? 'text-emerald-400' : data.matchScore >= 70 ? 'text-yellow-400' : 'text-red-400'}`}>
+                      {data.matchScore}
+                    </span>
+                  )}
+                  <span className="text-slate-400 text-sm">/ 100</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Contacts Section */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                <Phone className="w-5 h-5 text-emerald-400" />
+                Contacts
+              </h3>
+              {isEditing && (
                 <button
-                  onClick={() => setLimit(l => l + 50)}
-                  className="px-4 py-2 rounded-lg bg-bg-input text-text-muted hover:text-text-primary text-sm transition-colors"
+                  onClick={addContact}
+                  className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm flex items-center gap-1 transition-colors"
                 >
-                  Load more ({fmtNum(leads.length - displayLeads.length)} remaining)
+                  <Plus className="w-4 h-4" />
+                  Add Contact
                 </button>
+              )}
+            </div>
+            
+            {(data.contacts || []).length === 0 ? (
+              <p className="text-slate-500 text-sm italic">No contacts added yet. Click Edit to add.</p>
+            ) : (
+              <div className="space-y-2">
+                {(data.contacts || []).map((contact, idx) => (
+                  <div key={idx} className="bg-slate-800/50 rounded-lg p-3 flex items-center gap-3">
+                    {isEditing ? (
+                      <>
+                        <select
+                          value={contact.type}
+                          onChange={(e) => updateContact(idx, 'type', e.target.value)}
+                          className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white text-sm"
+                        >
+                          <option value="phone">Phone</option>
+                          <option value="email">Email</option>
+                          <option value="linkedin">LinkedIn</option>
+                          <option value="website">Website</option>
+                        </select>
+                        <input
+                          type="text"
+                          value={contact.label}
+                          onChange={(e) => updateContact(idx, 'label', e.target.value)}
+                          placeholder="Label"
+                          className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white text-sm flex-1"
+                        />
+                        <input
+                          type="text"
+                          value={contact.value}
+                          onChange={(e) => updateContact(idx, 'value', e.target.value)}
+                          placeholder="Value"
+                          className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white text-sm flex-1"
+                        />
+                        <button
+                          onClick={() => removeContact(idx)}
+                          className="p-1.5 hover:bg-red-500/20 text-red-400 rounded"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-slate-400 text-sm capitalize w-20">{contact.type}</span>
+                        <span className="text-slate-300 text-sm">{contact.label}</span>
+                        <a 
+                          href={contact.type === 'email' ? `mailto:${contact.value}` : contact.type === 'phone' ? `tel:${contact.value}` : contact.value}
+                          className="text-blue-400 hover:text-blue-300 text-sm ml-auto"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {contact.value}
+                        </a>
+                      </>
+                    )}
+                  </div>
+                ))}
               </div>
             )}
-          </>
-        )}
+          </div>
+          
+          {/* Notes Section */}
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold text-white">Notes</h3>
+            {isEditing ? (
+              <textarea
+                value={data.notes || ''}
+                onChange={(e) => handleChange('notes', e.target.value)}
+                rows={4}
+                className="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-white resize-none"
+                placeholder="Add notes about this lead..."
+              />
+            ) : (
+              <div className="bg-slate-800/50 rounded-lg p-4 min-h-[100px]">
+                <p className="text-slate-300 text-sm whitespace-pre-wrap">
+                  {data.notes || <span className="text-slate-500 italic">No notes added yet.</span>}
+                </p>
+              </div>
+            )}
+          </div>
+          
+          {/* Quick Links - Auto-generated from entity name */}
+          {!isEditing && data.entity && (
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-white">Quick Links</h3>
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href={`https://www.google.com/search?q=${encodeURIComponent(data.entity)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                >
+                  <Search className="w-4 h-4" />
+                  Google Search
+                </a>
+                <a
+                  href={`https://www.google.com/search?q=${encodeURIComponent(data.entity)}+linkedin`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  LinkedIn Search
+                </a>
+                <a
+                  href={`https://www.google.com/search?q=${encodeURIComponent(data.entity)}+corporation+canada`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                >
+                  <Building className="w-4 h-4" />
+                  Corporation Search
+                </a>
+                <a
+                  href={`https://www.google.com/search?q=${encodeURIComponent(data.entity)}+realtor+ca`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm flex items-center gap-2 transition-colors"
+                >
+                  <Search className="w-4 h-4" />
+                  Realtor.ca
+                </a>
+              </div>
+            </div>
+          )}
+          
+          {/* Profile Section */}
+          {!isEditing && (
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                  <UserCircle className="w-5 h-5 text-purple-400" />
+                  Profile Intelligence
+                </h3>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handlePullProfile}
+                    disabled={pullingProfile}
+                    className="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white rounded-lg text-sm flex items-center gap-2 transition-colors"
+                  >
+                    {pullingProfile ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Researching...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-4 h-4" />
+                        Pull Profile
+                      </>
+                    )}
+                  </button>
+                  {profileData && (
+                    <button
+                      onClick={handleSaveToObsidian}
+                      className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <FileText className="w-4 h-4" />
+                      Save to Obsidian
+                    </button>
+                  )}
+                </div>
+              </div>
+              
+              {showProfile && profileData && (
+                <div className="bg-slate-800/50 rounded-lg p-4 space-y-4">
+                  {profileData.summary && (
+                    <div>
+                      <h4 className="text-sm font-medium text-slate-400 mb-1">Summary</h4>
+                      <p className="text-slate-300 text-sm">{profileData.summary}</p>
+                    </div>
+                  )}
+                  
+                  {profileData.research && (
+                    <div>
+                      <h4 className="text-sm font-medium text-slate-400 mb-1">Research Findings</h4>
+                      <p className="text-slate-300 text-sm whitespace-pre-wrap">{profileData.research}</p>
+                    </div>
+                  )}
+                  
+                  {profileData.connections && (
+                    <div>
+                      <h4 className="text-sm font-medium text-slate-400 mb-1">Potential Connections</h4>
+                      <p className="text-slate-300 text-sm">{profileData.connections}</p>
+                    </div>
+                  )}
+                  
+                  {profileData.preferences && (
+                    <div>
+                      <h4 className="text-sm font-medium text-slate-400 mb-1">Investment Preferences</h4>
+                      <p className="text-slate-300 text-sm">{profileData.preferences}</p>
+                    </div>
+                  )}
+                </div>
+              )}
+              
+              {!profileData && !pullingProfile && (
+                <p className="text-slate-500 text-sm italic">
+                  Click "Pull Profile" to use AI to research this entity and generate a comprehensive profile.
+                </p>
+              )}
+            </div>
+          )}
+          
+          {/* Matching Opportunities Section */}
+          {!isEditing && (
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                  <Target className="w-5 h-5 text-emerald-400" />
+                  Matching Opportunities
+                  {matches.length > 0 && (
+                    <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-full text-xs">
+                      {matches.length} found
+                    </span>
+                  )}
+                </h3>
+                <button
+                  onClick={() => setShowMatches(!showMatches)}
+                  className="text-sm text-emerald-400 hover:text-emerald-300"
+                >
+                  {showMatches ? 'Hide' : 'Show'}
+                </button>
+              </div>
+              
+              {loadingMatches ? (
+                <div className="flex items-center gap-2 text-slate-400">
+                  <div className="w-4 h-4 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+                  Finding matches...
+                </div>
+              ) : showMatches && (
+                <div className="space-y-3">
+                  {matches.length === 0 ? (
+                    <p className="text-slate-500 text-sm italic">
+                      No matching opportunities found. Check back later or expand search criteria.
+                    </p>
+                  ) : (
+                    matches.slice(0, 5).map((match, idx) => (
+                      <div 
+                        key={idx}
+                        className="bg-gradient-to-r from-emerald-900/30 to-slate-800/50 rounded-xl p-4 border border-emerald-500/20 hover:border-emerald-500/40 transition-colors"
+                      >
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2">
+                              <h4 className="font-semibold text-white">{match.opportunity.title || match.opportunity.address}</h4>
+                              <span className={`px-2 py-0.5 rounded text-xs font-medium ${
+                                match.match_score >= 80 ? 'bg-emerald-500/20 text-emerald-400' :
+                                match.match_score >= 60 ? 'bg-blue-500/20 text-blue-400' :
+                                'bg-yellow-500/20 text-yellow-400'
+                              }`}>
+                                {match.match_tier} ({match.match_score}%)
+                              </span>
+                            </div>
+                            <p className="text-sm text-slate-400 mt-1">{match.opportunity.address}</p>
+                            <p className="text-sm text-emerald-400 font-medium mt-1">
+                              {match.opportunity.previousPrice || match.opportunity.price}
+                            </p>
+                            <div className="flex flex-wrap gap-2 mt-2">
+                              {match.match_reasons.map((reason, ridx) => (
+                                <span key={ridx} className="text-xs text-slate-500 bg-slate-800/50 px-2 py-1 rounded">
+                                  {reason}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                          <button className="ml-3 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-sm font-medium transition-colors">
+                            View
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                  
+                  {matches.length > 5 && (
+                    <p className="text-center text-slate-500 text-sm">
+                      + {matches.length - 5} more matches
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        
+        {/* Footer Actions */}
+        <div className="flex items-center justify-between p-6 border-t border-slate-700 bg-slate-900/50">
+          {!isEditing && (
+            <div className="flex items-center gap-2">
+              <button className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg text-sm font-medium flex items-center gap-2 transition-colors">
+                <Phone className="w-4 h-4" />
+                Call Now
+              </button>
+              <button className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm font-medium flex items-center gap-2 transition-colors">
+                <Mail className="w-4 h-4" />
+                Email
+              </button>
+            </div>
+          )}
+          <button
+            onClick={onClose}
+            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition-colors ml-auto"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   )
 }
+
+const ExportButton = ({ leads }) => {
+  const handleExport = () => {
+    const headers = ['Entity', 'Cash Amount', 'Sale Date', 'Location', 'Property', 'Asset Class', 'Address', 'Property Type', 'Match Score', 'Days Ago', 'Notes']
+    const rows = leads.map(lead => [
+      lead.entity,
+      lead.cashAmount,
+      lead.saleDate,
+      lead.location,
+      lead.property,
+      lead.assetClass || lead.propertyType,
+      lead.address || lead.property,
+      lead.propertyType,
+      lead.matchScore,
+      lead.daysAgo,
+      lead.notes || ''
+    ])
+    
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+    ].join('\n')
+    
+    const blob = new Blob([csvContent], { type: 'text/csv' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `hot-money-leads-${new Date().toISOString().split('T')[0]}.csv`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+  
+  return (
+    <button 
+      onClick={handleExport}
+      className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors"
+    >
+      <Download className="w-4 h-4" />
+      Export
+    </button>
+  )
+}
+
+const FilterModal = ({ show, onClose, filters, setFilters }) => {
+  if (!show) return null
+  
+  const propertyTypes = ['all', 'Industrial', 'Retail', 'Office', 'Multi-Family', 'Agricultural', 'Land', 'Mixed-Use']
+  
+  const clearFilters = () => {
+    setFilters({
+      propertyType: 'all',
+      minCash: '',
+      maxCash: '',
+      location: '',
+      daysFilter: filters.daysFilter
+    })
+  }
+  
+  const hasActiveFilters = Object.values(filters).some(v => v && v !== 'all')
+  
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={onClose}>
+      <div className="bg-slate-900 w-full max-w-md mx-4 rounded-xl border border-slate-700" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between p-4 border-b border-slate-700">
+          <h3 className="font-semibold text-white flex items-center gap-2">
+            <Filter className="w-5 h-5 text-red-500" />
+            Filter Hot Money Leads
+          </h3>
+          <button onClick={onClose} className="p-2 hover:bg-slate-800 rounded-lg transition-colors">
+            <X className="w-5 h-5 text-slate-400" />
+          </button>
+        </div>
+        
+        <div className="p-4 space-y-4">
+          {/* Property Type */}
+          <div>
+            <label className="block text-sm text-slate-400 mb-2">Property Type</label>
+            <select 
+              value={filters.propertyType}
+              onChange={(e) => setFilters({...filters, propertyType: e.target.value})}
+              className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+            >
+              <option value="all">All Types</option>
+              <option value="Industrial">Industrial</option>
+              <option value="Retail">Retail</option>
+              <option value="Office">Office</option>
+              <option value="Multi-Family">Multi-Family</option>
+              <option value="Agricultural">Agricultural</option>
+              <option value="Land">Land</option>
+              <option value="Mixed-Use">Mixed-Use</option>
+            </select>
+          </div>
+          
+          {/* Cash Range */}
+          <div>
+            <label className="block text-sm text-slate-400 mb-2">Cash Amount Range</label>
+            <div className="flex items-center gap-2">
+              <div className="relative flex-1">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">$</span>
+                <input
+                  type="number"
+                  placeholder="Min"
+                  value={filters.minCash}
+                  onChange={(e) => setFilters({...filters, minCash: e.target.value})}
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg pl-7 pr-3 py-2 text-white"
+                />
+              </div>
+              <span className="text-slate-500">-</span>
+              <div className="relative flex-1">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">$</span>
+                <input
+                  type="number"
+                  placeholder="Max"
+                  value={filters.maxCash}
+                  onChange={(e) => setFilters({...filters, maxCash: e.target.value})}
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg pl-7 pr-3 py-2 text-white"
+                />
+              </div>
+            </div>
+          </div>
+          
+          {/* Location */}
+          <div>
+            <label className="block text-sm text-slate-400 mb-2">Location</label>
+            <input
+              type="text"
+              placeholder="Search location..."
+              value={filters.location}
+              onChange={(e) => setFilters({...filters, location: e.target.value})}
+              className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+            />
+          </div>
+        </div>
+        
+        <div className="flex items-center justify-between p-4 border-t border-slate-700">
+          <button 
+            onClick={clearFilters}
+            disabled={!hasActiveFilters}
+            className="text-sm text-slate-400 hover:text-white disabled:opacity-50"
+          >
+            Clear All
+          </button>
+          <button 
+            onClick={onClose}
+            className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg text-sm font-medium flex items-center gap-2 transition-colors"
+          >
+            <Check className="w-4 h-4" />
+            Apply Filters
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const HotMoneyListItem = ({ lead, formatCash, onViewProfile }) => {
+  const getScoreColor = (score) => {
+    if (score >= 90) return 'text-emerald-400'
+    if (score >= 70) return 'text-yellow-400'
+    return 'text-red-400'
+  }
+  
+  return (
+    <div 
+      onClick={onViewProfile}
+      className="p-5 hover:bg-slate-800/50 transition-colors group cursor-pointer"
+    >
+      <div className="flex items-start gap-4">
+        {/* Hot Badge */}
+        <div className="flex-shrink-0">
+          <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex flex-col items-center justify-center">
+            <Flame className="w-5 h-5 text-red-500" />
+          </div>
+        </div>
+        
+        {/* Main Content */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start justify-between">
+            <div>
+              <div className="flex items-center gap-3">
+                <h4 className="font-semibold text-white text-lg group-hover:text-red-400 transition-colors">{lead.entity}</h4>
+                <span className="px-2 py-0.5 rounded-full bg-red-500/10 text-red-400 text-xs font-medium">
+                  {lead.daysAgo} days ago
+                </span>
+              </div>
+              
+              <div className="flex items-center gap-4 mt-2 text-sm">
+                <div className="flex items-center gap-1.5 text-red-400 font-semibold">
+                  <DollarSign className="w-4 h-4" />
+                  <span className="text-lg">{formatCash(lead.cashAmount)} cash</span>
+                </div>
+                <span className="text-slate-600">|</span>
+                <div className="flex items-center gap-1.5 text-slate-400">
+                  <Calendar className="w-4 h-4" />
+                  <span>Sold {lead.saleDate}</span>
+                </div>
+                <span className="text-slate-600">|</span>
+                <div className="flex items-center gap-1.5 text-slate-400">
+                  <MapPin className="w-4 h-4" />
+                  <span>{lead.location}</span>
+                </div>
+              </div>
+              
+              <p className="text-slate-500 text-sm mt-1">
+                <span className="text-slate-400">{lead.assetClass || lead.propertyType}</span>
+                <span className="mx-2">•</span>
+                <span>{lead.address || lead.property}</span>
+              </p>
+            </div>
+            
+            {/* Score & Actions */}
+            <div className="flex items-center gap-4">
+              <div className="text-center">
+                <div className={`text-3xl font-bold ${getScoreColor(lead.matchScore)}`}>
+                  {lead.matchScore}
+                </div>
+                <div className="text-xs text-slate-500">Match Score</div>
+              </div>
+              
+              <div className="flex flex-col gap-2">
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onViewProfile()
+                  }}
+                  className="px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-medium hover:bg-red-500 transition-colors"
+                >
+                  View Profile
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Paste Deal Modal Component
+const PasteDealModal = ({ onClose, onSuccess, formatCash }) => {
+  const [rawText, setRawText] = useState('')
+  const [parsed, setParsed] = useState(null)
+  const [saving, setSaving] = useState(false)
+  const [activeTab, setActiveTab] = useState('paste') // 'paste' or 'manual'
+  
+  // Manual form state
+  const [manualData, setManualData] = useState({
+    entity: '',
+    cashAmount: '',
+    propertyType: 'Industrial',
+    assetClass: '',
+    address: '',
+    location: '',
+    saleDate: '',
+    matchScore: 85,
+    notes: ''
+  })
+
+  // Smart parser for deal text
+  const parseDealText = (text) => {
+    if (!text.trim()) return null
+    
+    const result = {
+      entity: '',
+      cashAmount: 0,
+      propertyType: 'Industrial',
+      assetClass: '',
+      address: '',
+      location: '',
+      saleDate: '',
+      matchScore: 85,
+      notes: text,
+      daysAgo: 0
+    }
+    
+    // Extract entity name (Ontario Inc/Ltd numbers or company names)
+    const ontarioInc = text.match(/(\d{7})\s*(Ontario\s+(?:Inc\.?|Ltd\.?|Limited))/i)
+    const ontarioNumbered = text.match(/(\d{7})/)
+    const companyMatch = text.match(/([A-Z][A-Za-z0-9\s&]+(?:Holdings|Ltd|Inc|Corp|Company|Realty|Estates?|Developments?|Properties?|Investments?))/i)
+    
+    if (ontarioInc) {
+      result.entity = `${ontarioInc[1]} ${ontarioInc[2]}`
+    } else if (ontarioNumbered) {
+      result.entity = `${ontarioNumbered[1]} Ontario Inc`
+    } else if (companyMatch) {
+      result.entity = companyMatch[1].trim()
+    }
+    
+    // Extract cash amount (look for $X or X million/thousand)
+    const cashMatch = text.match(/\$?([\d,]+(?:\.\d+)?)\s*(M(?:illion)?|mil|K(?: Thousand)?)/i) ||
+                     text.match(/\$([\d,]+(?:\.\d+)?)/)
+    if (cashMatch) {
+      let amount = parseFloat(cashMatch[1].replace(/,/g, ''))
+      const unit = (cashMatch[2] || '').toLowerCase()
+      if (unit.startsWith('m')) amount *= 1000000
+      if (unit === 'k') amount *= 1000
+      result.cashAmount = Math.round(amount)
+    }
+    
+    // Extract property type
+    const types = ['Industrial', 'Retail', 'Office', 'Multi-Family', 'Agricultural', 'Land', 'Mixed-Use']
+    for (const type of types) {
+      if (text.toLowerCase().includes(type.toLowerCase())) {
+        result.propertyType = type
+        break
+      }
+    }
+    
+    // Extract asset class (look for descriptive terms)
+    const assetMatches = text.match(/(\w+\s*(?:Warehouse|Center|Centre|Plaza|Mall|Building|Complex|Facility|Land|Farm|Vineyard))/i)
+    if (assetMatches) {
+      result.assetClass = assetMatches[1]
+    }
+    
+    // Extract location (Niagara region cities)
+    const cities = ['St. Catharines', 'Niagara Falls', 'Welland', 'Thorold', 'Pelham', 'Lincoln', 'Grimsby', 'West Lincoln', 'Wainfleet', 'Port Colborne', 'Fort Erie', 'Niagara-on-the-Lake', 'Fonthill', 'Beamsville', 'Smithville']
+    for (const city of cities) {
+      if (text.includes(city) || text.includes(city.replace('St. ', 'St '))) {
+        result.location = city
+        break
+      }
+    }
+    
+    // Extract address (look for Rd, St, Ave, etc.)
+    const addressMatch = text.match(/(\d+\s+[\w\s]+(?:Rd|Road|St|Street|Ave|Avenue|Blvd|Boulevard|Dr|Drive))/i)
+    if (addressMatch) {
+      result.address = addressMatch[1]
+    }
+    
+    // Extract date
+    const dateMatch = text.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s*(\d{4})/i) ||
+                     text.match(/(\d{1,2})\/(\d{1,2})\/(\d{2,4})/)
+    if (dateMatch) {
+      result.saleDate = dateMatch[0]
+    }
+    
+    // Calculate days ago if date found
+    if (result.saleDate) {
+      try {
+        const date = new Date(result.saleDate)
+        const now = new Date()
+        result.daysAgo = Math.floor((now - date) / (1000 * 60 * 60 * 24))
+      } catch {}
+    }
+    
+    return result
+  }
+  
+  const handleTextChange = (text) => {
+    setRawText(text)
+    const parsed = parseDealText(text)
+    setParsed(parsed)
+    if (parsed) {
+      setManualData(prev => ({
+        ...prev,
+        entity: parsed.entity || prev.entity,
+        cashAmount: parsed.cashAmount || prev.cashAmount,
+        propertyType: parsed.propertyType || prev.propertyType,
+        assetClass: parsed.assetClass || prev.assetClass,
+        address: parsed.address || prev.address,
+        location: parsed.location || prev.location,
+        saleDate: parsed.saleDate || prev.saleDate,
+        matchScore: parsed.matchScore || prev.matchScore,
+        notes: text
+      }))
+    }
+  }
+  
+  const handleSave = async () => {
+    const data = activeTab === 'paste' && parsed ? parsed : manualData
+    
+    if (!data.entity) {
+      alert('Entity name is required')
+      return
+    }
+    
+    setSaving(true)
+    
+    try {
+      // Create lead in database
+      const apiLead = {
+        entity: data.entity,
+        cash_amount: parseInt(data.cashAmount) || 0,
+        sale_date: data.saleDate || '',
+        location: data.location || '',
+        property: data.address || data.location || '',
+        match_score: parseInt(data.matchScore) || 85,
+        property_type: data.propertyType || 'Industrial',
+        asset_class: data.assetClass || data.propertyType || 'Commercial',
+        address: data.address || '',
+        days_ago: data.daysAgo || 0,
+        notes: data.notes || '',
+        contacts: []
+      }
+      
+      const response = await fetch(`${API_BASE}/hotmoney`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(apiLead)
+      })
+      
+      if (!response.ok) throw new Error('Failed to create lead')
+      
+      const result = await response.json()
+      
+      // Get the full lead data
+      const leadResponse = await fetch(`${API_BASE}/hotmoney/${result.id}`)
+      const leadData = await leadResponse.json()
+      const newLead = apiToFrontend(leadData)
+      
+      // Send to Obsidian
+      await sendToObsidian(newLead)
+      
+      onSuccess(newLead)
+    } catch (err) {
+      console.error('Error saving deal:', err)
+      alert('Failed to save deal: ' + err.message)
+    } finally {
+      setSaving(false)
+    }
+  }
+  
+  const sendToObsidian = async (lead) => {
+    try {
+      // Use the obsidian_integration endpoint if available
+      await fetch(`${API_BASE}/obsidian/quick-link`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: `Hot Money: ${lead.entity}`,
+          content: generateObsidianContent(lead),
+          folder: 'Deals/Hot Money'
+        })
+      })
+    } catch (err) {
+      console.log('Obsidian integration not available, skipping')
+    }
+  }
+  
+  const generateObsidianContent = (lead) => {
+    const quickLinks = generateQuickLinks(lead.entity)
+    return `# Hot Money Lead: ${lead.entity}
+
+## Deal Overview
+- **Entity:** ${lead.entity}
+- **Cash Available:** ${formatCash(lead.cashAmount)}
+- **Property Type:** ${lead.propertyType}
+- **Asset Class:** ${lead.assetClass || 'N/A'}
+- **Match Score:** ${lead.matchScore}/100
+
+## Property Details
+- **Address:** ${lead.address || 'N/A'}
+- **Location:** ${lead.location || 'N/A'}
+- **Sale Date:** ${lead.saleDate || 'N/A'}
+
+## Quick Links
+- [Google Search](${quickLinks?.google || ''})
+- [LinkedIn Search](${quickLinks?.linkedin || ''})
+- [Corporation Search](${quickLinks?.corporation || ''})
+
+## Notes
+${lead.notes || 'No notes yet.'}
+
+## Status
+- [ ] Initial contact made
+- [ ] Property requirements identified
+- [ ] Deal packaged
+- [ ] Closed
+
+*Created: ${new Date().toLocaleString()}*
+`
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={onClose}>
+      <div 
+        className="bg-slate-900 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto rounded-2xl border border-slate-700 shadow-2xl"
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-slate-700 bg-gradient-to-r from-emerald-600/10 to-teal-600/10">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+              <ClipboardPaste className="w-6 h-6 text-emerald-500" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white">Paste New Deal</h2>
+              <p className="text-slate-400 text-sm">Copy & paste deal text to auto-extract details</p>
+            </div>
+          </div>
+          <button onClick={onClose} className="p-2 hover:bg-slate-800 rounded-lg transition-colors">
+            <X className="w-5 h-5 text-slate-400" />
+          </button>
+        </div>
+        
+        {/* Tabs */}
+        <div className="flex border-b border-slate-700">
+          <button
+            onClick={() => setActiveTab('paste')}
+            className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+              activeTab === 'paste' 
+                ? 'text-emerald-400 border-b-2 border-emerald-500' 
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <Sparkles className="w-4 h-4 inline mr-2" />
+            Smart Paste
+          </button>
+          <button
+            onClick={() => setActiveTab('manual')}
+            className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+              activeTab === 'manual' 
+                ? 'text-emerald-400 border-b-2 border-emerald-500' 
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            Manual Entry
+          </button>
+        </div>
+        
+        <div className="p-6 space-y-6">
+          {activeTab === 'paste' ? (
+            <>
+              {/* Paste Text Area */}
+              <div>
+                <label className="block text-sm text-slate-400 mb-2">
+                  Paste deal text here (emails, listings, notes...)
+                </label>
+                <textarea
+                  value={rawText}
+                  onChange={(e) => handleTextChange(e.target.value)}
+                  placeholder={`Example:\n2650687 Ontario Inc sold their industrial warehouse at 1230 Thirty Rd, West Lincoln for $15M in May 2025. Looking to redeploy capital into commercial development.`}
+                  rows={6}
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 resize-none focus:outline-none focus:border-emerald-500"
+                />
+              </div>
+              
+              {/* Parsed Preview */}
+              {parsed && parsed.entity && (
+                <div className="bg-slate-800/50 rounded-lg p-4 border border-emerald-500/20">
+                  <h4 className="text-sm font-medium text-emerald-400 mb-3 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4" />
+                    Auto-Extracted Details
+                  </h4>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    {parsed.entity && (
+                      <div>
+                        <span className="text-slate-500">Entity:</span>
+                        <span className="text-white ml-2">{parsed.entity}</span>
+                      </div>
+                    )}
+                    {parsed.cashAmount > 0 && (
+                      <div>
+                        <span className="text-slate-500">Cash:</span>
+                        <span className="text-white ml-2">{formatCash(parsed.cashAmount)}</span>
+                      </div>
+                    )}
+                    {parsed.propertyType && (
+                      <div>
+                        <span className="text-slate-500">Type:</span>
+                        <span className="text-white ml-2">{parsed.propertyType}</span>
+                      </div>
+                    )}
+                    {parsed.location && (
+                      <div>
+                        <span className="text-slate-500">Location:</span>
+                        <span className="text-white ml-2">{parsed.location}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            /* Manual Entry Form */
+            <div className="grid grid-cols-2 gap-4">
+              <div className="col-span-2">
+                <label className="block text-sm text-slate-400 mb-1">Entity Name *</label>
+                <input
+                  type="text"
+                  value={manualData.entity}
+                  onChange={(e) => setManualData({...manualData, entity: e.target.value})}
+                  placeholder="e.g. 2650687 Ontario Inc"
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm text-slate-400 mb-1">Cash Amount</label>
+                <input
+                  type="number"
+                  value={manualData.cashAmount}
+                  onChange={(e) => setManualData({...manualData, cashAmount: e.target.value})}
+                  placeholder="15000000"
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm text-slate-400 mb-1">Property Type</label>
+                <select
+                  value={manualData.propertyType}
+                  onChange={(e) => setManualData({...manualData, propertyType: e.target.value})}
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                >
+                  <option value="Industrial">Industrial</option>
+                  <option value="Retail">Retail</option>
+                  <option value="Office">Office</option>
+                  <option value="Multi-Family">Multi-Family</option>
+                  <option value="Agricultural">Agricultural</option>
+                  <option value="Land">Land</option>
+                  <option value="Mixed-Use">Mixed-Use</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-sm text-slate-400 mb-1">Asset Class</label>
+                <input
+                  type="text"
+                  value={manualData.assetClass}
+                  onChange={(e) => setManualData({...manualData, assetClass: e.target.value})}
+                  placeholder="e.g. Industrial Warehouse"
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm text-slate-400 mb-1">Location</label>
+                <input
+                  type="text"
+                  value={manualData.location}
+                  onChange={(e) => setManualData({...manualData, location: e.target.value})}
+                  placeholder="e.g. West Lincoln"
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                />
+              </div>
+              
+              <div className="col-span-2">
+                <label className="block text-sm text-slate-400 mb-1">Address</label>
+                <input
+                  type="text"
+                  value={manualData.address}
+                  onChange={(e) => setManualData({...manualData, address: e.target.value})}
+                  placeholder="Full property address"
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm text-slate-400 mb-1">Sale Date</label>
+                <input
+                  type="text"
+                  value={manualData.saleDate}
+                  onChange={(e) => setManualData({...manualData, saleDate: e.target.value})}
+                  placeholder="e.g. May 2025"
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm text-slate-400 mb-1">Match Score</label>
+                <input
+                  type="number"
+                  min="0"
+                  max="100"
+                  value={manualData.matchScore}
+                  onChange={(e) => setManualData({...manualData, matchScore: e.target.value})}
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                />
+              </div>
+              
+              <div className="col-span-2">
+                <label className="block text-sm text-slate-400 mb-1">Notes</label>
+                <textarea
+                  value={manualData.notes}
+                  onChange={(e) => setManualData({...manualData, notes: e.target.value})}
+                  rows={3}
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white resize-none"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        
+        {/* Footer */}
+        <div className="flex items-center justify-between p-6 border-t border-slate-700 bg-slate-900/50">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSave}
+            disabled={saving || (activeTab === 'paste' && !parsed?.entity && !manualData.entity)}
+            className="px-6 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg text-sm font-medium flex items-center gap-2 transition-colors"
+          >
+            {saving ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Saving...
+              </>
+            ) : (
+              <>
+                <Plus className="w-4 h-4" />
+                Create Deal & Send to Obsidian
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default HotMoneyRadar
